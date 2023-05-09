@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "jsx": "react",
+    "sourceMap": true,
+    "checkJs": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "rootDir": "./src",
+    "paths": {
+      "#@/*": [
+        "./src/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "declaration": true,
+    "outDir": "./out"
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*",
+    "out",
+    "**/out/*"
+  ]
+}

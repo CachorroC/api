@@ -1,0 +1,23 @@
+{
+  "name": "com.rsasesorjuridico.api",
+  "packageManager": "yarn@3.5.1",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "latest",
+    "eslint": "^8.40.0",
+    "koa": "^2.14.2",
+    "sass": "^1.62.1",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8",
+    "@types/koa": "^2"
+  },
+  "description": "api endpoint",
+  "version": "1.0.1",
+  "main": "out/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CachorroC",
+  "license": "ISC"
+}
