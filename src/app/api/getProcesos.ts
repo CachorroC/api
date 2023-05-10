@@ -8,31 +8,25 @@ import { getBaseUrl } from "#@/lib/getBaseUrl";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 
-process.env[ "NODE_TLS_REJECT_UNAUTHORIZED" ] = "0";
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 
 const rows: unknown[] = [];
 
-export async function getProcesos () {
-  const res = await fetch(
-    `${ getBaseUrl() }/api`
-  );
+export async function getProcesos() {
+  const res = await fetch(`${getBaseUrl()}/api`);
 
-  const procesos = ( await res.json() ) as intProceso[];
+  const procesos = (await res.json()) as intProceso[];
   return procesos;
 }
 //? en este bloque está la peticion con llaveProceso a nuestra api pero decido colocarlo con la peticion a la rama judicial
 
-export async function getProcesosByllaveProceso (
-  {
-    llaveProceso,
-  }: {
-    llaveProceso: string;
-  }
-) {
-  const res = await fetch(
-    `${ getBaseUrl() }/api?llaveProceso=${ llaveProceso }`
-  );
-  const proceso = ( await res.json() ) as intProceso[];
+export async function getProcesosByllaveProceso({
+  llaveProceso,
+}: {
+  llaveProceso: string;
+}) {
+  const res = await fetch(`${getBaseUrl()}/api?llaveProceso=${llaveProceso}`);
+  const proceso = (await res.json()) as intProceso[];
   return proceso;
 }
 /* export async function getProcesosByllaveProceso (
@@ -83,21 +77,15 @@ export async function getProcesosByllaveProceso (
 }
  */
 
-export async function getProcesoByidProceso (
-  {
-    idProceso,
-  }: {
-    idProceso: number;
+export async function getProcesoByidProceso({
+  idProceso,
+}: {
+  idProceso: number;
+}) {
+  const res = await fetch(`${getBaseUrl()}/api?idProceso=${idProceso}`);
+  if (!res.ok) {
+    throw new Error("no pudo obtener el proceso by idProceso ");
   }
-) {
-  const res = await fetch(
-    `${ getBaseUrl() }/api?idProceso=${ idProceso }`
-  );
-  if ( !res.ok ) {
-    throw new Error(
-      "no pudo obtener el proceso by idProceso "
-    );
-  }
-  const proceso = ( await res.json() ) as intProceso;
+  const proceso = (await res.json()) as intProceso;
   return proceso;
 }

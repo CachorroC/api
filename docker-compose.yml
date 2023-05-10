@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 services:
   api:
@@ -27,4 +27,3 @@ networks:
   external:
     external: true
     name: external
-

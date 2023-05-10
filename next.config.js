@@ -3,10 +3,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
     typedRoutes: true,
-
   },
   env: {
-    PORT: '6969',
+    PORT: "6969",
   },
 };
 
