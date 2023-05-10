@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  api:
+    image: api
+    container_name: api
+    hostname: api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      PORT: 6969
+    ports:
+      - 6969:6969
+    expose:
+      - 6969
+    networks:
+      - internal
+      - external
+    volumes:
+      - ./:/usr/src/api
+
+networks:
+  internal:
+    external: true
+    name: internal
+  external:
+    external: true
+    name: external
+

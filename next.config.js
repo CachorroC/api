@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  experimental: {
+    appDir: true,
+    typedRoutes: true,
 
-module.exports = nextConfig
+  },
+  env: {
+    PORT: '6969',
+  },
+};
+
+module.exports = nextConfig;
