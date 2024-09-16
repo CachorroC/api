@@ -6,7 +6,7 @@
 //   const CarpetaRaw = Convert.toCarpetaRaw(json);
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 //# sourceMappingURL=carpetas.js.map

@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.ClassDeudor = exports.Tel = void 0;
@@ -54,12 +54,7 @@ class ClassDeudor {
     rawCarpeta 
   ) {
     const {
-      DEMANDADO_IDENTIFICACION: cedula,
-      DEMANDADO_DIRECCION: direccion,
-      DEMANDADO_EMAIL: email,
-      DEMANDADO_TELEFONOS: telefono,
-      DEMANDADO_NOMBRE: nombre,
-      NUMERO: id,
+      DEMANDADO_IDENTIFICACION: cedula, DEMANDADO_DIRECCION: direccion, DEMANDADO_EMAIL: email, DEMANDADO_TELEFONOS: telefono, DEMANDADO_NOMBRE: nombre, NUMERO: id, 
     } = rawCarpeta;
     this.id = Number(
       id 
@@ -129,7 +124,7 @@ class ClassDeudor {
             this.segundoNombre,
             this.primerApellido
           ]
-          = nameStringArray;
+                    = nameStringArray;
           this.segundoApellido = null;
           break;
         default:

@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.ClassDemanda = void 0;
@@ -31,35 +31,14 @@ class ClassDemanda {
     rawCarpeta 
   ) {
     const {
-      VALOR_CAPITAL_ADEUDADO: capitalAdeudado,
-      JUZGADO_EJECUCION,
-      JUZGADO_ORIGEN,
-      FECHA_ENTREGA_GARANTIAS_ABOGADO: entregaGarantiasAbogado,
-      ETAPA_PROCESAL: etapaProcesal,
-      DEPARTAMENTO: departamento,
-      NUMERO,
-      FECHA_PRESENTACION_DEMANDA: fechaPresentacion,
-      TIPO_PROCESO: tipoProceso,
-      FECHA_MANDAMIENTO_PAGO: mandamientoPago,
-      JUZGADO_CIUDAD: municipio,
-      RADICADO: radicado,
-      EXPEDIENTE: llaveProceso,
-      FECHA_VENCIMIENTO_PAGARE: vencimientoPagare,
-      FECHA_ORDENA_MEDIDAS_CAUTELARES: fechaOrdenaMedidas,
-      MEDIDA_SOLICITADA: medidaSolicitada,
-      OBLIGACION_1: A,
-      OBLIGACION_2: B,
-      VALOR_LIQUIDACION_DEL_CREDITO,
-      VALOR_AVALUO,
-      BIENES,
-      BIENES_SECUESTRADOS,
+      VALOR_CAPITAL_ADEUDADO: capitalAdeudado, JUZGADO_EJECUCION, JUZGADO_ORIGEN, FECHA_ENTREGA_GARANTIAS_ABOGADO: entregaGarantiasAbogado, ETAPA_PROCESAL: etapaProcesal, DEPARTAMENTO: departamento, NUMERO, FECHA_PRESENTACION_DEMANDA: fechaPresentacion, TIPO_PROCESO: tipoProceso, FECHA_MANDAMIENTO_PAGO: mandamientoPago, JUZGADO_CIUDAD: municipio, RADICADO: radicado, EXPEDIENTE: llaveProceso, FECHA_VENCIMIENTO_PAGARE: vencimientoPagare, FECHA_ORDENA_MEDIDAS_CAUTELARES: fechaOrdenaMedidas, MEDIDA_SOLICITADA: medidaSolicitada, OBLIGACION_1: A, OBLIGACION_2: B, VALOR_LIQUIDACION_DEL_CREDITO, VALOR_AVALUO, BIENES, BIENES_SECUESTRADOS, 
     } = rawCarpeta;
     rawCarpeta.FECHA_PRESENTACION_DEMANDA;
 
     const [
       newFechaOrdenaMedida
     ] = ( 0, date_validator_1.datesExtractor )(
-      fechaOrdenaMedidas,
+      fechaOrdenaMedidas 
     );
     this.id = Number(
       NUMERO 
@@ -103,20 +82,18 @@ class ClassDemanda {
       );
     }
 
-    this.fechaPresentacion
-      = ( 0, date_validator_1.datesExtractor )(
-        fechaPresentacion 
-      ) ?? null;
+    this.fechaPresentacion = ( 0, date_validator_1.datesExtractor )(
+      fechaPresentacion 
+    ) ?? null;
     this.notificacion = new notificacion_1.ClassNotificacion(
       rawCarpeta 
     );
-    this.mandamientoPago
-      = ( 0, date_validator_1.datesExtractor )(
-        mandamientoPago 
-      ) ?? null;
+    this.mandamientoPago = ( 0, date_validator_1.datesExtractor )(
+      mandamientoPago 
+    ) ?? null;
 
     const NewEntregaDeGarantias = ( 0, date_validator_1.datesExtractor )(
-      entregaGarantiasAbogado,
+      entregaGarantiasAbogado 
     );
 
     if ( NewEntregaDeGarantias.length === 0 ) {
@@ -131,7 +108,7 @@ class ClassDemanda {
     this.capitalAdeudado = new library_1.Decimal(
       ( 0, capital_builder_1.capitalBuilder )(
         capitalAdeudado 
-      ),
+      ) 
     );
     this.tipoProceso = ( 0, tipoProceso_1.tipoProcesoBuilder )(
       tipoProceso 
@@ -151,7 +128,7 @@ class ClassDemanda {
       ? `${ radicado }`
       : null;
     this.vencimientoPagare = ( 0, date_validator_1.datesExtractor )(
-      vencimientoPagare,
+      vencimientoPagare 
     );
     this.departamento = departamento
       ? departamento
@@ -169,12 +146,12 @@ class ClassDemanda {
     this.avaluo = new library_1.Decimal(
       ( 0, capital_builder_1.capitalBuilder )(
         VALOR_AVALUO 
-      ),
+      ) 
     );
     this.liquidacion = new library_1.Decimal(
       ( 0, capital_builder_1.capitalBuilder )(
         VALOR_LIQUIDACION_DEL_CREDITO 
-      ),
+      ) 
     );
   }
   liquidacion;
@@ -207,7 +184,7 @@ class ClassDemanda {
     };
 
     const newNotificacion = notificacion_1.ClassNotificacion.prismaNotificacion(
-      demanda.notificacion,
+      demanda.notificacion 
     );
 
     const newDemanda = {

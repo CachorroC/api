@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 //# sourceMappingURL=contabilidad.js.map

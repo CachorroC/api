@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.ClassProcesos = void 0;
@@ -114,20 +114,18 @@ class ClassProcesos {
   ) {
     try {
       const request = await fetch(
-        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ llaveProceso }&SoloActivos=false&pagina=1`,
+        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ llaveProceso }&SoloActivos=false&pagina=1` 
       );
 
       if ( !request.ok ) {
         throw new Error(
           `${ llaveProceso }: ${ request.status } ${ request.statusText }${ JSON.stringify(
-            request,
-            null,
-            2,
-          ) }`,
+            request, null, 2 
+          ) }` 
         );
       }
 
-      const json = await request.json();
+      const json = ( await request.json() );
 
       const {
         procesos 

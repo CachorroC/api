@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.NewJuzgado = exports.JuzgadoClass = void 0;
@@ -70,7 +70,7 @@ function extrapolateTipoToCorrectType(
 class JuzgadoClass {
   constructor(
     {
-      id, tipo, ciudad 
+      id, tipo, ciudad, 
     } 
   ) {
     this.id = id.padStart(
@@ -81,16 +81,15 @@ class JuzgadoClass {
     this.ciudad = ciudad.toUpperCase()
       .trim();
 
-    const constructorString
-      = `JUZGADO ${ this.id } ${ this.tipo } DE ${ this.ciudad }`
-        .toUpperCase()
-        .normalize(
-          'NFD' 
-        )
-        .replaceAll(
-          /\p{Diacritic}/gu, '' 
-        )
-        .trim();
+    const constructorString = `JUZGADO ${ this.id } ${ this.tipo } DE ${ this.ciudad }`
+      .toUpperCase()
+      .normalize(
+        'NFD' 
+      )
+      .replaceAll(
+        /\p{Diacritic}/gu, '' 
+      )
+      .trim();
 
     const [
       matchedDespacho
@@ -128,13 +127,13 @@ class JuzgadoClass {
 
         if ( indexOfDespacho !== -1 ) {
           console.log(
-            `Juzgado Class indexOf ${ includesDespacho }: ${ normalizedIteratedName } === ${ normalizedName }: ${ normalizedIteratedName === normalizedName }`,
+            `Juzgado Class indexOf ${ includesDespacho }: ${ normalizedIteratedName } === ${ normalizedName }: ${ normalizedIteratedName === normalizedName }` 
           );
         }
 
         if ( includesDespacho ) {
           console.log(
-            `Juzgado Class includes${ includesDespacho }: ${ normalizedIteratedName } === ${ normalizedName }: ${ normalizedIteratedName === normalizedName }`,
+            `Juzgado Class includes${ includesDespacho }: ${ normalizedIteratedName } === ${ normalizedName }: ${ normalizedIteratedName === normalizedName }` 
           );
           return true;
         }
@@ -147,7 +146,7 @@ class JuzgadoClass {
       this.url = `https://www.ramajudicial.gov.co${ matchedDespacho.url }`;
 
       const matchedDespachoParts = matchedDespacho.nombre.match(
-        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im,
+        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im 
       );
 
       if ( matchedDespachoParts ) {
@@ -171,14 +170,14 @@ class JuzgadoClass {
   url;
   static fromShortName(
     {
-      ciudad, juzgadoRaw 
+      ciudad, juzgadoRaw, 
     } 
   ) {
     let newTipo, newId;
     newTipo = juzgadoRaw;
 
     const matchedRegexNumberAndLetters = juzgadoRaw.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im,
+      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im 
     );
 
     if ( !matchedRegexNumberAndLetters ) {
@@ -219,7 +218,7 @@ class JuzgadoClass {
     proceso 
   ) {
     const matchedDespachoParts = proceso.despacho.match(
-      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im,
+      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im 
     );
 
     if ( !matchedDespachoParts ) {
@@ -245,7 +244,7 @@ class JuzgadoClass {
       {
         id,
         tipo,
-        ciudad,
+        ciudad 
       } 
     );
   }
@@ -258,7 +257,7 @@ class NewJuzgado {
   ) {
     //TODO -> arreglar el constructor para que construya directamente cada propiedad y busque en la lista solamente el url
     const matchedValues = constructorString.match(
-      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíáü-]+)/im,
+      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíáü-]+)/im 
     );
     this.url = '';
 
@@ -333,7 +332,7 @@ class NewJuzgado {
             .replaceAll(
               /\p{Diacritic}/gu, '' 
             )
-            .trim(),
+            .trim() 
         );
 
         if ( indexOfDespacho !== -1 ) {
@@ -348,7 +347,7 @@ class NewJuzgado {
       this.url = `https://www.ramajudicial.gov.co${ matchedDespacho.url }`;
 
       const regexNameMatch = matchedDespacho.nombre.match(
-        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) de ([.A-Z\sñúóéíá-]+)/im,
+        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) de ([.A-Z\sñúóéíá-]+)/im 
       );
 
       if ( regexNameMatch ) {
@@ -373,14 +372,14 @@ class NewJuzgado {
   url;
   static fromShortName(
     {
-      ciudad, juzgadoRaw 
+      ciudad, juzgadoRaw, 
     } 
   ) {
     let newTipo, newId;
     newTipo = juzgadoRaw;
 
     const matchedRegexNumberAndLetters = juzgadoRaw.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im,
+      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im 
     );
 
     if ( matchedRegexNumberAndLetters ) {
@@ -411,7 +410,7 @@ class NewJuzgado {
         .replaceAll(
           /\p{Diacritic}/gu, '' 
         )
-        .trim() }`,
+        .trim() }` 
     );
   }
   static fromProceso(

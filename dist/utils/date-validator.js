@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.datesExtractor = datesExtractor;
@@ -10,63 +10,6 @@ exports.dateValidator = dateValidator;
 exports.dateArrayValidator = dateArrayValidator;
 exports.xlsxNumberToDate = xlsxNumberToDate;
 
-/*
-const rawValues = [];
-
-//SECTION Carpeta example
-for ( const carpeta of Carpetas ) {
-  const dateEntries = new Map();
-
-  dateEntries.set(
-    'numero', carpeta.numero
-  );
-
-  const carpetaEntries = Object.entries(
-    carpeta
-  );
-
-
-  for ( const [
-    key,
-    value
-  ] of carpetaEntries ) {
-    const matchedFechansKey = key.search(
-      /(FECHA+)/gm
-    );
-
-    if ( matchedFechansKey >= 0 ) {
-      const dateValue = datesExtractor(
-        value
-      );
-      console.log(
-        `${ value } ====> ${ dateValue }`
-      );
-      dateEntries.set(
-        `RAW_${ key }`, value
-      );
-      rawValues.push(
-        value
-      );
-      dateEntries.set(
-        key, dateValue
-      );
-    }
-  }
-
-  const fechaCarpeta = Object.fromEntries(
-    dateEntries
-  );
-  console.log(
-    fechaCarpeta
-  );
-
-}
-
-fs.writeFile(
-  'fechas.json', JSON.stringify(
-    rawValues, null, 2
-  )
-); */
 //!SECTION
 //SECTION first step: extract the date
 function datesExtractor(
@@ -153,35 +96,22 @@ function fixSingleFecha(
       secondDivider,
       thirdNumber,
     ] = matchedValue;
-    let newYear, newDay;
 
     const newMonth = Number(
       secondNumber 
     ) - 1;
 
-    if ( firstDivider === '-' ) {
-      newYear = Number(
-        firstNumber.padStart(
-          4, '2015' 
-        ) 
-      );
-      newDay = Number(
-        thirdNumber.padStart(
-          2, '00' 
-        ) 
-      );
-    } else {
-      newYear = Number(
-        thirdNumber.padStart(
-          4, '2015' 
-        ) 
-      );
-      newDay = Number(
-        firstNumber.padStart(
-          2, '00' 
-        ) 
-      );
-    }
+    const newYear = Number(
+      thirdNumber.padStart(
+        4, '2015' 
+      ) 
+    );
+
+    const newDay = Number(
+      firstNumber.padStart(
+        2, '00' 
+      ) 
+    );
 
     const outputDate = new Date(
       newYear, newMonth, newDay 
@@ -208,7 +138,7 @@ function dateValidator(
     ${ String(
     incomingDate 
   ) }
-    `,
+    ` 
   );
 
   const dateYear = incomingDate.getFullYear();
@@ -216,11 +146,9 @@ function dateValidator(
     dateYear 
   );
 
-  if (
-    stringifiedDate === 'Invalid Date'
-    || dateYear <= 2000
-    || dateYear > 2200
-  ) {
+  if ( stringifiedDate === 'Invalid Date'
+        || dateYear <= 2000
+        || dateYear > 2200 ) {
     console.log(
       dateYear 
     );
@@ -260,11 +188,9 @@ function xlsxNumberToDate(
     ( incomingDate - ( 25567 + 1 ) ) * 86400 * 1000 
   );
 
-  if (
-    incomingDate > 55000
-    || outgoingDate.toString() === 'Invalid Date'
-    || outgoingDate.getFullYear() > 2200
-  ) {
+  if ( incomingDate > 55000
+        || outgoingDate.toString() === 'Invalid Date'
+        || outgoingDate.getFullYear() > 2200 ) {
     console.log(
       outgoingDate.toString() 
     );

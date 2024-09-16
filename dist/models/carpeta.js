@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.ClassCarpeta = void 0;
@@ -71,23 +71,7 @@ class ClassCarpeta {
     rawCarpeta 
   ) {
     const {
-      NUMERO,
-      category,
-      DEMANDADO_IDENTIFICACION: cedula,
-      EXPEDIENTE,
-      DEMANDADO_NOMBRE,
-      FECHA_ULTIMA_REVISION,
-      FECHA_ULTIMA_ACTUACION,
-      CODEUDOR_NOMBRE,
-      CODEUDOR_IDENTIFICACION,
-      CODEUDOR_DIRECCION,
-      CODEUDOR_TELEFONOS,
-      JUZGADO_EJECUCION,
-      JUZGADO_ORIGEN,
-      JUZGADO_CIUDAD,
-      TIPO_PROCESO,
-      EXTRA,
-      OBSERVACIONES,
+      NUMERO, category, DEMANDADO_IDENTIFICACION: cedula, EXPEDIENTE, DEMANDADO_NOMBRE, FECHA_ULTIMA_REVISION, FECHA_ULTIMA_ACTUACION, CODEUDOR_NOMBRE, CODEUDOR_IDENTIFICACION, CODEUDOR_DIRECCION, CODEUDOR_TELEFONOS, JUZGADO_EJECUCION, JUZGADO_ORIGEN, JUZGADO_CIUDAD, TIPO_PROCESO, EXTRA, OBSERVACIONES, 
     } = rawCarpeta;
     let idBuilder;
     let notasCounter = 0;
@@ -115,11 +99,9 @@ class ClassCarpeta {
           notasCounter++;
 
           const newNoter = new nota_1.NotasBuilder(
-            nota,
-            Number(
+            nota, Number(
               NUMERO 
-            ),
-            notasCounter,
+            ), notasCounter 
           );
           this.notas.push(
             newNoter 
@@ -146,11 +128,9 @@ class ClassCarpeta {
           notasCounter++;
 
           const newNoter = new nota_1.NotasBuilder(
-            nota,
-            Number(
+            nota, Number(
               NUMERO 
-            ),
-            notasCounter,
+            ), notasCounter 
           );
           this.notas.push(
             newNoter 
@@ -268,19 +248,19 @@ class ClassCarpeta {
   async getProcesos() {
     try {
       const request = await fetch(
-        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1`,
+        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1` 
       );
 
       if ( !request.ok ) {
         const json = await request.json();
         throw new Error(
           `${ request.status } : ${ request.statusText } === ${ JSON.stringify(
-            json,
-          ) }`,
+            json 
+          ) }` 
         );
       }
 
-      const consultaProcesos = await request.json();
+      const consultaProcesos = ( await request.json() );
 
       const {
         procesos 
@@ -318,7 +298,7 @@ class ClassCarpeta {
       return this.procesos;
     } catch ( error ) {
       console.log(
-        `${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }`,
+        `${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }` 
       );
       return null;
     }
@@ -327,8 +307,7 @@ class ClassCarpeta {
   //ASYNC getProcesosByName
   async getProcesosByName() {
     const fetchUrl = new URL(
-      `Procesos/Consulta/NombreRazonSocial?nombre=${ this.nombre }&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`,
-      'https://consultaprocesos.ramajudicial.gov.co:448/api/v2/',
+      `Procesos/Consulta/NombreRazonSocial?nombre=${ this.nombre }&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`, 'https://consultaprocesos.ramajudicial.gov.co:448/api/v2/' 
     );
 
     try {
@@ -383,7 +362,7 @@ class ClassCarpeta {
       return this.procesos;
     } catch ( error ) {
       console.log(
-        `${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }`,
+        `${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }` 
       );
       return [];
     }
@@ -398,7 +377,7 @@ class ClassCarpeta {
     for ( const idProceso of this.idProcesos ) {
       try {
         const request = await fetch(
-          `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }`,
+          `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }` 
         );
 
         if ( !request.ok ) {
@@ -407,7 +386,7 @@ class ClassCarpeta {
           );
         }
 
-        const consultaActuaciones = await request.json();
+        const consultaActuaciones = ( await request.json() );
 
         const {
           actuaciones 
@@ -459,10 +438,8 @@ class ClassCarpeta {
       } catch ( error ) {
         console.log(
           `${ this.numero } ERROR ==> getActuaciones ${ idProceso } => ${ JSON.stringify(
-            error,
-            null,
-            2,
-          ) }`,
+            error, null, 2 
+          ) }` 
         );
         continue;
       }
@@ -636,13 +613,7 @@ class ClassCarpeta {
     incomingCarpeta 
   ) {
     const {
-      ultimaActuacion,
-      procesos,
-      actuaciones,
-      demanda,
-      deudor,
-      codeudor,
-      notas,
+      ultimaActuacion, procesos, actuaciones, demanda, deudor, codeudor, notas, 
     } = incomingCarpeta;
 
     const newDemanda = demanda_1.ClassDemanda.prismaDemanda(

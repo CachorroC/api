@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.isIrrelevantActuacion = isIrrelevantActuacion;
@@ -11,7 +11,7 @@ function isIrrelevantActuacion(
   incomingActuacion 
 ) {
   return /([Ff][iI][Jj][Aa][cC][iI][oO][Nn])|([Dd][eE][sS][pP][aA][cC][hH][oO])/gim.test(
-    incomingActuacion,
+    incomingActuacion 
   );
 }
 
@@ -52,8 +52,7 @@ function searchForLastActuacion(
     ultimaActuacion,
     penUltimaActuacion,
     antePenultimaActuacion
-  ]
-    = sortedLastFirst;
+  ] = sortedLastFirst;
   console.log(
     JSON.stringify(
       penUltimaActuacion, null, 2 

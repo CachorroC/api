@@ -6,7 +6,7 @@
 //   const consultaNumeroRadicacion = Convert.toConsultaNumeroRadicacion(json);
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.Convert = void 0;

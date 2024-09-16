@@ -16,7 +16,7 @@
 //   const rawDb = Convert.toRawDb(json);
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.Convert = exports.ConvertRawDb = void 0;

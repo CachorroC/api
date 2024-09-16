@@ -69,7 +69,7 @@ for ( const carpeta of Carpetas ) {
 } */
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.capitalBuilder = capitalBuilder;

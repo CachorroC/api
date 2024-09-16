@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.ClassNotificacion = void 0;
@@ -15,16 +15,7 @@ class ClassNotificacion {
     rawDb 
   ) {
     const {
-      FISICO: fisico,
-      CERTIMAIL: certimail,
-      FECHA_AUTO_NOTIFICADO: autoNotificado,
-      NUMERO,
-      FECHA_RECIBO_291: fechaRecibido291,
-      FECHA_APORTA_NOTIFICACION_291: fechaAporta291,
-      RESULTADO_291: resultado291,
-      FECHA_RECIBO_AVISO_292: fechaRecibido292,
-      FECHA_APORTA_NOTIFICACION_292: fechaAporta292,
-      RESULTADO_292: resultado292,
+      FISICO: fisico, CERTIMAIL: certimail, FECHA_AUTO_NOTIFICADO: autoNotificado, NUMERO, FECHA_RECIBO_291: fechaRecibido291, FECHA_APORTA_NOTIFICACION_291: fechaAporta291, RESULTADO_291: resultado291, FECHA_RECIBO_AVISO_292: fechaRecibido292, FECHA_APORTA_NOTIFICACION_292: fechaAporta292, RESULTADO_292: resultado292, 
     } = rawDb;
     this.id = Number(
       NUMERO 
@@ -49,7 +40,7 @@ class ClassNotificacion {
       const [
         newAutoNotificado
       ] = ( 0, date_validator_1.datesExtractor )(
-        autoNotificado,
+        autoNotificado 
       );
       this.autoNotificado = newAutoNotificado ?? null;
     } else {
@@ -59,13 +50,13 @@ class ClassNotificacion {
     const [
       newFechaRecibido291
     ] = ( 0, date_validator_1.datesExtractor )(
-      fechaRecibido291,
+      fechaRecibido291 
     );
 
     const [
       newFechaAporta291
     ] = ( 0, date_validator_1.datesExtractor )(
-      fechaAporta291,
+      fechaAporta291 
     );
 
     const newResultado291 = resultado291
@@ -88,13 +79,13 @@ class ClassNotificacion {
     const [
       newFechaRecibido292
     ] = ( 0, date_validator_1.datesExtractor )(
-      fechaRecibido292,
+      fechaRecibido292 
     );
 
     const [
       newFechaAporta292
     ] = ( 0, date_validator_1.datesExtractor )(
-      fechaAporta292,
+      fechaAporta292 
     );
 
     const newResultado292 = resultado292

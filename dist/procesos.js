@@ -1,8 +1,6 @@
 'use strict';
-var __createBinding
-  = ( this && this.__createBinding )
-  || ( Object.create
-    ? function (
+var __createBinding = ( this && this.__createBinding ) || ( Object.create
+  ? ( function(
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
@@ -13,25 +11,22 @@ var __createBinding
         m, k 
       );
 
-      if (
-        !desc
-          || ( 'get' in desc
-            ? !m.__esModule
-            : desc.writable || desc.configurable )
-      ) {
+      if ( !desc || ( 'get' in desc
+        ? !m.__esModule
+        : desc.writable || desc.configurable ) ) {
         desc = {
           enumerable: true,
-          get       : function () {
-            return m[ k ];
-          },
+          get       : function() {
+            return m[ k ]; 
+          } 
         };
       }
 
       Object.defineProperty(
         o, k2, desc 
       );
-    }
-    : function (
+    } )
+  : ( function(
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
@@ -39,58 +34,54 @@ var __createBinding
       }
 
       o[ k2 ] = m[ k ];
-    } );
-var __setModuleDefault
-  = ( this && this.__setModuleDefault )
-  || ( Object.create
-    ? function (
+    } ) );
+var __setModuleDefault = ( this && this.__setModuleDefault ) || ( Object.create
+  ? ( function(
       o, v 
     ) {
       Object.defineProperty(
         o, 'default', {
           enumerable: true,
-          value     : v,
+          value     : v 
         } 
       );
-    }
-    : function (
-      o, v 
-    ) {
-      o[ 'default' ] = v;
-    } );
-
-var __importStar
-  = ( this && this.__importStar )
-  || function (
-    mod 
+    } )
+  : function(
+    o, v 
   ) {
-    if ( mod && mod.__esModule ) {
-      return mod;
-    }
+    o[ 'default' ] = v;
+  } );
 
-    var result = {};
+var __importStar = ( this && this.__importStar ) || function (
+  mod 
+) {
+  if ( mod && mod.__esModule ) {
+    return mod;
+  }
 
-    if ( mod != null ) {
-      for ( var k in mod ) {
-        if ( k !== 'default' && Object.prototype.hasOwnProperty.call(
-          mod, k 
-        ) ) {
-          __createBinding(
-            result, mod, k 
-          );
-        }
+  var result = {};
+
+  if ( mod != null ) {
+    for ( var k in mod ) {
+      if ( k !== 'default' && Object.prototype.hasOwnProperty.call(
+        mod, k 
+      ) ) {
+        __createBinding(
+          result, mod, k 
+        );
       }
     }
+  }
 
-    __setModuleDefault(
-      result, mod 
-    );
-    return result;
-  };
+  __setModuleDefault(
+    result, mod 
+  );
+  return result;
+};
 
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 
@@ -119,20 +110,18 @@ async function fetcher(
 ) {
   try {
     const request = await fetch(
-      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ llaveProceso }&SoloActivos=false&pagina=1`,
+      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ llaveProceso }&SoloActivos=false&pagina=1` 
     );
 
     if ( !request.ok ) {
       throw new Error(
         `${ llaveProceso }: ${ request.status } ${ request.statusText }${ JSON.stringify(
-          request,
-          null,
-          2,
-        ) }`,
+          request, null, 2 
+        ) }` 
       );
     }
 
-    const json = await request.json();
+    const json = ( await request.json() );
 
     const {
       procesos 
@@ -186,8 +175,7 @@ async function* AsyncGenerateActuaciones(
 ) {
   for ( const carpeta of llaves ) {
     const newProceso = await procesos_1.ClassProcesos.getProcesos(
-      carpeta.llaveProceso,
-      carpeta.numero,
+      carpeta.llaveProceso, carpeta.numero 
     );
 
     const fetcherIdProceso = await fetcher(

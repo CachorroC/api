@@ -6,7 +6,7 @@
 //   const consultaActuacion = Convert.toConsultaActuacion(json);
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.actuacionConvert = void 0;

@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.NotasBuilder = void 0;
@@ -43,11 +43,9 @@ class NotasBuilder {
       : null;
     this.id = `${ carpetaNumero
       ? carpetaNumero
-      : Date.now() }-${
-      index
-        ? index
-        : Math.random()
-    }`;
+      : Date.now() }-${ index
+      ? index
+      : Math.random() }`;
   }
 }
 exports.NotasBuilder = NotasBuilder;

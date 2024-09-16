@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(
   exports, '__esModule', {
-    value: true,
+    value: true 
   } 
 );
 exports.tipoProcesoBuilder = tipoProcesoBuilder;
@@ -20,7 +20,7 @@ function tipoProcesoBuilder(
   const isAcumulado = tipoProcesoMatchAcumulado !== null;
 
   const tipoProcesoMatchHipotecario = tipoProceso.match(
-    /[Hh][Ii][Pp][Oo][Tt][Ee]..../g,
+    /[Hh][Ii][Pp][Oo][Tt][Ee]..../g 
   );
 
   const isHipotecario = tipoProcesoMatchHipotecario !== null;
