@@ -1,13 +1,19 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-  value: true,
-});
+'use strict';
+Object.defineProperty(
+  exports, '__esModule', {
+    value: true,
+  } 
+);
 exports.ClassNotificacion = void 0;
 
-const date_validator_1 = require("../utils/date-validator");
+const date_validator_1 = require(
+  '../utils/date-validator' 
+);
 
 class ClassNotificacion {
-  constructor(rawDb) {
+  constructor(
+    rawDb 
+  ) {
     const {
       FISICO: fisico,
       CERTIMAIL: certimail,
@@ -20,13 +26,29 @@ class ClassNotificacion {
       FECHA_APORTA_NOTIFICACION_292: fechaAporta292,
       RESULTADO_292: resultado292,
     } = rawDb;
-    this.id = Number(NUMERO);
-    this.certimail = certimail ? (certimail === "SI" ? true : false) : null;
-    this.fisico = fisico ? (fisico === "SI" ? true : false) : null;
-    this.autoNotificado = autoNotificado ? new Date(autoNotificado) : null;
+    this.id = Number(
+      NUMERO 
+    );
+    this.certimail = certimail
+      ? ( certimail === 'SI'
+          ? true
+          : false )
+      : null;
+    this.fisico = fisico
+      ? ( fisico === 'SI'
+          ? true
+          : false )
+      : null;
+    this.autoNotificado = autoNotificado
+      ? new Date(
+        autoNotificado 
+      )
+      : null;
 
-    if (autoNotificado) {
-      const [newAutoNotificado] = (0, date_validator_1.datesExtractor)(
+    if ( autoNotificado ) {
+      const [
+        newAutoNotificado
+      ] = ( 0, date_validator_1.datesExtractor )(
         autoNotificado,
       );
       this.autoNotificado = newAutoNotificado ?? null;
@@ -34,80 +56,102 @@ class ClassNotificacion {
       this.autoNotificado = null;
     }
 
-    const [newFechaRecibido291] = (0, date_validator_1.datesExtractor)(
+    const [
+      newFechaRecibido291
+    ] = ( 0, date_validator_1.datesExtractor )(
       fechaRecibido291,
     );
 
-    const [newFechaAporta291] = (0, date_validator_1.datesExtractor)(
+    const [
+      newFechaAporta291
+    ] = ( 0, date_validator_1.datesExtractor )(
       fechaAporta291,
     );
 
     const newResultado291 = resultado291
-      ? resultado291 === "POSITIVO" || resultado291 === "ABIERTO"
+      ? resultado291 === 'POSITIVO' || resultado291 === 'ABIERTO'
         ? true
         : false
       : null;
-    this.notifiers.push({
-      tipo: "291",
-      fechaRecibido: newFechaRecibido291 ?? null,
-      fechaAporta: newFechaAporta291 ?? null,
-      resultado: newResultado291,
-      carpetaNumero: Number(NUMERO),
-    });
+    this.notifiers.push(
+      {
+        tipo         : '291',
+        fechaRecibido: newFechaRecibido291 ?? null,
+        fechaAporta  : newFechaAporta291 ?? null,
+        resultado    : newResultado291,
+        carpetaNumero: Number(
+          NUMERO 
+        ),
+      } 
+    );
 
-    const [newFechaRecibido292] = (0, date_validator_1.datesExtractor)(
+    const [
+      newFechaRecibido292
+    ] = ( 0, date_validator_1.datesExtractor )(
       fechaRecibido292,
     );
 
-    const [newFechaAporta292] = (0, date_validator_1.datesExtractor)(
+    const [
+      newFechaAporta292
+    ] = ( 0, date_validator_1.datesExtractor )(
       fechaAporta292,
     );
 
     const newResultado292 = resultado292
-      ? resultado292 === "POSITIVO" || resultado292 === "ABIERTO"
+      ? resultado292 === 'POSITIVO' || resultado292 === 'ABIERTO'
         ? true
         : false
       : null;
-    this.notifiers.push({
-      tipo: "292",
-      fechaRecibido: newFechaRecibido292 ?? null,
-      fechaAporta: newFechaAporta292 ?? null,
-      resultado: newResultado292,
-      carpetaNumero: Number(NUMERO),
-    });
+    this.notifiers.push(
+      {
+        tipo         : '292',
+        fechaRecibido: newFechaRecibido292 ?? null,
+        fechaAporta  : newFechaAporta292 ?? null,
+        resultado    : newResultado292,
+        carpetaNumero: Number(
+          NUMERO 
+        ),
+      } 
+    );
   }
   id;
   notifiers = [];
   certimail;
   fisico;
   autoNotificado;
-  static prismaNotificacion(notificacion) {
+  static prismaNotificacion(
+    notificacion 
+  ) {
     const newNotificacion = {
-      id: notificacion.id,
+      id            : notificacion.id,
       autoNotificado: notificacion.autoNotificado,
-      certimail: notificacion.certimail,
-      fisico: notificacion.fisico,
-      notifiers: {
-        connectOrCreate: notificacion.notifiers.map((notif) => {
-          const notifCarpetaInput = {
-            tipo: notif.tipo,
-            carpetaNumero: notif.carpetaNumero,
-          };
-
-          const notifierConnectOrCreate = {
-            where: {
-              tipo_carpetaNumero: notifCarpetaInput,
-            },
-            create: {
-              tipo: notif.tipo,
+      certimail     : notificacion.certimail,
+      fisico        : notificacion.fisico,
+      notifiers     : {
+        connectOrCreate: notificacion.notifiers.map(
+          (
+            notif 
+          ) => {
+            const notifCarpetaInput = {
+              tipo         : notif.tipo,
               carpetaNumero: notif.carpetaNumero,
-              fechaAporta: notif.fechaAporta,
-              fechaRecibido: notif.fechaRecibido,
-              resultado: notif.resultado,
-            },
-          };
-          return notifierConnectOrCreate;
-        }),
+            };
+
+            const notifierConnectOrCreate = {
+              where: {
+                tipo_carpetaNumero: notifCarpetaInput,
+              },
+              create: {
+                tipo         : notif.tipo,
+                carpetaNumero: notif.carpetaNumero,
+                fechaAporta  : notif.fechaAporta,
+                fechaRecibido: notif.fechaRecibido,
+                resultado    : notif.resultado,
+              },
+            };
+            return notifierConnectOrCreate;
+          } 
+        ),
       },
     };
     return newNotificacion;
