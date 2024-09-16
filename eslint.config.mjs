@@ -1,22 +1,23 @@
 import js from '@eslint/js';
+import stylistic from '@stylistic/eslint-plugin';
 
 export default [
   js.configs.recommended,
 
   {
-    ignores: [
-      '.dist/'
-    ],
+    plugins: {
+      '@stylistic': stylistic
+    },
     rules: {
-      'no-unused-vars'       : 'off',
-      'no-undef'             : 'off',
-      'array-bracket-newline': [
+      'no-unused-vars'                  : 'off',
+      'no-undef'                        : 'off',
+      '@stylistic/array-bracket-newline': [
         'error',
         {
           minItems: 1,
         },
       ],
-      'array-bracket-spacing': [
+      '@stylistic/array-bracket-spacing': [
         'error',
         'always'
       ],

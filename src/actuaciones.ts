@@ -2,7 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import * as fs from "fs/promises";
 import { ConsultaActuacion, outActuacion } from "./types/actuaciones";
 import { client } from "./services/prisma";
-process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '1';
+import { sleep } from './utils/awaiter';
+process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 console.log( process.env.NODE_TLS_REJECT_UNAUTHORIZED );
 async function fetcher ( idProceso: number )
 {
@@ -75,8 +76,9 @@ async function* AsyncGenerateActuaciones (
   procesos: { idProceso: number; numero: number; }[],
 )
 {
-  for ( const { idProceso } of procesos )
+  for ( const { idProceso, numero } of procesos )
   {
+    await sleep( numero );
     const fetcherIdProceso = await fetcher( idProceso );
     if ( fetcherIdProceso !== null )
     {
