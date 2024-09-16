@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1995007490,
+  "llaveProceso": "11001400300220170100200",
+  "consActuacion": 65,
+  "fechaActuacion": "2024-07-15T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": " OFICIO No. OOECM-0724JJR-7930 Y OFICIO No. OOECM-0724JJR-7930  ENVIADOS, PASA A LETRA // PILAR SIERRA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-07-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 65,
+  "isUltimaAct": true,
+  "idProceso": 50780430
+}

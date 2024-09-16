@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 102913513,
+  "llaveProceso": "11001400304320170120500",
+  "consActuacion": 18,
+  "fechaActuacion": "2018-10-26T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PAQ 460",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-10-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 18,
+  "isUltimaAct": true,
+  "idProceso": 9334913
+}

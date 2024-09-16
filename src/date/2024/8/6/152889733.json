@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 152889733,
+  "llaveProceso": "11001400305320170072000",
+  "consActuacion": 19,
+  "fechaActuacion": "2018-06-14T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PAQUETE 1082 T ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-06-14T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 19,
+  "isUltimaAct": true,
+  "idProceso": 11997693
+}

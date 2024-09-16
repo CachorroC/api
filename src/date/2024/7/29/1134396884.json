@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1134396884,
+  "llaveProceso": "11001400305520200045600",
+  "consActuacion": 35,
+  "fechaActuacion": "2022-07-14T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "DTE ALLEGA TERMINACION POR PAGO DE LAS CUOTAS EN MORA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-07-14T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 35,
+  "isUltimaAct": true,
+  "idProceso": 1808770134
+}

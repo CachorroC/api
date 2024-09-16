@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1934858360,
+  "llaveProceso": "11001400308220170068000",
+  "consActuacion": 85,
+  "fechaActuacion": "2023-11-08T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "Se hace envió digital del el/los Despacho Comisorio Nº DCOECM-1023JR-256  al interesado//proceso pasa a letra//juan diaz",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-11-08T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 85,
+  "isUltimaAct": true,
+  "idProceso": 51619370
+}

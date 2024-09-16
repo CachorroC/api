@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 962646520,
+  "llaveProceso": "11001400303620170112500",
+  "consActuacion": 50,
+  "fechaActuacion": "2020-03-06T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Vencido el termino de 6o dias, proceso se envia para rearchivar en la caja313 //JUANMANUEL//",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2020-03-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 50,
+  "isUltimaAct": true,
+  "idProceso": 50800110
+}

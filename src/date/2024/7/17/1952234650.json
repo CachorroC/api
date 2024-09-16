@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1952234650,
+  "llaveProceso": "11001400301820170152200",
+  "consActuacion": 93,
+  "fechaActuacion": "2024-02-12T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "Se hace envió digital del el/los TELEGRAMA No. TOECM-0124WGG-70  al Secuestre://proceso se direcciona  a letra//juan diaz",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-02-12T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 93,
+  "isUltimaAct": true,
+  "idProceso": 50711570
+}

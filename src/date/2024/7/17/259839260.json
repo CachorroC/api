@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 259839260,
+  "llaveProceso": "11001400306820170105100",
+  "consActuacion": 21,
+  "fechaActuacion": "2018-06-18T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA 882",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-06-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 21,
+  "isUltimaAct": true,
+  "idProceso": 19209750
+}

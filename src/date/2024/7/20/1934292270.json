@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1934292270,
+  "llaveProceso": "11001400302420170170800",
+  "consActuacion": 28,
+  "fechaActuacion": "2023-11-07T05:00:00.000Z",
+  "actuacion": "Oficio Elaborado",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-11-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 28,
+  "isUltimaAct": true,
+  "idProceso": 50905230
+}

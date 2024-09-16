@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1831457873,
+  "llaveProceso": "11001400303720240026900",
+  "consActuacion": 9,
+  "fechaActuacion": "2024-08-21T05:00:00.000Z",
+  "actuacion": "Envío Comunicaciones",
+  "anotacion": "MC",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-21T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 9,
+  "isUltimaAct": true,
+  "idProceso": 132586833
+}

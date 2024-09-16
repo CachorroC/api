@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1861940543,
+  "llaveProceso": "15001405300320240029700",
+  "consActuacion": 9,
+  "fechaActuacion": "2024-09-02T05:00:00.000Z",
+  "actuacion": "Agrega memorial expediente",
+  "anotacion": "MEMORIAL ALLEGA CONSTANCIA DE ENVIO DE NOTIFICACION ARTICULO 8 LEY 2213 DE 2022",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 9,
+  "isUltimaAct": true,
+  "idProceso": 133337293
+}

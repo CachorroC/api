@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 638348500,
+  "llaveProceso": "11001400301420170098800",
+  "consActuacion": 43,
+  "fechaActuacion": "2019-01-14T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PAQUETE 2057",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-01-14T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 43,
+  "isUltimaAct": true,
+  "idProceso": 50633790
+}

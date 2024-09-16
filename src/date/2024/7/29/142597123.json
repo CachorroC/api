@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 142597123,
+  "llaveProceso": "11001400305120170064400",
+  "consActuacion": 11,
+  "fechaActuacion": "2017-08-28T05:00:00.000Z",
+  "actuacion": "Envío Expediente",
+  "anotacion": "REMITIDO A LA OFICINA JUDICIAL REPARTO DE SOACHA CUNDINAMARCA POR COMPETENCIA CON OFICIO 17-1502 EN UN CUADERNO CON 85 FOLIOS",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2017-08-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 11,
+  "isUltimaAct": true,
+  "idProceso": 11486153
+}

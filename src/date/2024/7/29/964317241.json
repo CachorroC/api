@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 964317241,
+  "llaveProceso": "25183400300120170011900",
+  "consActuacion": 14540213,
+  "fechaActuacion": "2020-11-04T05:00:00.000Z",
+  "actuacion": "FIJACION ESTADO",
+  "anotacion": "",
+  "fechaInicial": "2020-11-04T05:00:00.000Z",
+  "fechaFinal": "2020-11-06T05:00:00.000Z",
+  "fechaRegistro": "2020-11-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 4,
+  "isUltimaAct": false,
+  "idProceso": 86212271
+}

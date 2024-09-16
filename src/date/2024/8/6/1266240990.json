@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1266240990,
+  "llaveProceso": "11001400307020190055100",
+  "consActuacion": 22,
+  "fechaActuacion": "2022-03-23T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "respuesta de registro- desembargo ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-03-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 22,
+  "isUltimaAct": true,
+  "idProceso": 112013800
+}

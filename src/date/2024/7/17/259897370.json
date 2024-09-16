@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 259897370,
+  "llaveProceso": "11001400306820170124000",
+  "consActuacion": 25,
+  "fechaActuacion": "2018-08-06T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA 906",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-08-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 25,
+  "isUltimaAct": true,
+  "idProceso": 19211240
+}

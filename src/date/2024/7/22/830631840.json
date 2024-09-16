@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 830631840,
+  "llaveProceso": "11001400306120170079300",
+  "consActuacion": 21,
+  "fechaActuacion": "2018-10-17T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "347",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-10-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 21,
+  "isUltimaAct": true,
+  "idProceso": 50655580
+}

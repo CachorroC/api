@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1984761860,
+  "llaveProceso": "11001400305920180009000",
+  "consActuacion": 69,
+  "fechaActuacion": "2024-06-17T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "Se remite oficio No OOECM-0524LS-3460//CENTRO DE CONCILIACION//ordenado en auto del 07 de marzo de 2024// Proceso pasa a terminos// ANDREA VILLAMIL ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-06-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 69,
+  "isUltimaAct": true,
+  "idProceso": 50989890
+}

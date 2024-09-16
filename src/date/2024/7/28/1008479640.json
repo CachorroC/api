@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1008479640,
+  "llaveProceso": "11001400304520170147600",
+  "consActuacion": 56,
+  "fechaActuacion": "2021-03-10T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "No hay títulos judiciales pendientes de pago. Se envía expediente al área de Letra con Informe de Títulos. /Guillermo C.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-03-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 56,
+  "isUltimaAct": true,
+  "idProceso": 50866270
+}

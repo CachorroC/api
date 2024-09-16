@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1960325300,
+  "llaveProceso": "11001400305020170133600",
+  "consActuacion": 72,
+  "fechaActuacion": "2024-03-12T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "SE REMITE OFICIO No. OOECM-0224 HABC 10153 ordenados por auto del 23 de enero de 2024.// QUEDA EN LETRA// CARLOS A",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-03-12T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 72,
+  "isUltimaAct": true,
+  "idProceso": 106185210
+}

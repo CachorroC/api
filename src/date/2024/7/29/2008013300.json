@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2008013300,
+  "llaveProceso": "11001400306420240058800",
+  "consActuacion": 14,
+  "fechaActuacion": "2024-08-27T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Respuesta ORIP Firmada ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-27T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 14,
+  "isUltimaAct": true,
+  "idProceso": 165443150
+}

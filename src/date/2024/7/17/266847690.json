@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 266847690,
+  "llaveProceso": "11001400306420180021800",
+  "consActuacion": 10,
+  "fechaActuacion": "2018-04-24T05:00:00.000Z",
+  "actuacion": "Retiro de demanada",
+  "anotacion": "RETIRO DEMANDA DIANA PATRICIA TRIANA AUTORIZADA SIN COMPENSACION",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-04-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 10,
+  "isUltimaAct": true,
+  "idProceso": 17948440
+}

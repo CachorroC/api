@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 869970790,
+  "llaveProceso": "11001400304420190016500",
+  "consActuacion": 29,
+  "fechaActuacion": "2019-11-20T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Proceso se envia para archivo definitivo caja 245  //JUANMANUEL//",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-11-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 29,
+  "isUltimaAct": true,
+  "idProceso": 65707550
+}

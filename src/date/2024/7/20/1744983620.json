@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1744983620,
+  "llaveProceso": "11001400301620170087500",
+  "consActuacion": 70,
+  "fechaActuacion": "2023-05-16T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "EXPEDIENTE HIBRIDO BAJA DEL DESPACHO// HAMES R",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-05-16T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 70,
+  "isUltimaAct": true,
+  "idProceso": 50687430
+}

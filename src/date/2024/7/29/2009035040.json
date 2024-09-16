@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2009035040,
+  "llaveProceso": "11001400307720170056800",
+  "consActuacion": 120,
+  "fechaActuacion": "2024-08-29T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "OFICIO ELABORADO// JAVIER// PASA A FIRMA OOECM-0824JJR-8153",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 120,
+  "isUltimaAct": true,
+  "idProceso": 50921080
+}

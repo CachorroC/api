@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 602065020,
+  "llaveProceso": "11001400300820170127300",
+  "consActuacion": 15,
+  "fechaActuacion": "2018-03-08T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CJ 502",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-03-08T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 15,
+  "isUltimaAct": true,
+  "idProceso": 50776700
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 458509034,
+  "llaveProceso": "11001400305520170094300",
+  "consActuacion": 21,
+  "fechaActuacion": "2019-01-28T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "ALLEGAN RESPUESTA OFICIO 3054  SECRETARIA DE MOVILIDAD",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-01-30T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 21,
+  "isUltimaAct": true,
+  "idProceso": 17050494
+}

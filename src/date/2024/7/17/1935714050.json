@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1935714050,
+  "llaveProceso": "11001400301220170097100",
+  "consActuacion": 90,
+  "fechaActuacion": "2023-11-20T05:00:00.000Z",
+  "actuacion": "Fijacion estado",
+  "anotacion": "Actuación registrada el 20/11/2023 a las 11:30:57.",
+  "fechaInicial": "2023-11-21T05:00:00.000Z",
+  "fechaFinal": "2023-11-21T05:00:00.000Z",
+  "fechaRegistro": "2023-11-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 90,
+  "isUltimaAct": true,
+  "idProceso": 50669130
+}

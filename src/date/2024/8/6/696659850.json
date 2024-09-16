@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 696659850,
+  "llaveProceso": "11001400302320170145200",
+  "consActuacion": 5,
+  "fechaActuacion": "2018-03-23T05:00:00.000Z",
+  "actuacion": "Envío Expediente",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-03-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 5,
+  "isUltimaAct": true,
+  "idProceso": 50915500
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 550291430,
+  "llaveProceso": "11001400306520170082700",
+  "consActuacion": 37,
+  "fechaActuacion": "2019-06-25T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "paquetes terminados 640  HOY CAJA 49 ARCHIVO PUERTA DEL SOL",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-06-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 37,
+  "isUltimaAct": true,
+  "idProceso": 18161830
+}

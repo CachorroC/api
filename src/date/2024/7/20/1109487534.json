@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1109487534,
+  "llaveProceso": "11001310302120170047100",
+  "consActuacion": 127,
+  "fechaActuacion": "2023-06-05T05:00:00.000Z",
+  "actuacion": "Movimiento expediente",
+  "anotacion": "Se anexa respuesta Registro y se pasa a la letra .- aa",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-06-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 127,
+  "isUltimaAct": true,
+  "idProceso": 28907104
+}

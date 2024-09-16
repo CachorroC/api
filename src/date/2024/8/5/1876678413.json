@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1876678413,
+  "llaveProceso": "11001400303820230113800",
+  "consActuacion": 17,
+  "fechaActuacion": "2024-09-05T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 17,
+  "isUltimaAct": true,
+  "idProceso": 128522533
+}

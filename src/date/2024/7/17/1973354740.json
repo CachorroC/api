@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1973354740,
+  "llaveProceso": "11001400306520230124300",
+  "consActuacion": 18,
+  "fechaActuacion": "2024-05-06T05:00:00.000Z",
+  "actuacion": "A la Oficina de Ejecución por Reparto",
+  "anotacion": null,
+  "fechaInicial": "2024-05-06T05:00:00.000Z",
+  "fechaFinal": null,
+  "fechaRegistro": "2024-05-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 18,
+  "isUltimaAct": true,
+  "idProceso": 163032920
+}

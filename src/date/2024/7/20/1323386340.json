@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1323386340,
+  "llaveProceso": "11001400301720180083200",
+  "consActuacion": 30,
+  "fechaActuacion": "2022-06-29T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "UBICACION: CAJA NO 31 DE 2022",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-06-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 30,
+  "isUltimaAct": true,
+  "idProceso": 51345660
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 770667580,
+  "llaveProceso": "11001400303520170129700",
+  "consActuacion": 15,
+  "fechaActuacion": "2018-03-08T05:00:00.000Z",
+  "actuacion": "Retiro de demanada",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-03-08T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 15,
+  "isUltimaAct": true,
+  "idProceso": 50679230
+}

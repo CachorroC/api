@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1010546790,
+  "llaveProceso": "11001400303220180095900",
+  "consActuacion": 51,
+  "fechaActuacion": "2021-03-25T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PASA AREA BARADA CITAS // MEMORIAL No 24450 // CLAUDIA ESCOBAR",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-03-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 51,
+  "isUltimaAct": true,
+  "idProceso": 51318660
+}

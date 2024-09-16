@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 565577340,
+  "llaveProceso": "11001418901420190019000",
+  "consActuacion": 10,
+  "fechaActuacion": "2019-09-23T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA 152 TERMINADOS ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-09-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 10,
+  "isUltimaAct": true,
+  "idProceso": 51786190
+}

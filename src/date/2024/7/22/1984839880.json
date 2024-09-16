@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1984839880,
+  "llaveProceso": "11001400303720170139100",
+  "consActuacion": 81,
+  "fechaActuacion": "2024-06-12T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECEPCIONA EXPEDIENTRE POR ESTADO//DIEGO A.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-06-12T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 81,
+  "isUltimaAct": true,
+  "idProceso": 112945420
+}

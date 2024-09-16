@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 999344760,
+  "llaveProceso": "11001400301220170095000",
+  "consActuacion": 46,
+  "fechaActuacion": "2020-11-24T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Proceso se envia a archivo caja 131//OscarParada//",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2020-11-24T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 46,
+  "isUltimaAct": true,
+  "idProceso": 50651910
+}

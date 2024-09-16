@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 611922164,
+  "llaveProceso": "11001400305720170128900",
+  "consActuacion": 30,
+  "fechaActuacion": "2019-07-29T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA 3",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-07-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 30,
+  "isUltimaAct": true,
+  "idProceso": 17608484
+}

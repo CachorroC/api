@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1106395833,
+  "llaveProceso": "11001400304520170104100",
+  "consActuacion": 32,
+  "fechaActuacion": "2024-02-16T05:00:00.000Z",
+  "actuacion": "Envío Comunicaciones",
+  "anotacion": "REMISIÓN OFICIOS VÍA CORREO ELECTRÓNICO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-02-16T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 32,
+  "isUltimaAct": true,
+  "idProceso": 9876793
+}

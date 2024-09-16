@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 903204510,
+  "llaveProceso": "11001400302420180011900",
+  "consActuacion": 35,
+  "fechaActuacion": "2019-12-10T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-12-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 35,
+  "isUltimaAct": true,
+  "idProceso": 50990990
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1260723850,
+  "llaveProceso": "11001400301220170101200",
+  "consActuacion": 74,
+  "fechaActuacion": "2022-03-02T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "De acuerdo a solicitud M-16634, se informa al usuario que el expediente solicitado todavía no ha sido digitalizado; sin embargo, podrá acceder a el de manera presencial. Proceso pasa a letra // Paola Robayo",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-03-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 74,
+  "isUltimaAct": true,
+  "idProceso": 50681670
+}

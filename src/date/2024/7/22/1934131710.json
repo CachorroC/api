@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1934131710,
+  "llaveProceso": "11001400301120170062300",
+  "consActuacion": 24,
+  "fechaActuacion": "2018-08-15T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVADO EN PAQUETE 310 DE AGOSTO DE 2018.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-08-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 24,
+  "isUltimaAct": true,
+  "idProceso": 50543070
+}

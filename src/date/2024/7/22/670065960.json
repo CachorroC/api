@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 670065960,
+  "llaveProceso": "11001400301920170087200",
+  "consActuacion": 21,
+  "fechaActuacion": "2018-09-04T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVO DEFINITIVO CAJA 602 DE SEPTIEMBRE DE 2018-.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-09-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 21,
+  "isUltimaAct": true,
+  "idProceso": 50667300
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2005125060,
+  "llaveProceso": "11001400302720170085000",
+  "consActuacion": 43,
+  "fechaActuacion": "2024-08-16T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA 58 AÑO 2024",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-16T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 43,
+  "isUltimaAct": true,
+  "idProceso": 50666880
+}

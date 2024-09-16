@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1867021543,
+  "llaveProceso": "11001400303720230130800",
+  "consActuacion": 11,
+  "fechaActuacion": "2024-09-03T05:00:00.000Z",
+  "actuacion": "Auto de Trámite",
+  "anotacion": "AUTO ORDENA SEGUIR ADELANTE LA EJECUCION C.G.P. MENOR.  ESTADO ELECTRONICO No. 065 DEL AÑO 2024",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 11,
+  "isUltimaAct": true,
+  "idProceso": 128677033
+}

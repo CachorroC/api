@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 809812920,
+  "llaveProceso": "11001400305820170091800",
+  "consActuacion": 64,
+  "fechaActuacion": "2019-04-11T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Proceso se Archiva en caja 134-Andres A",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-04-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 64,
+  "isUltimaAct": true,
+  "idProceso": 50526190
+}

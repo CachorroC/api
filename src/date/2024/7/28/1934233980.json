@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1934233980,
+  "llaveProceso": "11001400301120170088900",
+  "consActuacion": 32,
+  "fechaActuacion": "2019-06-18T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PAQUETE 377 DE JUNIO DEL 2019\r\n\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-06-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 32,
+  "isUltimaAct": true,
+  "idProceso": 50668030
+}

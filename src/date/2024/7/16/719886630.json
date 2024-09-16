@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 719886630,
+  "llaveProceso": "11001400302720170085000",
+  "consActuacion": 42,
+  "fechaActuacion": "2019-07-25T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "SE HACE ENTREGA DE LOS OFICIOS DE DESEMBARGO A LA DEMANDADA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-07-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 42,
+  "isUltimaAct": true,
+  "idProceso": 50666880
+}

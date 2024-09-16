@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1274578730,
+  "llaveProceso": "11001400301720180070500",
+  "consActuacion": 57,
+  "fechaActuacion": "2022-04-20T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "proceso pasa a terminados/German B.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-04-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 57,
+  "isUltimaAct": true,
+  "idProceso": 51275960
+}

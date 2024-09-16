@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1686593620,
+  "llaveProceso": "11001400300220180020500",
+  "consActuacion": 30,
+  "fechaActuacion": "2023-03-22T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVO ACTUALIZADO 2023 CAJA 31 (VF)",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-03-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 30,
+  "isUltimaAct": true,
+  "idProceso": 51034000
+}

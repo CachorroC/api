@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1975163100,
+  "llaveProceso": "11001400306220170122900",
+  "consActuacion": 65,
+  "fechaActuacion": "2024-05-12T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "EL PROCESO FUE TRASLADADO A ARCHIVO CENTRAL // 24-04-2024 //CAJA 189// PAULA GONZALEZ.\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-05-12T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 65,
+  "isUltimaAct": true,
+  "idProceso": 50741270
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 958263380,
+  "llaveProceso": "11001400305320180094500",
+  "consActuacion": 41,
+  "fechaActuacion": "2020-02-17T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Proceso se envia a archivo definitivo caja 299 //linamartin//",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2020-02-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 41,
+  "isUltimaAct": true,
+  "idProceso": 64641230
+}

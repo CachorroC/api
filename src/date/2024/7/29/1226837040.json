@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1226837040,
+  "llaveProceso": "11001400306520170090300",
+  "consActuacion": 62,
+  "fechaActuacion": "2021-10-05T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Proceso se envio a la caja 319 con stickers 1002762907/Andres Ariza",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-10-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 62,
+  "isUltimaAct": true,
+  "idProceso": 70519480
+}

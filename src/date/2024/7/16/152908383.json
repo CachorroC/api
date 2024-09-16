@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 152908383,
+  "llaveProceso": "11001400305320170087100",
+  "consActuacion": 8,
+  "fechaActuacion": "2018-03-23T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PAQUETE 1069 T ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-03-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 8,
+  "isUltimaAct": true,
+  "idProceso": 11998913
+}

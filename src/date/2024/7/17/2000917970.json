@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2000917970,
+  "llaveProceso": "11001400307120170125000",
+  "consActuacion": 79,
+  "fechaActuacion": "2024-08-01T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "SE REMITE Oficio No. OOECM-0724AQV-9485 ordenado en auto del 25 de octubre de 2024.//PROCESO PASA LETRA//JUAN CONCHA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 79,
+  "isUltimaAct": true,
+  "idProceso": 64793050
+}

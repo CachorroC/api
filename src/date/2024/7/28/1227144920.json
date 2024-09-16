@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1227144920,
+  "llaveProceso": "11001400300920170136100",
+  "consActuacion": 60,
+  "fechaActuacion": "2021-10-06T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Sin tramite pendiente en el area de desglose. proceso pasa a letra // NataliaChinchilla",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-10-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 60,
+  "isUltimaAct": true,
+  "idProceso": 50925430
+}

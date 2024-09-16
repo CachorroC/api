@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 855746560,
+  "llaveProceso": "11001400307320170133300",
+  "consActuacion": 8,
+  "fechaActuacion": "2017-11-08T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "COMP. RADICADA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2017-11-08T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 8,
+  "isUltimaAct": true,
+  "idProceso": 50765090
+}

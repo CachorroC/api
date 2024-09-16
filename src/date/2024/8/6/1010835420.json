@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1010835420,
+  "llaveProceso": "11001400301720170152600",
+  "consActuacion": 49,
+  "fechaActuacion": "2021-03-26T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "proceso se envia a archivo caja 249 // lina vergara. //stiker 1002769251.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-03-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 49,
+  "isUltimaAct": true,
+  "idProceso": 50875060
+}

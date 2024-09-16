@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1279553860,
+  "llaveProceso": "11001400304420180056600",
+  "consActuacion": 79,
+  "fechaActuacion": "2022-05-02T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "En atención a solicitud M-99661 se remitió información al usuario vía correo electrónico // Pasa a letra // Wendy Arias",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-05-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 78,
+  "isUltimaAct": false,
+  "idProceso": 65703460
+}

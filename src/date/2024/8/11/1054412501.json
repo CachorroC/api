@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1054412501,
+  "llaveProceso": "25899400300220200028900",
+  "consActuacion": 21163228,
+  "fechaActuacion": "2021-09-16T05:00:00.000Z",
+  "actuacion": "Auto Emplaza",
+  "anotacion": "AUTO EMPLAZA PEDRO JULIO TRIVIÑO VALVUENA",
+  "fechaInicial": "2021-09-22T05:00:00.000Z",
+  "fechaFinal": "2021-10-12T05:00:00.000Z",
+  "fechaRegistro": "2021-09-21T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": true,
+  "cant": 1,
+  "isUltimaAct": false,
+  "idProceso": 119099861
+}

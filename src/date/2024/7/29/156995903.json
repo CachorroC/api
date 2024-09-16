@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 156995903,
+  "llaveProceso": "11001400305420170071200",
+  "consActuacion": 12,
+  "fechaActuacion": "2017-11-15T05:00:00.000Z",
+  "actuacion": "Retiro demanda",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2017-11-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 12,
+  "isUltimaAct": true,
+  "idProceso": 12251233
+}

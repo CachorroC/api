@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 123000343,
+  "llaveProceso": "11001400304720170171300",
+  "consActuacion": 29,
+  "fechaActuacion": "2018-09-07T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "SE DEVUELVE AL ARCHIVO POR PEMANECER UN MES EN SECRETARIA SIN SOLICITUD ALGUNA, SE REMITE AL MISMO PAQUETE O CAJA. JC",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-09-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 29,
+  "isUltimaAct": true,
+  "idProceso": 10410303
+}

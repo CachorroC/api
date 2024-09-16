@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1878629140,
+  "llaveProceso": "11001400301220170136900",
+  "consActuacion": 37,
+  "fechaActuacion": "2023-09-18T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVADO CAJA 33 DE 2021",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-09-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 37,
+  "isUltimaAct": true,
+  "idProceso": 50848760
+}

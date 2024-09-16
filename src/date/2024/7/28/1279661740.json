@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1279661740,
+  "llaveProceso": "11001400308120180011100",
+  "consActuacion": 30,
+  "fechaActuacion": "2022-05-02T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "ENTREGUE DESDGLOSE Y OFICIO A LA DRA CARMEN CECILIA RAMIREZ MENDOZA//LUCERO SUAREZ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-05-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 30,
+  "isUltimaAct": true,
+  "idProceso": 51918100
+}

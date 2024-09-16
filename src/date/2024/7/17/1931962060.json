@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1931962060,
+  "llaveProceso": "11001400301120180011800",
+  "consActuacion": 66,
+  "fechaActuacion": "2022-10-25T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PROCESO ARCHIVADO //Caja 392//Laura Gutierrez",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-10-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 66,
+  "isUltimaAct": true,
+  "idProceso": 50995460
+}

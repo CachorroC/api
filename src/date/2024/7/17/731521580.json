@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 731521580,
+  "llaveProceso": "11001400302920170055700",
+  "consActuacion": 17,
+  "fechaActuacion": "2018-02-22T05:00:00.000Z",
+  "actuacion": "Envio Expediente",
+  "anotacion": "SE REMITIO A LA ENTIDAD SUPERINTENDENCIA DE SOCIEDADES. OFICIO REMISORIO No. 0973 DE FEBRERO 20 DE 2018.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-02-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 17,
+  "isUltimaAct": true,
+  "idProceso": 50517510
+}

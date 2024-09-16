@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1184571551,
+  "llaveProceso": "11001400304020180012300",
+  "consActuacion": 25,
+  "fechaActuacion": "2022-10-05T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": " En virtud de lo establecido en el artículo 33 del Acuerdo PCSJA20-11567 de 2020 y la circular CSJBTC22-67 referentes al plan de digitalización y la entrega de expedientes físicos para la digitalización de los mismos, este despacho hizo entrega del expediente físico al consorcio a cargo del proyecto de digitalización",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-10-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 25,
+  "isUltimaAct": true,
+  "idProceso": 19155581
+}

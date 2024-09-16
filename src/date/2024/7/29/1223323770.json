@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1223323770,
+  "llaveProceso": "11001400308520170159600",
+  "consActuacion": 20,
+  "fechaActuacion": "2021-09-15T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "proceso archivado en la caja 278 // 1002769365 // lina vergara.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-09-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 20,
+  "isUltimaAct": true,
+  "idProceso": 65614470
+}

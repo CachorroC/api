@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2010720480,
+  "llaveProceso": "11001400307620170101600",
+  "consActuacion": 181,
+  "fechaActuacion": "2024-09-02T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "SE ELABORA OFICIO  N° TOECM-0924SBO-1\r\n//PROCESO HIBRIDO SE DIRECCIONA PARA LA FIRMA// EMILIO BENAVIDES",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 181,
+  "isUltimaAct": true,
+  "idProceso": 51499790
+}

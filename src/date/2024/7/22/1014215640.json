@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1014215640,
+  "llaveProceso": "11001400300720170111300",
+  "consActuacion": 34,
+  "fechaActuacion": "2021-04-30T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA NO 005 DE 2021",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-04-30T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 34,
+  "isUltimaAct": true,
+  "idProceso": 50593940
+}

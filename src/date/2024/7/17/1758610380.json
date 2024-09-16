@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1758610380,
+  "llaveProceso": "11001400302220170056700",
+  "consActuacion": 128,
+  "fechaActuacion": "2023-05-29T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "\r\nSE  RECEPCIONA  EL EXPEDIENTE EN EL AREA  DE ESTADOS PARA LO PERTINENTE // stefanny ortizCUADERNOS 2\r\n\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-05-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 128,
+  "isUltimaAct": true,
+  "idProceso": 111939890
+}

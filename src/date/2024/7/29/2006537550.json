@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2006537550,
+  "llaveProceso": "11001418901720240042800",
+  "consActuacion": 7,
+  "fechaActuacion": "2024-08-22T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "SOLICITUD TRERMINACION PROCESO.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 7,
+  "isUltimaAct": true,
+  "idProceso": 156121030
+}

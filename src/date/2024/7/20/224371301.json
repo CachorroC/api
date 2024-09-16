@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 224371301,
+  "llaveProceso": "11001400304120180007500",
+  "consActuacion": 5,
+  "fechaActuacion": "2018-04-06T05:00:00.000Z",
+  "actuacion": "Retiro demanda",
+  "anotacion": "por la apoderada demandante María Helena Suarez Garcia",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-04-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 5,
+  "isUltimaAct": true,
+  "idProceso": 19431801
+}

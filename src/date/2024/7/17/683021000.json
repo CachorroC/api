@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 683021000,
+  "llaveProceso": "11001400302120170175500",
+  "consActuacion": 8,
+  "fechaActuacion": "2018-02-01T05:00:00.000Z",
+  "actuacion": "Retiro Demanda Rechazada",
+  "anotacion": "POR DIANA PATRICIA TRIANA SUAREZ.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-02-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 8,
+  "isUltimaAct": true,
+  "idProceso": 50869770
+}

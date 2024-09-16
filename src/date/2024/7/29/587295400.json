@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 587295400,
+  "llaveProceso": "11001400300620170041700",
+  "consActuacion": 19,
+  "fechaActuacion": "2019-03-04T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA 405/2018",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-03-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 19,
+  "isUltimaAct": true,
+  "idProceso": 50596080
+}

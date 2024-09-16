@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "module": "NodeNext",
+    "target": "ESNext",
+    "jsx": "react",
+    "strict": true,
+    "lib": [
+      "WebWorker",
+      "ESNext.Array",
+      "ESNext.AsyncIterable",
+      "ES2022.Object",
+      "esnext"
+    ],
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules"]
+}

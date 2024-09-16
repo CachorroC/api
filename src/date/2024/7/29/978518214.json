@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 978518214,
+  "llaveProceso": "11001310304320170055400",
+  "consActuacion": 57,
+  "fechaActuacion": "2021-09-20T05:00:00.000Z",
+  "actuacion": "Inventario",
+  "anotacion": "PROCESO TERMINADO PASA PARA ARCHIVO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-09-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 57,
+  "isUltimaAct": true,
+  "idProceso": 52281244
+}

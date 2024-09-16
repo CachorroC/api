@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1191778194,
+  "llaveProceso": "11001310302120170047100",
+  "consActuacion": 128,
+  "fechaActuacion": "2024-08-08T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PROCESO ARCHIVADO DEFINITIVO  CON 1 CDNO CAJA 2024-572 // SV",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 128,
+  "isUltimaAct": true,
+  "idProceso": 28907104
+}

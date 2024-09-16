@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1410857211,
+  "llaveProceso": "11001400304220240080800",
+  "consActuacion": 5,
+  "fechaActuacion": "2024-08-02T05:00:00.000Z",
+  "actuacion": "Oficio Elaborado",
+  "anotacion": "C, oficio No.1837 Embargo registro - para revisión y firma",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 5,
+  "isUltimaAct": true,
+  "idProceso": 175165761
+}

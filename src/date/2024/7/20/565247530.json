@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 565247530,
+  "llaveProceso": "11001400303020170181700",
+  "consActuacion": 67,
+  "fechaActuacion": "2019-09-25T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "SE ENTREGA OFICIO No 55958-55959 AUTORIZADA PARTE DDO FRANCY MALDONADO  - MAUBRICIO ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-09-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 67,
+  "isUltimaAct": true,
+  "idProceso": 50883240
+}

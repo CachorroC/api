@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 764063990,
+  "llaveProceso": "11001400303420170108900",
+  "consActuacion": 24,
+  "fechaActuacion": "2019-03-07T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PAQUETE 605 TER ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-03-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 24,
+  "isUltimaAct": true,
+  "idProceso": 50654580
+}

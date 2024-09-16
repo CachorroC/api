@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 920378870,
+  "llaveProceso": "11001400306620190040900",
+  "consActuacion": 5,
+  "fechaActuacion": "2019-04-11T05:00:00.000Z",
+  "actuacion": "Retiro demanda",
+  "anotacion": "RETIRA LA DEMANDA LA APODERADA DEMANDANTE ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-04-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 5,
+  "isUltimaAct": true,
+  "idProceso": 18852280
+}

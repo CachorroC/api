@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1486196010,
+  "llaveProceso": "11001400301220170102100",
+  "consActuacion": 110,
+  "fechaActuacion": "2022-11-02T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "\r\nSE RECEPCIONA EL EXPEDIENTE EN (2) CUADERNOS HENRY BERNAL Y NATALY RIAÑO LETRA ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-11-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 110,
+  "isUltimaAct": true,
+  "idProceso": 50692560
+}

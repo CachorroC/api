@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 587378290,
+  "llaveProceso": "11001400300620170076300",
+  "consActuacion": 13,
+  "fechaActuacion": "2019-03-08T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA 380 DE 2018",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-03-08T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 13,
+  "isUltimaAct": true,
+  "idProceso": 50760770
+}

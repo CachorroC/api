@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1936299090,
+  "llaveProceso": "11001400306420170119100",
+  "consActuacion": 78,
+  "fechaActuacion": "2023-11-21T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "SE REMITE Oficio No. OOECM-1023JZ-3933 ordenado en auto del 27 de agosto de 2020.//PROCESO PASA LETRA//JUAN CONCHA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-11-21T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 78,
+  "isUltimaAct": true,
+  "idProceso": 50672820
+}

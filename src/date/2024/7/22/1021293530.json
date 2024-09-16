@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1021293530,
+  "llaveProceso": "11001400307320190028700",
+  "consActuacion": 40,
+  "fechaActuacion": "2021-07-01T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Proceso se envia a la caja 319 stickrs 1002769109-Andres Ariza",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-07-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 40,
+  "isUltimaAct": true,
+  "idProceso": 51718410
+}

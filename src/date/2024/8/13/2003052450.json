@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2003052450,
+  "llaveProceso": "11001400300120170100100",
+  "consActuacion": 125,
+  "fechaActuacion": "2024-08-09T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "SE HACE ENVIO DIGITAL DEL OFICIO OOECM-0824SBO-39  A LA ENTIDAD Y AL INTERESADO // SE DIRECCIONA AL AREA DE  TERMINOS  // JAVIER FLOREZ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-09T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 125,
+  "isUltimaAct": true,
+  "idProceso": 50621670
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 592867813,
+  "llaveProceso": "11001400305020180014000",
+  "consActuacion": 20,
+  "fechaActuacion": "2019-09-11T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVO TERMINADO PAQUETE 356 DE 2019.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-09-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 20,
+  "isUltimaAct": true,
+  "idProceso": 11227303
+}

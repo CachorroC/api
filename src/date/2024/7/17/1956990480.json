@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1956990480,
+  "llaveProceso": "11001400306420180102900",
+  "consActuacion": 34,
+  "fechaActuacion": "2024-02-28T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Acuerdo de Pago Centro de Conciliación",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-02-28T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 34,
+  "isUltimaAct": true,
+  "idProceso": 113353750
+}

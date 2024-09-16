@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 690458400,
+  "llaveProceso": "11001400302220170048300",
+  "consActuacion": 15,
+  "fechaActuacion": "2017-10-13T05:00:00.000Z",
+  "actuacion": "Retiro demanda",
+  "anotacion": "maria helena suarez",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2017-10-13T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 15,
+  "isUltimaAct": true,
+  "idProceso": 50466490
+}

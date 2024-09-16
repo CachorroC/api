@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1237916570,
+  "llaveProceso": "11001400300420170080100",
+  "consActuacion": 140,
+  "fechaActuacion": "2021-12-10T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Respuesta Secretaría de Movilidad // Levanta medida ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-12-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 140,
+  "isUltimaAct": true,
+  "idProceso": 112783650
+}

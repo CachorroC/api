@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 265461700,
+  "llaveProceso": "11001400306420170116000",
+  "consActuacion": 33,
+  "fechaActuacion": "2022-03-23T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA NO. 24 - 2022",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-03-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 33,
+  "isUltimaAct": true,
+  "idProceso": 17941850
+}

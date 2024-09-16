@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 952462630,
+  "llaveProceso": "11001400300120170084900",
+  "consActuacion": 51,
+  "fechaActuacion": "2020-02-03T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Proceso se envia para archivo defenitivo caja 288//karenmm//",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2020-02-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 50,
+  "isUltimaAct": false,
+  "idProceso": 50548450
+}

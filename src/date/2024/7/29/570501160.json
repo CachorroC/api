@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 570501160,
+  "llaveProceso": "11001400300320170106500",
+  "consActuacion": 13,
+  "fechaActuacion": "2017-12-04T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PAQUE. 345. DICIEMBRE 2017",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2017-12-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 13,
+  "isUltimaAct": true,
+  "idProceso": 50527120
+}

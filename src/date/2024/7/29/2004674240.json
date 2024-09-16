@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2004674240,
+  "llaveProceso": "11001400300120170100100",
+  "consActuacion": 126,
+  "fechaActuacion": "2024-08-15T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PROCESO CON TERMINO VENCIDO PASA A LETRA // P LUGO \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 125,
+  "isUltimaAct": false,
+  "idProceso": 50621670
+}

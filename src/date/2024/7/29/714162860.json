@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 714162860,
+  "llaveProceso": "11001400302620180047900",
+  "consActuacion": 6,
+  "fechaActuacion": "2018-06-15T05:00:00.000Z",
+  "actuacion": "Envío  comunicaciones",
+  "anotacion": "COMPETENCIA ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-06-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 6,
+  "isUltimaAct": true,
+  "idProceso": 51176440
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1250395210,
+  "llaveProceso": "11001400307020170121800",
+  "consActuacion": 18,
+  "fechaActuacion": "2021-09-22T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "RESPUESTA SUPERNOTARIADO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-09-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 18,
+  "isUltimaAct": true,
+  "idProceso": 113385910
+}

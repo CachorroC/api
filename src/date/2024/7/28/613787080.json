@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 613787080,
+  "llaveProceso": "11001400301020170065301",
+  "consActuacion": 29,
+  "fechaActuacion": "2018-08-27T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PAQUETE 2040",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-08-27T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 29,
+  "isUltimaAct": true,
+  "idProceso": 50540650
+}

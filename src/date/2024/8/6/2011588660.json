@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2011588660,
+  "llaveProceso": "11001400307720170056800",
+  "consActuacion": 123,
+  "fechaActuacion": "2024-09-03T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "OFICIO  ENVIADO//   OOECM-0824JJR-8153 // PROCESO PASA A LETRA// JAVIER.\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 123,
+  "isUltimaAct": true,
+  "idProceso": 50921080
+}

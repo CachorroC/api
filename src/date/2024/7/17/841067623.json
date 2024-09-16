@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 841067623,
+  "llaveProceso": "11001400303820180014900",
+  "consActuacion": 29,
+  "fechaActuacion": "2021-05-27T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "RESPUESTA TRANSITO - SE AGREGA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-06-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 29,
+  "isUltimaAct": true,
+  "idProceso": 9088093
+}

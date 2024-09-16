@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1754755510,
+  "llaveProceso": "11001400300520170132600",
+  "consActuacion": 92,
+  "fechaActuacion": "2023-05-25T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Informe de titulos(Fl.153 C-1) No hay titulos/ a la letra/ Andrea Vásquez 1C",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-05-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 92,
+  "isUltimaAct": true,
+  "idProceso": 50720040
+}

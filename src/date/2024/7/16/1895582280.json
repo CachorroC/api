@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1895582280,
+  "llaveProceso": "11001400305620170131200",
+  "consActuacion": 49,
+  "fechaActuacion": "2023-10-05T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "SE HACE ENVIO DIGITAL DE  OFICIO    OOECM-0623JR-472   A LA ENTIDAD Y AL INTERESADO // SE DIRECCIONA AL AREA DE  TERMINADOS  // STEVEN PICO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-10-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 49,
+  "isUltimaAct": true,
+  "idProceso": 50916090
+}

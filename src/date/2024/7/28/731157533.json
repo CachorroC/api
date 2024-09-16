@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 731157533,
+  "llaveProceso": "11001400304720170149100",
+  "consActuacion": 28,
+  "fechaActuacion": "2020-03-06T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "EL PROCESO SE DEVUELVE A ARCHIVO CENTRAL JFVE",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2020-03-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 28,
+  "isUltimaAct": true,
+  "idProceso": 10408413
+}

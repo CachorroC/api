@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1203222103,
+  "llaveProceso": "11001400305220170090600",
+  "consActuacion": 54,
+  "fechaActuacion": "2024-05-08T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Respuesta centro de conciliación",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-05-08T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 54,
+  "isUltimaAct": true,
+  "idProceso": 11720143
+}

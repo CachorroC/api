@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 861521230,
+  "llaveProceso": "11001400302220180060400",
+  "consActuacion": 49,
+  "fechaActuacion": "2019-10-10T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVADOS CAJA NO. 560/2019",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-10-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 49,
+  "isUltimaAct": true,
+  "idProceso": 51173050
+}

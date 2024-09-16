@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 375274913,
+  "llaveProceso": "11001400303820180083500",
+  "consActuacion": 16,
+  "fechaActuacion": "2019-03-06T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PQ 443 TERMINADOS ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-03-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 16,
+  "isUltimaAct": true,
+  "idProceso": 9093813
+}

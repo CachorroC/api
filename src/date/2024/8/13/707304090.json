@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 707304090,
+  "llaveProceso": "11001400302520170106400",
+  "consActuacion": 5,
+  "fechaActuacion": "2017-10-06T05:00:00.000Z",
+  "actuacion": "Retiro de demanada",
+  "anotacion": "DEMANDA RETIRADA POR SU APODERADA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2017-10-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 5,
+  "isUltimaAct": true,
+  "idProceso": 50738440
+}

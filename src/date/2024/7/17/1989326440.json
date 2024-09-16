@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1989326440,
+  "llaveProceso": "11001400301420180092900",
+  "consActuacion": 60,
+  "fechaActuacion": "2024-06-25T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECIBE PROCESO POR ESTADO  // ANA ZAPATA \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-06-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 60,
+  "isUltimaAct": true,
+  "idProceso": 51341610
+}

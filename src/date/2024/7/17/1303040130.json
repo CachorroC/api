@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1303040130,
+  "llaveProceso": "11001400306820190100400",
+  "consActuacion": 7,
+  "fechaActuacion": "2022-06-03T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA 955- ARCHIVO 22 DE FEBRERO DEL 2022",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-06-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 7,
+  "isUltimaAct": true,
+  "idProceso": 39001450
+}

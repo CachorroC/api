@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1803871850,
+  "llaveProceso": "11001400305120180085000",
+  "consActuacion": 62,
+  "fechaActuacion": "2023-07-10T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "Se remite Despacho Comisorio DCOECM-0623LG-188 ordenado en auto del 20/06/2023 // proceso pasa a letra // Roberto Ramirez",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-07-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 62,
+  "isUltimaAct": true,
+  "idProceso": 89137980
+}

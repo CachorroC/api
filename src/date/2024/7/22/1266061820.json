@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1266061820,
+  "llaveProceso": "11001418902120190029100",
+  "consActuacion": 12,
+  "fechaActuacion": "2022-03-23T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "No hay títulos judiciales pendientes de pago. Se envía expediente al área de Letra con reporte general del Banco Agrario. /Guillermo C.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-03-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 12,
+  "isUltimaAct": true,
+  "idProceso": 72721150
+}

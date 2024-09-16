@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 265839730,
+  "llaveProceso": "11001400306420170146900",
+  "consActuacion": 10,
+  "fechaActuacion": "2017-12-01T05:00:00.000Z",
+  "actuacion": "Retiro demanda",
+  "anotacion": "RETIRA DEMANDA AUTORIZADA DIANA PATRICIA TRIANA S. ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2017-12-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 10,
+  "isUltimaAct": true,
+  "idProceso": 17944250
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 857000690,
+  "llaveProceso": "11001400307820170098600",
+  "consActuacion": 2,
+  "fechaActuacion": "2019-01-15T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE ENTREGO DESGLOSE",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-01-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 2,
+  "isUltimaAct": true,
+  "idProceso": 51570460
+}

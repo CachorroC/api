@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1832599260,
+  "llaveProceso": "11001400305520170086000",
+  "consActuacion": 84,
+  "fechaActuacion": "2023-08-03T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECEPCIONA EXPEDIENTE DEL AREA DE ESTADO/    LETRA         /JULIAN SANCHEZ \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-08-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 84,
+  "isUltimaAct": true,
+  "idProceso": 86524020
+}

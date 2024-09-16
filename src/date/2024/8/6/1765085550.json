@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1765085550,
+  "llaveProceso": "11001400301220180081000",
+  "consActuacion": 65,
+  "fechaActuacion": "2023-06-05T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 5474-2023, No. Reloj Radicador: 9387, Entidad o Señor(a): ORIP SUR - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-06-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 65,
+  "isUltimaAct": true,
+  "idProceso": 51282150
+}

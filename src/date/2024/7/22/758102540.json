@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 758102540,
+  "llaveProceso": "11001400303320170118000",
+  "consActuacion": 8,
+  "fechaActuacion": "2018-03-24T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "CAJA 726 - 2018",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-03-24T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 8,
+  "isUltimaAct": true,
+  "idProceso": 50643180
+}

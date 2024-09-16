@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1723823110,
+  "llaveProceso": "11001400304320180038400",
+  "consActuacion": 108,
+  "fechaActuacion": "2023-04-27T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE HACE ENVIO DE OFICIO OOECM-0223WA-9266   // STEVEN PICO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-04-27T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 108,
+  "isUltimaAct": true,
+  "idProceso": 114256610
+}

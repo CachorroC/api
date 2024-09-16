@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1376855330,
+  "llaveProceso": "11001400303520180037000",
+  "consActuacion": 37,
+  "fechaActuacion": "2022-08-25T05:00:00.000Z",
+  "actuacion": "Oficio Elaborado",
+  "anotacion": "OFICIO No 3.766 A LA O.R.I.P. ACTUAIZATERMINACION",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-08-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 37,
+  "isUltimaAct": true,
+  "idProceso": 51103200
+}

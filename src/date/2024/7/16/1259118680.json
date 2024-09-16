@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1259118680,
+  "llaveProceso": "11001400302620170087200",
+  "consActuacion": 90,
+  "fechaActuacion": "2022-02-23T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "TERMINACION CAJA NO 0033 DE 2022",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-02-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 90,
+  "isUltimaAct": true,
+  "idProceso": 50652400
+}

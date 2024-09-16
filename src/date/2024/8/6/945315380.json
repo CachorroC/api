@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 945315380,
+  "llaveProceso": "11001400307220170065400",
+  "consActuacion": 36,
+  "fechaActuacion": "2020-01-15T05:00:00.000Z",
+  "actuacion": "Entrega Desglose",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2020-01-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 36,
+  "isUltimaAct": true,
+  "idProceso": 50468310
+}

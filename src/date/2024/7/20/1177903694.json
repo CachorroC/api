@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1177903694,
+  "llaveProceso": "11001400302720140070300",
+  "consActuacion": 191,
+  "fechaActuacion": "2024-07-02T05:00:00.000Z",
+  "actuacion": "Movimiento expediente",
+  "anotacion": "Se anexa memorial con radicado No. 5350-2024 de conformidad con el ART 109 CGP//PROCESO A LA LETRA//FRD ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-07-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 191,
+  "isUltimaAct": true,
+  "idProceso": 29071084
+}

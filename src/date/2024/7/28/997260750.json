@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 997260750,
+  "llaveProceso": "11001400306920170075400",
+  "consActuacion": 85,
+  "fechaActuacion": "2020-11-04T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Proceso se envía a archivo definitivo caja 361 **LinaMartin**",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2020-11-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 85,
+  "isUltimaAct": true,
+  "idProceso": 50632410
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 882419603,
+  "llaveProceso": "11001400304720170106500",
+  "consActuacion": 49,
+  "fechaActuacion": "2022-06-08T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PROCESO ARCHIVADO CAJA 021 AÑO 2022 JFVE ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-06-08T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 49,
+  "isUltimaAct": true,
+  "idProceso": 10404913
+}

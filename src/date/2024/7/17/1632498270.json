@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1632498270,
+  "llaveProceso": "11001400303720180011100",
+  "consActuacion": 56,
+  "fechaActuacion": "2023-02-02T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 648-2023, No. Reloj Radicador: 5237, Entidad o Señor(a): CARMEN RAMÍREZ MUÑOZ. - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otro, Observaciones: Allega soporte de un abono realizado a la deuda",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-02-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 56,
+  "isUltimaAct": true,
+  "idProceso": 50990920
+}

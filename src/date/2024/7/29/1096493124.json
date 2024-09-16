@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1096493124,
+  "llaveProceso": "11001310301120170033500",
+  "consActuacion": 110,
+  "fechaActuacion": "2023-03-10T05:00:00.000Z",
+  "actuacion": "Movimiento expediente",
+  "anotacion": "Se anexa respuesta Policía Nacional y se pasa a la letra .- aa",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-03-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 110,
+  "isUltimaAct": true,
+  "idProceso": 1805257424
+}

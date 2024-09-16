@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1776510313,
+  "llaveProceso": "11001400303720240026900",
+  "consActuacion": 8,
+  "fechaActuacion": "2024-08-05T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "OFICIO 2316 // AN",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-08-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 8,
+  "isUltimaAct": true,
+  "idProceso": 132586833
+}

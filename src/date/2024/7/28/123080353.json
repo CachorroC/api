@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 123080353,
+  "llaveProceso": "11001400304720180024200",
+  "consActuacion": 6,
+  "fechaActuacion": "2018-02-20T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "TERMINADOS CAJA 492 DEL 2018\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-02-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 6,
+  "isUltimaAct": true,
+  "idProceso": 10416913
+}

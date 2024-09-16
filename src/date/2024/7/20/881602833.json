@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 881602833,
+  "llaveProceso": "11001400304820170087900",
+  "consActuacion": 26,
+  "fechaActuacion": "2022-06-01T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PROCESO ARCHIVADO EN LA CAJA 78 SEGÚN ACUERDO PCSJA20-11567 DEL 2020. ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-06-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 26,
+  "isUltimaAct": true,
+  "idProceso": 10684603
+}

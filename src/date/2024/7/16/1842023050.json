@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1842023050,
+  "llaveProceso": "11001400307620180005200",
+  "consActuacion": 4,
+  "fechaActuacion": "2023-08-11T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "SolicitudActora-RtaEsc ARCHIVADO en el PAQUETE No. 207/18         11/08/23 - AAG\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-08-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 4,
+  "isUltimaAct": true,
+  "idProceso": 51500810
+}

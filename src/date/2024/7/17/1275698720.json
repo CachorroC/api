@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1275698720,
+  "llaveProceso": "11001400306920200082300",
+  "consActuacion": 24,
+  "fechaActuacion": "2022-04-25T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "SOLICITUD LEVANTAMIENTO MEDIDAS",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-04-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 24,
+  "isUltimaAct": true,
+  "idProceso": 112082810
+}

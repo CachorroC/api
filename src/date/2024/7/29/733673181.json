@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 733673181,
+  "llaveProceso": "11001400304020180089600",
+  "consActuacion": 27,
+  "fechaActuacion": "2020-02-07T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PAQUETE 667 DEL 2020",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2020-02-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 27,
+  "isUltimaAct": true,
+  "idProceso": 19161681
+}

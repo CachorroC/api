@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 92614493,
+  "llaveProceso": "11001400303720170150900",
+  "consActuacion": 25,
+  "fechaActuacion": "2018-09-05T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PROCESO TERMINADO ARCHIVADO PAQUETE No. 549  AÑO 2018",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-09-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 25,
+  "isUltimaAct": true,
+  "idProceso": 8830323
+}

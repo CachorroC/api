@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 856989860,
+  "llaveProceso": "11001400307820170076200",
+  "consActuacion": 12,
+  "fechaActuacion": "2019-07-02T05:00:00.000Z",
+  "actuacion": "Fijacion estado",
+  "anotacion": "Actuación registrada el 02/07/2019 a las 16:10:29.",
+  "fechaInicial": "2019-07-03T05:00:00.000Z",
+  "fechaFinal": "2019-07-03T05:00:00.000Z",
+  "fechaRegistro": "2019-07-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 12,
+  "isUltimaAct": true,
+  "idProceso": 51542360
+}

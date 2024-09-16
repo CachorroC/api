@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1232735570,
+  "llaveProceso": "11001400307820180062300",
+  "consActuacion": 75,
+  "fechaActuacion": "2021-11-09T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "Proceso se envia a la caja 352 con skikers 1002769293/Andres Ariza     ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-11-09T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 75,
+  "isUltimaAct": true,
+  "idProceso": 51462640
+}

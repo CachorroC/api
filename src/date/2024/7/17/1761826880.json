@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1761826880,
+  "llaveProceso": "11001400307620170063500",
+  "consActuacion": 44,
+  "fechaActuacion": "2023-05-31T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Proceso hibrido baja del despacho con 1 cuadernos pasa a la letra// German B.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-05-31T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 44,
+  "isUltimaAct": true,
+  "idProceso": 51497380
+}

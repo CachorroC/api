@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 910105801,
+  "llaveProceso": "25754400300220180007000",
+  "consActuacion": 3826534,
+  "fechaActuacion": "2018-04-17T05:00:00.000Z",
+  "actuacion": "NOVEDAD POR RETIRO O POR NO SUBSANAR",
+  "anotacion": "",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-04-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 1,
+  "isUltimaAct": false,
+  "idProceso": 167403911
+}

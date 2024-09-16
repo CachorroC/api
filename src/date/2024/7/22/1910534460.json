@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1910534460,
+  "llaveProceso": "11001400303120180040600",
+  "consActuacion": 78,
+  "fechaActuacion": "2023-10-19T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "\r\nSE AGREGA MEMORIAL DIGITAL PASA LETRA HENRIBERNALC",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2023-10-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 78,
+  "isUltimaAct": true,
+  "idProceso": 51092120
+}

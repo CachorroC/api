@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 863844990,
+  "llaveProceso": "11001400302320170104400",
+  "consActuacion": 51,
+  "fechaActuacion": "2019-10-18T05:00:00.000Z",
+  "actuacion": "Oficio Elaborado",
+  "anotacion": "CAJA 494",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2019-10-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 51,
+  "isUltimaAct": true,
+  "idProceso": 50725030
+}

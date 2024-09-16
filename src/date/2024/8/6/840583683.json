@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 840583683,
+  "llaveProceso": "11001400305120180029900",
+  "consActuacion": 27,
+  "fechaActuacion": "2021-05-27T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVO TERMINADO EN LA CAJA N° 039 PROCESOS TERMINADOS 2021",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2021-05-27T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 27,
+  "isUltimaAct": true,
+  "idProceso": 11496423
+}

@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 582442800,
+  "llaveProceso": "11001400300520180071100",
+  "consActuacion": 6,
+  "fechaActuacion": "2018-09-06T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "RETIRADA  PAQ 33",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-09-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 6,
+  "isUltimaAct": true,
+  "idProceso": 51277500
+}
