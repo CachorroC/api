@@ -1,1 +1,16 @@
-{"idRegActuacion":2011340920,"llaveProceso":"11001418904820240044400","consActuacion":2,"fechaActuacion":"2024-09-04T05:00:00.000Z","actuacion":"Al Despacho Por Reparto","anotacion":"PARA RESOLVER ADMISIÓN","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-09-03T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":2,"isUltimaAct":true,"idProceso":199699910}
+{
+  "idRegActuacion": 2011340920,
+  "llaveProceso": "11001418904820240044400",
+  "consActuacion": 2,
+  "fechaActuacion": "2024-09-04T05:00:00.000Z",
+  "actuacion": "Al Despacho Por Reparto",
+  "anotacion": "PARA RESOLVER ADMISIÓN",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 2,
+  "isUltimaAct": true,
+  "idProceso": 199699910
+}

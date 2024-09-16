@@ -1,185 +1,87 @@
-'use strict';
+"use strict";
 // To parse this data:
 //
 //   import { Convert } from "./file";
 //
 //   const intCarpeta = Convert.toIntCarpeta(json);
-Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
-);
+Object.defineProperty(exports, "__esModule", {
+  value: true,
+});
 exports.Convert = void 0;
 
 // Converts JSON strings to/from your types
 class Convert {
-  static toIntCarpeta(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toIntCarpeta(json) {
+    return JSON.parse(json);
   }
-  static intCarpetaToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static intCarpetaToJson(value) {
+    return JSON.stringify(value);
   }
-  static toActuaciones(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toActuaciones(json) {
+    return JSON.parse(json);
   }
-  static actuacionesToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static actuacionesToJson(value) {
+    return JSON.stringify(value);
   }
-  static toActuacione(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toActuacione(json) {
+    return JSON.parse(json);
   }
-  static actuacioneToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static actuacioneToJson(value) {
+    return JSON.stringify(value);
   }
-  static toCodeudor(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toCodeudor(json) {
+    return JSON.parse(json);
   }
-  static codeudorToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static codeudorToJson(value) {
+    return JSON.stringify(value);
   }
-  static toDemanda(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toDemanda(json) {
+    return JSON.parse(json);
   }
-  static demandaToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static demandaToJson(value) {
+    return JSON.stringify(value);
   }
-  static toMedidasCautelares(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toMedidasCautelares(json) {
+    return JSON.parse(json);
   }
-  static medidasCautelaresToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static medidasCautelaresToJson(value) {
+    return JSON.stringify(value);
   }
-  static toDeudor(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toDeudor(json) {
+    return JSON.parse(json);
   }
-  static deudorToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static deudorToJson(value) {
+    return JSON.stringify(value);
   }
-  static toTel(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toTel(json) {
+    return JSON.parse(json);
   }
-  static telToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static telToJson(value) {
+    return JSON.stringify(value);
   }
-  static toNotificacion(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toNotificacion(json) {
+    return JSON.parse(json);
   }
-  static notificacionToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static notificacionToJson(value) {
+    return JSON.stringify(value);
   }
-  static toNotifier(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toNotifier(json) {
+    return JSON.parse(json);
   }
-  static notifierToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static notifierToJson(value) {
+    return JSON.stringify(value);
   }
-  static toProceso(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toProceso(json) {
+    return JSON.parse(json);
   }
-  static procesoToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static procesoToJson(value) {
+    return JSON.stringify(value);
   }
-  static toJuzgado(
-    json 
-  ) {
-    return JSON.parse(
-      json 
-    );
+  static toJuzgado(json) {
+    return JSON.parse(json);
   }
-  static juzgadoToJson(
-    value 
-  ) {
-    return JSON.stringify(
-      value 
-    );
+  static juzgadoToJson(value) {
+    return JSON.stringify(value);
   }
 }
 exports.Convert = Convert;

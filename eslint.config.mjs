@@ -1,76 +1,64 @@
-import js from '@eslint/js';
-import stylistic from '@stylistic/eslint-plugin';
+import js from "@eslint/js";
+import stylistic from "@stylistic/eslint-plugin";
 
 export default [
   js.configs.recommended,
 
   {
     plugins: {
-      '@stylistic': stylistic
+      "@stylistic": stylistic,
     },
     rules: {
-      'no-unused-vars'                  : 'off',
-      'no-undef'                        : 'off',
-      '@stylistic/array-bracket-newline': [
-        'error',
+      "no-unused-vars": "off",
+      "no-undef": "off",
+      "@stylistic/array-bracket-newline": [
+        "error",
         {
           minItems: 1,
         },
       ],
-      '@stylistic/array-bracket-spacing': [
-        'error',
-        'always'
-      ],
-      'array-callback-return': [
-        'error',
+      "@stylistic/array-bracket-spacing": ["error", "always"],
+      "array-callback-return": [
+        "error",
         {
           checkForEach: true,
         },
       ],
-      'max-statements-per-line': 'error',
+      "max-statements-per-line": "error",
 
-      'array-element-newline': [
-        'error',
+      "array-element-newline": [
+        "error",
         {
-          minItems : 1,
+          minItems: 1,
           multiline: true,
         },
       ],
-      'arrow-body-style': [
-        'error',
-        'always'
-      ],
-      'arrow-spacing': 'error',
-      'brace-style'  : 'error',
-      'comma-spacing': [
-        'error',
+      "arrow-body-style": ["error", "always"],
+      "arrow-spacing": "error",
+      "brace-style": "error",
+      "comma-spacing": [
+        "error",
         {
-          after : true,
+          after: true,
           before: false,
         },
       ],
-      'computed-property-spacing': [
-        'error',
-        'always'
-      ],
-      'consistent-return': 'error',
-      curly              : 'error',
-      'func-call-spacing': [
-        'error',
-        'never'
-      ],
-      'function-paren-newline': [
-        'error',
+      "computed-property-spacing": ["error", "always"],
+      "consistent-return": "error",
+      curly: "error",
+      "func-call-spacing": ["error", "never"],
+      "function-paren-newline": [
+        "error",
         {
           minItems: 1,
         },
       ],
-      'getter-return': 'error',
+      "getter-return": "error",
 
-      'prefer-destructuring': [
-        'error',
+      "prefer-destructuring": [
+        "error",
         {
-          array : true,
+          array: true,
           object: true,
         },
         {
@@ -78,138 +66,114 @@ export default [
         },
       ],
       indent: [
-        'error',
+        "error",
         2,
         {
           ArrayExpression: 1,
-          CallExpression : {
+          CallExpression: {
             arguments: 1,
           },
           FunctionDeclaration: {
-            body      : 1,
-            parameters: 'first',
+            body: 1,
+            parameters: "first",
           },
           FunctionExpression: {
-            body      : 1,
+            body: 1,
             parameters: 1,
           },
-          ImportDeclaration       : 1,
-          MemberExpression        : 1,
-          ObjectExpression        : 1,
-          SwitchCase              : 2,
-          VariableDeclarator      : 1,
+          ImportDeclaration: 1,
+          MemberExpression: 1,
+          ObjectExpression: 1,
+          SwitchCase: 2,
+          VariableDeclarator: 1,
           offsetTernaryExpressions: true,
         },
       ],
-      'key-spacing': [
-        'error',
+      "key-spacing": [
+        "error",
         {
-          align: 'colon',
+          align: "colon",
         },
       ],
-      'linebreak-style': [
-        'error',
-        'unix'
-      ],
-      'multiline-ternary': [
-        'error',
-        'always'
-      ],
-      'newline-per-chained-call': [
-        'error',
+      "linebreak-style": ["error", "unix"],
+      "multiline-ternary": ["error", "always"],
+      "newline-per-chained-call": [
+        "error",
         {
           ignoreChainWithDepth: 1,
         },
       ],
-      'no-dupe-args'   : 'error',
-      'no-dupe-else-if': 'error',
-      'no-else-return' : [
-        'error',
+      "no-dupe-args": "error",
+      "no-dupe-else-if": "error",
+      "no-else-return": [
+        "error",
         {
           allowElseIf: true,
         },
       ],
-      'no-unreachable'      : 'error',
-      'object-curly-newline': [
-        'error',
+      "no-unreachable": "error",
+      "object-curly-newline": [
+        "error",
         {
           ExportDeclaration: {
-            consistent   : true,
+            consistent: true,
             minProperties: 1,
-            multiline    : true,
+            multiline: true,
           },
-          ImportDeclaration: 'never',
-          ObjectExpression : {
-            consistent   : true,
+          ImportDeclaration: "never",
+          ObjectExpression: {
+            consistent: true,
             minProperties: 1,
-            multiline    : true,
+            multiline: true,
           },
           ObjectPattern: {
-            consistent   : true,
+            consistent: true,
             minProperties: 1,
-            multiline    : true,
+            multiline: true,
           },
         },
       ],
-      'object-curly-spacing': [
-        'error',
-        'always'
-      ],
-      'object-property-newline': 'error',
-      'operator-linebreak'     : [
-        'error',
-        'before'
-      ],
-      'padding-line-between-statements': [
-        'error',
+      "object-curly-spacing": ["error", "always"],
+      "object-property-newline": "error",
+      "operator-linebreak": ["error", "before"],
+      "padding-line-between-statements": [
+        "error",
         {
-          blankLine: 'always',
-          next     : [
-            'export',
-            'case',
-            'if',
-            'iife',
-            'const',
-            'class',
-            'multiline-block-like',
-            'try',
+          blankLine: "always",
+          next: [
+            "export",
+            "case",
+            "if",
+            "iife",
+            "const",
+            "class",
+            "multiline-block-like",
+            "try",
           ],
-          prev: '*',
+          prev: "*",
         },
         {
-          blankLine: 'always',
-          next     : '*',
-          prev     : [
-            'block',
-            'block-like',
-            'for',
-            'if',
-            'continue',
-            'return',
-            'throw',
-            'break',
+          blankLine: "always",
+          next: "*",
+          prev: [
+            "block",
+            "block-like",
+            "for",
+            "if",
+            "continue",
+            "return",
+            "throw",
+            "break",
           ],
         },
       ],
-      quotes: [
-        'error',
-        'single'
-      ],
-      semi             : 'error',
-      'space-in-parens': [
-        'error',
-        'always'
-      ],
-      'space-before-blocks'   : 'error',
-      'keyword-spacing'       : 'error',
-      'template-curly-spacing': [
-        'error',
-        'always'
-      ],
-      'template-tag-spacing': [
-        'error',
-        'always'
-      ],
+      quotes: ["error", "single"],
+      semi: "error",
+      "space-in-parens": ["error", "always"],
+      "space-before-blocks": "error",
+      "keyword-spacing": "error",
+      "template-curly-spacing": ["error", "always"],
+      "template-tag-spacing": ["error", "always"],
     },
   },
 ];
