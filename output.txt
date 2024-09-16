@@ -34406,3 +34406,164 @@ Juzgado Class includestrue: juzgado 001 civil municipal de ejecucion de sentenci
 <h"... is not valid JSON
 349 => error en CarpetaBuilder.getProcesos(11001400302720170127200) => SyntaxError: Unexpected token '<', "<html>
 <h"... is not valid JSON
+350 => error en CarpetaBuilder.getProcesos(11001400305020170135700) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+351 => error en CarpetaBuilder.getProcesos(1100141037520180002400) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+352 => error en CarpetaBuilder.getProcesos(11001400307620170101600) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+353 => error en CarpetaBuilder.getProcesos(11001400307320170156300) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+354 => error en CarpetaBuilder.getProcesos(11001310304520170035900) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+355 => error en CarpetaBuilder.getProcesos(11001400301720170152600) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+356 => error en CarpetaBuilder.getProcesos(11001400302420170170800) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 055 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 055 civil municipal de bogota === juzgado 055 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 055 civil municipal de bogota === juzgado 055 civil municipal de bogota: true
+357 ERROR ==> getActuaciones 17054094 => {}
+358 => error en CarpetaBuilder.getProcesos(11001400307820170097500) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 065 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 065 civil municipal de bogota === juzgado 065 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 065 civil municipal de bogota === juzgado 065 civil municipal de bogota: true
+360 => error en CarpetaBuilder.getProcesos(11001400302320170145200) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+361 => error en CarpetaBuilder.getProcesos(11001400301720170133600) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+362 => error en CarpetaBuilder.getProcesos(25754400300220180003100) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+363 => error en CarpetaBuilder.getProcesos(25754400300220170040900) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 073 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 073 civil municipal de bogota === juzgado 073 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 073 civil municipal de bogota === juzgado 073 civil municipal de bogota: true
+364 ERROR ==> getActuaciones 50923290 => {}
+JUZGADO 050 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 050 civil municipal de bogota === juzgado 050 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 050 civil municipal de bogota === juzgado 050 civil municipal de bogota: true
+366 => error en CarpetaBuilder.getProcesos(11001400300920170136100) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+367 => error en CarpetaBuilder.getProcesos(11001400307820170123500) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+368 => error en CarpetaBuilder.getProcesos(25307400300120180006600) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+368 => error en CarpetaBuilder.getProcesos(11001400302420180014300) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 020 CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 020 civil municipal de ejecucion de sentencias de bogota === juzgado 020 civil municipal de ejecucion de sentencias de bogota: true
+Juzgado Class includestrue: juzgado 020 civil municipal de ejecucion de sentencias de bogota === juzgado 020 civil municipal de ejecucion de sentencias de bogota: true
+369 ERROR ==> getActuaciones 50817380 => {}
+370 => error en CarpetaBuilder.getProcesos(11001400302020170155600) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 002 CIVIL MUNICIPAL DE SOACHA 
+Juzgado Class indexOf true: juzgado 002 civil municipal de soacha === juzgado 002 civil municipal de soacha: true
+Juzgado Class includestrue: juzgado 002 civil municipal de soacha === juzgado 002 civil municipal de soacha: true
+373 => error en CarpetaBuilder.getProcesos(25599400300120180000500) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+374 => error en CarpetaBuilder.getProcesos(11001400308620180006700) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 040 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 040 civil municipal de bogota === juzgado 040 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 040 civil municipal de bogota === juzgado 040 civil municipal de bogota: true
+376 => error en CarpetaBuilder.getProcesos(11001400307620180005200) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+377 => error en CarpetaBuilder.getProcesos(11001400304620180010700) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+378 => error en CarpetaBuilder.getProcesos(11001400301120180018100) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+379 => error en CarpetaBuilder.getProcesos(11001400308120180011100) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 005 CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 005 civil municipal de ejecucion de sentencias de bogota === juzgado 005 civil municipal de ejecucion de sentencias de bogota: true
+Juzgado Class includestrue: juzgado 005 civil municipal de ejecucion de sentencias de bogota === juzgado 005 civil municipal de ejecucion de sentencias de bogota: true
+JUZGADO 081 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 081 civil municipal de bogota === juzgado 081 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 081 civil municipal de bogota === juzgado 081 civil municipal de bogota: true
+380 ERROR ==> getActuaciones 51918100 => {}
+380 ERROR ==> getActuaciones 81806941 => {}
+381 => error en CarpetaBuilder.getProcesos(11001400304120180007500) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+383 => error en CarpetaBuilder.getProcesos(11001400302620180047900) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+384 => error en CarpetaBuilder.getProcesos(11001400305620180011000) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+385 => error en CarpetaBuilder.getProcesos(11001400303520180007400) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+386 => error en CarpetaBuilder.getProcesos(25269400300120170074400) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+387 => error en CarpetaBuilder.getProcesos(11001400305020170133600) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+388 => error en CarpetaBuilder.getProcesos(11001400301720180011100) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+389 => error en CarpetaBuilder.getProcesos(11001400307020180012100) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 009 CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 009 civil municipal de ejecucion de sentencias de bogota === juzgado 009 civil municipal de ejecucion de sentencias de bogota: true
+Juzgado Class includestrue: juzgado 009 civil municipal de ejecucion de sentencias de bogota === juzgado 009 civil municipal de ejecucion de sentencias de bogota: true
+JUZGADO 050 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 050 civil municipal de bogota === juzgado 050 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 050 civil municipal de bogota === juzgado 050 civil municipal de bogota: true
+392 => error en CarpetaBuilder.getProcesos(25899400300320180013100) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 038 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 038 civil municipal de bogota === juzgado 038 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 038 civil municipal de bogota === juzgado 038 civil municipal de bogota: true
+393 ERROR ==> getActuaciones 9088093 => {}
+394 => error en CarpetaBuilder.getProcesos(11001400305120180029900) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 016 CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 016 civil municipal de ejecucion de sentencias de bogota === juzgado 016 civil municipal de ejecucion de sentencias de bogota: true
+Juzgado Class includestrue: juzgado 016 civil municipal de ejecucion de sentencias de bogota === juzgado 016 civil municipal de ejecucion de sentencias de bogota: true
+397 => error en CarpetaBuilder.getProcesos(25473400300120180010600) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+398 => error en CarpetaBuilder.getProcesos(25754400300120180006400) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+399 => error en CarpetaBuilder.getProcesos(11001400303720180013200) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+400 => error en CarpetaBuilder.getProcesos(25307400300220180007500) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 025 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 025 civil municipal de bogota === juzgado 025 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 025 civil municipal de bogota === juzgado 025 civil municipal de bogota: true
+401 ERROR ==> getActuaciones 51025410 => {}
+402 => error en CarpetaBuilder.getProcesos(11001400306420180021800) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+403 => error en CarpetaBuilder.getProcesos(11001400304920180019100) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+404 => error en CarpetaBuilder.getProcesos(257544189003201800177) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+405 => error en CarpetaBuilder.getProcesos(11001400302120170153200) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 002 CIVIL MUNICIPAL DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 002 civil municipal de bogota === juzgado 002 civil municipal de bogota: true
+Juzgado Class includestrue: juzgado 002 civil municipal de bogota === juzgado 002 civil municipal de bogota: true
+407 => error en CarpetaBuilder.getProcesos(11001400307820170116400) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+408 => error en CarpetaBuilder.getProcesos(11001400308120180026400) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+410 => error en CarpetaBuilder.getProcesos(11001400303520180037000) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+411 => error en CarpetaBuilder.getProcesos(25754418900220180036500) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+412 => error en CarpetaBuilder.getProcesos(25754418900220180036400) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+414 => error en CarpetaBuilder.getProcesos(11001400304420180056600) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+415 => error en CarpetaBuilder.getProcesos(11001400304320180047400) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+416 => error en CarpetaBuilder.getProcesos(2017 - 01477) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+JUZGADO 007 CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS DE BOGOTÁ 
+Juzgado Class indexOf true: juzgado 007 civil municipal de ejecucion de sentencias de bogota === juzgado 007 civil municipal de ejecucion de sentencias de bogota: true
+Juzgado Class includestrue: juzgado 007 civil municipal de ejecucion de sentencias de bogota === juzgado 007 civil municipal de ejecucion de sentencias de bogota: true
+418 => error en CarpetaBuilder.getProcesos(25269400300120180024600) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+420 => error en CarpetaBuilder.getProcesos(11001400306320170129000) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+421 => error en CarpetaBuilder.getProcesos(11001400307520180061700) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+422 => error en CarpetaBuilder.getProcesos(11001410307520180060200) => SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
