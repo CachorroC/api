@@ -99,10 +99,6 @@ const carpeta_1 = require(
 const carpetas_1 = require(
   './data/carpetas' 
 );
-
-const awaiter_1 = require(
-  './utils/awaiter' 
-);
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 console.log(
   process.env.NODE_TLS_REJECT_UNAUTHORIZED 
@@ -127,9 +123,6 @@ async function* generateCarpetas() {
   for await ( const {
     carpeta, numero 
   } of carpetasMap ) {
-    await ( 0, awaiter_1.sleep )(
-      numero 
-    );
     await carpeta.getProcesos();
     await carpeta.getActuaciones();
     yield carpeta;

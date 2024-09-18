@@ -13,7 +13,6 @@ const carpetasMap = RawCarpetas.map((carpeta) => {
 
 export async function* generateCarpetas() {
   for await (const { carpeta, numero } of carpetasMap) {
-    await sleep(numero);
     await carpeta.getProcesos();
     await carpeta.getActuaciones();
     yield carpeta;
