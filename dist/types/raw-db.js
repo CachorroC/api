@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 // To parse this data:
 //
 //   import { Convert, RawDb } from "./file";
@@ -15,129 +15,125 @@
 //
 //   const rawDb = Convert.toRawDb(json);
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.Convert = exports.ConvertRawDb = void 0;
-
 // Converts JSON strings to/from your types
 class ConvertRawDb {
   static toRawDb(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static rawDbToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
 }
 exports.ConvertRawDb = ConvertRawDb;
-
 // Converts JSON strings to/from your types
 class Convert {
   static toRawDb(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static rawDbToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toRawWorkSheets(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static welcomeToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toBancolombia(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static bancolombiaToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toInsolvencia(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static insolvenciaToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toLiosJuridico(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static liosJuridicoToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toReintegra(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static reintegraToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toTerminado(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static terminadoToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
 }

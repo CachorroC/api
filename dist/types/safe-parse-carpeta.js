@@ -1,142 +1,139 @@
-'use strict';
+"use strict";
 // To parse this data:
 //
 //   import { Convert } from "./file";
 //
 //   const prismaCarpeta = Convert.toPrismaCarpeta(json);
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.Convert = void 0;
-
 // Converts JSON strings to/from your types
 class Convert {
   static toPrismaCarpeta(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static prismaCarpetaToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toPrismaDemanda(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static PrismademandaToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toPrismaDeudor(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static deudorToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toPrismaJuzgado(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static juzgadoToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toPrismaNota(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static notaToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toProceso(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static procesoToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toPrismaTarea(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static tareaToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toPrismaSubPrismaTarea(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static subPrismaTareaToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toUltimaActuacion(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static ultimaActuacionToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
 }

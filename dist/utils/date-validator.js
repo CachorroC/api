@@ -1,93 +1,76 @@
-'use strict';
+"use strict";
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.datesExtractor = datesExtractor;
 exports.fixSingleFecha = fixSingleFecha;
 exports.dateValidator = dateValidator;
 exports.dateArrayValidator = dateArrayValidator;
 exports.xlsxNumberToDate = xlsxNumberToDate;
-
 //!SECTION
 //SECTION first step: extract the date
 function datesExtractor(
-  incomingDate 
+  incomingDate
 ) {
   const outputDates = [];
-
-  if ( !incomingDate ) {
+  if (!incomingDate) {
     return dateArrayValidator(
-      outputDates 
+      outputDates
     );
   }
-
-  if ( typeof incomingDate === 'object' ) {
+  if (typeof incomingDate === "object") {
     console.log(
-      incomingDate 
+      incomingDate
     );
-
-    if ( incomingDate.toString() !== 'Invalid Date' ) {
+    if (incomingDate.toString() !== "Invalid Date") {
       outputDates.push(
-        incomingDate 
+        incomingDate
       );
     }
-
     return dateArrayValidator(
-      outputDates 
+      outputDates
     );
   }
-
-  if ( typeof incomingDate === 'number' ) {
+  if (typeof incomingDate === "number") {
     const outgoingDate = xlsxNumberToDate(
-      incomingDate 
+      incomingDate
     );
-
-    if ( outgoingDate ) {
+    if (outgoingDate) {
       outputDates.push(
-        outgoingDate 
+        outgoingDate
       );
     }
-
     return dateArrayValidator(
-      outputDates 
+      outputDates
     );
   }
-
   const splitByDoubleSlash = incomingDate.split(
-    '//' 
+    "//"
   );
-
-  for ( const splitted of splitByDoubleSlash ) {
+  for (const splitted of splitByDoubleSlash) {
     const fixed = fixSingleFecha(
-      splitted 
+      splitted
     );
-
-    for ( const fixedDate of fixed ) {
+    for (const fixedDate of fixed) {
       outputDates.push(
-        fixedDate 
+        fixedDate
       );
     }
   }
-
   return dateArrayValidator(
-    outputDates 
+    outputDates
   );
 }
-
 //!SECTION
 //SECTION secondStep: fix the extracted date
 function fixSingleFecha(
-  rawFecha 
+  rawFecha
 ) {
   const datesOutput = [];
-
   const matchedDate = rawFecha.matchAll(
-    /(\d+)(-|\/)(\d+)(-|\/)(\d+)/gm 
+    /(\d+)(-|\/)(\d+)(-|\/)(\d+)/gm
   );
-
-  for ( const matchedValue of matchedDate ) {
+  for (const matchedValue of matchedDate) {
     const [
       total,
       firstNumber,
@@ -96,107 +79,91 @@ function fixSingleFecha(
       secondDivider,
       thirdNumber,
     ] = matchedValue;
-
     const newMonth = Number(
-      secondNumber 
+      secondNumber
     ) - 1;
-
     const newYear = Number(
       thirdNumber.padStart(
-        4, '2015' 
-      ) 
+        4, "2015"
+      )
     );
-
     const newDay = Number(
       firstNumber.padStart(
-        2, '00' 
-      ) 
+        2, "00"
+      )
     );
-
     const outputDate = new Date(
-      newYear, newMonth, newDay 
+      newYear, newMonth, newDay
     );
     datesOutput.push(
-      outputDate 
+      outputDate
     );
   }
-
   return datesOutput;
 }
-
 //!SECTION
 function dateValidator(
-  incomingDate 
+  incomingDate
 ) {
   const stringifiedDate = incomingDate.toString();
   console.log(
-    stringifiedDate 
+    stringifiedDate
   );
   console.log(
     `
     string date:
-    ${ String(
-    incomingDate 
-  ) }
-    ` 
+    ${String(
+        incomingDate
+      )}
+    `
   );
-
   const dateYear = incomingDate.getFullYear();
   console.log(
-    dateYear 
+    dateYear
   );
-
-  if ( stringifiedDate === 'Invalid Date'
-        || dateYear <= 2000
-        || dateYear > 2200 ) {
+  if (stringifiedDate === "Invalid Date" ||
+        dateYear <= 2000 ||
+        dateYear > 2200) {
     console.log(
-      dateYear 
+      dateYear
     );
     return null;
   }
-
   console.log(
-    incomingDate 
+    incomingDate
   );
   return incomingDate;
 }
-
 function dateArrayValidator(
-  incomingDates 
+  incomingDates
 ) {
   const outPutDates = [];
-
-  for ( const date of incomingDates ) {
+  for (const date of incomingDates) {
     const ndate = dateValidator(
-      date 
+      date
     );
-
-    if ( ndate ) {
+    if (ndate) {
       outPutDates.push(
-        ndate 
+        ndate
       );
     }
   }
-
   return outPutDates;
 }
-
 function xlsxNumberToDate(
-  incomingDate 
+  incomingDate
 ) {
   const outgoingDate = new Date(
-    ( incomingDate - ( 25567 + 1 ) ) * 86400 * 1000 
+    (incomingDate - (25567 + 1)) * 86400 * 1000
   );
-
-  if ( incomingDate > 55000
-        || outgoingDate.toString() === 'Invalid Date'
-        || outgoingDate.getFullYear() > 2200 ) {
+  if (incomingDate > 55000 ||
+        outgoingDate.toString() === "Invalid Date" ||
+        outgoingDate.getFullYear() > 2200) {
     console.log(
-      outgoingDate.toString() 
+      outgoingDate.toString()
     );
     return null;
   }
-
   return outgoingDate;
 }
 //# sourceMappingURL=date-validator.js.map

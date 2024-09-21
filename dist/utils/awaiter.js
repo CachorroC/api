@@ -1,27 +1,23 @@
-'use strict';
+"use strict";
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.sleep = void 0;
-
 const sleep = (
-  ms 
+  ms
 ) => {
   return new Promise(
     (
-      resolve 
+      resolve
     ) => {
       console.log(
-        ms 
+        ms
       );
       return setTimeout(
-        resolve, ms * 10 
+        resolve, ms * 10
       );
-    } 
+    }
   );
 };
-
 exports.sleep = sleep;
 //# sourceMappingURL=awaiter.js.map

@@ -1,155 +1,135 @@
-'use strict';
+"use strict";
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.NewJuzgado = exports.JuzgadoClass = void 0;
 exports.extrapolateTipoToCorrectType = extrapolateTipoToCorrectType;
-
 const despachos_1 = require(
-  '../data/despachos' 
+  "../data/despachos"
 );
-
 function extrapolateTipoToCorrectType(
-  tipo 
+  tipo
 ) {
   let output = tipo;
-
   const hasEjecucion = /EJE|E|EJ/gim.test(
-    tipo 
+    tipo
   );
-
   const isPromiscuoCircuito = /PCTO/gim.test(
-    tipo 
+    tipo
   );
-
   const isPequeñasCausas = /PCCM|PCYCM|Peque|causas/gim.test(
-    tipo 
+    tipo
   );
-
   const isPromiscuoMunicipal = /PM|PROM|P M/gim.test(
-    tipo 
+    tipo
   );
-
   const isCivilMunicipal = /(CM|municipal|C M)/g.test(
-    tipo 
+    tipo
   );
-
   const isCivilCircuito = /(CCTO|CIRCUITO|CTO|C CTO|CC)/gim.test(
-    tipo 
+    tipo
   );
-
-  if ( hasEjecucion ) {
-    if ( isPequeñasCausas ) {
-      output = 'DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE';
-    } else if ( isPromiscuoMunicipal ) {
-      output = 'PROMISCUO MUNICIPAL';
-    } else if ( isCivilCircuito ) {
-      output = 'CIVIL DEL CIRCUITO DE EJECUCIÓN DE SENTENCIAS';
-    } else if ( isCivilMunicipal ) {
-      output = 'CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS';
+  if (hasEjecucion) {
+    if (isPequeñasCausas) {
+      output = "DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE";
     }
-  } else {
-    if ( isPequeñasCausas ) {
-      output = 'DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE';
-    } else if ( isPromiscuoMunicipal ) {
-      output = 'PROMISCUO MUNICIPAL';
-    } else if ( isPromiscuoCircuito ) {
-      output = 'PROMISCUO DEL CIRCUITO';
-    } else if ( isCivilCircuito ) {
-      output = 'CIVIL DEL CIRCUITO';
-    } else if ( isCivilMunicipal ) {
-      output = 'CIVIL MUNICIPAL';
+    else if (isPromiscuoMunicipal) {
+      output = "PROMISCUO MUNICIPAL";
+    }
+    else if (isCivilCircuito) {
+      output = "CIVIL DEL CIRCUITO DE EJECUCIÓN DE SENTENCIAS";
+    }
+    else if (isCivilMunicipal) {
+      output = "CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS";
     }
   }
-
+  else {
+    if (isPequeñasCausas) {
+      output = "DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE";
+    }
+    else if (isPromiscuoMunicipal) {
+      output = "PROMISCUO MUNICIPAL";
+    }
+    else if (isPromiscuoCircuito) {
+      output = "PROMISCUO DEL CIRCUITO";
+    }
+    else if (isCivilCircuito) {
+      output = "CIVIL DEL CIRCUITO";
+    }
+    else if (isCivilMunicipal) {
+      output = "CIVIL MUNICIPAL";
+    }
+  }
   return output;
 }
-
 class JuzgadoClass {
   constructor(
-    {
-      id, tipo, ciudad, 
-    } 
+    { id, tipo, ciudad, }
   ) {
     this.id = id.padStart(
-      3, '000' 
+      3, "000"
     );
-    this.tipo = tipo.toUpperCase()
-      .trim();
-    this.ciudad = ciudad.toUpperCase()
-      .trim();
-
-    const constructorString = `JUZGADO ${ this.id } ${ this.tipo } DE ${ this.ciudad }`
+    this.tipo = tipo.toUpperCase().trim();
+    this.ciudad = ciudad.toUpperCase().trim();
+    const constructorString = `JUZGADO ${this.id} ${this.tipo} DE ${this.ciudad}`
       .toUpperCase()
       .normalize(
-        'NFD' 
+        "NFD"
       )
       .replaceAll(
-        /\p{Diacritic}/gu, '' 
+        /\p{Diacritic}/gu, ""
       )
       .trim();
-
     const [
       matchedDespacho
     ] = despachos_1.Despachos.filter(
       (
-        despacho 
+        despacho
       ) => {
         const normalizedIteratedName = despacho.nombre
           .toLowerCase()
           .normalize(
-            'NFD' 
+            "NFD"
           )
           .replaceAll(
-            /\p{Diacritic}/gu, '' 
+            /\p{Diacritic}/gu, ""
           )
           .trim();
-
         const normalizedName = constructorString
           .toLowerCase()
           .normalize(
-            'NFD' 
+            "NFD"
           )
           .replaceAll(
-            /\p{Diacritic}/gu, '' 
+            /\p{Diacritic}/gu, ""
           )
           .trim();
-
         const indexOfDespacho = normalizedIteratedName.indexOf(
-          normalizedName 
+          normalizedName
         );
-
         const includesDespacho = normalizedIteratedName.includes(
-          normalizedName 
+          normalizedName
         );
-
-        if ( indexOfDespacho !== -1 ) {
+        if (indexOfDespacho !== -1) {
           console.log(
-            `Juzgado Class indexOf ${ includesDespacho }: ${ normalizedIteratedName } === ${ normalizedName }: ${ normalizedIteratedName === normalizedName }` 
+            `Juzgado Class indexOf ${includesDespacho}: ${normalizedIteratedName} === ${normalizedName}: ${normalizedIteratedName === normalizedName}`
           );
         }
-
-        if ( includesDespacho ) {
+        if (includesDespacho) {
           console.log(
-            `Juzgado Class includes${ includesDespacho }: ${ normalizedIteratedName } === ${ normalizedName }: ${ normalizedIteratedName === normalizedName }` 
+            `Juzgado Class includes${includesDespacho}: ${normalizedIteratedName} === ${normalizedName}: ${normalizedIteratedName === normalizedName}`
           );
           return true;
         }
-
         return normalizedIteratedName === normalizedName;
-      } 
+      }
     );
-
-    if ( matchedDespacho ) {
-      this.url = `https://www.ramajudicial.gov.co${ matchedDespacho.url }`;
-
+    if (matchedDespacho) {
+      this.url = `https://www.ramajudicial.gov.co${matchedDespacho.url}`;
       const matchedDespachoParts = matchedDespacho.nombre.match(
-        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im 
+        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im
       );
-
-      if ( matchedDespachoParts ) {
+      if (matchedDespachoParts) {
         const [
           longName,
           newId,
@@ -160,8 +140,9 @@ class JuzgadoClass {
         this.tipo = newTipo;
         this.ciudad = newCiudad;
       }
-    } else {
-      this.url = '';
+    }
+    else {
+      this.url = "";
     }
   }
   id;
@@ -169,31 +150,25 @@ class JuzgadoClass {
   ciudad;
   url;
   static fromShortName(
-    {
-      ciudad, juzgadoRaw, 
-    } 
+    { ciudad, juzgadoRaw, }
   ) {
     let newTipo, newId;
     newTipo = juzgadoRaw;
-
     const matchedRegexNumberAndLetters = juzgadoRaw.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im 
+      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im
     );
-
-    if ( !matchedRegexNumberAndLetters ) {
+    if (!matchedRegexNumberAndLetters) {
       return new JuzgadoClass(
         {
-          id  : '',
+          id: "",
           tipo: newTipo,
           ciudad,
-        } 
+        }
       );
     }
-
     const asAnArray = Array.from(
-      matchedRegexNumberAndLetters 
+      matchedRegexNumberAndLetters
     );
-
     const [
       fullArray,
       rawId,
@@ -201,36 +176,34 @@ class JuzgadoClass {
       rawTipo
     ] = asAnArray;
     newId = rawId.padStart(
-      3, '000' 
+      3, "000"
     );
     newTipo = extrapolateTipoToCorrectType(
-      rawTipo 
+      rawTipo
     );
     return new JuzgadoClass(
       {
-        id  : newId,
+        id: newId,
         tipo: newTipo,
         ciudad,
-      } 
+      }
     );
   }
   static fromProceso(
-    proceso 
+    proceso
   ) {
     const matchedDespachoParts = proceso.despacho.match(
-      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im 
+      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im
     );
-
-    if ( !matchedDespachoParts ) {
+    if (!matchedDespachoParts) {
       return new JuzgadoClass(
         {
-          id    : '',
-          tipo  : proceso.despacho,
+          id: "",
+          tipo: proceso.despacho,
           ciudad: proceso.departamento,
-        } 
+        }
       );
     }
-
     const [
       longName,
       id,
@@ -238,42 +211,34 @@ class JuzgadoClass {
       ciudad
     ] = matchedDespachoParts;
     console.log(
-      longName 
+      longName
     );
     return new JuzgadoClass(
-      {
-        id,
-        tipo,
-        ciudad 
-      } 
+      { id, tipo, ciudad }
     );
   }
 }
 exports.JuzgadoClass = JuzgadoClass;
-
 class NewJuzgado {
   constructor(
-    constructorString 
+    constructorString
   ) {
     //TODO -> arreglar el constructor para que construya directamente cada propiedad y busque en la lista solamente el url
     const matchedValues = constructorString.match(
-      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíáü-]+)/im 
+      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíáü-]+)/im
     );
-    this.url = '';
-
-    if ( !matchedValues ) {
-      this.id = constructorString.trim()
-        .slice(
-          7, 9 
-        )
-        .padStart(
-          3, '000' 
-        );
-      this.tipo = constructorString.trim()
-        .slice(
-          9 
-        );
-    } else {
+    this.url = "";
+    if (!matchedValues) {
+      this.id = constructorString.trim().slice(
+        7, 9
+      ).padStart(
+        3, "000"
+      );
+      this.tipo = constructorString.trim().slice(
+        9
+      );
+    }
+    else {
       const [
         fullQuery,
         id,
@@ -281,76 +246,66 @@ class NewJuzgado {
         ciudad
       ] = matchedValues;
       this.id = id.padStart(
-        3, '000' 
+        3, "000"
       );
       this.tipo = tipo;
       this.ciudad = ciudad;
     }
-
     const [
       matchedDespacho
     ] = despachos_1.Despachos.filter(
       (
-        despacho 
+        despacho
       ) => {
         const normalizedIteratedName = despacho.nombre
           .toLowerCase()
           .normalize(
-            'NFD' 
+            "NFD"
           )
           .replaceAll(
-            /\p{Diacritic}/gu, '' 
+            /\p{Diacritic}/gu, ""
           )
           .trim();
-
         const normalizedName = constructorString
           .toLowerCase()
           .normalize(
-            'NFD' 
+            "NFD"
           )
           .replaceAll(
-            /\p{Diacritic}/gu, '' 
+            /\p{Diacritic}/gu, ""
           )
           .trim();
-
         const indexOfDespacho = normalizedIteratedName.indexOf(
-          normalizedName 
+          normalizedName
         );
-
         const includesDespacho = normalizedIteratedName.includes(
-          normalizedName 
+          normalizedName
         );
-
         const includesBuilded = normalizedIteratedName.includes(
-          `${ Number(
-            this.id 
-          ) } ${ this.tipo }`
+          `${Number(
+            this.id
+          )} ${this.tipo}`
             .toLowerCase()
             .normalize(
-              'NFD' 
+              "NFD"
             )
             .replaceAll(
-              /\p{Diacritic}/gu, '' 
+              /\p{Diacritic}/gu, ""
             )
-            .trim() 
+            .trim()
         );
-
-        if ( indexOfDespacho !== -1 ) {
+        if (indexOfDespacho !== -1) {
           return true;
         }
-
         return normalizedIteratedName === normalizedName;
-      } 
+      }
     );
-
-    if ( matchedDespacho ) {
-      this.url = `https://www.ramajudicial.gov.co${ matchedDespacho.url }`;
-
+    if (matchedDespacho) {
+      this.url = `https://www.ramajudicial.gov.co${matchedDespacho.url}`;
       const regexNameMatch = matchedDespacho.nombre.match(
-        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) de ([.A-Z\sñúóéíá-]+)/im 
+        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) de ([.A-Z\sñúóéíá-]+)/im
       );
-
-      if ( regexNameMatch ) {
+      if (regexNameMatch) {
         const [
           longName,
           id,
@@ -360,33 +315,29 @@ class NewJuzgado {
         this.id = id;
         this.tipo = tipo;
         this.ciudad = ciudad;
-      } else {
+      }
+      else {
         this.tipo = matchedDespacho.nombre;
         this.ciudad = matchedDespacho.especialidad;
       }
     }
   }
-  ciudad = 'Bogota';
+  ciudad = "Bogota";
   id;
   tipo;
   url;
   static fromShortName(
-    {
-      ciudad, juzgadoRaw, 
-    } 
+    { ciudad, juzgadoRaw, }
   ) {
     let newTipo, newId;
     newTipo = juzgadoRaw;
-
     const matchedRegexNumberAndLetters = juzgadoRaw.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im 
+      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im
     );
-
-    if ( matchedRegexNumberAndLetters ) {
+    if (matchedRegexNumberAndLetters) {
       const asAnArray = Array.from(
-        matchedRegexNumberAndLetters 
+        matchedRegexNumberAndLetters
       );
-
       const [
         fullArray,
         rawId,
@@ -394,30 +345,29 @@ class NewJuzgado {
         rawTipo
       ] = asAnArray;
       newId = rawId.padStart(
-        3, '000' 
+        3, "000"
       );
       newTipo = extrapolateTipoToCorrectType(
-        rawTipo 
+        rawTipo
       );
     }
-
     return new NewJuzgado(
-      `JUZGADO ${ newId } ${ newTipo } DE ${ ciudad
+      `JUZGADO ${newId} ${newTipo} DE ${ciudad
         .toUpperCase()
         .normalize(
-          'NFD' 
+          "NFD"
         )
         .replaceAll(
-          /\p{Diacritic}/gu, '' 
+          /\p{Diacritic}/gu, ""
         )
-        .trim() }` 
+        .trim()}`
     );
   }
   static fromProceso(
-    proceso 
+    proceso
   ) {
     return new NewJuzgado(
-      proceso.despacho 
+      proceso.despacho
     );
   }
 }

@@ -22,9 +22,6 @@ importers:
       "@typescript-eslint/eslint-plugin":
         specifier: ^8.6.0
         version: 8.6.0(@typescript-eslint/parser@8.6.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
-      eslint:
-        specifier: ^8.56.0
-        version: 8.57.1
       express:
         specifier: 4.19.2
         version: 4.19.2
@@ -40,6 +37,19 @@ importers:
       xlsx:
         specifier: ^0.18.5
         version: 0.18.5
+    devDependencies:
+      "@eslint/js":
+        specifier: ^9.11.0
+        version: 9.11.0
+      eslint:
+        specifier: ^8.57.1
+        version: 8.57.1
+      globals:
+        specifier: ^15.9.0
+        version: 15.9.0
+      typescript-eslint:
+        specifier: ^8.6.0
+        version: 8.6.0(eslint@8.57.1)(typescript@5.5.4)
 
 packages:
   "@cspotcode/source-map-support@0.8.1":
@@ -78,6 +88,13 @@ packages:
         integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==,
       }
     engines: { node: ^12.22.0 || ^14.17.0 || >=16.0.0 }
+
+  "@eslint/js@9.11.0":
+    resolution:
+      {
+        integrity: sha512-LPkkenkDqyzTFauZLLAPhIb48fj6drrfMvRGSL9tS3AcZBSVTllemLSNyCvHNNL2t797S/6DJNSIwRwXgMO/eQ==,
+      }
+    engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
 
   "@humanwhocodes/config-array@0.13.0":
     resolution:
@@ -914,6 +931,13 @@ packages:
       }
     engines: { node: ">=8" }
 
+  globals@15.9.0:
+    resolution:
+      {
+        integrity: sha512-SmSKyLLKFbSr6rptvP8izbyxJL4ILwqO9Jg23UA0sDlGlu58V59D1//I3vlc0KJphVdUR7vMjHIplYnzBxorQA==,
+      }
+    engines: { node: ">=18" }
+
   gopd@1.0.1:
     resolution:
       {
@@ -1550,6 +1574,18 @@ packages:
       }
     engines: { node: ">= 0.6" }
 
+  typescript-eslint@8.6.0:
+    resolution:
+      {
+        integrity: sha512-eEhhlxCEpCd4helh3AO1hk0UP2MvbRi9CtIAJTVPQjuSXOOO2jsEacNi4UdcJzZJbeuVg1gMhtZ8UYb+NFYPrA==,
+      }
+    engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
+    peerDependencies:
+      typescript: "*"
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   typescript@5.5.4:
     resolution:
       {
@@ -1681,6 +1717,8 @@ snapshots:
       - supports-color
 
   "@eslint/js@8.57.1": {}
+
+  "@eslint/js@9.11.0": {}
 
   "@humanwhocodes/config-array@0.13.0":
     dependencies:
@@ -2254,6 +2292,8 @@ snapshots:
     dependencies:
       type-fest: 0.20.2
 
+  globals@15.9.0: {}
+
   gopd@1.0.1:
     dependencies:
       get-intrinsic: 1.2.4
@@ -2578,6 +2618,17 @@ snapshots:
     dependencies:
       media-typer: 0.3.0
       mime-types: 2.1.35
+
+  typescript-eslint@8.6.0(eslint@8.57.1)(typescript@5.5.4):
+    dependencies:
+      "@typescript-eslint/eslint-plugin": 8.6.0(@typescript-eslint/parser@8.6.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
+      "@typescript-eslint/parser": 8.6.0(eslint@8.57.1)(typescript@5.5.4)
+      "@typescript-eslint/utils": 8.6.0(eslint@8.57.1)(typescript@5.5.4)
+    optionalDependencies:
+      typescript: 5.5.4
+    transitivePeerDependencies:
+      - eslint
+      - supports-color
 
   typescript@5.5.4: {}
 

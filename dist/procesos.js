@@ -1,226 +1,185 @@
-'use strict';
-var __createBinding = ( this && this.__createBinding ) || ( Object.create
-  ? ( function(
-      o, m, k, k2 
-    ) {
-      if ( k2 === undefined ) {
-        k2 = k;
-      }
-
-      var desc = Object.getOwnPropertyDescriptor(
-        m, k 
-      );
-
-      if ( !desc || ( 'get' in desc
-        ? !m.__esModule
-        : desc.writable || desc.configurable ) ) {
-        desc = {
-          enumerable: true,
-          get       : function() {
-            return m[ k ]; 
-          } 
-        };
-      }
-
-      Object.defineProperty(
-        o, k2, desc 
-      );
-    } )
-  : ( function(
-      o, m, k, k2 
-    ) {
-      if ( k2 === undefined ) {
-        k2 = k;
-      }
-
-      o[ k2 ] = m[ k ];
-    } ) );
-var __setModuleDefault = ( this && this.__setModuleDefault ) || ( Object.create
-  ? ( function(
-      o, v 
-    ) {
-      Object.defineProperty(
-        o, 'default', {
-          enumerable: true,
-          value     : v 
-        } 
-      );
-    } )
-  : function(
-    o, v 
-  ) {
-    o[ 'default' ] = v;
-  } );
-
-var __importStar = ( this && this.__importStar ) || function (
-  mod 
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(
+  o, m, k, k2
 ) {
-  if ( mod && mod.__esModule ) {
-    return mod;
+  if (k2 === undefined) {
+    k2 = k; 
   }
-
+  var desc = Object.getOwnPropertyDescriptor(
+    m, k
+  );
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = { enumerable: true, get: function() {
+      return m[ k ]; 
+    } };
+  }
+  Object.defineProperty(
+    o, k2, desc
+  );
+}) : (function(
+  o, m, k, k2
+) {
+  if (k2 === undefined) {
+    k2 = k; 
+  }
+  o[ k2 ] = m[ k ];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(
+  o, v
+) {
+  Object.defineProperty(
+    o, "default", { enumerable: true, value: v }
+  );
+}) : function(
+  o, v
+) {
+  o[ "default" ] = v;
+});
+var __importStar = (this && this.__importStar) || function (
+  mod
+) {
+  if (mod && mod.__esModule) {
+    return mod; 
+  }
   var result = {};
-
-  if ( mod != null ) {
-    for ( var k in mod ) {
-      if ( k !== 'default' && Object.prototype.hasOwnProperty.call(
-        mod, k 
-      ) ) {
+  if (mod != null) {
+    for (var k in mod) {
+      if (k !== "default" && Object.prototype.hasOwnProperty.call(
+        mod, k
+      )) {
         __createBinding(
-          result, mod, k 
-        );
-      }
-    }
+          result, mod, k
+        ); 
+      } 
+    } 
   }
-
   __setModuleDefault(
-    result, mod 
+    result, mod
   );
   return result;
 };
-
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
-
 const client_1 = require(
-  '@prisma/client' 
+  "@prisma/client"
 );
-
 const fs = __importStar(
   require(
-    'fs/promises' 
-  ) 
+    "fs/promises"
+  )
 );
-
 const juzgado_1 = require(
-  './models/juzgado' 
+  "./models/juzgado"
 );
-
 const procesos_1 = require(
-  './models/procesos' 
+  "./models/procesos"
 );
-
 const prisma = new client_1.PrismaClient();
-
 async function fetcher(
-  llaveProceso 
+  llaveProceso
 ) {
   try {
     const request = await fetch(
-      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ llaveProceso }&SoloActivos=false&pagina=1` 
+      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${llaveProceso}&SoloActivos=false&pagina=1`
     );
-
-    if ( !request.ok ) {
+    if (!request.ok) {
       throw new Error(
-        `${ llaveProceso }: ${ request.status } ${ request.statusText }${ JSON.stringify(
-          request, null, 2 
-        ) }` 
+        `${llaveProceso}: ${request.status} ${request.statusText}${JSON.stringify(
+          request, null, 2
+        )}`
       );
     }
-
-    const json = ( await request.json() );
-
-    const {
-      procesos 
-    } = json;
+    const json = (await request.json());
+    const { procesos } = json;
     return procesos.map(
       (
-        proceso 
+        proceso
       ) => {
         return {
           ...proceso,
           fechaProceso: proceso.fechaProceso
             ? new Date(
-              proceso.fechaProceso 
+              proceso.fechaProceso
             )
             : null,
           fechaUltimaActuacion: proceso.fechaUltimaActuacion
             ? new Date(
-              proceso.fechaUltimaActuacion 
+              proceso.fechaUltimaActuacion
             )
             : null,
           juzgado: juzgado_1.JuzgadoClass.fromProceso(
-            proceso 
+            proceso
           ),
         };
-      } 
+      }
     );
-  } catch ( error ) {
+  }
+  catch (error) {
     console.log(
-      error 
+      error
     );
     return [];
   }
 }
-
 async function getLLaves() {
   const carpetas = await prisma.carpeta.findMany();
   return carpetas.flatMap(
     (
-      carpeta 
+      carpeta
     ) => {
       return {
         llaveProceso: carpeta.llaveProceso.trim(),
-        numero      : carpeta.numero,
+        numero: carpeta.numero,
       };
-    } 
+    }
   );
 }
-
 async function* AsyncGenerateActuaciones(
-  llaves 
+  llaves
 ) {
-  for ( const carpeta of llaves ) {
+  for (const carpeta of llaves) {
     const newProceso = await procesos_1.ClassProcesos.getProcesos(
-      carpeta.llaveProceso, carpeta.numero 
+      carpeta.llaveProceso, carpeta.numero
     );
-
     const fetcherIdProceso = await fetcher(
-      carpeta.llaveProceso 
+      carpeta.llaveProceso
     );
-
-    for ( const proceso of fetcherIdProceso ) {
-      if ( !proceso.esPrivado ) {
+    for (const proceso of fetcherIdProceso) {
+      if (!proceso.esPrivado) {
         await prismaUpdaterProcesos(
-          proceso, carpeta.numero 
+          proceso, carpeta.numero
         );
       }
     }
-
     newProceso.prismaUpdateProcesos();
     yield newProceso;
   }
 }
-
 async function prismaUpdaterProcesos(
-  proceso, numero 
+  proceso, numero
 ) {
   const idProcesosSet = new Set();
-
   try {
     const carpeta = await prisma.carpeta.findFirstOrThrow(
       {
         where: {
           numero: numero,
         },
-      } 
+      }
     );
     carpeta.idProcesos.forEach(
       (
-        idProceso 
+        idProceso
       ) => {
         idProcesosSet.add(
-          idProceso 
+          idProceso
         );
-      } 
+      }
     );
     idProcesosSet.add(
-      proceso.idProceso 
+      proceso.idProceso
     );
-
     const updater = await prisma.carpeta.update(
       {
         where: {
@@ -229,7 +188,7 @@ async function prismaUpdaterProcesos(
         data: {
           idProcesos: {
             set: Array.from(
-              idProcesosSet 
+              idProcesosSet
             ),
           },
           procesos: {
@@ -243,16 +202,16 @@ async function prismaUpdaterProcesos(
                   connectOrCreate: {
                     where: {
                       id_tipo_ciudad: {
-                        tipo  : proceso.juzgado.tipo,
-                        id    : proceso.juzgado.id,
+                        tipo: proceso.juzgado.tipo,
+                        id: proceso.juzgado.id,
                         ciudad: proceso.juzgado.ciudad,
                       },
                     },
                     create: {
-                      tipo  : proceso.juzgado.tipo,
-                      id    : proceso.juzgado.id,
+                      tipo: proceso.juzgado.tipo,
+                      id: proceso.juzgado.id,
                       ciudad: proceso.juzgado.ciudad,
-                      url   : proceso.juzgado.url,
+                      url: proceso.juzgado.url,
                     },
                   },
                 },
@@ -260,44 +219,40 @@ async function prismaUpdaterProcesos(
             },
           },
         },
-      } 
+      }
     );
     console.log(
-      updater 
+      updater
     );
-  } catch ( error ) {
+  }
+  catch (error) {
     console.log(
-      error 
+      error
     );
   }
 }
-
 async function main() {
   const ActsMap = [];
-
   const idProcesos = await getLLaves();
   console.log(
-    idProcesos 
+    idProcesos
   );
-
-  for await ( const actuacionesJson of AsyncGenerateActuaciones(
-    idProcesos 
-  ) ) {
+  for await (const actuacionesJson of AsyncGenerateActuaciones(
+    idProcesos
+  )) {
     console.log(
-      actuacionesJson 
+      actuacionesJson
     );
     ActsMap.push(
-      actuacionesJson 
+      actuacionesJson
     );
   }
-
   fs.writeFile(
-    'actuacionesOutput.json', JSON.stringify(
-      ActsMap 
-    ) 
+    "actuacionesOutput.json", JSON.stringify(
+      ActsMap
+    )
   );
   return ActsMap;
 }
-
 main();
 //# sourceMappingURL=procesos.js.map

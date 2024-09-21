@@ -1,72 +1,69 @@
-'use strict';
+"use strict";
 // To parse this data:
 //
 //   import { Convert } from "./file";
 //
 //   const consultaActuacion = Convert.toConsultaActuacion(json);
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.actuacionConvert = void 0;
-
 // Converts JSON strings to/from your types
 class actuacionConvert {
   static actuacioneToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static consultaActuacionToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static dataToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static paginacionToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toActuacione(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static toConsultaActuacion(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static toData(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static toPaginacion(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
 }

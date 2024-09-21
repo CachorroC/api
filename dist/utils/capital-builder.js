@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /*
 const outGoingValuesMap = new Map();
 
@@ -68,98 +68,78 @@ for ( const carpeta of Carpetas ) {
   );
 } */
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.capitalBuilder = capitalBuilder;
-
 function capitalBuilder(
-  capitalAdeudado 
+  capitalAdeudado
 ) {
-  if ( !capitalAdeudado || typeof capitalAdeudado === 'object' ) {
+  if (!capitalAdeudado || typeof capitalAdeudado === "object") {
     return 0;
   }
-
-  if ( typeof capitalAdeudado === 'number' ) {
-    if ( Number.isNaN(
-      capitalAdeudado 
-    ) ) {
+  if (typeof capitalAdeudado === "number") {
+    if (Number.isNaN(
+      capitalAdeudado
+    )) {
       return 0;
     }
-
     return capitalAdeudado;
   }
-
   const copTaker = capitalAdeudado.matchAll(
-    /([\d.]+)([.,])(\d{2}|\d{2})$/gm 
+    /([\d.]+)([.,])(\d{2}|\d{2})$/gm
   );
   console.log(
-    copTaker 
+    copTaker
   );
-
-  for ( const cap of copTaker ) {
+  for (const cap of copTaker) {
     const [
       , /*  */ value
     ] = cap;
-
     const valueReplacer = value.replaceAll(
-      /([.,]+)/gm, '' 
+      /([.,]+)/gm, ""
     );
-
     const outputValue = Number(
-      valueReplacer 
+      valueReplacer
     );
-
-    if ( Number.isNaN(
-      outputValue 
-    ) ) {
+    if (Number.isNaN(
+      outputValue
+    )) {
       return 0;
     }
-
     return outputValue;
   }
-
   const newCapital = capitalAdeudado.search(
-    /([/A-Za-z@]+)/gm 
+    /([/A-Za-z@]+)/gm
   );
   console.log(
-    newCapital 
+    newCapital
   );
-
-  if ( newCapital >= 0 ) {
+  if (newCapital >= 0) {
     console.log(
-      `es mayor a 0 ${ newCapital }` 
+      `es mayor a 0 ${newCapital}`
     );
     return 0;
   }
-
   console.log(
-    capitalAdeudado 
+    capitalAdeudado
   );
-
   const outGoingMatch = capitalAdeudado.match(
-    /(\d+)/gm 
+    /(\d+)/gm
   );
-
-  if ( !outGoingMatch ) {
+  if (!outGoingMatch) {
     return 0;
   }
-
   const valueReplacer = capitalAdeudado.replaceAll(
-    /([.,]+)/gm, '' 
+    /([.,]+)/gm, ""
   );
-
   const outgoingValue = Number(
-    valueReplacer 
+    valueReplacer
   );
-
-  if ( Number.isNaN(
-    outgoingValue 
-  ) ) {
+  if (Number.isNaN(
+    outgoingValue
+  )) {
     return 0;
   }
-
   return outgoingValue;
 }
 //# sourceMappingURL=capital-builder.js.map

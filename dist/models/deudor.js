@@ -1,96 +1,72 @@
-'use strict';
+"use strict";
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.ClassDeudor = exports.Tel = void 0;
-
 class Tel {
   fijo;
   celular;
   constructor(
-    telefono 
+    telefono
   ) {
     const celularStringArray = telefono.match(
-      /\d{10}/g 
+      /\d{10}/g
     );
-
     const fijoStringArray = telefono.match(
-      /\d{7}\s/g 
+      /\d{7}\s/g
     );
-
     const celularNumber = celularStringArray?.map(
       (
-        f 
+        f
       ) => {
         return String(
-          f 
+          f
         );
-      } 
+      }
     );
-
     const fijoNumber = fijoStringArray?.map(
       (
-        f 
+        f
       ) => {
         return String(
-          f 
+          f
         );
-      } 
+      }
     );
-    this.fijo = fijoNumber
-      ? fijoNumber[ 0 ]
-      : null;
-    this.celular = celularNumber
-      ? celularNumber[ 0 ]
-      : null;
+    this.fijo = fijoNumber ? fijoNumber[ 0 ] : null;
+    this.celular = celularNumber ? celularNumber[ 0 ] : null;
   }
 }
 exports.Tel = Tel;
-
 class ClassDeudor {
   constructor(
-    rawCarpeta 
+    rawCarpeta
   ) {
-    const {
-      DEMANDADO_IDENTIFICACION: cedula, DEMANDADO_DIRECCION: direccion, DEMANDADO_EMAIL: email, DEMANDADO_TELEFONOS: telefono, DEMANDADO_NOMBRE: nombre, NUMERO: id, 
-    } = rawCarpeta;
+    const { DEMANDADO_IDENTIFICACION: cedula, DEMANDADO_DIRECCION: direccion, DEMANDADO_EMAIL: email, DEMANDADO_TELEFONOS: telefono, DEMANDADO_NOMBRE: nombre, NUMERO: id, } = rawCarpeta;
     this.id = Number(
-      id 
+      id
     );
     this.cedula = String(
-      cedula 
+      cedula
     );
-    this.direccion = direccion
-      ? direccion.toString()
-      : null;
-    this.email = email
-      ? email.toString()
-      : null;
-
-    const {
-      fijo, celular 
-    } = new Tel(
+    this.direccion = direccion ? direccion.toString() : null;
+    this.email = email ? email.toString() : null;
+    const { fijo, celular } = new Tel(
       String(
-        telefono 
-      ) 
+        telefono
+      )
     );
     this.telCelular = celular;
     this.telFijo = fijo;
-
     const nameStringArray = nombre
-      ? nombre.trim()
-        .split(
-          ' ' 
-        )
-      : 'Nelson Nuñez'.split(
-        ' ' 
+      ? nombre.trim().split(
+        " "
+      )
+      : "Nelson Nuñez".split(
+        " "
       );
-
     const nameArrayLength = nameStringArray.length;
-
-    switch ( nameArrayLength ) {
+    switch (nameArrayLength) {
         case 4:
           [
             this.primerNombre,
@@ -99,7 +75,6 @@ class ClassDeudor {
             this.segundoApellido,
           ] = nameStringArray;
           break;
-
         case 2:
           [
             this.primerNombre,
@@ -108,23 +83,21 @@ class ClassDeudor {
           this.segundoApellido = null;
           this.segundoNombre = null;
           break;
-
         case 1:
           [
             this.primerNombre
           ] = nameStringArray;
-          this.primerApellido = 'sinEspecificar';
+          this.primerApellido = "sinEspecificar";
           this.segundoApellido = null;
           this.segundoNombre = null;
           break;
-
         case 3:
           [
             this.primerNombre,
             this.segundoNombre,
             this.primerApellido
-          ]
-                    = nameStringArray;
+          ] =
+                    nameStringArray;
           this.segundoApellido = null;
           break;
         default:
@@ -148,19 +121,19 @@ class ClassDeudor {
   direccion;
   email;
   static prismaDeudor(
-    deudor 
+    deudor
   ) {
     const newDeudor = {
-      id             : deudor.id,
-      cedula         : deudor.cedula,
-      primerApellido : deudor.primerApellido,
-      primerNombre   : deudor.primerNombre,
-      direccion      : deudor.direccion,
-      email          : deudor.email,
+      id: deudor.id,
+      cedula: deudor.cedula,
+      primerApellido: deudor.primerApellido,
+      primerNombre: deudor.primerNombre,
+      direccion: deudor.direccion,
+      email: deudor.email,
       segundoApellido: deudor.segundoApellido,
-      segundoNombre  : deudor.segundoNombre,
-      telCelular     : deudor.telCelular,
-      telFijo        : deudor.telFijo,
+      segundoNombre: deudor.segundoNombre,
+      telCelular: deudor.telCelular,
+      telFijo: deudor.telFijo,
     };
     return newDeudor;
   }

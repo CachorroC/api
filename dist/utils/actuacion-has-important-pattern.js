@@ -1,143 +1,110 @@
-'use strict';
-var __createBinding = ( this && this.__createBinding ) || ( Object.create
-  ? ( function(
-      o, m, k, k2 
-    ) {
-      if ( k2 === undefined ) {
-        k2 = k;
-      }
-
-      var desc = Object.getOwnPropertyDescriptor(
-        m, k 
-      );
-
-      if ( !desc || ( 'get' in desc
-        ? !m.__esModule
-        : desc.writable || desc.configurable ) ) {
-        desc = {
-          enumerable: true,
-          get       : function() {
-            return m[ k ]; 
-          } 
-        };
-      }
-
-      Object.defineProperty(
-        o, k2, desc 
-      );
-    } )
-  : ( function(
-      o, m, k, k2 
-    ) {
-      if ( k2 === undefined ) {
-        k2 = k;
-      }
-
-      o[ k2 ] = m[ k ];
-    } ) );
-var __setModuleDefault = ( this && this.__setModuleDefault ) || ( Object.create
-  ? ( function(
-      o, v 
-    ) {
-      Object.defineProperty(
-        o, 'default', {
-          enumerable: true,
-          value     : v 
-        } 
-      );
-    } )
-  : function(
-    o, v 
-  ) {
-    o[ 'default' ] = v;
-  } );
-
-var __importStar = ( this && this.__importStar ) || function (
-  mod 
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(
+  o, m, k, k2
 ) {
-  if ( mod && mod.__esModule ) {
-    return mod;
+  if (k2 === undefined) {
+    k2 = k; 
   }
-
+  var desc = Object.getOwnPropertyDescriptor(
+    m, k
+  );
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = { enumerable: true, get: function() {
+      return m[ k ]; 
+    } };
+  }
+  Object.defineProperty(
+    o, k2, desc
+  );
+}) : (function(
+  o, m, k, k2
+) {
+  if (k2 === undefined) {
+    k2 = k; 
+  }
+  o[ k2 ] = m[ k ];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(
+  o, v
+) {
+  Object.defineProperty(
+    o, "default", { enumerable: true, value: v }
+  );
+}) : function(
+  o, v
+) {
+  o[ "default" ] = v;
+});
+var __importStar = (this && this.__importStar) || function (
+  mod
+) {
+  if (mod && mod.__esModule) {
+    return mod; 
+  }
   var result = {};
-
-  if ( mod != null ) {
-    for ( var k in mod ) {
-      if ( k !== 'default' && Object.prototype.hasOwnProperty.call(
-        mod, k 
-      ) ) {
+  if (mod != null) {
+    for (var k in mod) {
+      if (k !== "default" && Object.prototype.hasOwnProperty.call(
+        mod, k
+      )) {
         __createBinding(
-          result, mod, k 
-        );
-      }
-    }
+          result, mod, k
+        ); 
+      } 
+    } 
   }
-
   __setModuleDefault(
-    result, mod 
+    result, mod
   );
   return result;
 };
-
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.actuacionHasAuto = actuacionHasAuto;
-
 const prisma_1 = require(
-  '../services/prisma' 
+  "../services/prisma"
 );
-
 const fs = __importStar(
   require(
-    'fs/promises' 
-  ) 
+    "fs/promises"
+  )
 );
-
 async function actuacionesGetAuto() {
   const actuaciones = await prisma_1.client.actuacion.findMany();
-
   const newActs = actuaciones.map(
     (
-      actuacion 
+      actuacion
     ) => {
       return actuacionHasAuto(
-        actuacion 
+        actuacion
       );
-    } 
+    }
   );
   fs.writeFile(
-    'actuacionesNewMap.json', JSON.stringify(
-      newActs 
-    ) 
+    "actuacionesNewMap.json", JSON.stringify(
+      newActs
+    )
   );
   return newActs;
 }
-
 function actuacionHasAuto(
-  incomingActuacion 
+  incomingActuacion
 ) {
-  const {
-    actuacion 
-  } = incomingActuacion;
-
+  const { actuacion } = incomingActuacion;
   const hasAuto = /([Aa][Uu][Tt][Oo]+)\s([A-Z a-zÓÍÚÉÀóíúáé,.()\w/]+)/.test(
-    actuacion 
+    actuacion
   );
-
   const hasRadicado = /([Rr][Aa][Dd][Ii][Cc][Aa]+)([A-Z a-zÓÍÚÉÀóíúáé,.()\w/]+)/.test(
-    actuacion 
+    actuacion
   );
   return {
     ...incomingActuacion,
-    hasAuto    : hasAuto,
+    hasAuto: hasAuto,
     hasRadicado: hasRadicado,
   };
 }
-
 console.log(
-  actuacionesGetAuto() 
+  actuacionesGetAuto()
 );
 //# sourceMappingURL=actuacion-has-important-pattern.js.map

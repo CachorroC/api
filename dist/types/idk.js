@@ -1,184 +1,181 @@
-'use strict';
+"use strict";
 // To parse this data:
 //
 //   import { Convert } from "./file";
 //
 //   const intCarpeta = Convert.toIntCarpeta(json);
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.Convert = void 0;
-
 // Converts JSON strings to/from your types
 class Convert {
   static toIntCarpeta(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static intCarpetaToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toActuaciones(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static actuacionesToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toActuacione(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static actuacioneToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toCodeudor(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static codeudorToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toDemanda(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static demandaToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toMedidasCautelares(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static medidasCautelaresToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toDeudor(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static deudorToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toTel(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static telToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toNotificacion(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static notificacionToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toNotifier(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static notifierToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toProceso(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static procesoToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toJuzgado(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static juzgadoToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
 }

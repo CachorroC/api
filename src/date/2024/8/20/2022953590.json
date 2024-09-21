@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2022953590,
+  "llaveProceso": "11001400301420180092900",
+  "consActuacion": 62,
+  "fechaActuacion": "2024-09-20T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "INGRESA AL DESPACHO CON M34206 PARA LO PRETINENTE  //  DIANA GOMEZ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 62,
+  "isUltimaAct": true,
+  "idProceso": 51341610
+}

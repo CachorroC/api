@@ -1,368 +1,305 @@
-'use strict';
-var __createBinding = ( this && this.__createBinding ) || ( Object.create
-  ? ( function(
-      o, m, k, k2 
-    ) {
-      if ( k2 === undefined ) {
-        k2 = k;
-      }
-
-      var desc = Object.getOwnPropertyDescriptor(
-        m, k 
-      );
-
-      if ( !desc || ( 'get' in desc
-        ? !m.__esModule
-        : desc.writable || desc.configurable ) ) {
-        desc = {
-          enumerable: true,
-          get       : function() {
-            return m[ k ]; 
-          } 
-        };
-      }
-
-      Object.defineProperty(
-        o, k2, desc 
-      );
-    } )
-  : ( function(
-      o, m, k, k2 
-    ) {
-      if ( k2 === undefined ) {
-        k2 = k;
-      }
-
-      o[ k2 ] = m[ k ];
-    } ) );
-var __setModuleDefault = ( this && this.__setModuleDefault ) || ( Object.create
-  ? ( function(
-      o, v 
-    ) {
-      Object.defineProperty(
-        o, 'default', {
-          enumerable: true,
-          value     : v 
-        } 
-      );
-    } )
-  : function(
-    o, v 
-  ) {
-    o[ 'default' ] = v;
-  } );
-
-var __importStar = ( this && this.__importStar ) || function (
-  mod 
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(
+  o, m, k, k2
 ) {
-  if ( mod && mod.__esModule ) {
-    return mod;
+  if (k2 === undefined) {
+    k2 = k; 
   }
-
+  var desc = Object.getOwnPropertyDescriptor(
+    m, k
+  );
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = { enumerable: true, get: function() {
+      return m[ k ]; 
+    } };
+  }
+  Object.defineProperty(
+    o, k2, desc
+  );
+}) : (function(
+  o, m, k, k2
+) {
+  if (k2 === undefined) {
+    k2 = k; 
+  }
+  o[ k2 ] = m[ k ];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(
+  o, v
+) {
+  Object.defineProperty(
+    o, "default", { enumerable: true, value: v }
+  );
+}) : function(
+  o, v
+) {
+  o[ "default" ] = v;
+});
+var __importStar = (this && this.__importStar) || function (
+  mod
+) {
+  if (mod && mod.__esModule) {
+    return mod; 
+  }
   var result = {};
-
-  if ( mod != null ) {
-    for ( var k in mod ) {
-      if ( k !== 'default' && Object.prototype.hasOwnProperty.call(
-        mod, k 
-      ) ) {
+  if (mod != null) {
+    for (var k in mod) {
+      if (k !== "default" && Object.prototype.hasOwnProperty.call(
+        mod, k
+      )) {
         __createBinding(
-          result, mod, k 
-        );
-      }
-    }
+          result, mod, k
+        ); 
+      } 
+    } 
   }
-
   __setModuleDefault(
-    result, mod 
+    result, mod
   );
   return result;
 };
-
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
-
 const fs = __importStar(
   require(
-    'fs/promises' 
-  ) 
+    "fs/promises"
+  )
 );
-
 const prisma_1 = require(
-  './services/prisma' 
-);
-
-const awaiter_1 = require(
-  './utils/awaiter' 
+  "./services/prisma"
 );
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 console.log(
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED 
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED
 );
-
 async function fetcher(
-  idProceso 
+  idProceso
 ) {
   try {
     const request = await fetch(
-      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }` 
+      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${idProceso}`
     );
-
-    if ( !request.ok ) {
+    if (!request.ok) {
       throw new Error(
-        `${ idProceso }: ${ request.status } ${ request.statusText }${ JSON.stringify(
-          request, null, 2 
-        ) }` 
+        `${idProceso}: ${request.status} ${request.statusText}${JSON.stringify(
+          request, null, 2
+        )}`
       );
     }
-
-    const json = ( await request.json() );
-
-    const {
-      actuaciones 
-    } = json;
-    return actuaciones
-      .map(
-        (
-          actuacion 
-        ) => {
-          return {
-            ...actuacion,
-            fechaActuacion: new Date(
-              actuacion.fechaActuacion 
-            ),
-            fechaRegistro: new Date(
-              actuacion.fechaRegistro 
-            ),
-            fechaInicial: actuacion.fechaInicial
-              ? new Date(
-                actuacion.fechaInicial 
-              )
-              : null,
-            fechaFinal: actuacion.fechaFinal
-              ? new Date(
-                actuacion.fechaFinal 
-              )
-              : null,
-            isUltimaAct: actuacion.cant === actuacion.consActuacion,
-            idProceso  : idProceso,
-          };
-        } 
-      )
-      .sort(
-        (
-          a, b 
-        ) => {
-          const now = new Date()
-            .getTime();
-
-          const aFechaAct = new Date(
-            a.fechaActuacion 
-          )
-            .getTime();
-
-          const bFechaAct = new Date(
-            b.fechaActuacion 
-          )
-            .getTime();
-          return Math.abs(
-            aFechaAct - now 
-          ) - Math.abs(
-            bFechaAct - now 
-          );
-        } 
-      );
-  } catch ( error ) {
+    const json = (await request.json());
+    const { actuaciones } = json;
+    return actuaciones.map(
+      (
+        actuacion
+      ) => {
+        return {
+          ...actuacion,
+          fechaActuacion: new Date(
+            actuacion.fechaActuacion
+          ),
+          fechaRegistro: new Date(
+            actuacion.fechaRegistro
+          ),
+          fechaInicial: actuacion.fechaInicial
+            ? new Date(
+              actuacion.fechaInicial
+            )
+            : null,
+          fechaFinal: actuacion.fechaFinal
+            ? new Date(
+              actuacion.fechaFinal
+            )
+            : null,
+          isUltimaAct: actuacion.cant === actuacion.consActuacion,
+          idProceso: idProceso,
+        };
+      }
+    );
+  }
+  catch (error) {
     console.log(
-      `fetcher error: ${ error }` 
+      error
     );
     return null;
   }
 }
-
 async function getIdProcesos() {
   const carpetas = await prisma_1.client.carpeta.findMany();
   return carpetas.flatMap(
     (
-      carpeta 
+      carpeta
     ) => {
       return carpeta.idProcesos.map(
         (
-          idProceso 
+          idProceso
         ) => {
           return {
             idProceso,
             numero: carpeta.numero,
           };
-        } 
+        }
       );
-    } 
+    }
   );
 }
-
 async function* AsyncGenerateActuaciones(
-  procesos 
+  procesos
 ) {
-  for ( const {
-    idProceso, numero 
-  } of procesos ) {
-    await ( 0, awaiter_1.sleep )(
-      numero 
-    );
-
+  for (const { idProceso, numero } of procesos) {
     const fetcherIdProceso = await fetcher(
-      idProceso 
+      idProceso
     );
-
-    if ( fetcherIdProceso !== null ) {
+    if (fetcherIdProceso !== null) {
       await prismaUpdaterActuaciones(
-        fetcherIdProceso 
+        fetcherIdProceso, numero
       );
       await prisma_1.client.actuacion.createMany(
         {
-          data          : fetcherIdProceso,
+          data: fetcherIdProceso,
           skipDuplicates: true,
-        } 
+        }
       );
     }
-
     yield fetcherIdProceso;
   }
 }
-
+async function updatePreviousLastActuacion(
+  idRegUltimaAct
+) {
+  try {
+    if (idRegUltimaAct === null) {
+      throw new Error(
+        'la idRegAct de la ultima actuacion es null'
+      );
+    }
+    await prisma_1.client.actuacion.update(
+      {
+        where: {
+          idRegActuacion: idRegUltimaAct,
+        },
+        data: {
+          isUltimaAct: false,
+        },
+      }
+    );
+  }
+  catch (error) {
+    console.log(
+      `error al cambiar la ultima actuacion: ${error}`
+    );
+  }
+}
+async function updateCarpetaWithNewLastActuacion(
+  { ultimaActuacion, numero, }
+) {
+  try {
+    await prisma_1.client.carpeta.update(
+      {
+        where: {
+          numero: numero,
+        },
+        data: {
+          fecha: new Date(
+            ultimaActuacion.fechaActuacion
+          ),
+          revisado: false,
+          ultimaActuacion: {
+            connectOrCreate: {
+              where: {
+                idRegActuacion: ultimaActuacion.idRegActuacion,
+              },
+              create: {
+                ...ultimaActuacion,
+              },
+            },
+          },
+        },
+      }
+    );
+  }
+  catch (error) {
+    console.log(
+      `error al cambiar la carpeta y actualizar la ultima actuacion: ${error}`
+    );
+  }
+}
 async function prismaUpdaterActuaciones(
-  actuacionesComplete 
+  actuacionesComplete, numeroCarpeta
 ) {
   const [
     ultimaActuacion
   ] = actuacionesComplete.filter(
     (
-      a 
+      a
     ) => {
       return a.isUltimaAct;
-    } 
+    }
   );
-
   try {
     const carpeta = await prisma_1.client.carpeta.findFirstOrThrow(
       {
         where: {
-          llaveProceso: ultimaActuacion.llaveProceso,
+          OR: [
+            { llaveProceso: ultimaActuacion.llaveProceso },
+            { numero: numeroCarpeta },
+          ],
         },
-      } 
+      }
     );
-
     const incomingDate = new Date(
-      ultimaActuacion.fechaActuacion 
-    )
-      .getTime();
-
+      ultimaActuacion.fechaActuacion
+    ).getTime();
     const savedDate = carpeta.fecha
-      ? new Date(
-        carpeta.fecha 
-      )
-        .getTime()
+      ? carpeta.fecha.getTime()
       : null;
-
-    if ( !savedDate || savedDate < incomingDate ) {
+    if (!savedDate || savedDate < incomingDate) {
       console.log(
-        'no hay saved date o la saved date es menor que incoming date' 
+        'no hay saved date o la saved date es menor que incoming date'
       );
-
-      try {
-        await prisma_1.client.actuacion.update(
-          {
-            where: {
-              idRegActuacion: carpeta.idRegUltimaAct ?? undefined,
-            },
-            data: {
-              isUltimaAct: false,
-            },
-          } 
-        );
-      } catch ( error ) {
-        console.log(
-          `error al cambiar la ultima actuacion: ${ error }` 
-        );
-      }
-
-      try {
-        await prisma_1.client.carpeta.update(
-          {
-            where: {
-              numero: carpeta.numero,
-            },
-            data: {
-              fecha: new Date(
-                ultimaActuacion.fechaActuacion 
-              ),
-              revisado       : false,
-              ultimaActuacion: {
-                connectOrCreate: {
-                  where: {
-                    idRegActuacion: ultimaActuacion.idRegActuacion,
-                  },
-                  create: {
-                    ...ultimaActuacion,
-                  },
-                },
-              },
-            },
-          } 
-        );
-      } catch ( error ) {
-        console.log(
-          `error al cambiar la carpeta y actualizar la ultima actuacion: ${ error }` 
-        );
-      }
-
+      await updatePreviousLastActuacion(
+        carpeta.idRegUltimaAct
+      );
+      await updateCarpetaWithNewLastActuacion(
+        {
+          ultimaActuacion,
+          numero: numeroCarpeta,
+        }
+      );
       await fs.mkdir(
-        `./src/date/${ new Date()
-          .getFullYear() }/${ new Date()
-          .getMonth() }/${ new Date()
-          .getDate() }`, {
+        `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`, {
           recursive: true,
-        } 
+        }
       );
       fs.writeFile(
-        `./src/date/${ new Date()
-          .getFullYear() }/${ new Date()
-          .getMonth() }/${ new Date()
-          .getDate() }/${ ultimaActuacion.idRegActuacion }.json`, JSON.stringify(
-          ultimaActuacion 
-        ) 
+        `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}/${ultimaActuacion.idRegActuacion}.json`, JSON.stringify(
+          ultimaActuacion
+        )
       );
     }
-  } catch ( error ) {
+  }
+  catch (error) {
     console.log(
-      `prisma updater actuaciones error : ${ error }` 
+      `prisma updater actuaciones error : ${error}`
     );
   }
 }
-
 async function main() {
   const ActsMap = [];
-
   const idProcesos = await getIdProcesos();
-
-  for await ( const actuacionesJson of AsyncGenerateActuaciones(
-    idProcesos 
-  ) ) {
+  for await (const actuacionesJson of AsyncGenerateActuaciones(
+    idProcesos
+  )) {
     ActsMap.push(
-      actuacionesJson 
+      actuacionesJson
     );
   }
-
   fs.writeFile(
     'actuacionesOutput.json', JSON.stringify(
-      ActsMap, null, 2 
-    ) 
+      ActsMap, null, 2
+    )
   );
   return ActsMap;
 }
-
 main();
 //# sourceMappingURL=actuaciones.js.map

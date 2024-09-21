@@ -1,40 +1,35 @@
-'use strict';
+"use strict";
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.ClassProcesos = void 0;
-
 const prisma_1 = require(
-  '../services/prisma' 
+  "../services/prisma"
 );
-
 const juzgado_1 = require(
-  './juzgado' 
+  "./juzgado"
 );
-
 class ClassProcesos {
   idProcesosSet = new Set();
   procesos = [];
   numero;
   constructor(
-    procesos, numero 
+    procesos, numero
   ) {
     this.numero = numero;
     procesos.forEach(
       (
-        proceso 
+        proceso
       ) => {
-        if ( !proceso.esPrivado ) {
+        if (!proceso.esPrivado) {
           this.procesos.push(
-            proceso 
+            proceso
           );
           this.idProcesosSet.add(
-            proceso.idProceso 
+            proceso.idProceso
           );
         }
-      } 
+      }
     );
   }
   async prismaUpdateProcesos() {
@@ -44,18 +39,17 @@ class ClassProcesos {
           where: {
             numero: this.numero,
           },
-        } 
+        }
       );
       carpeta.idProcesos.forEach(
         (
-          idProceso 
+          idProceso
         ) => {
           this.idProcesosSet.add(
-            idProceso 
+            idProceso
           );
-        } 
+        }
       );
-
       const updater = await prisma_1.client.carpeta.update(
         {
           where: {
@@ -64,13 +58,13 @@ class ClassProcesos {
           data: {
             idProcesos: {
               set: Array.from(
-                this.idProcesosSet 
+                this.idProcesosSet
               ),
             },
             procesos: {
               connectOrCreate: this.procesos.map(
                 (
-                  proceso 
+                  proceso
                 ) => {
                   return {
                     where: {
@@ -82,8 +76,8 @@ class ClassProcesos {
                         connectOrCreate: {
                           where: {
                             id_tipo_ciudad: {
-                              id    : proceso.juzgado.id,
-                              tipo  : proceso.juzgado.tipo,
+                              id: proceso.juzgado.id,
+                              tipo: proceso.juzgado.tipo,
                               ciudad: proceso.juzgado.ciudad,
                             },
                           },
@@ -92,76 +86,72 @@ class ClassProcesos {
                       },
                     },
                   };
-                } 
+                }
               ),
             },
           },
-        } 
+        }
       );
       console.log(
-        updater 
+        updater
       );
       return updater;
-    } catch ( error ) {
+    }
+    catch (error) {
       console.log(
-        error 
+        error
       );
       return null;
     }
   }
   static async getProcesos(
-    llaveProceso, numero = 0 
+    llaveProceso, numero = 0
   ) {
     try {
       const request = await fetch(
-        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ llaveProceso }&SoloActivos=false&pagina=1` 
+        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${llaveProceso}&SoloActivos=false&pagina=1`
       );
-
-      if ( !request.ok ) {
+      if (!request.ok) {
         throw new Error(
-          `${ llaveProceso }: ${ request.status } ${ request.statusText }${ JSON.stringify(
-            request, null, 2 
-          ) }` 
+          `${llaveProceso}: ${request.status} ${request.statusText}${JSON.stringify(
+            request, null, 2
+          )}`
         );
       }
-
-      const json = ( await request.json() );
-
-      const {
-        procesos 
-      } = json;
-
+      const json = (await request.json());
+      const { procesos } = json;
       const mappedprocesos = procesos.map(
         (
-          proceso 
+          proceso
         ) => {
           return {
             ...proceso,
             fechaProceso: proceso.fechaProceso
               ? new Date(
-                proceso.fechaProceso 
+                proceso.fechaProceso
               )
               : null,
             fechaUltimaActuacion: proceso.fechaUltimaActuacion
               ? new Date(
-                proceso.fechaUltimaActuacion 
+                proceso.fechaUltimaActuacion
               )
               : null,
             juzgado: juzgado_1.JuzgadoClass.fromProceso(
-              proceso 
+              proceso
             ),
           };
-        } 
+        }
       );
       return new ClassProcesos(
-        mappedprocesos, numero 
+        mappedprocesos, numero
       );
-    } catch ( error ) {
+    }
+    catch (error) {
       console.log(
-        error 
+        error
       );
       return new ClassProcesos(
-        [], numero 
+        [], numero
       );
     }
   }

@@ -33,7 +33,6 @@ export class ClassDemanda implements IntDemanda {
       BIENES,
       BIENES_SECUESTRADOS,
     } = rawCarpeta;
-    rawCarpeta.FECHA_PRESENTACION_DEMANDA;
 
     const [newFechaOrdenaMedida] = datesExtractor(fechaOrdenaMedidas);
     this.id = Number(NUMERO);

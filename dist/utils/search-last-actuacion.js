@@ -1,53 +1,46 @@
-'use strict';
+"use strict";
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.isIrrelevantActuacion = isIrrelevantActuacion;
 exports.searchForLastActuacion = searchForLastActuacion;
-
 function isIrrelevantActuacion(
-  incomingActuacion 
+  incomingActuacion
 ) {
   return /([Ff][iI][Jj][Aa][cC][iI][oO][Nn])|([Dd][eE][sS][pP][aA][cC][hH][oO])/gim.test(
-    incomingActuacion 
+    incomingActuacion
   );
 }
-
 function searchForLastActuacion(
-  incomingActuaciones 
+  incomingActuaciones
 ) {
   const sortedLastFirst = [
     ...incomingActuaciones
   ].sort(
     (
-      a, b 
+      a, b
     ) => {
       const isAIrrelevantOrNot = isIrrelevantActuacion(
-        a.actuacion 
+        a.actuacion
       );
-
       const isBIrrelevantOrNot = isIrrelevantActuacion(
-        b.actuacion 
+        b.actuacion
       );
-
-      if ( isAIrrelevantOrNot ) {
+      if (isAIrrelevantOrNot) {
         return -1;
-      } else if ( isBIrrelevantOrNot ) {
+      }
+      else if (isBIrrelevantOrNot) {
         return 1;
       }
-
-      if ( a.consActuacion < b.consActuacion ) {
+      if (a.consActuacion < b.consActuacion) {
         return -1;
-      } else if ( a.consActuacion > b.consActuacion ) {
+      }
+      else if (a.consActuacion > b.consActuacion) {
         return 1;
       }
-
       return 0;
-    } 
+    }
   );
-
   const [
     ultimaActuacion,
     penUltimaActuacion,
@@ -55,13 +48,13 @@ function searchForLastActuacion(
   ] = sortedLastFirst;
   console.log(
     JSON.stringify(
-      penUltimaActuacion, null, 2 
-    ) 
+      penUltimaActuacion, null, 2
+    )
   );
   console.log(
     JSON.stringify(
-      antePenultimaActuacion, null, 2 
-    ) 
+      antePenultimaActuacion, null, 2
+    )
   );
   return ultimaActuacion;
 }

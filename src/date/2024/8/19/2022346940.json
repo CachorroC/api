@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 2022346940,
+  "llaveProceso": "11001400302420180014300",
+  "consActuacion": 35,
+  "fechaActuacion": "2024-09-19T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 35,
+  "isUltimaAct": true,
+  "idProceso": 51002530
+}

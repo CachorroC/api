@@ -1,72 +1,69 @@
-'use strict';
+"use strict";
 // To parse this data:
 //
 //   import { Convert, ConsultaNumeroRadicacion } from "./file";
 //
 //   const consultaNumeroRadicacion = Convert.toConsultaNumeroRadicacion(json);
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.Convert = void 0;
-
 // Converts JSON strings to/from your types
 class Convert {
   static toConsultaNumeroRadicacion(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static consultaNumeroRadicacionToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toPaginacion(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static paginacionToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toParametros(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static parametrosToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
   static toProceso(
-    json 
+    json
   ) {
     return JSON.parse(
-      json 
+      json
     );
   }
   static procesoToJson(
-    value 
+    value
   ) {
     return JSON.stringify(
-      value 
+      value
     );
   }
 }

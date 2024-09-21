@@ -171,7 +171,9 @@ export class ClassCarpeta implements IntCarpeta {
         const json = await request.json();
 
         throw new Error(
-          `${request.status} : ${request.statusText} === ${JSON.stringify(json)}`,
+          `${request.status} : ${request.statusText} === ${JSON.stringify(
+            json,
+          )}`,
         );
       }
 
@@ -347,10 +349,10 @@ export class ClassCarpeta implements IntCarpeta {
       llaveProceso: carpeta.llaveProceso,
       nombre: carpeta.nombre,
       ciudad: carpeta.ciudad,
+      fechaUltimaRevision: carpeta.fechaUltimaRevision,
       numero: carpeta.numero,
       category: carpeta.category,
       fecha: carpeta.fecha,
-      fechaUltimaRevision: carpeta.fechaUltimaRevision,
       idProcesos: carpeta.idProcesos,
       notasCount: carpeta.notasCount,
       revisado: carpeta.revisado,

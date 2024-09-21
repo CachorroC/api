@@ -1,0 +1,16 @@
+{
+  "idRegActuacion": 1284074350,
+  "llaveProceso": "11001400306620170089200",
+  "consActuacion": 44,
+  "fechaActuacion": "2022-05-09T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "El proceso de la referencia se archiva nuvamente en la caja correpondiente 0013-2018 del archivo definitivo   ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2022-05-09T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 44,
+  "isUltimaAct": true,
+  "idProceso": 112625340
+}

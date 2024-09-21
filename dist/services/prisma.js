@@ -1,17 +1,14 @@
-'use strict';
+"use strict";
 Object.defineProperty(
-  exports, '__esModule', {
-    value: true 
-  } 
+  exports, "__esModule", { value: true }
 );
 exports.client = void 0;
-
 const client_1 = require(
-  '@prisma/client' 
+  "@prisma/client"
 );
 exports.client = new client_1.PrismaClient(
   {
-    errorFormat: 'pretty',
-  } 
+    errorFormat: "pretty",
+  }
 );
 //# sourceMappingURL=prisma.js.map

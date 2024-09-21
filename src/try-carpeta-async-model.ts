@@ -12,7 +12,8 @@ const carpetasMap = RawCarpetas.map((carpeta) => {
 });
 
 export async function* generateCarpetas() {
-  for await (const { carpeta, numero } of carpetasMap) {
+  for await (const { carpeta } of carpetasMap) {
+    await sleep(100);
     await carpeta.getProcesos();
     await carpeta.getActuaciones();
     yield carpeta;
