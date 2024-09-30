@@ -4,22 +4,39 @@
 //
 //   const consultaNumeroRadicacion = Convert.toConsultaNumeroRadicacion(json);
 
-import { intActuacion } from "./actuaciones";
 import { Juzgado } from "./carpetas";
 
-export interface Data {
+export type RequestProceso = {
   StatusCode: number;
-  Message: Message | string;
-  procesos?: intProceso[];
-  actuaciones?: intActuacion[];
-}
+  Message: Message;
+  ConsultaProcesos?: ConsultaProcesos;
+};
 
-export interface ConsultaNumeroRadicacion {
-  tipoConsulta: string;
+export type ConsultaProcesos = {
+  tipoConsulta: TipoConsulta;
   procesos: intProceso[];
   parametros: Parametros;
   paginacion: Paginacion;
-}
+};
+
+export type Paginacion = {
+  cantidadRegistros: number;
+  registrosPagina: number;
+  cantidadPaginas: number;
+  pagina: number;
+  paginas: null;
+};
+
+export type Parametros = {
+  numero: null | string;
+  nombre: null | string;
+  tipoPersona: null | string;
+  idSujeto: null;
+  ponente: null;
+  claseProceso: null;
+  codificacionDespacho: null;
+  soloActivos: boolean;
+};
 
 export type Message =
   | "OK"
@@ -27,83 +44,103 @@ export type Message =
   | "Object reference not set to an instance of an object."
   | "No se pueden ver actuaciones de un proceso privado";
 
-export interface Paginacion {
-  cantidadRegistros: number;
-  registrosPagina: number;
-  cantidadPaginas: number;
-  pagina: number;
-  paginas: null;
-}
-
-export interface Parametros {
-  numero: string;
-  nombre: null;
-  tipoPersona: null;
-  idSujeto: null;
-  ponente: null;
-  claseProceso: null;
-  codificacionDespacho: null;
-  soloActivos: boolean;
-}
-
-export interface intProceso {
+export type intProceso = {
+  idProceso: number;
+  idConexion: number;
+  llaveProceso: string;
+  fechaProceso: Date | null;
+  fechaUltimaActuacion: Date | null;
+  despacho: string;
+  departamento: string;
+  sujetosProcesales: string;
+  esPrivado: boolean;
   cantFilas: number;
-  departamento: Departamento;
+};
+
+export type DetalleProceso = {
+  [key: string]: string | null | boolean | Date | number | Juzgado | undefined;
+  claseProceso: ClaseProceso;
+  contenidoRadicacion: null | string;
   despacho: string;
   esPrivado: boolean;
-  fechaProceso: Date | string | null;
-  fechaUltimaActuacion: Date | string | null;
+  fechaConsulta: Date;
+  fechaProceso: Date;
   idConexion: number;
-  idProceso: number;
+  idRegProceso: number;
+  juzgado?: Juzgado;
   llaveProceso: string;
-  sujetosProcesales: string;
-}
+  ponente: string;
+  recurso: Recurso | null;
+  subclaseProceso: SubclaseProceso;
+  tipoProceso: TipoProceso;
+  ubicacion: null | string;
+  ultimaActualizacion: Date;
+};
 
-export interface outProceso extends intProceso {
+export type ClaseProceso =
+  | "EJECUTIVO"
+  | "Ejecutivo con Título Hipotecario"
+  | "Ejecutivo Singular"
+  | "Ejecutivo con Título Prendario"
+  | "Abreviado"
+  | "PROCESOS EJECUTIVOS HIPOTECARIOS O PRENDARIOS"
+  | "Despachos Comisorios"
+  | "Sin Tipo de Proceso"
+  | "Ejecutivo Mixto"
+  | "Solicitud entrega inmueble"
+  | "Sucesión"
+  | "SUCESIÓN"
+  | "EJECUTIVOS DE MENOR Y MINIMA CUANTIA"
+  | "DESPACHOS COMISORIOS"
+  | "EJECUTIVO HIPOTECARIO"
+  | "Tutelas"
+  | "EJECUTIVO SINGULAR"
+  | "Ordinario";
+
+export type Recurso = "Sin Tipo de Recurso";
+
+export type SubclaseProceso =
+  | "En general / Sin subclase"
+  | "Sin Subclase de Proceso"
+  | "Por sumas de dinero"
+  | "Restitución del inmueble arrendado"
+  | "TITULO VALOR"
+  | "En general"
+  | "SINGULARES";
+
+export type TipoProceso =
+  | "EJECUTIVO C.G.P"
+  | "De Ejecución"
+  | "Declarativo"
+  | "Codigo General del Proceso"
+  | "Especial"
+  | "EjecucionTramitePosterior"
+  | "Especiales"
+  | "De Liquidación"
+  | "LIQUIDACIÓN C.G.P"
+  | "Acción de Tutela"
+  | "Otros Asuntos";
+
+export type Departamento =
+  | "BOGOTÁ"
+  | "CUNDINAMARCA"
+  | "META"
+  | "HUILA"
+  | "ANTIOQUIA"
+  | "ATLÁNTICO";
+
+export type TipoConsulta = "NumeroRadicacion" | "NombreRazonSocial";
+
+export type outProceso = {
   fechaProceso: Date | null;
   fechaUltimaActuacion: Date | null;
   juzgado: Juzgado;
-}
-
-export type Departamento = "BOGOTÁ" | "CUNDINAMARCA" | "ANTIOQUIA" | "META";
-
-export type TipoConsulta = "NumeroRadicacion";
-
-// Converts JSON strings to/from your types
-export class Convert {
-  public static toConsultaNumeroRadicacion(
-    json: string,
-  ): ConsultaNumeroRadicacion {
-    return JSON.parse(json);
-  }
-
-  public static consultaNumeroRadicacionToJson(
-    value: ConsultaNumeroRadicacion,
-  ): string {
-    return JSON.stringify(value);
-  }
-
-  public static toPaginacion(json: string): Paginacion {
-    return JSON.parse(json);
-  }
-
-  public static paginacionToJson(value: Paginacion): string {
-    return JSON.stringify(value);
-  }
-
-  public static toParametros(json: string): Parametros {
-    return JSON.parse(json);
-  }
-
-  public static parametrosToJson(value: Parametros): string {
-    return JSON.stringify(value);
-  }
-
-  public static toProceso(json: string): intProceso {
-    return JSON.parse(json);
-  }
-
-  public static procesoToJson(value: intProceso): string {
-    return JSON.stringify(value);
-  }
-}
+  idProceso: number;
+  idConexion: number;
+  llaveProceso: string;
+  despacho: string;
+  departamento: string;
+  sujetosProcesales: string;
+  esPrivado: boolean;
+  cantFilas: number;
+};

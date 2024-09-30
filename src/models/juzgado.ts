@@ -58,12 +58,14 @@ export class JuzgadoClass implements Juzgado {
 
     this.tipo = tipo.toUpperCase().trim();
     this.ciudad = ciudad.toUpperCase().trim();
+
     const constructorString =
       `JUZGADO ${this.id} ${this.tipo} DE ${this.ciudad}`
         .toUpperCase()
         .normalize("NFD")
         .replaceAll(/\p{Diacritic}/gu, "")
         .trim();
+
     const [matchedDespacho] = Despachos.filter((despacho) => {
       const normalizedIteratedName = despacho.nombre
         .toLowerCase()
@@ -83,27 +85,31 @@ export class JuzgadoClass implements Juzgado {
 
       if (indexOfDespacho !== -1) {
         console.log(
-          `Juzgado Class indexOf ${includesDespacho}: ${normalizedIteratedName} === ${normalizedName}: ${
+          `Juzgado Class indexOf Despacho ${includesDespacho}: ${normalizedIteratedName} === ${normalizedName}: ${
             normalizedIteratedName === normalizedName
           }`,
         );
       }
+
       if (includesDespacho) {
         console.log(
-          `Juzgado Class includes${includesDespacho}: ${normalizedIteratedName} === ${normalizedName}: ${
+          `Juzgado Class includes Despacho${includesDespacho}: ${normalizedIteratedName} === ${normalizedName}: ${
             normalizedIteratedName === normalizedName
           }`,
         );
-        return true;
+        return normalizedIteratedName === normalizedName;
       }
 
       return normalizedIteratedName === normalizedName;
     });
+
     if (matchedDespacho) {
       this.url = `https://www.ramajudicial.gov.co${matchedDespacho.url}`;
+
       const matchedDespachoParts = matchedDespacho.nombre.match(
         /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im,
       );
+
       if (matchedDespachoParts) {
         const [longName, newId, newTipo, newCiudad] = matchedDespachoParts;
         this.id = newId;
@@ -140,6 +146,7 @@ export class JuzgadoClass implements Juzgado {
         ciudad,
       });
     }
+
     const asAnArray = Array.from(matchedRegexNumberAndLetters);
 
     const [fullArray, rawId, space, rawTipo] = asAnArray;
@@ -153,10 +160,34 @@ export class JuzgadoClass implements Juzgado {
       ciudad,
     });
   }
+
+  static fromLongName(despacho: string) {
+    const matchedDespachoParts = despacho.match(
+      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im,
+    );
+
+    if (!matchedDespachoParts) {
+      return new JuzgadoClass({
+        id: "",
+        tipo: despacho,
+        ciudad: "",
+      });
+    }
+
+    const [longName, id, tipo, ciudad] = matchedDespachoParts;
+    console.log(longName);
+
+    return new JuzgadoClass({
+      id,
+      tipo,
+      ciudad,
+    });
+  }
   static fromProceso(proceso: intProceso) {
     const matchedDespachoParts = proceso.despacho.match(
       /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im,
     );
+
     if (!matchedDespachoParts) {
       return new JuzgadoClass({
         id: "",
@@ -164,119 +195,14 @@ export class JuzgadoClass implements Juzgado {
         ciudad: proceso.departamento,
       });
     }
+
     const [longName, id, tipo, ciudad] = matchedDespachoParts;
     console.log(longName);
 
-    return new JuzgadoClass({ id, tipo, ciudad });
-  }
-}
-
-export class NewJuzgado implements Juzgado {
-  constructor(constructorString: string) {
-    //TODO -> arreglar el constructor para que construya directamente cada propiedad y busque en la lista solamente el url
-    const matchedValues = constructorString.match(
-      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíáü-]+)/im,
-    );
-    this.url = "";
-
-    if (!matchedValues) {
-      this.id = constructorString.trim().slice(7, 9).padStart(3, "000");
-      this.tipo = constructorString.trim().slice(9);
-    } else {
-      const [fullQuery, id, tipo, ciudad] = matchedValues;
-
-      this.id = id.padStart(3, "000");
-      this.tipo = tipo;
-      this.ciudad = ciudad;
-    }
-
-    const [matchedDespacho] = Despachos.filter((despacho) => {
-      const normalizedIteratedName = despacho.nombre
-        .toLowerCase()
-        .normalize("NFD")
-        .replaceAll(/\p{Diacritic}/gu, "")
-        .trim();
-
-      const normalizedName = constructorString
-        .toLowerCase()
-        .normalize("NFD")
-        .replaceAll(/\p{Diacritic}/gu, "")
-        .trim();
-
-      const indexOfDespacho = normalizedIteratedName.indexOf(normalizedName);
-
-      const includesDespacho = normalizedIteratedName.includes(normalizedName);
-
-      const includesBuilded = normalizedIteratedName.includes(
-        `${Number(this.id)} ${this.tipo}`
-          .toLowerCase()
-          .normalize("NFD")
-          .replaceAll(/\p{Diacritic}/gu, "")
-          .trim(),
-      );
-
-      if (indexOfDespacho !== -1) {
-        return true;
-      }
-
-      return normalizedIteratedName === normalizedName;
+    return new JuzgadoClass({
+      id,
+      tipo,
+      ciudad,
     });
-
-    if (matchedDespacho) {
-      this.url = `https://www.ramajudicial.gov.co${matchedDespacho.url}`;
-
-      const regexNameMatch = matchedDespacho.nombre.match(
-        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) de ([.A-Z\sñúóéíá-]+)/im,
-      );
-
-      if (regexNameMatch) {
-        const [longName, id, tipo, ciudad] = regexNameMatch;
-
-        this.id = id;
-        this.tipo = tipo;
-        this.ciudad = ciudad;
-      } else {
-        this.tipo = matchedDespacho.nombre;
-        this.ciudad = matchedDespacho.especialidad;
-      }
-    }
-  }
-  ciudad: string = "Bogota";
-  id: string;
-  tipo: string;
-  url: string;
-  static fromShortName({
-    ciudad,
-    juzgadoRaw,
-  }: {
-    ciudad: string;
-    juzgadoRaw: string;
-  }) {
-    let newTipo, newId;
-    newTipo = juzgadoRaw;
-
-    const matchedRegexNumberAndLetters = juzgadoRaw.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im,
-    );
-
-    if (matchedRegexNumberAndLetters) {
-      const asAnArray = Array.from(matchedRegexNumberAndLetters);
-
-      const [fullArray, rawId, space, rawTipo] = asAnArray;
-
-      newId = rawId.padStart(3, "000");
-      newTipo = extrapolateTipoToCorrectType(rawTipo);
-    }
-
-    return new NewJuzgado(
-      `JUZGADO ${newId} ${newTipo} DE ${ciudad
-        .toUpperCase()
-        .normalize("NFD")
-        .replaceAll(/\p{Diacritic}/gu, "")
-        .trim()}`,
-    );
-  }
-  static fromProceso(proceso: intProceso) {
-    return new NewJuzgado(proceso.despacho);
   }
 }

@@ -1,0 +1,17 @@
+{
+  "idRegActuacion": 1443553421,
+  "llaveProceso": "11001400304220230122300",
+  "consActuacion": 20,
+  "fechaActuacion": "2024-09-25T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE TRAMITA OFICIOS NOS. 2174-2175",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 20,
+  "isUltimaAct": true,
+  "idProceso": 162562561,
+  "createdAt": "2024-09-25T05:00:00.000Z"
+}

@@ -9,7 +9,9 @@ import { Data } from "./procesos";
 export type Message =
   | "OK"
   | "Object reference not set to an instance of an object."
-  | "No se pueden ver actuaciones de un proceso privado";
+  | "No se pueden ver actuaciones de un proceso privado"
+  | "Internal Server Error"
+  | "Forbidden";
 
 export interface ConsultaActuacion {
   actuaciones: intActuacion[];
@@ -24,8 +26,6 @@ export interface intActuacion {
   actuacion: string;
   anotacion: null | string;
   fechaInicial: Date | null;
-  carpetaNumero: number | null;
-  createdAt: Date;
   fechaFinal: Date | null;
   fechaRegistro: Date;
   codRegla: string;
@@ -37,6 +37,7 @@ export interface outActuacion extends intActuacion {
   createdAt: Date;
   idProceso: number;
   isUltimaAct: boolean;
+  carpetaNumero?: number;
 }
 
 export type CodRegla = "00                              ";
@@ -67,7 +68,7 @@ export class actuacionConvert {
     return JSON.stringify(value);
   }
 
-  public static toActuacione(json: string): intActuacion {
+  public static toActuacione(json: string): outActuacion {
     return JSON.parse(json);
   }
 

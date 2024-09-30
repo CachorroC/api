@@ -14,7 +14,7 @@ model Carpeta {
   idRegUltimaAct      Int?
   llaveProceso        String
   nombre              String
-  numero              Int        @id
+  numero              Int
   revisado            Boolean    @default(false)
   terminado           Boolean    @default(false)
   updatedAt           DateTime   @updatedAt
@@ -35,6 +35,8 @@ model Carpeta {
   notas               Nota[]
   procesos            Proceso[]
   tareas              Task[]
+
+  @@id(name: "mainId", [numero, id])
 }
 
 model Factura {
@@ -58,9 +60,10 @@ model Factura {
   valorTotal         Decimal         @db.Money
   concepto           String
   carpetaNumero      Int?
+  carpetaId          Int?
   CUFE               String?
   QRCode             String?
-  carpeta            Carpeta?        @relation(fields: [carpetaNumero], references: [numero])
+  carpeta            Carpeta?        @relation(fields: [carpetaNumero, carpetaId], references: [numero, id])
   emisorDeFactura    EmisorDeFactura @relation(fields: [nit], references: [nit])
 }
 
@@ -81,7 +84,8 @@ model EmisorDeFactura {
 }
 
 model Deudor {
-  carpetaNumero   Int     @unique
+  carpetaNumero   Int
+  carpetaId       Int
   cedula          String
   direccion       String?
   email           String?
@@ -92,21 +96,27 @@ model Deudor {
   segundoNombre   String?
   telCelular      String?
   telFijo         String?
-  carpeta         Carpeta @relation(fields: [carpetaNumero], references: [numero])
+  carpeta         Carpeta @relation(fields: [carpetaNumero, carpetaId], references: [numero, id])
+
+  @@unique([carpetaNumero, carpetaId])
 }
 
 model Codeudor {
-  carpetaNumero Int     @unique
+  carpetaNumero Int
+  carpetaId     Int
   cedula        String?
   direccion     String?
   id            Int     @id
   nombre        String?
   telefono      String?
-  carpeta       Carpeta @relation(fields: [carpetaNumero], references: [numero])
+  carpeta       Carpeta @relation(fields: [carpetaNumero, carpetaId], references: [numero, id])
+
+  @@unique([carpetaNumero, carpetaId])
 }
 
 model Demanda {
-  carpetaNumero           Int                @unique
+  carpetaNumero           Int
+  carpetaId               Int
   departamento            String?
   despacho                String?
   entregaGarantiasAbogado DateTime?          @db.Date
@@ -123,9 +133,11 @@ model Demanda {
   mandamientoPago         DateTime[]         @db.Date
   avaluo                  Decimal            @default(0) @db.Money
   liquidacion             Decimal            @default(0) @db.Money
-  carpeta                 Carpeta            @relation(fields: [carpetaNumero], references: [numero])
+  carpeta                 Carpeta            @relation(fields: [carpetaNumero, carpetaId], references: [numero, id])
   medidasCautelares       MedidasCautelares?
   notificacion            Notificacion?
+
+  @@unique([carpetaNumero, carpetaId])
 }
 
 model Notificacion {
@@ -160,6 +172,7 @@ model Notifier {
 
 model Nota {
   carpetaNumero Int?
+  carpetaId     Int?
   createdAt     DateTime  @default(now())
   id            String    @id
   pathname      String?
@@ -167,11 +180,12 @@ model Nota {
   dueDate       DateTime? @db.Date
   text          String
   content       String[]
-  carpeta       Carpeta?  @relation(fields: [carpetaNumero], references: [numero])
+  carpeta       Carpeta?  @relation(fields: [carpetaNumero, carpetaId], references: [numero, id])
 }
 
 model Task {
   carpetaNumero Int?
+  carpetaId     Int?
   done          Boolean  @default(false)
   createdAt     DateTime @default(now())
   dueDate       DateTime @db.Date
@@ -179,7 +193,7 @@ model Task {
   text          String
   updatedAt     DateTime @updatedAt
   content       String[]
-  carpeta       Carpeta? @relation(fields: [carpetaNumero], references: [numero])
+  carpeta       Carpeta? @relation(fields: [carpetaNumero, carpetaId], references: [numero, id])
 }
 
 model Actuacion {
@@ -216,23 +230,23 @@ model Juzgado {
 }
 
 model Proceso {
-  id                   Int         @id @default(autoincrement())
   cantFilas            Int
   carpetaNumero        Int
+  carpetaId            Int
   departamento         String
   despacho             String
   esPrivado            Boolean
   fechaProceso         DateTime?   @db.Date
   fechaUltimaActuacion DateTime?   @db.Date
   idConexion           Int
-  idProceso            Int         @unique
+  idProceso            Int         @id @unique
   juzgadoTipo          String
   llaveProceso         String
   sujetosProcesales    String
   juzgadoId            String
   juzgadoCiudad        String
   actuaciones          Actuacion[]
-  carpeta              Carpeta     @relation(fields: [carpetaNumero], references: [numero])
+  carpeta              Carpeta     @relation(fields: [carpetaNumero, carpetaId], references: [numero, id])
   juzgado              Juzgado     @relation(fields: [juzgadoId, juzgadoTipo, juzgadoCiudad], references: [id, tipo, ciudad])
 }
 

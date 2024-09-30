@@ -1,0 +1,17 @@
+{
+  "idRegActuacion": 2029698520,
+  "llaveProceso": "11001400300920230130200",
+  "consActuacion": 34,
+  "fechaActuacion": "2024-09-27T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "MEMORIAL APORTA NOTIFICACIÓN LEY 2213 DE 2022 POSITIVA / JFVE ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-28T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 34,
+  "isUltimaAct": true,
+  "idProceso": 138696760,
+  "createdAt": "2024-09-28T05:00:00.000Z"
+}

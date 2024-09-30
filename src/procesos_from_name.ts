@@ -16,6 +16,7 @@ export async function* generateCarpetas() {
 
 async function tryAsyncClassCarpetas() {
   const mapClassCarpetas: Map<number, ClassCarpeta> = new Map();
+
   for await (const carpeta of generateCarpetas()) {
     mapClassCarpetas.set(carpeta.numero, carpeta);
   }

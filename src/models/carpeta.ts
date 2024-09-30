@@ -78,12 +78,14 @@ export class ClassCarpeta implements IntCarpeta {
     let idBuilder;
 
     let notasCounter = 0;
-    if (FECHA_ULTIMA_REVISION) {
-      this.fechaUltimaRevision = new Date(FECHA_ULTIMA_REVISION);
-    }
-    if (FECHA_ULTIMA_ACTUACION) {
-      this.fecha = new Date(FECHA_ULTIMA_ACTUACION);
-    }
+
+    this.fechaUltimaRevision = FECHA_ULTIMA_REVISION
+      ? new Date(FECHA_ULTIMA_REVISION)
+      : null;
+
+    this.fecha = FECHA_ULTIMA_ACTUACION
+      ? new Date(FECHA_ULTIMA_ACTUACION)
+      : null;
 
     if (OBSERVACIONES) {
       const extras = OBSERVACIONES.split("//");
@@ -141,7 +143,6 @@ export class ClassCarpeta implements IntCarpeta {
 
     this.terminado = category === "Terminados" ? true : false;
     this.idRegUltimaAct = null;
-    this.fecha = null;
     this.ultimaActuacion = null;
     this.llaveProceso = EXPEDIENTE ? String(EXPEDIENTE) : "SinEspecificar";
     this.numero = Number(NUMERO);
@@ -154,7 +155,6 @@ export class ClassCarpeta implements IntCarpeta {
           ? JUZGADO_ORIGEN
           : "",
     });
-    this.fechaUltimaRevision = null;
     this.juzgadoTipo = this.juzgado.tipo;
   }
   //!CONSTRUCTOR -
@@ -216,6 +216,7 @@ export class ClassCarpeta implements IntCarpeta {
       `Procesos/Consulta/NombreRazonSocial?nombre=${this.nombre}&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`,
       "https://consultaprocesos.ramajudicial.gov.co:448/api/v2/",
     );
+
     try {
       const request = await fetch(fetchUrl);
 
@@ -290,11 +291,14 @@ export class ClassCarpeta implements IntCarpeta {
             fechaFinal: actuacion.fechaFinal
               ? new Date(actuacion.fechaFinal)
               : null,
+            createdAt: new Date(actuacion.fechaRegistro),
+            carpetaNumero: this.numero,
           };
         });
 
         outActuaciones.forEach((actuacion) => {
           this.actuaciones.push(actuacion);
+
           if (actuacion.isUltimaAct) {
             this.ultimaActuacion = actuacion;
             this.fecha = actuacion.fechaActuacion;
@@ -413,7 +417,10 @@ export class ClassCarpeta implements IntCarpeta {
 
     const inserter = await client.carpeta.update({
       where: {
-        numero: incomingCarpeta.numero,
+        mainId: {
+          numero: incomingCarpeta.numero,
+          id: incomingCarpeta.id,
+        },
       },
       data: {
         category: newCarpeta.category,
@@ -472,7 +479,10 @@ export class ClassCarpeta implements IntCarpeta {
 
     await client.carpeta.upsert({
       where: {
-        numero: incomingCarpeta.numero,
+        mainId: {
+          numero: incomingCarpeta.numero,
+          id: incomingCarpeta.id,
+        },
       },
       create: {
         ...newCarpeta,

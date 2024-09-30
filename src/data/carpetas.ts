@@ -11,6 +11,7 @@ const workbook = xlsx.readFile(
 );
 
 const { SheetNames, Sheets } = workbook;
+
 const outputSheets: unknown[] = [];
 
 const mapperSheets = SheetNames.flatMap((sheetname) => {
@@ -29,18 +30,9 @@ const mapperSheets = SheetNames.flatMap((sheetname) => {
 fs.writeFile("outputSheets.json", JSON.stringify(outputSheets));
 
 export const RawCarpetas = [...mapperSheets].sort((a, b) => {
-  const categoriaImplicitaA = a.category;
-  const categoriaImplicitaB = b.category;
   const x = a.NUMERO;
 
   const y = b.NUMERO;
-  if (categoriaImplicitaA === "Terminados") {
-    console.log("a es terminado");
-    return -1;
-  } else if (categoriaImplicitaB === "Terminados") {
-    console.log("b es terminado");
-    return 1;
-  }
 
   if (x < y) {
     return -1;

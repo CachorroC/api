@@ -6,7 +6,9 @@ export class ClassProcesos {
   idProcesosSet: Set<number> = new Set();
   procesos: outProceso[] = [];
   numero: number;
-  constructor(procesos: outProceso[], numero: number) {
+  carpetaId: number;
+  constructor(procesos: outProceso[], numero: number, carpetaId: number) {
+    this.carpetaId = carpetaId;
     this.numero = numero;
 
     procesos.forEach((proceso) => {
@@ -29,7 +31,10 @@ export class ClassProcesos {
 
       const updater = await client.carpeta.update({
         where: {
-          numero: this.numero,
+          mainId: {
+            numero: this.numero,
+            id: this.carpetaId,
+          },
         },
         data: {
           idProcesos: {
@@ -68,7 +73,7 @@ export class ClassProcesos {
       return null;
     }
   }
-  static async getProcesos(llaveProceso: string, numero = 0) {
+  static async getProcesos(llaveProceso: string, numero = 0, carpetaId = 0) {
     try {
       const request = await fetch(
         `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${llaveProceso}&SoloActivos=false&pagina=1`,
@@ -98,10 +103,10 @@ export class ClassProcesos {
           juzgado: JuzgadoClass.fromProceso(proceso),
         };
       });
-      return new ClassProcesos(mappedprocesos, numero);
+      return new ClassProcesos(mappedprocesos, numero, carpetaId);
     } catch (error) {
       console.log(error);
-      return new ClassProcesos([], numero);
+      return new ClassProcesos([], numero, carpetaId);
     }
   }
 }

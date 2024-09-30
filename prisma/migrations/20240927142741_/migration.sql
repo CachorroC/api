@@ -28,9 +28,10 @@ CREATE TABLE "Carpeta" (
     "fechaUltimaRevision" DATE,
     "ciudad" TEXT,
     "juzgadoTipo" TEXT,
+    "juzgadoCiudad" TEXT,
     "juzgadoId" TEXT,
 
-    CONSTRAINT "Carpeta_pkey" PRIMARY KEY ("numero")
+    CONSTRAINT "Carpeta_pkey" PRIMARY KEY ("numero","id")
 );
 
 -- CreateTable
@@ -55,6 +56,7 @@ CREATE TABLE "Factura" (
     "valorTotal" MONEY NOT NULL,
     "concepto" TEXT NOT NULL,
     "carpetaNumero" INTEGER,
+    "carpetaId" INTEGER,
     "CUFE" TEXT,
     "QRCode" TEXT,
 
@@ -82,6 +84,7 @@ CREATE TABLE "EmisorDeFactura" (
 -- CreateTable
 CREATE TABLE "Deudor" (
     "carpetaNumero" INTEGER NOT NULL,
+    "carpetaId" INTEGER NOT NULL,
     "cedula" TEXT NOT NULL,
     "direccion" TEXT,
     "email" TEXT,
@@ -99,6 +102,7 @@ CREATE TABLE "Deudor" (
 -- CreateTable
 CREATE TABLE "Codeudor" (
     "carpetaNumero" INTEGER NOT NULL,
+    "carpetaId" INTEGER NOT NULL,
     "cedula" TEXT,
     "direccion" TEXT,
     "id" INTEGER NOT NULL,
@@ -111,6 +115,7 @@ CREATE TABLE "Codeudor" (
 -- CreateTable
 CREATE TABLE "Demanda" (
     "carpetaNumero" INTEGER NOT NULL,
+    "carpetaId" INTEGER NOT NULL,
     "departamento" TEXT,
     "despacho" TEXT,
     "entregaGarantiasAbogado" DATE,
@@ -167,6 +172,7 @@ CREATE TABLE "Notifier" (
 -- CreateTable
 CREATE TABLE "Nota" (
     "carpetaNumero" INTEGER,
+    "carpetaId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "id" TEXT NOT NULL,
     "pathname" TEXT,
@@ -181,6 +187,7 @@ CREATE TABLE "Nota" (
 -- CreateTable
 CREATE TABLE "Task" (
     "carpetaNumero" INTEGER,
+    "carpetaId" INTEGER,
     "done" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "dueDate" DATE NOT NULL,
@@ -227,9 +234,9 @@ CREATE TABLE "Juzgado" (
 
 -- CreateTable
 CREATE TABLE "Proceso" (
-    "id" SERIAL NOT NULL,
     "cantFilas" INTEGER NOT NULL,
     "carpetaNumero" INTEGER NOT NULL,
+    "carpetaId" INTEGER NOT NULL,
     "departamento" TEXT NOT NULL,
     "despacho" TEXT NOT NULL,
     "esPrivado" BOOLEAN NOT NULL,
@@ -243,17 +250,17 @@ CREATE TABLE "Proceso" (
     "juzgadoId" TEXT NOT NULL,
     "juzgadoCiudad" TEXT NOT NULL,
 
-    CONSTRAINT "Proceso_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Proceso_pkey" PRIMARY KEY ("idProceso")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Deudor_carpetaNumero_key" ON "Deudor"("carpetaNumero");
+CREATE UNIQUE INDEX "Deudor_carpetaNumero_carpetaId_key" ON "Deudor"("carpetaNumero", "carpetaId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Codeudor_carpetaNumero_key" ON "Codeudor"("carpetaNumero");
+CREATE UNIQUE INDEX "Codeudor_carpetaNumero_carpetaId_key" ON "Codeudor"("carpetaNumero", "carpetaId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Demanda_carpetaNumero_key" ON "Demanda"("carpetaNumero");
+CREATE UNIQUE INDEX "Demanda_carpetaNumero_carpetaId_key" ON "Demanda"("carpetaNumero", "carpetaId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Notificacion_demandaId_key" ON "Notificacion"("demandaId");
@@ -268,22 +275,22 @@ CREATE UNIQUE INDEX "Proceso_idProceso_key" ON "Proceso"("idProceso");
 ALTER TABLE "Carpeta" ADD CONSTRAINT "Carpeta_idRegUltimaAct_fkey" FOREIGN KEY ("idRegUltimaAct") REFERENCES "Actuacion"("idRegActuacion") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Carpeta" ADD CONSTRAINT "Carpeta_juzgadoId_juzgadoTipo_ciudad_fkey" FOREIGN KEY ("juzgadoId", "juzgadoTipo", "ciudad") REFERENCES "Juzgado"("id", "tipo", "ciudad") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Carpeta" ADD CONSTRAINT "Carpeta_juzgadoId_juzgadoTipo_juzgadoCiudad_fkey" FOREIGN KEY ("juzgadoId", "juzgadoTipo", "juzgadoCiudad") REFERENCES "Juzgado"("id", "tipo", "ciudad") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Factura" ADD CONSTRAINT "Factura_carpetaNumero_fkey" FOREIGN KEY ("carpetaNumero") REFERENCES "Carpeta"("numero") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Factura" ADD CONSTRAINT "Factura_carpetaNumero_carpetaId_fkey" FOREIGN KEY ("carpetaNumero", "carpetaId") REFERENCES "Carpeta"("numero", "id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Factura" ADD CONSTRAINT "Factura_nit_fkey" FOREIGN KEY ("nit") REFERENCES "EmisorDeFactura"("nit") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Deudor" ADD CONSTRAINT "Deudor_carpetaNumero_fkey" FOREIGN KEY ("carpetaNumero") REFERENCES "Carpeta"("numero") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Deudor" ADD CONSTRAINT "Deudor_carpetaNumero_carpetaId_fkey" FOREIGN KEY ("carpetaNumero", "carpetaId") REFERENCES "Carpeta"("numero", "id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Codeudor" ADD CONSTRAINT "Codeudor_carpetaNumero_fkey" FOREIGN KEY ("carpetaNumero") REFERENCES "Carpeta"("numero") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Codeudor" ADD CONSTRAINT "Codeudor_carpetaNumero_carpetaId_fkey" FOREIGN KEY ("carpetaNumero", "carpetaId") REFERENCES "Carpeta"("numero", "id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Demanda" ADD CONSTRAINT "Demanda_carpetaNumero_fkey" FOREIGN KEY ("carpetaNumero") REFERENCES "Carpeta"("numero") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Demanda" ADD CONSTRAINT "Demanda_carpetaNumero_carpetaId_fkey" FOREIGN KEY ("carpetaNumero", "carpetaId") REFERENCES "Carpeta"("numero", "id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Notificacion" ADD CONSTRAINT "Notificacion_demandaId_fkey" FOREIGN KEY ("demandaId") REFERENCES "Demanda"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -295,16 +302,16 @@ ALTER TABLE "MedidasCautelares" ADD CONSTRAINT "MedidasCautelares_demandaId_fkey
 ALTER TABLE "Notifier" ADD CONSTRAINT "Notifier_notificacionId_fkey" FOREIGN KEY ("notificacionId") REFERENCES "Notificacion"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Nota" ADD CONSTRAINT "Nota_carpetaNumero_fkey" FOREIGN KEY ("carpetaNumero") REFERENCES "Carpeta"("numero") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Nota" ADD CONSTRAINT "Nota_carpetaNumero_carpetaId_fkey" FOREIGN KEY ("carpetaNumero", "carpetaId") REFERENCES "Carpeta"("numero", "id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Task" ADD CONSTRAINT "Task_carpetaNumero_fkey" FOREIGN KEY ("carpetaNumero") REFERENCES "Carpeta"("numero") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Task" ADD CONSTRAINT "Task_carpetaNumero_carpetaId_fkey" FOREIGN KEY ("carpetaNumero", "carpetaId") REFERENCES "Carpeta"("numero", "id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Actuacion" ADD CONSTRAINT "Actuacion_procesoId_fkey" FOREIGN KEY ("procesoId") REFERENCES "Proceso"("idProceso") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Proceso" ADD CONSTRAINT "Proceso_carpetaNumero_fkey" FOREIGN KEY ("carpetaNumero") REFERENCES "Carpeta"("numero") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Proceso" ADD CONSTRAINT "Proceso_carpetaNumero_carpetaId_fkey" FOREIGN KEY ("carpetaNumero", "carpetaId") REFERENCES "Carpeta"("numero", "id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Proceso" ADD CONSTRAINT "Proceso_juzgadoId_juzgadoTipo_juzgadoCiudad_fkey" FOREIGN KEY ("juzgadoId", "juzgadoTipo", "juzgadoCiudad") REFERENCES "Juzgado"("id", "tipo", "ciudad") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -2,7 +2,7 @@ import { client } from "../services/prisma";
 import { intActuacion } from "../types/actuaciones";
 import * as fs from "fs/promises";
 
-async function actuacionesGetAuto() {
+export async function actuacionesGetAuto() {
   const actuaciones = await client.actuacion.findMany();
 
   const newActs = actuaciones.map((actuacion) => {
@@ -29,5 +29,3 @@ export function actuacionHasAuto(incomingActuacion: intActuacion) {
     hasRadicado: hasRadicado,
   };
 }
-
-console.log(actuacionesGetAuto());

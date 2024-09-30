@@ -1,0 +1,759 @@
+0
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 81806941: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 81806941: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 81638681: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 81869251: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 86212261: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 113956611: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 81869501: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+Error: 86374941: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+no hay saved date o la saved date es menor que incoming date
+1000
+1000
+1000
+1000
+1000
+Error: 81621491: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 127748331: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+Error: 50777890: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 50762570: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 110120573: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+Error: 51499790: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 51002530: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 50817380: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 51500810: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 106185210: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 112730580: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 51465700: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 64793050: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 86157021: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 50989890: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 51149410: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 121826111: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 51029180: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+Error: 86958040: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 114399551: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 50764880: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 89137980: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 50763460: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+Error: 164732010: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 130908640: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 132102980: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 132018670: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 164444120: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+Error: 128037283: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+Error: 133187160: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 134065610: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 50780430: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 137231670: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+Error: 137788650: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 153072790: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+Error: 153307500: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 153951920: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 155218070: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+Error: 154958600: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 138297000: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+Error: 132946913: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 188750770: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+Error: 186687150: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 202527590: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+Error: 175165761: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 194668310: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+Error: 193808050: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+Error: 133903433: 403 Forbidden{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:185:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000

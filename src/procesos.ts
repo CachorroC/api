@@ -48,12 +48,13 @@ async function getLLaves() {
     return {
       llaveProceso: carpeta.llaveProceso.trim(),
       numero: carpeta.numero,
+      id: carpeta.id,
     };
   });
 }
 
 async function* AsyncGenerateActuaciones(
-  llaves: { llaveProceso: string; numero: number }[],
+  llaves: { llaveProceso: string; id: number; numero: number }[],
 ) {
   for (const carpeta of llaves) {
     const newProceso = await ClassProcesos.getProcesos(
@@ -65,7 +66,7 @@ async function* AsyncGenerateActuaciones(
 
     for (const proceso of fetcherIdProceso) {
       if (!proceso.esPrivado) {
-        await prismaUpdaterProcesos(proceso, carpeta.numero);
+        await prismaUpdaterProcesos(proceso, carpeta.numero, carpeta.id);
       }
     }
 
@@ -75,7 +76,11 @@ async function* AsyncGenerateActuaciones(
   }
 }
 
-async function prismaUpdaterProcesos(proceso: outProceso, numero: number) {
+async function prismaUpdaterProcesos(
+  proceso: outProceso,
+  numero: number,
+  id: number,
+) {
   const idProcesosSet = new Set<number>();
 
   try {
@@ -92,7 +97,10 @@ async function prismaUpdaterProcesos(proceso: outProceso, numero: number) {
 
     const updater = await prisma.carpeta.update({
       where: {
-        numero: numero,
+        mainId: {
+          numero: numero,
+          id: id,
+        },
       },
       data: {
         idProcesos: {
