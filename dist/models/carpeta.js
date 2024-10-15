@@ -7,7 +7,7 @@ const juzgado_1 = require("./juzgado");
 const nota_1 = require("./nota");
 const tipoProceso_1 = require("./tipoProceso");
 const prisma_1 = require("../services/prisma");
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 class ClassCarpeta {
     //PROPERTIES -todas las propiedades  que existen en la class carpeta
@@ -53,7 +53,7 @@ class ClassCarpeta {
             ? new Date(FECHA_ULTIMA_ACTUACION)
             : null;
         if (OBSERVACIONES) {
-            const extras = OBSERVACIONES.split("//");
+            const extras = OBSERVACIONES.split('//');
             extras.forEach((nota) => {
                 notasCounter++;
                 const newNoter = new nota_1.NotasBuilder(nota, Number(NUMERO), notasCounter);
@@ -62,7 +62,8 @@ class ClassCarpeta {
         }
         if (EXTRA) {
             console.log(`EXTRAS === ${EXTRA}`);
-            const extras = String(EXTRA).split("//");
+            const extras = String(EXTRA)
+                .split('//');
             extras.forEach((nota) => {
                 notasCounter++;
                 const newNoter = new nota_1.NotasBuilder(nota, Number(NUMERO), notasCounter);
@@ -80,7 +81,9 @@ class ClassCarpeta {
         this.id = idBuilder;
         this.ciudad = String(JUZGADO_CIUDAD);
         this.idRegUltimaAct = null;
-        this.numero = isNaN(Number(NUMERO)) ? this.id : Number(NUMERO);
+        this.numero = isNaN(Number(NUMERO))
+            ? this.id
+            : Number(NUMERO);
         this.category = category;
         this.deudor = new deudor_1.ClassDeudor(rawCarpeta);
         this.llaveProceso = String(EXPEDIENTE);
@@ -88,19 +91,31 @@ class ClassCarpeta {
         this.nombre = String(DEMANDADO_NOMBRE);
         this.revisado = false;
         this.codeudor = {
-            nombre: CODEUDOR_NOMBRE ? String(CODEUDOR_NOMBRE) : null,
-            cedula: CODEUDOR_IDENTIFICACION ? String(CODEUDOR_IDENTIFICACION) : null,
-            direccion: CODEUDOR_DIRECCION ? String(CODEUDOR_DIRECCION) : null,
-            telefono: CODEUDOR_TELEFONOS ? String(CODEUDOR_TELEFONOS) : null,
+            nombre: CODEUDOR_NOMBRE
+                ? String(CODEUDOR_NOMBRE)
+                : null,
+            cedula: CODEUDOR_IDENTIFICACION
+                ? String(CODEUDOR_IDENTIFICACION)
+                : null,
+            direccion: CODEUDOR_DIRECCION
+                ? String(CODEUDOR_DIRECCION)
+                : null,
+            telefono: CODEUDOR_TELEFONOS
+                ? String(CODEUDOR_TELEFONOS)
+                : null,
             id: this.numero,
         };
         this.tipoProceso = TIPO_PROCESO
             ? (0, tipoProceso_1.tipoProcesoBuilder)(TIPO_PROCESO)
-            : "SINGULAR";
-        this.terminado = category === "Terminados" ? true : false;
+            : 'SINGULAR';
+        this.terminado = category === 'Terminados'
+            ? true
+            : false;
         this.idRegUltimaAct = null;
         this.ultimaActuacion = null;
-        this.llaveProceso = EXPEDIENTE ? String(EXPEDIENTE) : "SinEspecificar";
+        this.llaveProceso = EXPEDIENTE
+            ? String(EXPEDIENTE)
+            : 'SinEspecificar';
         this.numero = Number(NUMERO);
         this.ciudad = String(JUZGADO_CIUDAD);
         this.juzgado = juzgado_1.JuzgadoClass.fromShortName({
@@ -109,7 +124,7 @@ class ClassCarpeta {
                 ? JUZGADO_EJECUCION
                 : JUZGADO_ORIGEN
                     ? JUZGADO_ORIGEN
-                    : "",
+                    : '',
         });
         this.juzgadoTipo = this.juzgado.tipo;
     }
@@ -152,7 +167,7 @@ class ClassCarpeta {
     //!ASYNC
     //ASYNC getProcesosByName
     async getProcesosByName() {
-        const fetchUrl = new URL(`Procesos/Consulta/NombreRazonSocial?nombre=${this.nombre}&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`, "https://consultaprocesos.ramajudicial.gov.co:448/api/v2/");
+        const fetchUrl = new URL(`Procesos/Consulta/NombreRazonSocial?nombre=${this.nombre}&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`, 'https://consultaprocesos.ramajudicial.gov.co:448/api/v2/');
         try {
             const request = await fetch(fetchUrl);
             if (!request.ok) {
@@ -322,10 +337,7 @@ class ClassCarpeta {
         const newCarpeta = ClassCarpeta.prismaCarpeta(incomingCarpeta);
         const inserter = await prisma_1.client.carpeta.update({
             where: {
-                mainId: {
-                    numero: incomingCarpeta.numero,
-                    id: incomingCarpeta.id,
-                },
+                numero: incomingCarpeta.numero,
             },
             data: {
                 category: newCarpeta.category,
@@ -372,10 +384,7 @@ class ClassCarpeta {
         const newCarpeta = ClassCarpeta.prismaCarpeta(incomingCarpeta);
         await prisma_1.client.carpeta.upsert({
             where: {
-                mainId: {
-                    numero: incomingCarpeta.numero,
-                    id: incomingCarpeta.id,
-                },
+                numero: incomingCarpeta.numero,
             },
             create: {
                 ...newCarpeta,

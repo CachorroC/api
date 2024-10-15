@@ -4,11 +4,11 @@ import { client } from './services/prisma';
 import { sleep } from './utils/awaiter';
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 console.log(
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED 
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED
 );
 
 async function fetcher(
-  idProceso: number 
+  idProceso: number
 ) {
   try {
     const request = await fetch(
@@ -28,43 +28,43 @@ async function fetcher(
     const json = ( await request.json() ) as ConsultaActuacion;
 
     const {
-      actuaciones 
+      actuaciones
     } = json;
 
     return actuaciones.map(
       (
-        actuacion 
+        actuacion
       ) => {
         return {
           ...actuacion,
           fechaActuacion: new Date(
-            actuacion.fechaActuacion 
+            actuacion.fechaActuacion
           ),
           fechaRegistro: new Date(
-            actuacion.fechaRegistro 
+            actuacion.fechaRegistro
           ),
           fechaInicial: actuacion.fechaInicial
             ? new Date(
-              actuacion.fechaInicial 
+              actuacion.fechaInicial
             )
             : null,
           fechaFinal: actuacion.fechaFinal
             ? new Date(
-              actuacion.fechaFinal 
+              actuacion.fechaFinal
             )
             : null,
           isUltimaAct: actuacion.cant === actuacion.consActuacion,
           idProceso  : idProceso,
           createdAt  : new Date(
-            actuacion.fechaRegistro 
+            actuacion.fechaRegistro
           ),
         };
-      } 
+      }
     );
   }
   catch ( error ) {
     console.log(
-      error 
+      error
     );
     return null;
   }
@@ -74,11 +74,11 @@ async function getIdProcesos() {
   const carpetas = await client.carpeta.findMany();
   return carpetas.flatMap(
     (
-      carpeta 
+      carpeta
     ) => {
       return carpeta.idProcesos.map(
         (
-          idProceso 
+          idProceso
         ) => {
           return {
             idProceso,
@@ -86,9 +86,9 @@ async function getIdProcesos() {
             llaveProceso : carpeta.llaveProceso,
             carpetaId    : carpeta.id,
           };
-        } 
+        }
       );
-    } 
+    }
   );
 }
 
@@ -101,14 +101,14 @@ async function* AsyncGenerateActuaciones(
   }[],
 ) {
   for ( const {
-    idProceso, carpetaNumero, carpetaId 
+    idProceso, carpetaNumero, carpetaId
   } of procesos ) {
     await sleep(
-      1000 
+      1000
     );
 
     const fetcherIdProceso = await fetcher(
-      idProceso 
+      idProceso
     );
 
     if ( fetcherIdProceso ) {
@@ -116,7 +116,7 @@ async function* AsyncGenerateActuaciones(
         {
           data          : fetcherIdProceso,
           skipDuplicates: true,
-        } 
+        }
       );
       await prismaUpdaterActuaciones(
         fetcherIdProceso,
@@ -130,12 +130,12 @@ async function* AsyncGenerateActuaciones(
 }
 
 async function updatePreviousLastActuacion(
-  idRegUltimaAct: number | null 
+  idRegUltimaAct: number | null
 ) {
   try {
     if ( idRegUltimaAct === null ) {
       throw new Error(
-        'la idRegAct de la ultima actuacion es null' 
+        'la idRegAct de la ultima actuacion es null'
       );
     }
 
@@ -147,12 +147,12 @@ async function updatePreviousLastActuacion(
         data: {
           isUltimaAct: false,
         },
-      } 
+      }
     );
   }
   catch ( error ) {
     console.log(
-      `error al cambiar la ultima actuacion: ${ error }` 
+      `error al cambiar la ultima actuacion: ${ error }`
     );
   }
 }
@@ -160,26 +160,23 @@ async function updatePreviousLastActuacion(
 async function updateCarpetaWithNewLastActuacion(
   {
     ultimaActuacion,
-    numero,
-    id,
+    numero
   }: {
     ultimaActuacion: outActuacion;
     numero         : number;
-    id             : number;
-  } 
+  }
 ) {
   try {
     await client.carpeta.update(
       {
         where: {
-          mainId: {
-            numero: numero,
-            id    : id,
-          },
+
+          numero: numero,
+
         },
         data: {
           fecha: new Date(
-            ultimaActuacion.fechaActuacion 
+            ultimaActuacion.fechaActuacion
           ),
           revisado       : false,
           ultimaActuacion: {
@@ -193,7 +190,7 @@ async function updateCarpetaWithNewLastActuacion(
             },
           },
         },
-      } 
+      }
     );
   }
   catch ( error ) {
@@ -212,10 +209,10 @@ async function prismaUpdaterActuaciones(
     ultimaActuacion
   ] = actuacionesComplete.filter(
     (
-      a 
+      a
     ) => {
       return a.consActuacion === a.cant;
-    } 
+    }
   );
 
   try {
@@ -232,11 +229,11 @@ async function prismaUpdaterActuaciones(
             },
           ],
         },
-      } 
+      }
     );
 
     const incomingDate = new Date(
-      ultimaActuacion.fechaActuacion 
+      ultimaActuacion.fechaActuacion
     )
       .getTime();
 
@@ -250,14 +247,13 @@ async function prismaUpdaterActuaciones(
       );
 
       await updatePreviousLastActuacion(
-        carpeta.idRegUltimaAct 
+        carpeta.idRegUltimaAct
       );
       await updateCarpetaWithNewLastActuacion(
         {
           ultimaActuacion,
-          numero: numeroCarpeta,
-          id    : numeroId,
-        } 
+          numero: numeroCarpeta
+        }
       );
 
       await fs.mkdir(
@@ -278,14 +274,14 @@ async function prismaUpdaterActuaciones(
           ultimaActuacion.idRegActuacion
         }.json`,
         JSON.stringify(
-          ultimaActuacion 
+          ultimaActuacion
         ),
       );
     }
   }
   catch ( error ) {
     console.log(
-      `prisma updater actuaciones error : ${ error }` 
+      `prisma updater actuaciones error : ${ error }`
     );
   }
 }
@@ -296,17 +292,17 @@ async function main() {
   const idProcesos = await getIdProcesos();
 
   for await ( const actuacionesJson of AsyncGenerateActuaciones(
-    idProcesos 
+    idProcesos
   ) ) {
     ActsMap.push(
-      actuacionesJson 
+      actuacionesJson
     );
   }
 
   fs.writeFile(
     'actuacionesOutput.json', JSON.stringify(
-      ActsMap, null, 2 
-    ) 
+      ActsMap, null, 2
+    )
   );
   return ActsMap;
 }

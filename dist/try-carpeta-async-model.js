@@ -28,7 +28,7 @@ const fs = __importStar(require("fs/promises"));
 const carpeta_1 = require("./models/carpeta");
 const carpetas_1 = require("./data/carpetas");
 const awaiter_1 = require("./utils/awaiter");
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 const carpetasMap = carpetas_1.RawCarpetas.map((carpeta) => {
     return {
@@ -51,7 +51,7 @@ async function tryAsyncClassCarpetas() {
         await carpeta_1.ClassCarpeta.insertCarpeta(carpeta);
     }
     const asAnArray = Array.from(mapClassCarpetas.values());
-    fs.writeFile("ClasscarpetasModelPostAwait.json", JSON.stringify(asAnArray));
+    fs.writeFile('ClasscarpetasModelPostAwait.json', JSON.stringify(asAnArray));
     return asAnArray;
 }
 tryAsyncClassCarpetas();

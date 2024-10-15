@@ -103,14 +103,11 @@ async function updatePreviousLastActuacion(idRegUltimaAct) {
         console.log(`error al cambiar la ultima actuacion: ${error}`);
     }
 }
-async function updateCarpetaWithNewLastActuacion({ ultimaActuacion, numero, id, }) {
+async function updateCarpetaWithNewLastActuacion({ ultimaActuacion, numero }) {
     try {
         await prisma_1.client.carpeta.update({
             where: {
-                mainId: {
-                    numero: numero,
-                    id: id,
-                },
+                numero: numero,
             },
             data: {
                 fecha: new Date(ultimaActuacion.fechaActuacion),
@@ -160,8 +157,7 @@ async function prismaUpdaterActuaciones(actuacionesComplete, numeroCarpeta, nume
             await updatePreviousLastActuacion(carpeta.idRegUltimaAct);
             await updateCarpetaWithNewLastActuacion({
                 ultimaActuacion,
-                numero: numeroCarpeta,
-                id: numeroId,
+                numero: numeroCarpeta
             });
             await fs.mkdir(`./src/date/${new Date()
                 .getFullYear()}/${new Date()

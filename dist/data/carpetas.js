@@ -29,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RawCarpetas = void 0;
 const xlsx_1 = __importDefault(require("xlsx"));
 const fs = __importStar(require("fs/promises"));
-const workbook = xlsx_1.default.readFile("/home/cachorro_cami/OneDrive/bases_de_datos/general.xlsx", {
+const workbook = xlsx_1.default.readFile('/home/cachorro_cami/OneDrive/bases_de_datos/general.xlsx', {
     cellDates: true,
 });
 const { SheetNames, Sheets } = workbook;
@@ -45,8 +45,10 @@ const mapperSheets = SheetNames.flatMap((sheetname) => {
         };
     });
 });
-fs.writeFile("outputSheets.json", JSON.stringify(outputSheets));
-exports.RawCarpetas = [...mapperSheets].sort((a, b) => {
+fs.writeFile('outputSheets.json', JSON.stringify(outputSheets));
+exports.RawCarpetas = [
+    ...mapperSheets
+].sort((a, b) => {
     const x = a.NUMERO;
     const y = b.NUMERO;
     if (x < y) {
@@ -57,5 +59,12 @@ exports.RawCarpetas = [...mapperSheets].sort((a, b) => {
     }
     return 0;
 });
-fs.writeFile("carpetas.json", JSON.stringify(exports.RawCarpetas, null, 2));
+fs.writeFile('carpetas.json', JSON.stringify(exports.RawCarpetas, null, 2));
+const outputData = [];
+exports.RawCarpetas.forEach((carpeta, index) => {
+    const newString = `${Number(carpeta.NUMERO) === index + 1} numero: ${carpeta.NUMERO}, index:${index + 1} `;
+    console.log(newString);
+    outputData.push(newString);
+});
+fs.writeFile('numbers.json', JSON.stringify(outputData, null, 2));
 //# sourceMappingURL=carpetas.js.map

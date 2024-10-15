@@ -1,20 +1,34 @@
-import * as fs from "fs/promises";
-import { ClassCarpeta } from "./models/carpeta";
-import { RawCarpetas } from "./data/carpetas";
-import { sleep } from "./utils/awaiter";
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
-console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
+import * as fs from 'fs/promises';
+import { ClassCarpeta } from './models/carpeta';
+import { RawCarpetas } from './data/carpetas';
+import { sleep } from './utils/awaiter';
+process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
+console.log(
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED 
+);
 
-const carpetasMap = RawCarpetas.map((carpeta) => {
-  return {
-    carpeta: new ClassCarpeta(carpeta),
-    numero: Number(carpeta.NUMERO),
-  };
-});
+const carpetasMap = RawCarpetas.map(
+  (
+    carpeta 
+  ) => {
+    return {
+      carpeta: new ClassCarpeta(
+        carpeta 
+      ),
+      numero: Number(
+        carpeta.NUMERO 
+      ),
+    };
+  } 
+);
 
 export async function* generateCarpetas() {
-  for await (const { carpeta } of carpetasMap) {
-    await sleep(1000);
+  for await ( const {
+    carpeta 
+  } of carpetasMap ) {
+    await sleep(
+      1000 
+    );
     await carpeta.getProcesos();
     await carpeta.getActuaciones();
     yield carpeta;
@@ -24,13 +38,23 @@ export async function* generateCarpetas() {
 async function tryAsyncClassCarpetas() {
   const mapClassCarpetas: Map<number, ClassCarpeta> = new Map();
 
-  for await (const carpeta of generateCarpetas()) {
-    mapClassCarpetas.set(carpeta.numero, carpeta);
-    await ClassCarpeta.insertCarpeta(carpeta);
+  for await ( const carpeta of generateCarpetas() ) {
+    mapClassCarpetas.set(
+      carpeta.numero, carpeta 
+    );
+    await ClassCarpeta.insertCarpeta(
+      carpeta 
+    );
   }
 
-  const asAnArray = Array.from(mapClassCarpetas.values());
-  fs.writeFile("ClasscarpetasModelPostAwait.json", JSON.stringify(asAnArray));
+  const asAnArray = Array.from(
+    mapClassCarpetas.values() 
+  );
+  fs.writeFile(
+    'ClasscarpetasModelPostAwait.json', JSON.stringify(
+      asAnArray 
+    ) 
+  );
   return asAnArray;
 }
 

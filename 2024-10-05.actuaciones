@@ -1,0 +1,538 @@
+0
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 81869251: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+Error: 86212261: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 113956611: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+Error: 81869501: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 86374941: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 81621491: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 127748331: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 81806941: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+Error: 81806941: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+1000
+1000
+Error: 86157021: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 114399551: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+Error: 81638681: 500 Internal Server Error{}
+    at fetcher (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:35:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AsyncGenerateActuaciones (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:77:34)
+    at async main (/home/cachorro_cami/Projects/com/rsasesorjuridico/api/dist/actuaciones.js:181:22)
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+prisma updater actuaciones error : TypeError: Cannot read properties of undefined (reading 'llaveProceso')
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
+1000
