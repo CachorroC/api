@@ -4,30 +4,30 @@ import { RawCarpetas } from './data/carpetas';
 import { sleep } from './utils/awaiter';
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 console.log(
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED 
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED
 );
 
 const carpetasMap = RawCarpetas.map(
   (
-    carpeta 
+    carpeta
   ) => {
     return {
       carpeta: new ClassCarpeta(
-        carpeta 
+        carpeta
       ),
       numero: Number(
-        carpeta.NUMERO 
+        carpeta.NUMERO
       ),
     };
-  } 
+  }
 );
 
 export async function* generateCarpetas() {
   for await ( const {
-    carpeta 
+    carpeta
   } of carpetasMap ) {
     await sleep(
-      1000 
+      1000
     );
     await carpeta.getProcesos();
     await carpeta.getActuaciones();
@@ -40,20 +40,20 @@ async function tryAsyncClassCarpetas() {
 
   for await ( const carpeta of generateCarpetas() ) {
     mapClassCarpetas.set(
-      carpeta.numero, carpeta 
+      carpeta.numero, carpeta
     );
     await ClassCarpeta.insertCarpeta(
-      carpeta 
+      carpeta
     );
   }
 
   const asAnArray = Array.from(
-    mapClassCarpetas.values() 
+    mapClassCarpetas.values()
   );
   fs.writeFile(
     'ClasscarpetasModelPostAwait.json', JSON.stringify(
-      asAnArray 
-    ) 
+      asAnArray
+    )
   );
   return asAnArray;
 }

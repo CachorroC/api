@@ -80,7 +80,7 @@ RawCarpetas.forEach(
     carpeta, index
   ) => {
     const newString = `${ Number(
-      carpeta.NUMERO 
+      carpeta.NUMERO
     ) === index + 1 } numero: ${ carpeta.NUMERO }, index:${ index+1 } `;
     console.log(
       newString

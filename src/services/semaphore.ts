@@ -1,89 +1,145 @@
 #!/usr/bin/env node
 
-import { RateLimit } from "async-sema";
+import { RateLimit } from 'async-sema';
 
 async function f() {
-  console.log("Naive requests per second rate limiting");
+  console.log(
+    'Naive requests per second rate limiting' 
+  );
 
   const n = 50;
 
-  const lim = RateLimit(5);
+  const lim = RateLimit(
+    5 
+  );
 
   const start = process.hrtime();
 
-  for (let i = 0; i < n; i++) {
+  for ( let i = 0; i < n; i++ ) {
     await lim();
-    process.stdout.write(".");
+    process.stdout.write(
+      '.' 
+    );
   }
 
-  process.stdout.write("\n");
+  process.stdout.write(
+    '\n' 
+  );
 
-  const hrt = process.hrtime(start);
+  const hrt = process.hrtime(
+    start 
+  );
 
-  const elapsed = (hrt[0] * 1000 + hrt[1] / 1e6) / 1000;
+  const elapsed = ( hrt[ 0 ] * 1000 + hrt[ 1 ] / 1e6 ) / 1000;
 
   const rps = n / elapsed;
-  console.log(rps.toFixed(3) + " req/s");
+  console.log(
+    rps.toFixed(
+      3 
+    ) + ' req/s' 
+  );
 }
 
 async function g() {
-  console.log("Custom rate limit time unit");
+  console.log(
+    'Custom rate limit time unit' 
+  );
 
   const n = 20;
 
-  const lim = RateLimit(5, {
-    timeUnit: 60 * 1000,
-  });
+  const lim = RateLimit(
+    5, {
+      timeUnit: 60 * 1000,
+    } 
+  );
 
   const start = process.hrtime();
 
-  for (let i = 0; i < n; i++) {
+  for ( let i = 0; i < n; i++ ) {
     await lim();
-    process.stdout.write(".");
+    process.stdout.write(
+      '.' 
+    );
   }
 
-  process.stdout.write("\n");
+  process.stdout.write(
+    '\n' 
+  );
 
-  const hrt = process.hrtime(start);
+  const hrt = process.hrtime(
+    start 
+  );
 
-  const elapsed = (hrt[0] * 1000 + hrt[1] / 1e6) / 1000;
+  const elapsed = ( hrt[ 0 ] * 1000 + hrt[ 1 ] / 1e6 ) / 1000;
 
-  const rps = n / (elapsed / 60);
-  console.log(rps.toFixed(3) + " req/min");
+  const rps = n / ( elapsed / 60 );
+  console.log(
+    rps.toFixed(
+      3 
+    ) + ' req/min' 
+  );
 }
 
 async function h() {
-  console.log("Uniform distribution of requests over time");
+  console.log(
+    'Uniform distribution of requests over time' 
+  );
 
   const n = 50;
 
-  const lim = RateLimit(5, {
-    uniformDistribution: true,
-  });
+  const lim = RateLimit(
+    5, {
+      uniformDistribution: true,
+    } 
+  );
 
   const start = process.hrtime();
 
-  for (let i = 0; i < n; i++) {
+  for ( let i = 0; i < n; i++ ) {
     await lim();
-    process.stdout.write(".");
+    process.stdout.write(
+      '.' 
+    );
   }
 
-  process.stdout.write("\n");
+  process.stdout.write(
+    '\n' 
+  );
 
-  const hrt = process.hrtime(start);
+  const hrt = process.hrtime(
+    start 
+  );
 
-  const elapsed = (hrt[0] * 1000 + hrt[1] / 1e6) / 1000;
+  const elapsed = ( hrt[ 0 ] * 1000 + hrt[ 1 ] / 1e6 ) / 1000;
 
   const rps = n / elapsed;
-  console.log(rps.toFixed(3) + " req/s");
+  console.log(
+    rps.toFixed(
+      3 
+    ) + ' req/s' 
+  );
 }
 
 f()
-  .then(g)
-  .then(h)
-  .catch((e) => {
-    return console.log(e);
-  })
-  .then(() => {
-    return console.log("READY");
-  });
+  .then(
+    g 
+  )
+  .then(
+    h 
+  )
+  .catch(
+    (
+      e 
+    ) => {
+      return console.log(
+        e 
+      );
+    } 
+  )
+  .then(
+    () => {
+      return console.log(
+        'READY' 
+      );
+    } 
+  );
