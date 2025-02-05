@@ -1,0 +1,954 @@
+Option Explicit
+
+Private oDlg        'Displayed dialog
+
+Private iRow
+Private iCol
+
+Private oController
+
+Private oSheet
+Private iSheet
+
+Private oRange
+
+Private iTableWidth
+Private iTableTop
+Private iTableLeft
+Private iTableHeight
+
+Private sLineNumber
+
+Dim aCellTypes()
+
+Sub Main
+  RunSimpleDialog()
+End Sub
+
+Sub DumpFormat()
+  Dim oSelection
+  Dim oCell
+  oSelection = ThisComponent.getCurrentSelection()
+  oCell = oSelection
+  Print oCell.NumberFormat
+
+End Sub
+
+Sub RunSimpleDialog()
+  Dim oDlgModel            'The dialog's model
+  Dim oModel               'Model for a control
+  Dim oAListenerExit        'A created listener object
+  Dim oActionListener2
+  Dim oActionListener3
+  Dim oActionListener4
+  Dim oActionListener5
+  Dim oAListenerDelete
+  Dim oAlistenerInsert
+  Dim oTextListener
+  Dim oButtonControl       'References a control
+  Dim oTextControl
+  Dim iTabIndex As Integer 'The current tab index while creating controls
+  Dim iDlgHeight As Long   'The dialog's height
+  Dim iDlgWidth As Long    'The dialog's width
+  Dim oCell
+  Dim oKeyListener, oControl
+  Dim oSelection, sText
+
+  iRow = 0
+  oSelection = ThisComponent.getCurrentSelection()
+  oController = ThisComponent.getCurrentController()
+
+  if oSelection.supportsService("com.sun.star.sheet.SheetCell") Then
+     oCell = oSelection
+  else
+     print "Select one cell only inside the table"
+     exit sub
+  end if
+     iSheet = oCell.getCellAddress().Sheet
+     iCol = oCell.getCellAddress().Column
+     iRow = oCell.getCellAddress().Row
+
+     oSheet = ThisComponent.Sheets(iSheet)
+
+     Dim i
+     Dim j
+     Dim lNumberFormat
+     Dim oNumberFormat
+
+     i = 1
+     oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iCol, iRow-i)
+     Do while oCell.getType() <> com.sun.star.table.CellContentType.EMPTY
+        i = i + 1
+        oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iCol, iRow-i)
+     Loop
+     iTableTop = iRow-i+1
+
+     i = 1
+     oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iCol-i, iTableTop)
+     Do while oCell.getType() <> com.sun.star.table.CellContentType.EMPTY
+        i = i + 1
+        oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iCol-i, iTableTop)
+     Loop
+     iTableLeft = iCol-i+1
+
+     i = 1
+     oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft, iTableTop)
+     Do while oCell.getType() <> com.sun.star.table.CellContentType.EMPTY
+        i = i + 1
+        oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft+i, iTableTop)
+     Loop
+     iTableWidth = i
+
+     ReDim aCellTypes(iTableWidth)
+     For i = 0 To iTableWidth-1
+        oCell =  oSheet.getCellByPosition(iTableLeft+i, iRow)
+        Select Case oCell.getType()
+        Case com.sun.star.table.CellContentType.VALUE
+           lNumberFormat = oCell.NumberFormat
+           oNumberFormat = ThisComponent.NumberFormats.getByKey(lNumberFormat)
+           if (oNumberFormat.Type and com.sun.star.util.NumberFormat.DATE) > 0 Then
+              aCellTypes(i) = "Date"
+           else
+              aCellTypes(i) = "Value"
+           end if
+        Case com.sun.star.table.CellContentType.TEXT
+           aCellTypes(i) = "Text"
+        Case Else
+           aCellTypes(i) = "Text"
+        End Select
+     Next
+
+    i = 1
+     oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft, iTableTop)
+     Do while oCell.getType() <> com.sun.star.table.CellContentType.EMPTY
+        i = i + 1
+        oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft, iTableTop+i)
+     Loop
+     iTableHeight = i
+
+     oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+     oController.select(oRange)
+
+
+  iDlgHeight = (iTableWidth*20) + 90
+  iDlgWidth  = 180
+
+  oDlgModel = CreateUnoService("com.sun.star.awt.UnoControlDialogModel")
+  oDlg = CreateUnoService("com.sun.star.awt.UnoControlDialog")
+  oDlg.setModel(oDlgModel)
+
+  setProperties(oDlgModel, Array("PositionX", 50, "PositionY", 50,_
+     "Width", iDlgWidth, "Height", iDlgHeight, "Title", "Richhill's Data Entry Wizard v0.2"))
+ ''CREATE TEXTBOXES
+  For j = 0 To iTableWidth - 1
+      'iTabIndex = j 'NEW LINE
+     'oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft+j, iTableTop+1)
+     oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft+j, iRow)
+     if aCellTypes(j) = "Date" Then
+         createInsertControl(oDlgModel, iTabIndex, "TextBOX" & j,_
+           "com.sun.star.awt.UnoControlDateFieldModel",_
+           Array("PositionX", 50, "PositionY", 20 + 20*j,_
+             "Height", 10, "Width", 40,_
+             "Border", 2, "Enabled", TRUE))
+     oDlg.getModel().getByName("TextBOX" & j).Date = CDateToIso(oCell.getValue())
+     else
+     createInsertControl(oDlgModel, iTabIndex, "TextBOX" & j,_
+        "com.sun.star.awt.UnoControlEditModel",_
+        Array("PositionX", 50, "PositionY", 20 + 20*j,_
+          "Height", 10, "Width", 40,_
+          "Border", 2, "Text", oCell.getString(), "Enabled", TRUE))
+     end if
+          'olf label
+
+
+         ' oDialogModel.insertByName("txtFile",oControlModel)
+          oKeyListener=CreateUnoListener("KeyEvent_","com.sun.star.awt.XKeyListener")
+          oControl=oDlg.getControl("TextBOX" & j)
+          oControl.addKeyListener(oKeyListener)
+         ' oDlg.setVisible(True)
+        ' oDlg.Execute()
+  Next
+  ''CREATE BUTTONS
+  createInsertControl(oDlgModel, iTabIndex, "NextButton",_
+     "com.sun.star.awt.UnoControlButtonModel",_
+     Array("PositionX", 120, "PositionY", 15,_
+       "Width", 40, "Height", 15, "Label", "Next",_
+       "PushButtonType", com.sun.star.awt.PushButtonType.STANDARD))
+
+  createInsertControl(oDlgModel, iTabIndex, "InsertButton",_
+     "com.sun.star.awt.UnoControlButtonModel",_
+     Array("PositionX", 120, "PositionY", 32,_
+       "Width", 40, "Height", 15, "Label", "Insert",_
+       "PushButtonType", com.sun.star.awt.PushButtonType.STANDARD))
+
+  createInsertControl(oDlgModel, iTabIndex, "ADDButton",_
+     "com.sun.star.awt.UnoControlButtonModel",_
+     Array("PositionX", 120, "PositionY", 49,_
+       "Width", 40, "Height", 15, "Label", "Undo",_
+       "PushButtonType", com.sun.star.awt.PushButtonType.STANDARD))
+
+  createInsertControl(oDlgModel, iTabIndex, "DeleteButton",_
+     "com.sun.star.awt.UnoControlButtonModel",_
+     Array("PositionX", 120, "PositionY", 66,_
+       "Width", 40, "Height", 15, "Label", "Delete",_
+       "PushButtonType", com.sun.star.awt.PushButtonType.STANDARD))
+
+  createInsertControl(oDlgModel, iTabIndex, "PreviousButton",_
+     "com.sun.star.awt.UnoControlButtonModel",_
+     Array("PositionX", 120, "PositionY", 90,_
+       "Width", 40, "Height", 15, "Label", "Previous",_
+       "PushButtonType", com.sun.star.awt.PushButtonType.STANDARD))
+
+  createInsertControl(oDlgModel, iTabIndex, "NewButton",_
+     "com.sun.star.awt.UnoControlButtonModel",_
+     Array("PositionX", 120, "PositionY", 107,_
+       "Width", 40, "Height", 15, "Label", "New",_
+       "PushButtonType", com.sun.star.awt.PushButtonType.STANDARD))
+
+  createInsertControl(oDlgModel, iTabIndex, "ExitButton",_
+     "com.sun.star.awt.UnoControlButtonModel",_
+     Array("PositionX", Clng(iDlgWidth / 2 - 25), "PositionY", iDlgHeight-20,_
+       "Width", 40, "Height", 15, "Label", "Exit",_
+       "PushButtonType", com.sun.star.awt.PushButtonType.STANDARD))
+
+  sLineNumber = "Record " & iRow-iTableTop & " of " & iTableHeight-1
+  createInsertControl(oDlgModel, iTabIndex, "LineNumber",_
+     "com.sun.star.awt.UnoControlFixedTextModel",_
+     Array("PositionX", 10, "PositionY", iDlgHeight-20,_
+       "Width", 40, "Height", 15, "Label", sLineNumber ))
+
+ REM For each column, we add a textbox and label
+
+
+   For j = 0 To iTableWidth - 1
+       oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft+j, iTableTop)
+      createInsertControl(oDlgModel, iTabIndex, "Label" & j,_
+         "com.sun.star.awt.UnoControlFixedTextModel",_
+         Array("PositionX", 10, "PositionY", 20 + 20*j,_
+          "Height", 10, "Width", 30,_
+           "Label", oCell.getString(), "Enabled", TRUE))
+   Next
+
+  REM Create the dialog and set the model
+  REM Set up Listener for Buttons
+  oAListenerExit = CreateUnoListener( "ExitButton_", "com.sun.star.awt.XActionListener" )
+  oButtonControl = oDlg.getControl("ExitButton")
+  oButtonControl.addActionListener( oAListenerExit )
+
+  oActionListener2 = CreateUnoListener( "ADDButton_", "com.sun.star.awt.XActionListener" )
+  oButtonControl = oDlg.getControl("ADDButton")
+  oButtonControl.addActionListener( oActionListener2 )
+
+  oAListenerInsert = CreateUnoListener( "InsertButton_", "com.sun.star.awt.XActionListener" )
+  oButtonControl = oDlg.getControl("InsertButton")
+  oButtonControl.addActionListener( oAListenerInsert )
+
+  oActionListener3 = CreateUnoListener( "NextButton_", "com.sun.star.awt.XActionListener" )
+  oButtonControl = oDlg.getControl("NextButton")
+  oButtonControl.addActionListener( oActionListener3 )
+
+  oActionListener4 = CreateUnoListener( "PreviousButton_", "com.sun.star.awt.XActionListener" )
+  oButtonControl = oDlg.getControl("PreviousButton")
+  oButtonControl.addActionListener( oActionListener4 )
+
+  oActionListener5 = CreateUnoListener( "NewButton_", "com.sun.star.awt.XActionListener" )
+  oButtonControl = oDlg.getControl("NewButton")
+  oButtonControl.addActionListener( oActionListener5 )
+
+  oAListenerDelete = CreateUnoListener( "DeleteButton_", "com.sun.star.awt.XActionListener" )
+  oButtonControl = oDlg.getControl("DeleteButton")
+  oButtonControl.addActionListener( oAListenerDelete )
+
+  REM Create a window and then tell the dialog to use the created window.
+  Dim oWindow
+  oWindow = CreateUnoService("com.sun.star.awt.Toolkit")
+  oDlg.createPeer(oWindow, null)
+  REM highlight all text in textBox1
+   wait 100
+   oDlg.AccessibleContext.getAccessibleChild( 0).setFocus()
+   oControl = oDlg.AccessibleContext.getAccessibleChild( 0)
+   stext = len(ocontrol.Text)
+   oControl.setSelection( MakeSelection( 0, sText  ) )
+  REM Finally, execute the dialog.
+  oDlg.setVisible(True)
+  oDlg.execute()
+End Sub
+
+Sub ExitButton_actionPerformed(oEvent)
+   oDlg.endExecute()
+End Sub
+
+Sub DeleteButton_actionPerformed(oEvent)
+Dim i
+Dim oModel
+Dim oCell
+Dim oFromAddress
+Dim oToAddress
+  REM find last row w newrow function
+  iTableHeight = newrow() - iTableTop
+      ' msgbox iTableHeight
+   REM end find last row function
+  For i = 0 To iTableWidth - 1
+     oCell =  oSheet.getCellByPosition(iTableLeft+i, iRow)
+     oCell.setString("")
+  Next
+
+    If iRow <> iTableTop + iTableHeight - 1 Then
+       oFromAddress = oSheet.getCellRangeByPosition(iTableLeft, iRow + 1, _
+              iTableLeft + iTableWidth-1, iTableTop+iTableHeight-1).getRangeAddress()
+
+       oToAddress = oSheet.getCellByPosition(iTableLeft, iRow).getCellAddress()
+       oSheet.moveRange(oToAddress, oFromAddress)
+    Else
+       iRow = iTableTop + iTableHeight - 2
+       oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+       oController.select(oRange)
+    End if
+
+    For i = 0 To iTableWidth - 1
+       oCell =  oSheet.getCellByPosition(iTableLeft+i, iRow)
+       oModel = oDlg.getModel().getByName("TextBOX" & i)
+       If aCellTypes(i) = "Date" Then
+          oModel.Date = CDateToIso(oCell.getValue())
+       Else
+          oModel.setPropertyValue("Text", oCell.getString())
+       End If
+    Next
+
+    iTableHeight = iTableHeight-1
+End Sub
+
+Sub NewButton_actionPerformed(oEvent)
+Dim i
+Dim oCell
+Dim oModel
+  'ADDButton
+'Dim oCell
+Dim s
+Dim j
+  For j = 0 To iTableWidth - 1
+     if aCellTypes(j) = "Date" Then
+        s = oDlg.getModel().getByName("TextBOX" & j).Date
+     else
+        s = oDlg.getModel().getByName("TextBOX" & j).Text
+     end if
+     oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft+j, iRow)
+    ' If aCellTypes(j) = "Date" Then
+    '    oCell.NumberFormat = 37
+     '   oCell.setValue(DateValue(CDateFromIso(s)))
+     'Else
+     'if aCellTypes(j) = "Value" Then
+     if isnumeric(s) then
+        oCell.setValue(s)
+     Else
+        oCell.setString(s)
+     End If
+  Next
+'End ADDbutton
+   iRow = newrow()
+   'iRow + 1
+   oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+   oController.select(oRange)
+    For i = 0 To iTableWidth - 1
+     oCell =  oSheet.getCellByPosition(iTableLeft+i, iRow)
+     oModel = oDlg.getModel().getByName("TextBOX" & i)
+     'If aCellTypes(i) = "Date" Then
+     '   oModel.Date = CDateToIso(oCell.getValue())
+     'Else
+
+       oModel.setPropertyValue("Text", oCell.getString())
+     'End If
+    ''if isnumeric(ocell.string) = True then
+     ' oModel.setpropertyvalue = ocell.getvalue()
+    'else
+    '   oModel.setpropertyvalue ("text", ocell.getstring())
+    'endif
+
+  Next
+
+   sLineNumber = "Record " & iRow-iTableTop & " of " & iTableHeight-1
+   oModel = oDlg.getModel().getByName("LineNumber")
+   oModel.setPropertyValue("Label", sLineNumber)
+
+   If iRow = iTableTop + 2 Then
+     oModel = oDlg.getModel().getByName("PreviousButton")
+     oModel.setPropertyValue("Enabled", TRUE)
+   End If
+
+ '  If iRow = iTableTop + iTableHeight - 1 Then
+  '   oModel = oDlg.getModel().getByName("NextButton")
+   '  oModel.setPropertyValue("Enabled", FALSE)
+   'End If
+   oDlg.AccessibleContext.getAccessibleChild( 0).setFocus()
+  ''FOLLOWING TURNS PREVIOUS ROW BUTTON BACK ON
+    oModel = oDlg.getModel().getByName("PreviousButton")
+  If iRow = iTableTop + 1 Then
+     oModel.setPropertyValue("Enabled", FALSE)
+  Else
+      oModel.setPropertyValue("Enabled", TRUE)
+  End If
+'FOLLOWING OLD NEW ROW ADDS NEW FOR DELETE, INSERT RECORD
+  ' oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+   'oController.select(oRange)
+   'print iRow
+     oCell =  oSheet.getCellByPosition(iTableLeft, iRow  )
+     oModel = oDlg.getModel().getByName("TextBOX0")
+     oModel.setPropertyValue("Text", "")
+     oCell.setString("")
+     iTableHeight = irow - iTableTop + 1
+     'print itableheight
+End Sub
+
+Sub NextButton_actionPerformed(oEvent)
+Dim i
+Dim oCell
+Dim oModel, oControl, sText
+  'ADDButton
+'Dim oCell
+Dim s
+Dim j
+  For j = 0 To iTableWidth - 1
+     if aCellTypes(j) = "Date" Then
+        s = oDlg.getModel().getByName("TextBOX" & j).Date
+     else
+        s = oDlg.getModel().getByName("TextBOX" & j).Text
+     end if
+     oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft+j, iRow)
+    ' If aCellTypes(j) = "Date" Then
+    '    oCell.NumberFormat = 37
+     '   oCell.setValue(DateValue(CDateFromIso(s)))
+     'Else
+     'if aCellTypes(j) = "Value" Then
+     if isnumeric(s) then
+        oCell.setValue(s)
+     Else
+        oCell.setString(s)
+     End If
+  Next
+'End ADDbutton
+   iRow = iRow + 1
+   oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+   oController.select(oRange)
+    For i = 0 To iTableWidth - 1
+     oCell =  oSheet.getCellByPosition(iTableLeft+i, iRow)
+     oModel = oDlg.getModel().getByName("TextBOX" & i)
+     'If aCellTypes(i) = "Date" Then
+     '   oModel.Date = CDateToIso(oCell.getValue())
+     'Else
+
+       oModel.setPropertyValue("Text", oCell.getString())
+     'End If
+    ''if isnumeric(ocell.string) = True then
+     ' oModel.setpropertyvalue = ocell.getvalue()
+    'else
+    '   oModel.setpropertyvalue ("text", ocell.getstring())
+    'endif
+
+  Next
+
+  oDlg.AccessibleContext.getAccessibleChild( 0).setFocus()
+   oControl = oDlg.AccessibleContext.getAccessibleChild( 0)
+   stext = len(ocontrol.Text)
+     ' msgbox stext
+   oControl.setSelection( MakeSelection( 0, sText  ) )
+
+   sLineNumber = "Record " & iRow-iTableTop & " of " & iTableHeight-1
+   oModel = oDlg.getModel().getByName("LineNumber")
+   oModel.setPropertyValue("Label", sLineNumber)
+
+   If iRow = iTableTop + 2 Then
+     oModel = oDlg.getModel().getByName("PreviousButton")
+     oModel.setPropertyValue("Enabled", TRUE)
+   End If
+
+ '  If iRow = iTableTop + iTableHeight - 1 Then
+  '   oModel = oDlg.getModel().getByName("NextButton")
+   '  oModel.setPropertyValue("Enabled", FALSE)
+   'End If
+
+End Sub
+
+Sub PreviousButton_actionPerformed(oEvent)
+Dim i
+Dim oCell
+Dim oModel
+Dim oControl, sText
+  'ADDButton
+'Dim oCell
+Dim s
+Dim j
+  For j = 0 To iTableWidth - 1
+     if aCellTypes(j) = "Date" Then
+        s = oDlg.getModel().getByName("TextBOX" & j).Date
+     else
+        s = oDlg.getModel().getByName("TextBOX" & j).Text
+     end if
+     oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft+j, iRow)
+    ' If aCellTypes(j) = "Date" Then
+    '    oCell.NumberFormat = 37
+     '   oCell.setValue(DateValue(CDateFromIso(s)))
+     'Else
+     'if aCellTypes(j) = "Value" Then
+     if isnumeric(s) then
+        oCell.setValue(s)
+     Else
+        oCell.setString(s)
+     End If
+  Next
+'End ADDbutton
+   iRow = iRow - 1
+
+   '''FOLLOWIN TURNS OFF PREV BUTTON IF IN TITLES ROW
+   ' oModel = oDlg.getModel().getByName("PreviousButton")
+    If iRow < iTableTop + 1 Then
+    ' oModel.setPropertyValue("Enabled", FALSE)
+     iRow = iRow + 1
+     'exit sub
+    Else
+      'oModel.setPropertyValue("Enabled", TRUE)
+    End if
+   ''''ABOVE TURNED OFF IF IN TITLES ROW
+
+   oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+   oController.select(oRange)
+    For i = 0 To iTableWidth - 1
+     oCell =  oSheet.getCellByPosition(iTableLeft+i, iRow)
+     oModel = oDlg.getModel().getByName("TextBOX" & i)
+     'If aCellTypes(i) = "Date" Then
+     '   oModel.Date = CDateToIso(oCell.getValue())
+     'Else
+
+       oModel.setPropertyValue("Text", oCell.getString())
+     'End If
+    ''if isnumeric(ocell.string) = True then
+     ' oModel.setpropertyvalue = ocell.getvalue()
+    'else
+    '   oModel.setpropertyvalue ("text", ocell.getstring())
+    'endif
+
+  Next
+   oDlg.AccessibleContext.getAccessibleChild( 0).setFocus()
+   oControl = oDlg.AccessibleContext.getAccessibleChild( 0)
+    stext = len(ocontrol.Text)
+          ' msgbox stext
+    oControl.setSelection( MakeSelection( 0, sText  ) )
+
+   sLineNumber = "Record " & iRow-iTableTop & " of " & iTableHeight-1
+   oModel = oDlg.getModel().getByName("LineNumber")
+   oModel.setPropertyValue("Label", sLineNumber)
+
+   If iRow = iTableTop + 1 Then
+     oModel = oDlg.getModel().getByName("PreviousButton")
+     oModel.setPropertyValue("Enabled", FALSE)
+   End If
+
+   If iRow = iTableTop + iTableHeight - 2 Then
+     oModel = oDlg.getModel().getByName("NextButton")
+     oModel.setPropertyValue("Enabled", TRUE)
+   End If
+End Sub
+
+Sub ADDButton_actionPerformed(oEvent)
+Dim i
+Dim oCell
+Dim oModel
+  'ADDButton NOW IS UNDO BUTTON!!!!
+'Dim oCell
+Dim s
+Dim j
+
+   iRow = iRow
+   oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+   oController.select(oRange)
+    For i = 0 To iTableWidth - 1
+     oCell =  oSheet.getCellByPosition(iTableLeft+i, iRow)
+     oModel = oDlg.getModel().getByName("TextBOX" & i)
+     'If aCellTypes(i) = "Date" Then
+     '   oModel.Date = CDateToIso(oCell.getValue())
+     'Else
+
+       oModel.setPropertyValue("Text", oCell.getString())
+     'End If
+    ''if isnumeric(ocell.string) = True then
+     ' oModel.setpropertyvalue = ocell.getvalue()
+    'else
+    '   oModel.setpropertyvalue ("text", ocell.getstring())
+    'endif
+
+  Next
+
+   sLineNumber = "Record " & iRow-iTableTop & " of " & iTableHeight-1
+   oModel = oDlg.getModel().getByName("LineNumber")
+   oModel.setPropertyValue("Label", sLineNumber)
+
+   If iRow = iTableTop + 2 Then
+     oModel = oDlg.getModel().getByName("PreviousButton")
+     oModel.setPropertyValue("Enabled", TRUE)
+   End If
+
+ '  If iRow = iTableTop + iTableHeight - 1 Then
+  '   oModel = oDlg.getModel().getByName("NextButton")
+   '  oModel.setPropertyValue("Enabled", FALSE)
+   'End If
+End Sub
+
+
+Sub createInsertControl(oDlgModel, index%, sName$, sType$, props())
+  Dim oModel
+
+  REM Create a control from the dialog.
+  oModel = oDlgModel.createInstance(sType$)
+
+  REM Set the properties on the control.
+  setProperties(oModel, props())
+
+  REM Set some more properities on the control.
+  REM These properites include the control name and the
+  REM TabIndex of the control. Note that the TabIndex should
+  REM increment as you add the controls.
+  setProperties(oModel, Array("Name", sName$, "TabIndex", index%))
+  oDlgModel.insertByName(sName$, oModel)
+
+  REM This changes the value because it is not passed by value.
+  index% = index% + 1
+End Sub
+
+Sub InsertButton_actionPerformed(oEvent)
+Dim oCell
+Dim oModel
+Dim i
+Dim oFromAddress
+Dim oToAddress
+
+   'iRow = iTableTop + iTableHeight
+    REM find last row w newrow function
+    iTableHeight = newrow() - iTableTop + 1
+       'msgbox iTableHeight
+   REM end find last row function
+    If iRow <> iTableTop + iTableHeight - 1 Then
+       oFromAddress = oSheet.getCellRangeByPosition(iTableLeft, iRow, _
+              iTableLeft + iTableWidth-1, iTableTop+iTableHeight-1).getRangeAddress()
+       oToAddress = oSheet.getCellByPosition(iTableLeft, iRow+1).getCellAddress()
+       oSheet.moveRange(oToAddress, oFromAddress)
+    Else
+       'iRow = iTableTop + iTableHeight - 2
+       oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+       oController.select(oRange)
+    End if
+
+   oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+   oController.select(oRange)
+     oCell =  oSheet.getCellByPosition(iTableLeft, iRow)
+     oModel = oDlg.getModel().getByName("TextBOX0")
+     oModel.setPropertyValue("Text", "[New]")
+     oCell.setString("[New]")
+
+    For i = 1 To iTableWidth - 1
+     oCell =  oSheet.getCellByPosition(iTableLeft+i, iRow)
+     oModel = oDlg.getModel().getByName("TextBOX" & i)
+     'If aCellTypes(i) = "Date" Then
+       ' oModel.Date = CDateToIso(Date())
+     'Else
+       oModel.setPropertyValue("Text", "")
+     'End If
+  Next
+
+   iTableHeight = iTableHeight + 1
+
+   sLineNumber = iRow-iTableTop & " of " & iTableHeight-1
+   oModel = oDlg.getModel().getByName("LineNumber")
+   oModel.setPropertyValue("Label", sLineNumber)
+
+    oModel = oDlg.getModel().getByName("PreviousButton")
+    If iRow = iTableTop + 1 Then
+     oModel.setPropertyValue("Enabled", FALSE)
+    Else
+      oModel.setPropertyValue("Enabled", TRUE)
+
+   End If
+
+   oModel = oDlg.getModel().getByName("NextButton")
+   If iRow = iTableTop + iTableHeight - 1 Then
+     oModel.setPropertyValue("Enabled", FALSE)
+   Else
+     oModel.setPropertyValue("Enabled", TRUE)
+   End If
+
+End Sub
+
+
+''NEW CODE BELOW
+Sub KeyEvent_KeyPressed(oKeyEvent)
+Dim ox as variant, zzvar as Long 'oSelection as variant
+Dim oController, oModel, actControl as integer, oTextfield, Form, Dlg, oControl, stext
+  ' Msgbox(oKeyEvent.KeyChar)
+   Select Case oKeyEvent.KeyCode
+      Case com.sun.star.awt.Key.ESCAPE
+         Msgbox("ESC")
+      'Case com.sun.star.awt.Key.A
+      '  Msgbox("A")
+      Case com.sun.star.awt.Key.RETURN ,  com.sun.star.awt.Key.DOWN
+         'Msgbox("RETURN")
+         actControl = oKeyEvent.Source.getModel().TabIndex
+         'msgbox actControl
+         IF actControl < ((iTableWidth ) -1 ) then
+           oDlg.AccessibleContext.getAccessibleChild(actControl + 1).setFocus()
+           ' DialogLibraries.LoadLibrary("Standard")
+           oControl = oDlg.AccessibleContext.getAccessibleChild(actControl + 1)
+           stext = len(ocontrol.Text)
+           'msgbox stext
+           oControl.setSelection( MakeSelection( 0, sText  ) )
+         else
+             oDlg.AccessibleContext.getAccessibleChild( itablewidth ).setFocus()
+         end if
+            'Form = Event.Source.Model
+             'oController = Form.GetByIndex(ACTCONTROL + 1)
+             'Dim sText As String
+ ' Dim oSelection As New com.sun.star.awt.Selection
+
+ ' REM get control
+ ' oTextField = oDlg.getControl("TextBox1")
+
+ ' REM set displayed text
+ ' sText = "Displayed Text"
+ ' oTextField.setText( sText )
+
+  REM set selection
+  'oSelection.Min = 0
+  'oSelection.Max = Len( sText )
+  'oTextField.setSelection( oSelection )
+      Case com.sun.star.awt.Key.UP
+         'msgbox "up"
+         actControl = oKeyEvent.Source.getModel().TabIndex
+
+         IF actControl <= ((iTableWidth ) -1 ) and actControl > 0 then
+           oDlg.AccessibleContext.getAccessibleChild(actControl - 1).setFocus()
+           ' DialogLibraries.LoadLibrary("Standard")
+           oControl = oDlg.AccessibleContext.getAccessibleChild(actControl -1)
+           stext = len(ocontrol.Text)
+           'msgbox stext
+           oControl.setSelection( MakeSelection( 0, sText  ) )
+         else
+             oDlg.AccessibleContext.getAccessibleChild( itablewidth ).setFocus()
+         end if
+
+             '''''oController.setSelection( MakeSelection( 0, 2 ) )
+           'GOODlINE? oControl=oDlg.getControl("TextBOX" & j)
+          '' msgbox itabletop &" " & itableleft'''get current control by index number
+           'oDialog
+         'oSelection = ThisComponent.getCurrentSelection()
+         'oController = ThisComponent.getCurrentController()
+         'zzvar = ocontroller.oModel.TabIndex
+         'msgbox( zzvar)
+        ' SetFocus.NextControl
+        ' ox = Dlg.Model.TabIndex (Long)
+         'msgbox( ox)
+      Case com.sun.star.awt.Key.F2
+         Msgbox("F2")
+   End Select
+End Sub
+
+Sub KeyEvent_KeyReleased(oKeyEvent)
+End Sub
+
+Sub KeyEvent_disposing(source)
+End Sub
+
+
+
+
+REM Generically set a properties based on an array of name/value pairs.
+Sub setProperties(oModel, props())
+  Dim i As Integer
+  For i=LBound(props()) To UBound(props()) Step 2
+    oModel.setPropertyValue(props(i), props(i+1))
+  Next
+end sub
+
+
+sub trash
+Dim oCell
+Dim s
+Dim j
+  For j = 0 To iTableWidth - 1
+     if aCellTypes(j) = "Date" Then
+        s = oDlg.getModel().getByName("TextBOX" & j).Date
+     else
+        s = oDlg.getModel().getByName("TextBOX" & j).Text
+     end if
+     oCell =  ThisComponent.Sheets(iSheet).getCellByPosition(iTableLeft+j, iRow)
+     If aCellTypes(j) = "Date" Then
+        oCell.NumberFormat = 37
+        oCell.setValue(DateValue(CDateFromIso(s)))
+     Elseif aCellTypes(j) = "Value" Then
+        oCell.setValue(s)
+     Else
+        oCell.setString(s)
+     End If
+  Next
+  'next is old newrow
+'Dim oCell
+Dim oModel
+Dim i
+
+   iRow = iTableTop + iTableHeight
+   oRange = oSheet.getCellRangeByPosition(iTableLeft, iRow, iTableLeft + iTableWidth - 1, iRow)
+   oController.select(oRange)
+     oCell =  oSheet.getCellByPosition(iTableLeft, iRow)
+     oModel = oDlg.getModel().getByName("TextBOX0")
+     oModel.setPropertyValue("Text", "[New]")
+     oCell.setString("[New]")
+
+    For i = 1 To iTableWidth - 1
+     oCell =  oSheet.getCellByPosition(iTableLeft+i, iRow)
+     oModel = oDlg.getModel().getByName("TextBOX" & i)
+     If aCellTypes(i) = "Date" Then
+        oModel.Date = CDateToIso(Date())
+     Else
+       oModel.setPropertyValue("Text", " ")
+     End If
+  Next
+
+   iTableHeight = iTableHeight + 1
+
+   sLineNumber = iRow-iTableTop & " of " & iTableHeight-1
+   oModel = oDlg.getModel().getByName("LineNumber")
+   oModel.setPropertyValue("Label", sLineNumber)
+
+    oModel = oDlg.getModel().getByName("PreviousButton")
+    If iRow = iTableTop + 1 Then
+     oModel.setPropertyValue("Enabled", FALSE)
+    Else
+      oModel.setPropertyValue("Enabled", TRUE)
+
+   End If
+
+   oModel = oDlg.getModel().getByName("NextButton")
+   If iRow = iTableTop + iTableHeight - 1 Then
+     oModel.setPropertyValue("Enabled", FALSE)
+   Else
+     oModel.setPropertyValue("Enabled", TRUE)
+   End If
+
+ End Sub
+
+
+
+Function newrow(OPTIONAL FRANGE as string )
+Dim iTitle as String, iDetails as String, ida as String
+Dim id as Integer, adb as string
+Dim oSql as String,oDocument
+Dim oResult as Object, oCellC, oCellD, nrow, nrow1, nrow2
+Dim oStatement as Object
+Dim db as object, ostring as string, uvar as string, vvar as string
+Dim oCell as object, nc as integer, startc as integer, endc as integer, startr as integer
+Dim nr as integer, lvar as string
+oDocument = ThisComponent
+oSheet = oDocument.getCurrentController().ActiveSheet
+oCellc = ThisComponent.CurrentSelection
+'If ISMISSING(FRange) THEN
+' oFromRange = oCellc
+'ELSE
+ ''oFromRange = oSheetA.getCellRangeByName(FRange)
+'  If inStr(FRange, ".") <> 0 then
+'   nLoc = InStr(FRange, ".")
+'   oSheet = ThisComponent.getSheets().getByName(Left(FRange, nLoc-1))
+'   oCellc = oSheet.getCellRangeByName(Mid(FRange, nLoc + 1))
+'  Else
+'   oSheet = oDocument.getCurrentController().ActiveSheet
+'   oCellc = oSheet.getCellRangeByName(FRange)
+'  End if
+ '  'oFromRange = oCell
+  '  'oSheetA.getCellRangeByName(oCell)
+'END IF
+
+
+'nr = ocellc.rangeaddress.startrow
+
+'nc =  ocellc.rangeaddress.startcolumn
+
+'oCell = osheet.getcellbyPosition( nc - 1, nr +1)
+nc = iTableLeft
+nr = iTableTop
+startc = nc
+startr = nr
+
+
+OCellc  = oSheet.getCellByPosition( nc, nr)
+OCelld  = oSheet.getCellByPosition( nc , nr + 1 )
+while oCellc.string <> ""
+  'CODE HERE
+  nc = nc + 1
+  OCellc  = oSheet.getCellByPosition( nc, nr)
+  OCelld  = oSheet.getCellByPosition( nc , nr + 1)
+wend
+endc = nc -1
+'print endc
+
+nc = startc
+nr = startr + 1
+
+Do
+
+  nc = startc
+  oCellc = osheet.getcellbyPosition( startc , nr )
+  OCelld  = oSheet.getCellByPosition( nc , nr  )
+  while oCelld.string = "" AND nc <= endc
+    'CODE HERE
+
+    '' oDocument.CurrentController.Select(oCelld)
+    ''print "hello"
+     nc = nc + 1
+     OCellc  = oSheet.getCellByPosition( nc, startr)
+     OCelld  = oSheet.getCellByPosition( nc , nr)
+  wend
+  'oDoc.CurrentController.Select(oCelld)
+
+  If nc <= endc then
+    ''NewCode here w loop to pick up Stinky me Field Names and Data
+    OCellc  = oSheet.getCellByPosition( nc, startr)
+    OCelld  = oSheet.getCellByPosition( nc , nr  )
+     '''Ocellc = oSheetc.getCellByPosition(0 , nr)
+     'while oCellc.string <> ""
+      while nc <= endc
+        nc = nc + 1
+        OCellc  = oSheet.getCellByPosition( nc, startr)
+        OCelld  = oSheet.getCellByPosition( nc , nr )
+      wend
+ 	nc = startc + 1
+  else
+    'print "exit " & nc
+    'print nr ' actually row num - 1, 1st row is 0
+    ''print "startrow" & startr  &" startcolumn" & startc & " endcolumn" & endc
+
+     nRow = startr + 1
+
+     nRow2 = nr '+ 1
+     'nColumn2 = oActiveRange.EndColumn
+    ' nColL = CalcColumnNumberToName( oSheet, startc )
+    ' nColL2 = CalcColumnNumberToName( oSheet, endc )
+    ' lvar = nColL & nRow & ":" & nColL2 & nRow2
+
+    goto linea
+  end if
+
+  nr = nr + 1
+  ' print "New row"
+Loop
+linea:
+'print nr
+newrow = nr
+end function
+
+
+
+
+Function MakeSelection( ByVal nMin As Long, ByVal nMax As Long ) As com.sun.star.awt.Selection
+Dim oSelection
+ oSelection = createUnoStruct( "com.sun.star.awt.Selection" )
+   With oSelection
+      .Min = nMin
+      .Max = nMax
+   End With
+   MakeSelection = oSelection
+End Function
