@@ -1,4 +1,4 @@
-import * as fs from 'fs/promises';
+
 import { ClassCarpeta } from './models/carpeta';
 import { RawCarpetas } from './data/carpetas';
 import { sleep } from './utils/awaiter';
@@ -22,10 +22,13 @@ const carpetasMap = RawCarpetas.map(
   }
 );
 
-export async function* generateCarpetas() {
+export async function* generateCarpetas () {
   for await ( const {
     carpeta
   } of carpetasMap ) {
+
+
+
     await sleep(
       1000
     );
@@ -35,13 +38,18 @@ export async function* generateCarpetas() {
   }
 }
 
-async function tryAsyncClassCarpetas() {
+async function tryAsyncClassCarpetas () {
   const mapClassCarpetas: Map<number, ClassCarpeta> = new Map();
 
   for await ( const carpeta of generateCarpetas() ) {
     mapClassCarpetas.set(
       carpeta.numero, carpeta
     );
+
+    if ( carpeta.category !== 'Bancolombia' ) {
+      continue;
+    }
+
     await ClassCarpeta.insertCarpeta(
       carpeta
     );
@@ -50,11 +58,7 @@ async function tryAsyncClassCarpetas() {
   const asAnArray = Array.from(
     mapClassCarpetas.values()
   );
-  fs.writeFile(
-    'ClasscarpetasModelPostAwait.json', JSON.stringify(
-      asAnArray
-    )
-  );
+
   return asAnArray;
 }
 

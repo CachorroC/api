@@ -10,7 +10,7 @@ import { outProceso } from './procesos';
 import { NotasBuilder } from '../models/nota';
 
 export type IntCarpeta = {
-  category           : Category;
+  category           : string;
   ciudad             : string | null;
   codeudor           : Codeudor;
   demanda            : IntDemanda;
@@ -231,4 +231,4 @@ export type TipoProceso =
   | 'HIPOTECARIO'
   | 'PRENDARIO'
   | 'SINGULAR'
-  | 'ACUMULADO';
+  | 'ACUMULADO' | 'VERBAL' ;
