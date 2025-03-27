@@ -26,7 +26,11 @@ export async function* generateCarpetas () {
   for await ( const {
     carpeta
   } of carpetasMap ) {
-
+    if (
+      carpeta.category === 'Terminados'
+    ) {
+      yield carpeta;
+    }
 
 
     await sleep(
@@ -46,7 +50,7 @@ async function tryAsyncClassCarpetas () {
       carpeta.numero, carpeta
     );
 
-    if ( carpeta.category !== 'Bancolombia' ) {
+    if ( carpeta.category === 'Terminados' ) {
       continue;
     }
 
