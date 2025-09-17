@@ -4,7 +4,7 @@ var __createBinding = ( this && this.__createBinding ) || ( Object.create
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
-        k2 = k; 
+        k2 = k;
       }
 
       var desc = Object.getOwnPropertyDescriptor(
@@ -30,7 +30,7 @@ var __createBinding = ( this && this.__createBinding ) || ( Object.create
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
-        k2 = k; 
+        k2 = k;
       }
 
       o[ k2 ] = m[ k ];
@@ -51,34 +51,49 @@ var __setModuleDefault = ( this && this.__setModuleDefault ) || ( Object.create
   ) {
     o[ 'default' ] = v;
   } );
+var __importStar = ( this && this.__importStar ) || ( function () {
+  var ownKeys = function( o ) {
+    ownKeys = Object.getOwnPropertyNames || function ( o ) {
+      var ar = [];
 
-var __importStar = ( this && this.__importStar ) || function (
-  mod 
-) {
-  if ( mod && mod.__esModule ) {
-    return mod; 
-  }
+      for ( var k in o ) {
+        if ( Object.prototype.hasOwnProperty.call(
+          o, k 
+        ) ) {
+          ar[ ar.length ] = k;
+        }
+      }
 
-  var result = {};
+      return ar;
+    };
 
-  if ( mod != null ) {
-    for ( var k in mod ) {
-      if ( k !== 'default' && Object.prototype.hasOwnProperty.call(
-        mod, k 
-      ) ) {
-        __createBinding(
-          result, mod, k 
-        ); 
-      } 
-    } 
-  }
+    return ownKeys( o );
+  };
 
-  __setModuleDefault(
-    result, mod 
-  );
-  return result;
-};
+  return function ( mod ) {
+    if ( mod && mod.__esModule ) {
+      return mod;
+    }
 
+    var result = {};
+
+    if ( mod != null ) {
+      for ( var k = ownKeys( mod ), i = 0; i < k.length; i++ ) {
+        if ( k[ i ] !== 'default' ) {
+          __createBinding(
+            result, mod, k[ i ] 
+          );
+        }
+      }
+    }
+
+    __setModuleDefault(
+      result, mod 
+    );
+
+    return result;
+  };
+} )();
 Object.defineProperty(
   exports, '__esModule', {
     value: true 
@@ -87,50 +102,33 @@ Object.defineProperty(
 exports.actuacionesGetAuto = actuacionesGetAuto;
 exports.actuacionHasAuto = actuacionHasAuto;
 
-const prisma_1 = require(
-  '../services/prisma' 
-);
+const prisma_1 = require( '../services/prisma' );
 
-const fs = __importStar(
-  require(
-    'fs/promises' 
-  ) 
-);
+const fs = __importStar( require( 'fs/promises' ) );
 
 async function actuacionesGetAuto() {
   const actuaciones = await prisma_1.client.actuacion.findMany();
 
-  const newActs = actuaciones.map(
-    (
-      actuacion 
-    ) => {
-      return actuacionHasAuto(
-        actuacion 
-      );
-    } 
-  );
+  const newActs = actuaciones.map( ( actuacion ) => {
+    return actuacionHasAuto( actuacion );
+  } );
+
   fs.writeFile(
-    'actuacionesNewMap.json', JSON.stringify(
-      newActs 
-    ) 
+    'actuacionesNewMap.json', JSON.stringify( newActs ) 
   );
+
   return newActs;
 }
 
-function actuacionHasAuto(
-  incomingActuacion 
-) {
+function actuacionHasAuto( incomingActuacion ) {
   const {
     actuacion 
   } = incomingActuacion;
 
-  const hasAuto = /([Aa][Uu][Tt][Oo]+)\s([A-Z a-zÓÍÚÉÀóíúáé,.()\w/]+)/.test(
-    actuacion 
-  );
+  const hasAuto = /([Aa][Uu][Tt][Oo]+)\s([A-Z a-zÓÍÚÉÀóíúáé,.()\w/]+)/.test( actuacion );
 
-  const hasRadicado = /([Rr][Aa][Dd][Ii][Cc][Aa]+)([A-Z a-zÓÍÚÉÀóíúáé,.()\w/]+)/.test(
-    actuacion 
-  );
+  const hasRadicado = /([Rr][Aa][Dd][Ii][Cc][Aa]+)([A-Z a-zÓÍÚÉÀóíúáé,.()\w/]+)/.test( actuacion );
+
   return {
     ...incomingActuacion,
     hasAuto    : hasAuto,

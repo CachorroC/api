@@ -4,7 +4,7 @@ var __createBinding = ( this && this.__createBinding ) || ( Object.create
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
-        k2 = k; 
+        k2 = k;
       }
 
       var desc = Object.getOwnPropertyDescriptor(
@@ -30,7 +30,7 @@ var __createBinding = ( this && this.__createBinding ) || ( Object.create
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
-        k2 = k; 
+        k2 = k;
       }
 
       o[ k2 ] = m[ k ];
@@ -51,34 +51,49 @@ var __setModuleDefault = ( this && this.__setModuleDefault ) || ( Object.create
   ) {
     o[ 'default' ] = v;
   } );
+var __importStar = ( this && this.__importStar ) || ( function () {
+  var ownKeys = function( o ) {
+    ownKeys = Object.getOwnPropertyNames || function ( o ) {
+      var ar = [];
 
-var __importStar = ( this && this.__importStar ) || function (
-  mod 
-) {
-  if ( mod && mod.__esModule ) {
-    return mod; 
-  }
+      for ( var k in o ) {
+        if ( Object.prototype.hasOwnProperty.call(
+          o, k 
+        ) ) {
+          ar[ ar.length ] = k;
+        }
+      }
 
-  var result = {};
+      return ar;
+    };
 
-  if ( mod != null ) {
-    for ( var k in mod ) {
-      if ( k !== 'default' && Object.prototype.hasOwnProperty.call(
-        mod, k 
-      ) ) {
-        __createBinding(
-          result, mod, k 
-        ); 
-      } 
-    } 
-  }
+    return ownKeys( o );
+  };
 
-  __setModuleDefault(
-    result, mod 
-  );
-  return result;
-};
+  return function ( mod ) {
+    if ( mod && mod.__esModule ) {
+      return mod;
+    }
 
+    var result = {};
+
+    if ( mod != null ) {
+      for ( var k = ownKeys( mod ), i = 0; i < k.length; i++ ) {
+        if ( k[ i ] !== 'default' ) {
+          __createBinding(
+            result, mod, k[ i ] 
+          );
+        }
+      }
+    }
+
+    __setModuleDefault(
+      result, mod 
+    );
+
+    return result;
+  };
+} )();
 Object.defineProperty(
   exports, '__esModule', {
     value: true 
@@ -86,50 +101,33 @@ Object.defineProperty(
 );
 exports.extrapolateIdCiudadyTipo = extrapolateIdCiudadyTipo;
 
-const fs = __importStar(
-  require(
-    'fs/promises' 
-  ) 
-);
+const fs = __importStar( require( 'fs/promises' ) );
 
-const juzgado_1 = require(
-  '../models/juzgado' 
-);
+const juzgado_1 = require( '../models/juzgado' );
 
-const carpetas_1 = require(
-  '../data/carpetas' 
-);
+const carpetas_1 = require( '../data/carpetas' );
 
 const outgoingJuzgados = [];
 
 for ( const carpeta of carpetas_1.RawCarpetas ) {
   const juzgadoByCarpeta = extrapolateIdCiudadyTipo(
-    String(
-      carpeta.JUZGADO_CIUDAD 
-    ), carpeta.JUZGADO_EJECUCION, carpeta.JUZGADO_ORIGEN 
+    String( carpeta.JUZGADO_CIUDAD ), carpeta.JUZGADO_EJECUCION, carpeta.JUZGADO_ORIGEN 
   );
 
-  const juzgadoByCareta = juzgado_1.JuzgadoClass.fromShortName(
-    {
-      ciudad: String(
-        carpeta.JUZGADO_CIUDAD 
-      ),
-      juzgadoRaw: carpeta.JUZGADO_EJECUCION
-        ? carpeta.JUZGADO_EJECUCION
-        : carpeta.JUZGADO_ORIGEN
-          ? carpeta.JUZGADO_ORIGEN
-          : '1 CM',
-    } 
-  );
-  console.log(
-    juzgadoByCarpeta 
-  );
-  outgoingJuzgados.push(
-    {
-      ...juzgadoByCarpeta,
-      ...juzgadoByCareta,
-    } 
-  );
+  const juzgadoByCareta = juzgado_1.JuzgadoClass.fromShortName( {
+    ciudad    : String( carpeta.JUZGADO_CIUDAD ),
+    juzgadoRaw: carpeta.JUZGADO_EJECUCION
+      ? carpeta.JUZGADO_EJECUCION
+      : carpeta.JUZGADO_ORIGEN
+        ? carpeta.JUZGADO_ORIGEN
+        : '1 CM',
+  } );
+
+  console.log( juzgadoByCarpeta );
+  outgoingJuzgados.push( {
+    ...juzgadoByCarpeta,
+    ...juzgadoByCareta,
+  } );
 }
 
 fs.writeFile(
@@ -144,43 +142,30 @@ function extrapolateIdCiudadyTipo(
   let matchedRegexNumberAndLetters;
 
   if ( ejecucion ) {
-    matchedRegexNumberAndLetters = ejecucion.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im 
-    );
-  }
-  else if ( origen ) {
-    matchedRegexNumberAndLetters = origen.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im 
-    );
+    matchedRegexNumberAndLetters = ejecucion.match( /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im );
+  } else if ( origen ) {
+    matchedRegexNumberAndLetters = origen.match( /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im );
   }
 
   if ( matchedRegexNumberAndLetters ) {
-    const asAnArray = Array.from(
-      matchedRegexNumberAndLetters 
-    );
+    const asAnArray = Array.from( matchedRegexNumberAndLetters );
 
     if ( asAnArray.length === 0 ) {
       return {
-        fullArray: JSON.stringify(
-          matchedRegexNumberAndLetters 
-        ),
-        id    : '',
-        tipo  : '',
-        ciudad: ciudad,
-        value : ejecucion
+        fullArray: JSON.stringify( matchedRegexNumberAndLetters ),
+        id       : '',
+        tipo     : '',
+        ciudad   : ciudad,
+        value    : ejecucion
           ? ejecucion
           : origen
             ? origen
             : '',
-        tipoRaw: String(
-          matchedRegexNumberAndLetters 
-        ),
+        tipoRaw: String( matchedRegexNumberAndLetters ),
       };
-    }
-    else if ( asAnArray.length >= 2 ) {
-      const temporaryTipo = ( 0, juzgado_1.extrapolateTipoToCorrectType )(
-        asAnArray[ 3 ] 
-      );
+    } else if ( asAnArray.length >= 2 ) {
+      const temporaryTipo = ( 0, juzgado_1.extrapolateTipoToCorrectType )( asAnArray[ 3 ] );
+
       return {
         id       : asAnArray[ 1 ],
         tipo     : temporaryTipo,
@@ -193,9 +178,8 @@ function extrapolateIdCiudadyTipo(
       };
     }
 
-    const temporaryTipo = ( 0, juzgado_1.extrapolateTipoToCorrectType )(
-      asAnArray[ 3 ] 
-    );
+    const temporaryTipo = ( 0, juzgado_1.extrapolateTipoToCorrectType )( asAnArray[ 3 ] );
+
     return {
       id       : asAnArray[ 1 ],
       tipo     : temporaryTipo,

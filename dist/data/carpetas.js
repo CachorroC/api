@@ -4,7 +4,7 @@ var __createBinding = ( this && this.__createBinding ) || ( Object.create
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
-        k2 = k; 
+        k2 = k;
       }
 
       var desc = Object.getOwnPropertyDescriptor(
@@ -30,7 +30,7 @@ var __createBinding = ( this && this.__createBinding ) || ( Object.create
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
-        k2 = k; 
+        k2 = k;
       }
 
       o[ k2 ] = m[ k ];
@@ -51,37 +51,51 @@ var __setModuleDefault = ( this && this.__setModuleDefault ) || ( Object.create
   ) {
     o[ 'default' ] = v;
   } );
+var __importStar = ( this && this.__importStar ) || ( function () {
+  var ownKeys = function( o ) {
+    ownKeys = Object.getOwnPropertyNames || function ( o ) {
+      var ar = [];
 
-var __importStar = ( this && this.__importStar ) || function (
-  mod 
-) {
-  if ( mod && mod.__esModule ) {
-    return mod; 
-  }
+      for ( var k in o ) {
+        if ( Object.prototype.hasOwnProperty.call(
+          o, k 
+        ) ) {
+          ar[ ar.length ] = k;
+        }
+      }
 
-  var result = {};
+      return ar;
+    };
 
-  if ( mod != null ) {
-    for ( var k in mod ) {
-      if ( k !== 'default' && Object.prototype.hasOwnProperty.call(
-        mod, k 
-      ) ) {
-        __createBinding(
-          result, mod, k 
-        ); 
-      } 
-    } 
-  }
+    return ownKeys( o );
+  };
 
-  __setModuleDefault(
-    result, mod 
-  );
-  return result;
-};
+  return function ( mod ) {
+    if ( mod && mod.__esModule ) {
+      return mod;
+    }
 
-var __importDefault = ( this && this.__importDefault ) || function (
-  mod 
-) {
+    var result = {};
+
+    if ( mod != null ) {
+      for ( var k = ownKeys( mod ), i = 0; i < k.length; i++ ) {
+        if ( k[ i ] !== 'default' ) {
+          __createBinding(
+            result, mod, k[ i ] 
+          );
+        }
+      }
+    }
+
+    __setModuleDefault(
+      result, mod 
+    );
+
+    return result;
+  };
+} )();
+
+var __importDefault = ( this && this.__importDefault ) || function ( mod ) {
   return ( mod && mod.__esModule )
     ? mod
     : {
@@ -96,17 +110,9 @@ Object.defineProperty(
 );
 exports.RawCarpetas = void 0;
 
-const xlsx_1 = __importDefault(
-  require(
-    'xlsx' 
-  ) 
-);
+const xlsx_1 = __importDefault( require( 'xlsx' ) );
 
-const fs = __importStar(
-  require(
-    'fs/promises' 
-  ) 
-);
+const fs = __importStar( require( 'fs/promises' ) );
 
 const workbook = xlsx_1.default.readFile(
   '/home/cachorro_cami/OneDrive/bases_de_datos/general.xlsx', {
@@ -120,55 +126,41 @@ const {
 
 const outputSheets = [];
 
-const mapperSheets = SheetNames.flatMap(
-  (
-    sheetname 
-  ) => {
-    const sheet = Sheets[ sheetname ];
+const mapperSheets = SheetNames.flatMap( ( sheetname ) => {
+  const sheet = Sheets[ sheetname ];
 
-    const tableSheet = xlsx_1.default.utils.sheet_to_json(
-      sheet 
-    );
-    outputSheets.push(
-      tableSheet 
-    );
-    return tableSheet.map(
-      (
-        table 
-      ) => {
-        return {
-          ...table,
-          category: sheetname,
-        };
-      } 
-    );
-  } 
-);
+  const tableSheet = xlsx_1.default.utils.sheet_to_json( sheet );
+
+  outputSheets.push( tableSheet );
+
+  return tableSheet.map( ( table ) => {
+    return {
+      ...table,
+      category: sheetname,
+    };
+  } );
+} );
+
 fs.writeFile(
-  'outputSheets.json', JSON.stringify(
-    outputSheets 
-  ) 
+  'outputSheets.json', JSON.stringify( outputSheets ) 
 );
 exports.RawCarpetas = [
   ...mapperSheets
-].sort(
-  (
-    a, b 
-  ) => {
-    const x = a.NUMERO;
+].sort( (
+  a, b 
+) => {
+  const x = a.NUMERO;
 
-    const y = b.NUMERO;
+  const y = b.NUMERO;
 
-    if ( x < y ) {
-      return -1;
-    }
-    else if ( x > y ) {
-      return 1;
-    }
+  if ( x < y ) {
+    return -1;
+  } else if ( x > y ) {
+    return 1;
+  }
 
-    return 0;
-  } 
-);
+  return 0;
+} );
 fs.writeFile(
   'carpetas.json', JSON.stringify(
     exports.RawCarpetas, null, 2 
@@ -176,21 +168,15 @@ fs.writeFile(
 );
 
 const outputData = [];
-exports.RawCarpetas.forEach(
-  (
-    carpeta, index 
-  ) => {
-    const newString = `${ Number(
-      carpeta.NUMERO 
-    ) === index + 1 } numero: ${ carpeta.NUMERO }, index:${ index + 1 } `;
-    console.log(
-      newString 
-    );
-    outputData.push(
-      newString 
-    );
-  } 
-);
+
+exports.RawCarpetas.forEach( (
+  carpeta, index 
+) => {
+  const newString = `${ Number( carpeta.NUMERO ) === index + 1 } numero: ${ carpeta.NUMERO }, index:${ index + 1 } `;
+
+  console.log( newString );
+  outputData.push( newString );
+} );
 fs.writeFile(
   'numbers.json', JSON.stringify(
     outputData, null, 2 

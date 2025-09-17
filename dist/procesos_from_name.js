@@ -4,7 +4,7 @@ var __createBinding = ( this && this.__createBinding ) || ( Object.create
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
-        k2 = k; 
+        k2 = k;
       }
 
       var desc = Object.getOwnPropertyDescriptor(
@@ -30,7 +30,7 @@ var __createBinding = ( this && this.__createBinding ) || ( Object.create
       o, m, k, k2 
     ) {
       if ( k2 === undefined ) {
-        k2 = k; 
+        k2 = k;
       }
 
       o[ k2 ] = m[ k ];
@@ -51,34 +51,49 @@ var __setModuleDefault = ( this && this.__setModuleDefault ) || ( Object.create
   ) {
     o[ 'default' ] = v;
   } );
+var __importStar = ( this && this.__importStar ) || ( function () {
+  var ownKeys = function( o ) {
+    ownKeys = Object.getOwnPropertyNames || function ( o ) {
+      var ar = [];
 
-var __importStar = ( this && this.__importStar ) || function (
-  mod 
-) {
-  if ( mod && mod.__esModule ) {
-    return mod; 
-  }
+      for ( var k in o ) {
+        if ( Object.prototype.hasOwnProperty.call(
+          o, k 
+        ) ) {
+          ar[ ar.length ] = k;
+        }
+      }
 
-  var result = {};
+      return ar;
+    };
 
-  if ( mod != null ) {
-    for ( var k in mod ) {
-      if ( k !== 'default' && Object.prototype.hasOwnProperty.call(
-        mod, k 
-      ) ) {
-        __createBinding(
-          result, mod, k 
-        ); 
-      } 
-    } 
-  }
+    return ownKeys( o );
+  };
 
-  __setModuleDefault(
-    result, mod 
-  );
-  return result;
-};
+  return function ( mod ) {
+    if ( mod && mod.__esModule ) {
+      return mod;
+    }
 
+    var result = {};
+
+    if ( mod != null ) {
+      for ( var k = ownKeys( mod ), i = 0; i < k.length; i++ ) {
+        if ( k[ i ] !== 'default' ) {
+          __createBinding(
+            result, mod, k[ i ] 
+          );
+        }
+      }
+    }
+
+    __setModuleDefault(
+      result, mod 
+    );
+
+    return result;
+  };
+} )();
 Object.defineProperty(
   exports, '__esModule', {
     value: true 
@@ -86,29 +101,15 @@ Object.defineProperty(
 );
 exports.generateCarpetas = generateCarpetas;
 
-const fs = __importStar(
-  require(
-    'fs/promises' 
-  ) 
-);
+const fs = __importStar( require( 'fs/promises' ) );
 
-const carpeta_1 = require(
-  './models/carpeta' 
-);
+const carpeta_1 = require( './models/carpeta' );
 
-const carpetas_1 = require(
-  './data/carpetas' 
-);
+const carpetas_1 = require( './data/carpetas' );
 
-const carpetasMap = carpetas_1.RawCarpetas.map(
-  (
-    carpeta 
-  ) => {
-    return new carpeta_1.ClassCarpeta(
-      carpeta 
-    );
-  } 
-);
+const carpetasMap = carpetas_1.RawCarpetas.map( ( carpeta ) => {
+  return new carpeta_1.ClassCarpeta( carpeta );
+} );
 
 async function* generateCarpetas() {
   for await ( const carpeta of carpetasMap ) {
@@ -128,16 +129,11 @@ async function tryAsyncClassCarpetas() {
   }
 
   fs.writeFile(
-    'ClasscarpetasModelPostAwait.json', JSON.stringify(
-      Array.from(
-        mapClassCarpetas.values() 
-      ) 
-    ) 
+    'ClasscarpetasModelPostAwait.json', JSON.stringify( Array.from( mapClassCarpetas.values() ) ) 
   );
 
-  const asAnArray = Array.from(
-    mapClassCarpetas.values() 
-  );
+  const asAnArray = Array.from( mapClassCarpetas.values() );
+
   return asAnArray;
 }
 

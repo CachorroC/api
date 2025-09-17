@@ -1,16 +1,16 @@
 export const sleep = (
-  ms: number 
+  ms: number
 ) => {
   return new Promise(
     (
-      resolve 
+      resolve
     ) => {
       console.log(
-        ms 
+        ms
       );
       return setTimeout(
-        resolve, ms 
+        resolve, ms
       );
-    } 
+    }
   );
 };

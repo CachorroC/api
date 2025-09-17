@@ -5,7 +5,7 @@ import { datesExtractor } from '../utils/date-validator';
 
 export class ClassNotificacion implements intNotificacion {
   constructor(
-    rawDb: RawDb 
+    rawDb: RawDb
   ) {
     const {
       FISICO: fisico,
@@ -20,7 +20,7 @@ export class ClassNotificacion implements intNotificacion {
       RESULTADO_292: resultado292,
     } = rawDb;
     this.id = Number(
-      NUMERO 
+      NUMERO
     );
     this.certimail = certimail
       ? ( certimail === 'SI'
@@ -34,7 +34,7 @@ export class ClassNotificacion implements intNotificacion {
       : null;
     this.autoNotificado = autoNotificado
       ? new Date(
-        autoNotificado 
+        autoNotificado
       )
       : null;
 
@@ -42,7 +42,7 @@ export class ClassNotificacion implements intNotificacion {
       const [
         newAutoNotificado
       ] = datesExtractor(
-        autoNotificado 
+        autoNotificado
       );
       this.autoNotificado = newAutoNotificado ?? null;
     }
@@ -53,13 +53,13 @@ export class ClassNotificacion implements intNotificacion {
     const [
       newFechaRecibido291
     ] = datesExtractor(
-      fechaRecibido291 
+      fechaRecibido291
     );
 
     const [
       newFechaAporta291
     ] = datesExtractor(
-      fechaAporta291 
+      fechaAporta291
     );
 
     const newResultado291 = resultado291
@@ -74,21 +74,21 @@ export class ClassNotificacion implements intNotificacion {
         fechaAporta  : newFechaAporta291 ?? null,
         resultado    : newResultado291,
         carpetaNumero: Number(
-          NUMERO 
+          NUMERO
         ),
-      } 
+      }
     );
 
     const [
       newFechaRecibido292
     ] = datesExtractor(
-      fechaRecibido292 
+      fechaRecibido292
     );
 
     const [
       newFechaAporta292
     ] = datesExtractor(
-      fechaAporta292 
+      fechaAporta292
     );
 
     const newResultado292 = resultado292
@@ -103,9 +103,9 @@ export class ClassNotificacion implements intNotificacion {
         fechaAporta  : newFechaAporta292 ?? null,
         resultado    : newResultado292,
         carpetaNumero: Number(
-          NUMERO 
+          NUMERO
         ),
-      } 
+      }
     );
   }
   id            : number;
@@ -115,7 +115,7 @@ export class ClassNotificacion implements intNotificacion {
   autoNotificado: Date | null;
 
   static prismaNotificacion(
-    notificacion: intNotificacion 
+    notificacion: intNotificacion
   ) {
     const newNotificacion: Prisma.NotificacionCreateWithoutDemandaInput = {
       id            : notificacion.id,
@@ -125,7 +125,7 @@ export class ClassNotificacion implements intNotificacion {
       notifiers     : {
         connectOrCreate: notificacion.notifiers.map(
           (
-            notif 
+            notif
           ) => {
             const notifCarpetaInput: Prisma.NotifierTipoCarpetaNumeroCompoundUniqueInput
             = {
@@ -148,7 +148,7 @@ export class ClassNotificacion implements intNotificacion {
             };
 
             return notifierConnectOrCreate;
-          } 
+          }
         ),
       },
     };

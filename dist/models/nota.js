@@ -6,9 +6,7 @@ Object.defineProperty(
 );
 exports.NotasBuilder = void 0;
 
-const date_validator_1 = require(
-  '../utils/date-validator' 
-);
+const date_validator_1 = require( '../utils/date-validator' );
 
 class NotasBuilder {
   createdAt;
@@ -20,13 +18,9 @@ class NotasBuilder {
   constructor(
     incomingNote, carpetaNumero, index 
   ) {
-    this.content = incomingNote.split(
-      '//' 
-    );
+    this.content = incomingNote.split( '//' );
 
-    const dateExtract = ( 0, date_validator_1.datesExtractor )(
-      incomingNote 
-    );
+    const dateExtract = ( 0, date_validator_1.datesExtractor )( incomingNote );
 
     if ( dateExtract.length === 0 ) {
       this.dueDate = null;
@@ -35,6 +29,7 @@ class NotasBuilder {
     const [
       firstDate
     ] = dateExtract;
+
     this.dueDate = firstDate;
     this.text = incomingNote;
     this.createdAt = new Date();

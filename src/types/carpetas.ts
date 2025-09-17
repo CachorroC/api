@@ -21,7 +21,7 @@ export type IntCarpeta = {
   fecha              : Date | null;
   id                 : number;
   idProcesos         : number[];
-  idRegUltimaAct     : number | null;
+  idRegUltimaAct     : string | null;
   llaveProceso       : string;
   nombre             : string;
   numero             : number;
@@ -39,14 +39,7 @@ export type Obligacion = {
   B?: string | number;
 };
 
-export type Category =
-  | 'Terminados'
-  | 'LiosJuridicos'
-  | 'Bancolombia'
-  | 'Reintegra'
-  | 'Insolvencia'
-  | 'SinEspecificar'
-  | 'todos';
+export type Category = "Terminados" | "Insolvencia" | "Reintegra" | "Lios Juridicos" | "Sin Tercero" | "Bancolombia";
 
 export interface Codeudor {
   cedula   : string | null;

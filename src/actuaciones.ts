@@ -2,6 +2,7 @@ import * as fs from 'fs/promises';
 import { ConsultaActuacion, outActuacion } from './types/actuaciones';
 import { client } from './services/prisma';
 import { sleep } from './utils/awaiter';
+import { create } from 'domain';
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 console.log(
   process.env.NODE_TLS_REJECT_UNAUTHORIZED
@@ -9,7 +10,12 @@ console.log(
 
 async function fetcher(
   idProceso: number
-) {
+)
+{
+  console.log(`fetching idProceso: ${ idProceso }`);
+
+
+  await sleep(4000)
   try {
     const request = await fetch(
       `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }`,
@@ -34,29 +40,31 @@ async function fetcher(
     return actuaciones.map(
       (
         actuacion
-      ) => {
+      ) =>
+      {
+        const{fechaActuacion,fechaRegistro,fechaFinal, fechaInicial, consActuacion , cant, idRegActuacion}=actuacion;
         return {
           ...actuacion,
           fechaActuacion: new Date(
-            actuacion.fechaActuacion
+            fechaActuacion,
           ),
           fechaRegistro: new Date(
-            actuacion.fechaRegistro
+            fechaRegistro
           ),
-          fechaInicial: actuacion.fechaInicial
+          fechaInicial: fechaInicial
             ? new Date(
-              actuacion.fechaInicial
+              fechaInicial
             )
             : null,
-          fechaFinal: actuacion.fechaFinal
+          fechaFinal: fechaFinal
             ? new Date(
-              actuacion.fechaFinal
+              fechaFinal
             )
             : null,
-          isUltimaAct: actuacion.cant === actuacion.consActuacion,
+          isUltimaAct: cant === consActuacion,
           idProceso  : idProceso,
           createdAt  : new Date(
-            actuacion.fechaRegistro
+            fechaRegistro
           ),
         };
       }
@@ -99,10 +107,15 @@ async function* AsyncGenerateActuaciones(
     carpetaId    : number;
     llaveProceso : string;
   }[],
-) {
+)
+{
+
   for ( const {
     idProceso, carpetaNumero, carpetaId
-  } of procesos ) {
+  } of procesos )
+  {
+
+
     await sleep(
       1000
     );
@@ -111,26 +124,27 @@ async function* AsyncGenerateActuaciones(
       idProceso
     );
 
-    if ( fetcherIdProceso ) {
-      await client.actuacion.createMany(
-        {
-          data          : fetcherIdProceso,
-          skipDuplicates: true,
-        }
-      );
+    if ( fetcherIdProceso && fetcherIdProceso.length > 0 )
+    {
+
+
+
+
       await prismaUpdaterActuaciones(
         fetcherIdProceso,
         carpetaNumero,
         carpetaId,
       );
-    }
 
+
+    }
     yield fetcherIdProceso;
   }
+
 }
 
 async function updatePreviousLastActuacion(
-  idRegUltimaAct: number | null
+  idRegUltimaAct: string | null
 ) {
   try {
     if ( idRegUltimaAct === null ) {
@@ -182,10 +196,12 @@ async function updateCarpetaWithNewLastActuacion(
           ultimaActuacion: {
             connectOrCreate: {
               where: {
-                idRegActuacion: ultimaActuacion.idRegActuacion,
+                idRegActuacion: `${ ultimaActuacion.idRegActuacion }`,
               },
               create: {
                 ...ultimaActuacion,
+                idRegActuacion: `${ ultimaActuacion.idRegActuacion }`,
+                idProceso     : Number( ultimaActuacion.idProceso ),
               },
             },
           },
@@ -215,7 +231,9 @@ async function prismaUpdaterActuaciones(
     }
   );
 
-  try {
+  try
+  {
+
     const carpeta = await client.carpeta.findFirstOrThrow(
       {
         where: {
@@ -225,7 +243,7 @@ async function prismaUpdaterActuaciones(
             },
             {
               numero: numeroCarpeta,
-              id    : numeroId,
+              id: numeroId,
             },
           ],
         },
@@ -241,7 +259,8 @@ async function prismaUpdaterActuaciones(
       ? carpeta.fecha.getTime()
       : null;
 
-    if ( !savedDate || savedDate < incomingDate ) {
+    if ( !savedDate || savedDate < incomingDate )
+    {
       console.log(
         'no hay saved date o la saved date es menor que incoming date',
       );
@@ -259,8 +278,8 @@ async function prismaUpdaterActuaciones(
       await fs.mkdir(
         `./src/date/${ new Date()
           .getFullYear() }/${ new Date()
-          .getMonth() }/${ new Date()
-          .getDate() }`,
+            .getMonth() }/${ new Date()
+              .getDate() }`,
         {
           recursive: true,
         },
@@ -269,15 +288,21 @@ async function prismaUpdaterActuaciones(
       fs.writeFile(
         `./src/date/${ new Date()
           .getFullYear() }/${ new Date()
-          .getMonth() }/${ new Date()
-          .getDate() }/${
-          ultimaActuacion.idRegActuacion
+            .getMonth() }/${ new Date()
+              .getDate() }/${ ultimaActuacion.idRegActuacion
         }.json`,
         JSON.stringify(
           ultimaActuacion
         ),
       );
     }
+
+    await client.actuacion.createMany(
+      {
+        data: actuacionesComplete.map((act)=>{return {...act, idRegActuacion: `${ act.idRegActuacion }`,idProceso: Number(act.idProceso)}}),
+        skipDuplicates: true,
+      }
+    );
   }
   catch ( error ) {
     console.log(

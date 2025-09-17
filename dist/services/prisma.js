@@ -6,12 +6,9 @@ Object.defineProperty(
 );
 exports.client = void 0;
 
-const client_1 = require(
-  '@prisma/client' 
-);
-exports.client = new client_1.PrismaClient(
-  {
-    errorFormat: 'pretty',
-  } 
-);
+const client_1 = require( '@prisma/client' );
+
+exports.client = new client_1.PrismaClient( {
+  errorFormat: 'pretty',
+} );
 //# sourceMappingURL=prisma.js.map

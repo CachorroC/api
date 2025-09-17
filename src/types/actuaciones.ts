@@ -2,9 +2,7 @@
 //
 //   import { Convert } from "./file";
 //
-//   const consultaActuacion = Convert.toConsultaActuacion(json);
-
-import { Data } from './procesos';
+//   const consultaActuaci
 
 export type Message =
   | 'OK'
@@ -19,7 +17,7 @@ export interface ConsultaActuacion {
 }
 
 export interface intActuacion {
-  idRegActuacion: number;
+  idRegActuacion: string;
   llaveProceso  : string;
   consActuacion : number;
   fechaActuacion: Date;
@@ -52,67 +50,55 @@ export interface Paginacion {
 
 // Converts JSON strings to/from your types
 export class actuacionConvert {
-  public static actuacioneToJson(
-    value: intActuacion 
+  public static actuacioneToJson (
+    value: intActuacion
   ): string {
     return JSON.stringify(
-      value 
+      value
     );
   }
 
-  public static consultaActuacionToJson(
-    value: ConsultaActuacion 
+  public static consultaActuacionToJson (
+    value: ConsultaActuacion
   ): string {
     return JSON.stringify(
-      value 
+      value
     );
   }
 
-  public static dataToJson(
-    value: Data 
+
+
+  public static paginacionToJson (
+    value: Paginacion
   ): string {
     return JSON.stringify(
-      value 
+      value
     );
   }
 
-  public static paginacionToJson(
-    value: Paginacion 
-  ): string {
-    return JSON.stringify(
-      value 
-    );
-  }
-
-  public static toActuacione(
-    json: string 
+  public static toActuacione (
+    json: string
   ): outActuacion {
     return JSON.parse(
-      json 
+      json
     );
   }
 
-  public static toConsultaActuacion(
-    json: string 
+  public static toConsultaActuacion (
+    json: string
   ): ConsultaActuacion {
     return JSON.parse(
-      json 
+      json
     );
   }
 
-  public static toData(
-    json: string 
-  ): Data {
-    return JSON.parse(
-      json 
-    );
-  }
 
-  public static toPaginacion(
-    json: string 
+
+  public static toPaginacion (
+    json: string
   ): Paginacion {
     return JSON.parse(
-      json 
+      json
     );
   }
 }

@@ -74,29 +74,22 @@ Object.defineProperty(
 );
 exports.capitalBuilder = capitalBuilder;
 
-function capitalBuilder(
-  capitalAdeudado 
-) {
+function capitalBuilder( capitalAdeudado ) {
   if ( !capitalAdeudado || typeof capitalAdeudado === 'object' ) {
     return 0;
   }
 
   if ( typeof capitalAdeudado === 'number' ) {
-    if ( Number.isNaN(
-      capitalAdeudado 
-    ) ) {
+    if ( Number.isNaN( capitalAdeudado ) ) {
       return 0;
     }
 
     return capitalAdeudado;
   }
 
-  const copTaker = capitalAdeudado.matchAll(
-    /([\d.]+)([.,])(\d{2}|\d{2})$/gm 
-  );
-  console.log(
-    copTaker 
-  );
+  const copTaker = capitalAdeudado.matchAll( /([\d.]+)([.,])(\d{2}|\d{2})$/gm );
+
+  console.log( copTaker );
 
   for ( const cap of copTaker ) {
     const [
@@ -107,40 +100,28 @@ function capitalBuilder(
       /([.,]+)/gm, '' 
     );
 
-    const outputValue = Number(
-      valueReplacer 
-    );
+    const outputValue = Number( valueReplacer );
 
-    if ( Number.isNaN(
-      outputValue 
-    ) ) {
+    if ( Number.isNaN( outputValue ) ) {
       return 0;
     }
 
     return outputValue;
   }
 
-  const newCapital = capitalAdeudado.search(
-    /([/A-Za-z@]+)/gm 
-  );
-  console.log(
-    newCapital 
-  );
+  const newCapital = capitalAdeudado.search( /([/A-Za-z@]+)/gm );
+
+  console.log( newCapital );
 
   if ( newCapital >= 0 ) {
-    console.log(
-      `es mayor a 0 ${ newCapital }` 
-    );
+    console.log( `es mayor a 0 ${ newCapital }` );
+
     return 0;
   }
 
-  console.log(
-    capitalAdeudado 
-  );
+  console.log( capitalAdeudado );
 
-  const outGoingMatch = capitalAdeudado.match(
-    /(\d+)/gm 
-  );
+  const outGoingMatch = capitalAdeudado.match( /(\d+)/gm );
 
   if ( !outGoingMatch ) {
     return 0;
@@ -150,13 +131,9 @@ function capitalBuilder(
     /([.,]+)/gm, '' 
   );
 
-  const outgoingValue = Number(
-    valueReplacer 
-  );
+  const outgoingValue = Number( valueReplacer );
 
-  if ( Number.isNaN(
-    outgoingValue 
-  ) ) {
+  if ( Number.isNaN( outgoingValue ) ) {
     return 0;
   }
 

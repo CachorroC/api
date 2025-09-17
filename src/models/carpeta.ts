@@ -14,6 +14,7 @@ import { JuzgadoClass } from './juzgado';
 import { NotasBuilder } from './nota';
 import { tipoProcesoBuilder } from './tipoProceso';
 import { client } from '../services/prisma';
+import { sleep } from '../utils/awaiter';
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 console.log(
   process.env.NODE_TLS_REJECT_UNAUTHORIZED
@@ -40,7 +41,7 @@ export class ClassCarpeta implements IntCarpeta {
   numero             : number;
   llaveProceso       : string;
   fecha              : Date | null;
-  idRegUltimaAct     : number | null;
+  idRegUltimaAct     : string | null;
   id                 : number;
   category           : string;
   nombre             : string;
@@ -259,13 +260,69 @@ export class ClassCarpeta implements IntCarpeta {
 
   //METHODS
   //ASYNC - getProcesos
-  async getProcesos() {
-    try {
+  async getProcesos ()
+  {
+   /*   await sleep( 2000 ) */
+    try
+    {
+      const isInPrisma = await client.proceso.findMany( { where: { llaveProceso: this.llaveProceso }, select: { fechaProceso        : true,
+  fechaUltimaActuacion: true,
+  juzgado             : true,
+  idProceso           :true,
+  idConexion          :true,
+  llaveProceso        :true,
+  despacho            :true,
+  departamento        :true,
+  sujetosProcesales   :true,
+  esPrivado           : true,
+  cantFilas           :true, } } )
+
+      if ( isInPrisma.length > 0 )
+      {
+         for ( const rawProceso of isInPrisma ) {
+        if ( rawProceso.esPrivado ) {
+          continue;
+        }
+
+        const proceso = {
+          ...rawProceso,
+          fechaProceso: rawProceso.fechaProceso
+            ? new Date(
+              rawProceso.fechaProceso
+            )
+            : null,
+          fechaUltimaActuacion:
+            rawProceso.fechaUltimaActuacion
+              ? new Date(
+                rawProceso.fechaUltimaActuacion
+              )
+              : null,
+          juzgado: JuzgadoClass.fromProceso(
+            rawProceso
+          ),
+        };
+        this.procesos.push(
+          proceso
+        );
+        this.idProcesos.push(
+          proceso.idProceso
+        );
+      }
+
+      return this.procesos;
+      } else
+      {
+       /*  await sleep(1000) */
       const request = await fetch(
-        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1`
+        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1`, {
+          cache: 'force-cache',
+        headers: {
+            'Accept': 'application/json'
+        }
+    }
       );
 
-      if ( !request.ok ) {
+      if ( !request.ok || request.status !== 200 ) {
         const json = await request.json();
 
         throw new Error(
@@ -314,13 +371,13 @@ export class ClassCarpeta implements IntCarpeta {
         );
       }
 
-      return this.procesos;
+      return this.procesos}
     }
     catch ( error ) {
       console.log(
         `${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }`
       );
-      return null;
+      return this.procesos;
     }
   }
   //!ASYNC
@@ -423,7 +480,8 @@ export class ClassCarpeta implements IntCarpeta {
           ) => {
             return {
               ...actuacion,
-              idProceso: idProceso,
+              idRegActuacion: `${ actuacion.idRegActuacion }`,
+              idProceso: Number(idProceso),
               isUltimaAct:
                 actuacion.cant === actuacion.consActuacion,
               fechaActuacion: new Date(
@@ -444,9 +502,7 @@ export class ClassCarpeta implements IntCarpeta {
                 : null,
               createdAt: new Date(
                 actuacion.fechaRegistro
-              ),
-              carpetaNumero: this.numero,
-            };
+              ),          };
           }
         );
 
@@ -581,7 +637,7 @@ export class ClassCarpeta implements IntCarpeta {
       }
     );
   }
-  static async updateCarpeta(
+/*   static async updateCarpeta(
     incomingCarpeta: ClassCarpeta
   ) {
     const {
@@ -618,10 +674,12 @@ export class ClassCarpeta implements IntCarpeta {
                 connectOrCreate: {
                   where: {
                     idRegActuacion:
-                    ultimaActuacion.idRegActuacion,
+                    String(ultimaActuacion.idRegActuacion)
                   },
                   create: {
                     ...ultimaActuacion,
+                    idRegActuacion: String(ultimaActuacion.idRegActuacion)
+
                   },
                 },
               }
@@ -648,7 +706,7 @@ export class ClassCarpeta implements IntCarpeta {
     console.log(
       inserter
     );
-  }
+  } */
   static async insertCarpeta(
     incomingCarpeta: ClassCarpeta
   ) {
@@ -702,16 +760,18 @@ export class ClassCarpeta implements IntCarpeta {
             },
             ultimaActuacion: ultimaActuacion
               ? {
-                  connectOrCreate: {
-                    where: {
-                      idRegActuacion:
-                    ultimaActuacion.idRegActuacion,
-                    },
-                    create: {
-                      ...ultimaActuacion,
-                    },
+                connectOrCreate: {
+                  where: {
+                    idRegActuacion:
+                     ultimaActuacion.idRegActuacion,
+                  },
+                  create: {
+                    ...ultimaActuacion,
+                    idRegActuacion: `${ultimaActuacion.idRegActuacion }`,
+
                   },
                 }
+              }
               : undefined,
             deudor: {
               connectOrCreate: {
@@ -754,7 +814,7 @@ export class ClassCarpeta implements IntCarpeta {
                     juzgado, ...restProceso
                   } = proceso;
 
-                  const procesoCreateorConnect: Prisma.ProcesoCreateOrConnectWithoutCarpetaInput
+                  const procesoCreateorConnect
               = {
                 where: {
                   idProceso: proceso.idProceso,
@@ -785,14 +845,16 @@ export class ClassCarpeta implements IntCarpeta {
                       ) => {
                         const actuacionCreateOrConnect: Prisma.ActuacionCreateOrConnectWithoutCarpetaInput
                           = {
-                            where: {
-                              idRegActuacion:
-                                actuacion.idRegActuacion,
-                            },
-                            create: {
-                              ...actuacion,
-                            },
-                          };
+                          where: {
+                            idRegActuacion:
+                            actuacion.idRegActuacion,
+                          },
+                          create: {
+                            ...actuacion,
+                            idRegActuacion: `${ actuacion.idRegActuacion }`,
+
+                          }
+                        };
                         return actuacionCreateOrConnect;
                       }
                     ),
@@ -834,16 +896,18 @@ export class ClassCarpeta implements IntCarpeta {
             },
             ultimaActuacion: ultimaActuacion
               ? {
-                  connectOrCreate: {
-                    where: {
-                      idRegActuacion:
-                    ultimaActuacion.idRegActuacion,
-                    },
-                    create: {
-                      ...ultimaActuacion,
-                    },
-                  },
+                connectOrCreate: {
+                          where: {
+                            idRegActuacion:
+                              ultimaActuacion.idRegActuacion,
+                          },
+                          create: {
+                            ...ultimaActuacion,
+                            idRegActuacion: `${ ultimaActuacion.idRegActuacion }`,
+
+                          }
                 }
+              }
               : undefined,
             demanda: {
               connectOrCreate: {
@@ -899,13 +963,15 @@ export class ClassCarpeta implements IntCarpeta {
                       ) => {
                         const actuacionCreateOrConnect: Prisma.ActuacionCreateOrConnectWithoutCarpetaInput
                           = {
-                            where: {
-                              idRegActuacion:
-                                actuacion.idRegActuacion,
-                            },
-                            create: {
-                              ...actuacion,
-                            },
+                          where: {
+                            idRegActuacion:
+                           actuacion.idRegActuacion,
+                          },
+                          create: {
+                            ...actuacion,
+                            idRegActuacion:`${ actuacion.idRegActuacion }`,
+
+                          }
                           };
                         return actuacionCreateOrConnect;
                       }
@@ -924,7 +990,7 @@ export class ClassCarpeta implements IntCarpeta {
     }
     catch ( error ) {
       console.log(
-        error
+        `error al insertar la carpeta: ${ error }`
       );
 
     }

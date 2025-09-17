@@ -11,7 +11,7 @@ model Carpeta {
   id                  Int
   fecha               DateTime?
   idProcesos          Int[]
-  idRegUltimaAct      Int?
+  idRegUltimaAct      String?
   llaveProceso        String
   nombre              String
   numero              Int        @id
@@ -196,10 +196,10 @@ model Actuacion {
   fechaInicial   DateTime? @db.Date
   fechaRegistro  DateTime  @db.Date
   idProceso      Int
-  idRegActuacion Int       @id
+  procesoId      Int?
+  idRegActuacion String    @id
   isUltimaAct    Boolean
   llaveProceso   String
-  procesoId      Int?
   proceso        Proceso?  @relation(fields: [procesoId], references: [idProceso])
   Carpeta        Carpeta[]
 }
