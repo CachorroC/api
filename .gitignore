@@ -129,6 +129,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+*.actuaciones.txt
 # Logs
 logs
 *.log
