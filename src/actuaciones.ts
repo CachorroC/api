@@ -1,217 +1,167 @@
 import * as fs from 'fs/promises';
-import { ConsultaActuacion, outActuacion } from './types/actuaciones';
+import {
+  ConsultaActuacion,
+  outActuacion,
+} from './types/actuaciones';
 import { client } from './services/prisma';
 import { sleep } from './utils/awaiter';
 import { create } from 'domain';
-process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
-console.log(
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED
-);
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 
-async function fetcher(
-  idProceso: number
-)
-{
-  console.log(`fetching idProceso: ${ idProceso }`);
+async function fetcher(idProceso: number) {
+  console.log(`fetching idProceso: ${idProceso}`);
 
-
-  await sleep(4000)
+  await sleep(10000);
   try {
     const request = await fetch(
-      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }`,
+      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${idProceso}`
     );
 
-    if ( !request.ok ) {
+    if (!request.ok) {
       throw new Error(
-        `${ idProceso }: ${ request.status } ${ request.statusText }${ JSON.stringify(
-          request,
-          null,
-          2,
-        ) }`,
+        `${idProceso}: ${request.status} ${
+          request.statusText
+        }${JSON.stringify(request, null, 2)}`
       );
     }
 
-    const json = ( await request.json() ) as ConsultaActuacion;
+    const json =
+      (await request.json()) as ConsultaActuacion;
 
-    const {
-      actuaciones
-    } = json;
+    const { actuaciones } = json;
 
-    return actuaciones.map(
-      (
-        actuacion
-      ) =>
-      {
-        const{fechaActuacion,fechaRegistro,fechaFinal, fechaInicial, consActuacion , cant, idRegActuacion}=actuacion;
-        return {
-          ...actuacion,
-          fechaActuacion: new Date(
-            fechaActuacion,
-          ),
-          fechaRegistro: new Date(
-            fechaRegistro
-          ),
-          fechaInicial: fechaInicial
-            ? new Date(
-              fechaInicial
-            )
-            : null,
-          fechaFinal: fechaFinal
-            ? new Date(
-              fechaFinal
-            )
-            : null,
-          isUltimaAct: cant === consActuacion,
-          idProceso  : idProceso,
-          createdAt  : new Date(
-            fechaRegistro
-          ),
-        };
-      }
-    );
-  }
-  catch ( error ) {
-    console.log(
-      error
-    );
+    return actuaciones.map((actuacion) => {
+      const {
+        fechaActuacion,
+        fechaRegistro,
+        fechaFinal,
+        fechaInicial,
+        consActuacion,
+        cant,
+        idRegActuacion,
+      } = actuacion;
+      return {
+        ...actuacion,
+        fechaActuacion: new Date(fechaActuacion),
+        fechaRegistro: new Date(fechaRegistro),
+        fechaInicial: fechaInicial
+          ? new Date(fechaInicial)
+          : null,
+        fechaFinal: fechaFinal
+          ? new Date(fechaFinal)
+          : null,
+        isUltimaAct: cant === consActuacion,
+        idProceso: idProceso,
+        createdAt: new Date(fechaRegistro),
+      };
+    });
+  } catch (error) {
+    console.log(error);
     return null;
   }
 }
 
 async function getIdProcesos() {
   const carpetas = await client.carpeta.findMany();
-  return carpetas.flatMap(
-    (
-      carpeta
-    ) => {
-      return carpeta.idProcesos.map(
-        (
-          idProceso
-        ) => {
-          return {
-            idProceso,
-            carpetaNumero: carpeta.numero,
-            llaveProceso : carpeta.llaveProceso,
-            carpetaId    : carpeta.id,
-          };
-        }
-      );
-    }
-  );
+  return carpetas.flatMap((carpeta) => {
+    return carpeta.idProcesos.map((idProceso) => {
+      return {
+        idProceso,
+        carpetaNumero: carpeta.numero,
+        llaveProceso: carpeta.llaveProceso,
+        carpetaId: carpeta.id,
+      };
+    });
+  });
 }
 
 async function* AsyncGenerateActuaciones(
   procesos: {
-    idProceso    : number;
+    idProceso: number;
     carpetaNumero: number;
-    carpetaId    : number;
-    llaveProceso : string;
-  }[],
-)
-{
-
-  for ( const {
-    idProceso, carpetaNumero, carpetaId
+    carpetaId: number;
+    llaveProceso: string;
+  }[]
+) {
+  for (const {
+    idProceso,
+    carpetaNumero,
+    carpetaId,
   } of procesos )
   {
+    await sleep(10000);
 
+    const fetcherIdProceso = await fetcher(idProceso);
 
-    await sleep(
-      1000
-    );
-
-    const fetcherIdProceso = await fetcher(
-      idProceso
-    );
-
-    if ( fetcherIdProceso && fetcherIdProceso.length > 0 )
-    {
-
-
-
-
+    if (fetcherIdProceso && fetcherIdProceso.length > 0) {
       await prismaUpdaterActuaciones(
         fetcherIdProceso,
         carpetaNumero,
-        carpetaId,
+        carpetaId
       );
-
-
     }
     yield fetcherIdProceso;
   }
-
 }
 
 async function updatePreviousLastActuacion(
   idRegUltimaAct: string | null
 ) {
   try {
-    if ( idRegUltimaAct === null ) {
+    if (idRegUltimaAct === null) {
       throw new Error(
         'la idRegAct de la ultima actuacion es null'
       );
     }
 
-    await client.actuacion.update(
-      {
-        where: {
-          idRegActuacion: idRegUltimaAct,
-        },
-        data: {
-          isUltimaAct: false,
-        },
-      }
-    );
-  }
-  catch ( error ) {
+    await client.actuacion.update({
+      where: {
+        idRegActuacion: idRegUltimaAct,
+      },
+      data: {
+        isUltimaAct: false,
+      },
+    });
+  } catch (error) {
     console.log(
-      `error al cambiar la ultima actuacion: ${ error }`
+      `error al cambiar la ultima actuacion: ${error}`
     );
   }
 }
 
-async function updateCarpetaWithNewLastActuacion(
-  {
-    ultimaActuacion,
-    numero
-  }: {
-    ultimaActuacion: outActuacion;
-    numero         : number;
-  }
-) {
+async function updateCarpetaWithNewLastActuacion({
+  ultimaActuacion,
+  numero,
+}: {
+  ultimaActuacion: outActuacion;
+  numero: number;
+}) {
   try {
-    await client.carpeta.update(
-      {
-        where: {
-
-          numero: numero,
-
-        },
-        data: {
-          fecha: new Date(
-            ultimaActuacion.fechaActuacion
-          ),
-          revisado       : false,
-          ultimaActuacion: {
-            connectOrCreate: {
-              where: {
-                idRegActuacion: `${ ultimaActuacion.idRegActuacion }`,
-              },
-              create: {
-                ...ultimaActuacion,
-                idRegActuacion: `${ ultimaActuacion.idRegActuacion }`,
-                idProceso     : Number( ultimaActuacion.idProceso ),
-              },
+    await client.carpeta.update({
+      where: {
+        numero: numero,
+      },
+      data: {
+        fecha: new Date(ultimaActuacion.fechaActuacion),
+        revisado: false,
+        ultimaActuacion: {
+          connectOrCreate: {
+            where: {
+              idRegActuacion: `${ultimaActuacion.idRegActuacion}`,
+            },
+            create: {
+              ...ultimaActuacion,
+              idRegActuacion: `${ultimaActuacion.idRegActuacion}`,
+              idProceso: Number(ultimaActuacion.idProceso),
             },
           },
         },
-      }
-    );
-  }
-  catch ( error ) {
+      },
+    });
+  } catch (error) {
     console.log(
-      `error al cambiar la carpeta y actualizar la ultima actuacion: ${ error }`,
+      `error al cambiar la carpeta y actualizar la ultima actuacion: ${error}`
     );
   }
 }
@@ -219,94 +169,78 @@ async function updateCarpetaWithNewLastActuacion(
 async function prismaUpdaterActuaciones(
   actuacionesComplete: outActuacion[],
   numeroCarpeta: number,
-  numeroId: number,
+  numeroId: number
 ) {
-  const [
-    ultimaActuacion
-  ] = actuacionesComplete.filter(
-    (
-      a
-    ) => {
+  const [ultimaActuacion] = actuacionesComplete.filter(
+    (a) => {
       return a.consActuacion === a.cant;
     }
   );
 
-  try
-  {
-
-    const carpeta = await client.carpeta.findFirstOrThrow(
-      {
-        where: {
-          OR: [
-            {
-              llaveProceso: ultimaActuacion.llaveProceso,
-            },
-            {
-              numero: numeroCarpeta,
-              id: numeroId,
-            },
-          ],
-        },
-      }
-    );
+  try {
+    const carpeta = await client.carpeta.findFirstOrThrow({
+      where: {
+        OR: [
+          {
+            llaveProceso: ultimaActuacion.llaveProceso,
+          },
+          {
+            numero: numeroCarpeta,
+            id: numeroId,
+          },
+        ],
+      },
+    });
 
     const incomingDate = new Date(
       ultimaActuacion.fechaActuacion
-    )
-      .getTime();
+    ).getTime();
 
     const savedDate = carpeta.fecha
       ? carpeta.fecha.getTime()
       : null;
 
-    if ( !savedDate || savedDate < incomingDate )
-    {
+    if (!savedDate || savedDate < incomingDate) {
       console.log(
-        'no hay saved date o la saved date es menor que incoming date',
+        'no hay saved date o la saved date es menor que incoming date'
       );
 
       await updatePreviousLastActuacion(
         carpeta.idRegUltimaAct
       );
-      await updateCarpetaWithNewLastActuacion(
+      await updateCarpetaWithNewLastActuacion({
+        ultimaActuacion,
+        numero: numeroCarpeta,
+      });
+
+      await fs.mkdir(
+        `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`,
         {
-          ultimaActuacion,
-          numero: numeroCarpeta
+          recursive: true,
         }
       );
 
-      await fs.mkdir(
-        `./src/date/${ new Date()
-          .getFullYear() }/${ new Date()
-            .getMonth() }/${ new Date()
-              .getDate() }`,
-        {
-          recursive: true,
-        },
-      );
-
       fs.writeFile(
-        `./src/date/${ new Date()
-          .getFullYear() }/${ new Date()
-            .getMonth() }/${ new Date()
-              .getDate() }/${ ultimaActuacion.idRegActuacion
+        `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}/${
+          ultimaActuacion.idRegActuacion
         }.json`,
-        JSON.stringify(
-          ultimaActuacion
-        ),
+        JSON.stringify(ultimaActuacion)
       );
     }
 
-    await client.actuacion.createMany(
-      {
-        data: actuacionesComplete.map((act)=>{return {...act, idRegActuacion: `${ act.idRegActuacion }`,idProceso: Number(act.idProceso)}}),
-        skipDuplicates: true,
-      }
-    );
-  }
-  catch ( error ) {
+    await client.actuacion.createMany({
+      data: actuacionesComplete.map((act) => {
+        return {
+          ...act,
+          idRegActuacion: `${act.idRegActuacion}`,
+          idProceso: Number(act.idProceso),
+        };
+      }),
+      skipDuplicates: true,
+    });
+  } catch (error) {
     console.log(
-      `prisma updater actuaciones error : ${ error }`
+      `prisma updater actuaciones error : ${error}`
     );
   }
 }
@@ -316,18 +250,15 @@ async function main() {
 
   const idProcesos = await getIdProcesos();
 
-  for await ( const actuacionesJson of AsyncGenerateActuaciones(
+  for await (const actuacionesJson of AsyncGenerateActuaciones(
     idProcesos
-  ) ) {
-    ActsMap.push(
-      actuacionesJson
-    );
+  )) {
+    ActsMap.push(actuacionesJson);
   }
 
   fs.writeFile(
-    'actuacionesOutput.json', JSON.stringify(
-      ActsMap, null, 2
-    )
+    'actuacionesOutput.json',
+    JSON.stringify(ActsMap, null, 2)
   );
   return ActsMap;
 }

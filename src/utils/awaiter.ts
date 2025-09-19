@@ -6,7 +6,7 @@ export const sleep = (
       resolve
     ) => {
       console.log(
-        ms
+        `sleeping ${ms} ${ new Date().toString()}`
       );
       return setTimeout(
         resolve, ms

@@ -31,7 +31,7 @@ export async function* generateCarpetas () {
       yield carpeta;
     } */
 
-
+console.log(`carpeta numero ${carpeta.numero}`);
      await sleep(
       10000
     );
