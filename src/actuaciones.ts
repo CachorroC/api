@@ -5,10 +5,11 @@ import {
 } from './types/actuaciones';
 import { client } from './services/prisma';
 import { sleep } from './utils/awaiter';
-import { create } from 'domain';
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 
+import { Prisma } from '@prisma/client';
+import Actuacion from './models/actuacion';
 async function fetcher(idProceso: number) {
   console.log(`fetching idProceso: ${idProceso}`);
 
@@ -54,6 +55,7 @@ async function fetcher(idProceso: number) {
         isUltimaAct: cant === consActuacion,
         idProceso: idProceso,
         createdAt: new Date(fechaRegistro),
+        idRegActuacion: `${idRegActuacion}`,
       };
     });
   } catch (error) {
@@ -88,160 +90,25 @@ async function* AsyncGenerateActuaciones(
     idProceso,
     carpetaNumero,
     carpetaId,
-  } of procesos )
-  {
+  } of procesos) {
     await sleep(10000);
 
     const fetcherIdProceso = await fetcher(idProceso);
 
     if (fetcherIdProceso && fetcherIdProceso.length > 0) {
-      await prismaUpdaterActuaciones(
+      const actsActualizadas =
+        await Actuacion.updateAllActuaciones(
+          fetcherIdProceso,
+          carpetaNumero
+        );
+      console.log(actsActualizadas);
+      await Actuacion.prismaUpdaterActuaciones(
         fetcherIdProceso,
         carpetaNumero,
         carpetaId
       );
     }
     yield fetcherIdProceso;
-  }
-}
-
-async function updatePreviousLastActuacion(
-  idRegUltimaAct: string | null
-) {
-  try {
-    if (idRegUltimaAct === null) {
-      throw new Error(
-        'la idRegAct de la ultima actuacion es null'
-      );
-    }
-
-    await client.actuacion.update({
-      where: {
-        idRegActuacion: idRegUltimaAct,
-      },
-      data: {
-        isUltimaAct: false,
-      },
-    });
-  } catch (error) {
-    console.log(
-      `error al cambiar la ultima actuacion: ${error}`
-    );
-  }
-}
-
-async function updateCarpetaWithNewLastActuacion({
-  ultimaActuacion,
-  numero,
-}: {
-  ultimaActuacion: outActuacion;
-  numero: number;
-}) {
-  try {
-    await client.carpeta.update({
-      where: {
-        numero: numero,
-      },
-      data: {
-        fecha: new Date(ultimaActuacion.fechaActuacion),
-        revisado: false,
-        ultimaActuacion: {
-          connectOrCreate: {
-            where: {
-              idRegActuacion: `${ultimaActuacion.idRegActuacion}`,
-            },
-            create: {
-              ...ultimaActuacion,
-              idRegActuacion: `${ultimaActuacion.idRegActuacion}`,
-              idProceso: Number(ultimaActuacion.idProceso),
-            },
-          },
-        },
-      },
-    });
-  } catch (error) {
-    console.log(
-      `error al cambiar la carpeta y actualizar la ultima actuacion: ${error}`
-    );
-  }
-}
-
-async function prismaUpdaterActuaciones(
-  actuacionesComplete: outActuacion[],
-  numeroCarpeta: number,
-  numeroId: number
-) {
-  const [ultimaActuacion] = actuacionesComplete.filter(
-    (a) => {
-      return a.consActuacion === a.cant;
-    }
-  );
-
-  try {
-    const carpeta = await client.carpeta.findFirstOrThrow({
-      where: {
-        OR: [
-          {
-            llaveProceso: ultimaActuacion.llaveProceso,
-          },
-          {
-            numero: numeroCarpeta,
-            id: numeroId,
-          },
-        ],
-      },
-    });
-
-    const incomingDate = new Date(
-      ultimaActuacion.fechaActuacion
-    ).getTime();
-
-    const savedDate = carpeta.fecha
-      ? carpeta.fecha.getTime()
-      : null;
-
-    if (!savedDate || savedDate < incomingDate) {
-      console.log(
-        'no hay saved date o la saved date es menor que incoming date'
-      );
-
-      await updatePreviousLastActuacion(
-        carpeta.idRegUltimaAct
-      );
-      await updateCarpetaWithNewLastActuacion({
-        ultimaActuacion,
-        numero: numeroCarpeta,
-      });
-
-      await fs.mkdir(
-        `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`,
-        {
-          recursive: true,
-        }
-      );
-
-      fs.writeFile(
-        `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}/${
-          ultimaActuacion.idRegActuacion
-        }.json`,
-        JSON.stringify(ultimaActuacion)
-      );
-    }
-
-    await client.actuacion.createMany({
-      data: actuacionesComplete.map((act) => {
-        return {
-          ...act,
-          idRegActuacion: `${act.idRegActuacion}`,
-          idProceso: Number(act.idProceso),
-        };
-      }),
-      skipDuplicates: true,
-    });
-  } catch (error) {
-    console.log(
-      `prisma updater actuaciones error : ${error}`
-    );
   }
 }
 
