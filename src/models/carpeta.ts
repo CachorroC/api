@@ -374,6 +374,7 @@ export class ClassCarpeta implements IntCarpeta {
                 ? new Date(actuacion.fechaFinal)
                 : null,
               createdAt: new Date(actuacion.fechaRegistro),
+              carpetaNumero: this.numero
             };
           }
         );

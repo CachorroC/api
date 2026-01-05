@@ -10,6 +10,7 @@ console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 
 import { Prisma } from '@prisma/client';
 import Actuacion from './models/actuacion';
+import { RobustApiClient } from './utils/fetcher';
 async function fetcher(idProceso: number) {
   console.log(`fetching idProceso: ${idProceso}`);
 
@@ -66,18 +67,21 @@ async function fetcher(idProceso: number) {
 
 async function getIdProcesos() {
   const carpetas = await client.carpeta.findMany();
-  return carpetas.flatMap((carpeta) => {
-    return carpeta.idProcesos.map((idProceso) => {
-      return {
-        idProceso,
-        carpetaNumero: carpeta.numero,
-        llaveProceso: carpeta.llaveProceso,
-        carpetaId: carpeta.id,
-      };
+  return carpetas
+    .flatMap((carpeta) => {
+      return carpeta.idProcesos.map((idProceso) => {
+        return {
+          idProceso,
+          carpetaNumero: carpeta.numero,
+          llaveProceso: carpeta.llaveProceso,
+          carpetaId: carpeta.id,
+        };
+      });
+    })
+    .sort((a, b) => {
+      return b.carpetaNumero - a.carpetaNumero;
     });
-  });
 }
-
 async function* AsyncGenerateActuaciones(
   procesos: {
     idProceso: number;
@@ -128,6 +132,39 @@ async function main() {
     JSON.stringify(ActsMap, null, 2)
   );
   return ActsMap;
+}
+
+main();
+
+
+// Interfaces
+interface UserReq { id: number; role: string; }
+interface UserRes { id: number; name: string; }
+
+// Data
+const users: UserReq[] = [
+  { id: 1, role: "admin" },         // Exists
+  { id: 99999, role: "guest" },     // 404 (Will fail immediately, no retry)
+  { id: 2, role: "editor" }         // Exists
+];
+
+async function main() {
+  const api = new RobustApiClient("https://consultaprocesos.ramajudicial.gov.co:448");
+
+  console.log("🚀 Starting Batch with Retries...");
+
+  const results = await api.fetchBatch<UserRes, UserReq>(
+    users,
+    (user) => `/users/${user.id}`
+  );
+
+  console.log("\n--- Final Report ---");
+  console.table(results.map(r => ({
+    ID: r.originalItem.id,
+    Status: r.status,
+    Error: r.error || "N/A",
+    Name: r.data?.name || "N/A"
+  })));
 }
 
 main();

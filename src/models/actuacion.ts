@@ -97,7 +97,9 @@ export default class Actuacion {
       }
     );
 
+
     try {
+      console.log(`${numeroCarpeta}: ultima Actuacion isUltimaAct ${ultimaActuacion.isUltimaAct ?? 'no hay ultima act'}`)
       const carpeta = await client.carpeta.findFirstOrThrow(
         {
           where: {
@@ -110,9 +112,10 @@ export default class Actuacion {
                 id: numeroId,
               },
             ],
-          }, include: {
-            ultimaActuacion: true
-          }
+          },
+          include: {
+            ultimaActuacion: true,
+          },
         }
       );
 
@@ -120,11 +123,10 @@ export default class Actuacion {
         ultimaActuacion.fechaActuacion
       ).getTime();
 
-      const savedDate = carpeta.ultimaActuacion?.fechaActuacion
+      const savedDate = carpeta.ultimaActuacion
+        ?.fechaActuacion
         ? carpeta.ultimaActuacion?.fechaActuacion.getTime()
         : null;
-
-
 
       if (!savedDate || savedDate < incomingDate) {
         console.log(
@@ -136,10 +138,15 @@ export default class Actuacion {
             carpeta.idRegUltimaAct
           );
 
-        await Actuacion.updateCarpetaWithNewLastActuacion({
-          ultimaActuacion,
-          numero: numeroCarpeta,
-        });
+        const updateCarpeta =
+          await Actuacion.updateCarpetaWithNewLastActuacion(
+            {
+              ultimaActuacion,
+              numero: numeroCarpeta,
+            }
+          );
+
+        console.log( JSON.stringify(updateCarpeta, null, 2))
 
         await fs.mkdir(
           `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`,
@@ -154,7 +161,7 @@ export default class Actuacion {
           }.json`,
           JSON.stringify(updateLastActuacion)
         );
-      }
+      }/*
       console.log('prisma will start now');
       for (const actuacion of actuacionesComplete) {
         const upsertActuacion =
@@ -168,11 +175,7 @@ export default class Actuacion {
               idProceso: Number(actuacion.idProceso),
               isUltimaAct:
                 actuacion.consActuacion === actuacion.cant,
-              Carpeta: {
-                connect: {
-                  numero: numeroCarpeta,
-                },
-              },
+
             },
             create: {
               ...actuacion,
@@ -180,16 +183,12 @@ export default class Actuacion {
               idProceso: Number(actuacion.idProceso),
               isUltimaAct:
                 actuacion.consActuacion === actuacion.cant,
-              Carpeta: {
-                connect: {
-                  numero: numeroCarpeta,
-                },
-              },
+
             },
           });
         upsertActuacion;
-        console.log(`created ${upsertActuacion}`);
-      }
+        console.log(`created ${JSON.stringify(upsertActuacion)}`);
+      } */
     } catch (error) {
       console.log(
         `prisma updater actuaciones error : ${error}`
@@ -229,6 +228,9 @@ export default class Actuacion {
               },
             },
           },
+        },
+        include:{
+          ultimaActuacion: true,
         },
       });
       return carpetaUpdate;
