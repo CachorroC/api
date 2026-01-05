@@ -135,36 +135,3 @@ async function main() {
 }
 
 main();
-
-
-// Interfaces
-interface UserReq { id: number; role: string; }
-interface UserRes { id: number; name: string; }
-
-// Data
-const users: UserReq[] = [
-  { id: 1, role: "admin" },         // Exists
-  { id: 99999, role: "guest" },     // 404 (Will fail immediately, no retry)
-  { id: 2, role: "editor" }         // Exists
-];
-
-async function main() {
-  const api = new RobustApiClient("https://consultaprocesos.ramajudicial.gov.co:448");
-
-  console.log("🚀 Starting Batch with Retries...");
-
-  const results = await api.fetchBatch<UserRes, UserReq>(
-    users,
-    (user) => `/users/${user.id}`
-  );
-
-  console.log("\n--- Final Report ---");
-  console.table(results.map(r => ({
-    ID: r.originalItem.id,
-    Status: r.status,
-    Error: r.error || "N/A",
-    Name: r.data?.name || "N/A"
-  })));
-}
-
-main();
