@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"Pasa para entradas- Paula RamÃ­rez ","cant":84,"carpetaNumero":102,"codRegla":"00                              ","conDocumentos":false,"consActuacion":45,"createdAt":"2019-04-30T05:00:00.000Z","fechaActuacion":"2019-04-30T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-04-30T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300620170041900","procesoId":50593100,"idProceso":50593100,"idRegActuacion":"587296160"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Pasa para entradas- Paula Ramírez ",
+  "cant": 84,
+  "carpetaNumero": 102,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 45,
+  "createdAt": "2019-04-30T05:00:00.000Z",
+  "fechaActuacion": "2019-04-30T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-04-30T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300620170041900",
+  "procesoId": 50593100,
+  "idProceso": 50593100,
+  "idRegActuacion": "587296160"
+}

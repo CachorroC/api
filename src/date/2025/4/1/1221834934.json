@@ -1,1 +1,17 @@
-{"idRegActuacion":1221834934,"llaveProceso":"11001310302520170073600","consActuacion":111,"fechaActuacion":"2025-04-28T05:00:00.000Z","actuacion":"Movimiento expediente","anotacion":"Proceso sale de correspondencia por oficio No OCCES25-PA0884 tramitado //pasa al Ã¡rea de ENTRADAS con memorial radicado No.1392-2025 //01 cuaderno//JSMD","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-28T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":111,"isUltimaAct":true,"idProceso":28937944,"createdAt":"2025-04-28T05:00:00.000Z"}
+{
+  "idRegActuacion": 1221834934,
+  "llaveProceso": "11001310302520170073600",
+  "consActuacion": 111,
+  "fechaActuacion": "2025-04-28T05:00:00.000Z",
+  "actuacion": "Movimiento expediente",
+  "anotacion": "Proceso sale de correspondencia por oficio No OCCES25-PA0884 tramitado //pasa al área de ENTRADAS con memorial radicado No.1392-2025 //01 cuaderno//JSMD",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-28T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 111,
+  "isUltimaAct": true,
+  "idProceso": 28937944,
+  "createdAt": "2025-04-28T05:00:00.000Z"
+}

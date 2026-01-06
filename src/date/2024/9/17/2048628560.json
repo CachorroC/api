@@ -1,1 +1,17 @@
-{"idRegActuacion":2048628560,"llaveProceso":"11001400300120170130900","consActuacion":105,"fechaActuacion":"2024-10-17T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 15551-2024, No. Reloj Radicador: 50765, Entidad o Señor(a): RYS ASESORIA JURIDICA - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: RENUNCIA PODER","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-17T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":105,"isUltimaAct":true,"idProceso":50764880,"createdAt":"2024-10-17T05:00:00.000Z"}
+{
+  "idRegActuacion": 2048628560,
+  "llaveProceso": "11001400300120170130900",
+  "consActuacion": 105,
+  "fechaActuacion": "2024-10-17T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 15551-2024, No. Reloj Radicador: 50765, Entidad o Señor(a): RYS ASESORIA JURIDICA - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: RENUNCIA PODER",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 105,
+  "isUltimaAct": true,
+  "idProceso": 50764880,
+  "createdAt": "2024-10-17T05:00:00.000Z"
+}

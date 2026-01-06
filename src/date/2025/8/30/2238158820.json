@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"SOLICITA LINK, SE LE COMPARTE POR SEGUNDA VEZ","cant":51,"carpetaNumero":593,"codRegla":"00                              ","conDocumentos":false,"consActuacion":12,"createdAt":"2024-03-14T05:00:00.000Z","fechaActuacion":"2024-03-14T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2024-03-14T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400301520230098000","procesoId":218654130,"idProceso":218654130,"idRegActuacion":"2025839820"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "SOLICITA LINK, SE LE COMPARTE POR SEGUNDA VEZ",
+  "cant": 51,
+  "carpetaNumero": 593,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 12,
+  "createdAt": "2024-03-14T05:00:00.000Z",
+  "fechaActuacion": "2024-03-14T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2024-03-14T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400301520230098000",
+  "procesoId": 218654130,
+  "idProceso": 218654130,
+  "idRegActuacion": "2025839820"
+}

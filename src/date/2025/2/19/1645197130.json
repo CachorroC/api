@@ -1,1 +1,17 @@
-{"idRegActuacion":1645197130,"llaveProceso":"11001400301620230122200","consActuacion":28,"fechaActuacion":"2025-03-19T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 4798-2025, No. Reloj Radicador: 17, Entidad o SeÃ±or(a): ISABE OSPINA - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: CesiÃ³n de crÃ©ditos","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-19T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":28,"isUltimaAct":true,"idProceso":134585460,"createdAt":"2025-03-19T05:00:00.000Z"}
+{
+  "idRegActuacion": 1645197130,
+  "llaveProceso": "11001400301620230122200",
+  "consActuacion": 28,
+  "fechaActuacion": "2025-03-19T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 4798-2025, No. Reloj Radicador: 17, Entidad o Señor(a): ISABE OSPINA - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Cesión de créditos",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 28,
+  "isUltimaAct": true,
+  "idProceso": 134585460,
+  "createdAt": "2025-03-19T05:00:00.000Z"
+}

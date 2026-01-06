@@ -1,1 +1,17 @@
-{"idRegActuacion":1789712590,"llaveProceso":"11001400301820240036200","consActuacion":32,"fechaActuacion":"2025-05-14T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"SE AGREGA MEMORIAL AL DESPACHO 130255// ANDREA M//","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-14T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":32,"isUltimaAct":true,"idProceso":155218070,"createdAt":"2025-05-14T05:00:00.000Z"}
+{
+  "idRegActuacion": 1789712590,
+  "llaveProceso": "11001400301820240036200",
+  "consActuacion": 32,
+  "fechaActuacion": "2025-05-14T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "SE AGREGA MEMORIAL AL DESPACHO 130255// ANDREA M//",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-14T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 32,
+  "isUltimaAct": true,
+  "idProceso": 155218070,
+  "createdAt": "2025-05-14T05:00:00.000Z"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":1406611310,"llaveProceso":"11001402271020170012800","consActuacion":40,"fechaActuacion":"2024-06-04T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 8557-2024, No. Reloj Radicador: 29516, Entidad o SeÃ±or(a): SECRETARIA DISTRITAL DE MOVILIDAD - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RPTA OFICIO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-06-04T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":40,"isUltimaAct":true,"idProceso":81301190,"createdAt":"2024-06-04T05:00:00.000Z"}
+{
+  "idRegActuacion": 1406611310,
+  "llaveProceso": "11001402271020170012800",
+  "consActuacion": 40,
+  "fechaActuacion": "2024-06-04T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 8557-2024, No. Reloj Radicador: 29516, Entidad o Señor(a): SECRETARIA DISTRITAL DE MOVILIDAD - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RPTA OFICIO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-06-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 40,
+  "isUltimaAct": true,
+  "idProceso": 81301190,
+  "createdAt": "2024-06-04T05:00:00.000Z"
+}

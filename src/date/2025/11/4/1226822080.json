@@ -1,1 +1,19 @@
-{"actuacion":"Oficio Elaborado","anotacion":"Of. 3254-17 Oficina de Registro ","cant":44,"carpetaNumero":36,"codRegla":"00                              ","conDocumentos":false,"consActuacion":5,"createdAt":"2017-07-11T05:00:00.000Z","fechaActuacion":"2017-07-10T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2017-07-11T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400306620170089200","procesoId":112625340,"idProceso":112625340,"idRegActuacion":"259527120"}
+{
+  "actuacion": "Oficio Elaborado",
+  "anotacion": "Of. 3254-17 Oficina de Registro ",
+  "cant": 44,
+  "carpetaNumero": 36,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 5,
+  "createdAt": "2017-07-11T05:00:00.000Z",
+  "fechaActuacion": "2017-07-10T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2017-07-11T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400306620170089200",
+  "procesoId": 112625340,
+  "idProceso": 112625340,
+  "idRegActuacion": "259527120"
+}

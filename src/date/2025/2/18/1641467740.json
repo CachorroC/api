@@ -1,1 +1,17 @@
-{"idRegActuacion":1641467740,"llaveProceso":"11001400300920240033200","consActuacion":37,"fechaActuacion":"2025-03-18T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 5007-2025, No. Reloj Radicador: 43876, Entidad o SeÃ±or(a): CARMEN CECILIA RAMIREZ M - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: SOLICITUD DECRETAR TERMINACIÃ“N PROCESO POR PAGO TOTAL DE LA OBLIGACIÃ“N","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-18T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":37,"isUltimaAct":true,"idProceso":154958600,"createdAt":"2025-03-18T05:00:00.000Z"}
+{
+  "idRegActuacion": 1641467740,
+  "llaveProceso": "11001400300920240033200",
+  "consActuacion": 37,
+  "fechaActuacion": "2025-03-18T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 5007-2025, No. Reloj Radicador: 43876, Entidad o Señor(a): CARMEN CECILIA RAMIREZ M - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: SOLICITUD DECRETAR TERMINACIÓN PROCESO POR PAGO TOTAL DE LA OBLIGACIÓN",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 37,
+  "isUltimaAct": true,
+  "idProceso": 154958600,
+  "createdAt": "2025-03-18T05:00:00.000Z"
+}

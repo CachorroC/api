@@ -1,1 +1,19 @@
-{"actuacion":"Recepción informe notificación","anotacion":null,"cant":82,"carpetaNumero":275,"codRegla":"00                              ","conDocumentos":false,"consActuacion":43,"createdAt":"2019-05-28T05:00:00.000Z","fechaActuacion":"2019-05-28T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-05-28T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302120170153200","procesoId":50769660,"idProceso":50769660,"idRegActuacion":"682978410"}
+{
+  "actuacion": "Recepciï¿½n informe notificaciï¿½n",
+  "anotacion": null,
+  "cant": 82,
+  "carpetaNumero": 275,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 43,
+  "createdAt": "2019-05-28T05:00:00.000Z",
+  "fechaActuacion": "2019-05-28T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-05-28T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302120170153200",
+  "procesoId": 50769660,
+  "idProceso": 50769660,
+  "idRegActuacion": "682978410"
+}

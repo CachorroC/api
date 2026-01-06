@@ -1,1 +1,19 @@
-{"actuacion":"Auto ordena Seguir adelante la Ejecucion  Ley 1395/2010","anotacion":null,"cant":52,"carpetaNumero":461,"codRegla":"00                              ","conDocumentos":false,"consActuacion":13,"createdAt":"2019-03-20T05:00:00.000Z","fechaActuacion":"2019-03-20T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-03-20T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400303220180095900","procesoId":51318660,"idProceso":51318660,"idRegActuacion":"751874670"}
+{
+  "actuacion": "Auto ordena Seguir adelante la Ejecucion  Ley 1395/2010",
+  "anotacion": null,
+  "cant": 52,
+  "carpetaNumero": 461,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 13,
+  "createdAt": "2019-03-20T05:00:00.000Z",
+  "fechaActuacion": "2019-03-20T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-03-20T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400303220180095900",
+  "procesoId": 51318660,
+  "idProceso": 51318660,
+  "idRegActuacion": "751874670"
+}

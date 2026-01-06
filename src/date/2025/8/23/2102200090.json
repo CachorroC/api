@@ -1,1 +1,19 @@
-{"actuacion":"Al despacho","anotacion":"(COL1357) AL DESPACHO PARA LO PERTINENTE // DOS CDNOS // GERMAN\r\n","cant":158,"carpetaNumero":371,"codRegla":"00                              ","conDocumentos":false,"consActuacion":158,"createdAt":"2025-08-19T05:00:00.000Z","fechaActuacion":"2025-08-19T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2025-08-19T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400303420170083600","procesoId":50521480,"idProceso":50521480,"idRegActuacion":"2102200090"}
+{
+  "actuacion": "Al despacho",
+  "anotacion": "(COL1357) AL DESPACHO PARA LO PERTINENTE // DOS CDNOS // GERMAN\r\n",
+  "cant": 158,
+  "carpetaNumero": 371,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 158,
+  "createdAt": "2025-08-19T05:00:00.000Z",
+  "fechaActuacion": "2025-08-19T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2025-08-19T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400303420170083600",
+  "procesoId": 50521480,
+  "idProceso": 50521480,
+  "idRegActuacion": "2102200090"
+}

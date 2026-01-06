@@ -1,1 +1,17 @@
-{"idRegActuacion":1964011913,"llaveProceso":"11001400305320240114400","consActuacion":24,"fechaActuacion":"2025-07-29T05:00:00.000Z","actuacion":"Traslado LiquidaciÃ³n Credito Art. 446 C.G.P.","anotacion":null,"fechaInicial":"2025-07-30T05:00:00.000Z","fechaFinal":"2025-08-01T05:00:00.000Z","fechaRegistro":"2025-07-29T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":24,"isUltimaAct":true,"idProceso":133946073,"createdAt":"2025-07-29T05:00:00.000Z"}
+{
+  "idRegActuacion": 1964011913,
+  "llaveProceso": "11001400305320240114400",
+  "consActuacion": 24,
+  "fechaActuacion": "2025-07-29T05:00:00.000Z",
+  "actuacion": "Traslado Liquidación Credito Art. 446 C.G.P.",
+  "anotacion": null,
+  "fechaInicial": "2025-07-30T05:00:00.000Z",
+  "fechaFinal": "2025-08-01T05:00:00.000Z",
+  "fechaRegistro": "2025-07-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 24,
+  "isUltimaAct": true,
+  "idProceso": 133946073,
+  "createdAt": "2025-07-29T05:00:00.000Z"
+}

@@ -1,1 +1,19 @@
-{"actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 1123-2019, No. Reloj Radicador: 56860, Entidad o SeÃ±or(a): DAVIVIENDA - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Otras, Observaciones: SOLICITUD//ZULMAK","cant":88,"carpetaNumero":79,"codRegla":"00                              ","conDocumentos":false,"consActuacion":49,"createdAt":"2019-02-04T05:00:00.000Z","fechaActuacion":"2019-02-04T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-02-04T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400303320170089200","procesoId":50514570,"idProceso":50514570,"idRegActuacion":"758036020"}
+{
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 1123-2019, No. Reloj Radicador: 56860, Entidad o Señor(a): DAVIVIENDA - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: SOLICITUD//ZULMAK",
+  "cant": 88,
+  "carpetaNumero": 79,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 49,
+  "createdAt": "2019-02-04T05:00:00.000Z",
+  "fechaActuacion": "2019-02-04T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-02-04T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400303320170089200",
+  "procesoId": 50514570,
+  "idProceso": 50514570,
+  "idRegActuacion": "758036020"
+}

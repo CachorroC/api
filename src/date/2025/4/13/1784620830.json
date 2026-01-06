@@ -1,1 +1,17 @@
-{"idRegActuacion":1784620830,"llaveProceso":"11001400300420230062200","consActuacion":41,"fechaActuacion":"2025-05-13T05:00:00.000Z","actuacion":"Al despacho","anotacion":"\r\nSE INGRESA EL PROCESO AL DESPACHO PARA LO PERTINENTE //JHONATHAN CAÃ‘ON ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-13T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":41,"isUltimaAct":true,"idProceso":130946630,"createdAt":"2025-05-13T05:00:00.000Z"}
+{
+  "idRegActuacion": 1784620830,
+  "llaveProceso": "11001400300420230062200",
+  "consActuacion": 41,
+  "fechaActuacion": "2025-05-13T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "\r\nSE INGRESA EL PROCESO AL DESPACHO PARA LO PERTINENTE //JHONATHAN CAÑON ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-13T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 41,
+  "isUltimaAct": true,
+  "idProceso": 130946630,
+  "createdAt": "2025-05-13T05:00:00.000Z"
+}

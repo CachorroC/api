@@ -1,1 +1,17 @@
-{"idRegActuacion":1634501900,"llaveProceso":"11001400300920230130200","consActuacion":46,"fechaActuacion":"2025-03-14T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"MEMORIAL APORTA LIQUIDACIÃ“N DE CRÃ‰DITO / JFVE","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-14T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":46,"isUltimaAct":true,"idProceso":138696760,"createdAt":"2025-03-14T05:00:00.000Z"}
+{
+  "idRegActuacion": 1634501900,
+  "llaveProceso": "11001400300920230130200",
+  "consActuacion": 46,
+  "fechaActuacion": "2025-03-14T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "MEMORIAL APORTA LIQUIDACIÓN DE CRÉDITO / JFVE",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-14T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 46,
+  "isUltimaAct": true,
+  "idProceso": 138696760,
+  "createdAt": "2025-03-14T05:00:00.000Z"
+}

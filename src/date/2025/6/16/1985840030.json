@@ -1,1 +1,17 @@
-{"idRegActuacion":1985840030,"llaveProceso":"11001400301720240090400","consActuacion":6,"fechaActuacion":"2025-07-15T05:00:00.000Z","actuacion":"Archivo Definitivo","anotacion":"PROCESO ARCHIVADO (CARPETA DIGITAL)","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-15T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":6,"isUltimaAct":true,"idProceso":194187610,"createdAt":"2025-07-15T05:00:00.000Z"}
+{
+  "idRegActuacion": 1985840030,
+  "llaveProceso": "11001400301720240090400",
+  "consActuacion": 6,
+  "fechaActuacion": "2025-07-15T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PROCESO ARCHIVADO (CARPETA DIGITAL)",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 6,
+  "isUltimaAct": true,
+  "idProceso": 194187610,
+  "createdAt": "2025-07-15T05:00:00.000Z"
+}

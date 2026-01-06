@@ -1,1 +1,17 @@
-{"idRegActuacion":2116187690,"llaveProceso":"11001400302020240092800","consActuacion":21,"fechaActuacion":"2025-08-22T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"En la fecha se informa que, realizada la consulta a travÃ©s del portal del Banco Agrario por el tipo de identificaciÃ³n del demandante, del demandado y por nÃºmero de proceso, se verifica que no existen depÃ³sitos judiciales constituidos a Ã³rdenes de este Despacho ni a favor del proceso de la referencia","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-22T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":21,"isUltimaAct":true,"idProceso":197448100,"createdAt":"2025-08-22T05:00:00.000Z"}
+{
+  "idRegActuacion": 2116187690,
+  "llaveProceso": "11001400302020240092800",
+  "consActuacion": 21,
+  "fechaActuacion": "2025-08-22T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "En la fecha se informa que, realizada la consulta a través del portal del Banco Agrario por el tipo de identificación del demandante, del demandado y por número de proceso, se verifica que no existen depósitos judiciales constituidos a órdenes de este Despacho ni a favor del proceso de la referencia",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 21,
+  "isUltimaAct": true,
+  "idProceso": 197448100,
+  "createdAt": "2025-08-22T05:00:00.000Z"
+}

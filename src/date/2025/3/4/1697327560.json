@@ -1,1 +1,17 @@
-{"idRegActuacion":1697327560,"llaveProceso":"11001400302220170120800","consActuacion":103,"fechaActuacion":"2025-04-04T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 6562-2025, No. Reloj Radicador: 46706, Entidad o SeÃ±or(a): BANCOOMEVA - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RTA BANCOS","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-04T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":103,"isUltimaAct":true,"idProceso":50817380,"createdAt":"2025-04-04T05:00:00.000Z"}
+{
+  "idRegActuacion": 1697327560,
+  "llaveProceso": "11001400302220170120800",
+  "consActuacion": 103,
+  "fechaActuacion": "2025-04-04T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 6562-2025, No. Reloj Radicador: 46706, Entidad o Señor(a): BANCOOMEVA - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RTA BANCOS",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 103,
+  "isUltimaAct": true,
+  "idProceso": 50817380,
+  "createdAt": "2025-04-04T05:00:00.000Z"
+}

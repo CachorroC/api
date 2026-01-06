@@ -1,1 +1,17 @@
-{"idRegActuacion":1638798550,"llaveProceso":"11001400308120180051400","consActuacion":59,"fechaActuacion":"2025-03-17T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"firmado pasa baranda..Cielo","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-17T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":59,"isUltimaAct":true,"idProceso":51918470,"createdAt":"2025-03-17T05:00:00.000Z"}
+{
+  "idRegActuacion": 1638798550,
+  "llaveProceso": "11001400308120180051400",
+  "consActuacion": 59,
+  "fechaActuacion": "2025-03-17T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "firmado pasa baranda..Cielo",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 59,
+  "isUltimaAct": true,
+  "idProceso": 51918470,
+  "createdAt": "2025-03-17T05:00:00.000Z"
+}

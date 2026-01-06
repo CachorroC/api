@@ -1,1 +1,17 @@
-{"idRegActuacion":2102677610,"llaveProceso":"11001418907020230052700","consActuacion":41,"fechaActuacion":"2025-08-19T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"PROCESO DIGITAL//SE RECEPCIONA EN EL √ÅREA DE ESTADOS //LINA ORTEGA \r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-19T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":41,"isUltimaAct":true,"idProceso":134910250,"createdAt":"2025-08-19T05:00:00.000Z"}
+{
+  "idRegActuacion": 2102677610,
+  "llaveProceso": "11001418907020230052700",
+  "consActuacion": 41,
+  "fechaActuacion": "2025-08-19T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PROCESO DIGITAL//SE RECEPCIONA EN EL ¡REA DE ESTADOS //LINA ORTEGA \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 41,
+  "isUltimaAct": true,
+  "idProceso": 134910250,
+  "createdAt": "2025-08-19T05:00:00.000Z"
+}

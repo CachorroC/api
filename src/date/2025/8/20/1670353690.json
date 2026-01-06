@@ -1,1 +1,19 @@
-{"actuacion":"RecepciÃ³n memorial","anotacion":"ALLEGAN PUBLICACIÃ“N EMPLAZAMIENTO","cant":90,"carpetaNumero":135,"codRegla":"00                              ","conDocumentos":false,"consActuacion":51,"createdAt":"2019-04-12T05:00:00.000Z","fechaActuacion":"2019-04-12T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-04-12T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300420170063900","procesoId":50542600,"idProceso":50542600,"idRegActuacion":"575915570"}
+{
+  "actuacion": "Recepción memorial",
+  "anotacion": "ALLEGAN PUBLICACIÓN EMPLAZAMIENTO",
+  "cant": 90,
+  "carpetaNumero": 135,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 51,
+  "createdAt": "2019-04-12T05:00:00.000Z",
+  "fechaActuacion": "2019-04-12T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-04-12T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300420170063900",
+  "procesoId": 50542600,
+  "idProceso": 50542600,
+  "idRegActuacion": "575915570"
+}

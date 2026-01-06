@@ -1,1 +1,17 @@
-{"idRegActuacion":1549909520,"llaveProceso":"11001400301020230121200","consActuacion":45,"fechaActuacion":"2025-02-11T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"SE AGREGA MEMORIAL AL DESPACHO PARA SU RESPECTIVO TRAMITE//SANTIAGO MALAVER \r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-11T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":45,"isUltimaAct":true,"idProceso":137788650,"createdAt":"2025-02-11T05:00:00.000Z"}
+{
+  "idRegActuacion": 1549909520,
+  "llaveProceso": "11001400301020230121200",
+  "consActuacion": 45,
+  "fechaActuacion": "2025-02-11T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "SE AGREGA MEMORIAL AL DESPACHO PARA SU RESPECTIVO TRAMITE//SANTIAGO MALAVER \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 45,
+  "isUltimaAct": true,
+  "idProceso": 137788650,
+  "createdAt": "2025-02-11T05:00:00.000Z"
+}

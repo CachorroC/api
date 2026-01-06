@@ -1,1 +1,17 @@
-{"idRegActuacion":1606679610,"llaveProceso":"11001418900420230088600","consActuacion":4,"fechaActuacion":"2025-03-03T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"MEMORIAL SOLICITUD SECUESTRO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-06T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":4,"isUltimaAct":true,"idProceso":216256520,"createdAt":"2025-03-06T05:00:00.000Z"}
+{
+  "idRegActuacion": 1606679610,
+  "llaveProceso": "11001418900420230088600",
+  "consActuacion": 4,
+  "fechaActuacion": "2025-03-03T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "MEMORIAL SOLICITUD SECUESTRO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 4,
+  "isUltimaAct": true,
+  "idProceso": 216256520,
+  "createdAt": "2025-03-06T05:00:00.000Z"
+}

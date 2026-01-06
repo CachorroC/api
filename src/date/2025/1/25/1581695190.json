@@ -1,1 +1,17 @@
-{"idRegActuacion":1581695190,"llaveProceso":"11001400306520230124300","consActuacion":21,"fechaActuacion":"2025-02-28T05:00:00.000Z","actuacion":"Al despacho","anotacion":"PROCESO DIGITAL INGRESA AL DESPACHO PARA LO PERTINENTE/03-12-2024 Y 05-02-2025/ CESION+ESPEDIR D.C/ JULIAN SANCHEZ\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-25T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":21,"isUltimaAct":true,"idProceso":163032920,"createdAt":"2025-02-25T05:00:00.000Z"}
+{
+  "idRegActuacion": 1581695190,
+  "llaveProceso": "11001400306520230124300",
+  "consActuacion": 21,
+  "fechaActuacion": "2025-02-28T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "PROCESO DIGITAL INGRESA AL DESPACHO PARA LO PERTINENTE/03-12-2024 Y 05-02-2025/ CESION+ESPEDIR D.C/ JULIAN SANCHEZ\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 21,
+  "isUltimaAct": true,
+  "idProceso": 163032920,
+  "createdAt": "2025-02-25T05:00:00.000Z"
+}

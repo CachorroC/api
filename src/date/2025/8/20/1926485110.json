@@ -1,1 +1,19 @@
-{"actuacion":"Auto decreta retenciÃ³n vehÃ­culos","anotacion":null,"cant":78,"carpetaNumero":268,"codRegla":"00                              ","conDocumentos":false,"consActuacion":39,"createdAt":"2019-05-20T05:00:00.000Z","fechaActuacion":"2019-05-20T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-05-20T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400303520170147500","procesoId":50764160,"idProceso":50764160,"idRegActuacion":"770709670"}
+{
+  "actuacion": "Auto decreta retención vehículos",
+  "anotacion": null,
+  "cant": 78,
+  "carpetaNumero": 268,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 39,
+  "createdAt": "2019-05-20T05:00:00.000Z",
+  "fechaActuacion": "2019-05-20T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-05-20T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400303520170147500",
+  "procesoId": 50764160,
+  "idProceso": 50764160,
+  "idRegActuacion": "770709670"
+}

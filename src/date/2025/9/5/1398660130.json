@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"Radicado No. 3581-2019, No. Reloj Radicador: 28684, Entidad o Señor(a): MARIA HELENA SUAREZ GARCIA - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Dar Trámite, Observaciones: ALLEGA  AUTORIZACION","cant":56,"carpetaNumero":313,"codRegla":"00                              ","conDocumentos":false,"consActuacion":17,"createdAt":"2019-04-23T05:00:00.000Z","fechaActuacion":"2019-04-23T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-04-23T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400307820170104900","procesoId":51463110,"idProceso":51463110,"idRegActuacion":"857003670"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "Radicado No. 3581-2019, No. Reloj Radicador: 28684, Entidad o Seï¿½or(a): MARIA HELENA SUAREZ GARCIA - Tercer Interesado, Aportï¿½ Documento: Memorial, Con La Solucitud: Dar Trï¿½mite, Observaciones: ALLEGA  AUTORIZACION",
+  "cant": 56,
+  "carpetaNumero": 313,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 17,
+  "createdAt": "2019-04-23T05:00:00.000Z",
+  "fechaActuacion": "2019-04-23T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-04-23T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400307820170104900",
+  "procesoId": 51463110,
+  "idProceso": 51463110,
+  "idRegActuacion": "857003670"
+}

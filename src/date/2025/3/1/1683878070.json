@@ -1,1 +1,17 @@
-{"idRegActuacion":1683878070,"llaveProceso":"11001400301520170139400","consActuacion":97,"fechaActuacion":"2025-04-01T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"// SE AGREGA MEMORIAL AL EXPEDIENTE CON SOLICITUD DE PARTE PROCESO PASA AL AREA DE TRASLADOS PARA LO PERTINENTE // SIHARA A // P. HIBRIDO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-01T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":97,"isUltimaAct":true,"idProceso":50777890,"createdAt":"2025-04-01T05:00:00.000Z"}
+{
+  "idRegActuacion": 1683878070,
+  "llaveProceso": "11001400301520170139400",
+  "consActuacion": 97,
+  "fechaActuacion": "2025-04-01T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "// SE AGREGA MEMORIAL AL EXPEDIENTE CON SOLICITUD DE PARTE PROCESO PASA AL AREA DE TRASLADOS PARA LO PERTINENTE // SIHARA A // P. HIBRIDO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 97,
+  "isUltimaAct": true,
+  "idProceso": 50777890,
+  "createdAt": "2025-04-01T05:00:00.000Z"
+}

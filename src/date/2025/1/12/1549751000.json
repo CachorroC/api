@@ -1,1 +1,17 @@
-{"idRegActuacion":1549751000,"llaveProceso":"11001400307620170063500","consActuacion":50,"fechaActuacion":"2025-02-11T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"SE CARGA MEMORIAL PARA SU RESPECTIVO TRAMITE//PAULA GONZALEZ ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-11T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":50,"isUltimaAct":true,"idProceso":51497380,"createdAt":"2025-02-11T05:00:00.000Z"}
+{
+  "idRegActuacion": 1549751000,
+  "llaveProceso": "11001400307620170063500",
+  "consActuacion": 50,
+  "fechaActuacion": "2025-02-11T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "SE CARGA MEMORIAL PARA SU RESPECTIVO TRAMITE//PAULA GONZALEZ ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 50,
+  "isUltimaAct": true,
+  "idProceso": 51497380,
+  "createdAt": "2025-02-11T05:00:00.000Z"
+}

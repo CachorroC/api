@@ -1,1 +1,17 @@
-{"idRegActuacion":1458013770,"llaveProceso":"11001400300620180045400","consActuacion":84,"fechaActuacion":"2024-11-26T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"HIB SE RECEPCIONA DEL DESPACHO // JULIANB ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-26T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":84,"isUltimaAct":true,"idProceso":51154840,"createdAt":"2024-11-26T05:00:00.000Z"}
+{
+  "idRegActuacion": 1458013770,
+  "llaveProceso": "11001400300620180045400",
+  "consActuacion": 84,
+  "fechaActuacion": "2024-11-26T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "HIB SE RECEPCIONA DEL DESPACHO // JULIANB ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 84,
+  "isUltimaAct": true,
+  "idProceso": 51154840,
+  "createdAt": "2024-11-26T05:00:00.000Z"
+}

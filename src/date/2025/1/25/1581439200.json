@@ -1,1 +1,17 @@
-{"idRegActuacion":1581439200,"llaveProceso":"11001400301220170102100","consActuacion":116,"fechaActuacion":"2025-02-25T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"Me permito comunicar al despacho que revisado el Portal Web Transaccional del Banco Agrario con números de identificación de las partes y número de expediente a la fecha NO se encuentran títulos constituidos para el proceso de la referencia.\r\n_ALópezM_","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-25T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":116,"isUltimaAct":true,"idProceso":50692560,"createdAt":"2025-02-25T05:00:00.000Z"}
+{
+  "idRegActuacion": 1581439200,
+  "llaveProceso": "11001400301220170102100",
+  "consActuacion": 116,
+  "fechaActuacion": "2025-02-25T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Me permito comunicar al despacho que revisado el Portal Web Transaccional del Banco Agrario con números de identificación de las partes y número de expediente a la fecha NO se encuentran títulos constituidos para el proceso de la referencia.\r\n_ALópezM_",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 116,
+  "isUltimaAct": true,
+  "idProceso": 50692560,
+  "createdAt": "2025-02-25T05:00:00.000Z"
+}

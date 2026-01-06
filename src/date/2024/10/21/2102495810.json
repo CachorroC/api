@@ -1,1 +1,17 @@
-{"idRegActuacion":2102495810,"llaveProceso":"11001400301220180081000","consActuacion":66,"fechaActuacion":"2024-11-21T05:00:00.000Z","actuacion":"Archivo Definitivo","anotacion":"ARCHIVADO// CAJA 479//PROCESO FISICO-HIBRIDO //LAURA GUTIERREZ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-21T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":66,"isUltimaAct":true,"idProceso":51282150,"createdAt":"2024-11-21T05:00:00.000Z"}
+{
+  "idRegActuacion": 2102495810,
+  "llaveProceso": "11001400301220180081000",
+  "consActuacion": 66,
+  "fechaActuacion": "2024-11-21T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVADO// CAJA 479//PROCESO FISICO-HIBRIDO //LAURA GUTIERREZ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-21T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 66,
+  "isUltimaAct": true,
+  "idProceso": 51282150,
+  "createdAt": "2024-11-21T05:00:00.000Z"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":1665568820,"llaveProceso":"11001400304320180038400","consActuacion":114,"fechaActuacion":"2025-03-26T05:00:00.000Z","actuacion":"ElaboraciÃ³n de oficios","anotacion":"SE ELABORA OFICIO No. OOECM-0325SBO-4314\r\n//PROCESO HIBRIDO SE DIRECCIONA PARA LA FIRMA//EMILIO B\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-26T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":114,"isUltimaAct":true,"idProceso":114256610,"createdAt":"2025-03-26T05:00:00.000Z"}
+{
+  "idRegActuacion": 1665568820,
+  "llaveProceso": "11001400304320180038400",
+  "consActuacion": 114,
+  "fechaActuacion": "2025-03-26T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "SE ELABORA OFICIO No. OOECM-0325SBO-4314\r\n//PROCESO HIBRIDO SE DIRECCIONA PARA LA FIRMA//EMILIO B\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 114,
+  "isUltimaAct": true,
+  "idProceso": 114256610,
+  "createdAt": "2025-03-26T05:00:00.000Z"
+}

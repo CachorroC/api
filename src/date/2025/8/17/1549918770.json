@@ -1,1 +1,17 @@
-{"idRegActuacion":1549918770,"llaveProceso":"11001400302120170153200","consActuacion":78,"fechaActuacion":"2025-02-11T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 1811-2025, No. Reloj Radicador: 15, Entidad o SeÃ±or(a): MARIA SUAREZ - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: En conocimiento oficio","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-11T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":78,"isUltimaAct":true,"idProceso":50769660,"createdAt":"2025-02-11T05:00:00.000Z"}
+{
+  "idRegActuacion": 1549918770,
+  "llaveProceso": "11001400302120170153200",
+  "consActuacion": 78,
+  "fechaActuacion": "2025-02-11T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 1811-2025, No. Reloj Radicador: 15, Entidad o Señor(a): MARIA SUAREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: En conocimiento oficio",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 78,
+  "isUltimaAct": true,
+  "idProceso": 50769660,
+  "createdAt": "2025-02-11T05:00:00.000Z"
+}

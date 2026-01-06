@@ -1,1 +1,19 @@
-{"actuacion":"Al despacho","anotacion":"secuestro","cant":80,"carpetaNumero":401,"codRegla":"00                              ","conDocumentos":false,"consActuacion":41,"createdAt":"2022-10-16T05:00:00.000Z","fechaActuacion":"2022-10-18T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-10-16T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302120180023600","procesoId":51029180,"idProceso":51029180,"idRegActuacion":"1278851300"}
+{
+  "actuacion": "Al despacho",
+  "anotacion": "secuestro",
+  "cant": 80,
+  "carpetaNumero": 401,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 41,
+  "createdAt": "2022-10-16T05:00:00.000Z",
+  "fechaActuacion": "2022-10-18T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-10-16T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302120180023600",
+  "procesoId": 51029180,
+  "idProceso": 51029180,
+  "idRegActuacion": "1278851300"
+}

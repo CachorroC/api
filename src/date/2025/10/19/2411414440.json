@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"SE NOTIFICO TUTELA 2025-166 DEL JUZGADO 03 CIVIL DEL CIRCUITO DE EJECUCION DE SENTENCIAS DE BOGOTA, PROCESO HIBRIDO, SE ENVIA NOTIFICACION, RESPUESTA DE TUTELA, LINK DEL PROCESO Y  CONSTANCIA AL JUZGADO.  /UBICACION SECRETARIA LETRA /PAULA B/","cant":203,"carpetaNumero":170,"codRegla":"00                              ","conDocumentos":false,"consActuacion":164,"createdAt":"2025-05-08T05:00:00.000Z","fechaActuacion":"2025-05-08T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2025-05-08T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302520170090300","procesoId":112048180,"idProceso":112048180,"idRegActuacion":"1771221340"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE NOTIFICO TUTELA 2025-166 DEL JUZGADO 03 CIVIL DEL CIRCUITO DE EJECUCION DE SENTENCIAS DE BOGOTA, PROCESO HIBRIDO, SE ENVIA NOTIFICACION, RESPUESTA DE TUTELA, LINK DEL PROCESO Y  CONSTANCIA AL JUZGADO.  /UBICACION SECRETARIA LETRA /PAULA B/",
+  "cant": 203,
+  "carpetaNumero": 170,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 164,
+  "createdAt": "2025-05-08T05:00:00.000Z",
+  "fechaActuacion": "2025-05-08T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2025-05-08T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302520170090300",
+  "procesoId": 112048180,
+  "idProceso": 112048180,
+  "idRegActuacion": "1771221340"
+}

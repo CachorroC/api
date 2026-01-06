@@ -1,1 +1,17 @@
-{"idRegActuacion":1595629460,"llaveProceso":"11001400303720230099100","consActuacion":23,"fechaActuacion":"2025-03-03T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SE RECEPCIONA EXPEDIENTE DIGITAL POR ESTADO  //PASA A LETRA /// ANUAR GUERRA  \r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-03T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":23,"isUltimaAct":true,"idProceso":207990060,"createdAt":"2025-03-03T05:00:00.000Z"}
+{
+  "idRegActuacion": 1595629460,
+  "llaveProceso": "11001400303720230099100",
+  "consActuacion": 23,
+  "fechaActuacion": "2025-03-03T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECEPCIONA EXPEDIENTE DIGITAL POR ESTADO  //PASA A LETRA /// ANUAR GUERRA  \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 23,
+  "isUltimaAct": true,
+  "idProceso": 207990060,
+  "createdAt": "2025-03-03T05:00:00.000Z"
+}

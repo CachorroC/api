@@ -1,1 +1,19 @@
-{"actuacion":"Al despacho","anotacion":"SE INGRESA EL PROCESO AL DESPACHO CON (2) CUADERNOS HENRYBERNAL","cant":86,"carpetaNumero":387,"codRegla":"00                              ","conDocumentos":false,"consActuacion":47,"createdAt":"2022-03-17T05:00:00.000Z","fechaActuacion":"2022-03-18T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-03-17T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400305020170133600","procesoId":106185210,"idProceso":106185210,"idRegActuacion":"1219067400"}
+{
+  "actuacion": "Al despacho",
+  "anotacion": "SE INGRESA EL PROCESO AL DESPACHO CON (2) CUADERNOS HENRYBERNAL",
+  "cant": 86,
+  "carpetaNumero": 387,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 47,
+  "createdAt": "2022-03-17T05:00:00.000Z",
+  "fechaActuacion": "2022-03-18T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-03-17T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400305020170133600",
+  "procesoId": 106185210,
+  "idProceso": 106185210,
+  "idRegActuacion": "1219067400"
+}

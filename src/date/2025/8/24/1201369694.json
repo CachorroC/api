@@ -1,1 +1,19 @@
-{"actuacion":"Auto reconoce personer√≠a","anotacion":"R&S ASESOR√çAS JUR√çDICAS","cant":121,"carpetaNumero":25,"codRegla":"00                              ","conDocumentos":false,"consActuacion":82,"createdAt":"2021-12-09T05:00:00.000Z","fechaActuacion":"2021-12-09T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-12-09T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001310301120170033500","procesoId":1805257424,"idProceso":1805257424,"idRegActuacion":"990694824"}
+{
+  "actuacion": "Auto reconoce personerÌa",
+  "anotacion": "R&S ASESORÕAS JURÕDICAS",
+  "cant": 121,
+  "carpetaNumero": 25,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 82,
+  "createdAt": "2021-12-09T05:00:00.000Z",
+  "fechaActuacion": "2021-12-09T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-12-09T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001310301120170033500",
+  "procesoId": 1805257424,
+  "idProceso": 1805257424,
+  "idRegActuacion": "990694824"
+}

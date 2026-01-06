@@ -1,1 +1,19 @@
-{"actuacion":"Fijacion estado","anotacion":"Actuación registrada el 16/04/2018 a las 15:48:41.","cant":58,"carpetaNumero":122,"codRegla":"00                              ","conDocumentos":false,"consActuacion":19,"createdAt":"2018-04-16T05:00:00.000Z","fechaActuacion":"2018-04-16T00:00:00.000Z","fechaFinal":"2018-04-17T00:00:00.000Z","fechaInicial":"2018-04-17T00:00:00.000Z","fechaRegistro":"2018-04-16T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400304020170119300","procesoId":19148931,"idProceso":19148931,"idRegActuacion":"219853871"}
+{
+  "actuacion": "Fijacion estado",
+  "anotacion": "Actuaciï¿½n registrada el 16/04/2018 a las 15:48:41.",
+  "cant": 58,
+  "carpetaNumero": 122,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 19,
+  "createdAt": "2018-04-16T05:00:00.000Z",
+  "fechaActuacion": "2018-04-16T00:00:00.000Z",
+  "fechaFinal": "2018-04-17T00:00:00.000Z",
+  "fechaInicial": "2018-04-17T00:00:00.000Z",
+  "fechaRegistro": "2018-04-16T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400304020170119300",
+  "procesoId": 19148931,
+  "idProceso": 19148931,
+  "idRegActuacion": "219853871"
+}

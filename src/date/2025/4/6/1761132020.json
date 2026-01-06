@@ -1,1 +1,17 @@
-{"idRegActuacion":1761132020,"llaveProceso":"11001400302520170090300","consActuacion":161,"fechaActuacion":"2025-05-06T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"EXPEDIENTE HIBRIDO PASA A JURIDICA  // XIMENA C \r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-06T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":161,"isUltimaAct":true,"idProceso":112048180,"createdAt":"2025-05-06T05:00:00.000Z"}
+{
+  "idRegActuacion": 1761132020,
+  "llaveProceso": "11001400302520170090300",
+  "consActuacion": 161,
+  "fechaActuacion": "2025-05-06T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "EXPEDIENTE HIBRIDO PASA A JURIDICA  // XIMENA C \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 161,
+  "isUltimaAct": true,
+  "idProceso": 112048180,
+  "createdAt": "2025-05-06T05:00:00.000Z"
+}

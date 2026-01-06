@@ -1,1 +1,17 @@
-{"idRegActuacion":2054458190,"llaveProceso":"11001400307820170097500","consActuacion":56,"fechaActuacion":"2024-10-23T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 20882-2024, No. Reloj Radicador: 52818, Entidad o Señor(a): CARMEN RAMIREZ MUÑOZ. - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: RENUNCIA","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-23T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":56,"isUltimaAct":true,"idProceso":51465090,"createdAt":"2024-10-23T05:00:00.000Z"}
+{
+  "idRegActuacion": 2054458190,
+  "llaveProceso": "11001400307820170097500",
+  "consActuacion": 56,
+  "fechaActuacion": "2024-10-23T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 20882-2024, No. Reloj Radicador: 52818, Entidad o Señor(a): CARMEN RAMIREZ MUÑOZ. - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: RENUNCIA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 56,
+  "isUltimaAct": true,
+  "idProceso": 51465090,
+  "createdAt": "2024-10-23T05:00:00.000Z"
+}

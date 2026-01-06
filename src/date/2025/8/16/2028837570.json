@@ -1,1 +1,17 @@
-{"idRegActuacion":2028837570,"llaveProceso":"11001400303820240098200","consActuacion":35,"fechaActuacion":"2025-08-01T05:00:00.000Z","actuacion":"Al despacho","anotacion":"INGRESA AL DESPACHO SOLC LIQUIDACION DE CREDITO // DIGITAL // ALEJANDRA P.","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-28T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":35,"isUltimaAct":true,"idProceso":218197100,"createdAt":"2025-07-28T05:00:00.000Z"}
+{
+  "idRegActuacion": 2028837570,
+  "llaveProceso": "11001400303820240098200",
+  "consActuacion": 35,
+  "fechaActuacion": "2025-08-01T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "INGRESA AL DESPACHO SOLC LIQUIDACION DE CREDITO // DIGITAL // ALEJANDRA P.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-28T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 35,
+  "isUltimaAct": true,
+  "idProceso": 218197100,
+  "createdAt": "2025-07-28T05:00:00.000Z"
+}

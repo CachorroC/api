@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"SE ENVIA EXPEDIENTE A ENTRADAS CON RESPUEST DE LA ENTIDAD FOGAFIN JENNYFER T ","cant":132,"carpetaNumero":44,"codRegla":"00                              ","conDocumentos":false,"consActuacion":93,"createdAt":"2021-10-26T05:00:00.000Z","fechaActuacion":"2021-10-26T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-10-26T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302220170056700","procesoId":111939890,"idProceso":111939890,"idRegActuacion":"1190963290"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE ENVIA EXPEDIENTE A ENTRADAS CON RESPUEST DE LA ENTIDAD FOGAFIN JENNYFER T ",
+  "cant": 132,
+  "carpetaNumero": 44,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 93,
+  "createdAt": "2021-10-26T05:00:00.000Z",
+  "fechaActuacion": "2021-10-26T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-10-26T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302220170056700",
+  "procesoId": 111939890,
+  "idProceso": 111939890,
+  "idRegActuacion": "1190963290"
+}

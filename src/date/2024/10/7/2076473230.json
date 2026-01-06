@@ -1,1 +1,17 @@
-{"idRegActuacion":2076473230,"llaveProceso":"11001400306320170092400","consActuacion":72,"fechaActuacion":"2024-11-12T05:00:00.000Z","actuacion":"Al despacho","anotacion":"EXPEDIENTE DIGITAL INGRESA AL DESPACHO PARA LO PERTINENTE // LAURA ROMERO 12/11","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-07T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":72,"isUltimaAct":true,"idProceso":65700110,"createdAt":"2024-11-07T05:00:00.000Z"}
+{
+  "idRegActuacion": 2076473230,
+  "llaveProceso": "11001400306320170092400",
+  "consActuacion": 72,
+  "fechaActuacion": "2024-11-12T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "EXPEDIENTE DIGITAL INGRESA AL DESPACHO PARA LO PERTINENTE // LAURA ROMERO 12/11",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 72,
+  "isUltimaAct": true,
+  "idProceso": 65700110,
+  "createdAt": "2024-11-07T05:00:00.000Z"
+}

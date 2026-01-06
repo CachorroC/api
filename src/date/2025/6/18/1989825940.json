@@ -1,1 +1,17 @@
-{"idRegActuacion":1989825940,"llaveProceso":"11001418901220180064400","consActuacion":66,"fechaActuacion":"2025-07-16T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"HIB PASA ATITULOS // JULIAN B ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-16T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":66,"isUltimaAct":true,"idProceso":71079290,"createdAt":"2025-07-16T05:00:00.000Z"}
+{
+  "idRegActuacion": 1989825940,
+  "llaveProceso": "11001418901220180064400",
+  "consActuacion": 66,
+  "fechaActuacion": "2025-07-16T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "HIB PASA ATITULOS // JULIAN B ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-16T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 66,
+  "isUltimaAct": true,
+  "idProceso": 71079290,
+  "createdAt": "2025-07-16T05:00:00.000Z"
+}

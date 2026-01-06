@@ -1,1 +1,19 @@
-{"actuacion":"Entrega de oficios","anotacion":"Se remite Oficio No. OOECM-1223DT-2896 ordenado en auto del 16 de noviembre de 2023. ENTRADAS. YANNETH AMAYA","cant":114,"carpetaNumero":508,"codRegla":"00                              ","conDocumentos":false,"consActuacion":75,"createdAt":"2024-01-25T05:00:00.000Z","fechaActuacion":"2024-01-25T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2024-01-25T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400305620180022100","procesoId":51042800,"idProceso":51042800,"idRegActuacion":"1372853780"}
+{
+  "actuacion": "Entrega de oficios",
+  "anotacion": "Se remite Oficio No. OOECM-1223DT-2896 ordenado en auto del 16 de noviembre de 2023. ENTRADAS. YANNETH AMAYA",
+  "cant": 114,
+  "carpetaNumero": 508,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 75,
+  "createdAt": "2024-01-25T05:00:00.000Z",
+  "fechaActuacion": "2024-01-25T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2024-01-25T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400305620180022100",
+  "procesoId": 51042800,
+  "idProceso": 51042800,
+  "idRegActuacion": "1372853780"
+}

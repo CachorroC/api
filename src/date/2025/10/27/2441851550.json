@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"SOLICITUD","cant":133,"carpetaNumero":533,"codRegla":"00                              ","conDocumentos":false,"consActuacion":94,"createdAt":"2022-11-28T05:00:00.000Z","fechaActuacion":"2022-11-21T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-11-28T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300320170088400","procesoId":50468620,"idProceso":50468620,"idRegActuacion":"1287023420"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "SOLICITUD",
+  "cant": 133,
+  "carpetaNumero": 533,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 94,
+  "createdAt": "2022-11-28T05:00:00.000Z",
+  "fechaActuacion": "2022-11-21T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-11-28T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300320170088400",
+  "procesoId": 50468620,
+  "idProceso": 50468620,
+  "idRegActuacion": "1287023420"
+}

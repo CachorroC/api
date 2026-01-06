@@ -1,1 +1,17 @@
-{"idRegActuacion":2034642950,"llaveProceso":"11001400303720170083900","consActuacion":53,"fechaActuacion":"2024-10-03T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 8531-2024, No. Reloj Radicador: 43691, Entidad o Señor(a): SECRE MOVILIDAD - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: LEVANTA EMB VEH ZZW970","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-03T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":53,"isUltimaAct":true,"idProceso":50508570,"createdAt":"2024-10-03T05:00:00.000Z"}
+{
+  "idRegActuacion": 2034642950,
+  "llaveProceso": "11001400303720170083900",
+  "consActuacion": 53,
+  "fechaActuacion": "2024-10-03T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 8531-2024, No. Reloj Radicador: 43691, Entidad o Señor(a): SECRE MOVILIDAD - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: LEVANTA EMB VEH ZZW970",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 53,
+  "isUltimaAct": true,
+  "idProceso": 50508570,
+  "createdAt": "2024-10-03T05:00:00.000Z"
+}

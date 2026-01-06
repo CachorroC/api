@@ -1,1 +1,19 @@
-{"actuacion":"Al despacho por reparto","anotacion":null,"cant":41,"carpetaNumero":587,"codRegla":"00                              ","conDocumentos":false,"consActuacion":2,"createdAt":"2023-11-03T05:00:00.000Z","fechaActuacion":"2023-11-03T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2023-11-03T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001418907020230052700","procesoId":134910250,"idProceso":134910250,"idRegActuacion":"1358054330"}
+{
+  "actuacion": "Al despacho por reparto",
+  "anotacion": null,
+  "cant": 41,
+  "carpetaNumero": 587,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 2,
+  "createdAt": "2023-11-03T05:00:00.000Z",
+  "fechaActuacion": "2023-11-03T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2023-11-03T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001418907020230052700",
+  "procesoId": 134910250,
+  "idProceso": 134910250,
+  "idRegActuacion": "1358054330"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":1655033310,"llaveProceso":"11001400300420180047500","consActuacion":145,"fechaActuacion":"2025-03-21T05:00:00.000Z","actuacion":"Auto de Tr√°mite","anotacion":"POR LA OFICINA DE EJECUCION DESGLOSESE OFICIO INDICADO////","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-21T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":145,"isUltimaAct":true,"idProceso":51149410,"createdAt":"2025-03-21T05:00:00.000Z"}
+{
+  "idRegActuacion": 1655033310,
+  "llaveProceso": "11001400300420180047500",
+  "consActuacion": 145,
+  "fechaActuacion": "2025-03-21T05:00:00.000Z",
+  "actuacion": "Auto de Tr·mite",
+  "anotacion": "POR LA OFICINA DE EJECUCION DESGLOSESE OFICIO INDICADO////",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-21T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 145,
+  "isUltimaAct": true,
+  "idProceso": 51149410,
+  "createdAt": "2025-03-21T05:00:00.000Z"
+}

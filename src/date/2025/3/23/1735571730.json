@@ -1,1 +1,17 @@
-{"idRegActuacion":1735571730,"llaveProceso":"11001400306920230166900","consActuacion":25,"fechaActuacion":"2025-04-24T05:00:00.000Z","actuacion":"Traslado LiquidaciÃ³n Credito Art. 446 C.G.P.","anotacion":"L- GERMAN","fechaInicial":"2025-04-25T05:00:00.000Z","fechaFinal":"2025-04-29T05:00:00.000Z","fechaRegistro":"2025-04-23T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":25,"isUltimaAct":true,"idProceso":167724300,"createdAt":"2025-04-23T05:00:00.000Z"}
+{
+  "idRegActuacion": 1735571730,
+  "llaveProceso": "11001400306920230166900",
+  "consActuacion": 25,
+  "fechaActuacion": "2025-04-24T05:00:00.000Z",
+  "actuacion": "Traslado Liquidación Credito Art. 446 C.G.P.",
+  "anotacion": "L- GERMAN",
+  "fechaInicial": "2025-04-25T05:00:00.000Z",
+  "fechaFinal": "2025-04-29T05:00:00.000Z",
+  "fechaRegistro": "2025-04-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 25,
+  "isUltimaAct": true,
+  "idProceso": 167724300,
+  "createdAt": "2025-04-23T05:00:00.000Z"
+}

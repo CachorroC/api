@@ -1,1 +1,17 @@
-{"idRegActuacion":1838977330,"llaveProceso":"11001400308120180051400","consActuacion":61,"fechaActuacion":"2025-05-30T05:00:00.000Z","actuacion":"Recepci√≥n memorial","anotacion":"Radicado No. 9783-2025, No. Reloj Radicador: 147981, Entidad o Se√±or(a): ALCALDIA MAYOR DE BOGOT√Å - Tercer Interesado, Aport√≥ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: allega certificacion catastral","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-30T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":61,"isUltimaAct":true,"idProceso":51918470,"createdAt":"2025-05-30T05:00:00.000Z"}
+{
+  "idRegActuacion": 1838977330,
+  "llaveProceso": "11001400308120180051400",
+  "consActuacion": 61,
+  "fechaActuacion": "2025-05-30T05:00:00.000Z",
+  "actuacion": "RecepciÛn memorial",
+  "anotacion": "Radicado No. 9783-2025, No. Reloj Radicador: 147981, Entidad o SeÒor(a): ALCALDIA MAYOR DE BOGOT¡ - Tercer Interesado, AportÛ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: allega certificacion catastral",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-30T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 61,
+  "isUltimaAct": true,
+  "idProceso": 51918470,
+  "createdAt": "2025-05-30T05:00:00.000Z"
+}

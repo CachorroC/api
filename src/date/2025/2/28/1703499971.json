@@ -1,1 +1,17 @@
-{"idRegActuacion":1703499971,"llaveProceso":"11001400304220230109900","consActuacion":32,"fechaActuacion":"2025-03-28T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"C, correo envÃ­o oficios Nos.0386 y 0387 Desembargo Registro.\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-28T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":32,"isUltimaAct":true,"idProceso":162013641,"createdAt":"2025-03-28T05:00:00.000Z"}
+{
+  "idRegActuacion": 1703499971,
+  "llaveProceso": "11001400304220230109900",
+  "consActuacion": 32,
+  "fechaActuacion": "2025-03-28T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "C, correo envío oficios Nos.0386 y 0387 Desembargo Registro.\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-28T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 32,
+  "isUltimaAct": true,
+  "idProceso": 162013641,
+  "createdAt": "2025-03-28T05:00:00.000Z"
+}

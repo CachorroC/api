@@ -1,1 +1,17 @@
-{"idRegActuacion":1560130770,"llaveProceso":"11001400305920230031500","consActuacion":27,"fechaActuacion":"2025-02-25T05:00:00.000Z","actuacion":"Al despacho","anotacion":"DIGITAL-PROCESO INGRESA AL DESPACHO//LEIDY","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-17T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":27,"isUltimaAct":true,"idProceso":132018670,"createdAt":"2025-02-17T05:00:00.000Z"}
+{
+  "idRegActuacion": 1560130770,
+  "llaveProceso": "11001400305920230031500",
+  "consActuacion": 27,
+  "fechaActuacion": "2025-02-25T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "DIGITAL-PROCESO INGRESA AL DESPACHO//LEIDY",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 27,
+  "isUltimaAct": true,
+  "idProceso": 132018670,
+  "createdAt": "2025-02-17T05:00:00.000Z"
+}

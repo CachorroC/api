@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"Radicado No. 9206-2021, No. Reloj Radicador: 46462, Entidad o Señor(a): MUNDO MUJER - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Oficio","cant":144,"carpetaNumero":81,"codRegla":"00                              ","conDocumentos":false,"consActuacion":105,"createdAt":"2021-09-29T05:00:00.000Z","fechaActuacion":"2021-09-29T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-09-29T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400303620170055400","procesoId":50527610,"idProceso":50527610,"idRegActuacion":"1187252280"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "Radicado No. 9206-2021, No. Reloj Radicador: 46462, Entidad o Seï¿½or(a): MUNDO MUJER - Tercer Interesado, Aportï¿½ Documento: Memorial, Con La Solucitud: Oficio",
+  "cant": 144,
+  "carpetaNumero": 81,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 105,
+  "createdAt": "2021-09-29T05:00:00.000Z",
+  "fechaActuacion": "2021-09-29T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-09-29T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400303620170055400",
+  "procesoId": 50527610,
+  "idProceso": 50527610,
+  "idRegActuacion": "1187252280"
+}

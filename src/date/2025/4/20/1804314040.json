@@ -1,1 +1,17 @@
-{"idRegActuacion":1804314040,"llaveProceso":"11001400300920240033200","consActuacion":43,"fechaActuacion":"2025-05-20T05:00:00.000Z","actuacion":"Entrega de oficios","anotacion":"SE HACE ENVIO DIGITAL DEL OFICIO OOECM-0425CAPB-5058 A LA ENTIDAD Y AL INTERESADO // SE DIRECCIONA AL AREA DE TITULOS // JAVIER F.","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-20T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":43,"isUltimaAct":true,"idProceso":154958600,"createdAt":"2025-05-20T05:00:00.000Z"}
+{
+  "idRegActuacion": 1804314040,
+  "llaveProceso": "11001400300920240033200",
+  "consActuacion": 43,
+  "fechaActuacion": "2025-05-20T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "SE HACE ENVIO DIGITAL DEL OFICIO OOECM-0425CAPB-5058 A LA ENTIDAD Y AL INTERESADO // SE DIRECCIONA AL AREA DE TITULOS // JAVIER F.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 43,
+  "isUltimaAct": true,
+  "idProceso": 154958600,
+  "createdAt": "2025-05-20T05:00:00.000Z"
+}

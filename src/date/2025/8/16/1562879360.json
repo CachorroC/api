@@ -1,1 +1,17 @@
-{"idRegActuacion":1562879360,"llaveProceso":"11001400302520170080700","consActuacion":68,"fechaActuacion":"2025-02-18T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Respuesta Circulemos Digital","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-18T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":68,"isUltimaAct":true,"idProceso":50623380,"createdAt":"2025-02-18T05:00:00.000Z"}
+{
+  "idRegActuacion": 1562879360,
+  "llaveProceso": "11001400302520170080700",
+  "consActuacion": 68,
+  "fechaActuacion": "2025-02-18T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Respuesta Circulemos Digital",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 68,
+  "isUltimaAct": true,
+  "idProceso": 50623380,
+  "createdAt": "2025-02-18T05:00:00.000Z"
+}

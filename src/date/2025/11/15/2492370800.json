@@ -1,1 +1,19 @@
-{"actuacion":"Al despacho","anotacion":"EXPEDIENTE AL DESPACHO PARA LO PERTINENTE CD 1/ MICHAEL BAQUERO","cant":80,"carpetaNumero":546,"codRegla":"00                              ","conDocumentos":false,"consActuacion":41,"createdAt":"2022-03-15T05:00:00.000Z","fechaActuacion":"2022-03-15T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-03-15T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300220170100200","procesoId":50780430,"idProceso":50780430,"idRegActuacion":"1218072410"}
+{
+  "actuacion": "Al despacho",
+  "anotacion": "EXPEDIENTE AL DESPACHO PARA LO PERTINENTE CD 1/ MICHAEL BAQUERO",
+  "cant": 80,
+  "carpetaNumero": 546,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 41,
+  "createdAt": "2022-03-15T05:00:00.000Z",
+  "fechaActuacion": "2022-03-15T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-03-15T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300220170100200",
+  "procesoId": 50780430,
+  "idProceso": 50780430,
+  "idRegActuacion": "1218072410"
+}

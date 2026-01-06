@@ -1,1 +1,17 @@
-{"idRegActuacion":2143367040,"llaveProceso":"11001400305620180022100","consActuacion":106,"fechaActuacion":"2025-09-01T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 12831-2025, No. Reloj Radicador: 200105, Entidad o SeÃ±or(a): CREAS CONSULTORES S.A.S., AportÃ³ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: SOLICITUD LEVANTAMIENTO DE MEDIDAS CAUTELARES","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-09-01T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":106,"isUltimaAct":true,"idProceso":51042800,"createdAt":"2025-09-01T05:00:00.000Z"}
+{
+  "idRegActuacion": 2143367040,
+  "llaveProceso": "11001400305620180022100",
+  "consActuacion": 106,
+  "fechaActuacion": "2025-09-01T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 12831-2025, No. Reloj Radicador: 200105, Entidad o Señor(a): CREAS CONSULTORES S.A.S., Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: SOLICITUD LEVANTAMIENTO DE MEDIDAS CAUTELARES",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-09-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 106,
+  "isUltimaAct": true,
+  "idProceso": 51042800,
+  "createdAt": "2025-09-01T05:00:00.000Z"
+}

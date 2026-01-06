@@ -1,1 +1,17 @@
-{"idRegActuacion":2099383190,"llaveProceso":"11001400301820240036200","consActuacion":30,"fechaActuacion":"2024-11-21T05:00:00.000Z","actuacion":"Al despacho","anotacion":"PROCESO INGRESA AL DESPACHO PARA LO PERTINENTE // LAURA BAQUERO// P. DIGITAL //","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-20T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":30,"isUltimaAct":true,"idProceso":155218070,"createdAt":"2024-11-20T05:00:00.000Z"}
+{
+  "idRegActuacion": 2099383190,
+  "llaveProceso": "11001400301820240036200",
+  "consActuacion": 30,
+  "fechaActuacion": "2024-11-21T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "PROCESO INGRESA AL DESPACHO PARA LO PERTINENTE // LAURA BAQUERO// P. DIGITAL //",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 30,
+  "isUltimaAct": true,
+  "idProceso": 155218070,
+  "createdAt": "2024-11-20T05:00:00.000Z"
+}

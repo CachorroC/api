@@ -1,1 +1,17 @@
-{"idRegActuacion":1819779450,"llaveProceso":"11001418902920240047200","consActuacion":35,"fechaActuacion":"2025-05-26T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 7998-2025, No. Reloj Radicador: 143853, Entidad o SeÃ±or(a): CARMEN RAMIREZ MUÃ‘OZ - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Otro, Observaciones: SOLICITUD TERMINACION","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-26T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":35,"isUltimaAct":true,"idProceso":157581350,"createdAt":"2025-05-26T05:00:00.000Z"}
+{
+  "idRegActuacion": 1819779450,
+  "llaveProceso": "11001418902920240047200",
+  "consActuacion": 35,
+  "fechaActuacion": "2025-05-26T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 7998-2025, No. Reloj Radicador: 143853, Entidad o Señor(a): CARMEN RAMIREZ MUÑOZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otro, Observaciones: SOLICITUD TERMINACION",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 35,
+  "isUltimaAct": true,
+  "idProceso": 157581350,
+  "createdAt": "2025-05-26T05:00:00.000Z"
+}

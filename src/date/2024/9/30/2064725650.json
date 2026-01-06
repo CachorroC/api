@@ -1,1 +1,17 @@
-{"idRegActuacion":2064725650,"llaveProceso":"11001400307720170056800","consActuacion":131,"fechaActuacion":"2024-10-30T05:00:00.000Z","actuacion":"Elaboración de oficios","anotacion":"SE ELABORA OFICIO No. TOECM-1024LFGL-281 REQUIERE SECUESTRE/LUISAGARZON","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-30T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":131,"isUltimaAct":true,"idProceso":50921080,"createdAt":"2024-10-30T05:00:00.000Z"}
+{
+  "idRegActuacion": 2064725650,
+  "llaveProceso": "11001400307720170056800",
+  "consActuacion": 131,
+  "fechaActuacion": "2024-10-30T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "SE ELABORA OFICIO No. TOECM-1024LFGL-281 REQUIERE SECUESTRE/LUISAGARZON",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-30T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 131,
+  "isUltimaAct": true,
+  "idProceso": 50921080,
+  "createdAt": "2024-10-30T05:00:00.000Z"
+}

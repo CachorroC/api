@@ -1,1 +1,17 @@
-{"idRegActuacion":1425087103,"llaveProceso":"11001400303820240098200","consActuacion":17,"fechaActuacion":"2025-01-21T05:00:00.000Z","actuacion":"Entrega de oficios","anotacion":"Camara comercio e Inmueble","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-01-21T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":17,"isUltimaAct":true,"idProceso":134105833,"createdAt":"2025-01-21T05:00:00.000Z"}
+{
+  "idRegActuacion": 1425087103,
+  "llaveProceso": "11001400303820240098200",
+  "consActuacion": 17,
+  "fechaActuacion": "2025-01-21T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "Camara comercio e Inmueble",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-01-21T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 17,
+  "isUltimaAct": true,
+  "idProceso": 134105833,
+  "createdAt": "2025-01-21T05:00:00.000Z"
+}

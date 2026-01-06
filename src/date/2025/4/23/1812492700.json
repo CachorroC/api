@@ -1,1 +1,17 @@
-{"idRegActuacion":1812492700,"llaveProceso":"11001400300320170088400","consActuacion":125,"fechaActuacion":"2025-05-22T05:00:00.000Z","actuacion":"Al despacho","anotacion":"(FIL5339) VENCIDO TERMINO TRASLADO DE LIQUIDACION // DGTAL // DianaAguilar\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-22T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":125,"isUltimaAct":true,"idProceso":50468620,"createdAt":"2025-05-22T05:00:00.000Z"}
+{
+  "idRegActuacion": 1812492700,
+  "llaveProceso": "11001400300320170088400",
+  "consActuacion": 125,
+  "fechaActuacion": "2025-05-22T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "(FIL5339) VENCIDO TERMINO TRASLADO DE LIQUIDACION // DGTAL // DianaAguilar\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 125,
+  "isUltimaAct": true,
+  "idProceso": 50468620,
+  "createdAt": "2025-05-22T05:00:00.000Z"
+}

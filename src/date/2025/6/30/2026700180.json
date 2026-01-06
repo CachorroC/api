@@ -1,1 +1,17 @@
-{"idRegActuacion":2026700180,"llaveProceso":"11001400304620230119600","consActuacion":26,"fechaActuacion":"2025-07-28T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"PROCESO DIGITAL// SE RECEPCIONA EN EL AREA DE ESTADOS PASA A LETRA// ESTEFANY ROJAS","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-28T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":26,"isUltimaAct":true,"idProceso":209631520,"createdAt":"2025-07-28T05:00:00.000Z"}
+{
+  "idRegActuacion": 2026700180,
+  "llaveProceso": "11001400304620230119600",
+  "consActuacion": 26,
+  "fechaActuacion": "2025-07-28T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PROCESO DIGITAL// SE RECEPCIONA EN EL AREA DE ESTADOS PASA A LETRA// ESTEFANY ROJAS",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-28T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 26,
+  "isUltimaAct": true,
+  "idProceso": 209631520,
+  "createdAt": "2025-07-28T05:00:00.000Z"
+}

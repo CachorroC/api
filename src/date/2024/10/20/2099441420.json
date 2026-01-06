@@ -1,1 +1,17 @@
-{"idRegActuacion":2099441420,"llaveProceso":"11001400307820170097500","consActuacion":58,"fechaActuacion":"2024-11-20T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"se agrega memorial para lo pertinente, devolver a entradas//DianaAguilar","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-20T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":58,"isUltimaAct":true,"idProceso":51465090,"createdAt":"2024-11-20T05:00:00.000Z"}
+{
+  "idRegActuacion": 2099441420,
+  "llaveProceso": "11001400307820170097500",
+  "consActuacion": 58,
+  "fechaActuacion": "2024-11-20T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "se agrega memorial para lo pertinente, devolver a entradas//DianaAguilar",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 58,
+  "isUltimaAct": true,
+  "idProceso": 51465090,
+  "createdAt": "2024-11-20T05:00:00.000Z"
+}

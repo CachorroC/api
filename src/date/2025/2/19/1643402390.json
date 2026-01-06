@@ -1,1 +1,17 @@
-{"idRegActuacion":1643402390,"llaveProceso":"11001418907120240087400","consActuacion":20,"fechaActuacion":"2025-03-19T05:00:00.000Z","actuacion":"Recepci√≥n memorial","anotacion":"Radicado No. 4741-2025, No. Reloj Radicador: 17, Entidad o Se√±or(a): CARMEN RAMIREZ - Tercer Interesado, Aport√≥ Documento: Memorial, Con La Solucitud: Dar Tr√°mite","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-19T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":20,"isUltimaAct":true,"idProceso":168317340,"createdAt":"2025-03-19T05:00:00.000Z"}
+{
+  "idRegActuacion": 1643402390,
+  "llaveProceso": "11001418907120240087400",
+  "consActuacion": 20,
+  "fechaActuacion": "2025-03-19T05:00:00.000Z",
+  "actuacion": "RecepciÛn memorial",
+  "anotacion": "Radicado No. 4741-2025, No. Reloj Radicador: 17, Entidad o SeÒor(a): CARMEN RAMIREZ - Tercer Interesado, AportÛ Documento: Memorial, Con La Solucitud: Dar Tr·mite",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 20,
+  "isUltimaAct": true,
+  "idProceso": 168317340,
+  "createdAt": "2025-03-19T05:00:00.000Z"
+}

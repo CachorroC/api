@@ -1,1 +1,17 @@
-{"idRegActuacion":1898089370,"llaveProceso":"11001400302320240087800","consActuacion":22,"fechaActuacion":"2025-06-18T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"SE AGREGA MEMORIAL PARA SU RESPECTIVO TRAMITE//PAULA GONZALEZ ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-06-18T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":22,"isUltimaAct":true,"idProceso":194422350,"createdAt":"2025-06-18T05:00:00.000Z"}
+{
+  "idRegActuacion": 1898089370,
+  "llaveProceso": "11001400302320240087800",
+  "consActuacion": 22,
+  "fechaActuacion": "2025-06-18T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "SE AGREGA MEMORIAL PARA SU RESPECTIVO TRAMITE//PAULA GONZALEZ ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-06-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 22,
+  "isUltimaAct": true,
+  "idProceso": 194422350,
+  "createdAt": "2025-06-18T05:00:00.000Z"
+}

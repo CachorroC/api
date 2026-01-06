@@ -1,1 +1,19 @@
-{"actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 11358-2023, No. Reloj Radicador: 15166, Entidad o SeÃ±or(a): CARMEN RAMIREZ - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial","cant":108,"carpetaNumero":233,"codRegla":"00                              ","conDocumentos":false,"consActuacion":69,"createdAt":"2023-10-31T05:00:00.000Z","fechaActuacion":"2023-10-31T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2023-10-31T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302820170084900","procesoId":50685700,"idProceso":50685700,"idRegActuacion":"1355627420"}
+{
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 11358-2023, No. Reloj Radicador: 15166, Entidad o Señor(a): CARMEN RAMIREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial",
+  "cant": 108,
+  "carpetaNumero": 233,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 69,
+  "createdAt": "2023-10-31T05:00:00.000Z",
+  "fechaActuacion": "2023-10-31T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2023-10-31T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302820170084900",
+  "procesoId": 50685700,
+  "idProceso": 50685700,
+  "idRegActuacion": "1355627420"
+}

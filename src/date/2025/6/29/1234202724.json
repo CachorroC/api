@@ -1,1 +1,17 @@
-{"idRegActuacion":1234202724,"llaveProceso":"11001400302720140070300","consActuacion":201,"fechaActuacion":"2025-07-28T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 7345-2025, Entidad o SeÃ±or(a): JHON FREDY ACEVEDO - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Otro, Observaciones: RENUNCIA PODER \r\nDe:Â Jhon Fredy Acevedo Taborda <juridicojf@aliado.co>\r\nEnviado:Â lunes, 28 de julio de 2025 12:21 p.Â m.\r\nPara:Â gestionj03ejeccbta@cendoj.ramajudicial.gov.co <gestionj03ejeccbta@cendoj.ramajudicial.gov.co>; Oficina Apoyo Juzgado 03 Civil Circuito EjecuciÃ³n Sentencias - BogotÃ¡ - BogotÃ¡ D.C. <ofiapoyoj03ejeccbta@cendoj.ramajudicial.gov.co>; Juzgado 03 Civil Circuito EjecuciÃ³n Sentencias - BogotÃ¡ - BogotÃ¡ D.C. <j03ejeccbta@cendoj.ramajudicial.gov.co>\r\nCc:Â Notificaciones Judiciales <notificaciones.judiciales.co@ars.com.ec>; Oscar HernÃ¡ndez <asistente.legal.col@ars.com.ec>\r\nAsunto:Â Renuncia a Poder RadicadoÂ Â Â Â Â Â  11001400302720140070300\r\n11001400302720140070300. JDO 3 CCEJ. GV. FL 2","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-28T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":201,"isUltimaAct":true,"idProceso":29071084,"createdAt":"2025-07-28T05:00:00.000Z"}
+{
+  "idRegActuacion": 1234202724,
+  "llaveProceso": "11001400302720140070300",
+  "consActuacion": 201,
+  "fechaActuacion": "2025-07-28T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 7345-2025, Entidad o Señor(a): JHON FREDY ACEVEDO - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otro, Observaciones: RENUNCIA PODER \r\nDe: Jhon Fredy Acevedo Taborda <juridicojf@aliado.co>\r\nEnviado: lunes, 28 de julio de 2025 12:21 p. m.\r\nPara: gestionj03ejeccbta@cendoj.ramajudicial.gov.co <gestionj03ejeccbta@cendoj.ramajudicial.gov.co>; Oficina Apoyo Juzgado 03 Civil Circuito Ejecución Sentencias - Bogotá - Bogotá D.C. <ofiapoyoj03ejeccbta@cendoj.ramajudicial.gov.co>; Juzgado 03 Civil Circuito Ejecución Sentencias - Bogotá - Bogotá D.C. <j03ejeccbta@cendoj.ramajudicial.gov.co>\r\nCc: Notificaciones Judiciales <notificaciones.judiciales.co@ars.com.ec>; Oscar Hernández <asistente.legal.col@ars.com.ec>\r\nAsunto: Renuncia a Poder Radicado       11001400302720140070300\r\n11001400302720140070300. JDO 3 CCEJ. GV. FL 2",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-28T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 201,
+  "isUltimaAct": true,
+  "idProceso": 29071084,
+  "createdAt": "2025-07-28T05:00:00.000Z"
+}

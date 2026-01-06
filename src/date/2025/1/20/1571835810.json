@@ -1,1 +1,17 @@
-{"idRegActuacion":1571835810,"llaveProceso":"11001400304420190016500","consActuacion":38,"fechaActuacion":"2025-02-20T05:00:00.000Z","actuacion":"Entrega de oficios","anotacion":"OOECM-0225PSR-27\t//ENVÍO PASA A TERMINADOS\t// JN RROMERO//\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-20T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":38,"isUltimaAct":true,"idProceso":65707550,"createdAt":"2025-02-20T05:00:00.000Z"}
+{
+  "idRegActuacion": 1571835810,
+  "llaveProceso": "11001400304420190016500",
+  "consActuacion": 38,
+  "fechaActuacion": "2025-02-20T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "OOECM-0225PSR-27\t//ENVÍO PASA A TERMINADOS\t// JN RROMERO//\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 38,
+  "isUltimaAct": true,
+  "idProceso": 65707550,
+  "createdAt": "2025-02-20T05:00:00.000Z"
+}

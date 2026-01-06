@@ -1,1 +1,17 @@
-{"idRegActuacion":1771692683,"llaveProceso":"11001400303820240098200","consActuacion":31,"fechaActuacion":"2025-05-21T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"LIQUIDACION DE CREDITO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-22T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":31,"isUltimaAct":true,"idProceso":134105833,"createdAt":"2025-05-22T05:00:00.000Z"}
+{
+  "idRegActuacion": 1771692683,
+  "llaveProceso": "11001400303820240098200",
+  "consActuacion": 31,
+  "fechaActuacion": "2025-05-21T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "LIQUIDACION DE CREDITO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 31,
+  "isUltimaAct": true,
+  "idProceso": 134105833,
+  "createdAt": "2025-05-22T05:00:00.000Z"
+}

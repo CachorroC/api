@@ -1,1 +1,17 @@
-{"idRegActuacion":2055619860,"llaveProceso":"11001400305920230031500","consActuacion":29,"fechaActuacion":"2025-08-11T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"MEMORIAL AL DESPACHO/ESTEBAN BERMUDEZ H. ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-05T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":29,"isUltimaAct":true,"idProceso":132018670,"createdAt":"2025-08-05T05:00:00.000Z"}
+{
+  "idRegActuacion": 2055619860,
+  "llaveProceso": "11001400305920230031500",
+  "consActuacion": 29,
+  "fechaActuacion": "2025-08-11T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "MEMORIAL AL DESPACHO/ESTEBAN BERMUDEZ H. ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 29,
+  "isUltimaAct": true,
+  "idProceso": 132018670,
+  "createdAt": "2025-08-05T05:00:00.000Z"
+}

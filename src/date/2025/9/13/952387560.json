@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"Radicado No. 5321-2018, No. Reloj Radicador: 98021, Entidad o Señor(a): MARIA SUAREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otro, Observaciones: ALLEGA SOLICITUD PARA REQUERIR Y EMBARGO DE CESANTIAS","cant":74,"carpetaNumero":45,"codRegla":"00                              ","conDocumentos":false,"consActuacion":35,"createdAt":"2018-08-13T05:00:00.000Z","fechaActuacion":"2018-08-13T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2018-08-13T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400301920170052800","procesoId":74646350,"idProceso":74646350,"idRegActuacion":"669999440"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "Radicado No. 5321-2018, No. Reloj Radicador: 98021, Entidad o Seï¿½or(a): MARIA SUAREZ - Tercer Interesado, Aportï¿½ Documento: Memorial, Con La Solucitud: Otro, Observaciones: ALLEGA SOLICITUD PARA REQUERIR Y EMBARGO DE CESANTIAS",
+  "cant": 74,
+  "carpetaNumero": 45,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 35,
+  "createdAt": "2018-08-13T05:00:00.000Z",
+  "fechaActuacion": "2018-08-13T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2018-08-13T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400301920170052800",
+  "procesoId": 74646350,
+  "idProceso": 74646350,
+  "idRegActuacion": "669999440"
+}

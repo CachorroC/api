@@ -1,1 +1,17 @@
-{"idRegActuacion":1752515140,"llaveProceso":"11001400307720230195200","consActuacion":19,"fechaActuacion":"2025-05-02T05:00:00.000Z","actuacion":"Remite Oficina de EjecuciÃ³n","anotacion":null,"fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-02T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":19,"isUltimaAct":true,"idProceso":138101670,"createdAt":"2025-05-02T05:00:00.000Z"}
+{
+  "idRegActuacion": 1752515140,
+  "llaveProceso": "11001400307720230195200",
+  "consActuacion": 19,
+  "fechaActuacion": "2025-05-02T05:00:00.000Z",
+  "actuacion": "Remite Oficina de Ejecución",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 19,
+  "isUltimaAct": true,
+  "idProceso": 138101670,
+  "createdAt": "2025-05-02T05:00:00.000Z"
+}

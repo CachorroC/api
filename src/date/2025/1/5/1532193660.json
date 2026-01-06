@@ -1,1 +1,17 @@
-{"idRegActuacion":1532193660,"llaveProceso":"11001400302020240092800","consActuacion":11,"fechaActuacion":"2025-01-31T05:00:00.000Z","actuacion":"Entrega de oficios","anotacion":"Se remiten oficio","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-01-31T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":11,"isUltimaAct":true,"idProceso":197448100,"createdAt":"2025-01-31T05:00:00.000Z"}
+{
+  "idRegActuacion": 1532193660,
+  "llaveProceso": "11001400302020240092800",
+  "consActuacion": 11,
+  "fechaActuacion": "2025-01-31T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "Se remiten oficio",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-01-31T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 11,
+  "isUltimaAct": true,
+  "idProceso": 197448100,
+  "createdAt": "2025-01-31T05:00:00.000Z"
+}

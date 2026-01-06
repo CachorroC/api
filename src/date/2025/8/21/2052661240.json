@@ -1,1 +1,19 @@
-{"actuacion":"Fijacion estado","anotacion":"ActuaciÃ³n registrada el 01/04/2022 a las 22:05:38.","cant":51,"carpetaNumero":499,"codRegla":"00                              ","conDocumentos":false,"consActuacion":12,"createdAt":"2022-04-01T05:00:00.000Z","fechaActuacion":"2022-04-01T00:00:00.000Z","fechaFinal":"2022-04-04T00:00:00.000Z","fechaInicial":"2022-04-04T00:00:00.000Z","fechaRegistro":"2022-04-01T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400306820200102100","procesoId":164732010,"idProceso":164732010,"idRegActuacion":"1399267420"}
+{
+  "actuacion": "Fijacion estado",
+  "anotacion": "Actuación registrada el 01/04/2022 a las 22:05:38.",
+  "cant": 51,
+  "carpetaNumero": 499,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 12,
+  "createdAt": "2022-04-01T05:00:00.000Z",
+  "fechaActuacion": "2022-04-01T00:00:00.000Z",
+  "fechaFinal": "2022-04-04T00:00:00.000Z",
+  "fechaInicial": "2022-04-04T00:00:00.000Z",
+  "fechaRegistro": "2022-04-01T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400306820200102100",
+  "procesoId": 164732010,
+  "idProceso": 164732010,
+  "idRegActuacion": "1399267420"
+}

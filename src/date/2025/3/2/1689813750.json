@@ -1,1 +1,17 @@
-{"idRegActuacion":1689813750,"llaveProceso":"11001400305520170086000","consActuacion":106,"fechaActuacion":"2025-04-02T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 4440-2025, No. Reloj Radicador: 15, Entidad o SeÃ±or(a): COOPCENTRAL - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Oficio","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-02T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":106,"isUltimaAct":true,"idProceso":86524020,"createdAt":"2025-04-02T05:00:00.000Z"}
+{
+  "idRegActuacion": 1689813750,
+  "llaveProceso": "11001400305520170086000",
+  "consActuacion": 106,
+  "fechaActuacion": "2025-04-02T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 4440-2025, No. Reloj Radicador: 15, Entidad o Señor(a): COOPCENTRAL - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Oficio",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 106,
+  "isUltimaAct": true,
+  "idProceso": 86524020,
+  "createdAt": "2025-04-02T05:00:00.000Z"
+}

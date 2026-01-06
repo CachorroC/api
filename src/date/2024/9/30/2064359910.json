@@ -1,1 +1,17 @@
-{"idRegActuacion":2064359910,"llaveProceso":"11001400303220180095900","consActuacion":52,"fechaActuacion":"2024-10-30T05:00:00.000Z","actuacion":"Archivo Definitivo","anotacion":"PROCESO SE ARCHIVA EN LA CAJA #477//FISICO//PAULA GONZALEZ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-30T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":52,"isUltimaAct":true,"idProceso":51318660,"createdAt":"2024-10-30T05:00:00.000Z"}
+{
+  "idRegActuacion": 2064359910,
+  "llaveProceso": "11001400303220180095900",
+  "consActuacion": 52,
+  "fechaActuacion": "2024-10-30T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PROCESO SE ARCHIVA EN LA CAJA #477//FISICO//PAULA GONZALEZ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-30T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 52,
+  "isUltimaAct": true,
+  "idProceso": 51318660,
+  "createdAt": "2024-10-30T05:00:00.000Z"
+}

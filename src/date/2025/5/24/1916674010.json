@@ -1,1 +1,17 @@
-{"idRegActuacion":1916674010,"llaveProceso":"11001400303020170181700","consActuacion":68,"fechaActuacion":"2025-06-24T05:00:00.000Z","actuacion":"Archivo Definitivo","anotacion":"ARCHIVADO// CAJA 549   PROCESO FISICO // PAOLA CASTIBLANCO \r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-06-24T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":68,"isUltimaAct":true,"idProceso":50883240,"createdAt":"2025-06-24T05:00:00.000Z"}
+{
+  "idRegActuacion": 1916674010,
+  "llaveProceso": "11001400303020170181700",
+  "consActuacion": 68,
+  "fechaActuacion": "2025-06-24T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVADO// CAJA 549   PROCESO FISICO // PAOLA CASTIBLANCO \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-06-24T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 68,
+  "isUltimaAct": true,
+  "idProceso": 50883240,
+  "createdAt": "2025-06-24T05:00:00.000Z"
+}

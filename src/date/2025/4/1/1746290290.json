@@ -1,1 +1,17 @@
-{"idRegActuacion":1746290290,"llaveProceso":"11001400308220180096400","consActuacion":92,"fechaActuacion":"2025-05-02T05:00:00.000Z","actuacion":"Al despacho","anotacion":"SE INGRESA PROCESO AL DESPACHO CON, OTROS\r\n //DANIELA D\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-30T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":92,"isUltimaAct":true,"idProceso":52160520,"createdAt":"2025-04-30T05:00:00.000Z"}
+{
+  "idRegActuacion": 1746290290,
+  "llaveProceso": "11001400308220180096400",
+  "consActuacion": 92,
+  "fechaActuacion": "2025-05-02T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "SE INGRESA PROCESO AL DESPACHO CON, OTROS\r\n //DANIELA D\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-30T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 92,
+  "isUltimaAct": true,
+  "idProceso": 52160520,
+  "createdAt": "2025-04-30T05:00:00.000Z"
+}

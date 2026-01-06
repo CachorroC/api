@@ -1,1 +1,17 @@
-{"idRegActuacion":2072125300,"llaveProceso":"11001400302520170080700","consActuacion":64,"fechaActuacion":"2024-11-05T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Memorial renuncia poder","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-05T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":64,"isUltimaAct":true,"idProceso":50623380,"createdAt":"2024-11-05T05:00:00.000Z"}
+{
+  "idRegActuacion": 2072125300,
+  "llaveProceso": "11001400302520170080700",
+  "consActuacion": 64,
+  "fechaActuacion": "2024-11-05T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Memorial renuncia poder",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-05T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 64,
+  "isUltimaAct": true,
+  "idProceso": 50623380,
+  "createdAt": "2024-11-05T05:00:00.000Z"
+}

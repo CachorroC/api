@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"Radicado No. 11497-2023, No. Reloj Radicador: 16602, Entidad o Señor(a): CARMEN CECILIA RAMIREZ MUÑOZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: ASUNTO: RENUNCIA AL PODER","cant":112,"carpetaNumero":508,"codRegla":"00                              ","conDocumentos":false,"consActuacion":73,"createdAt":"2023-12-06T05:00:00.000Z","fechaActuacion":"2023-12-06T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2023-12-06T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400305620180022100","procesoId":51042800,"idProceso":51042800,"idRegActuacion":"1365937300"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "Radicado No. 11497-2023, No. Reloj Radicador: 16602, Entidad o Seï¿½or(a): CARMEN CECILIA RAMIREZ MUï¿½OZ - Tercer Interesado, Aportï¿½ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: ASUNTO: RENUNCIA AL PODER",
+  "cant": 112,
+  "carpetaNumero": 508,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 73,
+  "createdAt": "2023-12-06T05:00:00.000Z",
+  "fechaActuacion": "2023-12-06T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2023-12-06T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400305620180022100",
+  "procesoId": 51042800,
+  "idProceso": 51042800,
+  "idRegActuacion": "1365937300"
+}

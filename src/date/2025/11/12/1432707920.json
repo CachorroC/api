@@ -1,1 +1,19 @@
-{"actuacion":"Auto requiere","anotacion":"APORTE CERTIFICADO DE LIBERTAR Y TRADICION VEHICULO","cant":72,"carpetaNumero":277,"codRegla":"00                              ","conDocumentos":false,"consActuacion":33,"createdAt":"2022-01-26T05:00:00.000Z","fechaActuacion":"2022-01-26T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-01-26T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400308320170098000","procesoId":51665750,"idProceso":51665750,"idRegActuacion":"1207219080"}
+{
+  "actuacion": "Auto requiere",
+  "anotacion": "APORTE CERTIFICADO DE LIBERTAR Y TRADICION VEHICULO",
+  "cant": 72,
+  "carpetaNumero": 277,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 33,
+  "createdAt": "2022-01-26T05:00:00.000Z",
+  "fechaActuacion": "2022-01-26T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-01-26T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400308320170098000",
+  "procesoId": 51665750,
+  "idProceso": 51665750,
+  "idRegActuacion": "1207219080"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":2037917240,"llaveProceso":"11001400306420240058800","consActuacion":18,"fechaActuacion":"2024-10-07T05:00:00.000Z","actuacion":"Fijacion estado","anotacion":"Actuación registrada el 07/10/2024 a las 22:38:49.","fechaInicial":"2024-10-08T05:00:00.000Z","fechaFinal":"2024-10-08T05:00:00.000Z","fechaRegistro":"2024-10-07T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":18,"isUltimaAct":true,"idProceso":165443150,"createdAt":"2024-10-07T05:00:00.000Z"}
+{
+  "idRegActuacion": 2037917240,
+  "llaveProceso": "11001400306420240058800",
+  "consActuacion": 18,
+  "fechaActuacion": "2024-10-07T05:00:00.000Z",
+  "actuacion": "Fijacion estado",
+  "anotacion": "Actuación registrada el 07/10/2024 a las 22:38:49.",
+  "fechaInicial": "2024-10-08T05:00:00.000Z",
+  "fechaFinal": "2024-10-08T05:00:00.000Z",
+  "fechaRegistro": "2024-10-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 18,
+  "isUltimaAct": true,
+  "idProceso": 165443150,
+  "createdAt": "2024-10-07T05:00:00.000Z"
+}

@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"Radicado No. 4231-2022, No. Reloj Radicador: 04792, Entidad o Señor(a): CARMEN RAMIREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Oficio, Observaciones: REQUERIR","cant":100,"carpetaNumero":231,"codRegla":"00                              ","conDocumentos":false,"consActuacion":61,"createdAt":"2022-05-19T05:00:00.000Z","fechaActuacion":"2022-05-19T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-05-19T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300820170113400","procesoId":50716620,"idProceso":50716620,"idRegActuacion":"1228777490"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "Radicado No. 4231-2022, No. Reloj Radicador: 04792, Entidad o Seï¿½or(a): CARMEN RAMIREZ - Tercer Interesado, Aportï¿½ Documento: Memorial, Con La Solucitud: Oficio, Observaciones: REQUERIR",
+  "cant": 100,
+  "carpetaNumero": 231,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 61,
+  "createdAt": "2022-05-19T05:00:00.000Z",
+  "fechaActuacion": "2022-05-19T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-05-19T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300820170113400",
+  "procesoId": 50716620,
+  "idProceso": 50716620,
+  "idRegActuacion": "1228777490"
+}

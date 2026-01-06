@@ -1,1 +1,17 @@
-{"idRegActuacion":1595802710,"llaveProceso":"11001400306920230166900","consActuacion":21,"fechaActuacion":"2025-03-03T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":null,"fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-03T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":21,"isUltimaAct":true,"idProceso":167724300,"createdAt":"2025-03-03T05:00:00.000Z"}
+{
+  "idRegActuacion": 1595802710,
+  "llaveProceso": "11001400306920230166900",
+  "consActuacion": 21,
+  "fechaActuacion": "2025-03-03T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 21,
+  "isUltimaAct": true,
+  "idProceso": 167724300,
+  "createdAt": "2025-03-03T05:00:00.000Z"
+}

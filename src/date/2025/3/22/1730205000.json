@@ -1,1 +1,17 @@
-{"idRegActuacion":1730205000,"llaveProceso":"11001400308120180051400","consActuacion":60,"fechaActuacion":"2025-04-22T05:00:00.000Z","actuacion":"Entrega de oficios","anotacion":"REMISION OFICIO .OOECM-0225JSC-9354 ordenado en auto del 28 de noviembre de 2024.//ROBERTO R","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-22T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":60,"isUltimaAct":true,"idProceso":51918470,"createdAt":"2025-04-22T05:00:00.000Z"}
+{
+  "idRegActuacion": 1730205000,
+  "llaveProceso": "11001400308120180051400",
+  "consActuacion": 60,
+  "fechaActuacion": "2025-04-22T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "REMISION OFICIO .OOECM-0225JSC-9354 ordenado en auto del 28 de noviembre de 2024.//ROBERTO R",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 60,
+  "isUltimaAct": true,
+  "idProceso": 51918470,
+  "createdAt": "2025-04-22T05:00:00.000Z"
+}

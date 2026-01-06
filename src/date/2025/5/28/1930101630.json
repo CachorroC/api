@@ -1,1 +1,17 @@
-{"idRegActuacion":1930101630,"llaveProceso":"11001400301820240036200","consActuacion":33,"fechaActuacion":"2025-06-27T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 11945-2025, No. Reloj Radicador: 146918, Entidad o SeÃ±or(a): CARMEN CECILIA RAMIREZ MUÃ‘OZ - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Otro, Observaciones: SOLICITUD D.C","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-06-27T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":33,"isUltimaAct":true,"idProceso":155218070,"createdAt":"2025-06-27T05:00:00.000Z"}
+{
+  "idRegActuacion": 1930101630,
+  "llaveProceso": "11001400301820240036200",
+  "consActuacion": 33,
+  "fechaActuacion": "2025-06-27T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 11945-2025, No. Reloj Radicador: 146918, Entidad o Señor(a): CARMEN CECILIA RAMIREZ MUÑOZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otro, Observaciones: SOLICITUD D.C",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-06-27T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 33,
+  "isUltimaAct": true,
+  "idProceso": 155218070,
+  "createdAt": "2025-06-27T05:00:00.000Z"
+}

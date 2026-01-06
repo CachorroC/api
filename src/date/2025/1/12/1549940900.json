@@ -1,1 +1,17 @@
-{"idRegActuacion":1549940900,"llaveProceso":"11001400304420190016500","consActuacion":36,"fechaActuacion":"2025-02-11T05:00:00.000Z","actuacion":"Comunicación secretarial firmada","anotacion":"FIRMADO\tPROCESO HIBRIDO PASA A ENVIO \t1\tLEV RIP\tJRIANOS\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-11T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":36,"isUltimaAct":true,"idProceso":65707550,"createdAt":"2025-02-11T05:00:00.000Z"}
+{
+  "idRegActuacion": 1549940900,
+  "llaveProceso": "11001400304420190016500",
+  "consActuacion": 36,
+  "fechaActuacion": "2025-02-11T05:00:00.000Z",
+  "actuacion": "Comunicación secretarial firmada",
+  "anotacion": "FIRMADO\tPROCESO HIBRIDO PASA A ENVIO \t1\tLEV RIP\tJRIANOS\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 36,
+  "isUltimaAct": true,
+  "idProceso": 65707550,
+  "createdAt": "2025-02-11T05:00:00.000Z"
+}

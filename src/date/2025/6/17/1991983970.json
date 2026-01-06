@@ -1,1 +1,17 @@
-{"idRegActuacion":1991983970,"llaveProceso":"11001400300220170100200","consActuacion":75,"fechaActuacion":"2025-07-17T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SE RECIBE PROCESO EN EL √ÅREA DE SECRETAR√çA - PASA A LA LETRA // DIEGO A// P. H√çBRIDO // ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-17T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":75,"isUltimaAct":true,"idProceso":50780430,"createdAt":"2025-07-17T05:00:00.000Z"}
+{
+  "idRegActuacion": 1991983970,
+  "llaveProceso": "11001400300220170100200",
+  "consActuacion": 75,
+  "fechaActuacion": "2025-07-17T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECIBE PROCESO EN EL ¡REA DE SECRETARÕA - PASA A LA LETRA // DIEGO A// P. HÕBRIDO // ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 75,
+  "isUltimaAct": true,
+  "idProceso": 50780430,
+  "createdAt": "2025-07-17T05:00:00.000Z"
+}

@@ -1,1 +1,19 @@
-{"actuacion":"Al despacho","anotacion":"PROCESO INGRESA AL DESPACHO 1C/JHZ.","cant":65,"carpetaNumero":540,"codRegla":"00                              ","conDocumentos":false,"consActuacion":26,"createdAt":"2019-08-22T05:00:00.000Z","fechaActuacion":"2019-08-23T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-08-22T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400301420180092900","procesoId":51341610,"idProceso":51341610,"idRegActuacion":"638637860"}
+{
+  "actuacion": "Al despacho",
+  "anotacion": "PROCESO INGRESA AL DESPACHO 1C/JHZ.",
+  "cant": 65,
+  "carpetaNumero": 540,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 26,
+  "createdAt": "2019-08-22T05:00:00.000Z",
+  "fechaActuacion": "2019-08-23T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-08-22T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400301420180092900",
+  "procesoId": 51341610,
+  "idProceso": 51341610,
+  "idRegActuacion": "638637860"
+}

@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"Radicado No. 9283-2025, No. Reloj Radicador: 133419, Entidad o Señor(a): LUIS ALEJANDRO MALAGON RODRIGUEZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: SOLICITUD DEVOLUCION DE POSTURA","cant":196,"carpetaNumero":140,"codRegla":"00                              ","conDocumentos":false,"consActuacion":157,"createdAt":"2025-05-21T05:00:00.000Z","fechaActuacion":"2025-05-21T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2025-05-21T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400307720170056800","procesoId":50921080,"idProceso":50921080,"idRegActuacion":"1808746940"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "Radicado No. 9283-2025, No. Reloj Radicador: 133419, Entidad o Seï¿½or(a): LUIS ALEJANDRO MALAGON RODRIGUEZ - Tercer Interesado, Aportï¿½ Documento: Memorial, Con La Solucitud: Otras, Observaciones: SOLICITUD DEVOLUCION DE POSTURA",
+  "cant": 196,
+  "carpetaNumero": 140,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 157,
+  "createdAt": "2025-05-21T05:00:00.000Z",
+  "fechaActuacion": "2025-05-21T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2025-05-21T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400307720170056800",
+  "procesoId": 50921080,
+  "idProceso": 50921080,
+  "idRegActuacion": "1808746940"
+}

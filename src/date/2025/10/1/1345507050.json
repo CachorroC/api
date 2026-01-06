@@ -1,1 +1,19 @@
-{"actuacion":"Oficio Elaborado","anotacion":"OF. 2686 EMB. INM.","cant":47,"carpetaNumero":43,"codRegla":"00                              ","conDocumentos":false,"consActuacion":8,"createdAt":"2017-10-23T05:00:00.000Z","fechaActuacion":"2017-10-23T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2017-10-23T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400301220170088200","procesoId":50631800,"idProceso":50631800,"idRegActuacion":"404142430"}
+{
+  "actuacion": "Oficio Elaborado",
+  "anotacion": "OF. 2686 EMB. INM.",
+  "cant": 47,
+  "carpetaNumero": 43,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 8,
+  "createdAt": "2017-10-23T05:00:00.000Z",
+  "fechaActuacion": "2017-10-23T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2017-10-23T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400301220170088200",
+  "procesoId": 50631800,
+  "idProceso": 50631800,
+  "idRegActuacion": "404142430"
+}

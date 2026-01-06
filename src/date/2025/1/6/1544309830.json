@@ -1,1 +1,17 @@
-{"idRegActuacion":1544309830,"llaveProceso":"11001400301820240049800","consActuacion":29,"fechaActuacion":"2025-02-06T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"Se realiza autorizacion de pago DJ04 y se envia informe del pago a la demandada - SP","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-06T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":29,"isUltimaAct":true,"idProceso":159919040,"createdAt":"2025-02-06T05:00:00.000Z"}
+{
+  "idRegActuacion": 1544309830,
+  "llaveProceso": "11001400301820240049800",
+  "consActuacion": 29,
+  "fechaActuacion": "2025-02-06T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Se realiza autorizacion de pago DJ04 y se envia informe del pago a la demandada - SP",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 29,
+  "isUltimaAct": true,
+  "idProceso": 159919040,
+  "createdAt": "2025-02-06T05:00:00.000Z"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":1561467820,"llaveProceso":"11001400300420230062200","consActuacion":32,"fechaActuacion":"2025-02-17T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 2359-2025, No. Reloj Radicador: 98154, Entidad o Señor(a): CARMEN RAMIREZ MUÑOZ. - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Acepta cargo secuestre, Observaciones: sirva decretar el Despacho Comisorio","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-17T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":32,"isUltimaAct":true,"idProceso":130946630,"createdAt":"2025-02-17T05:00:00.000Z"}
+{
+  "idRegActuacion": 1561467820,
+  "llaveProceso": "11001400300420230062200",
+  "consActuacion": 32,
+  "fechaActuacion": "2025-02-17T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 2359-2025, No. Reloj Radicador: 98154, Entidad o Señor(a): CARMEN RAMIREZ MUÑOZ. - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Acepta cargo secuestre, Observaciones: sirva decretar el Despacho Comisorio",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 32,
+  "isUltimaAct": true,
+  "idProceso": 130946630,
+  "createdAt": "2025-02-17T05:00:00.000Z"
+}

@@ -1,1 +1,19 @@
-{"actuacion":"Telegrama","anotacion":"-SE ELABORA TELEGRAMA No. TOECM-0124WGG-70//REQUIE.SECUES// PROCESO HIBRIDO SE DIRECCIONA PARA LA FIRMA// Wendy Gualteros","cant":130,"carpetaNumero":289,"codRegla":"00                              ","conDocumentos":false,"consActuacion":91,"createdAt":"2024-01-29T05:00:00.000Z","fechaActuacion":"2024-01-29T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2024-01-29T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400301820170152200","procesoId":50711570,"idProceso":50711570,"idRegActuacion":"1373689370"}
+{
+  "actuacion": "Telegrama",
+  "anotacion": "-SE ELABORA TELEGRAMA No. TOECM-0124WGG-70//REQUIE.SECUES// PROCESO HIBRIDO SE DIRECCIONA PARA LA FIRMA// Wendy Gualteros",
+  "cant": 130,
+  "carpetaNumero": 289,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 91,
+  "createdAt": "2024-01-29T05:00:00.000Z",
+  "fechaActuacion": "2024-01-29T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2024-01-29T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400301820170152200",
+  "procesoId": 50711570,
+  "idProceso": 50711570,
+  "idRegActuacion": "1373689370"
+}

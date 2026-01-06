@@ -1,1 +1,19 @@
-{"actuacion":"Entrega de oficios","anotacion":" Se realiza envío digital del Oficio No. OOECM-0322KRH-8707 ordenado en auto del 11 de marzo de 2022 en un folio anexo.al apoderado actor y a la entidad a la que va dirigido// Expediente pasa a letra // Wendy Arias","cant":83,"carpetaNumero":294,"codRegla":"00                              ","conDocumentos":false,"consActuacion":44,"createdAt":"2022-03-28T05:00:00.000Z","fechaActuacion":"2022-03-28T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-03-28T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400306320170092400","procesoId":65700110,"idProceso":65700110,"idRegActuacion":"1220642580"}
+{
+  "actuacion": "Entrega de oficios",
+  "anotacion": " Se realiza envï¿½o digital del Oficio No. OOECM-0322KRH-8707 ordenado en auto del 11 de marzo de 2022 en un folio anexo.al apoderado actor y a la entidad a la que va dirigido// Expediente pasa a letra // Wendy Arias",
+  "cant": 83,
+  "carpetaNumero": 294,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 44,
+  "createdAt": "2022-03-28T05:00:00.000Z",
+  "fechaActuacion": "2022-03-28T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-03-28T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400306320170092400",
+  "procesoId": 65700110,
+  "idProceso": 65700110,
+  "idRegActuacion": "1220642580"
+}

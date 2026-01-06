@@ -1,1 +1,17 @@
-{"idRegActuacion":1695195230,"llaveProceso":"11001400300620240021800","consActuacion":19,"fechaActuacion":"2025-04-10T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SE ELABORA PRENOTIFICACI√ìN T√çTULOS A FAVOR DEL DEMANDADO ELKIN CARRILLO MARTINEZ DE CONFORMIDAD AL AUTO DE FECHA 01 DE ABRIL DE 2025","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-10T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":19,"isUltimaAct":true,"idProceso":153072790,"createdAt":"2025-04-10T05:00:00.000Z"}
+{
+  "idRegActuacion": 1695195230,
+  "llaveProceso": "11001400300620240021800",
+  "consActuacion": 19,
+  "fechaActuacion": "2025-04-10T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE ELABORA PRENOTIFICACI”N TÕTULOS A FAVOR DEL DEMANDADO ELKIN CARRILLO MARTINEZ DE CONFORMIDAD AL AUTO DE FECHA 01 DE ABRIL DE 2025",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 19,
+  "isUltimaAct": true,
+  "idProceso": 153072790,
+  "createdAt": "2025-04-10T05:00:00.000Z"
+}

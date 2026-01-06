@@ -1,1 +1,17 @@
-{"idRegActuacion":2092370933,"llaveProceso":"11001400304720240102300","consActuacion":16,"fechaActuacion":"2024-11-13T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"SE ALLEGA MEMORIAL DE PARTE DANDO CONTESTACIÓN A REQUERIMIENTO AMRG ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-13T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":16,"isUltimaAct":true,"idProceso":133804633,"createdAt":"2024-11-13T05:00:00.000Z"}
+{
+  "idRegActuacion": 2092370933,
+  "llaveProceso": "11001400304720240102300",
+  "consActuacion": 16,
+  "fechaActuacion": "2024-11-13T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "SE ALLEGA MEMORIAL DE PARTE DANDO CONTESTACIÓN A REQUERIMIENTO AMRG ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-13T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 16,
+  "isUltimaAct": true,
+  "idProceso": 133804633,
+  "createdAt": "2024-11-13T05:00:00.000Z"
+}

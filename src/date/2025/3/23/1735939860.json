@@ -1,1 +1,17 @@
-{"idRegActuacion":1735939860,"llaveProceso":"11001400303720230130800","consActuacion":18,"fechaActuacion":"2025-04-23T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 5095-2025, No. Reloj Radicador: 15, Entidad o SeÃ±or(a): CARMEN RAMMIREZ - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Aportar liquidaciÃ³n de crÃ©dito","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-23T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":18,"isUltimaAct":true,"idProceso":216708420,"createdAt":"2025-04-23T05:00:00.000Z"}
+{
+  "idRegActuacion": 1735939860,
+  "llaveProceso": "11001400303720230130800",
+  "consActuacion": 18,
+  "fechaActuacion": "2025-04-23T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 5095-2025, No. Reloj Radicador: 15, Entidad o Señor(a): CARMEN RAMMIREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Aportar liquidación de crédito",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 18,
+  "isUltimaAct": true,
+  "idProceso": 216708420,
+  "createdAt": "2025-04-23T05:00:00.000Z"
+}

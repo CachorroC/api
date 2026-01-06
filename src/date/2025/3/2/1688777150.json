@@ -1,1 +1,17 @@
-{"idRegActuacion":1688777150,"llaveProceso":"11001400304820240051000","consActuacion":26,"fechaActuacion":"2025-04-02T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SIN MEDIDAS CAUTELARES EFECTIVAS PENDIENTES POR LEVANTAR","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-02T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":26,"isUltimaAct":true,"idProceso":177830260,"createdAt":"2025-04-02T05:00:00.000Z"}
+{
+  "idRegActuacion": 1688777150,
+  "llaveProceso": "11001400304820240051000",
+  "consActuacion": 26,
+  "fechaActuacion": "2025-04-02T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SIN MEDIDAS CAUTELARES EFECTIVAS PENDIENTES POR LEVANTAR",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 26,
+  "isUltimaAct": true,
+  "idProceso": 177830260,
+  "createdAt": "2025-04-02T05:00:00.000Z"
+}

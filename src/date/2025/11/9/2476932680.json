@@ -1,1 +1,19 @@
-{"actuacion":"Remitidos a otros Despachos\r\n\r\n","anotacion":"Proceso remitido al Juzgado 68 Civil Municipal de Bogot√° en cumplimiento de medida de redistibuci√≥n. Acuerdo CSJBTA24-62.","cant":42,"carpetaNumero":635,"codRegla":"00                              ","conDocumentos":false,"consActuacion":3,"createdAt":"2024-05-26T05:00:00.000Z","fechaActuacion":"2024-05-27T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2024-05-26T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302520240038000","procesoId":212524620,"idProceso":212524620,"idRegActuacion":"1453998720"}
+{
+  "actuacion": "Remitidos a otros Despachos\r\n\r\n",
+  "anotacion": "Proceso remitido al Juzgado 68 Civil Municipal de Bogot· en cumplimiento de medida de redistibuciÛn. Acuerdo CSJBTA24-62.",
+  "cant": 42,
+  "carpetaNumero": 635,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 3,
+  "createdAt": "2024-05-26T05:00:00.000Z",
+  "fechaActuacion": "2024-05-27T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2024-05-26T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302520240038000",
+  "procesoId": 212524620,
+  "idProceso": 212524620,
+  "idRegActuacion": "1453998720"
+}

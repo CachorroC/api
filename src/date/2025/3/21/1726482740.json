@@ -1,1 +1,17 @@
-{"idRegActuacion":1726482740,"llaveProceso":"11001418907120240124700","consActuacion":9,"fechaActuacion":"2025-04-21T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"AG SOLICITUD TERMINAR PROCESO POR PAGO TOTAL","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-21T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":9,"isUltimaAct":true,"idProceso":198588490,"createdAt":"2025-04-21T05:00:00.000Z"}
+{
+  "idRegActuacion": 1726482740,
+  "llaveProceso": "11001418907120240124700",
+  "consActuacion": 9,
+  "fechaActuacion": "2025-04-21T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "AG SOLICITUD TERMINAR PROCESO POR PAGO TOTAL",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-21T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 9,
+  "isUltimaAct": true,
+  "idProceso": 198588490,
+  "createdAt": "2025-04-21T05:00:00.000Z"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":2046618990,"llaveProceso":"11001400301020230121200","consActuacion":52,"fechaActuacion":"2025-08-05T05:00:00.000Z","actuacion":"Al despacho","anotacion":"EXPEDIENTE INGRESA AL DESPACHO PARA LO PERTINENTE//SANTIAGO MALAVER \r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-01T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":52,"isUltimaAct":true,"idProceso":137788650,"createdAt":"2025-08-01T05:00:00.000Z"}
+{
+  "idRegActuacion": 2046618990,
+  "llaveProceso": "11001400301020230121200",
+  "consActuacion": 52,
+  "fechaActuacion": "2025-08-05T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "EXPEDIENTE INGRESA AL DESPACHO PARA LO PERTINENTE//SANTIAGO MALAVER \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 52,
+  "isUltimaAct": true,
+  "idProceso": 137788650,
+  "createdAt": "2025-08-01T05:00:00.000Z"
+}

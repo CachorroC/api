@@ -1,1 +1,19 @@
-{"actuacion":"Al despacho","anotacion":null,"cant":49,"carpetaNumero":71,"codRegla":"00                              ","conDocumentos":false,"consActuacion":10,"createdAt":"2017-10-05T05:00:00.000Z","fechaActuacion":"2017-10-05T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2017-10-05T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400304720170106500","procesoId":10404913,"idProceso":10404913,"idRegActuacion":"122904653"}
+{
+  "actuacion": "Al despacho",
+  "anotacion": null,
+  "cant": 49,
+  "carpetaNumero": 71,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 10,
+  "createdAt": "2017-10-05T05:00:00.000Z",
+  "fechaActuacion": "2017-10-05T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2017-10-05T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400304720170106500",
+  "procesoId": 10404913,
+  "idProceso": 10404913,
+  "idRegActuacion": "122904653"
+}

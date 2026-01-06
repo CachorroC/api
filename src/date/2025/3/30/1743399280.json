@@ -1,1 +1,17 @@
-{"idRegActuacion":1743399280,"llaveProceso":"11001400300920240033200","consActuacion":41,"fechaActuacion":"2025-04-30T05:00:00.000Z","actuacion":"ElaboraciÃ³n de oficios","anotacion":"SE ELABORA OFICIO NÂ°OOOECM-0425CAPB-5058 //SE DIRECCIONA PROCESO PARA FIRMA// QUEDA EN SECRETARIA - FIRMA OFICIOS// CESAR PRIETO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-30T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":41,"isUltimaAct":true,"idProceso":154958600,"createdAt":"2025-04-30T05:00:00.000Z"}
+{
+  "idRegActuacion": 1743399280,
+  "llaveProceso": "11001400300920240033200",
+  "consActuacion": 41,
+  "fechaActuacion": "2025-04-30T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "SE ELABORA OFICIO N°OOOECM-0425CAPB-5058 //SE DIRECCIONA PROCESO PARA FIRMA// QUEDA EN SECRETARIA - FIRMA OFICIOS// CESAR PRIETO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-30T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 41,
+  "isUltimaAct": true,
+  "idProceso": 154958600,
+  "createdAt": "2025-04-30T05:00:00.000Z"
+}

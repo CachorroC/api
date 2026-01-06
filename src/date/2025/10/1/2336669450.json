@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"Audiencia de remate no efectuada//Angélica Poveda","cant":194,"carpetaNumero":140,"codRegla":"00                              ","conDocumentos":false,"consActuacion":155,"createdAt":"2025-05-20T05:00:00.000Z","fechaActuacion":"2025-05-20T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2025-05-20T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400307720170056800","procesoId":50921080,"idProceso":50921080,"idRegActuacion":"1802622580"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Audiencia de remate no efectuada//Angï¿½lica Poveda",
+  "cant": 194,
+  "carpetaNumero": 140,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 155,
+  "createdAt": "2025-05-20T05:00:00.000Z",
+  "fechaActuacion": "2025-05-20T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2025-05-20T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400307720170056800",
+  "procesoId": 50921080,
+  "idProceso": 50921080,
+  "idRegActuacion": "1802622580"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":2063552480,"llaveProceso":"11001400306820170130600","consActuacion":62,"fechaActuacion":"2024-10-29T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"En la fecha, comunico que una vez revisado el plenario, el proceso termino por DESISTIMIENTO TACITO y no se encuentran medidas de embargos DE REMANENTES PARA DEJAR A DISPOSICION// PASA A TITULOS// CESAR PRIETO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-29T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":62,"isUltimaAct":true,"idProceso":50765770,"createdAt":"2024-10-29T05:00:00.000Z"}
+{
+  "idRegActuacion": 2063552480,
+  "llaveProceso": "11001400306820170130600",
+  "consActuacion": 62,
+  "fechaActuacion": "2024-10-29T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "En la fecha, comunico que una vez revisado el plenario, el proceso termino por DESISTIMIENTO TACITO y no se encuentran medidas de embargos DE REMANENTES PARA DEJAR A DISPOSICION// PASA A TITULOS// CESAR PRIETO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 62,
+  "isUltimaAct": true,
+  "idProceso": 50765770,
+  "createdAt": "2024-10-29T05:00:00.000Z"
+}

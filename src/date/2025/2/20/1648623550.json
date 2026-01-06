@@ -1,1 +1,17 @@
-{"idRegActuacion":1648623550,"llaveProceso":"11001400302520240038000","consActuacion":27,"fechaActuacion":"2025-03-20T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SE REMITE LINK EXPEDIENTE DIGITAL AL CORREO rscojuez@gmail.com // HARLEY S. ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-20T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":27,"isUltimaAct":true,"idProceso":212524620,"createdAt":"2025-03-20T05:00:00.000Z"}
+{
+  "idRegActuacion": 1648623550,
+  "llaveProceso": "11001400302520240038000",
+  "consActuacion": 27,
+  "fechaActuacion": "2025-03-20T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE REMITE LINK EXPEDIENTE DIGITAL AL CORREO rscojuez@gmail.com // HARLEY S. ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 27,
+  "isUltimaAct": true,
+  "idProceso": 212524620,
+  "createdAt": "2025-03-20T05:00:00.000Z"
+}

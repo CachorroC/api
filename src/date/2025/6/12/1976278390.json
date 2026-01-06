@@ -1,1 +1,17 @@
-{"idRegActuacion":1976278390,"llaveProceso":"11001400303720230130800","consActuacion":22,"fechaActuacion":"2025-07-14T05:00:00.000Z","actuacion":"Traslado LiquidaciÃ³n Credito Art. 446 C.G.P.","anotacion":"L - J FLOREZ","fechaInicial":"2025-07-15T05:00:00.000Z","fechaFinal":"2025-07-17T05:00:00.000Z","fechaRegistro":"2025-07-11T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":22,"isUltimaAct":true,"idProceso":216708420,"createdAt":"2025-07-11T05:00:00.000Z"}
+{
+  "idRegActuacion": 1976278390,
+  "llaveProceso": "11001400303720230130800",
+  "consActuacion": 22,
+  "fechaActuacion": "2025-07-14T05:00:00.000Z",
+  "actuacion": "Traslado Liquidación Credito Art. 446 C.G.P.",
+  "anotacion": "L - J FLOREZ",
+  "fechaInicial": "2025-07-15T05:00:00.000Z",
+  "fechaFinal": "2025-07-17T05:00:00.000Z",
+  "fechaRegistro": "2025-07-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 22,
+  "isUltimaAct": true,
+  "idProceso": 216708420,
+  "createdAt": "2025-07-11T05:00:00.000Z"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":1783823823,"llaveProceso":"11001400305320240114400","consActuacion":17,"fechaActuacion":"2025-05-27T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":null,"fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-27T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":17,"isUltimaAct":true,"idProceso":133946073,"createdAt":"2025-05-27T05:00:00.000Z"}
+{
+  "idRegActuacion": 1783823823,
+  "llaveProceso": "11001400305320240114400",
+  "consActuacion": 17,
+  "fechaActuacion": "2025-05-27T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-27T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 17,
+  "isUltimaAct": true,
+  "idProceso": 133946073,
+  "createdAt": "2025-05-27T05:00:00.000Z"
+}

@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"SE AGREGA ESTANDO EN BARANDA, FINALIZADO TRAMITE VOLVER A ENTRADAS,DAVID SANCHEZ","cant":113,"carpetaNumero":508,"codRegla":"00                              ","conDocumentos":false,"consActuacion":74,"createdAt":"2023-12-07T05:00:00.000Z","fechaActuacion":"2023-12-07T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2023-12-07T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400305620180022100","procesoId":51042800,"idProceso":51042800,"idRegActuacion":"1366350570"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE AGREGA ESTANDO EN BARANDA, FINALIZADO TRAMITE VOLVER A ENTRADAS,DAVID SANCHEZ",
+  "cant": 113,
+  "carpetaNumero": 508,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 74,
+  "createdAt": "2023-12-07T05:00:00.000Z",
+  "fechaActuacion": "2023-12-07T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2023-12-07T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400305620180022100",
+  "procesoId": 51042800,
+  "idProceso": 51042800,
+  "idRegActuacion": "1366350570"
+}

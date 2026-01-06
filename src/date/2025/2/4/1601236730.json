@@ -1,1 +1,17 @@
-{"idRegActuacion":1601236730,"llaveProceso":"11001400301820170152200","consActuacion":116,"fechaActuacion":"2025-03-04T05:00:00.000Z","actuacion":"Entrega de oficios","anotacion":"Se realiza  enviÃ³ digital del el/los oficio(s) NÂ°  OOECM-0225SBO-4180 a la entidad ////juan diaz","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-04T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":116,"isUltimaAct":true,"idProceso":50711570,"createdAt":"2025-03-04T05:00:00.000Z"}
+{
+  "idRegActuacion": 1601236730,
+  "llaveProceso": "11001400301820170152200",
+  "consActuacion": 116,
+  "fechaActuacion": "2025-03-04T05:00:00.000Z",
+  "actuacion": "Entrega de oficios",
+  "anotacion": "Se realiza  envió digital del el/los oficio(s) N°  OOECM-0225SBO-4180 a la entidad ////juan diaz",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 116,
+  "isUltimaAct": true,
+  "idProceso": 50711570,
+  "createdAt": "2025-03-04T05:00:00.000Z"
+}

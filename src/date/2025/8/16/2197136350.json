@@ -1,1 +1,17 @@
-{"idRegActuacion":"2197136350","llaveProceso":"11001400301220170097100","consActuacion":97,"fechaActuacion":"2025-09-16T05:00:00.000Z","actuacion":"Al despacho","anotacion":"PROCESO INGRESA AL DESPACHO //CD1// RENUNCIA PODER / JEFERSON SUAREZ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-09-16T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":97,"isUltimaAct":true,"idProceso":"50669130","createdAt":"2025-09-16T05:00:00.000Z"}
+{
+  "idRegActuacion": "2197136350",
+  "llaveProceso": "11001400301220170097100",
+  "consActuacion": 97,
+  "fechaActuacion": "2025-09-16T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "PROCESO INGRESA AL DESPACHO //CD1// RENUNCIA PODER / JEFERSON SUAREZ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-09-16T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 97,
+  "isUltimaAct": true,
+  "idProceso": "50669130",
+  "createdAt": "2025-09-16T05:00:00.000Z"
+}

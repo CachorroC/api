@@ -1,1 +1,19 @@
-{"actuacion":"Auto decreta medida cautelar","anotacion":null,"cant":44,"carpetaNumero":346,"codRegla":"00                              ","conDocumentos":false,"consActuacion":5,"createdAt":"2017-12-01T05:00:00.000Z","fechaActuacion":"2017-12-01T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2017-12-01T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400307320170154500","procesoId":50866190,"idProceso":50866190,"idRegActuacion":"855799650"}
+{
+  "actuacion": "Auto decreta medida cautelar",
+  "anotacion": null,
+  "cant": 44,
+  "carpetaNumero": 346,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 5,
+  "createdAt": "2017-12-01T05:00:00.000Z",
+  "fechaActuacion": "2017-12-01T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2017-12-01T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400307320170154500",
+  "procesoId": 50866190,
+  "idProceso": 50866190,
+  "idRegActuacion": "855799650"
+}

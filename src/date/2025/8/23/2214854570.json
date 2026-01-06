@@ -1,1 +1,19 @@
-{"actuacion":"Al despacho","anotacion":"EXPEDIENTE HIBRIDO INGRESA AL DESPACHO //hames r ","cant":194,"carpetaNumero":170,"codRegla":"00                              ","conDocumentos":false,"consActuacion":155,"createdAt":"2025-01-17T05:00:00.000Z","fechaActuacion":"2025-01-17T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2025-01-17T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302520170090300","procesoId":112048180,"idProceso":112048180,"idRegActuacion":"1500852470"}
+{
+  "actuacion": "Al despacho",
+  "anotacion": "EXPEDIENTE HIBRIDO INGRESA AL DESPACHO //hames r ",
+  "cant": 194,
+  "carpetaNumero": 170,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 155,
+  "createdAt": "2025-01-17T05:00:00.000Z",
+  "fechaActuacion": "2025-01-17T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2025-01-17T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302520170090300",
+  "procesoId": 112048180,
+  "idProceso": 112048180,
+  "idRegActuacion": "1500852470"
+}

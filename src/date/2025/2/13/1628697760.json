@@ -1,1 +1,17 @@
-{"idRegActuacion":1628697760,"llaveProceso":"11001400305920170048300","consActuacion":76,"fechaActuacion":"2025-03-13T05:00:00.000Z","actuacion":"Al despacho","anotacion":"PROCESO INGRESA AL DESPACHO //CD1// REQUERIR SIJIN / JEFERSON SUAREZ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-13T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":76,"isUltimaAct":true,"idProceso":50514310,"createdAt":"2025-03-13T05:00:00.000Z"}
+{
+  "idRegActuacion": 1628697760,
+  "llaveProceso": "11001400305920170048300",
+  "consActuacion": 76,
+  "fechaActuacion": "2025-03-13T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "PROCESO INGRESA AL DESPACHO //CD1// REQUERIR SIJIN / JEFERSON SUAREZ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-13T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 76,
+  "isUltimaAct": true,
+  "idProceso": 50514310,
+  "createdAt": "2025-03-13T05:00:00.000Z"
+}

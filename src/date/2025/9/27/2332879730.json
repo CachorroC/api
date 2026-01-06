@@ -1,1 +1,19 @@
-{"actuacion":" RadicaciÃ³n de Proceso","anotacion":"ActuaciÃ³n de  RadicaciÃ³n de Proceso  realizada el 01/12/2023 a las 03:31:32","cant":24,"carpetaNumero":607,"codRegla":"00                              ","conDocumentos":false,"consActuacion":1,"createdAt":"2023-12-01T05:00:00.000Z","fechaActuacion":"2023-12-01T00:00:00.000Z","fechaFinal":"2023-12-01T00:00:00.000Z","fechaInicial":"2023-12-01T00:00:00.000Z","fechaRegistro":"2023-12-01T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400307720230195200","procesoId":138101670,"idProceso":138101670,"idRegActuacion":"1364668630"}
+{
+  "actuacion": " Radicación de Proceso",
+  "anotacion": "Actuación de  Radicación de Proceso  realizada el 01/12/2023 a las 03:31:32",
+  "cant": 24,
+  "carpetaNumero": 607,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 1,
+  "createdAt": "2023-12-01T05:00:00.000Z",
+  "fechaActuacion": "2023-12-01T00:00:00.000Z",
+  "fechaFinal": "2023-12-01T00:00:00.000Z",
+  "fechaInicial": "2023-12-01T00:00:00.000Z",
+  "fechaRegistro": "2023-12-01T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400307720230195200",
+  "procesoId": 138101670,
+  "idProceso": 138101670,
+  "idRegActuacion": "1364668630"
+}

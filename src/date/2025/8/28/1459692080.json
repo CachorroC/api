@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"Radicado No. 5611-2020, No. Reloj Radicador: 09660, Entidad o Señor(a): MARIA HELENA SUAREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otro, Observaciones: ALLEGA CERTIFICACION DE EXISTENCIA Y REPRESENTACION LEGAL","cant":101,"carpetaNumero":117,"codRegla":"00                              ","conDocumentos":false,"consActuacion":62,"createdAt":"2020-10-08T05:00:00.000Z","fechaActuacion":"2020-10-08T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2020-10-08T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400307020170056600","procesoId":50522530,"idProceso":50522530,"idRegActuacion":"967503830"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "Radicado No. 5611-2020, No. Reloj Radicador: 09660, Entidad o Seï¿½or(a): MARIA HELENA SUAREZ - Tercer Interesado, Aportï¿½ Documento: Memorial, Con La Solucitud: Otro, Observaciones: ALLEGA CERTIFICACION DE EXISTENCIA Y REPRESENTACION LEGAL",
+  "cant": 101,
+  "carpetaNumero": 117,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 62,
+  "createdAt": "2020-10-08T05:00:00.000Z",
+  "fechaActuacion": "2020-10-08T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2020-10-08T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400307020170056600",
+  "procesoId": 50522530,
+  "idProceso": 50522530,
+  "idRegActuacion": "967503830"
+}

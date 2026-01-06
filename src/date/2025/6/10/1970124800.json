@@ -1,1 +1,17 @@
-{"idRegActuacion":1970124800,"llaveProceso":"11001410375220240217100","consActuacion":10,"fechaActuacion":"2025-07-09T05:00:00.000Z","actuacion":"Oficio Enviado Virtualmente","anotacion":"Oficio enviado correo apoderado","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-09T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":10,"isUltimaAct":true,"idProceso":214919910,"createdAt":"2025-07-09T05:00:00.000Z"}
+{
+  "idRegActuacion": 1970124800,
+  "llaveProceso": "11001410375220240217100",
+  "consActuacion": 10,
+  "fechaActuacion": "2025-07-09T05:00:00.000Z",
+  "actuacion": "Oficio Enviado Virtualmente",
+  "anotacion": "Oficio enviado correo apoderado",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-09T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 10,
+  "isUltimaAct": true,
+  "idProceso": 214919910,
+  "createdAt": "2025-07-09T05:00:00.000Z"
+}

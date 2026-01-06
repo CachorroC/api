@@ -1,1 +1,17 @@
-{"idRegActuacion":1632389820,"llaveProceso":"11001400301720230078200","consActuacion":36,"fechaActuacion":"2025-03-14T05:00:00.000Z","actuacion":"Recepci√≥n memorial","anotacion":"Radicado No. 4806-2025, No. Reloj Radicador: 43523, Entidad o Se√±or(a): SECRETAR√çA MOVILIDAD DE FUNZA - Tercer Interesado, Aport√≥ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RESPUESTA ENTIDAD","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-14T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":36,"isUltimaAct":true,"idProceso":132372990,"createdAt":"2025-03-14T05:00:00.000Z"}
+{
+  "idRegActuacion": 1632389820,
+  "llaveProceso": "11001400301720230078200",
+  "consActuacion": 36,
+  "fechaActuacion": "2025-03-14T05:00:00.000Z",
+  "actuacion": "RecepciÛn memorial",
+  "anotacion": "Radicado No. 4806-2025, No. Reloj Radicador: 43523, Entidad o SeÒor(a): SECRETARÕA MOVILIDAD DE FUNZA - Tercer Interesado, AportÛ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RESPUESTA ENTIDAD",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-14T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 36,
+  "isUltimaAct": true,
+  "idProceso": 132372990,
+  "createdAt": "2025-03-14T05:00:00.000Z"
+}

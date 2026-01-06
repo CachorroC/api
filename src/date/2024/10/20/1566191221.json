@@ -1,1 +1,17 @@
-{"idRegActuacion":1566191221,"llaveProceso":"11001400303920240122300","consActuacion":4,"fechaActuacion":"2024-11-20T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"Memorial Impulso Calificación","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-20T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":4,"isUltimaAct":true,"idProceso":178379211,"createdAt":"2024-11-20T05:00:00.000Z"}
+{
+  "idRegActuacion": 1566191221,
+  "llaveProceso": "11001400303920240122300",
+  "consActuacion": 4,
+  "fechaActuacion": "2024-11-20T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "Memorial Impulso Calificación",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 4,
+  "isUltimaAct": true,
+  "idProceso": 178379211,
+  "createdAt": "2024-11-20T05:00:00.000Z"
+}

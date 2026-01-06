@@ -1,1 +1,17 @@
-{"idRegActuacion":1686117960,"llaveProceso":"11001400307920240018700","consActuacion":9,"fechaActuacion":"2025-04-08T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"se informa que la anotacion de auto anterior no corresponde a este proceso, continua al despacho.","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-08T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":9,"isUltimaAct":true,"idProceso":150681300,"createdAt":"2025-04-08T05:00:00.000Z"}
+{
+  "idRegActuacion": 1686117960,
+  "llaveProceso": "11001400307920240018700",
+  "consActuacion": 9,
+  "fechaActuacion": "2025-04-08T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "se informa que la anotacion de auto anterior no corresponde a este proceso, continua al despacho.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-08T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 9,
+  "isUltimaAct": true,
+  "idProceso": 150681300,
+  "createdAt": "2025-04-08T05:00:00.000Z"
+}

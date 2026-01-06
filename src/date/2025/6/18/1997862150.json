@@ -1,1 +1,17 @@
-{"idRegActuacion":1997862150,"llaveProceso":"11001400308220170068000","consActuacion":96,"fechaActuacion":"2025-07-18T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 11731-2025, No. Reloj Radicador: 18, Entidad o SeÃ±or(a): FARIDE IVANNA OVIEDO MOLINA - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: PONE HECHOS EN CONOCIMIENTO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-18T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":96,"isUltimaAct":true,"idProceso":51619370,"createdAt":"2025-07-18T05:00:00.000Z"}
+{
+  "idRegActuacion": 1997862150,
+  "llaveProceso": "11001400308220170068000",
+  "consActuacion": 96,
+  "fechaActuacion": "2025-07-18T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 11731-2025, No. Reloj Radicador: 18, Entidad o Señor(a): FARIDE IVANNA OVIEDO MOLINA - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: PONE HECHOS EN CONOCIMIENTO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 96,
+  "isUltimaAct": true,
+  "idProceso": 51619370,
+  "createdAt": "2025-07-18T05:00:00.000Z"
+}

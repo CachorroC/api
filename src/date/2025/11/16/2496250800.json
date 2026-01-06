@@ -1,1 +1,19 @@
-{"actuacion":"Entrega de oficios","anotacion":"Se hace envió digital del el/los TELEGRAMA No. TOECM-0124WGG-70  al Secuestre://proceso se direcciona  a letra//juan diaz","cant":132,"carpetaNumero":289,"codRegla":"00                              ","conDocumentos":false,"consActuacion":93,"createdAt":"2024-02-12T05:00:00.000Z","fechaActuacion":"2024-02-12T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2024-02-12T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400301820170152200","procesoId":50711570,"idProceso":50711570,"idRegActuacion":"1377213910"}
+{
+  "actuacion": "Entrega de oficios",
+  "anotacion": "Se hace enviï¿½ digital del el/los TELEGRAMA No. TOECM-0124WGG-70  al Secuestre://proceso se direcciona  a letra//juan diaz",
+  "cant": 132,
+  "carpetaNumero": 289,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 93,
+  "createdAt": "2024-02-12T05:00:00.000Z",
+  "fechaActuacion": "2024-02-12T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2024-02-12T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400301820170152200",
+  "procesoId": 50711570,
+  "idProceso": 50711570,
+  "idRegActuacion": "1377213910"
+}

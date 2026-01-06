@@ -1,1 +1,17 @@
-{"idRegActuacion":2016718340,"llaveProceso":"11001418902920240159600","consActuacion":11,"fechaActuacion":"2025-07-24T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Solicitan medida cautelar","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-24T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":11,"isUltimaAct":true,"idProceso":209170460,"createdAt":"2025-07-24T05:00:00.000Z"}
+{
+  "idRegActuacion": 2016718340,
+  "llaveProceso": "11001418902920240159600",
+  "consActuacion": 11,
+  "fechaActuacion": "2025-07-24T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Solicitan medida cautelar",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-24T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 11,
+  "isUltimaAct": true,
+  "idProceso": 209170460,
+  "createdAt": "2025-07-24T05:00:00.000Z"
+}

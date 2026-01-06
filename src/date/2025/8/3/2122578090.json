@@ -1,1 +1,17 @@
-{"idRegActuacion":2122578090,"llaveProceso":"11001400302520170090300","consActuacion":191,"fechaActuacion":"2025-08-26T05:00:00.000Z","actuacion":"Al despacho","anotacion":"EXPEDIENTE HIBRIDO INGRESA AL DESPACHO // XIMENA C \r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-25T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":191,"isUltimaAct":true,"idProceso":112048180,"createdAt":"2025-08-25T05:00:00.000Z"}
+{
+  "idRegActuacion": 2122578090,
+  "llaveProceso": "11001400302520170090300",
+  "consActuacion": 191,
+  "fechaActuacion": "2025-08-26T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "EXPEDIENTE HIBRIDO INGRESA AL DESPACHO // XIMENA C \r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 191,
+  "isUltimaAct": true,
+  "idProceso": 112048180,
+  "createdAt": "2025-08-25T05:00:00.000Z"
+}

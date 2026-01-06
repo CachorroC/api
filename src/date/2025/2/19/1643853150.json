@@ -1,1 +1,17 @@
-{"idRegActuacion":1643853150,"llaveProceso":"11001418902920240114500","consActuacion":9,"fechaActuacion":"2025-03-19T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"diligencia de notificacion","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-19T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":9,"isUltimaAct":true,"idProceso":195582260,"createdAt":"2025-03-19T05:00:00.000Z"}
+{
+  "idRegActuacion": 1643853150,
+  "llaveProceso": "11001418902920240114500",
+  "consActuacion": 9,
+  "fechaActuacion": "2025-03-19T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "diligencia de notificacion",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 9,
+  "isUltimaAct": true,
+  "idProceso": 195582260,
+  "createdAt": "2025-03-19T05:00:00.000Z"
+}

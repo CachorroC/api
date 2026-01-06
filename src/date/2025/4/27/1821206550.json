@@ -1,1 +1,17 @@
-{"idRegActuacion":1821206550,"llaveProceso":"11001400307020180092200","consActuacion":13,"fechaActuacion":"2025-05-26T05:00:00.000Z","actuacion":"Desarchivado","anotacion":"PROCESO DESARCHIVADO EN FISICO - UBICADO EN ANAQUEL JUZGADO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-26T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":13,"isUltimaAct":true,"idProceso":18376650,"createdAt":"2025-05-26T05:00:00.000Z"}
+{
+  "idRegActuacion": 1821206550,
+  "llaveProceso": "11001400307020180092200",
+  "consActuacion": 13,
+  "fechaActuacion": "2025-05-26T05:00:00.000Z",
+  "actuacion": "Desarchivado",
+  "anotacion": "PROCESO DESARCHIVADO EN FISICO - UBICADO EN ANAQUEL JUZGADO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 13,
+  "isUltimaAct": true,
+  "idProceso": 18376650,
+  "createdAt": "2025-05-26T05:00:00.000Z"
+}

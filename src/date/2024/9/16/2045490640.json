@@ -1,1 +1,17 @@
-{"idRegActuacion":2045490640,"llaveProceso":"11001400304220170076000","consActuacion":121,"fechaActuacion":"2024-10-16T05:00:00.000Z","actuacion":"Al despacho","anotacion":"Proceso híbrido ingresa al Despacho, para lo pertinente -  renuncia poder// Alejandra P.\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-15T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":121,"isUltimaAct":true,"idProceso":50517060,"createdAt":"2024-10-15T05:00:00.000Z"}
+{
+  "idRegActuacion": 2045490640,
+  "llaveProceso": "11001400304220170076000",
+  "consActuacion": 121,
+  "fechaActuacion": "2024-10-16T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "Proceso híbrido ingresa al Despacho, para lo pertinente -  renuncia poder// Alejandra P.\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 121,
+  "isUltimaAct": true,
+  "idProceso": 50517060,
+  "createdAt": "2024-10-15T05:00:00.000Z"
+}

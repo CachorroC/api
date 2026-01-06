@@ -1,1 +1,17 @@
-{"idRegActuacion":1653370100,"llaveProceso":"11001400302520170090300","consActuacion":159,"fechaActuacion":"2025-03-21T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 4933-2025, No. Reloj Radicador: 18, Entidad o SeÃ±or(a): SUPERINTENDENCIA DE NOTARIADO Y REGISTRO - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-21T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":159,"isUltimaAct":true,"idProceso":112048180,"createdAt":"2025-03-21T05:00:00.000Z"}
+{
+  "idRegActuacion": 1653370100,
+  "llaveProceso": "11001400302520170090300",
+  "consActuacion": 159,
+  "fechaActuacion": "2025-03-21T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 4933-2025, No. Reloj Radicador: 18, Entidad o Señor(a): SUPERINTENDENCIA DE NOTARIADO Y REGISTRO - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-21T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 159,
+  "isUltimaAct": true,
+  "idProceso": 112048180,
+  "createdAt": "2025-03-21T05:00:00.000Z"
+}

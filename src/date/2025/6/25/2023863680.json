@@ -1,1 +1,17 @@
-{"idRegActuacion":2023863680,"llaveProceso":"11001400305920240086000","consActuacion":31,"fechaActuacion":"2025-07-25T05:00:00.000Z","actuacion":"EnvÃ­o Comunicaciones","anotacion":"Se enviÃ³ oficio NÂ°2124 Desembargo Salario, al correo electrÃ³nicos de la empresa British American Tobacco Colombia S.A.S., con copia al correo electrÃ³nico de la demandada","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-25T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":31,"isUltimaAct":true,"idProceso":195244820,"createdAt":"2025-07-25T05:00:00.000Z"}
+{
+  "idRegActuacion": 2023863680,
+  "llaveProceso": "11001400305920240086000",
+  "consActuacion": 31,
+  "fechaActuacion": "2025-07-25T05:00:00.000Z",
+  "actuacion": "Envío Comunicaciones",
+  "anotacion": "Se envió oficio N°2124 Desembargo Salario, al correo electrónicos de la empresa British American Tobacco Colombia S.A.S., con copia al correo electrónico de la demandada",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 31,
+  "isUltimaAct": true,
+  "idProceso": 195244820,
+  "createdAt": "2025-07-25T05:00:00.000Z"
+}

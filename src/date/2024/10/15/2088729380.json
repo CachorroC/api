@@ -1,1 +1,17 @@
-{"idRegActuacion":2088729380,"llaveProceso":"11001400307620170063500","consActuacion":47,"fechaActuacion":"2024-11-13T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 13985-2024, No. Reloj Radicador: 63109, Entidad o Señor(a): CDI BARRRIOS UNIDOS - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Despacho Comisorio, Observaciones: RESPUESTA OFICIO//CARLOS PEÑA","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-13T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":47,"isUltimaAct":true,"idProceso":51497380,"createdAt":"2024-11-13T05:00:00.000Z"}
+{
+  "idRegActuacion": 2088729380,
+  "llaveProceso": "11001400307620170063500",
+  "consActuacion": 47,
+  "fechaActuacion": "2024-11-13T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 13985-2024, No. Reloj Radicador: 63109, Entidad o Señor(a): CDI BARRRIOS UNIDOS - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Despacho Comisorio, Observaciones: RESPUESTA OFICIO//CARLOS PEÑA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-13T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 47,
+  "isUltimaAct": true,
+  "idProceso": 51497380,
+  "createdAt": "2024-11-13T05:00:00.000Z"
+}

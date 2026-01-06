@@ -1,1 +1,17 @@
-{"idRegActuacion":1766287710,"llaveProceso":"11001400304820240051000","consActuacion":28,"fechaActuacion":"2025-05-07T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"NO SE ELABORA OFICIO POR CUANTO AUTO QUE TERMINA PROCESO NO ORDENA EL LEVANTAMIENTO DE MEDIDAS CAUTELARES","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-05-07T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":28,"isUltimaAct":true,"idProceso":177830260,"createdAt":"2025-05-07T05:00:00.000Z"}
+{
+  "idRegActuacion": 1766287710,
+  "llaveProceso": "11001400304820240051000",
+  "consActuacion": 28,
+  "fechaActuacion": "2025-05-07T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "NO SE ELABORA OFICIO POR CUANTO AUTO QUE TERMINA PROCESO NO ORDENA EL LEVANTAMIENTO DE MEDIDAS CAUTELARES",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-05-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 28,
+  "isUltimaAct": true,
+  "idProceso": 177830260,
+  "createdAt": "2025-05-07T05:00:00.000Z"
+}

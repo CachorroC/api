@@ -1,104 +1,200 @@
-// 1. Custom Error
-export class ApiError extends Error {
-  constructor(public message: string, public statusCode?: number) {
+import * as fs from 'fs';
+import * as path from 'path';
+import { PrismaClient } from '@prisma/client';
+import { ConsultaActuacion } from '../types/actuaciones';
+
+// 2. Custom Error
+class ApiError extends Error {
+  constructor(
+    public message: string,
+    public statusCode?: number
+  ) {
     super(message);
-    this.name = "ApiError";
+    this.name = 'ApiError';
   }
 }
 
-// 2. Helper for delays
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// --- Helper: Delay ---
+const wait = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
+// --- Helper: File Logger ---
+class FileLogger {
+  private filePath: string;
+
+  constructor(filename: string) {
+    this.filePath = path.join(__dirname, filename);
+  }
+
+  // Logs failures.
+  // 'context' helps us know which main API request this sub-item belonged to.
+  public logFailure(
+    contextId: string | number,
+    subItem: any,
+    error: string,
+    phase: 'FETCH' | 'DB_ITEM'
+  ) {
+    let currentLog = [];
+    if (fs.existsSync(this.filePath)) {
+      try {
+        currentLog = JSON.parse(
+          fs.readFileSync(this.filePath, 'utf-8')
+        );
+      } catch {}
+    }
+
+    currentLog.push({
+      timestamp: new Date().toISOString(),
+      phase,
+      parentId: contextId, // The ID used for the fetch URL
+      error,
+      data: subItem, // The specific item that failed (or the whole request if phase is FETCH)
+    });
+
+    fs.writeFileSync(
+      this.filePath,
+      JSON.stringify(currentLog, null, 2)
+    );
+  }
+}
+
+// --- Main Class ---
 export class RobustApiClient {
   private baseUrl: string;
-  private readonly RATE_LIMIT_DELAY_MS = 12000; // 12 seconds (5 req/min)
+  private logger: FileLogger;
+  private readonly RATE_LIMIT_DELAY_MS = 12000; // 12 seconds per request
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
+    this.logger = new FileLogger('failed_sync_ops.json');
   }
 
-  /**
-   * Internal Request Method
-   * Performs the actual fetch
-   */
-  async request<T>(endpoint: string): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`);
-
-    if (!response.ok) {
-      throw new ApiError(`HTTP Error: ${response.status}`, response.status);
-    }
-
-    const data = await response.json().catch(() => {
-      throw new ApiError("Invalid JSON response");
-    });
-
-    return data as T;
-  }
-
-  /**
-   * Retry Wrapper
-   * Wraps the request in a loop to handle temporary failures
-   */
-  async requestWithRetry<T>(endpoint: string, maxRetries: number = 3): Promise<T> {
+  // Basic Fetch with Retry Logic
+  private async fetchWithRetry<T>(
+    endpoint: string,
+    maxRetries = 3
+  ): Promise<T> {
     let attempt = 0;
-
     while (attempt < maxRetries) {
       try {
-        return await this.request<T>(endpoint);
+        const response = await fetch(
+          `${this.baseUrl}${endpoint}`
+        );
+        if (!response.ok)
+          throw new ApiError(
+            `HTTP Error: ${response.status}`,
+            response.status
+          );
+        return (await response.json()) as T;
       } catch (error) {
         attempt++;
-
-        // LOGIC: When should we give up?
-        // 1. If we hit the max retries
-        // 2. If it's a 404 (Not Found) - retrying won't find it
-        // 3. If it's a 4xx Client Error (User fault)
-        const isClientError = error instanceof ApiError && error.statusCode && error.statusCode >= 400 && error.statusCode < 500;
-
-        if (attempt >= maxRetries || isClientError) {
+        const isClientError =
+          error instanceof ApiError &&
+          error.statusCode &&
+          error.statusCode >= 400 &&
+          error.statusCode < 500;
+        if (attempt >= maxRetries || isClientError)
           throw error;
-        }
-
-        console.warn(`⚠️ Attempt ${attempt} failed. Retrying in 2 seconds...`);
-        await wait(2000); // Wait 2 seconds before retrying
+        await wait(2000); // Short wait for retry
       }
     }
-    throw new Error("Unreachable code");
+    throw new Error('Unreachable');
   }
 
   /**
-   * Batch Processor
-   * Handles Array Iteration + Rate Limiting + Error Management
+   * Complex Batch Handler
+   * 1. Fetches data (Rate Limited)
+   * 2. Extracts 'actuaciones' array
+   * 3. Iterates and Upserts items individually
    */
-  public async fetchBatch<T, U extends { id: string | number }>(
+  public async processActuaciones<
+    U extends { idProceso: number }
+  >(
     items: U[],
-    pathBuilder: (item: U) => string
-  ): Promise<Array<{ originalItem: U; status: 'success' | 'error' | string; data?: T; error?: string }>> {
+    pathBuilder: (item: U) => string,
+    dbHandler: (
+      actuacion: any,
+      parentItem: U
+    ) => Promise<void>
+  ): Promise<void> {
+    console.log(
+      `🚀 Starting process for ${items.length} URL targets...`
+    );
 
-    const results = [];
-
-    for (const [index, item] of items.entries()) {
-      // RATE LIMITER: Strict 12s delay between new items
+    for (const [index, parentItem] of items.entries()) {
+      // --- A. Rate Limiting (Throttle the Fetch) ---
       if (index > 0) {
-        console.log(`⏳ Rate Limit: Waiting ${this.RATE_LIMIT_DELAY_MS / 1000}s...`);
+        console.log(`⏳ Waiting 12s for rate limit...`);
         await wait(this.RATE_LIMIT_DELAY_MS);
       }
 
+      // --- B. The Fetch Step ---
+      let responseData: ConsultaActuacion;
       try {
-        console.log(`Fetching ID: ${item.id}...`);
-
-        // We call requestWithRetry instead of request directly
-        const endpoint = pathBuilder(item);
-        const data = await this.requestWithRetry<T>(endpoint);
-
-        results.push({ originalItem: item, status: 'success', data });
-
+        const endpoint = pathBuilder(parentItem);
+        console.log(`🌐 Fetching: ${endpoint}`);
+        responseData =
+          await this.fetchWithRetry<ConsultaActuacion>(
+            endpoint
+          );
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Unknown error";
-        console.error(`❌ Final Failure ID ${item.id}: ${message}`);
-        results.push({ originalItem: item, status: 'error', error: message });
+        const msg =
+          err instanceof Error
+            ? err.message
+            : 'Unknown Fetch Error';
+        console.error(
+          `❌ FETCH FAILED for Parent ID ${parentItem.idProceso}: ${msg}`
+        );
+        // Log the PARENT item as failed because we couldn't even get the list
+        this.logger.logFailure(
+          parentItem.idProceso,
+          parentItem,
+          msg,
+          'FETCH'
+        );
+        continue; // Move to next URL
       }
-    }
 
-    return results;
+      // --- C. The Array Processing Step ---
+      const actuacionesList =
+        responseData.actuaciones || [];
+      console.log(
+        `   📂 Found ${actuacionesList.length} actuaciones. Processing DB writes...`
+      );
+
+      if (actuacionesList.length === 0) {
+        console.warn(
+          `   ⚠️ Warning: 'actuaciones' array is empty for ID ${parentItem.idProceso}`
+        );
+      }
+
+      for (const actuacion of actuacionesList) {
+        try {
+          // Call the Prisma handler for this specific sub-item
+          await dbHandler(actuacion, parentItem);
+          // Optional: Add a tiny delay here if DB is overwhelmed, usually not needed for upserts
+          // process.stdout.write('.'); // Progress indicator
+        } catch (dbErr) {
+          const msg =
+            dbErr instanceof Error
+              ? dbErr.message
+              : 'DB Error';
+          console.error(
+            `\n   ❌ DB UPSERT FAILED for an item inside Parent ${parentItem.idProceso}: ${msg}`
+          );
+
+          // Log specific sub-item failure, but continue the loop!
+          this.logger.logFailure(
+            parentItem.idProceso,
+            actuacion,
+            msg,
+            'DB_ITEM'
+          );
+        }
+      }
+      console.log(
+        `\n   ✅ Finished processing items for Parent ${parentItem.idProceso}`
+      );
+    }
   }
 }

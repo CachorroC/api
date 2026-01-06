@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"SE  RECEPCIONA  EL EXPEDIENTE    EN EL AREA  DE ESTADOS PARA LO PERTINENTE // // juliana caceres   CUADERNOS 2","cant":73,"carpetaNumero":358,"codRegla":"00                              ","conDocumentos":false,"consActuacion":34,"createdAt":"2023-02-20T05:00:00.000Z","fechaActuacion":"2023-02-20T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2023-02-20T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400307820170097500","procesoId":51465090,"idProceso":51465090,"idRegActuacion":"1299898850"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE  RECEPCIONA  EL EXPEDIENTE    EN EL AREA  DE ESTADOS PARA LO PERTINENTE // // juliana caceres   CUADERNOS 2",
+  "cant": 73,
+  "carpetaNumero": 358,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 34,
+  "createdAt": "2023-02-20T05:00:00.000Z",
+  "fechaActuacion": "2023-02-20T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2023-02-20T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400307820170097500",
+  "procesoId": 51465090,
+  "idProceso": 51465090,
+  "idRegActuacion": "1299898850"
+}

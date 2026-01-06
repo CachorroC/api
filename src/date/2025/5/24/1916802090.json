@@ -1,1 +1,17 @@
-{"idRegActuacion":1916802090,"llaveProceso":"11001418900820180078500","consActuacion":34,"fechaActuacion":"2025-07-03T05:00:00.000Z","actuacion":"Al despacho","anotacion":"PROCESO HB INGRESA AL DESPACHO//ESTEBAN BERMUDEZ H.","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-06-24T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":34,"isUltimaAct":true,"idProceso":87350810,"createdAt":"2025-06-24T05:00:00.000Z"}
+{
+  "idRegActuacion": 1916802090,
+  "llaveProceso": "11001418900820180078500",
+  "consActuacion": 34,
+  "fechaActuacion": "2025-07-03T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "PROCESO HB INGRESA AL DESPACHO//ESTEBAN BERMUDEZ H.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-06-24T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 34,
+  "isUltimaAct": true,
+  "idProceso": 87350810,
+  "createdAt": "2025-06-24T05:00:00.000Z"
+}

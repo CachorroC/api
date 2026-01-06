@@ -1,1 +1,19 @@
-{"actuacion":"Fijacion estado","anotacion":"Actuación registrada el 06/09/2017 a las 10:16:35.","cant":43,"carpetaNumero":172,"codRegla":"00                              ","conDocumentos":false,"consActuacion":4,"createdAt":"2017-09-06T05:00:00.000Z","fechaActuacion":"2017-09-06T00:00:00.000Z","fechaFinal":"2017-09-08T00:00:00.000Z","fechaInicial":"2017-09-08T00:00:00.000Z","fechaRegistro":"2017-09-06T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302720170085000","procesoId":50666880,"idProceso":50666880,"idRegActuacion":"719886250"}
+{
+  "actuacion": "Fijacion estado",
+  "anotacion": "Actuaciï¿½n registrada el 06/09/2017 a las 10:16:35.",
+  "cant": 43,
+  "carpetaNumero": 172,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 4,
+  "createdAt": "2017-09-06T05:00:00.000Z",
+  "fechaActuacion": "2017-09-06T00:00:00.000Z",
+  "fechaFinal": "2017-09-08T00:00:00.000Z",
+  "fechaInicial": "2017-09-08T00:00:00.000Z",
+  "fechaRegistro": "2017-09-06T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302720170085000",
+  "procesoId": 50666880,
+  "idProceso": 50666880,
+  "idRegActuacion": "719886250"
+}

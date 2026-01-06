@@ -1,1 +1,17 @@
-{"idRegActuacion":2090223360,"llaveProceso":"11001400302020170050100","consActuacion":47,"fechaActuacion":"2025-08-14T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"Se deja constancia secretarial que no se elabora oficio de desembargo, toda vez que, no se avizora respuesta, ni inscripciÃ³n de las medadas de embargo.","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-14T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":47,"isUltimaAct":true,"idProceso":50366660,"createdAt":"2025-08-14T05:00:00.000Z"}
+{
+  "idRegActuacion": 2090223360,
+  "llaveProceso": "11001400302020170050100",
+  "consActuacion": 47,
+  "fechaActuacion": "2025-08-14T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Se deja constancia secretarial que no se elabora oficio de desembargo, toda vez que, no se avizora respuesta, ni inscripción de las medadas de embargo.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-14T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 47,
+  "isUltimaAct": true,
+  "idProceso": 50366660,
+  "createdAt": "2025-08-14T05:00:00.000Z"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":1555506750,"llaveProceso":"11001400301720170119500","consActuacion":105,"fechaActuacion":"2025-02-14T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"SOLICITUD IMPULSO MEMORIAL RENUNCIA","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-14T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":105,"isUltimaAct":true,"idProceso":50721470,"createdAt":"2025-02-14T05:00:00.000Z"}
+{
+  "idRegActuacion": 1555506750,
+  "llaveProceso": "11001400301720170119500",
+  "consActuacion": 105,
+  "fechaActuacion": "2025-02-14T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "SOLICITUD IMPULSO MEMORIAL RENUNCIA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-14T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 105,
+  "isUltimaAct": true,
+  "idProceso": 50721470,
+  "createdAt": "2025-02-14T05:00:00.000Z"
+}

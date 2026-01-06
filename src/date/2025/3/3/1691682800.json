@@ -1,1 +1,17 @@
-{"idRegActuacion":1691682800,"llaveProceso":"11001400302220170120800","consActuacion":97,"fechaActuacion":"2025-04-03T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"PROCESO DIGITAL SE REMITE PARA TERMINADOS/JOHN/","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-03T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":97,"isUltimaAct":true,"idProceso":50817380,"createdAt":"2025-04-03T05:00:00.000Z"}
+{
+  "idRegActuacion": 1691682800,
+  "llaveProceso": "11001400302220170120800",
+  "consActuacion": 97,
+  "fechaActuacion": "2025-04-03T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PROCESO DIGITAL SE REMITE PARA TERMINADOS/JOHN/",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 97,
+  "isUltimaAct": true,
+  "idProceso": 50817380,
+  "createdAt": "2025-04-03T05:00:00.000Z"
+}

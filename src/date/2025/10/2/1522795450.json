@@ -1,1 +1,19 @@
-{"actuacion":"A la Oficina de Ejecución por Reparto","anotacion":null,"cant":71,"carpetaNumero":452,"codRegla":"00                              ","conDocumentos":false,"consActuacion":32,"createdAt":"2019-06-13T05:00:00.000Z","fechaActuacion":"2019-06-13T00:00:00.000Z","fechaFinal":null,"fechaInicial":"2019-06-13T00:00:00.000Z","fechaRegistro":"2019-06-13T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400305920180009000","procesoId":50989890,"idProceso":50989890,"idRegActuacion":"557383170"}
+{
+  "actuacion": "A la Oficina de Ejecuciï¿½n por Reparto",
+  "anotacion": null,
+  "cant": 71,
+  "carpetaNumero": 452,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 32,
+  "createdAt": "2019-06-13T05:00:00.000Z",
+  "fechaActuacion": "2019-06-13T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": "2019-06-13T00:00:00.000Z",
+  "fechaRegistro": "2019-06-13T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400305920180009000",
+  "procesoId": 50989890,
+  "idProceso": 50989890,
+  "idRegActuacion": "557383170"
+}

@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"SE INFORMA QUE POR ERROR SE INGRESA EL PROCESO AL DESPACHO-PROCESO QUEDA EN LA LETRA HENRIBERNAL","cant":85,"carpetaNumero":387,"codRegla":"00                              ","conDocumentos":false,"consActuacion":46,"createdAt":"2022-02-24T05:00:00.000Z","fechaActuacion":"2022-02-24T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-02-24T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400305020170133600","procesoId":106185210,"idProceso":106185210,"idRegActuacion":"1215259090"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE INFORMA QUE POR ERROR SE INGRESA EL PROCESO AL DESPACHO-PROCESO QUEDA EN LA LETRA HENRIBERNAL",
+  "cant": 85,
+  "carpetaNumero": 387,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 46,
+  "createdAt": "2022-02-24T05:00:00.000Z",
+  "fechaActuacion": "2022-02-24T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-02-24T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400305020170133600",
+  "procesoId": 106185210,
+  "idProceso": 106185210,
+  "idRegActuacion": "1215259090"
+}

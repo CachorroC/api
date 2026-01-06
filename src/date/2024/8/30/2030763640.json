@@ -1,1 +1,17 @@
-{"idRegActuacion":2030763640,"llaveProceso":"11001400307120170125000","consActuacion":81,"fechaActuacion":"2024-09-30T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SE AGREGA MEMORIAL AL GESTOR PARA LO PERTINENTE // JONATHAN CAÑON ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-09-30T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":81,"isUltimaAct":true,"idProceso":64793050,"createdAt":"2024-09-30T05:00:00.000Z"}
+{
+  "idRegActuacion": 2030763640,
+  "llaveProceso": "11001400307120170125000",
+  "consActuacion": 81,
+  "fechaActuacion": "2024-09-30T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE AGREGA MEMORIAL AL GESTOR PARA LO PERTINENTE // JONATHAN CAÑON ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-30T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 81,
+  "isUltimaAct": true,
+  "idProceso": 64793050,
+  "createdAt": "2024-09-30T05:00:00.000Z"
+}

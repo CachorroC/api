@@ -1,1 +1,17 @@
-{"idRegActuacion":2058751710,"llaveProceso":"11001400301120170108400","consActuacion":115,"fechaActuacion":"2024-10-25T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"RENUNCIA PODER - PROCESO EN EL DESPACHO // ERICKD","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-25T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":115,"isUltimaAct":true,"idProceso":50760030,"createdAt":"2024-10-25T05:00:00.000Z"}
+{
+  "idRegActuacion": 2058751710,
+  "llaveProceso": "11001400301120170108400",
+  "consActuacion": 115,
+  "fechaActuacion": "2024-10-25T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "RENUNCIA PODER - PROCESO EN EL DESPACHO // ERICKD",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 115,
+  "isUltimaAct": true,
+  "idProceso": 50760030,
+  "createdAt": "2024-10-25T05:00:00.000Z"
+}

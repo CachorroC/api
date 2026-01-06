@@ -1,1 +1,17 @@
-{"idRegActuacion":2052661240,"llaveProceso":"11001400306820200102100","consActuacion":51,"fechaActuacion":"2025-08-04T05:00:00.000Z","actuacion":"Memorial al despacho","anotacion":"SE ANEXA MEMORIAL AL DESPACHO 158014 // IMPULSO //  DIANA A","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-04T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":51,"isUltimaAct":true,"idProceso":164732010,"createdAt":"2025-08-04T05:00:00.000Z"}
+{
+  "idRegActuacion": 2052661240,
+  "llaveProceso": "11001400306820200102100",
+  "consActuacion": 51,
+  "fechaActuacion": "2025-08-04T05:00:00.000Z",
+  "actuacion": "Memorial al despacho",
+  "anotacion": "SE ANEXA MEMORIAL AL DESPACHO 158014 // IMPULSO //  DIANA A",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 51,
+  "isUltimaAct": true,
+  "idProceso": 164732010,
+  "createdAt": "2025-08-04T05:00:00.000Z"
+}

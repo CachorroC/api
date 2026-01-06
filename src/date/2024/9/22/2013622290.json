@@ -1,1 +1,17 @@
-{"idRegActuacion":2013622290,"llaveProceso":"11001400306820170130600","consActuacion":61,"fechaActuacion":"2024-09-04T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SE RECEPCIONA EXPEDIENTE DEL AREA DE ESTADOS //OFICIOS// JEFERSON SUAREZ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-09-06T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":61,"isUltimaAct":true,"idProceso":50765770,"createdAt":"2024-09-06T05:00:00.000Z"}
+{
+  "idRegActuacion": 2013622290,
+  "llaveProceso": "11001400306820170130600",
+  "consActuacion": 61,
+  "fechaActuacion": "2024-09-04T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECEPCIONA EXPEDIENTE DEL AREA DE ESTADOS //OFICIOS// JEFERSON SUAREZ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-09-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 61,
+  "isUltimaAct": true,
+  "idProceso": 50765770,
+  "createdAt": "2024-09-06T05:00:00.000Z"
+}

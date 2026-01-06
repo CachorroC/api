@@ -1,1 +1,17 @@
-{"idRegActuacion":1688733810,"llaveProceso":"11001400302220170120800","consActuacion":93,"fechaActuacion":"2025-04-02T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 6316-2025, No. Reloj Radicador: 46370, Entidad o SeÃ±or(a): BANCO CITIBANK - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RESPUESTA BANCO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-02T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":93,"isUltimaAct":true,"idProceso":50817380,"createdAt":"2025-04-02T05:00:00.000Z"}
+{
+  "idRegActuacion": 1688733810,
+  "llaveProceso": "11001400302220170120800",
+  "consActuacion": 93,
+  "fechaActuacion": "2025-04-02T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 6316-2025, No. Reloj Radicador: 46370, Entidad o Señor(a): BANCO CITIBANK - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RESPUESTA BANCO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-02T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 93,
+  "isUltimaAct": true,
+  "idProceso": 50817380,
+  "createdAt": "2025-04-02T05:00:00.000Z"
+}

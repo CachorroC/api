@@ -1,1 +1,17 @@
-{"idRegActuacion":1684959190,"llaveProceso":"11001400300620240021800","consActuacion":15,"fechaActuacion":"2025-04-01T05:00:00.000Z","actuacion":"Al despacho","anotacion":"SOLICTUD PAGO DE TITULOS ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-01T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":15,"isUltimaAct":true,"idProceso":153072790,"createdAt":"2025-04-01T05:00:00.000Z"}
+{
+  "idRegActuacion": 1684959190,
+  "llaveProceso": "11001400300620240021800",
+  "consActuacion": 15,
+  "fechaActuacion": "2025-04-01T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "SOLICTUD PAGO DE TITULOS ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 15,
+  "isUltimaAct": true,
+  "idProceso": 153072790,
+  "createdAt": "2025-04-01T05:00:00.000Z"
+}

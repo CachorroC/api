@@ -1,1 +1,17 @@
-{"idRegActuacion":1562969150,"llaveProceso":"11001400304420190016500","consActuacion":37,"fechaActuacion":"2025-02-18T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 2897-2025, No. Reloj Radicador: 93990, Entidad o Señor(a): ERICK RICARDO PINTO - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: SOLICITUD ENVIO OFICIO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-18T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":37,"isUltimaAct":true,"idProceso":65707550,"createdAt":"2025-02-18T05:00:00.000Z"}
+{
+  "idRegActuacion": 1562969150,
+  "llaveProceso": "11001400304420190016500",
+  "consActuacion": 37,
+  "fechaActuacion": "2025-02-18T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 2897-2025, No. Reloj Radicador: 93990, Entidad o Señor(a): ERICK RICARDO PINTO - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: SOLICITUD ENVIO OFICIO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 37,
+  "isUltimaAct": true,
+  "idProceso": 65707550,
+  "createdAt": "2025-02-18T05:00:00.000Z"
+}

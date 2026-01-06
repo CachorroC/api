@@ -1,1 +1,17 @@
-{"idRegActuacion":2073726580,"llaveProceso":"11001400308220240129800","consActuacion":11,"fechaActuacion":"2024-11-06T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"RespuestaORIP (LR)","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-06T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":11,"isUltimaAct":true,"idProceso":198718200,"createdAt":"2024-11-06T05:00:00.000Z"}
+{
+  "idRegActuacion": 2073726580,
+  "llaveProceso": "11001400308220240129800",
+  "consActuacion": 11,
+  "fechaActuacion": "2024-11-06T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "RespuestaORIP (LR)",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 11,
+  "isUltimaAct": true,
+  "idProceso": 198718200,
+  "createdAt": "2024-11-06T05:00:00.000Z"
+}

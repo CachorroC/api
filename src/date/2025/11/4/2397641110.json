@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"PROCESO BAJA DEL JUZGADO CON 2 CDNOS// PASA AREA BARANDA// CLAUDIA ESCOBAR ","cant":113,"carpetaNumero":348,"codRegla":"00                              ","conDocumentos":false,"consActuacion":74,"createdAt":"2020-09-01T05:00:00.000Z","fechaActuacion":"2020-09-01T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2020-09-01T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300120170130900","procesoId":50764880,"idProceso":50764880,"idRegActuacion":"964142770"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PROCESO BAJA DEL JUZGADO CON 2 CDNOS// PASA AREA BARANDA// CLAUDIA ESCOBAR ",
+  "cant": 113,
+  "carpetaNumero": 348,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 74,
+  "createdAt": "2020-09-01T05:00:00.000Z",
+  "fechaActuacion": "2020-09-01T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2020-09-01T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300120170130900",
+  "procesoId": 50764880,
+  "idProceso": 50764880,
+  "idRegActuacion": "964142770"
+}

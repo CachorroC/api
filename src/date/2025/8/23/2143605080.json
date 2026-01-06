@@ -1,1 +1,19 @@
-{"actuacion":"Elaboración de oficios","anotacion":"Sin tramite por realizar ","cant":188,"carpetaNumero":140,"codRegla":"00                              ","conDocumentos":false,"consActuacion":149,"createdAt":"2025-04-28T05:00:00.000Z","fechaActuacion":"2025-04-28T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2025-04-28T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400307720170056800","procesoId":50921080,"idProceso":50921080,"idRegActuacion":"1742560340"}
+{
+  "actuacion": "Elaboraciï¿½n de oficios",
+  "anotacion": "Sin tramite por realizar ",
+  "cant": 188,
+  "carpetaNumero": 140,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 149,
+  "createdAt": "2025-04-28T05:00:00.000Z",
+  "fechaActuacion": "2025-04-28T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2025-04-28T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400307720170056800",
+  "procesoId": 50921080,
+  "idProceso": 50921080,
+  "idRegActuacion": "1742560340"
+}

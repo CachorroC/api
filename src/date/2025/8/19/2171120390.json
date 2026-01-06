@@ -1,1 +1,17 @@
-{"idRegActuacion":2171120390,"llaveProceso":"11001400303120250071400","consActuacion":11,"fechaActuacion":"2025-09-09T05:00:00.000Z","actuacion":"Al despacho","anotacion":"Aporta poder\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-09-09T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":11,"isUltimaAct":true,"idProceso":218346990,"createdAt":"2025-09-09T05:00:00.000Z"}
+{
+  "idRegActuacion": 2171120390,
+  "llaveProceso": "11001400303120250071400",
+  "consActuacion": 11,
+  "fechaActuacion": "2025-09-09T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "Aporta poder\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-09-09T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 11,
+  "isUltimaAct": true,
+  "idProceso": 218346990,
+  "createdAt": "2025-09-09T05:00:00.000Z"
+}

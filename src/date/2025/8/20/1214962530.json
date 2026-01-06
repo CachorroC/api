@@ -1,1 +1,19 @@
-{"actuacion":"RecepciÃ³n memorial","anotacion":"CESION CL. ","cant":90,"carpetaNumero":144,"codRegla":"00                              ","conDocumentos":false,"consActuacion":51,"createdAt":"2019-11-20T05:00:00.000Z","fechaActuacion":"2019-11-20T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-11-20T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302620170087200","procesoId":50652400,"idProceso":50652400,"idRegActuacion":"870182640"}
+{
+  "actuacion": "Recepción memorial",
+  "anotacion": "CESION CL. ",
+  "cant": 90,
+  "carpetaNumero": 144,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 51,
+  "createdAt": "2019-11-20T05:00:00.000Z",
+  "fechaActuacion": "2019-11-20T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-11-20T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302620170087200",
+  "procesoId": 50652400,
+  "idProceso": 50652400,
+  "idRegActuacion": "870182640"
+}

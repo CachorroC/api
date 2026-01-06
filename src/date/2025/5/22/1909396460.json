@@ -1,1 +1,17 @@
-{"idRegActuacion":1909396460,"llaveProceso":"11001418900820180078500","consActuacion":33,"fechaActuacion":"2025-06-20T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 6370-2025, No. Reloj Radicador: 160258, Entidad o SeÃ±or(a): LINA MARCELA QUIJANO - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: ALLEGA PODER","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-06-20T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":33,"isUltimaAct":true,"idProceso":87350810,"createdAt":"2025-06-20T05:00:00.000Z"}
+{
+  "idRegActuacion": 1909396460,
+  "llaveProceso": "11001418900820180078500",
+  "consActuacion": 33,
+  "fechaActuacion": "2025-06-20T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 6370-2025, No. Reloj Radicador: 160258, Entidad o Señor(a): LINA MARCELA QUIJANO - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: ALLEGA PODER",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-06-20T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 33,
+  "isUltimaAct": true,
+  "idProceso": 87350810,
+  "createdAt": "2025-06-20T05:00:00.000Z"
+}

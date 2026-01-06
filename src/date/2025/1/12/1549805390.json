@@ -1,1 +1,17 @@
-{"idRegActuacion":1549805390,"llaveProceso":"11001418907220240052900","consActuacion":25,"fechaActuacion":"2025-02-10T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"RAD: 2024-00529-PROCESO TERMINADO POR PAGO TOTAL-BANCOLOMBIA CONTRA JAIRO HELBER TORRES ESMERAL\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-10T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":25,"isUltimaAct":true,"idProceso":160274900,"createdAt":"2025-02-10T05:00:00.000Z"}
+{
+  "idRegActuacion": 1549805390,
+  "llaveProceso": "11001418907220240052900",
+  "consActuacion": 25,
+  "fechaActuacion": "2025-02-10T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "RAD: 2024-00529-PROCESO TERMINADO POR PAGO TOTAL-BANCOLOMBIA CONTRA JAIRO HELBER TORRES ESMERAL\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 25,
+  "isUltimaAct": true,
+  "idProceso": 160274900,
+  "createdAt": "2025-02-10T05:00:00.000Z"
+}

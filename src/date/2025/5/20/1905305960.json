@@ -1,1 +1,17 @@
-{"idRegActuacion":1905305960,"llaveProceso":"11001400302220170056700","consActuacion":129,"fechaActuacion":"2025-06-20T05:00:00.000Z","actuacion":"Al despacho","anotacion":"INGRESA AL DESPACHO ART 317 CGP PARA LO PERTINENTE /JUDY ZEA","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-06-19T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":129,"isUltimaAct":true,"idProceso":111939890,"createdAt":"2025-06-19T05:00:00.000Z"}
+{
+  "idRegActuacion": 1905305960,
+  "llaveProceso": "11001400302220170056700",
+  "consActuacion": 129,
+  "fechaActuacion": "2025-06-20T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "INGRESA AL DESPACHO ART 317 CGP PARA LO PERTINENTE /JUDY ZEA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-06-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 129,
+  "isUltimaAct": true,
+  "idProceso": 111939890,
+  "createdAt": "2025-06-19T05:00:00.000Z"
+}

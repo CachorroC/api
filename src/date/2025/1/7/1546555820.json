@@ -1,1 +1,17 @@
-{"idRegActuacion":1546555820,"llaveProceso":"11001400302220170120800","consActuacion":85,"fechaActuacion":"2025-02-10T05:00:00.000Z","actuacion":"Al despacho","anotacion":"PROCESO DIGITAL INGRESA AL DESPACHO PARA LO PERTINENTE/JOHN/DT","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-07T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":85,"isUltimaAct":true,"idProceso":50817380,"createdAt":"2025-02-07T05:00:00.000Z"}
+{
+  "idRegActuacion": 1546555820,
+  "llaveProceso": "11001400302220170120800",
+  "consActuacion": 85,
+  "fechaActuacion": "2025-02-10T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "PROCESO DIGITAL INGRESA AL DESPACHO PARA LO PERTINENTE/JOHN/DT",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 85,
+  "isUltimaAct": true,
+  "idProceso": 50817380,
+  "createdAt": "2025-02-07T05:00:00.000Z"
+}

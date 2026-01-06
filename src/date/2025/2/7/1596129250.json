@@ -1,1 +1,17 @@
-{"idRegActuacion":1596129250,"llaveProceso":"11001400308220180096400","consActuacion":90,"fechaActuacion":"2025-02-27T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SE RECEPCIONA PROCESO DEL AREA DE ESTADO, PASA AL AREA DE LETRA// DANIELA D","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-03T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":90,"isUltimaAct":true,"idProceso":52160520,"createdAt":"2025-03-03T05:00:00.000Z"}
+{
+  "idRegActuacion": 1596129250,
+  "llaveProceso": "11001400308220180096400",
+  "consActuacion": 90,
+  "fechaActuacion": "2025-02-27T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECEPCIONA PROCESO DEL AREA DE ESTADO, PASA AL AREA DE LETRA// DANIELA D",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-03T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 90,
+  "isUltimaAct": true,
+  "idProceso": 52160520,
+  "createdAt": "2025-03-03T05:00:00.000Z"
+}

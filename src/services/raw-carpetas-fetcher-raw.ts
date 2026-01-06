@@ -1,27 +1,25 @@
-import * as fs from 'fs/promises';
-import { RawCarpetas } from '../data/carpetas';
-import { JuzgadoClass } from '../models/juzgado';
-import { ConsultaActuacion, outActuacion } from '../types/actuaciones';
-import { ConsultaProcesos, DetalleProceso } from '../types/procesos';
-import { sleep } from '../utils/awaiter';
+import * as fs from "fs/promises";
+import { RawCarpetas } from "../data/carpetas";
+import { JuzgadoClass } from "../models/juzgado";
+import { ConsultaActuacion, outActuacion } from "../types/actuaciones";
+import { ConsultaProcesos, DetalleProceso } from "../types/procesos";
+import { sleep } from "../utils/awaiter";
 
-export const ramaJudicialBaseURL
-  = 'https://consultaprocesos.ramajudicial.gov.co:448/api/v2/';
+export const ramaJudicialBaseURL =
+  "https://consultaprocesos.ramajudicial.gov.co:448/api/v2/";
 
 /* TODO hacer la clase de proceso que tenga como entrada el idProceso y mas bien  desde la carpeta pedir los procesos disponibles con esa clase proceso a partir de los procesos que salgan en llave proceso */
 
 export class ProcesoJudicial {
-  idProceso      : number;
-  numero         : number;
-  llaveProceso   : string;
-  actuaciones    : outActuacion[] = [];
+  idProceso: number;
+  numero: number;
+  llaveProceso: string;
+  actuaciones: outActuacion[] = [];
   ultimaActuacion: outActuacion | null = null;
-  fecha          : Date | null = null;
-  idRegUltimaAct : number | null = null;
-  detalleProceso : DetalleProceso | null = null;
-  constructor(
-    numero: number, idProceso: number, llaveProceso: string
-  ) {
+  fecha: Date | null = null;
+  idRegUltimaAct: number | null = null;
+  detalleProceso: DetalleProceso | null = null;
+  constructor(numero: number, idProceso: number, llaveProceso: string) {
     this.idProceso = idProceso;
     this.numero = numero;
     this.llaveProceso = llaveProceso;
@@ -30,78 +28,53 @@ export class ProcesoJudicial {
   async getActuaciones() {
     try {
       const request = await fetch(
-        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ this.idProceso }`,
+        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${this.idProceso}`,
       );
 
-      if ( !request.ok ) {
-        throw new Error(
-          request.statusText
-        );
+      if (!request.ok) {
+        throw new Error(request.statusText);
       }
 
-      const consultaActuaciones = ( await request.json() ) as ConsultaActuacion;
+      const consultaActuaciones = (await request.json()) as ConsultaActuacion;
 
-      const {
-        actuaciones
-      } = consultaActuaciones;
+      const { actuaciones } = consultaActuaciones;
 
-      const outActuaciones = actuaciones.map(
-        (
-          actuacion
-        ) => {
-          return {
-            ...actuacion,
-            idProceso     : this.idProceso,
-            isUltimaAct   : actuacion.cant === actuacion.consActuacion,
-            fechaActuacion: new Date(
-              actuacion.fechaActuacion
-            ),
-            fechaRegistro: new Date(
-              actuacion.fechaRegistro
-            ),
-            fechaInicial: actuacion.fechaInicial
-              ? new Date(
-                actuacion.fechaInicial
-              )
-              : null,
-            fechaFinal: actuacion.fechaFinal
-              ? new Date(
-                actuacion.fechaFinal
-              )
-              : null,
-            createdAt: new Date(
-              actuacion.fechaRegistro
-            ),
-            carpetaNumero: this.numero,
-          };
+      const outActuaciones = actuaciones.map((actuacion) => {
+        return {
+          ...actuacion,
+          idProceso: this.idProceso,
+          isUltimaAct: actuacion.cant === actuacion.consActuacion,
+          fechaActuacion: new Date(actuacion.fechaActuacion),
+          fechaRegistro: new Date(actuacion.fechaRegistro),
+          fechaInicial: actuacion.fechaInicial
+            ? new Date(actuacion.fechaInicial)
+            : null,
+          fechaFinal: actuacion.fechaFinal
+            ? new Date(actuacion.fechaFinal)
+            : null,
+          createdAt: new Date(actuacion.fechaRegistro),
+          carpetaNumero: this.numero,
+        };
+      });
+
+      outActuaciones.forEach((actuacion) => {
+        this.actuaciones.push(actuacion);
+
+        if (actuacion.isUltimaAct) {
+          this.ultimaActuacion = actuacion;
+          this.fecha = actuacion.fechaActuacion;
+          this.idRegUltimaAct = actuacion.idRegActuacion;
         }
-      );
-
-      outActuaciones.forEach(
-        (
-          actuacion
-        ) => {
-          this.actuaciones.push(
-            actuacion
-          );
-
-          if ( actuacion.isUltimaAct ) {
-            this.ultimaActuacion = actuacion;
-            this.fecha = actuacion.fechaActuacion;
-            this.idRegUltimaAct = actuacion.idRegActuacion;
-          }
-        }
-      );
-    }
-    catch ( error ) {
+      });
+    } catch (error) {
       console.log(
         `${
           this.numero
-        } ERROR ==> getActuaciones ${ this.idProceso } => ${ JSON.stringify(
+        } ERROR ==> getActuaciones ${this.idProceso} => ${JSON.stringify(
           error,
           null,
           2,
-        ) }`,
+        )}`,
       );
     }
 
@@ -110,32 +83,23 @@ export class ProcesoJudicial {
   async getDetalleProceso() {
     try {
       const urlNameMaker = new URL(
-        `Proceso/Detalle/${ this.idProceso }`,
+        `Proceso/Detalle/${this.idProceso}`,
         ramaJudicialBaseURL,
       );
 
-      const fetchProc = await fetch(
-        urlNameMaker
-      );
+      const fetchProc = await fetch(urlNameMaker);
 
-      if ( !fetchProc.ok ) {
-        throw new Error(
-          fetchProc.statusText
-        );
+      if (!fetchProc.ok) {
+        throw new Error(fetchProc.statusText);
       }
 
-      const detalleProceso = ( await fetchProc.json() ) as DetalleProceso;
+      const detalleProceso = (await fetchProc.json()) as DetalleProceso;
       this.detalleProceso = {
         ...detalleProceso,
-        juzgado: JuzgadoClass.fromLongName(
-          detalleProceso.despacho
-        ),
+        juzgado: JuzgadoClass.fromLongName(detalleProceso.despacho),
       };
-    }
-    catch ( error ) {
-      console.log(
-        error
-      );
+    } catch (error) {
+      console.log(error);
     }
 
     return this.detalleProceso;
@@ -144,39 +108,35 @@ export class ProcesoJudicial {
 
 export class FetcherJudicial {
   llaveProceso: string;
-  procesos    : unknown[] = [];
-  idProcesos  : number[] = [];
-  numero      : number;
-  constructor(
-    llaveProceso: string, numero: number
-  ) {
+  procesos: unknown[] = [];
+  idProcesos: number[] = [];
+  numero: number;
+  constructor(llaveProceso: string, numero: number) {
     this.llaveProceso = llaveProceso;
     this.numero = numero;
   }
   async getProcesos() {
     try {
       const request = await fetch(
-        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1`,
+        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${this.llaveProceso}&SoloActivos=false&pagina=1`,
       );
 
-      if ( !request.ok ) {
+      if (!request.ok) {
         const json = await request.json();
 
         throw new Error(
-          `${ request.status } : ${ request.statusText } === ${ JSON.stringify(
+          `${request.status} : ${request.statusText} === ${JSON.stringify(
             json,
-          ) }`,
+          )}`,
         );
       }
 
-      const consultaProcesos = ( await request.json() ) as ConsultaProcesos;
+      const consultaProcesos = (await request.json()) as ConsultaProcesos;
 
-      const {
-        procesos
-      } = consultaProcesos;
+      const { procesos } = consultaProcesos;
 
-      for ( const rawProceso of procesos ) {
-        if ( rawProceso.esPrivado ) {
+      for (const rawProceso of procesos) {
+        if (rawProceso.esPrivado) {
           continue;
         }
 
@@ -192,32 +152,21 @@ export class FetcherJudicial {
           ...rawProceso,
           ...newProceso,
           fechaProceso: rawProceso.fechaProceso
-            ? new Date(
-              rawProceso.fechaProceso
-            )
+            ? new Date(rawProceso.fechaProceso)
             : null,
           fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
-            ? new Date(
-              rawProceso.fechaUltimaActuacion
-            )
+            ? new Date(rawProceso.fechaUltimaActuacion)
             : null,
-          juzgado: JuzgadoClass.fromProceso(
-            rawProceso
-          ),
+          juzgado: JuzgadoClass.fromProceso(rawProceso),
         };
-        this.procesos.push(
-          proceso
-        );
-        this.idProcesos.push(
-          proceso.idProceso
-        );
+        this.procesos.push(proceso);
+        this.idProcesos.push(proceso.idProceso);
       }
 
       return this.procesos;
-    }
-    catch ( error ) {
+    } catch (error) {
       console.log(
-        `${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }`,
+        `${this.numero} => error en CarpetaBuilder.getProcesos(${this.llaveProceso}) => ${error}`,
       );
       return null;
     }
@@ -350,24 +299,14 @@ export class FetcherJudicial {
 }
 
 async function* generateCarpetas() {
-  for await ( const carpeta of RawCarpetas ) {
-    console.log(
-      'start sleeping'
-    );
-    await sleep(
-      1000
-    );
-    console.log(
-      'wake up'
-    );
+  for await (const carpeta of RawCarpetas) {
+    console.log("start sleeping");
+    await sleep(1000);
+    console.log("wake up");
 
     const newCarpeta = new FetcherJudicial(
-      String(
-        carpeta.EXPEDIENTE
-      ),
-      Number(
-        carpeta.NUMERO
-      ),
+      String(carpeta.EXPEDIENTE),
+      Number(carpeta.NUMERO),
     );
     await newCarpeta.getProcesos();
     yield newCarpeta;
@@ -377,20 +316,12 @@ async function* generateCarpetas() {
 async function tryAsyncClassCarpetas() {
   const mapClassCarpetas = new Map();
 
-  for await ( const carpeta of generateCarpetas() ) {
-    mapClassCarpetas.set(
-      carpeta.numero, carpeta
-    );
+  for await (const carpeta of generateCarpetas()) {
+    mapClassCarpetas.set(carpeta.numero, carpeta);
   }
 
-  const asAnArray = Array.from(
-    mapClassCarpetas.values()
-  );
-  fs.writeFile(
-    'ClasscarpetasModelPostAwait.json', JSON.stringify(
-      asAnArray
-    )
-  );
+  const asAnArray = Array.from(mapClassCarpetas.values());
+  fs.writeFile("ClasscarpetasModelPostAwait.json", JSON.stringify(asAnArray));
   return asAnArray;
 }
 

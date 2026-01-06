@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"ENTREGUE OFICIO A LA APODERADA DE LA PARTE ACTORA//LUCERO SUAREAZ","cant":84,"carpetaNumero":294,"codRegla":"00                              ","conDocumentos":false,"consActuacion":45,"createdAt":"2022-03-28T05:00:00.000Z","fechaActuacion":"2022-03-28T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-03-28T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400306320170092400","procesoId":65700110,"idProceso":65700110,"idRegActuacion":"1220668790"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "ENTREGUE OFICIO A LA APODERADA DE LA PARTE ACTORA//LUCERO SUAREAZ",
+  "cant": 84,
+  "carpetaNumero": 294,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 45,
+  "createdAt": "2022-03-28T05:00:00.000Z",
+  "fechaActuacion": "2022-03-28T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-03-28T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400306320170092400",
+  "procesoId": 65700110,
+  "idProceso": 65700110,
+  "idRegActuacion": "1220668790"
+}

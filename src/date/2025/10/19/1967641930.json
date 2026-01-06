@@ -1,1 +1,19 @@
-{"actuacion":"Memorial al despacho","anotacion":"cesion ... cssr","cant":122,"carpetaNumero":32,"codRegla":"00                              ","conDocumentos":false,"consActuacion":83,"createdAt":"2021-10-25T05:00:00.000Z","fechaActuacion":"2021-10-25T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-10-25T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400304320180038400","procesoId":114256610,"idProceso":114256610,"idRegActuacion":"1220700760"}
+{
+  "actuacion": "Memorial al despacho",
+  "anotacion": "cesion ... cssr",
+  "cant": 122,
+  "carpetaNumero": 32,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 83,
+  "createdAt": "2021-10-25T05:00:00.000Z",
+  "fechaActuacion": "2021-10-25T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-10-25T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400304320180038400",
+  "procesoId": 114256610,
+  "idProceso": 114256610,
+  "idRegActuacion": "1220700760"
+}

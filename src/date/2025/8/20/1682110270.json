@@ -1,1 +1,19 @@
-{"actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 8507-2021, No. Reloj Radicador: 49109, Entidad o SeÃ±or(a): CARMEN RAMIREZ MUÃ‘OZ - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Apoderados","cant":106,"carpetaNumero":223,"codRegla":"00                              ","conDocumentos":false,"consActuacion":67,"createdAt":"2021-11-03T05:00:00.000Z","fechaActuacion":"2021-11-03T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-11-03T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400305520170086000","procesoId":86524020,"idProceso":86524020,"idRegActuacion":"1191945100"}
+{
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 8507-2021, No. Reloj Radicador: 49109, Entidad o Señor(a): CARMEN RAMIREZ MUÑOZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Apoderados",
+  "cant": 106,
+  "carpetaNumero": 223,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 67,
+  "createdAt": "2021-11-03T05:00:00.000Z",
+  "fechaActuacion": "2021-11-03T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-11-03T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400305520170086000",
+  "procesoId": 86524020,
+  "idProceso": 86524020,
+  "idRegActuacion": "1191945100"
+}

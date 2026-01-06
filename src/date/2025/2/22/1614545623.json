@@ -1,1 +1,17 @@
-{"idRegActuacion":1614545623,"llaveProceso":"11001400304320250016000","consActuacion":8,"fechaActuacion":"2025-03-21T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"solicitud envio oficio (radicado 13-03-25) ... cssr ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-21T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":8,"isUltimaAct":true,"idProceso":146197893,"createdAt":"2025-03-21T05:00:00.000Z"}
+{
+  "idRegActuacion": 1614545623,
+  "llaveProceso": "11001400304320250016000",
+  "consActuacion": 8,
+  "fechaActuacion": "2025-03-21T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "solicitud envio oficio (radicado 13-03-25) ... cssr ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-21T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 8,
+  "isUltimaAct": true,
+  "idProceso": 146197893,
+  "createdAt": "2025-03-21T05:00:00.000Z"
+}

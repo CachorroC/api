@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"Radicado No. 7268-2025, No. Reloj Radicador: 33216, Entidad o Señor(a): JUZGADO TERCERO (03) CIVIL DEL CIRCUITO DE EJECUCIÓN DE SENTENCIAS DE BOGOTÁ D.C - Tercer Interesado, Aportó Documento: Tutela, Con La Solucitud: Tutela, Observaciones: RADICACIÓN AUTO ADMITE TUTELA N°2025-166// SHELYN RUGE.","cant":199,"carpetaNumero":170,"codRegla":"00                              ","conDocumentos":false,"consActuacion":160,"createdAt":"2025-05-06T05:00:00.000Z","fechaActuacion":"2025-05-06T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2025-05-06T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302520170090300","procesoId":112048180,"idProceso":112048180,"idRegActuacion":"1760777580"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "Radicado No. 7268-2025, No. Reloj Radicador: 33216, Entidad o Seï¿½or(a): JUZGADO TERCERO (03) CIVIL DEL CIRCUITO DE EJECUCIï¿½N DE SENTENCIAS DE BOGOTï¿½ D.C - Tercer Interesado, Aportï¿½ Documento: Tutela, Con La Solucitud: Tutela, Observaciones: RADICACIï¿½N AUTO ADMITE TUTELA Nï¿½2025-166// SHELYN RUGE.",
+  "cant": 199,
+  "carpetaNumero": 170,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 160,
+  "createdAt": "2025-05-06T05:00:00.000Z",
+  "fechaActuacion": "2025-05-06T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2025-05-06T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302520170090300",
+  "procesoId": 112048180,
+  "idProceso": 112048180,
+  "idRegActuacion": "1760777580"
+}

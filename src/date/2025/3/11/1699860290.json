@@ -1,1 +1,17 @@
-{"idRegActuacion":1699860290,"llaveProceso":"11001400302220170120800","consActuacion":108,"fechaActuacion":"2025-04-11T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 7094-2025, No. Reloj Radicador: 47850, Entidad o SeÃ±or(a): BANCO PICHINCHA - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RESPUESTA BANCO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-11T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":108,"isUltimaAct":true,"idProceso":50817380,"createdAt":"2025-04-11T05:00:00.000Z"}
+{
+  "idRegActuacion": 1699860290,
+  "llaveProceso": "11001400302220170120800",
+  "consActuacion": 108,
+  "fechaActuacion": "2025-04-11T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 7094-2025, No. Reloj Radicador: 47850, Entidad o Señor(a): BANCO PICHINCHA - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: RESPUESTA BANCO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 108,
+  "isUltimaAct": true,
+  "idProceso": 50817380,
+  "createdAt": "2025-04-11T05:00:00.000Z"
+}

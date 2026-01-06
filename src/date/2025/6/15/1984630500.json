@@ -1,1 +1,17 @@
-{"idRegActuacion":1984630500,"llaveProceso":"11001400302520240038000","consActuacion":29,"fechaActuacion":"2025-07-21T05:00:00.000Z","actuacion":"Al despacho","anotacion":"EXPEDIENTE DIGITAL INGRESA AL DESPACHO PARA LO PERTINENTE // LAURA ROMERO LINARES 21/07/2025","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-15T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":29,"isUltimaAct":true,"idProceso":212524620,"createdAt":"2025-07-15T05:00:00.000Z"}
+{
+  "idRegActuacion": 1984630500,
+  "llaveProceso": "11001400302520240038000",
+  "consActuacion": 29,
+  "fechaActuacion": "2025-07-21T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "EXPEDIENTE DIGITAL INGRESA AL DESPACHO PARA LO PERTINENTE // LAURA ROMERO LINARES 21/07/2025",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-15T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 29,
+  "isUltimaAct": true,
+  "idProceso": 212524620,
+  "createdAt": "2025-07-15T05:00:00.000Z"
+}

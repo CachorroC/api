@@ -1,1 +1,17 @@
-{"idRegActuacion":102878393,"llaveProceso":"11001400304320170106400","consActuacion":24,"fechaActuacion":"2018-04-16T05:00:00.000Z","actuacion":"Archivo Definitivo","anotacion":"PAQUETE 420 / 2018","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2018-04-16T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":24,"isUltimaAct":true,"idProceso":9333743,"createdAt":"2018-04-16T05:00:00.000Z"}
+{
+  "idRegActuacion": 102878393,
+  "llaveProceso": "11001400304320170106400",
+  "consActuacion": 24,
+  "fechaActuacion": "2018-04-16T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PAQUETE 420 / 2018",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2018-04-16T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 24,
+  "isUltimaAct": true,
+  "idProceso": 9333743,
+  "createdAt": "2018-04-16T05:00:00.000Z"
+}

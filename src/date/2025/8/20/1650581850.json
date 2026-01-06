@@ -1,1 +1,19 @@
-{"actuacion":"Al despacho","anotacion":"ContestaciÃ³n curador sin excepciones-","cant":81,"carpetaNumero":243,"codRegla":"00                              ","conDocumentos":false,"consActuacion":42,"createdAt":"2019-12-13T05:00:00.000Z","fechaActuacion":"2019-12-13T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-12-13T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400306920170084500","procesoId":50675410,"idProceso":50675410,"idRegActuacion":"904188530"}
+{
+  "actuacion": "Al despacho",
+  "anotacion": "Contestación curador sin excepciones-",
+  "cant": 81,
+  "carpetaNumero": 243,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 42,
+  "createdAt": "2019-12-13T05:00:00.000Z",
+  "fechaActuacion": "2019-12-13T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-12-13T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400306920170084500",
+  "procesoId": 50675410,
+  "idProceso": 50675410,
+  "idRegActuacion": "904188530"
+}

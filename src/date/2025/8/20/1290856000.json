@@ -1,1 +1,19 @@
-{"actuacion":"EnvÃ­o Comunicaciones","anotacion":"OF No. 34883\r\n_AndrÃ©sF.LÃ³pezM_","cant":77,"carpetaNumero":266,"codRegla":"00                              ","conDocumentos":false,"consActuacion":38,"createdAt":"2019-06-07T05:00:00.000Z","fechaActuacion":"2019-06-07T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2019-06-07T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302020170121900","procesoId":50739310,"idProceso":50739310,"idRegActuacion":"677617600"}
+{
+  "actuacion": "Envío Comunicaciones",
+  "anotacion": "OF No. 34883\r\n_AndrésF.LópezM_",
+  "cant": 77,
+  "carpetaNumero": 266,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 38,
+  "createdAt": "2019-06-07T05:00:00.000Z",
+  "fechaActuacion": "2019-06-07T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2019-06-07T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302020170121900",
+  "procesoId": 50739310,
+  "idProceso": 50739310,
+  "idRegActuacion": "677617600"
+}

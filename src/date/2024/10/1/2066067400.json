@@ -1,1 +1,17 @@
-{"idRegActuacion":2066067400,"llaveProceso":"11001400306820170130600","consActuacion":63,"fechaActuacion":"2024-10-30T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"Revisado el Portal Web Transaccional del Banco Agrario con números de identificación de las partes y número de expediente a la fecha NO se encuentran títulos PENDIENTES DE PAGO para el proceso de la referencia. Se anexa reporte. Se direcciona el expediente al área de letra **Brayan Bustos G**","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-30T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":63,"isUltimaAct":true,"idProceso":50765770,"createdAt":"2024-10-30T05:00:00.000Z"}
+{
+  "idRegActuacion": 2066067400,
+  "llaveProceso": "11001400306820170130600",
+  "consActuacion": 63,
+  "fechaActuacion": "2024-10-30T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Revisado el Portal Web Transaccional del Banco Agrario con números de identificación de las partes y número de expediente a la fecha NO se encuentran títulos PENDIENTES DE PAGO para el proceso de la referencia. Se anexa reporte. Se direcciona el expediente al área de letra **Brayan Bustos G**",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-30T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 63,
+  "isUltimaAct": true,
+  "idProceso": 50765770,
+  "createdAt": "2024-10-30T05:00:00.000Z"
+}

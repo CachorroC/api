@@ -1,1 +1,17 @@
-{"idRegActuacion":"2138625070","llaveProceso":"11001400305020170133600","consActuacion":84,"fechaActuacion":"2025-08-26T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SE  RECEPCIONA PROCESO DEL AREA DE ESTADOS, PASA AL AREA DE LETRA// DD","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-29T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":84,"isUltimaAct":true,"idProceso":106185210,"createdAt":"2025-08-29T05:00:00.000Z"}
+{
+  "idRegActuacion": "2138625070",
+  "llaveProceso": "11001400305020170133600",
+  "consActuacion": 84,
+  "fechaActuacion": "2025-08-26T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE  RECEPCIONA PROCESO DEL AREA DE ESTADOS, PASA AL AREA DE LETRA// DD",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 84,
+  "isUltimaAct": true,
+  "idProceso": 106185210,
+  "createdAt": "2025-08-29T05:00:00.000Z"
+}

@@ -1,1 +1,19 @@
-{"actuacion":"Recepci√≥n memorial","anotacion":"Radicado No. 4430-2021, No. Reloj Radicador: 66830, Entidad o Se√±or(a): MARIA SUAREZ - Tercer Interesado, Aport√≥ Documento: Memorial, Con La Solucitud: Dar Tr√°mite, Observaciones: ALLEGA MEMORIAL  ENVIO DE OFICIO","cant":75,"carpetaNumero":305,"codRegla":"00                              ","conDocumentos":false,"consActuacion":36,"createdAt":"2021-06-11T05:00:00.000Z","fechaActuacion":"2021-06-11T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-06-11T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400308220170125600","procesoId":51701110,"idProceso":51701110,"idRegActuacion":"988658360"}
+{
+  "actuacion": "RecepciÛn memorial",
+  "anotacion": "Radicado No. 4430-2021, No. Reloj Radicador: 66830, Entidad o SeÒor(a): MARIA SUAREZ - Tercer Interesado, AportÛ Documento: Memorial, Con La Solucitud: Dar Tr·mite, Observaciones: ALLEGA MEMORIAL  ENVIO DE OFICIO",
+  "cant": 75,
+  "carpetaNumero": 305,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 36,
+  "createdAt": "2021-06-11T05:00:00.000Z",
+  "fechaActuacion": "2021-06-11T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-06-11T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400308220170125600",
+  "procesoId": 51701110,
+  "idProceso": 51701110,
+  "idRegActuacion": "988658360"
+}

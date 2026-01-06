@@ -1,1 +1,17 @@
-{"idRegActuacion":1683998150,"llaveProceso":"11001400300920240033200","consActuacion":40,"fechaActuacion":"2025-04-01T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"PROCESO DIGITAL BAJA DEL DESPACHO/OFICIOS/JOHN","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-01T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":40,"isUltimaAct":true,"idProceso":154958600,"createdAt":"2025-04-01T05:00:00.000Z"}
+{
+  "idRegActuacion": 1683998150,
+  "llaveProceso": "11001400300920240033200",
+  "consActuacion": 40,
+  "fechaActuacion": "2025-04-01T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PROCESO DIGITAL BAJA DEL DESPACHO/OFICIOS/JOHN",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 40,
+  "isUltimaAct": true,
+  "idProceso": 154958600,
+  "createdAt": "2025-04-01T05:00:00.000Z"
+}

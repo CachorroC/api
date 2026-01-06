@@ -1,1 +1,17 @@
-{"idRegActuacion":1457373840,"llaveProceso":"11001400304720170152000","consActuacion":108,"fechaActuacion":"2024-11-22T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"PROCESO SE RECIBE POR PARTE DEL DESPACHO SE DIRECCIONA AL √ÅREA DE   /     LETRA  /    JOS√â ROJAS ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-22T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":108,"isUltimaAct":true,"idProceso":145903370,"createdAt":"2024-11-22T05:00:00.000Z"}
+{
+  "idRegActuacion": 1457373840,
+  "llaveProceso": "11001400304720170152000",
+  "consActuacion": 108,
+  "fechaActuacion": "2024-11-22T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PROCESO SE RECIBE POR PARTE DEL DESPACHO SE DIRECCIONA AL ¡REA DE   /     LETRA  /    JOS… ROJAS ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 108,
+  "isUltimaAct": true,
+  "idProceso": 145903370,
+  "createdAt": "2024-11-22T05:00:00.000Z"
+}

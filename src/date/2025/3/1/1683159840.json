@@ -1,1 +1,17 @@
-{"idRegActuacion":1683159840,"llaveProceso":"11001400307720170056800","consActuacion":147,"fechaActuacion":"2025-03-31T05:00:00.000Z","actuacion":"RecepciÃ³n expediente","anotacion":"Remate para el 20 de mayo del 2025 a las 9:00 am//Daniel Amado","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-31T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":147,"isUltimaAct":true,"idProceso":50921080,"createdAt":"2025-03-31T05:00:00.000Z"}
+{
+  "idRegActuacion": 1683159840,
+  "llaveProceso": "11001400307720170056800",
+  "consActuacion": 147,
+  "fechaActuacion": "2025-03-31T05:00:00.000Z",
+  "actuacion": "Recepción expediente",
+  "anotacion": "Remate para el 20 de mayo del 2025 a las 9:00 am//Daniel Amado",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-31T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 147,
+  "isUltimaAct": true,
+  "idProceso": 50921080,
+  "createdAt": "2025-03-31T05:00:00.000Z"
+}

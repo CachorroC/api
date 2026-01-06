@@ -1,1 +1,19 @@
-{"actuacion":"Auto requiere","anotacion":"acredite el tramite dado el dc 461 (FIL543)","cant":97,"carpetaNumero":231,"codRegla":"00                              ","conDocumentos":false,"consActuacion":58,"createdAt":"2022-05-06T05:00:00.000Z","fechaActuacion":"2022-05-06T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-05-06T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300820170113400","procesoId":50716620,"idProceso":50716620,"idRegActuacion":"1225544070"}
+{
+  "actuacion": "Auto requiere",
+  "anotacion": "acredite el tramite dado el dc 461 (FIL543)",
+  "cant": 97,
+  "carpetaNumero": 231,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 58,
+  "createdAt": "2022-05-06T05:00:00.000Z",
+  "fechaActuacion": "2022-05-06T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-05-06T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300820170113400",
+  "procesoId": 50716620,
+  "idProceso": 50716620,
+  "idRegActuacion": "1225544070"
+}

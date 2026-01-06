@@ -1,1 +1,17 @@
-{"idRegActuacion":1613433610,"llaveProceso":"11001418907220240052900","consActuacion":31,"fechaActuacion":"2025-03-07T05:00:00.000Z","actuacion":"EnvÃ­o  comunicaciones","anotacion":"SE REMITE OFICIO ORIP TERMINACION -RYCP-\r\n ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-07T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":31,"isUltimaAct":true,"idProceso":160274900,"createdAt":"2025-03-07T05:00:00.000Z"}
+{
+  "idRegActuacion": 1613433610,
+  "llaveProceso": "11001418907220240052900",
+  "consActuacion": 31,
+  "fechaActuacion": "2025-03-07T05:00:00.000Z",
+  "actuacion": "Envío  comunicaciones",
+  "anotacion": "SE REMITE OFICIO ORIP TERMINACION -RYCP-\r\n ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 31,
+  "isUltimaAct": true,
+  "idProceso": 160274900,
+  "createdAt": "2025-03-07T05:00:00.000Z"
+}

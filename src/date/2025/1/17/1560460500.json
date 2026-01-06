@@ -1,1 +1,17 @@
-{"idRegActuacion":1560460500,"llaveProceso":"11001400308120180051400","consActuacion":58,"fechaActuacion":"2025-02-17T05:00:00.000Z","actuacion":"Oficio Elaborado","anotacion":"OFICIO ELABORADO NO OOECM-0225MDP-8557 // PASA A FIRMA // MICHAEL MOYA //","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-17T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":58,"isUltimaAct":true,"idProceso":51918470,"createdAt":"2025-02-17T05:00:00.000Z"}
+{
+  "idRegActuacion": 1560460500,
+  "llaveProceso": "11001400308120180051400",
+  "consActuacion": 58,
+  "fechaActuacion": "2025-02-17T05:00:00.000Z",
+  "actuacion": "Oficio Elaborado",
+  "anotacion": "OFICIO ELABORADO NO OOECM-0225MDP-8557 // PASA A FIRMA // MICHAEL MOYA //",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 58,
+  "isUltimaAct": true,
+  "idProceso": 51918470,
+  "createdAt": "2025-02-17T05:00:00.000Z"
+}

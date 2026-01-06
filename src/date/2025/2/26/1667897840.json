@@ -1,1 +1,17 @@
-{"idRegActuacion":1667897840,"llaveProceso":"11001400308220170068000","consActuacion":92,"fechaActuacion":"2025-03-27T05:00:00.000Z","actuacion":"Al despacho","anotacion":"EXPEDIENTE HIBRIDO INGRESA AL DESPACHO //hames r","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-26T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":92,"isUltimaAct":true,"idProceso":51619370,"createdAt":"2025-03-26T05:00:00.000Z"}
+{
+  "idRegActuacion": 1667897840,
+  "llaveProceso": "11001400308220170068000",
+  "consActuacion": 92,
+  "fechaActuacion": "2025-03-27T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "EXPEDIENTE HIBRIDO INGRESA AL DESPACHO //hames r",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 92,
+  "isUltimaAct": true,
+  "idProceso": 51619370,
+  "createdAt": "2025-03-26T05:00:00.000Z"
+}

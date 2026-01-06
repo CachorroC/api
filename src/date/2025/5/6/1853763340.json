@@ -1,1 +1,17 @@
-{"idRegActuacion":1853763340,"llaveProceso":"11001400307720240074600","consActuacion":23,"fechaActuacion":"2025-06-04T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"SOLICITUD TERMINACION//JERP","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-06-04T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":23,"isUltimaAct":true,"idProceso":164444120,"createdAt":"2025-06-04T05:00:00.000Z"}
+{
+  "idRegActuacion": 1853763340,
+  "llaveProceso": "11001400307720240074600",
+  "consActuacion": 23,
+  "fechaActuacion": "2025-06-04T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "SOLICITUD TERMINACION//JERP",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-06-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 23,
+  "isUltimaAct": true,
+  "idProceso": 164444120,
+  "createdAt": "2025-06-04T05:00:00.000Z"
+}

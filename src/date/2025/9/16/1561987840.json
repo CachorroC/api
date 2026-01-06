@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"SE RECEPCIONA EXPEDIENTE POR ESTADO CUADERNOS 2 // DIANA GOMEZ  // TRIVIÑO","cant":125,"carpetaNumero":183,"codRegla":"00                              ","conDocumentos":false,"consActuacion":86,"createdAt":"2021-07-26T05:00:00.000Z","fechaActuacion":"2021-07-26T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-07-26T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400304220170076000","procesoId":50517060,"idProceso":50517060,"idRegActuacion":"1177963500"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECEPCIONA EXPEDIENTE POR ESTADO CUADERNOS 2 // DIANA GOMEZ  // TRIVIï¿½O",
+  "cant": 125,
+  "carpetaNumero": 183,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 86,
+  "createdAt": "2021-07-26T05:00:00.000Z",
+  "fechaActuacion": "2021-07-26T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-07-26T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400304220170076000",
+  "procesoId": 50517060,
+  "idProceso": 50517060,
+  "idRegActuacion": "1177963500"
+}

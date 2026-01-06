@@ -1,1 +1,17 @@
-{"idRegActuacion":1629512020,"llaveProceso":"11001400300920170083700","consActuacion":132,"fechaActuacion":"2025-03-13T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 3516-2025, No. Reloj Radicador: 15, Entidad o SeÃ±or(a): SERGIO PERDOMO - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Terminaciones","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-03-13T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":132,"isUltimaAct":true,"idProceso":50666380,"createdAt":"2025-03-13T05:00:00.000Z"}
+{
+  "idRegActuacion": 1629512020,
+  "llaveProceso": "11001400300920170083700",
+  "consActuacion": 132,
+  "fechaActuacion": "2025-03-13T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 3516-2025, No. Reloj Radicador: 15, Entidad o Señor(a): SERGIO PERDOMO - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Terminaciones",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-03-13T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 132,
+  "isUltimaAct": true,
+  "idProceso": 50666380,
+  "createdAt": "2025-03-13T05:00:00.000Z"
+}

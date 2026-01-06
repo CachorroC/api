@@ -1,1 +1,17 @@
-{"idRegActuacion":1452533290,"llaveProceso":"11001400303420170083600","consActuacion":151,"fechaActuacion":"2024-11-07T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"SE CARGA AL GESTOR RESPUESTA DE BANCOLOMBIA Y DE LA SECRETARIA DISTRITAL DE MOVILIDAD // PASA A LETRA // ANUAR GUERRA ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-07T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":151,"isUltimaAct":true,"idProceso":50521480,"createdAt":"2024-11-07T05:00:00.000Z"}
+{
+  "idRegActuacion": 1452533290,
+  "llaveProceso": "11001400303420170083600",
+  "consActuacion": 151,
+  "fechaActuacion": "2024-11-07T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE CARGA AL GESTOR RESPUESTA DE BANCOLOMBIA Y DE LA SECRETARIA DISTRITAL DE MOVILIDAD // PASA A LETRA // ANUAR GUERRA ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 151,
+  "isUltimaAct": true,
+  "idProceso": 50521480,
+  "createdAt": "2024-11-07T05:00:00.000Z"
+}

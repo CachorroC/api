@@ -1,1 +1,17 @@
-{"idRegActuacion":1549112170,"llaveProceso":"11001400305920170048300","consActuacion":75,"fechaActuacion":"2025-02-10T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 1743-2025, No. Reloj Radicador: 15, Entidad o Señor(a): FARIDE OVIEDO - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Oficio","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-10T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":75,"isUltimaAct":true,"idProceso":50514310,"createdAt":"2025-02-10T05:00:00.000Z"}
+{
+  "idRegActuacion": 1549112170,
+  "llaveProceso": "11001400305920170048300",
+  "consActuacion": 75,
+  "fechaActuacion": "2025-02-10T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 1743-2025, No. Reloj Radicador: 15, Entidad o Señor(a): FARIDE OVIEDO - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Oficio",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 75,
+  "isUltimaAct": true,
+  "idProceso": 50514310,
+  "createdAt": "2025-02-10T05:00:00.000Z"
+}

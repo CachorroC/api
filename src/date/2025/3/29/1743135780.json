@@ -1,1 +1,17 @@
-{"idRegActuacion":1743135780,"llaveProceso":"11001418903120240090400","consActuacion":10,"fechaActuacion":"2025-04-25T05:00:00.000Z","actuacion":"Al despacho","anotacion":"SOLICITUD CORRECCION ACTO MEDIDAS CAUTELARES","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-29T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":10,"isUltimaAct":true,"idProceso":202527590,"createdAt":"2025-04-29T05:00:00.000Z"}
+{
+  "idRegActuacion": 1743135780,
+  "llaveProceso": "11001418903120240090400",
+  "consActuacion": 10,
+  "fechaActuacion": "2025-04-25T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "SOLICITUD CORRECCION ACTO MEDIDAS CAUTELARES",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 10,
+  "isUltimaAct": true,
+  "idProceso": 202527590,
+  "createdAt": "2025-04-29T05:00:00.000Z"
+}

@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"SE RECEPCIONA EXPEDIENTE  CON 2 CUADERNOS //  ESTEFANIA LOPEZ HIBRIDO","cant":129,"carpetaNumero":289,"codRegla":"00                              ","conDocumentos":false,"consActuacion":90,"createdAt":"2023-12-12T05:00:00.000Z","fechaActuacion":"2023-12-12T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2023-12-12T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400301820170152200","procesoId":50711570,"idProceso":50711570,"idRegActuacion":"1366901620"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECEPCIONA EXPEDIENTE  CON 2 CUADERNOS //  ESTEFANIA LOPEZ HIBRIDO",
+  "cant": 129,
+  "carpetaNumero": 289,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 90,
+  "createdAt": "2023-12-12T05:00:00.000Z",
+  "fechaActuacion": "2023-12-12T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2023-12-12T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400301820170152200",
+  "procesoId": 50711570,
+  "idProceso": 50711570,
+  "idRegActuacion": "1366901620"
+}

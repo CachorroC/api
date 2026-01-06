@@ -1,1 +1,19 @@
-{"actuacion":"Traslado Liquidación Credito Art. 446 C.G.P.","anotacion":"L- GIOVANNY","cant":79,"carpetaNumero":546,"codRegla":"00                              ","conDocumentos":false,"consActuacion":40,"createdAt":"2022-03-04T05:00:00.000Z","fechaActuacion":"2022-03-04T00:00:00.000Z","fechaFinal":"2022-03-09T00:00:00.000Z","fechaInicial":"2022-03-07T00:00:00.000Z","fechaRegistro":"2022-03-04T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300220170100200","procesoId":50780430,"idProceso":50780430,"idRegActuacion":"1216764510"}
+{
+  "actuacion": "Traslado Liquidaciï¿½n Credito Art. 446 C.G.P.",
+  "anotacion": "L- GIOVANNY",
+  "cant": 79,
+  "carpetaNumero": 546,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 40,
+  "createdAt": "2022-03-04T05:00:00.000Z",
+  "fechaActuacion": "2022-03-04T00:00:00.000Z",
+  "fechaFinal": "2022-03-09T00:00:00.000Z",
+  "fechaInicial": "2022-03-07T00:00:00.000Z",
+  "fechaRegistro": "2022-03-04T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300220170100200",
+  "procesoId": 50780430,
+  "idProceso": 50780430,
+  "idRegActuacion": "1216764510"
+}

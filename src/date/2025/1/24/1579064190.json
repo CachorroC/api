@@ -1,1 +1,17 @@
-{"idRegActuacion":1579064190,"llaveProceso":"11001400301720230078200","consActuacion":33,"fechaActuacion":"2025-02-24T05:00:00.000Z","actuacion":"Elaboración de oficios","anotacion":"SE ELABORA OFICIO No. OOECM-0225SBO-4282\r\n//PROCESO DIGITAL SE DIRECCIONA PARA LA FIRMA//EMILIO B\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-24T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":33,"isUltimaAct":true,"idProceso":132372990,"createdAt":"2025-02-24T05:00:00.000Z"}
+{
+  "idRegActuacion": 1579064190,
+  "llaveProceso": "11001400301720230078200",
+  "consActuacion": 33,
+  "fechaActuacion": "2025-02-24T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "SE ELABORA OFICIO No. OOECM-0225SBO-4282\r\n//PROCESO DIGITAL SE DIRECCIONA PARA LA FIRMA//EMILIO B\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-24T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 33,
+  "isUltimaAct": true,
+  "idProceso": 132372990,
+  "createdAt": "2025-02-24T05:00:00.000Z"
+}

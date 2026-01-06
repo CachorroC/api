@@ -1,1 +1,17 @@
-{"idRegActuacion":1451117380,"llaveProceso":"11001400300620170030200","consActuacion":106,"fechaActuacion":"2024-11-01T05:00:00.000Z","actuacion":"ElaboraciÃ³n de oficios","anotacion":"SE REMITE OFICIO No. OOECM-1024LFGL-5470Â ordenados por auto del 30 de septiembre de 2024.Â // HIBRIDO // UBICACIÃ“N - LETRA // PEDRO MONROY.","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-01T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":106,"isUltimaAct":true,"idProceso":50521190,"createdAt":"2024-11-01T05:00:00.000Z"}
+{
+  "idRegActuacion": 1451117380,
+  "llaveProceso": "11001400300620170030200",
+  "consActuacion": 106,
+  "fechaActuacion": "2024-11-01T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "SE REMITE OFICIO No. OOECM-1024LFGL-5470 ordenados por auto del 30 de septiembre de 2024. // HIBRIDO // UBICACIÓN - LETRA // PEDRO MONROY.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 106,
+  "isUltimaAct": true,
+  "idProceso": 50521190,
+  "createdAt": "2024-11-01T05:00:00.000Z"
+}

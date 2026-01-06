@@ -1,27 +1,16 @@
-import { Prisma } from '@prisma/client';
-import {
-  ConsultaActuacion,
-  outActuacion,
-} from '../types/actuaciones';
-import {
-  Codeudor,
-  IntCarpeta,
-  Juzgado,
-  TipoProceso,
-} from '../types/carpetas';
-import {
-  ConsultaProcesos,
-  outProceso,
-} from '../types/procesos';
-import { RawDb } from '../types/raw-db';
-import { ClassDemanda } from './demanda';
-import { ClassDeudor } from './deudor';
-import { JuzgadoClass } from './juzgado';
-import { NotasBuilder } from './nota';
-import { tipoProcesoBuilder } from './tipoProceso';
-import { client } from '../services/prisma';
-import { sleep } from '../utils/awaiter';
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+import { Prisma } from "@prisma/client";
+import { ConsultaActuacion, outActuacion } from "../types/actuaciones";
+import { Codeudor, IntCarpeta, Juzgado, TipoProceso } from "../types/carpetas";
+import { ConsultaProcesos, outProceso } from "../types/procesos";
+import { RawDb } from "../types/raw-db";
+import { ClassDemanda } from "./demanda";
+import { ClassDeudor } from "./deudor";
+import { JuzgadoClass } from "./juzgado";
+import { NotasBuilder } from "./nota";
+import { tipoProcesoBuilder } from "./tipoProceso";
+import { client } from "../services/prisma";
+import { sleep } from "../utils/awaiter";
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 
 export class ClassCarpeta implements IntCarpeta {
@@ -94,15 +83,11 @@ export class ClassCarpeta implements IntCarpeta {
       : null;
 
     if (OBSERVACIONES) {
-      const extras = OBSERVACIONES.split('//');
+      const extras = OBSERVACIONES.split("//");
       extras.forEach((nota) => {
         notasCounter++;
 
-        const newNoter = new NotasBuilder(
-          nota,
-          Number(NUMERO),
-          notasCounter
-        );
+        const newNoter = new NotasBuilder(nota, Number(NUMERO), notasCounter);
         this.notas.push(newNoter);
       });
     }
@@ -110,16 +95,12 @@ export class ClassCarpeta implements IntCarpeta {
     if (EXTRA) {
       console.log(`EXTRAS === ${EXTRA}`);
 
-      const extras = String(EXTRA).split('//');
+      const extras = String(EXTRA).split("//");
 
       extras.forEach((nota) => {
         notasCounter++;
 
-        const newNoter = new NotasBuilder(
-          nota,
-          Number(NUMERO),
-          notasCounter
-        );
+        const newNoter = new NotasBuilder(nota, Number(NUMERO), notasCounter);
         this.notas.push(newNoter);
       });
     }
@@ -136,9 +117,7 @@ export class ClassCarpeta implements IntCarpeta {
     this.id = idBuilder;
     this.ciudad = String(JUZGADO_CIUDAD);
     this.idRegUltimaAct = null;
-    this.numero = isNaN(Number(NUMERO))
-      ? this.id
-      : Number(NUMERO);
+    this.numero = isNaN(Number(NUMERO)) ? this.id : Number(NUMERO);
     this.category = category;
     this.deudor = new ClassDeudor(rawCarpeta);
 
@@ -147,31 +126,20 @@ export class ClassCarpeta implements IntCarpeta {
     this.nombre = String(DEMANDADO_NOMBRE);
     this.revisado = false;
     this.codeudor = {
-      nombre: CODEUDOR_NOMBRE
-        ? String(CODEUDOR_NOMBRE)
-        : null,
-      cedula: CODEUDOR_IDENTIFICACION
-        ? String(CODEUDOR_IDENTIFICACION)
-        : null,
-      direccion: CODEUDOR_DIRECCION
-        ? String(CODEUDOR_DIRECCION)
-        : null,
-      telefono: CODEUDOR_TELEFONOS
-        ? String(CODEUDOR_TELEFONOS)
-        : null,
+      nombre: CODEUDOR_NOMBRE ? String(CODEUDOR_NOMBRE) : null,
+      cedula: CODEUDOR_IDENTIFICACION ? String(CODEUDOR_IDENTIFICACION) : null,
+      direccion: CODEUDOR_DIRECCION ? String(CODEUDOR_DIRECCION) : null,
+      telefono: CODEUDOR_TELEFONOS ? String(CODEUDOR_TELEFONOS) : null,
       id: this.numero,
     };
     this.tipoProceso = TIPO_PROCESO
       ? tipoProcesoBuilder(TIPO_PROCESO)
-      : 'SINGULAR';
+      : "SINGULAR";
 
-    this.terminado =
-      category === 'Terminados' ? true : false;
+    this.terminado = category === "Terminados" ? true : false;
     this.idRegUltimaAct = null;
     this.ultimaActuacion = null;
-    this.llaveProceso = EXPEDIENTE
-      ? String(EXPEDIENTE)
-      : 'SinEspecificar';
+    this.llaveProceso = EXPEDIENTE ? String(EXPEDIENTE) : "SinEspecificar";
     this.numero = Number(NUMERO);
     this.ciudad = String(JUZGADO_CIUDAD);
     this.juzgado = JuzgadoClass.fromShortName({
@@ -179,8 +147,8 @@ export class ClassCarpeta implements IntCarpeta {
       juzgadoRaw: JUZGADO_EJECUCION
         ? JUZGADO_EJECUCION
         : JUZGADO_ORIGEN
-        ? JUZGADO_ORIGEN
-        : '',
+          ? JUZGADO_ORIGEN
+          : "",
     });
     this.juzgadoTipo = this.juzgado.tipo;
   }
@@ -219,10 +187,9 @@ export class ClassCarpeta implements IntCarpeta {
             fechaProceso: rawProceso.fechaProceso
               ? new Date(rawProceso.fechaProceso)
               : null,
-            fechaUltimaActuacion:
-              rawProceso.fechaUltimaActuacion
-                ? new Date(rawProceso.fechaUltimaActuacion)
-                : null,
+            fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
+              ? new Date(rawProceso.fechaUltimaActuacion)
+              : null,
             juzgado: JuzgadoClass.fromProceso(rawProceso),
           };
           this.procesos.push(proceso);
@@ -232,11 +199,11 @@ export class ClassCarpeta implements IntCarpeta {
         const request = await fetch(
           `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${this.llaveProceso}&SoloActivos=false&pagina=1`,
           {
-            cache: 'force-cache',
+            cache: "force-cache",
             headers: {
-              Accept: 'application/json',
+              Accept: "application/json",
             },
-          }
+          },
         );
 
         if (!request.ok) {
@@ -245,12 +212,11 @@ export class ClassCarpeta implements IntCarpeta {
           throw new Error(
             `${request.status} : ${
               request.statusText
-            } === ${JSON.stringify(json)}`
+            } === ${JSON.stringify(json)}`,
           );
         }
 
-        const consultaProcesos =
-          (await request.json()) as ConsultaProcesos;
+        const consultaProcesos = (await request.json()) as ConsultaProcesos;
 
         const { procesos } = consultaProcesos;
 
@@ -264,10 +230,9 @@ export class ClassCarpeta implements IntCarpeta {
             fechaProceso: rawProceso.fechaProceso
               ? new Date(rawProceso.fechaProceso)
               : null,
-            fechaUltimaActuacion:
-              rawProceso.fechaUltimaActuacion
-                ? new Date(rawProceso.fechaUltimaActuacion)
-                : null,
+            fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
+              ? new Date(rawProceso.fechaUltimaActuacion)
+              : null,
             juzgado: JuzgadoClass.fromProceso(rawProceso),
           };
           this.procesos.push(proceso);
@@ -277,7 +242,7 @@ export class ClassCarpeta implements IntCarpeta {
       return this.procesos;
     } catch (error) {
       console.log(
-        `${this.numero} => error en CarpetaBuilder.getProcesos(${this.llaveProceso}) => ${error}`
+        `${this.numero} => error en CarpetaBuilder.getProcesos(${this.llaveProceso}) => ${error}`,
       );
       return this.procesos;
     }
@@ -287,7 +252,7 @@ export class ClassCarpeta implements IntCarpeta {
   async getProcesosByName() {
     const fetchUrl = new URL(
       `Procesos/Consulta/NombreRazonSocial?nombre=${this.nombre}&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`,
-      'https://consultaprocesos.ramajudicial.gov.co:448/api/v2/'
+      "https://consultaprocesos.ramajudicial.gov.co:448/api/v2/",
     );
 
     try {
@@ -313,10 +278,9 @@ export class ClassCarpeta implements IntCarpeta {
           fechaProceso: rawProceso.fechaProceso
             ? new Date(rawProceso.fechaProceso)
             : null,
-          fechaUltimaActuacion:
-            rawProceso.fechaUltimaActuacion
-              ? new Date(rawProceso.fechaUltimaActuacion)
-              : null,
+          fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
+            ? new Date(rawProceso.fechaUltimaActuacion)
+            : null,
           juzgado: JuzgadoClass.fromProceso(rawProceso),
         };
         this.procesos.push(proceso);
@@ -326,7 +290,7 @@ export class ClassCarpeta implements IntCarpeta {
       return this.procesos;
     } catch (error) {
       console.log(
-        `${this.numero} => error en CarpetaBuilder.getProcesos(${this.llaveProceso}) => ${error}`
+        `${this.numero} => error en CarpetaBuilder.getProcesos(${this.llaveProceso}) => ${error}`,
       );
       return [];
     }
@@ -341,43 +305,35 @@ export class ClassCarpeta implements IntCarpeta {
     for (const idProceso of this.idProcesos) {
       try {
         const request = await fetch(
-          `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${idProceso}`
+          `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${idProceso}`,
         );
 
         if (!request.ok) {
           throw new Error(request.statusText);
         }
 
-        const consultaActuaciones =
-          (await request.json()) as ConsultaActuacion;
+        const consultaActuaciones = (await request.json()) as ConsultaActuacion;
 
         const { actuaciones } = consultaActuaciones;
 
-        const outActuaciones = actuaciones.map(
-          (actuacion) => {
-            return {
-              ...actuacion,
-              idRegActuacion: `${actuacion.idRegActuacion}`,
-              idProceso: Number(idProceso),
-              isUltimaAct:
-                actuacion.cant === actuacion.consActuacion,
-              fechaActuacion: new Date(
-                actuacion.fechaActuacion
-              ),
-              fechaRegistro: new Date(
-                actuacion.fechaRegistro
-              ),
-              fechaInicial: actuacion.fechaInicial
-                ? new Date(actuacion.fechaInicial)
-                : null,
-              fechaFinal: actuacion.fechaFinal
-                ? new Date(actuacion.fechaFinal)
-                : null,
-              createdAt: new Date(actuacion.fechaRegistro),
-              carpetaNumero: this.numero
-            };
-          }
-        );
+        const outActuaciones = actuaciones.map((actuacion) => {
+          return {
+            ...actuacion,
+            idRegActuacion: `${actuacion.idRegActuacion}`,
+            idProceso: Number(idProceso),
+            isUltimaAct: actuacion.cant === actuacion.consActuacion,
+            fechaActuacion: new Date(actuacion.fechaActuacion),
+            fechaRegistro: new Date(actuacion.fechaRegistro),
+            fechaInicial: actuacion.fechaInicial
+              ? new Date(actuacion.fechaInicial)
+              : null,
+            fechaFinal: actuacion.fechaFinal
+              ? new Date(actuacion.fechaFinal)
+              : null,
+            createdAt: new Date(actuacion.fechaRegistro),
+            carpetaNumero: this.numero,
+          };
+        });
 
         outActuaciones.forEach((actuacion) => {
           this.actuaciones.push(actuacion);
@@ -396,8 +352,8 @@ export class ClassCarpeta implements IntCarpeta {
           } ERROR ==> getActuaciones ${idProceso} => ${JSON.stringify(
             error,
             null,
-            2
-          )}`
+            2,
+          )}`,
         );
         continue;
       }
@@ -559,9 +515,7 @@ export class ClassCarpeta implements IntCarpeta {
       inserter
     );
   } */
-  static async insertCarpeta(
-    incomingCarpeta: ClassCarpeta
-  ) {
+  static async insertCarpeta(incomingCarpeta: ClassCarpeta) {
     const {
       ultimaActuacion,
       procesos,
@@ -576,8 +530,7 @@ export class ClassCarpeta implements IntCarpeta {
 
     const newDeudor = ClassDeudor.prismaDeudor(deudor);
 
-    const newCarpeta =
-      ClassCarpeta.prismaCarpeta(incomingCarpeta);
+    const newCarpeta = ClassCarpeta.prismaCarpeta(incomingCarpeta);
 
     try {
       await client.carpeta.upsert({
@@ -607,8 +560,7 @@ export class ClassCarpeta implements IntCarpeta {
             ? {
                 connectOrCreate: {
                   where: {
-                    idRegActuacion:
-                      ultimaActuacion.idRegActuacion,
+                    idRegActuacion: ultimaActuacion.idRegActuacion,
                   },
                   create: {
                     ...ultimaActuacion,
@@ -677,22 +629,19 @@ export class ClassCarpeta implements IntCarpeta {
                     },
                   },
                   actuaciones: {
-                    connectOrCreate: actuaciones.map(
-                      (actuacion) => {
-                        const actuacionCreateOrConnect: Prisma.ActuacionCreateOrConnectWithoutCarpetaInput =
-                          {
-                            where: {
-                              idRegActuacion:
-                                actuacion.idRegActuacion,
-                            },
-                            create: {
-                              ...actuacion,
-                              idRegActuacion: `${actuacion.idRegActuacion}`,
-                            },
-                          };
-                        return actuacionCreateOrConnect;
-                      }
-                    ),
+                    connectOrCreate: actuaciones.map((actuacion) => {
+                      const actuacionCreateOrConnect: Prisma.ActuacionCreateOrConnectWithoutCarpetaInput =
+                        {
+                          where: {
+                            idRegActuacion: actuacion.idRegActuacion,
+                          },
+                          create: {
+                            ...actuacion,
+                            idRegActuacion: `${actuacion.idRegActuacion}`,
+                          },
+                        };
+                      return actuacionCreateOrConnect;
+                    }),
                   },
                 },
               };
@@ -704,8 +653,7 @@ export class ClassCarpeta implements IntCarpeta {
         update: {
           ...newCarpeta,
           fecha: newCarpeta.fecha,
-          fechaUltimaRevision:
-            newCarpeta.fechaUltimaRevision,
+          fechaUltimaRevision: newCarpeta.fechaUltimaRevision,
           category: newCarpeta.category,
           terminado: newCarpeta.terminado,
           revisado: newCarpeta.revisado,
@@ -733,8 +681,7 @@ export class ClassCarpeta implements IntCarpeta {
             ? {
                 connectOrCreate: {
                   where: {
-                    idRegActuacion:
-                      ultimaActuacion.idRegActuacion,
+                    idRegActuacion: ultimaActuacion.idRegActuacion,
                   },
                   create: {
                     ...ultimaActuacion,
@@ -786,22 +733,19 @@ export class ClassCarpeta implements IntCarpeta {
                       },
                     },
                     actuaciones: {
-                      connectOrCreate: actuaciones.map(
-                        (actuacion) => {
-                          const actuacionCreateOrConnect: Prisma.ActuacionCreateOrConnectWithoutCarpetaInput =
-                            {
-                              where: {
-                                idRegActuacion:
-                                  actuacion.idRegActuacion,
-                              },
-                              create: {
-                                ...actuacion,
-                                idRegActuacion: `${actuacion.idRegActuacion}`,
-                              },
-                            };
-                          return actuacionCreateOrConnect;
-                        }
-                      ),
+                      connectOrCreate: actuaciones.map((actuacion) => {
+                        const actuacionCreateOrConnect: Prisma.ActuacionCreateOrConnectWithoutCarpetaInput =
+                          {
+                            where: {
+                              idRegActuacion: actuacion.idRegActuacion,
+                            },
+                            create: {
+                              ...actuacion,
+                              idRegActuacion: `${actuacion.idRegActuacion}`,
+                            },
+                          };
+                        return actuacionCreateOrConnect;
+                      }),
                     },
                   },
                 };

@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"EXPEDIENTE HIBRIDO BAJA DEL DESPACHO// HAMES R","cant":139,"carpetaNumero":73,"codRegla":"00                              ","conDocumentos":false,"consActuacion":101,"createdAt":"2023-08-15T05:00:00.000Z","fechaActuacion":"2023-08-15T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2023-08-15T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300420170057500","procesoId":50508870,"idProceso":50508870,"idRegActuacion":"1337734400"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "EXPEDIENTE HIBRIDO BAJA DEL DESPACHO// HAMES R",
+  "cant": 139,
+  "carpetaNumero": 73,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 101,
+  "createdAt": "2023-08-15T05:00:00.000Z",
+  "fechaActuacion": "2023-08-15T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2023-08-15T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300420170057500",
+  "procesoId": 50508870,
+  "idProceso": 50508870,
+  "idRegActuacion": "1337734400"
+}

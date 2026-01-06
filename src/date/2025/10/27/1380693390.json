@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"Radicado No. 3002-2021, No. Reloj Radicador: 99487, Entidad o Señor(a): SERGIO PERDOMO - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Dar Trámite","cant":117,"carpetaNumero":65,"codRegla":"00                              ","conDocumentos":false,"consActuacion":78,"createdAt":"2021-03-25T05:00:00.000Z","fechaActuacion":"2021-03-25T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-03-25T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302020170077600","procesoId":50511250,"idProceso":50511250,"idRegActuacion":"981456130"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "Radicado No. 3002-2021, No. Reloj Radicador: 99487, Entidad o Seï¿½or(a): SERGIO PERDOMO - Tercer Interesado, Aportï¿½ Documento: Memorial, Con La Solucitud: Dar Trï¿½mite",
+  "cant": 117,
+  "carpetaNumero": 65,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 78,
+  "createdAt": "2021-03-25T05:00:00.000Z",
+  "fechaActuacion": "2021-03-25T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-03-25T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302020170077600",
+  "procesoId": 50511250,
+  "idProceso": 50511250,
+  "idRegActuacion": "981456130"
+}

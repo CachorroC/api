@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"allegan 292  positiva ","cant":64,"carpetaNumero":207,"codRegla":"00                              ","conDocumentos":false,"consActuacion":25,"createdAt":"2018-09-14T05:00:00.000Z","fechaActuacion":"2018-09-14T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2018-09-14T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302220170102400","procesoId":50727910,"idProceso":50727910,"idRegActuacion":"690593900"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "allegan 292  positiva ",
+  "cant": 64,
+  "carpetaNumero": 207,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 25,
+  "createdAt": "2018-09-14T05:00:00.000Z",
+  "fechaActuacion": "2018-09-14T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2018-09-14T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302220170102400",
+  "procesoId": 50727910,
+  "idProceso": 50727910,
+  "idRegActuacion": "690593900"
+}

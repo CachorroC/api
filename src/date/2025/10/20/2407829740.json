@@ -1,1 +1,19 @@
-{"actuacion":"Auto resuelve correcciÃ³n providencia","anotacion":null,"cant":55,"carpetaNumero":613,"codRegla":"00                              ","conDocumentos":false,"consActuacion":16,"createdAt":"2024-04-12T05:00:00.000Z","fechaActuacion":"2024-04-12T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2024-04-12T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300920230130200","procesoId":138696760,"idProceso":138696760,"idRegActuacion":"1391941060"}
+{
+  "actuacion": "Auto resuelve corrección providencia",
+  "anotacion": null,
+  "cant": 55,
+  "carpetaNumero": 613,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 16,
+  "createdAt": "2024-04-12T05:00:00.000Z",
+  "fechaActuacion": "2024-04-12T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2024-04-12T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300920230130200",
+  "procesoId": 138696760,
+  "idProceso": 138696760,
+  "idRegActuacion": "1391941060"
+}

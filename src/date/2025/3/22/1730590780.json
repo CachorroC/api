@@ -1,1 +1,17 @@
-{"idRegActuacion":1730590780,"llaveProceso":"11001418904020240115200","consActuacion":19,"fechaActuacion":"2025-04-22T05:00:00.000Z","actuacion":"ElaboraciÃ³n de oficios","anotacion":"Oficio firmado","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-22T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":19,"isUltimaAct":true,"idProceso":194135130,"createdAt":"2025-04-22T05:00:00.000Z"}
+{
+  "idRegActuacion": 1730590780,
+  "llaveProceso": "11001418904020240115200",
+  "consActuacion": 19,
+  "fechaActuacion": "2025-04-22T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "Oficio firmado",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 19,
+  "isUltimaAct": true,
+  "idProceso": 194135130,
+  "createdAt": "2025-04-22T05:00:00.000Z"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":2069960973,"llaveProceso":"11001400304820240107200","consActuacion":9,"fechaActuacion":"2024-11-07T05:00:00.000Z","actuacion":"Elaboración de oficios","anotacion":"Oficios a entidades","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-07T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":9,"isUltimaAct":true,"idProceso":133903433,"createdAt":"2024-11-07T05:00:00.000Z"}
+{
+  "idRegActuacion": 2069960973,
+  "llaveProceso": "11001400304820240107200",
+  "consActuacion": 9,
+  "fechaActuacion": "2024-11-07T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "Oficios a entidades",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-07T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 9,
+  "isUltimaAct": true,
+  "idProceso": 133903433,
+  "createdAt": "2024-11-07T05:00:00.000Z"
+}

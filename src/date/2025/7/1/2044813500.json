@@ -1,1 +1,17 @@
-{"idRegActuacion":2044813500,"llaveProceso":"11001400305920230031500","consActuacion":28,"fechaActuacion":"2025-08-01T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"Radicado No. 8166-2025, No. Reloj Radicador: 184973, Entidad o SeÃ±or(a): CARMAN RAMIREZ - Tercer Interesado, AportÃ³ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: TERMINACION POR PAGO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-01T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":28,"isUltimaAct":true,"idProceso":132018670,"createdAt":"2025-08-01T05:00:00.000Z"}
+{
+  "idRegActuacion": 2044813500,
+  "llaveProceso": "11001400305920230031500",
+  "consActuacion": 28,
+  "fechaActuacion": "2025-08-01T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 8166-2025, No. Reloj Radicador: 184973, Entidad o Señor(a): CARMAN RAMIREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: TERMINACION POR PAGO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-01T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 28,
+  "isUltimaAct": true,
+  "idProceso": 132018670,
+  "createdAt": "2025-08-01T05:00:00.000Z"
+}

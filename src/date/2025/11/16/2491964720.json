@@ -1,1 +1,19 @@
-{"actuacion":"Auto libra mandamiento ejecutivo","anotacion":"Eimy Rojas\r\n","cant":44,"carpetaNumero":721,"codRegla":"00                              ","conDocumentos":false,"consActuacion":5,"createdAt":"2025-04-01T05:00:00.000Z","fechaActuacion":"2025-04-01T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2025-04-01T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001418903920250026900","procesoId":216674850,"idProceso":216674850,"idRegActuacion":"1681344990"}
+{
+  "actuacion": "Auto libra mandamiento ejecutivo",
+  "anotacion": "Eimy Rojas\r\n",
+  "cant": 44,
+  "carpetaNumero": 721,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 5,
+  "createdAt": "2025-04-01T05:00:00.000Z",
+  "fechaActuacion": "2025-04-01T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2025-04-01T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001418903920250026900",
+  "procesoId": 216674850,
+  "idProceso": 216674850,
+  "idRegActuacion": "1681344990"
+}

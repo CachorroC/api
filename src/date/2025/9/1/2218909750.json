@@ -1,1 +1,19 @@
-{"actuacion":"Recepción memorial","anotacion":"anexo solicitud entrega titulos ","cant":39,"carpetaNumero":636,"codRegla":"00                              ","conDocumentos":false,"consActuacion":39,"createdAt":"2025-09-23T05:00:00.000Z","fechaActuacion":"2025-09-23T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2025-09-23T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400304820240051000","procesoId":177830260,"idProceso":177830260,"idRegActuacion":"2218909750"}
+{
+  "actuacion": "Recepciï¿½n memorial",
+  "anotacion": "anexo solicitud entrega titulos ",
+  "cant": 39,
+  "carpetaNumero": 636,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 39,
+  "createdAt": "2025-09-23T05:00:00.000Z",
+  "fechaActuacion": "2025-09-23T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2025-09-23T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400304820240051000",
+  "procesoId": 177830260,
+  "idProceso": 177830260,
+  "idRegActuacion": "2218909750"
+}

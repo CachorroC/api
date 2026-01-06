@@ -1,1 +1,17 @@
-{"idRegActuacion":2095596340,"llaveProceso":"11001400306020170101400","consActuacion":82,"fechaActuacion":"2024-11-18T05:00:00.000Z","actuacion":"Archivo Definitivo","anotacion":"ARCHIVADO//CAJA502//PROCESOFISICO//MARIANELA BALCEIRO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-18T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":82,"isUltimaAct":true,"idProceso":50788330,"createdAt":"2024-11-18T05:00:00.000Z"}
+{
+  "idRegActuacion": 2095596340,
+  "llaveProceso": "11001400306020170101400",
+  "consActuacion": 82,
+  "fechaActuacion": "2024-11-18T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVADO//CAJA502//PROCESOFISICO//MARIANELA BALCEIRO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-18T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 82,
+  "isUltimaAct": true,
+  "idProceso": 50788330,
+  "createdAt": "2024-11-18T05:00:00.000Z"
+}

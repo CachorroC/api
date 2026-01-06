@@ -1,1 +1,19 @@
-{"actuacion":" RadicaciÃ³n de Proceso","anotacion":"ActuaciÃ³n de  RadicaciÃ³n de Proceso  realizada el 20/06/2017 a las 15:56:42","cant":17,"carpetaNumero":64,"codRegla":"00                              ","conDocumentos":false,"consActuacion":1,"createdAt":"2017-06-20T05:00:00.000Z","fechaActuacion":"2017-06-20T00:00:00.000Z","fechaFinal":"2017-06-20T00:00:00.000Z","fechaInicial":"2017-06-20T00:00:00.000Z","fechaRegistro":"2017-06-20T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400302920170055700","procesoId":50517510,"idProceso":50517510,"idRegActuacion":"731521420"}
+{
+  "actuacion": " Radicación de Proceso",
+  "anotacion": "Actuación de  Radicación de Proceso  realizada el 20/06/2017 a las 15:56:42",
+  "cant": 17,
+  "carpetaNumero": 64,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 1,
+  "createdAt": "2017-06-20T05:00:00.000Z",
+  "fechaActuacion": "2017-06-20T00:00:00.000Z",
+  "fechaFinal": "2017-06-20T00:00:00.000Z",
+  "fechaInicial": "2017-06-20T00:00:00.000Z",
+  "fechaRegistro": "2017-06-20T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400302920170055700",
+  "procesoId": 50517510,
+  "idProceso": 50517510,
+  "idRegActuacion": "731521420"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":1560723240,"llaveProceso":"11001400301520230098000","consActuacion":39,"fechaActuacion":"2025-02-17T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"ALLEGAN LIQUIDACION CREDITO ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-02-17T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":39,"isUltimaAct":true,"idProceso":185690970,"createdAt":"2025-02-17T05:00:00.000Z"}
+{
+  "idRegActuacion": 1560723240,
+  "llaveProceso": "11001400301520230098000",
+  "consActuacion": 39,
+  "fechaActuacion": "2025-02-17T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "ALLEGAN LIQUIDACION CREDITO ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-02-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 39,
+  "isUltimaAct": true,
+  "idProceso": 185690970,
+  "createdAt": "2025-02-17T05:00:00.000Z"
+}

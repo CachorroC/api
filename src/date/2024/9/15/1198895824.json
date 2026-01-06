@@ -1,1 +1,17 @@
-{"idRegActuacion":1198895824,"llaveProceso":"11001310302520170073600","consActuacion":96,"fechaActuacion":"2024-10-06T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 7913-2024, Entidad o Señor(a): CARMEN CECILIA RAMIREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otro, Observaciones: De: R & S ASESORIA JURIDICA SAS <rscojuez@gmail.com>\r\nEnviado: jueves, 3 de octubre de 2024 14:32\r\nPara: Radicación Juzgado 02 Civil Municipal Ejecución Sentencias - Bogotá - Bogotá D.C. <radicacionj02ejecmbta@cendoj.ramajudicial.gov.co>\r\n\r\nAdjunto respuesta requiere parte actora sobre despacho comisorio\r\n\r\nPROCESO  11001310302520170073600   /   002 Juzgado   /   FL    06  /  ME.","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-06T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":96,"isUltimaAct":true,"idProceso":28937944,"createdAt":"2024-10-06T05:00:00.000Z"}
+{
+  "idRegActuacion": 1198895824,
+  "llaveProceso": "11001310302520170073600",
+  "consActuacion": 96,
+  "fechaActuacion": "2024-10-06T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 7913-2024, Entidad o Señor(a): CARMEN CECILIA RAMIREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otro, Observaciones: De: R & S ASESORIA JURIDICA SAS <rscojuez@gmail.com>\r\nEnviado: jueves, 3 de octubre de 2024 14:32\r\nPara: Radicación Juzgado 02 Civil Municipal Ejecución Sentencias - Bogotá - Bogotá D.C. <radicacionj02ejecmbta@cendoj.ramajudicial.gov.co>\r\n\r\nAdjunto respuesta requiere parte actora sobre despacho comisorio\r\n\r\nPROCESO  11001310302520170073600   /   002 Juzgado   /   FL    06  /  ME.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-06T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 96,
+  "isUltimaAct": true,
+  "idProceso": 28937944,
+  "createdAt": "2024-10-06T05:00:00.000Z"
+}

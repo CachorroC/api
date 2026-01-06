@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"Letra//romel\r\n","cant":143,"carpetaNumero":81,"codRegla":"00                              ","conDocumentos":false,"consActuacion":104,"createdAt":"2021-09-28T05:00:00.000Z","fechaActuacion":"2021-09-28T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-09-28T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400303620170055400","procesoId":50527610,"idProceso":50527610,"idRegActuacion":"1187075590"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Letra//romel\r\n",
+  "cant": 143,
+  "carpetaNumero": 81,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 104,
+  "createdAt": "2021-09-28T05:00:00.000Z",
+  "fechaActuacion": "2021-09-28T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-09-28T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400303620170055400",
+  "procesoId": 50527610,
+  "idProceso": 50527610,
+  "idRegActuacion": "1187075590"
+}

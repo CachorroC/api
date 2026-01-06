@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"EL PROCESO PASA A LIQUIDACIONES/ROMEL/JOHN/CUADERNOS 2","cant":126,"carpetaNumero":182,"codRegla":"00                              ","conDocumentos":false,"consActuacion":88,"createdAt":"2021-06-21T05:00:00.000Z","fechaActuacion":"2021-06-21T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2021-06-21T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300120170100100","procesoId":50621670,"idProceso":50621670,"idRegActuacion":"989429290"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "EL PROCESO PASA A LIQUIDACIONES/ROMEL/JOHN/CUADERNOS 2",
+  "cant": 126,
+  "carpetaNumero": 182,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 88,
+  "createdAt": "2021-06-21T05:00:00.000Z",
+  "fechaActuacion": "2021-06-21T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2021-06-21T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300120170100100",
+  "procesoId": 50621670,
+  "idProceso": 50621670,
+  "idRegActuacion": "989429290"
+}

@@ -1,1 +1,17 @@
-{"idRegActuacion":1691257660,"llaveProceso":"11001400300420230062200","consActuacion":39,"fechaActuacion":"2025-04-09T05:00:00.000Z","actuacion":"ElaboraciÃ³n de oficios","anotacion":"DCOECM-0425EC-282 // pasa a firma // edwinc","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-09T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":39,"isUltimaAct":true,"idProceso":130946630,"createdAt":"2025-04-09T05:00:00.000Z"}
+{
+  "idRegActuacion": 1691257660,
+  "llaveProceso": "11001400300420230062200",
+  "consActuacion": 39,
+  "fechaActuacion": "2025-04-09T05:00:00.000Z",
+  "actuacion": "Elaboración de oficios",
+  "anotacion": "DCOECM-0425EC-282 // pasa a firma // edwinc",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-09T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 39,
+  "isUltimaAct": true,
+  "idProceso": 130946630,
+  "createdAt": "2025-04-09T05:00:00.000Z"
+}

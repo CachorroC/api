@@ -1,1 +1,19 @@
-{"actuacion":"Auto libra mandamiento ejecutivo","anotacion":null,"cant":48,"carpetaNumero":556,"codRegla":"00                              ","conDocumentos":false,"consActuacion":9,"createdAt":"2023-09-25T05:00:00.000Z","fechaActuacion":"2023-09-25T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2023-09-25T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300420230062200","procesoId":130946630,"idProceso":130946630,"idRegActuacion":"1347028420"}
+{
+  "actuacion": "Auto libra mandamiento ejecutivo",
+  "anotacion": null,
+  "cant": 48,
+  "carpetaNumero": 556,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 9,
+  "createdAt": "2023-09-25T05:00:00.000Z",
+  "fechaActuacion": "2023-09-25T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2023-09-25T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300420230062200",
+  "procesoId": 130946630,
+  "idProceso": 130946630,
+  "idRegActuacion": "1347028420"
+}

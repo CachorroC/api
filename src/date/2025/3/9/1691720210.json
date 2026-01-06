@@ -1,1 +1,17 @@
-{"idRegActuacion":1691720210,"llaveProceso":"11001400303420170083600","consActuacion":153,"fechaActuacion":"2025-04-10T05:00:00.000Z","actuacion":"Al despacho","anotacion":"(FIL6518)  CESION // DOS CDNOS // DianaAguilar\r\n","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-09T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":153,"isUltimaAct":true,"idProceso":50521480,"createdAt":"2025-04-09T05:00:00.000Z"}
+{
+  "idRegActuacion": 1691720210,
+  "llaveProceso": "11001400303420170083600",
+  "consActuacion": 153,
+  "fechaActuacion": "2025-04-10T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "(FIL6518)  CESION // DOS CDNOS // DianaAguilar\r\n",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-09T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 153,
+  "isUltimaAct": true,
+  "idProceso": 50521480,
+  "createdAt": "2025-04-09T05:00:00.000Z"
+}

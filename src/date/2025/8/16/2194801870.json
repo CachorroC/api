@@ -1,1 +1,17 @@
-{"idRegActuacion":"2194801870","llaveProceso":"11001400301820170152200","consActuacion":129,"fechaActuacion":"2025-09-16T05:00:00.000Z","actuacion":"Recepci√≥n memorial","anotacion":"Radicado No. 15991-2025, No. Reloj Radicador: 016, Entidad o Se√±or(a): CARMEN CECILIA RAM√çREZ MU√ëOZ - Tercer Interesado, Aport√≥ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: SOLICITUD TR√ÅMITE RENUNCIA ENDOSO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-09-16T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":129,"isUltimaAct":true,"idProceso":"50711570","createdAt":"2025-09-16T05:00:00.000Z"}
+{
+  "idRegActuacion": "2194801870",
+  "llaveProceso": "11001400301820170152200",
+  "consActuacion": 129,
+  "fechaActuacion": "2025-09-16T05:00:00.000Z",
+  "actuacion": "RecepciÛn memorial",
+  "anotacion": "Radicado No. 15991-2025, No. Reloj Radicador: 016, Entidad o SeÒor(a): CARMEN CECILIA RAMÕREZ MU—OZ - Tercer Interesado, AportÛ Documento: Memorial, Con La Solucitud: Memorial, Observaciones: SOLICITUD TR¡MITE RENUNCIA ENDOSO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-09-16T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 129,
+  "isUltimaAct": true,
+  "idProceso": "50711570",
+  "createdAt": "2025-09-16T05:00:00.000Z"
+}

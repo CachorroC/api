@@ -1,1 +1,17 @@
-{"idRegActuacion":2034331100,"llaveProceso":"11001418905320250020200","consActuacion":19,"fechaActuacion":"2025-07-29T05:00:00.000Z","actuacion":"RecepciÃ³n memorial","anotacion":"SOLICITUD DESPACHO COMISORIO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-07-29T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":19,"isUltimaAct":true,"idProceso":216324940,"createdAt":"2025-07-29T05:00:00.000Z"}
+{
+  "idRegActuacion": 2034331100,
+  "llaveProceso": "11001418905320250020200",
+  "consActuacion": 19,
+  "fechaActuacion": "2025-07-29T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "SOLICITUD DESPACHO COMISORIO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-07-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 19,
+  "isUltimaAct": true,
+  "idProceso": 216324940,
+  "createdAt": "2025-07-29T05:00:00.000Z"
+}

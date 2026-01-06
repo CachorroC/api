@@ -1,1 +1,17 @@
-{"idRegActuacion":1697564010,"llaveProceso":"11001418908420240022100","consActuacion":10,"fechaActuacion":"2025-04-04T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"ElaboraciÃ³n liquidaciÃ³n costas","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-04-04T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":10,"isUltimaAct":true,"idProceso":193808050,"createdAt":"2025-04-04T05:00:00.000Z"}
+{
+  "idRegActuacion": 1697564010,
+  "llaveProceso": "11001418908420240022100",
+  "consActuacion": 10,
+  "fechaActuacion": "2025-04-04T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "Elaboración liquidación costas",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-04T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 10,
+  "isUltimaAct": true,
+  "idProceso": 193808050,
+  "createdAt": "2025-04-04T05:00:00.000Z"
+}

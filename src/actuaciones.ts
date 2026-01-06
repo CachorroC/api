@@ -1,6 +1,7 @@
 import * as fs from 'fs/promises';
 import {
   ConsultaActuacion,
+  intActuacion,
   outActuacion,
 } from './types/actuaciones';
 import { client } from './services/prisma';
@@ -8,7 +9,7 @@ import { sleep } from './utils/awaiter';
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 
-import { Prisma } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import Actuacion from './models/actuacion';
 import { RobustApiClient } from './utils/fetcher';
 async function fetcher(idProceso: number) {
@@ -116,7 +117,7 @@ async function* AsyncGenerateActuaciones(
   }
 }
 
-async function main() {
+/* async function main() {
   const ActsMap = [];
 
   const idProcesos = await getIdProcesos();
@@ -134,4 +135,96 @@ async function main() {
   return ActsMap;
 }
 
-main();
+main();*/
+
+// 1. Setup
+const prisma = new PrismaClient();
+const api = new RobustApiClient(
+  'https://consultaprocesos.ramajudicial.gov.co:448'
+); // Example URL
+
+// 2. Define Types
+// This is the object you use to build the URL (e.g. a process ID)
+interface ProcessRequest {
+  idProceso: number; // "11001..."
+  carpetaNumero: number;
+  llaveProceso: string;
+  carpetaId: number;
+}
+
+// This is what a single item inside the "actuaciones" array looks like
+
+// 3. Execution
+async function runSync() {
+  // The list of processes we want to check
+  const processesToCheck: ProcessRequest[] =
+    await getIdProcesos();
+
+  await api.processActuaciones<ProcessRequest>(
+    processesToCheck,
+
+    // Step 1: Build URL
+    (proc) =>
+      `/api/v2/Proceso/Actuaciones/${proc.idProceso}`,
+
+    // Step 2: Handle Database (Runs once for EACH item in the 'actuaciones' array)
+    async (actuacion: intActuacion, parentProc) => {
+      // Perform Prisma Upsert
+      await prisma.actuacion.upsert({
+        where: {
+          // Assuming 'idReg' comes from API and is unique
+          idRegActuacion: actuacion.idRegActuacion,
+        },
+        update: {
+          fechaActuacion: new Date(
+            actuacion.fechaActuacion
+          ),
+          fechaRegistro: new Date(actuacion.fechaRegistro),
+          fechaInicial: actuacion.fechaInicial
+            ? new Date(actuacion.fechaInicial)
+            : null,
+          fechaFinal: actuacion.fechaFinal
+            ? new Date(actuacion.fechaFinal)
+            : null,
+          isUltimaAct:
+            actuacion.cant === actuacion.consActuacion,
+          consActuacion: actuacion.consActuacion,
+        },
+        create: {
+          idRegActuacion: actuacion.idRegActuacion,
+          idProceso: parentProc.idProceso, // Linking back to our local Parent ID
+          consActuacion: actuacion.consActuacion,
+          fechaRegistro: new Date(actuacion.fechaRegistro),
+          actuacion: actuacion.actuacion,
+          anotacion: actuacion.anotacion,
+          cant: actuacion.cant,
+          carpetaNumero: parentProc.carpetaNumero,
+          codRegla: actuacion.codRegla,
+          conDocumentos: actuacion.conDocumentos,
+          createdAt: new Date(),
+          llaveProceso: parentProc.llaveProceso,
+          proceso: {
+            connect: {
+              idProceso: parentProc.idProceso,
+            }
+          },
+          fechaActuacion: new Date(
+            actuacion.fechaActuacion
+          ),
+          fechaInicial: actuacion.fechaInicial
+            ? new Date(actuacion.fechaInicial)
+            : null,
+          fechaFinal: actuacion.fechaFinal
+            ? new Date(actuacion.fechaFinal)
+            : null,
+          isUltimaAct:
+            actuacion.cant === actuacion.consActuacion,
+        },
+      });
+    }
+  );
+
+  console.log('Sync Complete');
+}
+
+runSync();

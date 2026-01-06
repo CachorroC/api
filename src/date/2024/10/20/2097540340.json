@@ -1,1 +1,17 @@
-{"idRegActuacion":2097540340,"llaveProceso":"11001400301820170152200","consActuacion":102,"fechaActuacion":"2024-11-19T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 14709-2024, No. Reloj Radicador: 016, Entidad o Señor(a): CARMEN CECILIA RAMÍREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: CONTROL DE LEGALIDAD // TATIANA HIGUERA","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-11-19T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":102,"isUltimaAct":true,"idProceso":50711570,"createdAt":"2024-11-19T05:00:00.000Z"}
+{
+  "idRegActuacion": 2097540340,
+  "llaveProceso": "11001400301820170152200",
+  "consActuacion": 102,
+  "fechaActuacion": "2024-11-19T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 14709-2024, No. Reloj Radicador: 016, Entidad o Señor(a): CARMEN CECILIA RAMÍREZ - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: CONTROL DE LEGALIDAD // TATIANA HIGUERA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-11-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 102,
+  "isUltimaAct": true,
+  "idProceso": 50711570,
+  "createdAt": "2024-11-19T05:00:00.000Z"
+}

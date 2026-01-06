@@ -1,1 +1,17 @@
-{"idRegActuacion":"2180123560","llaveProceso":"11001400305920230031500","consActuacion":34,"fechaActuacion":"2025-09-10T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"PROCESO BAJA DEL DESPACHO CON ESTADO//TRASLADO A LIQ. CREDITO//LUEGO REDIRECCIONAR A OFICIOS// MANUEL MARTINEZ.","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-09-10T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":34,"isUltimaAct":true,"idProceso":"132018670","createdAt":"2025-09-10T05:00:00.000Z"}
+{
+  "idRegActuacion": "2180123560",
+  "llaveProceso": "11001400305920230031500",
+  "consActuacion": 34,
+  "fechaActuacion": "2025-09-10T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "PROCESO BAJA DEL DESPACHO CON ESTADO//TRASLADO A LIQ. CREDITO//LUEGO REDIRECCIONAR A OFICIOS// MANUEL MARTINEZ.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-09-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 34,
+  "isUltimaAct": true,
+  "idProceso": "132018670",
+  "createdAt": "2025-09-10T05:00:00.000Z"
+}

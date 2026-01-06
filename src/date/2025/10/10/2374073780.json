@@ -1,1 +1,19 @@
-{"actuacion":"Constancia secretarial","anotacion":"SE RECIBE EL EXPEDIENTE DEL DESPACHO CON CD 1. / HENRI BERNAL - MICHAEL BAQUERO","cant":76,"carpetaNumero":546,"codRegla":"00                              ","conDocumentos":false,"consActuacion":37,"createdAt":"2022-02-03T05:00:00.000Z","fechaActuacion":"2022-02-03T00:00:00.000Z","fechaFinal":null,"fechaInicial":null,"fechaRegistro":"2022-02-03T00:00:00.000Z","isUltimaAct":false,"llaveProceso":"11001400300220170100200","procesoId":50780430,"idProceso":50780430,"idRegActuacion":"1208304470"}
+{
+  "actuacion": "Constancia secretarial",
+  "anotacion": "SE RECIBE EL EXPEDIENTE DEL DESPACHO CON CD 1. / HENRI BERNAL - MICHAEL BAQUERO",
+  "cant": 76,
+  "carpetaNumero": 546,
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "consActuacion": 37,
+  "createdAt": "2022-02-03T05:00:00.000Z",
+  "fechaActuacion": "2022-02-03T00:00:00.000Z",
+  "fechaFinal": null,
+  "fechaInicial": null,
+  "fechaRegistro": "2022-02-03T00:00:00.000Z",
+  "isUltimaAct": false,
+  "llaveProceso": "11001400300220170100200",
+  "procesoId": 50780430,
+  "idProceso": 50780430,
+  "idRegActuacion": "1208304470"
+}

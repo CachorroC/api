@@ -1,1 +1,17 @@
-{"idRegActuacion":1874347990,"llaveProceso":"11001400307820170123500","consActuacion":69,"fechaActuacion":"2025-06-11T05:00:00.000Z","actuacion":"Archivo Definitivo","anotacion":"ARCHIVADO CAJA 507//FISICO//YANNETH AMAYA// ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-06-11T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":69,"isUltimaAct":true,"idProceso":88297260,"createdAt":"2025-06-11T05:00:00.000Z"}
+{
+  "idRegActuacion": 1874347990,
+  "llaveProceso": "11001400307820170123500",
+  "consActuacion": 69,
+  "fechaActuacion": "2025-06-11T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "ARCHIVADO CAJA 507//FISICO//YANNETH AMAYA// ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-06-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 69,
+  "isUltimaAct": true,
+  "idProceso": 88297260,
+  "createdAt": "2025-06-11T05:00:00.000Z"
+}

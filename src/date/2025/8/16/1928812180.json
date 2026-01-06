@@ -1,1 +1,17 @@
-{"idRegActuacion":1928812180,"llaveProceso":"11001400304520170106300","consActuacion":56,"fechaActuacion":"2025-07-03T05:00:00.000Z","actuacion":"Al despacho","anotacion":"PROCESO DIGITAL INGRESA AL DESPACHO // ESTEBAN BERMUDEZ H.","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-06-26T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":56,"isUltimaAct":true,"idProceso":216822330,"createdAt":"2025-06-26T05:00:00.000Z"}
+{
+  "idRegActuacion": 1928812180,
+  "llaveProceso": "11001400304520170106300",
+  "consActuacion": 56,
+  "fechaActuacion": "2025-07-03T05:00:00.000Z",
+  "actuacion": "Al despacho",
+  "anotacion": "PROCESO DIGITAL INGRESA AL DESPACHO // ESTEBAN BERMUDEZ H.",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-06-26T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 56,
+  "isUltimaAct": true,
+  "idProceso": 216822330,
+  "createdAt": "2025-06-26T05:00:00.000Z"
+}

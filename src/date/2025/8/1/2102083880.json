@@ -1,1 +1,17 @@
-{"idRegActuacion":2102083880,"llaveProceso":"11001418903620240114100","consActuacion":13,"fechaActuacion":"2025-08-19T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"orden de pago ingresada, en proceso de autorizacion ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-19T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":13,"isUltimaAct":true,"idProceso":195470670,"createdAt":"2025-08-19T05:00:00.000Z"}
+{
+  "idRegActuacion": 2102083880,
+  "llaveProceso": "11001418903620240114100",
+  "consActuacion": 13,
+  "fechaActuacion": "2025-08-19T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "orden de pago ingresada, en proceso de autorizacion ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-19T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 13,
+  "isUltimaAct": true,
+  "idProceso": 195470670,
+  "createdAt": "2025-08-19T05:00:00.000Z"
+}

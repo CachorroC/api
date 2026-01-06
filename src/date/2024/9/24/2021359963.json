@@ -1,1 +1,17 @@
-{"idRegActuacion":2021359963,"llaveProceso":"15001405300320240029700","consActuacion":13,"fechaActuacion":"2024-10-23T05:00:00.000Z","actuacion":"Agrega memorial expediente","anotacion":"INCRIPCION MEDIDA CAUTELAR OFICINMA DE REGISTRO","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-23T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":13,"isUltimaAct":true,"idProceso":133337293,"createdAt":"2024-10-23T05:00:00.000Z"}
+{
+  "idRegActuacion": 2021359963,
+  "llaveProceso": "15001405300320240029700",
+  "consActuacion": 13,
+  "fechaActuacion": "2024-10-23T05:00:00.000Z",
+  "actuacion": "Agrega memorial expediente",
+  "anotacion": "INCRIPCION MEDIDA CAUTELAR OFICINMA DE REGISTRO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-23T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 13,
+  "isUltimaAct": true,
+  "idProceso": 133337293,
+  "createdAt": "2024-10-23T05:00:00.000Z"
+}

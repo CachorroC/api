@@ -1,1 +1,17 @@
-{"idRegActuacion":2141098880,"llaveProceso":"11001400305920240086000","consActuacion":35,"fechaActuacion":"2025-08-29T05:00:00.000Z","actuacion":"ElaboraciÃ³n Oficio Pago TÃ­tulo","anotacion":"SE ELABORA PAGO DE TITULOS JUDICIALES A FAVOR DE LA PARTE DEMANDADA POR VALOR DE $12.004.548,73","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2025-08-29T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":35,"isUltimaAct":true,"idProceso":195244820,"createdAt":"2025-08-29T05:00:00.000Z"}
+{
+  "idRegActuacion": 2141098880,
+  "llaveProceso": "11001400305920240086000",
+  "consActuacion": 35,
+  "fechaActuacion": "2025-08-29T05:00:00.000Z",
+  "actuacion": "Elaboración Oficio Pago Título",
+  "anotacion": "SE ELABORA PAGO DE TITULOS JUDICIALES A FAVOR DE LA PARTE DEMANDADA POR VALOR DE $12.004.548,73",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-08-29T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 35,
+  "isUltimaAct": true,
+  "idProceso": 195244820,
+  "createdAt": "2025-08-29T05:00:00.000Z"
+}
