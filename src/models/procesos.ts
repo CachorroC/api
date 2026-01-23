@@ -1,6 +1,6 @@
 import { client } from "../services/prisma";
-import { ConsultaNumeroRadicacion, outProceso } from "../types/procesos";
-import { JuzgadoClass } from "./juzgado";
+import { ConsultaProcesos, outProceso } from "../types/procesos.js";
+import  JuzgadoClass  from "./juzgado.js";
 
 export class ClassProcesos {
   idProcesosSet: Set<number> = new Set();
@@ -87,7 +87,7 @@ export class ClassProcesos {
         );
       }
 
-      const json = (await request.json()) as ConsultaNumeroRadicacion;
+      const json = (await request.json()) as ConsultaProcesos;
 
       const { procesos } = json;
 

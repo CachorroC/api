@@ -1,7 +1,7 @@
 import xlsx from "xlsx";
-import { Category } from "../types/carpetas";
+import { Category } from "../types/carpetas.js";
 import * as fs from "fs/promises";
-import { RawDb } from "../types/raw-db";
+import { RawDb } from "../types/raw-db.js";
 
 const workbook = xlsx.readFile(
   "/home/cachorro_cami/OneDrive/bases_de_datos/general.xlsx",

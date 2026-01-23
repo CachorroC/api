@@ -1,6 +1,7 @@
-import { Prisma } from "@prisma/client";
-import { IntDeudor } from "../types/carpetas";
-import { RawDb } from "../types/raw-db";
+
+import { Prisma } from '../../prisma/generated/prisma/client.js';
+import { IntDeudor } from "../types/carpetas.js";
+import { RawDb } from "../types/raw-db.js";
 
 export class Tel {
   fijo: string | null;

@@ -1,5 +1,5 @@
-import { client } from "../services/prisma";
-import { intActuacion } from "../types/actuaciones";
+import { client } from "../services/prisma.js";
+import { intActuacion } from "../types/actuaciones.js";
 import * as fs from "fs/promises";
 
 export async function actuacionesGetAuto() {

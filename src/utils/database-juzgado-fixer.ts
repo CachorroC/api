@@ -1,6 +1,7 @@
 import * as fs from "fs/promises";
-import { extrapolateTipoToCorrectType, JuzgadoClass } from "../models/juzgado";
-import { RawCarpetas } from "../data/carpetas";
+import { extrapolateTipoToCorrectType } from "../models/juzgado.js";
+import JuzgadoClass  from "../models/juzgado.js"
+import { RawCarpetas } from "../data/carpetas.js";
 
 const outgoingJuzgados = [];
 

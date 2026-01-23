@@ -1,7 +1,8 @@
-import { Prisma } from "@prisma/client";
-import { intNotificacion, intNotifier } from "../types/carpetas";
-import { RawDb } from "../types/raw-db";
-import { datesExtractor } from "../utils/date-validator";
+
+import { Prisma } from '../../prisma/generated/prisma/client.js';
+import { intNotificacion, intNotifier } from "../types/carpetas.js";
+import { RawDb } from "../types/raw-db.js";
+import { datesExtractor } from "../utils/date-validator.js";
 
 export class ClassNotificacion implements intNotificacion {
   constructor(rawDb: RawDb) {

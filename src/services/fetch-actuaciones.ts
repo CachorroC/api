@@ -1,4 +1,4 @@
-import { ConsultaActuacion } from "../types/actuaciones";
+import { ConsultaActuacion } from "../types/actuaciones.js";
 
 export default async function fetchActuaciones(
   idProceso: number,

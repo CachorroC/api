@@ -1,5 +1,5 @@
-import { IntNota } from "../types/notas";
-import { datesExtractor } from "../utils/date-validator";
+import { IntNota } from "../types/notas.js";
+import { datesExtractor } from "../utils/date-validator.js";
 
 export class NotasBuilder implements IntNota {
   createdAt: Date;

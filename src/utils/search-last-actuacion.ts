@@ -1,4 +1,4 @@
-import { outActuacion } from "../types/actuaciones";
+import { outActuacion } from "../types/actuaciones.js";
 
 export function isIrrelevantActuacion(incomingActuacion: string) {
   return /([Ff][iI][Jj][Aa][cC][iI][oO][Nn])|([Dd][eE][sS][pP][aA][cC][hH][oO])/gim.test(

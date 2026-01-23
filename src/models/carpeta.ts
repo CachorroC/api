@@ -1,14 +1,14 @@
 import { ConsultaActuacion, outActuacion } from "../types/actuaciones";
-import { Codeudor, IntCarpeta, Juzgado, TipoProceso } from "../types/carpetas";
-import { ConsultaProcesos, outProceso } from "../types/procesos";
-import { RawDb } from "../types/raw-db";
-import { ClassDemanda } from "./demanda";
-import { ClassDeudor } from "./deudor";
-import { NotasBuilder } from "./nota";
-import { tipoProcesoBuilder } from "./tipoProceso";
-import { client } from "../services/prisma";
-import { sleep } from "../utils/awaiter";
-import JuzgadoClass from "./juzgado";
+import { Codeudor, IntCarpeta, Juzgado, TipoProceso } from "../types/carpetas.js";
+import { ConsultaProcesos, outProceso } from "../types/procesos.js";
+import { RawDb } from "../types/raw-db.js";
+import { ClassDemanda } from "./demanda.js";
+import { ClassDeudor } from "./deudor.js";
+import { NotasBuilder } from "./nota.js";
+import { tipoProcesoBuilder } from "./tipoProceso.js";
+import { client } from "../services/prisma.js";
+import { sleep } from "../utils/awaiter.js";
+import JuzgadoClass from "./juzgado.js";
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 

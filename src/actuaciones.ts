@@ -3,11 +3,11 @@ import {
   ConsultaActuacion,
   intActuacion,
   outActuacion,
-} from './types/actuaciones';
-import { client } from './services/prisma';
-import { sleep } from './utils/awaiter';
-import Actuacion from './models/actuacion';
-import { RobustApiClient } from './utils/fetcher';
+} from './types/actuaciones.js';
+import { client } from './services/prisma.js';
+import { sleep } from './utils/awaiter.js';
+import Actuacion from './models/actuacion.js';
+import { RobustApiClient } from './utils/fetcher.js';
 async function fetcher(idProceso: number) {
   console.log(`fetching idProceso: ${idProceso}`);
 
@@ -163,7 +163,9 @@ async function runSync() {
       `/api/v2/Proceso/Actuaciones/${proc.idProceso}`,
 
     // Step 2: Handle Database (Runs once for EACH item in the 'actuaciones' array)
-    async (actuacion: intActuacion, parentProc) => {
+    async ( actuacion: intActuacion, parentProc ) =>
+    {
+
       // Perform Prisma Upsert
       await client.actuacion.upsert({
         where: {

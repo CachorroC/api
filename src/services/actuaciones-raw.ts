@@ -1,6 +1,6 @@
 import * as fs from "fs/promises";
-import { client } from "./prisma";
-import fetchActuaciones from "./fetch-actuaciones";
+import { client } from "./prisma.js";
+import fetchActuaciones from "./fetch-actuaciones.js";
 import { RateLimit } from "async-sema";
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";

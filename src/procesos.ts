@@ -1,10 +1,10 @@
-import { PrismaClient } from "@prisma/client";
-import * as fs from "fs/promises";
-import { ConsultaProcesos, outProceso } from "./types/procesos";
-import { JuzgadoClass } from "./models/juzgado";
-import { ClassProcesos } from "./models/procesos";
 
-const prisma = new PrismaClient();
+import * as fs from "fs/promises";
+import { ConsultaProcesos, outProceso } from "./types/procesos.js";
+import  JuzgadoClass  from "./models/juzgado.js";
+import { ClassProcesos } from "./models/procesos.js";
+import { client } from './services/prisma.js';
+
 
 async function fetcher(llaveProceso: string): Promise<outProceso[]> {
   try {
@@ -43,7 +43,7 @@ async function fetcher(llaveProceso: string): Promise<outProceso[]> {
 }
 
 async function getLLaves() {
-  const carpetas = await prisma.carpeta.findMany();
+  const carpetas = await client.carpeta.findMany();
   return carpetas.flatMap((carpeta) => {
     return {
       llaveProceso: carpeta.llaveProceso.trim(),
@@ -80,7 +80,7 @@ async function prismaUpdaterProcesos(proceso: outProceso, numero: number) {
   const idProcesosSet = new Set<number>();
 
   try {
-    const carpeta = await prisma.carpeta.findFirstOrThrow({
+    const carpeta = await client.carpeta.findFirstOrThrow({
       where: {
         numero: numero,
       },
@@ -91,7 +91,7 @@ async function prismaUpdaterProcesos(proceso: outProceso, numero: number) {
 
     idProcesosSet.add(proceso.idProceso);
 
-    const updater = await prisma.carpeta.update({
+    const updater = await client.carpeta.update({
       where: {
         numero: numero,
       },

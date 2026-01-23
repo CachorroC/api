@@ -1,19 +1,19 @@
 import * as fs from "fs";
 import * as path from "path";
-import { Despachos } from "../data/despachos";
-import { NotasBuilder } from "./nota";
-import { ClassDemanda } from "./demanda";
-import { ClassDeudor } from "./deudor";
-import { RawDb } from "../types/raw-db";
-import { RawCarpetas } from "../data/carpetas";
+import { Despachos } from "../data/despachos.js";
+import { NotasBuilder } from "./nota.js";
+import { ClassDemanda } from "./demanda.js";
+import { ClassDeudor } from "./deudor.js";
+import { RawDb } from "../types/raw-db.js";
+import { RawCarpetas } from "../data/carpetas.js";
 import {
   databaseActuacion,
   fetchResponseActuaciones,
   intActuacion,
-} from "../types/actuaciones";
-import { databaseProceso, fetchResponseProceso } from "../types/procesos";
-import { Codeudor, PrismaClient } from "../../prisma/generated/prisma/client";
-import { client } from "../services/prisma";
+} from "../types/actuaciones.js";
+import { databaseProceso, fetchResponseProceso } from "../types/procesos.js";
+import { client } from "../services/prisma.js";
+import { PrismaClient } from '../prisma/generated/prisma/client.js';
 
 //GG --- 1. MOCK TYPES & CLASSES (Placeholders for missing imports) ---
 //? These allow the code to compile since ClassCarpeta relies on them.

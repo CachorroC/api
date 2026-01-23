@@ -4,7 +4,7 @@
 //
 //   const consultaNumeroRadicacion = Convert.toConsultaNumeroRadicacion(json);
 
-import { Juzgado } from "./carpetas";
+import { Juzgado } from "./carpetas.js";
 
 // To parse this data:
 //

@@ -1,6 +1,6 @@
 import * as fs from "fs/promises";
-import { ClassCarpeta } from "./models/carpeta";
-import { RawCarpetas } from "./data/carpetas";
+import { ClassCarpeta } from "./models/carpeta.js";
+import { RawCarpetas } from "./data/carpetas.js";
 
 const carpetasMap = RawCarpetas.map((carpeta) => {
   return new ClassCarpeta(carpeta);

@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
-import { PrismaClient } from "@prisma/client";
-import { ConsultaActuacion } from "../types/actuaciones";
+import { ConsultaActuacion } from "../types/actuaciones.js";
+import Actuacion from '../models/actuacion.js';
 
 //GG 2. Custom Error
 export class ApiError extends Error {
@@ -97,7 +97,7 @@ export class RobustApiClient {
    * 3. Iterates and Upserts items individually
    */
   public async processActuaciones<
-    U extends { idProceso: number; carpetaNumero: number },
+    U extends { idProceso: number; carpetaNumero: number; carpetaId: number },
   >(
     items: U[],
     pathBuilder: (item: U) => string,
@@ -143,7 +143,8 @@ export class RobustApiClient {
       for (const actuacion of actuacionesList) {
         try {
           //? Call the Prisma handler for this specific sub-item
-          await dbHandler(actuacion, parentItem);
+          await dbHandler( actuacion, parentItem );
+
           //? Optional: Add a tiny delay here if DB is overwhelmed, usually not needed for upserts
           //? process.stdout.write('.'); // Progress indicator
         } catch (dbErr) {
@@ -160,6 +161,49 @@ export class RobustApiClient {
             "DB_ITEM",
           );
         }
+      }
+      try {
+        await Actuacion.prismaUpdaterActuaciones( actuacionesList.map((actuacion) => {
+      const {
+        fechaActuacion,
+        fechaRegistro,
+        fechaFinal,
+        fechaInicial,
+        consActuacion,
+        cant,
+        idRegActuacion,
+      } = actuacion;
+      return {
+        ...actuacion,
+        fechaActuacion: new Date(fechaActuacion),
+        fechaRegistro: new Date(fechaRegistro),
+        fechaInicial: fechaInicial
+          ? new Date(fechaInicial)
+          : null,
+        fechaFinal: fechaFinal
+          ? new Date(fechaFinal)
+          : null,
+        isUltimaAct: cant === consActuacion,
+        idProceso: parentItem.idProceso,
+        createdAt: new Date(fechaRegistro),
+        idRegActuacion: `${idRegActuacion}`,
+      };
+    }), parentItem.carpetaNumero,parentItem.carpetaId)
+      } catch ( error )
+      {
+
+          const msg = error instanceof Error ? error.message : "DB Error";
+          console.error(
+            `\n   ❌ DB UPSERT FAILED for an item inside Parent ${parentItem.idProceso}: ${msg}`,
+          );
+
+          //? Log specific sub-item failure, but continue the loop!
+          this.logger.logFailure(
+            parentItem.idProceso,
+            actuacionesList,
+            msg,
+            "DB_ITEM",
+          );
       }
       console.log(
         `\n   ${parentItem.carpetaNumero}✅ Finished processing items for Parent ${parentItem.idProceso}`,

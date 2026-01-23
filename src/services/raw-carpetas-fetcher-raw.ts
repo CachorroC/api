@@ -1,9 +1,9 @@
 import * as fs from "fs/promises";
-import { RawCarpetas } from "../data/carpetas";
-import { JuzgadoClass } from "../models/juzgado";
-import { ConsultaActuacion, outActuacion } from "../types/actuaciones";
-import { ConsultaProcesos, DetalleProceso } from "../types/procesos";
-import { sleep } from "../utils/awaiter";
+import { RawCarpetas } from "../data/carpetas.js";
+import JuzgadoClass  from "../models/juzgado.js";
+import { ConsultaActuacion, outActuacion } from "../types/actuaciones.js";
+import { ConsultaProcesos, DetalleProceso } from "../types/procesos.js";
+import { sleep } from "../utils/awaiter.js";
 
 export const ramaJudicialBaseURL =
   "https://consultaprocesos.ramajudicial.gov.co:448/api/v2/";

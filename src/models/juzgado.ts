@@ -1,6 +1,6 @@
-import { Despachos } from "../data/despachos";
-import { Juzgado } from "../types/carpetas";
-import { intProceso } from "../types/procesos";
+import { Despachos } from "../data/despachos.js";
+import { Juzgado } from "../types/carpetas.js";
+import { fetchResponseProceso, intProceso } from "../types/procesos.js";
 
 // Helper to normalize strings for comparison (removes accents, trims, lowercase)
 const normalizeText = (text: string): string => {
@@ -152,7 +152,7 @@ class JuzgadoClass implements Juzgado {
     });
   }
 
-  static fromProceso(proceso: intProceso) {
+  static fromProceso(proceso: fetchResponseProceso | intProceso) {
     const matchedDespachoParts = proceso.despacho.match(
       /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im,
     );

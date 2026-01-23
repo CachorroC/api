@@ -1,10 +1,10 @@
-import { Prisma } from "../../prisma/generated/prisma/client";
-import { IntDemanda, TipoProceso, intNotificacion } from "../types/carpetas";
-import { RawDb } from "../types/raw-db";
-import { capitalBuilder } from "../utils/capital-builder";
-import { datesExtractor } from "../utils/date-validator";
-import { ClassNotificacion } from "./notificacion";
-import { tipoProcesoBuilder } from "./tipoProceso";
+import { Prisma } from "../../prisma/generated/prisma/client.js";
+import { IntDemanda, TipoProceso, intNotificacion } from "../types/carpetas.js";
+import { RawDb } from "../types/raw-db.js";
+import { capitalBuilder } from "../utils/capital-builder.js";
+import { datesExtractor } from "../utils/date-validator.js";
+import { ClassNotificacion } from "./notificacion.js";
+import { tipoProcesoBuilder } from "./tipoProceso.js";
 
 export class ClassDemanda implements IntDemanda {
   constructor(rawCarpeta: RawDb) {

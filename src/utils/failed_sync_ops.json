@@ -1,254 +1,326 @@
 [
   {
-    "timestamp": "2026-01-06T05:47:23.019Z",
-    "phase": "FETCH",
-    "parentId": 216369710,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 216369710,
+      "carpetaId": 79389655,
       "carpetaNumero": 713,
-      "llaveProceso": "11001400306320250018800",
-      "carpetaId": 79389655
-    }
+      "idProceso": 216369710,
+      "llaveProceso": "11001400306320250018800"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 216369710,
+    "phase": "FETCH",
+    "timestamp": "2026-01-06T05:47:23.019Z"
   },
   {
-    "timestamp": "2026-01-06T05:56:58.016Z",
-    "phase": "FETCH",
-    "parentId": 133804633,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 133804633,
+      "carpetaId": 65798718,
       "carpetaNumero": 660,
-      "llaveProceso": "11001400304720240102300",
-      "carpetaId": 65798718
-    }
+      "idProceso": 133804633,
+      "llaveProceso": "11001400304720240102300"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 133804633,
+    "phase": "FETCH",
+    "timestamp": "2026-01-06T05:56:58.016Z"
   },
   {
-    "timestamp": "2026-01-06T06:01:07.103Z",
-    "phase": "FETCH",
-    "parentId": 168226620,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 168226620,
+      "carpetaId": 79485271,
       "carpetaNumero": 631,
-      "llaveProceso": "11001400300820240037000",
-      "carpetaId": 79485271
-    }
+      "idProceso": 168226620,
+      "llaveProceso": "11001400300820240037000"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 168226620,
+    "phase": "FETCH",
+    "timestamp": "2026-01-06T06:01:07.103Z"
   },
   {
-    "timestamp": "2026-01-21T17:26:02.534Z",
-    "phase": "FETCH",
-    "parentId": 216369710,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 216369710,
+      "carpetaId": 79389655,
       "carpetaNumero": 713,
-      "llaveProceso": "11001400306320250018800",
-      "carpetaId": 79389655
-    }
+      "idProceso": 216369710,
+      "llaveProceso": "11001400306320250018800"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 216369710,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T17:26:02.534Z"
   },
   {
-    "timestamp": "2026-01-21T17:30:54.572Z",
-    "phase": "FETCH",
-    "parentId": 170052912,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 170052912,
+      "carpetaId": 1033710779,
       "carpetaNumero": 684,
-      "llaveProceso": "11001310304620240046100",
-      "carpetaId": 1033710779
-    }
+      "idProceso": 170052912,
+      "llaveProceso": "11001310304620240046100"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 170052912,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T17:30:54.572Z"
   },
   {
-    "timestamp": "2026-01-21T17:34:53.767Z",
-    "phase": "FETCH",
-    "parentId": 133804633,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 133804633,
+      "carpetaId": 65798718,
       "carpetaNumero": 660,
-      "llaveProceso": "11001400304720240102300",
-      "carpetaId": 65798718
-    }
+      "idProceso": 133804633,
+      "llaveProceso": "11001400304720240102300"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 133804633,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T17:34:53.767Z"
   },
   {
-    "timestamp": "2026-01-21T17:38:41.083Z",
-    "phase": "FETCH",
-    "parentId": 168226620,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 168226620,
+      "carpetaId": 79485271,
       "carpetaNumero": 631,
-      "llaveProceso": "11001400300820240037000",
-      "carpetaId": 79485271
-    }
+      "idProceso": 168226620,
+      "llaveProceso": "11001400300820240037000"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 168226620,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T17:38:41.083Z"
   },
   {
-    "timestamp": "2026-01-21T17:52:13.235Z",
-    "phase": "FETCH",
-    "parentId": 112967583,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 112967583,
+      "carpetaId": 79533771,
       "carpetaNumero": 541,
-      "llaveProceso": "11001400308220180096400",
-      "carpetaId": 79533771
-    }
+      "idProceso": 112967583,
+      "llaveProceso": "11001400308220180096400"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 112967583,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T17:52:13.235Z"
   },
   {
-    "timestamp": "2026-01-21T17:53:55.463Z",
-    "phase": "FETCH",
-    "parentId": 113956611,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 113956611,
+      "carpetaId": 1077969975,
       "carpetaNumero": 533,
-      "llaveProceso": "11001400300320170088400",
-      "carpetaId": 1077969975
-    }
+      "idProceso": 113956611,
+      "llaveProceso": "11001400300320170088400"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 113956611,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T17:53:55.463Z"
   },
   {
-    "timestamp": "2026-01-21T17:56:14.399Z",
-    "phase": "FETCH",
-    "parentId": 114399551,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 114399551,
+      "carpetaId": 19496623,
       "carpetaNumero": 514,
-      "llaveProceso": "11001400301720190017900",
-      "carpetaId": 19496623
-    }
+      "idProceso": 114399551,
+      "llaveProceso": "11001400301720190017900"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 114399551,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T17:56:14.399Z"
   },
   {
-    "timestamp": "2026-01-21T18:11:19.994Z",
-    "phase": "FETCH",
-    "parentId": 81806941,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 81806941,
+      "carpetaId": 79804965,
       "carpetaNumero": 380,
-      "llaveProceso": "11001400308120180011100",
-      "carpetaId": 79804965
-    }
-  },
-  {
-    "timestamp": "2026-01-21T18:11:45.100Z",
-    "phase": "FETCH",
-    "parentId": 81806941,
-    "error": "HTTP Error: 404",
-    "data": {
       "idProceso": 81806941,
+      "llaveProceso": "11001400308120180011100"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 81806941,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T18:11:19.994Z"
+  },
+  {
+    "data": {
+      "carpetaId": 79804965,
       "carpetaNumero": 379,
-      "llaveProceso": "11001400308120180011100",
-      "carpetaId": 79804965
-    }
+      "idProceso": 81806941,
+      "llaveProceso": "11001400308120180011100"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 81806941,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T18:11:45.100Z"
   },
   {
-    "timestamp": "2026-01-21T18:13:00.530Z",
-    "phase": "FETCH",
-    "parentId": 81728891,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 81728891,
+      "carpetaId": 1032432802,
       "carpetaNumero": 371,
-      "llaveProceso": "11001400303420170083600",
-      "carpetaId": 1032432802
-    }
-  },
-  {
-    "timestamp": "2026-01-21T18:26:15.540Z",
-    "phase": "FETCH",
-    "parentId": 127748331,
-    "error": "HTTP Error: 404",
-    "data": {
-      "idProceso": 127748331,
-      "carpetaNumero": 286,
-      "llaveProceso": "11001400301720170119500",
-      "carpetaId": 286
-    }
-  },
-  {
-    "timestamp": "2026-01-21T18:29:41.041Z",
-    "phase": "FETCH",
-    "parentId": 81621491,
-    "error": "HTTP Error: 404",
-    "data": {
-      "idProceso": 81621491,
-      "carpetaNumero": 265,
-      "llaveProceso": "11001400302020170050100",
-      "carpetaId": 7601476
-    }
-  },
-  {
-    "timestamp": "2026-01-21T18:38:23.439Z",
-    "phase": "FETCH",
-    "parentId": 86374941,
-    "error": "HTTP Error: 404",
-    "data": {
-      "idProceso": 86374941,
-      "carpetaNumero": 208,
-      "llaveProceso": "25754400300220170026500",
-      "carpetaId": 80357801
-    }
-  },
-  {
-    "timestamp": "2026-01-21T18:48:50.426Z",
-    "phase": "FETCH",
-    "parentId": 81638681,
-    "error": "HTTP Error: 404",
-    "data": {
-      "idProceso": 81638681,
-      "carpetaNumero": 135,
-      "llaveProceso": "11001400300420170063900",
-      "carpetaId": 5654542
-    }
-  },
-  {
-    "timestamp": "2026-01-21T18:51:10.969Z",
-    "phase": "FETCH",
-    "parentId": 81728891,
-    "error": "HTTP Error: 404",
-    "data": {
       "idProceso": 81728891,
+      "llaveProceso": "11001400303420170083600"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 81728891,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T18:13:00.530Z"
+  },
+  {
+    "data": {
+      "carpetaId": 286,
+      "carpetaNumero": 286,
+      "idProceso": 127748331,
+      "llaveProceso": "11001400301720170119500"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 127748331,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T18:26:15.540Z"
+  },
+  {
+    "data": {
+      "carpetaId": 7601476,
+      "carpetaNumero": 265,
+      "idProceso": 81621491,
+      "llaveProceso": "11001400302020170050100"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 81621491,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T18:29:41.041Z"
+  },
+  {
+    "data": {
+      "carpetaId": 80357801,
+      "carpetaNumero": 208,
+      "idProceso": 86374941,
+      "llaveProceso": "25754400300220170026500"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 86374941,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T18:38:23.439Z"
+  },
+  {
+    "data": {
+      "carpetaId": 5654542,
+      "carpetaNumero": 135,
+      "idProceso": 81638681,
+      "llaveProceso": "11001400300420170063900"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 81638681,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T18:48:50.426Z"
+  },
+  {
+    "data": {
+      "carpetaId": 1032432802,
       "carpetaNumero": 120,
-      "llaveProceso": "11001400303420170083600",
-      "carpetaId": 1032432802
-    }
+      "idProceso": 81728891,
+      "llaveProceso": "11001400303420170083600"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 81728891,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T18:51:10.969Z"
   },
   {
-    "timestamp": "2026-01-21T18:54:47.749Z",
-    "phase": "FETCH",
-    "parentId": 81869501,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 81869501,
+      "carpetaId": 16831314,
       "carpetaNumero": 103,
-      "llaveProceso": "11001400308220170068000",
-      "carpetaId": 16831314
-    }
+      "idProceso": 81869501,
+      "llaveProceso": "11001400308220170068000"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 81869501,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T18:54:47.749Z"
   },
   {
-    "timestamp": "2026-01-21T19:03:42.061Z",
-    "phase": "FETCH",
-    "parentId": 86212261,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 86212261,
+      "carpetaId": 11251297,
       "carpetaNumero": 46,
-      "llaveProceso": "25183400300120170010600",
-      "carpetaId": 11251297
-    }
+      "idProceso": 86212261,
+      "llaveProceso": "25183400300120170010600"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 86212261,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T19:03:42.061Z"
   },
   {
-    "timestamp": "2026-01-21T19:05:36.443Z",
-    "phase": "FETCH",
-    "parentId": 81869251,
-    "error": "HTTP Error: 404",
     "data": {
-      "idProceso": 81869251,
+      "carpetaId": 28936365,
       "carpetaNumero": 33,
-      "llaveProceso": "11001400308220170064900",
-      "carpetaId": 28936365
-    }
+      "idProceso": 81869251,
+      "llaveProceso": "11001400308220170064900"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 81869251,
+    "phase": "FETCH",
+    "timestamp": "2026-01-21T19:05:36.443Z"
+  },
+  {
+    "data": {
+      "carpetaId": 79389655,
+      "carpetaNumero": 713,
+      "idProceso": 216369710,
+      "llaveProceso": "11001400306320250018800"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 216369710,
+    "phase": "FETCH",
+    "timestamp": "2026-01-23T21:13:08.045Z"
+  },
+  {
+    "data": {
+      "carpetaId": 1033710779,
+      "carpetaNumero": 684,
+      "idProceso": 170052912,
+      "llaveProceso": "11001310304620240046100"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 170052912,
+    "phase": "FETCH",
+    "timestamp": "2026-01-23T21:17:59.141Z"
+  },
+  {
+    "data": {
+      "carpetaId": 79389655,
+      "carpetaNumero": 713,
+      "idProceso": 216369710,
+      "llaveProceso": "11001400306320250018800"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 216369710,
+    "phase": "FETCH",
+    "timestamp": "2026-01-23T21:26:46.222Z"
+  },
+  {
+    "data": {
+      "carpetaId": 1033710779,
+      "carpetaNumero": 684,
+      "idProceso": 170052912,
+      "llaveProceso": "11001310304620240046100"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 170052912,
+    "phase": "FETCH",
+    "timestamp": "2026-01-23T21:31:36.128Z"
+  },
+  {
+    "data": {
+      "carpetaId": 65798718,
+      "carpetaNumero": 660,
+      "idProceso": 133804633,
+      "llaveProceso": "11001400304720240102300"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 133804633,
+    "phase": "FETCH",
+    "timestamp": "2026-01-23T21:35:35.394Z"
+  },
+  {
+    "data": {
+      "carpetaId": 79485271,
+      "carpetaNumero": 631,
+      "idProceso": 168226620,
+      "llaveProceso": "11001400300820240037000"
+    },
+    "error": "HTTP Error: 404",
+    "parentId": 168226620,
+    "phase": "FETCH",
+    "timestamp": "2026-01-23T21:39:23.440Z"
   }
 ]

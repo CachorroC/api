@@ -1,6 +1,6 @@
 import * as fs from "fs/promises";
-import { client } from "../services/prisma";
-import { outActuacion } from "../types/actuaciones";
+import { client } from "../services/prisma.js";
+import { outActuacion } from "../types/actuaciones.js";
 export default class Actuacion {
   static async updateAllActuaciones(
     actuacionesComplete: outActuacion[],
@@ -79,7 +79,7 @@ export default class Actuacion {
     numeroCarpeta: number,
     numeroId: number,
   ) {
-    const [ultimaActuacion] = actuacionesComplete.filter((a) => {
+    const ultimaActuacion = actuacionesComplete.find((a) => {
       console.log(
         `carpeta numero ${numeroCarpeta}: a.consActuacion: ${
           a.consActuacion
@@ -88,8 +88,9 @@ export default class Actuacion {
         }`,
       );
       return a.consActuacion === a.cant;
-    });
-
+    } )
+    if ( ultimaActuacion )
+    {
     try {
       console.log(
         `${numeroCarpeta}: ultima Actuacion isUltimaAct ${ultimaActuacion.isUltimaAct ?? "no hay ultima act"}`,
@@ -102,8 +103,10 @@ export default class Actuacion {
             },
             {
               numero: numeroCarpeta,
-              id: numeroId,
-            },
+
+            },{
+              id: numeroId
+            }
           ],
         },
         include: {
@@ -178,6 +181,7 @@ export default class Actuacion {
       } */
     } catch (error) {
       console.log(`prisma updater actuaciones error : ${error}`);
+    }
     }
   }
   static async updateCarpetaWithNewLastActuacion({
