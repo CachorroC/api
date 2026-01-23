@@ -1,7 +1,8 @@
-import { ClassCarpeta } from "./models/carpeta";
-import { RawCarpetas } from "./data/carpetas";
-import { sleep } from "./utils/awaiter";
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "1";
+import { ClassCarpeta } from './models/carpeta';
+import { RawCarpetas } from './data/carpetas';
+import { sleep } from './utils/awaiter';
+import { wait } from './utils/fetcher';
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1';
 console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 const carpetasMap = RawCarpetas.map((carpeta) => {
   return {
@@ -27,7 +28,8 @@ export async function* generateCarpetas() {
 }
 
 async function tryAsyncClassCarpetas() {
-  const mapClassCarpetas: Map<number, ClassCarpeta> = new Map();
+  const mapClassCarpetas: Map<number, ClassCarpeta> =
+    new Map();
 
   for await (const carpeta of generateCarpetas()) {
     mapClassCarpetas.set(carpeta.numero, carpeta);

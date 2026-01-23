@@ -1,10 +1,11 @@
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client"
+  output     = "./generated/prisma"
+  engineType = "client"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Carpeta {
@@ -186,6 +187,7 @@ model Actuacion {
   actuacion      String
   anotacion      String?
   cant           Int
+  Carpeta        Carpeta[]
   carpetaNumero  Int?
   codRegla       String
   conDocumentos  Boolean
@@ -195,13 +197,12 @@ model Actuacion {
   fechaFinal     DateTime? @db.Date
   fechaInicial   DateTime? @db.Date
   fechaRegistro  DateTime  @db.Date
-  isUltimaAct    Boolean
-  llaveProceso   String
-  procesoId      Int?
   idProceso      Int
   idRegActuacion String    @id
+  isUltimaAct    Boolean
+  llaveProceso   String
   proceso        Proceso?  @relation(fields: [procesoId], references: [idProceso])
-  Carpeta        Carpeta[]
+  procesoId      Int?
 }
 
 model Juzgado {
@@ -216,7 +217,9 @@ model Juzgado {
 }
 
 model Proceso {
+  actuaciones          Actuacion[]
   cantFilas            Int
+  carpeta              Carpeta     @relation(fields: [carpetaNumero], references: [numero])
   carpetaNumero        Int
   departamento         String
   despacho             String
@@ -225,14 +228,12 @@ model Proceso {
   fechaUltimaActuacion DateTime?   @db.Date
   idConexion           Int
   idProceso            Int         @id @unique
+  juzgado              Juzgado     @relation(fields: [juzgadoId, juzgadoTipo, juzgadoCiudad], references: [id, tipo, ciudad])
+  juzgadoCiudad        String
+  juzgadoId            String
   juzgadoTipo          String
   llaveProceso         String
   sujetosProcesales    String
-  juzgadoId            String
-  juzgadoCiudad        String
-  actuaciones          Actuacion[]
-  carpeta              Carpeta     @relation(fields: [carpetaNumero], references: [numero])
-  juzgado              Juzgado     @relation(fields: [juzgadoId, juzgadoTipo, juzgadoCiudad], references: [id, tipo, ciudad])
 }
 
 enum NotifierName {

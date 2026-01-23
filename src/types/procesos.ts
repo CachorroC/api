@@ -6,18 +6,11 @@
 
 import { Juzgado } from "./carpetas";
 
-export type RequestProceso = {
-  StatusCode: number;
-  Message: Message;
-  ConsultaProcesos?: ConsultaProcesos;
-};
-
-export type ConsultaProcesos = {
-  tipoConsulta: TipoConsulta;
-  procesos: intProceso[];
-  parametros: Parametros;
-  paginacion: Paginacion;
-};
+// To parse this data:
+//
+//   import { Convert, ConsultaProcesos } from "./file";
+//
+//   const consultaProcesos = Convert.toConsultaProcesos(json);
 
 export type Paginacion = {
   cantidadRegistros: number;
@@ -25,6 +18,45 @@ export type Paginacion = {
   cantidadPaginas: number;
   pagina: number;
   paginas: null;
+};
+
+export type fetchResponseProceso = {
+  cantFilas: number;
+  departamento: string;
+  despacho: string;
+  esPrivado: boolean;
+  fechaProceso: string | Date;
+  fechaUltimaActuacion: string | Date;
+  idConexion: number;
+  idProceso: number;
+  llaveProceso: string;
+  sujetosProcesales: string;
+};
+
+export type intProceso = {
+  cantFilas: number;
+  departamento: string;
+  despacho: string;
+  esPrivado: boolean;
+  fechaProceso: Date | null;
+  fechaUltimaActuacion: Date | null;
+  idConexion: number;
+  idProceso: number;
+  llaveProceso: string;
+  sujetosProcesales: string;
+};
+
+export interface databaseProceso extends fetchResponseProceso {
+  fechaProceso: Date;
+  fechaUltimaActuacion: Date;
+}
+// Converts JSON strings to/from your types
+
+export type ConsultaProcesos = {
+  tipoConsulta: TipoConsulta;
+  procesos: intProceso[] | fetchResponseProceso[];
+  parametros: Parametros;
+  paginacion: Paginacion;
 };
 
 export type Parametros = {
@@ -43,19 +75,6 @@ export type Message =
   | 'El parametro "NumeroRadicacion" ha de contener 23 digitos.'
   | "Object reference not set to an instance of an object."
   | "No se pueden ver actuaciones de un proceso privado";
-
-export type intProceso = {
-  idProceso: number;
-  idConexion: number;
-  llaveProceso: string;
-  fechaProceso: Date | null;
-  fechaUltimaActuacion: Date | null;
-  despacho: string;
-  departamento: string;
-  sujetosProcesales: string;
-  esPrivado: boolean;
-  cantFilas: number;
-};
 
 export type DetalleProceso = {
   [key: string]: string | null | boolean | Date | number | Juzgado | undefined;
@@ -79,17 +98,17 @@ export type DetalleProceso = {
 
 export type ClaseProceso =
   | "EJECUTIVO"
-  | "Ejecutivo con Título Hipotecario"
+  | "Ejecutivo con Tï¿½tulo Hipotecario"
   | "Ejecutivo Singular"
-  | "Ejecutivo con Título Prendario"
+  | "Ejecutivo con Tï¿½tulo Prendario"
   | "Abreviado"
   | "PROCESOS EJECUTIVOS HIPOTECARIOS O PRENDARIOS"
   | "Despachos Comisorios"
   | "Sin Tipo de Proceso"
   | "Ejecutivo Mixto"
   | "Solicitud entrega inmueble"
-  | "Sucesión"
-  | "SUCESIÓN"
+  | "Sucesiï¿½n"
+  | "SUCESIï¿½N"
   | "EJECUTIVOS DE MENOR Y MINIMA CUANTIA"
   | "DESPACHOS COMISORIOS"
   | "EJECUTIVO HIPOTECARIO"
@@ -103,31 +122,31 @@ export type SubclaseProceso =
   | "En general / Sin subclase"
   | "Sin Subclase de Proceso"
   | "Por sumas de dinero"
-  | "Restitución del inmueble arrendado"
+  | "Restituciï¿½n del inmueble arrendado"
   | "TITULO VALOR"
   | "En general"
   | "SINGULARES";
 
 export type TipoProceso =
   | "EJECUTIVO C.G.P"
-  | "De Ejecución"
+  | "De Ejecuciï¿½n"
   | "Declarativo"
   | "Codigo General del Proceso"
   | "Especial"
   | "EjecucionTramitePosterior"
   | "Especiales"
-  | "De Liquidación"
-  | "LIQUIDACIÓN C.G.P"
-  | "Acción de Tutela"
+  | "De Liquidaciï¿½n"
+  | "LIQUIDACIï¿½N C.G.P"
+  | "Acciï¿½n de Tutela"
   | "Otros Asuntos";
 
 export type Departamento =
-  | "BOGOTÁ"
+  | "BOGOTï¿½"
   | "CUNDINAMARCA"
   | "META"
   | "HUILA"
   | "ANTIOQUIA"
-  | "ATLÁNTICO";
+  | "ATLï¿½NTICO";
 
 export type TipoConsulta = "NumeroRadicacion" | "NombreRazonSocial";
 

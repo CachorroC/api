@@ -6,10 +6,6 @@ import {
 } from './types/actuaciones';
 import { client } from './services/prisma';
 import { sleep } from './utils/awaiter';
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
-console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
-
-import { Prisma, PrismaClient } from '@prisma/client';
 import Actuacion from './models/actuacion';
 import { RobustApiClient } from './utils/fetcher';
 async function fetcher(idProceso: number) {
@@ -138,7 +134,6 @@ async function* AsyncGenerateActuaciones(
 main();*/
 
 // 1. Setup
-const prisma = new PrismaClient();
 const api = new RobustApiClient(
   'https://consultaprocesos.ramajudicial.gov.co:448'
 ); // Example URL
@@ -170,10 +165,10 @@ async function runSync() {
     // Step 2: Handle Database (Runs once for EACH item in the 'actuaciones' array)
     async (actuacion: intActuacion, parentProc) => {
       // Perform Prisma Upsert
-      await prisma.actuacion.upsert({
+      await client.actuacion.upsert({
         where: {
           // Assuming 'idReg' comes from API and is unique
-          idRegActuacion: actuacion.idRegActuacion,
+          idRegActuacion: `${actuacion.idRegActuacion}`,
         },
         update: {
           fechaActuacion: new Date(
@@ -189,9 +184,10 @@ async function runSync() {
           isUltimaAct:
             actuacion.cant === actuacion.consActuacion,
           consActuacion: actuacion.consActuacion,
+          idRegActuacion: `${actuacion.idRegActuacion}`,
         },
         create: {
-          idRegActuacion: actuacion.idRegActuacion,
+          idRegActuacion: `${actuacion.idRegActuacion}`,
           idProceso: parentProc.idProceso, // Linking back to our local Parent ID
           consActuacion: actuacion.consActuacion,
           fechaRegistro: new Date(actuacion.fechaRegistro),
@@ -206,7 +202,7 @@ async function runSync() {
           proceso: {
             connect: {
               idProceso: parentProc.idProceso,
-            }
+            },
           },
           fechaActuacion: new Date(
             actuacion.fechaActuacion

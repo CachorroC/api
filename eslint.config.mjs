@@ -1,64 +1,76 @@
-import { defineConfig } from "eslint/config";
+import { defineConfig } from 'eslint/config';
 
-export default defineConfig([
+export default defineConfig( [
   {
     rules: {
-      "array-bracket-newline": [
-        "error",
+      'array-bracket-newline': [
+        'error',
         {
           minItems: 1,
         },
       ],
 
-      "array-bracket-spacing": ["error", "always"],
+      'array-bracket-spacing': [
+        'error',
+        'always'
+      ],
 
-      "array-callback-return": [
-        "error",
+      'array-callback-return': [
+        'error',
         {
           checkForEach: true,
         },
       ],
 
-      "max-statements-per-line": "error",
+      'max-statements-per-line': 'error',
 
-      "array-element-newline": [
-        "error",
+      'array-element-newline': [
+        'error',
         {
-          minItems: 1,
+          minItems : 1,
           multiline: true,
         },
       ],
 
-      "arrow-body-style": ["error", "always"],
-      "arrow-spacing": "error",
-      "brace-style": "error",
+      'arrow-body-style': [
+        'error',
+        'always'
+      ],
+      'arrow-spacing': 'error',
+      'brace-style'  : 'error',
 
-      "comma-spacing": [
-        "error",
+      'comma-spacing': [
+        'error',
         {
-          after: true,
+          after : true,
           before: false,
         },
       ],
 
-      "computed-property-spacing": ["error", "always"],
-      "consistent-return": "error",
-      curly: "error",
-      "func-call-spacing": ["error", "never"],
+      'computed-property-spacing': [
+        'error',
+        'always'
+      ],
+      'consistent-return': 'error',
+      curly              : 'error',
+      'func-call-spacing': [
+        'error',
+        'never'
+      ],
 
-      "function-paren-newline": [
-        "error",
+      'function-paren-newline': [
+        'error',
         {
           minItems: 2,
         },
       ],
 
-      "getter-return": "error",
+      'getter-return': 'error',
 
-      "prefer-destructuring": [
-        "error",
+      'prefer-destructuring': [
+        'error',
         {
-          array: true,
+          array : true,
           object: true,
         },
         {
@@ -67,7 +79,7 @@ export default defineConfig([
       ],
 
       indent: [
-        "error",
+        'error',
         2,
         {
           ArrayExpression: 1,
@@ -77,126 +89,150 @@ export default defineConfig([
           },
 
           FunctionDeclaration: {
-            body: 1,
-            parameters: "first",
+            body      : 1,
+            parameters: 'first',
           },
 
           FunctionExpression: {
-            body: 1,
-            parameters: "first",
+            body      : 1,
+            parameters: 'first',
           },
 
-          ImportDeclaration: 1,
-          MemberExpression: 1,
-          ObjectExpression: 1,
-          SwitchCase: 2,
-          VariableDeclarator: 1,
+          ImportDeclaration       : 1,
+          MemberExpression        : 1,
+          ObjectExpression        : 1,
+          SwitchCase              : 2,
+          VariableDeclarator      : 1,
           offsetTernaryExpressions: true,
         },
       ],
 
-      "key-spacing": [
-        "error",
+      'key-spacing': [
+        'error',
         {
-          align: "colon",
+          align: 'colon',
         },
       ],
 
-      "linebreak-style": ["error", "unix"],
-      "multiline-ternary": ["error", "always"],
+      'linebreak-style': [
+        'error',
+        'unix'
+      ],
+      'multiline-ternary': [
+        'error',
+        'always'
+      ],
 
-      "newline-per-chained-call": [
-        "error",
+      'newline-per-chained-call': [
+        'error',
         {
           ignoreChainWithDepth: 1,
         },
       ],
 
-      "no-dupe-args": "error",
-      "no-dupe-else-if": "error",
+      'no-dupe-args'   : 'error',
+      'no-dupe-else-if': 'error',
 
-      "no-else-return": [
-        "error",
+      'no-else-return': [
+        'error',
         {
           allowElseIf: true,
         },
       ],
 
-      "no-unreachable": "error",
+      'no-unreachable': 'error',
 
-      "object-curly-newline": [
-        "error",
+      'object-curly-newline': [
+        'error',
         {
           ExportDeclaration: {
-            consistent: true,
+            consistent   : true,
             minProperties: 1,
-            multiline: true,
+            multiline    : true,
           },
 
-          ImportDeclaration: "never",
+          ImportDeclaration: 'never',
 
           ObjectExpression: {
-            consistent: true,
+            consistent   : true,
             minProperties: 1,
-            multiline: true,
+            multiline    : true,
           },
 
           ObjectPattern: {
-            consistent: true,
+            consistent   : true,
             minProperties: 1,
-            multiline: true,
+            multiline    : true,
           },
         },
       ],
 
-      "object-curly-spacing": ["error", "always"],
-      "object-property-newline": "error",
-      "operator-linebreak": ["error", "before"],
+      'object-curly-spacing': [
+        'error',
+        'always'
+      ],
+      'object-property-newline': 'error',
+      'operator-linebreak'     : [
+        'error',
+        'before'
+      ],
 
-      "padding-line-between-statements": [
-        "error",
+      'padding-line-between-statements': [
+        'error',
         {
-          blankLine: "always",
+          blankLine: 'always',
 
           next: [
-            "export",
-            "case",
-            "if",
-            "iife",
-            "return",
-            "const",
-            "class",
-            "multiline-block-like",
-            "try",
+            'export',
+            'case',
+            'if',
+            'iife',
+            'return',
+            'const',
+            'class',
+            'multiline-block-like',
+            'try',
           ],
 
-          prev: "*",
+          prev: '*',
         },
         {
-          blankLine: "always",
-          next: "*",
+          blankLine: 'always',
+          next     : '*',
 
           prev: [
-            "block",
-            "block-like",
-            "for",
-            "const",
-            "if",
-            "continue",
-            "return",
-            "throw",
-            "break",
+            'block',
+            'block-like',
+            'for',
+            'const',
+            'if',
+            'continue',
+            'return',
+            'throw',
+            'break',
           ],
         },
       ],
 
-      quotes: ["error", "single"],
-      semi: "error",
-      "space-in-parens": ["error", "always"],
-      "space-before-blocks": "error",
-      "keyword-spacing": "error",
-      "template-curly-spacing": ["error", "always"],
-      "template-tag-spacing": ["error", "always"],
+      quotes: [
+        'error',
+        'single'
+      ],
+      semi             : 'error',
+      'space-in-parens': [
+        'error',
+        'always'
+      ],
+      'space-before-blocks'   : 'error',
+      'keyword-spacing'       : 'error',
+      'template-curly-spacing': [
+        'error',
+        'always'
+      ],
+      'template-tag-spacing': [
+        'error',
+        'always'
+      ],
     },
   },
-]);
+] );

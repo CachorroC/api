@@ -2,8 +2,8 @@
   "compilerOptions": {
     "sourceMap": true,
     "outDir": "./dist",
-    "resolveJsonModule": true,
-    "module": "NodeNext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "target": "ESNext",
     "jsx": "react",
     "strict": true,
@@ -16,5 +16,5 @@
     ],
     "esModuleInterop": true
   },
-  "exclude": ["node_modules"]
+  "exclude": [ "node_modules" ]
 }

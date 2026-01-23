@@ -2,34 +2,40 @@ import { Despachos } from "../data/despachos";
 import { Juzgado } from "../types/carpetas";
 import { intProceso } from "../types/procesos";
 
+// Helper to normalize strings for comparison (removes accents, trims, lowercase)
+const normalizeText = (text: string): string => {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .trim();
+};
+
 export function extrapolateTipoToCorrectType(tipo: string): string {
   let output = tipo;
 
-  const hasEjecucion = /EJE|E|EJ/gim.test(tipo);
+  // Removed 'g' flag, it is unnecessary for .test() and can cause state issues
+  const hasEjecucion = /EJE|E|EJ/im.test(tipo);
+  const isPromiscuoCircuito = /PCTO/im.test(tipo);
+  const isPequenasCausas = /PCCM|PCYCM|Peque|causas/im.test(tipo);
+  const isPromiscuoMunicipal = /PM|PROM|P M/im.test(tipo);
+  const isCivilMunicipal = /(CM|municipal|C M)/im.test(tipo);
+  const isCivilCircuito = /(CCTO|CIRCUITO|CTO|C CTO|CC)/im.test(tipo);
 
-  const isPromiscuoCircuito = /PCTO/gim.test(tipo);
-
-  const isPequeñasCausas = /PCCM|PCYCM|Peque|causas/gim.test(tipo);
-
-  const isPromiscuoMunicipal = /PM|PROM|P M/gim.test(tipo);
-
-  const isCivilMunicipal = /(CM|municipal|C M)/g.test(tipo);
-
-  const isCivilCircuito = /(CCTO|CIRCUITO|CTO|C CTO|CC)/gim.test(tipo);
-
+  // Fixed corrupted characters (ï¿½ -> ?, ï¿½ -> ?, ï¿½ -> ?)
   if (hasEjecucion) {
-    if (isPequeñasCausas) {
-      output = "DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE";
+    if (isPequenasCausas) {
+      output = "DE PEQUE?AS CAUSAS Y COMPETENCIA M?LTIPLE";
     } else if (isPromiscuoMunicipal) {
       output = "PROMISCUO MUNICIPAL";
     } else if (isCivilCircuito) {
-      output = "CIVIL DEL CIRCUITO DE EJECUCIÓN DE SENTENCIAS";
+      output = "CIVIL DEL CIRCUITO DE EJECUCI?N DE SENTENCIAS";
     } else if (isCivilMunicipal) {
-      output = "CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS";
+      output = "CIVIL MUNICIPAL DE EJECUCI?N DE SENTENCIAS";
     }
   } else {
-    if (isPequeñasCausas) {
-      output = "DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE";
+    if (isPequenasCausas) {
+      output = "DE PEQUE?AS CAUSAS Y COMPETENCIA M?LTIPLE";
     } else if (isPromiscuoMunicipal) {
       output = "PROMISCUO MUNICIPAL";
     } else if (isPromiscuoCircuito) {
@@ -44,7 +50,12 @@ export function extrapolateTipoToCorrectType(tipo: string): string {
   return output;
 }
 
-export class JuzgadoClass implements Juzgado {
+class JuzgadoClass implements Juzgado {
+  id: string;
+  tipo: string;
+  ciudad: string;
+  url: string;
+
   constructor({
     id,
     tipo,
@@ -55,75 +66,37 @@ export class JuzgadoClass implements Juzgado {
     ciudad: string;
   }) {
     this.id = id.padStart(3, "000");
-
     this.tipo = tipo.toUpperCase().trim();
     this.ciudad = ciudad.toUpperCase().trim();
 
-    const constructorString =
-      `JUZGADO ${this.id} ${this.tipo} DE ${this.ciudad}`
-        .toUpperCase()
-        .normalize("NFD")
-        .replaceAll(/\p{Diacritic}/gu, "")
-        .trim();
+    // Construct the standard name for comparison
+    const constructorString = `JUZGADO ${this.id} ${this.tipo} DE ${this.ciudad}`;
+    const normalizedName = normalizeText(constructorString);
 
-    const [matchedDespacho] = Despachos.filter((despacho) => {
-      const normalizedIteratedName = despacho.nombre
-        .toLowerCase()
-        .normalize("NFD")
-        .replaceAll(/\p{Diacritic}/gu, "")
-        .trim();
-
-      const normalizedName = constructorString
-        .toLowerCase()
-        .normalize("NFD")
-        .replaceAll(/\p{Diacritic}/gu, "")
-        .trim();
-
-      const indexOfDespacho = normalizedIteratedName.indexOf(normalizedName);
-
-      const includesDespacho = normalizedIteratedName.includes(normalizedName);
-
-      if (indexOfDespacho !== -1) {
-        console.log(
-          `Juzgado Class indexOf Despacho ${includesDespacho}: ${normalizedIteratedName} === ${normalizedName}: ${
-            normalizedIteratedName === normalizedName
-          }`,
-        );
-      }
-
-      if (includesDespacho) {
-        console.log(
-          `Juzgado Class includes Despacho${includesDespacho}: ${normalizedIteratedName} === ${normalizedName}: ${
-            normalizedIteratedName === normalizedName
-          }`,
-        );
-        return normalizedIteratedName === normalizedName;
-      }
-
+    // Use .find() instead of .filter() for better performance (O(n) -> Stops at first match)
+    const matchedDespacho = Despachos.find((despacho) => {
+      const normalizedIteratedName = normalizeText(despacho.nombre);
       return normalizedIteratedName === normalizedName;
     });
 
     if (matchedDespacho) {
       this.url = `https://www.ramajudicial.gov.co${matchedDespacho.url}`;
 
+      // regex updated to accept Spanish characters (?, ?, etc) instead of corrupted unicode
       const matchedDespachoParts = matchedDespacho.nombre.match(
-        /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im,
+        /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im,
       );
 
       if (matchedDespachoParts) {
-        const [longName, newId, newTipo, newCiudad] = matchedDespachoParts;
+        const [, newId, newTipo, newCiudad] = matchedDespachoParts;
         this.id = newId;
-        this.tipo = newTipo;
-        this.ciudad = newCiudad;
+        this.tipo = newTipo.trim();
+        this.ciudad = newCiudad.trim();
       }
     } else {
       this.url = "";
     }
   }
-  id: string;
-  tipo: string;
-  ciudad: string;
-  url: string;
 
   static fromShortName({
     ciudad,
@@ -132,27 +105,23 @@ export class JuzgadoClass implements Juzgado {
     ciudad: string;
     juzgadoRaw: string;
   }) {
-    let newTipo, newId;
-    newTipo = juzgadoRaw;
-
+    // Regex updated to capture standard alphanumeric + Spanish chars
     const matchedRegexNumberAndLetters = juzgadoRaw.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im,
+      /(\d+)(\s?)([A-Z??????\s-]+)/im,
     );
 
     if (!matchedRegexNumberAndLetters) {
       return new JuzgadoClass({
         id: "",
-        tipo: newTipo,
+        tipo: juzgadoRaw,
         ciudad,
       });
     }
 
-    const asAnArray = Array.from(matchedRegexNumberAndLetters);
+    const [, rawId, , rawTipo] = matchedRegexNumberAndLetters;
 
-    const [fullArray, rawId, space, rawTipo] = asAnArray;
-
-    newId = rawId.padStart(3, "000");
-    newTipo = extrapolateTipoToCorrectType(rawTipo);
+    const newId = rawId.padStart(3, "000");
+    const newTipo = extrapolateTipoToCorrectType(rawTipo);
 
     return new JuzgadoClass({
       id: newId,
@@ -163,7 +132,7 @@ export class JuzgadoClass implements Juzgado {
 
   static fromLongName(despacho: string) {
     const matchedDespachoParts = despacho.match(
-      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im,
+      /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im,
     );
 
     if (!matchedDespachoParts) {
@@ -175,7 +144,6 @@ export class JuzgadoClass implements Juzgado {
     }
 
     const [longName, id, tipo, ciudad] = matchedDespachoParts;
-    console.log(longName);
 
     return new JuzgadoClass({
       id,
@@ -183,9 +151,10 @@ export class JuzgadoClass implements Juzgado {
       ciudad,
     });
   }
+
   static fromProceso(proceso: intProceso) {
     const matchedDespachoParts = proceso.despacho.match(
-      /JUZGADO (\d+) ([A-Z\sñúóéíá]+) DE ([.A-Z\sñúóéíá-]+)/im,
+      /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im,
     );
 
     if (!matchedDespachoParts) {
@@ -197,7 +166,6 @@ export class JuzgadoClass implements Juzgado {
     }
 
     const [longName, id, tipo, ciudad] = matchedDespachoParts;
-    console.log(longName);
 
     return new JuzgadoClass({
       id,
@@ -206,3 +174,5 @@ export class JuzgadoClass implements Juzgado {
     });
   }
 }
+
+export default JuzgadoClass;

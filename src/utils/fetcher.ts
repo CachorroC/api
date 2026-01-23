@@ -1,90 +1,80 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { PrismaClient } from '@prisma/client';
-import { ConsultaActuacion } from '../types/actuaciones';
+import * as fs from "fs";
+import * as path from "path";
+import { PrismaClient } from "@prisma/client";
+import { ConsultaActuacion } from "../types/actuaciones";
 
-// 2. Custom Error
-class ApiError extends Error {
+//GG 2. Custom Error
+export class ApiError extends Error {
   constructor(
     public message: string,
-    public statusCode?: number
+    public statusCode?: number,
   ) {
     super(message);
-    this.name = 'ApiError';
+    this.name = "ApiError";
   }
 }
 
-// --- Helper: Delay ---
-const wait = (ms: number) =>
+//GG --- Helper: Delay ---
+export const wait = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-// --- Helper: File Logger ---
-class FileLogger {
+//GG --- Helper: File Logger ---
+export class FileLogger {
   private filePath: string;
 
   constructor(filename: string) {
     this.filePath = path.join(__dirname, filename);
   }
 
-  // Logs failures.
-  // 'context' helps us know which main API request this sub-item belonged to.
+  //? Logs failures.
+  //? 'context' helps us know which main API request this sub-item belonged to.
   public logFailure(
     contextId: string | number,
     subItem: any,
     error: string,
-    phase: 'FETCH' | 'DB_ITEM'
+    phase: "FETCH" | "DB_ITEM",
   ) {
     let currentLog = [];
     if (fs.existsSync(this.filePath)) {
       try {
-        currentLog = JSON.parse(
-          fs.readFileSync(this.filePath, 'utf-8')
-        );
+        currentLog = JSON.parse(fs.readFileSync(this.filePath, "utf-8"));
       } catch {}
     }
 
     currentLog.push({
       timestamp: new Date().toISOString(),
       phase,
-      parentId: contextId, // The ID used for the fetch URL
+      parentId: contextId, //? The ID used for the fetch URL
       error,
-      data: subItem, // The specific item that failed (or the whole request if phase is FETCH)
+      data: subItem, //? The specific item that failed (or the whole request if phase is FETCH)
     });
 
-    fs.writeFileSync(
-      this.filePath,
-      JSON.stringify(currentLog, null, 2)
-    );
+    fs.writeFileSync(this.filePath, JSON.stringify(currentLog, null, 2));
   }
 }
 
-// --- Main Class ---
+//GG --- Main Class ---
 export class RobustApiClient {
   private baseUrl: string;
   private logger: FileLogger;
-  private readonly RATE_LIMIT_DELAY_MS = 12000; // 12 seconds per request
+  private readonly RATE_LIMIT_DELAY_MS = 12000; //? 12 seconds per request
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
-    this.logger = new FileLogger('failed_sync_ops.json');
+    this.logger = new FileLogger("failed_sync_ops.json");
   }
 
-  // Basic Fetch with Retry Logic
+  //GG Basic Fetch with Retry Logic
   private async fetchWithRetry<T>(
     endpoint: string,
-    maxRetries = 3
+    maxRetries = 3,
   ): Promise<T> {
     let attempt = 0;
     while (attempt < maxRetries) {
       try {
-        const response = await fetch(
-          `${this.baseUrl}${endpoint}`
-        );
+        const response = await fetch(`${this.baseUrl}${endpoint}`);
         if (!response.ok)
-          throw new ApiError(
-            `HTTP Error: ${response.status}`,
-            response.status
-          );
+          throw new ApiError(`HTTP Error: ${response.status}`, response.status);
         return (await response.json()) as T;
       } catch (error) {
         attempt++;
@@ -93,12 +83,11 @@ export class RobustApiClient {
           error.statusCode &&
           error.statusCode >= 400 &&
           error.statusCode < 500;
-        if (attempt >= maxRetries || isClientError)
-          throw error;
-        await wait(2000); // Short wait for retry
+        if (attempt >= maxRetries || isClientError) throw error;
+        await wait(2000); //? Short wait for retry
       }
     }
-    throw new Error('Unreachable');
+    throw new Error("Unreachable");
   }
 
   /**
@@ -108,92 +97,72 @@ export class RobustApiClient {
    * 3. Iterates and Upserts items individually
    */
   public async processActuaciones<
-    U extends { idProceso: number }
+    U extends { idProceso: number; carpetaNumero: number },
   >(
     items: U[],
     pathBuilder: (item: U) => string,
-    dbHandler: (
-      actuacion: any,
-      parentItem: U
-    ) => Promise<void>
+    dbHandler: (actuacion: any, parentItem: U) => Promise<void>,
   ): Promise<void> {
-    console.log(
-      `🚀 Starting process for ${items.length} URL targets...`
-    );
+    console.log(`🚀 Starting process for ${items.length} URL targets...`);
 
     for (const [index, parentItem] of items.entries()) {
-      // --- A. Rate Limiting (Throttle the Fetch) ---
+      //GG --- A. Rate Limiting (Throttle the Fetch) ---
       if (index > 0) {
         console.log(`⏳ Waiting 12s for rate limit...`);
         await wait(this.RATE_LIMIT_DELAY_MS);
       }
 
-      // --- B. The Fetch Step ---
+      //GG --- B. The Fetch Step ---
       let responseData: ConsultaActuacion;
       try {
         const endpoint = pathBuilder(parentItem);
         console.log(`🌐 Fetching: ${endpoint}`);
-        responseData =
-          await this.fetchWithRetry<ConsultaActuacion>(
-            endpoint
-          );
+        responseData = await this.fetchWithRetry<ConsultaActuacion>(endpoint);
       } catch (err) {
-        const msg =
-          err instanceof Error
-            ? err.message
-            : 'Unknown Fetch Error';
+        const msg = err instanceof Error ? err.message : "Unknown Fetch Error";
         console.error(
-          `❌ FETCH FAILED for Parent ID ${parentItem.idProceso}: ${msg}`
+          `❌ FETCH FAILED for Parent ID ${parentItem.idProceso}: ${msg}`,
         );
-        // Log the PARENT item as failed because we couldn't even get the list
-        this.logger.logFailure(
-          parentItem.idProceso,
-          parentItem,
-          msg,
-          'FETCH'
-        );
-        continue; // Move to next URL
+        //?? Log the PARENT item as failed because we couldn't even get the list
+        this.logger.logFailure(parentItem.idProceso, parentItem, msg, "FETCH");
+        continue; //? Move to next URL
       }
 
-      // --- C. The Array Processing Step ---
-      const actuacionesList =
-        responseData.actuaciones || [];
+      //GG --- C. The Array Processing Step ---
+      const actuacionesList = responseData.actuaciones || [];
       console.log(
-        `   📂 Found ${actuacionesList.length} actuaciones. Processing DB writes...`
+        `   📂 Found ${actuacionesList.length} actuaciones. Processing DB writes...`,
       );
 
       if (actuacionesList.length === 0) {
         console.warn(
-          `   ⚠️ Warning: 'actuaciones' array is empty for ID ${parentItem.idProceso}`
+          `   ⚠️ Warning: 'actuaciones' array is empty for ID ${parentItem.idProceso}`,
         );
       }
 
       for (const actuacion of actuacionesList) {
         try {
-          // Call the Prisma handler for this specific sub-item
+          //? Call the Prisma handler for this specific sub-item
           await dbHandler(actuacion, parentItem);
-          // Optional: Add a tiny delay here if DB is overwhelmed, usually not needed for upserts
-          // process.stdout.write('.'); // Progress indicator
+          //? Optional: Add a tiny delay here if DB is overwhelmed, usually not needed for upserts
+          //? process.stdout.write('.'); // Progress indicator
         } catch (dbErr) {
-          const msg =
-            dbErr instanceof Error
-              ? dbErr.message
-              : 'DB Error';
+          const msg = dbErr instanceof Error ? dbErr.message : "DB Error";
           console.error(
-            `\n   ❌ DB UPSERT FAILED for an item inside Parent ${parentItem.idProceso}: ${msg}`
+            `\n   ❌ DB UPSERT FAILED for an item inside Parent ${parentItem.idProceso}: ${msg}`,
           );
 
-          // Log specific sub-item failure, but continue the loop!
+          //? Log specific sub-item failure, but continue the loop!
           this.logger.logFailure(
             parentItem.idProceso,
             actuacion,
             msg,
-            'DB_ITEM'
+            "DB_ITEM",
           );
         }
       }
       console.log(
-        `\n   ✅ Finished processing items for Parent ${parentItem.idProceso}`
+        `\n   ${parentItem.carpetaNumero}✅ Finished processing items for Parent ${parentItem.idProceso}`,
       );
     }
   }

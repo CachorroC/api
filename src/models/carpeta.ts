@@ -1,15 +1,14 @@
-import { Prisma } from "@prisma/client";
 import { ConsultaActuacion, outActuacion } from "../types/actuaciones";
 import { Codeudor, IntCarpeta, Juzgado, TipoProceso } from "../types/carpetas";
 import { ConsultaProcesos, outProceso } from "../types/procesos";
 import { RawDb } from "../types/raw-db";
 import { ClassDemanda } from "./demanda";
 import { ClassDeudor } from "./deudor";
-import { JuzgadoClass } from "./juzgado";
 import { NotasBuilder } from "./nota";
 import { tipoProcesoBuilder } from "./tipoProceso";
 import { client } from "../services/prisma";
 import { sleep } from "../utils/awaiter";
+import JuzgadoClass from "./juzgado";
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 

@@ -1,9 +1,8 @@
+import { Prisma } from "../../prisma/generated/prisma/client";
 import { IntDemanda, TipoProceso, intNotificacion } from "../types/carpetas";
 import { RawDb } from "../types/raw-db";
-import { Decimal } from "@prisma/client/runtime/library";
 import { capitalBuilder } from "../utils/capital-builder";
 import { datesExtractor } from "../utils/date-validator";
-import { Prisma } from "@prisma/client";
 import { ClassNotificacion } from "./notificacion";
 import { tipoProcesoBuilder } from "./tipoProceso";
 
@@ -70,7 +69,7 @@ export class ClassDemanda implements IntDemanda {
       this.entregaGarantiasAbogado = firstEntrega;
     }
 
-    this.capitalAdeudado = new Decimal(capitalBuilder(capitalAdeudado));
+    this.capitalAdeudado = new Prisma.Decimal(capitalBuilder(capitalAdeudado));
     this.tipoProceso = tipoProcesoBuilder(tipoProceso);
     this.etapaProcesal = etapaProcesal ? `${etapaProcesal}` : null;
     this.municipio = municipio ? String(municipio) : null;
@@ -84,14 +83,14 @@ export class ClassDemanda implements IntDemanda {
         ? JUZGADO_ORIGEN
         : null;
     this.llaveProceso = llaveProceso ? String(llaveProceso) : null;
-    this.avaluo = new Decimal(capitalBuilder(VALOR_AVALUO));
-    this.liquidacion = new Decimal(
+    this.avaluo = new Prisma.Decimal(capitalBuilder(VALOR_AVALUO));
+    this.liquidacion = new Prisma.Decimal(
       capitalBuilder(VALOR_LIQUIDACION_DEL_CREDITO),
     );
   }
-  liquidacion: Decimal;
-  avaluo: Decimal;
-  capitalAdeudado: Decimal;
+  liquidacion: Prisma.Decimal;
+  avaluo: Prisma.Decimal;
+  capitalAdeudado: Prisma.Decimal;
   carpetaNumero!: number;
   departamento: string | null;
   despacho: string | null;

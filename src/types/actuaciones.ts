@@ -12,23 +12,51 @@ export type Message =
   | "Forbidden";
 
 export interface ConsultaActuacion {
-  actuaciones: intActuacion[];
+  actuaciones: intActuacion[] | fetchResponseActuaciones[];
   paginacion: Paginacion;
 }
 
-export interface intActuacion {
-  idRegActuacion: string;
-  llaveProceso: string;
-  consActuacion: number;
-  fechaActuacion: Date;
+export type fetchResponseActuaciones = {
   actuacion: string;
   anotacion: null | string;
-  fechaInicial: Date | null;
-  fechaFinal: Date | null;
-  fechaRegistro: Date;
+  cant: number;
   codRegla: string;
   conDocumentos: boolean;
+  consActuacion: number;
+  fechaActuacion: Date | string;
+  fechaFinal: Date | string | null;
+  fechaInicial: Date | string | null;
+  fechaRegistro: Date | string;
+  idRegActuacion: number;
+  llaveProceso: string;
+};
+type ExtendedType = Omit<fetchResponseActuaciones, "idRegActuacion"> & {
+  idRegActuacion: string;
+};
+export interface databaseActuacion extends ExtendedType {
+  fechaActuacion: Date;
+  fechaFinal: Date | null;
+  fechaInicial: Date | null;
+  fechaRegistro: Date;
+  idProceso: number;
+  idRegActuacion: string;
+  isUltimaAct: boolean;
+  createdAt: Date;
+}
+
+export interface intActuacion {
+  actuacion: string;
+  anotacion: null | string;
   cant: number;
+  codRegla: string;
+  conDocumentos: boolean;
+  consActuacion: number;
+  fechaActuacion: Date;
+  fechaFinal: Date | null;
+  fechaInicial: Date | null;
+  fechaRegistro: Date;
+  idRegActuacion: string;
+  llaveProceso: string;
 }
 
 export interface outActuacion extends intActuacion {
