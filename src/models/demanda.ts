@@ -1,4 +1,5 @@
-import { Prisma } from "../../prisma/generated/prisma/client.js";
+
+import { Prisma } from '../prisma/generated/prisma/client.js';
 import { IntDemanda, TipoProceso, intNotificacion } from "../types/carpetas.js";
 import { RawDb } from "../types/raw-db.js";
 import { capitalBuilder } from "../utils/capital-builder.js";

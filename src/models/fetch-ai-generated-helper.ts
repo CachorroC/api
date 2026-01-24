@@ -13,7 +13,7 @@ import {
 } from "../types/actuaciones.js";
 import { databaseProceso, fetchResponseProceso } from "../types/procesos.js";
 import { client } from "../services/prisma.js";
-import { PrismaClient } from '../prisma/generated/prisma/client.js';
+import { PrismaClient } from "../prisma/generated/prisma/client.js";
 
 //GG --- 1. MOCK TYPES & CLASSES (Placeholders for missing imports) ---
 //? These allow the code to compile since ClassCarpeta relies on them.

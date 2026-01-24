@@ -1,10 +1,8 @@
-
 import * as fs from "fs/promises";
 import { ConsultaProcesos, outProceso } from "./types/procesos.js";
-import  JuzgadoClass  from "./models/juzgado.js";
+import JuzgadoClass from "./models/juzgado.js";
 import { ClassProcesos } from "./models/procesos.js";
-import { client } from './services/prisma.js';
-
+import { client } from "./services/prisma.js";
 
 async function fetcher(llaveProceso: string): Promise<outProceso[]> {
   try {

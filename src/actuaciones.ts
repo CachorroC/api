@@ -1,32 +1,31 @@
-import * as fs from 'fs/promises';
+import * as fs from "fs/promises";
 import {
   ConsultaActuacion,
   intActuacion,
   outActuacion,
-} from './types/actuaciones.js';
-import { client } from './services/prisma.js';
-import { sleep } from './utils/awaiter.js';
-import Actuacion from './models/actuacion.js';
-import { RobustApiClient } from './utils/fetcher.js';
+} from "./types/actuaciones.js";
+import { client } from "./services/prisma.js";
+import { sleep } from "./utils/awaiter.js";
+import Actuacion from "./models/actuacion.js";
+import { RobustApiClient } from "./utils/fetcher.js";
 async function fetcher(idProceso: number) {
   console.log(`fetching idProceso: ${idProceso}`);
 
   await sleep(10000);
   try {
     const request = await fetch(
-      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${idProceso}`
+      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${idProceso}`,
     );
 
     if (!request.ok) {
       throw new Error(
         `${idProceso}: ${request.status} ${
           request.statusText
-        }${JSON.stringify(request, null, 2)}`
+        }${JSON.stringify(request, null, 2)}`,
       );
     }
 
-    const json =
-      (await request.json()) as ConsultaActuacion;
+    const json = (await request.json()) as ConsultaActuacion;
 
     const { actuaciones } = json;
 
@@ -44,12 +43,8 @@ async function fetcher(idProceso: number) {
         ...actuacion,
         fechaActuacion: new Date(fechaActuacion),
         fechaRegistro: new Date(fechaRegistro),
-        fechaInicial: fechaInicial
-          ? new Date(fechaInicial)
-          : null,
-        fechaFinal: fechaFinal
-          ? new Date(fechaFinal)
-          : null,
+        fechaInicial: fechaInicial ? new Date(fechaInicial) : null,
+        fechaFinal: fechaFinal ? new Date(fechaFinal) : null,
         isUltimaAct: cant === consActuacion,
         idProceso: idProceso,
         createdAt: new Date(fechaRegistro),
@@ -85,28 +80,23 @@ async function* AsyncGenerateActuaciones(
     carpetaNumero: number;
     carpetaId: number;
     llaveProceso: string;
-  }[]
+  }[],
 ) {
-  for (const {
-    idProceso,
-    carpetaNumero,
-    carpetaId,
-  } of procesos) {
+  for (const { idProceso, carpetaNumero, carpetaId } of procesos) {
     await sleep(10000);
 
     const fetcherIdProceso = await fetcher(idProceso);
 
     if (fetcherIdProceso && fetcherIdProceso.length > 0) {
-      const actsActualizadas =
-        await Actuacion.updateAllActuaciones(
-          fetcherIdProceso,
-          carpetaNumero
-        );
+      const actsActualizadas = await Actuacion.updateAllActuaciones(
+        fetcherIdProceso,
+        carpetaNumero,
+      );
       console.log(actsActualizadas);
       await Actuacion.prismaUpdaterActuaciones(
         fetcherIdProceso,
         carpetaNumero,
-        carpetaId
+        carpetaId,
       );
     }
     yield fetcherIdProceso;
@@ -135,7 +125,7 @@ main();*/
 
 // 1. Setup
 const api = new RobustApiClient(
-  'https://consultaprocesos.ramajudicial.gov.co:448'
+  "https://consultaprocesos.ramajudicial.gov.co:448",
 ); // Example URL
 
 // 2. Define Types
@@ -152,20 +142,16 @@ interface ProcessRequest {
 // 3. Execution
 async function runSync() {
   // The list of processes we want to check
-  const processesToCheck: ProcessRequest[] =
-    await getIdProcesos();
+  const processesToCheck: ProcessRequest[] = await getIdProcesos();
 
   await api.processActuaciones<ProcessRequest>(
     processesToCheck,
 
     // Step 1: Build URL
-    (proc) =>
-      `/api/v2/Proceso/Actuaciones/${proc.idProceso}`,
+    (proc) => `/api/v2/Proceso/Actuaciones/${proc.idProceso}`,
 
     // Step 2: Handle Database (Runs once for EACH item in the 'actuaciones' array)
-    async ( actuacion: intActuacion, parentProc ) =>
-    {
-
+    async (actuacion: intActuacion, parentProc) => {
       // Perform Prisma Upsert
       await client.actuacion.upsert({
         where: {
@@ -173,9 +159,7 @@ async function runSync() {
           idRegActuacion: `${actuacion.idRegActuacion}`,
         },
         update: {
-          fechaActuacion: new Date(
-            actuacion.fechaActuacion
-          ),
+          fechaActuacion: new Date(actuacion.fechaActuacion),
           fechaRegistro: new Date(actuacion.fechaRegistro),
           fechaInicial: actuacion.fechaInicial
             ? new Date(actuacion.fechaInicial)
@@ -183,8 +167,7 @@ async function runSync() {
           fechaFinal: actuacion.fechaFinal
             ? new Date(actuacion.fechaFinal)
             : null,
-          isUltimaAct:
-            actuacion.cant === actuacion.consActuacion,
+          isUltimaAct: actuacion.cant === actuacion.consActuacion,
           consActuacion: actuacion.consActuacion,
           idRegActuacion: `${actuacion.idRegActuacion}`,
         },
@@ -206,23 +189,20 @@ async function runSync() {
               idProceso: parentProc.idProceso,
             },
           },
-          fechaActuacion: new Date(
-            actuacion.fechaActuacion
-          ),
+          fechaActuacion: new Date(actuacion.fechaActuacion),
           fechaInicial: actuacion.fechaInicial
             ? new Date(actuacion.fechaInicial)
             : null,
           fechaFinal: actuacion.fechaFinal
             ? new Date(actuacion.fechaFinal)
             : null,
-          isUltimaAct:
-            actuacion.cant === actuacion.consActuacion,
+          isUltimaAct: actuacion.cant === actuacion.consActuacion,
         },
       });
-    }
+    },
   );
 
-  console.log('Sync Complete');
+  console.log("Sync Complete");
 }
 
 runSync();

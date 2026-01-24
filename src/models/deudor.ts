@@ -1,5 +1,5 @@
 
-import { Prisma } from '../../prisma/generated/prisma/client.js';
+import { Prisma } from '../prisma/generated/prisma/client.js';
 import { IntDeudor } from "../types/carpetas.js";
 import { RawDb } from "../types/raw-db.js";
 
@@ -45,7 +45,7 @@ export class ClassDeudor implements IntDeudor {
 
     const nameStringArray = nombre
       ? nombre.trim().split(" ")
-      : "Nelson Nuñez".split(" ");
+      : "Nelson Nuï¿½ez".split(" ");
 
     const nameArrayLength = nameStringArray.length;
 

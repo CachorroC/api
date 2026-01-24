@@ -1,6 +1,6 @@
 import { client } from "../services/prisma";
 import { ConsultaProcesos, outProceso } from "../types/procesos.js";
-import  JuzgadoClass  from "./juzgado.js";
+import JuzgadoClass from "./juzgado.js";
 
 export class ClassProcesos {
   idProcesosSet: Set<number> = new Set();
@@ -31,10 +31,7 @@ export class ClassProcesos {
 
       const updater = await client.carpeta.update({
         where: {
-          mainId: {
-            numero: this.numero,
-            id: this.carpetaId,
-          },
+            numero: this.numero ,
         },
         data: {
           idProcesos: {

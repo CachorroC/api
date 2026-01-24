@@ -1,6 +1,6 @@
 import * as fs from "fs/promises";
 import { extrapolateTipoToCorrectType } from "../models/juzgado.js";
-import JuzgadoClass  from "../models/juzgado.js"
+import JuzgadoClass from "../models/juzgado.js";
 import { RawCarpetas } from "../data/carpetas.js";
 
 const outgoingJuzgados = [];
@@ -55,11 +55,11 @@ export function extrapolateIdCiudadyTipo(
 
   if (ejecucion) {
     matchedRegexNumberAndLetters = ejecucion.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im,
+      /(\d+)(\s?)([A-Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\s-]+)/im,
     );
   } else if (origen) {
     matchedRegexNumberAndLetters = origen.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im,
+      /(\d+)(\s?)([A-Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\s-]+)/im,
     );
   }
 

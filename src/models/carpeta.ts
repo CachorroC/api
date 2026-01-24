@@ -1,5 +1,10 @@
-import { ConsultaActuacion, outActuacion } from "../types/actuaciones";
-import { Codeudor, IntCarpeta, Juzgado, TipoProceso } from "../types/carpetas.js";
+import { ConsultaActuacion, outActuacion } from "../types/actuaciones.js";
+import {
+  Codeudor,
+  IntCarpeta,
+  Juzgado,
+  TipoProceso,
+} from "../types/carpetas.js";
 import { ConsultaProcesos, outProceso } from "../types/procesos.js";
 import { RawDb } from "../types/raw-db.js";
 import { ClassDemanda } from "./demanda.js";
@@ -9,9 +14,73 @@ import { tipoProcesoBuilder } from "./tipoProceso.js";
 import { client } from "../services/prisma.js";
 import { sleep } from "../utils/awaiter.js";
 import JuzgadoClass from "./juzgado.js";
+import { Prisma } from '../prisma/generated/prisma/client.js';
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
 
+
+// --- CONFIGURATION ---
+const RATE_LIMIT_DELAY = 12500; // 12.5 seconds (allows ~4.8 requests per minute)
+const MAX_RETRIES = 3;
+const RETRY_STATUS_CODES = [408, 429, 500, 502, 503, 504]; // Errors worth retrying
+
+let lastApiCallTime = 0;
+
+/**
+ * Enforces the rate limit by sleeping if the last request was too recent.
+ */
+async function enforceRateLimit() {
+  const now = Date.now();
+  const timeSinceLastCall = now - lastApiCallTime;
+
+  if (timeSinceLastCall < RATE_LIMIT_DELAY) {
+    const waitTime = RATE_LIMIT_DELAY - timeSinceLastCall;
+    console.log(`Rate Limit: Waiting ${(waitTime / 1000).toFixed(1)}s...`);
+    await sleep(waitTime);
+  }
+  lastApiCallTime = Date.now();
+}
+
+/**
+ * Fetches with Rate Limit AND Smart Retry logic.
+ */
+async function fetchWithSmartRetry(
+  url: string | URL,
+  options?: RequestInit,
+  retries = MAX_RETRIES
+): Promise<Response> {
+  // 1. Wait for the Rate Limit gap before making the request
+  await enforceRateLimit();
+
+  try {
+    const response = await fetch(url, options);
+
+    // 2. Success Case
+    if (response.ok) {
+      return response;
+    }
+
+    // 3. Retry Logic for specific HTTP Status Codes
+    if (RETRY_STATUS_CODES.includes(response.status) && retries > 0) {
+      console.warn(
+        `⚠️ API Error ${response.status}. Retrying... (${retries} attempts left)`
+      );
+      // We assume the 'enforceRateLimit' at the start of the recursion
+      // provides enough backoff time (12.5s), so we don't need extra sleep here.
+      return fetchWithSmartRetry(url, options, retries - 1);
+    }
+
+    // 4. Fatal HTTP Errors (404, 400, etc.) - Return response to be handled by caller
+    return response;
+
+  } catch (error) {
+    // 5. Network Errors (DNS, Offline, Connection Refused)
+    // You requested NOT to retry these.
+    console.error(`❌ Network/Fetch Error: ${error}`);
+    throw error;
+  }
+}
+// -----------------------------------
 export class ClassCarpeta implements IntCarpeta {
   //PROPERTIES -todas las propiedades  que existen en la class carpeta
 
@@ -152,11 +221,9 @@ export class ClassCarpeta implements IntCarpeta {
     this.juzgadoTipo = this.juzgado.tipo;
   }
   //!CONSTRUCTOR -
-
-  //METHODS
+//METHODS
   //ASYNC - getProcesos
   async getProcesos() {
-    /*   await sleep( 2000 ) */
     try {
       const isInPrisma = await client.proceso.findMany({
         where: { llaveProceso: this.llaveProceso },
@@ -177,61 +244,42 @@ export class ClassCarpeta implements IntCarpeta {
 
       if (isInPrisma.length > 0) {
         for (const rawProceso of isInPrisma) {
-          if (rawProceso.esPrivado) {
-            continue;
-          }
-
+          if (rawProceso.esPrivado) continue;
           const proceso = {
             ...rawProceso,
-            fechaProceso: rawProceso.fechaProceso
-              ? new Date(rawProceso.fechaProceso)
-              : null,
-            fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
-              ? new Date(rawProceso.fechaUltimaActuacion)
-              : null,
+            fechaProceso: rawProceso.fechaProceso ? new Date(rawProceso.fechaProceso) : null,
+            fechaUltimaActuacion: rawProceso.fechaUltimaActuacion ? new Date(rawProceso.fechaUltimaActuacion) : null,
             juzgado: JuzgadoClass.fromProceso(rawProceso),
           };
           this.procesos.push(proceso);
           this.idProcesos.push(proceso.idProceso);
         }
       } else {
-        const request = await fetch(
+        // !!! UPDATED: Using fetchWithSmartRetry !!!
+        const request = await fetchWithSmartRetry(
           `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${this.llaveProceso}&SoloActivos=false&pagina=1`,
           {
             cache: "force-cache",
-            headers: {
-              Accept: "application/json",
-            },
+            headers: { Accept: "application/json" },
           },
         );
 
         if (!request.ok) {
           const json = await request.json();
-
           throw new Error(
-            `${request.status} : ${
-              request.statusText
-            } === ${JSON.stringify(json)}`,
+            `${request.status} : ${request.statusText} === ${JSON.stringify(json)}`,
           );
         }
 
         const consultaProcesos = (await request.json()) as ConsultaProcesos;
-
         const { procesos } = consultaProcesos;
 
         for (const rawProceso of procesos) {
-          if (rawProceso.esPrivado) {
-            continue;
-          }
-
+          if (rawProceso.esPrivado) continue;
           const proceso = {
             ...rawProceso,
-            fechaProceso: rawProceso.fechaProceso
-              ? new Date(rawProceso.fechaProceso)
-              : null,
-            fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
-              ? new Date(rawProceso.fechaUltimaActuacion)
-              : null,
+            fechaProceso: rawProceso.fechaProceso ? new Date(rawProceso.fechaProceso) : null,
+            fechaUltimaActuacion: rawProceso.fechaUltimaActuacion ? new Date(rawProceso.fechaUltimaActuacion) : null,
             juzgado: JuzgadoClass.fromProceso(rawProceso),
           };
           this.procesos.push(proceso);
@@ -246,55 +294,7 @@ export class ClassCarpeta implements IntCarpeta {
       return this.procesos;
     }
   }
-  //!ASYNC
-  //ASYNC getProcesosByName
-  async getProcesosByName() {
-    const fetchUrl = new URL(
-      `Procesos/Consulta/NombreRazonSocial?nombre=${this.nombre}&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`,
-      "https://consultaprocesos.ramajudicial.gov.co:448/api/v2/",
-    );
 
-    try {
-      const request = await fetch(fetchUrl);
-
-      if (!request.ok) {
-        const json = await request.json();
-
-        throw new Error(JSON.stringify(json));
-      }
-
-      const consultaProcesos = await request.json();
-
-      const { procesos } = consultaProcesos;
-
-      for (const rawProceso of procesos) {
-        if (rawProceso.esPrivado) {
-          continue;
-        }
-
-        const proceso = {
-          ...rawProceso,
-          fechaProceso: rawProceso.fechaProceso
-            ? new Date(rawProceso.fechaProceso)
-            : null,
-          fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
-            ? new Date(rawProceso.fechaUltimaActuacion)
-            : null,
-          juzgado: JuzgadoClass.fromProceso(rawProceso),
-        };
-        this.procesos.push(proceso);
-        this.idProcesos.push(proceso.idProceso);
-      }
-
-      return this.procesos;
-    } catch (error) {
-      console.log(
-        `${this.numero} => error en CarpetaBuilder.getProcesos(${this.llaveProceso}) => ${error}`,
-      );
-      return [];
-    }
-  }
-  //!ASYNC
   //ASYNC - getActuaciones
   async getActuaciones() {
     if (this.idProcesos.length === 0) {
@@ -303,7 +303,8 @@ export class ClassCarpeta implements IntCarpeta {
 
     for (const idProceso of this.idProcesos) {
       try {
-        const request = await fetch(
+        // !!! UPDATED: Using fetchWithSmartRetry !!!
+        const request = await fetchWithSmartRetry(
           `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${idProceso}`,
         );
 
@@ -312,7 +313,6 @@ export class ClassCarpeta implements IntCarpeta {
         }
 
         const consultaActuaciones = (await request.json()) as ConsultaActuacion;
-
         const { actuaciones } = consultaActuaciones;
 
         const outActuaciones = actuaciones.map((actuacion) => {
@@ -323,12 +323,8 @@ export class ClassCarpeta implements IntCarpeta {
             isUltimaAct: actuacion.cant === actuacion.consActuacion,
             fechaActuacion: new Date(actuacion.fechaActuacion),
             fechaRegistro: new Date(actuacion.fechaRegistro),
-            fechaInicial: actuacion.fechaInicial
-              ? new Date(actuacion.fechaInicial)
-              : null,
-            fechaFinal: actuacion.fechaFinal
-              ? new Date(actuacion.fechaFinal)
-              : null,
+            fechaInicial: actuacion.fechaInicial ? new Date(actuacion.fechaInicial) : null,
+            fechaFinal: actuacion.fechaFinal ? new Date(actuacion.fechaFinal) : null,
             createdAt: new Date(actuacion.fechaRegistro),
             carpetaNumero: this.numero,
           };
@@ -336,7 +332,6 @@ export class ClassCarpeta implements IntCarpeta {
 
         outActuaciones.forEach((actuacion) => {
           this.actuaciones.push(actuacion);
-
           if (actuacion.isUltimaAct) {
             this.ultimaActuacion = actuacion;
             this.fecha = actuacion.fechaActuacion;
@@ -346,42 +341,47 @@ export class ClassCarpeta implements IntCarpeta {
         continue;
       } catch (error) {
         console.log(
-          `${
-            this.numero
-          } ERROR ==> getActuaciones ${idProceso} => ${JSON.stringify(
-            error,
-            null,
-            2,
-          )}`,
+          `${this.numero} ERROR ==> getActuaciones ${idProceso} => ${JSON.stringify(error, null, 2)}`,
         );
         continue;
       }
     }
-    /*
-    if ( this.actuaciones.length > 0 )
-    {
-
-      const sorted = [ ...this.actuaciones ].sort(
-        (
-          a, b
-        ) =>
-        {
-
-
-          const aFechaAct = new Date( a.fechaActuacion ).getTime()
-          const bFechaAct = new Date( b.fechaActuacion ).getTime()
-          return aFechaAct - bFechaAct
-        }
-      )
-
-      const [ ultimaActuacion ] = sorted;
-      this.ultimaActuacion = ultimaActuacion;
-      this.fecha = ultimaActuacion.fechaActuacion;
-      this.idRegUltimaAct = ultimaActuacion.idRegActuacion;
-    } */
-
     return this.actuaciones;
   }
+  async getProcesosByName() {
+    const fetchUrl = `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NombreRazonSocial?nombre=${this.nombre}&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`;
+
+    try {
+      const request = await fetchWithSmartRetry(fetchUrl); // Use SmartRetry here too
+      if (!request.ok) {
+        const json = await request.json();
+        throw new Error(JSON.stringify(json));
+      }
+
+      const consultaProcesos = await request.json();
+      const { procesos } = consultaProcesos;
+
+      for (const rawProceso of procesos) {
+        if (rawProceso.esPrivado) continue;
+
+        const proceso = {
+          ...rawProceso,
+          fechaProceso: rawProceso.fechaProceso ? new Date(rawProceso.fechaProceso) : null,
+          fechaUltimaActuacion: rawProceso.fechaUltimaActuacion ? new Date(rawProceso.fechaUltimaActuacion) : null,
+          juzgado: JuzgadoClass.fromProceso(rawProceso),
+        };
+        this.procesos.push(proceso);
+        this.idProcesos.push(proceso.idProceso);
+      }
+      return this.procesos;
+    } catch (error) {
+      console.log(`${this.numero} => error en getProcesosByName => ${error}`);
+      return [];
+    }
+  }
+  //!ASYNC
+  //ASYNC - getActuaciones
+
   //!ASYNC
   //STATIC
 
@@ -514,242 +514,134 @@ export class ClassCarpeta implements IntCarpeta {
       inserter
     );
   } */
-  static async insertCarpeta(incomingCarpeta: ClassCarpeta) {
+ static async insertCarpeta(incomingCarpeta: ClassCarpeta) {
     const {
-      ultimaActuacion,
-      procesos,
-      actuaciones,
-      demanda,
-      deudor,
-      codeudor,
-      notas,
+      ultimaActuacion, procesos, actuaciones, demanda,
+      deudor, codeudor, notas,
     } = incomingCarpeta;
 
     const newDemanda = ClassDemanda.prismaDemanda(demanda);
-
     const newDeudor = ClassDeudor.prismaDeudor(deudor);
-
     const newCarpeta = ClassCarpeta.prismaCarpeta(incomingCarpeta);
+
+    // Common juzgado helper
+    const juzgadoConnect = {
+      connectOrCreate: {
+        where: {
+          id_tipo_ciudad: {
+            tipo: incomingCarpeta.juzgado.tipo,
+            id: incomingCarpeta.juzgado.id,
+            ciudad: incomingCarpeta.juzgado.ciudad,
+          },
+        },
+        create: {
+          tipo: incomingCarpeta.juzgado.tipo,
+          id: incomingCarpeta.juzgado.id,
+          ciudad: incomingCarpeta.juzgado.ciudad,
+          url: incomingCarpeta.juzgado.url,
+        },
+      },
+    };
 
     try {
       await client.carpeta.upsert({
-        where: {
-          numero: incomingCarpeta.numero,
-        },
+        where: { numero: incomingCarpeta.numero },
         create: {
           ...newCarpeta,
-          juzgado: {
+          juzgado: juzgadoConnect,
+          ultimaActuacion: ultimaActuacion ? {
             connectOrCreate: {
-              where: {
-                id_tipo_ciudad: {
-                  tipo: incomingCarpeta.juzgado.tipo,
-                  id: incomingCarpeta.juzgado.id,
-                  ciudad: incomingCarpeta.juzgado.ciudad,
-                },
-              },
-              create: {
-                tipo: incomingCarpeta.juzgado.tipo,
-                id: incomingCarpeta.juzgado.id,
-                ciudad: incomingCarpeta.juzgado.ciudad,
-                url: incomingCarpeta.juzgado.url,
-              },
+              where: { idRegActuacion: ultimaActuacion.idRegActuacion },
+              create: { ...ultimaActuacion, idRegActuacion: `${ultimaActuacion.idRegActuacion}` },
             },
-          },
-          ultimaActuacion: ultimaActuacion
-            ? {
-                connectOrCreate: {
-                  where: {
-                    idRegActuacion: ultimaActuacion.idRegActuacion,
-                  },
-                  create: {
-                    ...ultimaActuacion,
-                    idRegActuacion: `${ultimaActuacion.idRegActuacion}`,
-                  },
-                },
-              }
-            : undefined,
+          } : undefined,
           deudor: {
             connectOrCreate: {
-              where: {
-                id: incomingCarpeta.numero,
-              },
+              where: { id: incomingCarpeta.numero },
               create: newDeudor,
             },
           },
           demanda: {
             connectOrCreate: {
-              where: {
-                id: incomingCarpeta.numero,
-              },
+              where: { id: incomingCarpeta.numero },
               create: newDemanda,
             },
           },
           codeudor: {
             connectOrCreate: {
-              where: {
-                id: incomingCarpeta.numero,
-              },
-              create: {
-                ...codeudor,
-              },
+              where: { id: incomingCarpeta.numero },
+              create: { ...codeudor },
             },
           },
-          notas: {
-            createMany: {
-              data: notas,
-              skipDuplicates: true,
-            },
-          },
+          notas: { createMany: { data: notas, skipDuplicates: true } },
           procesos: {
             connectOrCreate: procesos.map((proceso) => {
               const { juzgado, ...restProceso } = proceso;
 
-              const procesoCreateorConnect = {
-                where: {
-                  idProceso: proceso.idProceso,
-                },
+              // FILTER: Only map actuaciones belonging to THIS process
+              const processActuaciones = actuaciones.filter(a => a.idProceso === proceso.idProceso);
+
+              return {
+                where: { idProceso: proceso.idProceso },
                 create: {
                   ...restProceso,
                   juzgado: {
                     connectOrCreate: {
                       where: {
-                        id_tipo_ciudad: {
-                          tipo: juzgado.tipo,
-                          id: juzgado.id,
-                          ciudad: juzgado.ciudad,
-                        },
+                        id_tipo_ciudad: { tipo: juzgado.tipo, id: juzgado.id, ciudad: juzgado.ciudad },
                       },
-                      create: {
-                        tipo: juzgado.tipo,
-                        id: juzgado.id,
-                        ciudad: juzgado.ciudad,
-                        url: juzgado.url,
-                      },
+                      create: { tipo: juzgado.tipo, id: juzgado.id, ciudad: juzgado.ciudad, url: juzgado.url },
                     },
                   },
                   actuaciones: {
-                    connectOrCreate: actuaciones.map((actuacion) => {
-                      const actuacionCreateOrConnect: Prisma.ActuacionCreateOrConnectWithoutCarpetaInput =
-                        {
-                          where: {
-                            idRegActuacion: actuacion.idRegActuacion,
-                          },
-                          create: {
-                            ...actuacion,
-                            idRegActuacion: `${actuacion.idRegActuacion}`,
-                          },
-                        };
-                      return actuacionCreateOrConnect;
-                    }),
+                    connectOrCreate: processActuaciones.map((actuacion) => ({
+                      where: { idRegActuacion: actuacion.idRegActuacion },
+                      create: { ...actuacion, idRegActuacion: `${actuacion.idRegActuacion}` },
+                    })),
                   },
                 },
               };
-
-              return procesoCreateorConnect;
             }),
           },
         },
         update: {
           ...newCarpeta,
-          fecha: newCarpeta.fecha,
-          fechaUltimaRevision: newCarpeta.fechaUltimaRevision,
-          category: newCarpeta.category,
-          terminado: newCarpeta.terminado,
-          revisado: newCarpeta.revisado,
-          ciudad: newCarpeta.ciudad,
-          nombre: newCarpeta.nombre,
-          notasCount: newCarpeta.notasCount,
-          juzgado: {
+          juzgado: juzgadoConnect,
+          ultimaActuacion: ultimaActuacion ? {
             connectOrCreate: {
-              where: {
-                id_tipo_ciudad: {
-                  tipo: incomingCarpeta.juzgado.tipo,
-                  id: incomingCarpeta.juzgado.id,
-                  ciudad: incomingCarpeta.juzgado.ciudad,
-                },
-              },
-              create: {
-                tipo: incomingCarpeta.juzgado.tipo,
-                id: incomingCarpeta.juzgado.id,
-                ciudad: incomingCarpeta.juzgado.ciudad,
-                url: incomingCarpeta.juzgado.url,
-              },
+              where: { idRegActuacion: ultimaActuacion.idRegActuacion },
+              create: { ...ultimaActuacion, idRegActuacion: `${ultimaActuacion.idRegActuacion}` },
             },
-          },
-          ultimaActuacion: ultimaActuacion
-            ? {
-                connectOrCreate: {
-                  where: {
-                    idRegActuacion: ultimaActuacion.idRegActuacion,
-                  },
-                  create: {
-                    ...ultimaActuacion,
-                    idRegActuacion: `${ultimaActuacion.idRegActuacion}`,
-                  },
-                },
-              }
-            : undefined,
+          } : undefined,
           demanda: {
-            connectOrCreate: {
-              where: {
-                id: incomingCarpeta.numero,
-              },
-              create: newDemanda,
-            },
+            connectOrCreate: { where: { id: incomingCarpeta.numero }, create: newDemanda },
           },
-          notas: {
-            createMany: {
-              data: notas,
-              skipDuplicates: true,
-            },
-          },
+          notas: { createMany: { data: notas, skipDuplicates: true } },
           procesos: {
             connectOrCreate: procesos.map((proceso) => {
               const { juzgado, ...restProceso } = proceso;
 
-              const procesoCreateorConnect: Prisma.ProcesoCreateOrConnectWithoutCarpetaInput =
-                {
-                  where: {
-                    idProceso: proceso.idProceso,
-                  },
-                  create: {
-                    ...restProceso,
-                    juzgado: {
-                      connectOrCreate: {
-                        where: {
-                          id_tipo_ciudad: {
-                            tipo: juzgado.tipo,
-                            id: juzgado.id,
-                            ciudad: juzgado.ciudad,
-                          },
-                        },
-                        create: {
-                          tipo: juzgado.tipo,
-                          id: juzgado.id,
-                          ciudad: juzgado.ciudad,
-                          url: juzgado.url,
-                        },
-                      },
-                    },
-                    actuaciones: {
-                      connectOrCreate: actuaciones.map((actuacion) => {
-                        const actuacionCreateOrConnect: Prisma.ActuacionCreateOrConnectWithoutCarpetaInput =
-                          {
-                            where: {
-                              idRegActuacion: actuacion.idRegActuacion,
-                            },
-                            create: {
-                              ...actuacion,
-                              idRegActuacion: `${actuacion.idRegActuacion}`,
-                            },
-                          };
-                        return actuacionCreateOrConnect;
-                      }),
-                    },
-                  },
-                };
+              // FILTER: Only map actuaciones belonging to THIS process
+              const processActuaciones = actuaciones.filter(a => a.idProceso === proceso.idProceso);
 
-              return procesoCreateorConnect;
+              return {
+                where: { idProceso: proceso.idProceso },
+                create: {
+                  ...restProceso,
+                  juzgado: {
+                    connectOrCreate: {
+                      where: { id_tipo_ciudad: { tipo: juzgado.tipo, id: juzgado.id, ciudad: juzgado.ciudad } },
+                      create: { tipo: juzgado.tipo, id: juzgado.id, ciudad: juzgado.ciudad, url: juzgado.url },
+                    },
+                  },
+                  actuaciones: {
+                    connectOrCreate: processActuaciones.map((actuacion) => ({
+                      where: { idRegActuacion: actuacion.idRegActuacion },
+                      create: { ...actuacion, idRegActuacion: `${actuacion.idRegActuacion}` },
+                    })),
+                  },
+                },
+              };
             }),
           },
         },

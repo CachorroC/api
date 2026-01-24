@@ -1,6 +1,6 @@
 import * as fs from "fs/promises";
 import { RawCarpetas } from "../data/carpetas.js";
-import JuzgadoClass  from "../models/juzgado.js";
+import JuzgadoClass from "../models/juzgado.js";
 import { ConsultaActuacion, outActuacion } from "../types/actuaciones.js";
 import { ConsultaProcesos, DetalleProceso } from "../types/procesos.js";
 import { sleep } from "../utils/awaiter.js";

@@ -1,7 +1,36 @@
+// Fetch con reintentos inteligentes según status y errores de red
+export async function fetchWithSmartRetry(url: string, options?: RequestInit, maxRetries = 3, retryDelay = 2000): Promise<Response> {
+  let attempt = 0;
+  while (attempt < maxRetries) {
+    try {
+      const response = await fetch(url, options);
+      // Reintentar solo si el status es 429, 500, 502, 503, 504
+      if ([429, 500, 502, 503, 504].includes(response.status)) {
+        if (attempt < maxRetries - 1) {
+          await wait(retryDelay);
+          attempt++;
+          continue;
+        }
+      }
+      return response;
+    } catch (error: any) {
+      // Si es error de red, reintentar
+      const isNetworkError = error && (error.code === 'ECONNRESET' || error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED' || error.name === 'FetchError');
+      if (isNetworkError && attempt < maxRetries - 1) {
+        await wait(retryDelay);
+        attempt++;
+        continue;
+      }
+      throw error;
+    }
+    break;
+  }
+  throw new Error('fetchWithSmartRetry: No se pudo obtener respuesta satisfactoria');
+}
 import * as fs from "fs";
 import * as path from "path";
 import { ConsultaActuacion } from "../types/actuaciones.js";
-import Actuacion from '../models/actuacion.js';
+import Actuacion from "../models/actuacion.js";
 
 //GG 2. Custom Error
 export class ApiError extends Error {
@@ -143,7 +172,7 @@ export class RobustApiClient {
       for (const actuacion of actuacionesList) {
         try {
           //? Call the Prisma handler for this specific sub-item
-          await dbHandler( actuacion, parentItem );
+          await dbHandler(actuacion, parentItem);
 
           //? Optional: Add a tiny delay here if DB is overwhelmed, usually not needed for upserts
           //? process.stdout.write('.'); // Progress indicator
@@ -163,47 +192,45 @@ export class RobustApiClient {
         }
       }
       try {
-        await Actuacion.prismaUpdaterActuaciones( actuacionesList.map((actuacion) => {
-      const {
-        fechaActuacion,
-        fechaRegistro,
-        fechaFinal,
-        fechaInicial,
-        consActuacion,
-        cant,
-        idRegActuacion,
-      } = actuacion;
-      return {
-        ...actuacion,
-        fechaActuacion: new Date(fechaActuacion),
-        fechaRegistro: new Date(fechaRegistro),
-        fechaInicial: fechaInicial
-          ? new Date(fechaInicial)
-          : null,
-        fechaFinal: fechaFinal
-          ? new Date(fechaFinal)
-          : null,
-        isUltimaAct: cant === consActuacion,
-        idProceso: parentItem.idProceso,
-        createdAt: new Date(fechaRegistro),
-        idRegActuacion: `${idRegActuacion}`,
-      };
-    }), parentItem.carpetaNumero,parentItem.carpetaId)
-      } catch ( error )
-      {
+        await Actuacion.prismaUpdaterActuaciones(
+          actuacionesList.map((actuacion) => {
+            const {
+              fechaActuacion,
+              fechaRegistro,
+              fechaFinal,
+              fechaInicial,
+              consActuacion,
+              cant,
+              idRegActuacion,
+            } = actuacion;
+            return {
+              ...actuacion,
+              fechaActuacion: new Date(fechaActuacion),
+              fechaRegistro: new Date(fechaRegistro),
+              fechaInicial: fechaInicial ? new Date(fechaInicial) : null,
+              fechaFinal: fechaFinal ? new Date(fechaFinal) : null,
+              isUltimaAct: cant === consActuacion,
+              idProceso: parentItem.idProceso,
+              createdAt: new Date(fechaRegistro),
+              idRegActuacion: `${idRegActuacion}`,
+            };
+          }),
+          parentItem.carpetaNumero,
+          parentItem.carpetaId,
+        );
+      } catch (error) {
+        const msg = error instanceof Error ? error.message : "DB Error";
+        console.error(
+          `\n   ❌ DB UPSERT FAILED for an item inside Parent ${parentItem.idProceso}: ${msg}`,
+        );
 
-          const msg = error instanceof Error ? error.message : "DB Error";
-          console.error(
-            `\n   ❌ DB UPSERT FAILED for an item inside Parent ${parentItem.idProceso}: ${msg}`,
-          );
-
-          //? Log specific sub-item failure, but continue the loop!
-          this.logger.logFailure(
-            parentItem.idProceso,
-            actuacionesList,
-            msg,
-            "DB_ITEM",
-          );
+        //? Log specific sub-item failure, but continue the loop!
+        this.logger.logFailure(
+          parentItem.idProceso,
+          actuacionesList,
+          msg,
+          "DB_ITEM",
+        );
       }
       console.log(
         `\n   ${parentItem.carpetaNumero}✅ Finished processing items for Parent ${parentItem.idProceso}`,

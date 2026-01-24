@@ -1,26 +1,9 @@
-import { ClassCarpeta } from './models/carpeta.js';
 import { RawCarpetas } from './data/carpetas.js';
-import { sleep } from './utils/awaiter.js';
-import { wait } from './utils/fetcher.js';
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1';
-console.log(process.env.NODE_TLS_REJECT_UNAUTHORIZED);
-const carpetasMap = RawCarpetas.map((carpeta) => {
-  return {
-    carpeta: new ClassCarpeta(carpeta),
-    numero: Number(carpeta.NUMERO),
-  };
-});
+import { ClassCarpeta } from './models/carpeta.js';
 
-export async function* generateCarpetas() {
+export async function* generateCarpetas(carpetasMap: { carpeta: ClassCarpeta, numero: number }[]) {
   for await (const { carpeta } of carpetasMap) {
-    /*  if (
-      carpeta.category === 'Terminados'
-    ) {
-      yield carpeta;
-    } */
-
     console.log(`carpeta numero ${carpeta.numero}`);
-    await sleep(10000);
     await carpeta.getProcesos();
     await carpeta.getActuaciones();
     yield carpeta;
@@ -28,22 +11,24 @@ export async function* generateCarpetas() {
 }
 
 async function tryAsyncClassCarpetas() {
-  const mapClassCarpetas: Map<number, ClassCarpeta> =
-    new Map();
+  // Now that ClassCarpeta is defined, we can map the raw data
+  const carpetasMap = RawCarpetas.map((carpeta) => {
+    return {
+      carpeta: new ClassCarpeta(carpeta),
+      numero: Number(carpeta.NUMERO),
+    };
+  });
 
-  for await (const carpeta of generateCarpetas()) {
+  const mapClassCarpetas: Map<number, ClassCarpeta> = new Map();
+
+  for await (const carpeta of generateCarpetas(carpetasMap)) {
     mapClassCarpetas.set(carpeta.numero, carpeta);
-
-    /* if ( carpeta.category === 'Terminados' ) {
-      continue;
-    }
- */
     await ClassCarpeta.insertCarpeta(carpeta);
   }
 
   const asAnArray = Array.from(mapClassCarpetas.values());
-
   return asAnArray;
 }
 
+// Start execution
 tryAsyncClassCarpetas();

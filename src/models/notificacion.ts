@@ -1,5 +1,5 @@
 
-import { Prisma } from '../../prisma/generated/prisma/client.js';
+import { Prisma } from '../prisma/generated/prisma/client.js';
 import { intNotificacion, intNotifier } from "../types/carpetas.js";
 import { RawDb } from "../types/raw-db.js";
 import { datesExtractor } from "../utils/date-validator.js";

@@ -88,70 +88,67 @@ export default class Actuacion {
         }`,
       );
       return a.consActuacion === a.cant;
-    } )
-    if ( ultimaActuacion )
-    {
-    try {
-      console.log(
-        `${numeroCarpeta}: ultima Actuacion isUltimaAct ${ultimaActuacion.isUltimaAct ?? "no hay ultima act"}`,
-      );
-      const carpeta = await client.carpeta.findFirstOrThrow({
-        where: {
-          OR: [
-            {
-              llaveProceso: ultimaActuacion.llaveProceso,
-            },
-            {
-              numero: numeroCarpeta,
-
-            },{
-              id: numeroId
-            }
-          ],
-        },
-        include: {
-          ultimaActuacion: true,
-        },
-      });
-
-      const incomingDate = new Date(ultimaActuacion.fechaActuacion).getTime();
-
-      const savedDate = carpeta.ultimaActuacion?.fechaActuacion
-        ? carpeta.ultimaActuacion?.fechaActuacion.getTime()
-        : null;
-
-      if (!savedDate || savedDate < incomingDate) {
+    });
+    if (ultimaActuacion) {
+      try {
         console.log(
-          "no hay saved date o la saved date es menor que incoming date",
+          `${numeroCarpeta}: ultima Actuacion isUltimaAct ${ultimaActuacion.isUltimaAct ?? "no hay ultima act"}`,
         );
-
-        const updateLastActuacion = await Actuacion.updatePreviousLastActuacion(
-          carpeta.idRegUltimaAct,
-        );
-
-        const updateCarpeta = await Actuacion.updateCarpetaWithNewLastActuacion(
-          {
-            ultimaActuacion,
-            numero: numeroCarpeta,
+        const carpeta = await client.carpeta.findFirstOrThrow({
+          where: {
+            OR: [
+              {
+                llaveProceso: ultimaActuacion.llaveProceso,
+              },
+              {
+                numero: numeroCarpeta,
+              },
+              {
+                id: numeroId,
+              },
+            ],
           },
-        );
-
-        console.log(JSON.stringify(updateCarpeta, null, 2));
-
-        await fs.mkdir(
-          `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`,
-          {
-            recursive: true,
+          include: {
+            ultimaActuacion: true,
           },
-        );
+        });
 
-        fs.writeFile(
-          `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}/${
-            ultimaActuacion.idRegActuacion
-          }.json`,
-          JSON.stringify(updateLastActuacion),
-        );
-      } /*
+        const incomingDate = new Date(ultimaActuacion.fechaActuacion).getTime();
+
+        const savedDate = carpeta.fecha
+          ? new Date(carpeta.fecha).getTime()
+          : null;
+
+        if (!savedDate || savedDate < incomingDate) {
+          console.log(
+            "no hay saved date o la saved date es menor que incoming date",
+          );
+
+          const updateLastActuacion =
+            await Actuacion.updatePreviousLastActuacion(carpeta.idRegUltimaAct);
+
+          const updateCarpeta =
+            await Actuacion.updateCarpetaWithNewLastActuacion({
+              ultimaActuacion,
+              numero: numeroCarpeta,
+            });
+
+          console.log(JSON.stringify(updateCarpeta, null, 2));
+
+          await fs.mkdir(
+            `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`,
+            {
+              recursive: true,
+            },
+          );
+
+          fs.writeFile(
+            `./src/date/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}/${
+              ultimaActuacion.idRegActuacion
+            }.json`,
+            JSON.stringify(updateLastActuacion),
+          );
+        } /*
       console.log('prisma will start now');
       for (const actuacion of actuacionesComplete) {
         const upsertActuacion =
@@ -179,9 +176,9 @@ export default class Actuacion {
         upsertActuacion;
         console.log(`created ${JSON.stringify(upsertActuacion)}`);
       } */
-    } catch (error) {
-      console.log(`prisma updater actuaciones error : ${error}`);
-    }
+      } catch (error) {
+        console.log(`prisma updater actuaciones error : ${error}`);
+      }
     }
   }
   static async updateCarpetaWithNewLastActuacion({

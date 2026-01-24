@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 //!SECTION
 //SECTION first step: extract the date
 export function datesExtractor(incomingDate?: string | number | Date | null) {
