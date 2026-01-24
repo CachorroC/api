@@ -73,12 +73,12 @@ export type RawDb = {
   FECHA_AUTO_NOTIFICADO?: Empty;
   RESPESTA_EMBARGO?: Empty;
   VALOR_LIQUIDACION_DEL_CREDITO?: EtapaProcesal;
-  "  "?: Empty;
+  '  '?: Empty;
   JUZGADO_EJECUCION?: string;
   EXTRA?: string;
   FECHA_CIERRE?: string;
   FECHA_PRESENTACION_LIQUIDACION?: Empty;
-  "pendiente cesion del  "?: string;
+  'pendiente cesion del  '?: string;
   FECHA_APORTA_NOTIFICACION_292?: Empty;
   FECHA_ULTIMA_REVISION?: Date;
   ULTIMO_ESTADO_REVISADO?: Empty;
@@ -104,48 +104,56 @@ export type RawDb = {
 
 export type Empty = number | string;
 
-export type Certimail = "TRUE" | "FALSE" | "NO" | "SI" | "04/10/2018";
+export type Certimail = 'TRUE' | 'FALSE' | 'NO' | 'SI' | '04/10/2018';
 
 export type Departamento =
-  | "CUNDINAMARCA"
-  | "CUNDINNAMARCA"
-  | "CUNDINAMARCA "
-  | "TOLIMA"
-  | "CUN DINAMARCA"
-  | "CUNDINNAMARCA "
-  | "BOYACÁ"
-  | "CUNDINAMRCA"
-  | "CNDINAMARCA"
-  | "BOYACA";
+  | 'CUNDINAMARCA'
+  | 'CUNDINNAMARCA'
+  | 'CUNDINAMARCA '
+  | 'TOLIMA'
+  | 'CUN DINAMARCA'
+  | 'CUNDINNAMARCA '
+  | 'BOYACï¿½'
+  | 'CUNDINAMRCA'
+  | 'CNDINAMARCA'
+  | 'BOYACA';
 
 export type EtapaProcesal = number | string;
 
 export type FechaNotificacionUnion = Date | FechaNotificacionEnum | number;
 
 export type FechaNotificacionEnum =
-  | "9/04/2018"
-  | "POSITIVO"
-  | "NEGATIVO"
-  | "10/09/2018"
-  | "21/05/2018"
-  | "08/10/2018"
-  | "|";
+  | '9/04/2018'
+  | 'POSITIVO'
+  | 'NEGATIVO'
+  | '10/09/2018'
+  | '21/05/2018'
+  | '08/10/2018'
+  | '|';
 
 export type Category =
-  | "Terminados"
-  | "Insolvencia"
-  | "Reintegra"
-  | "Lios Juridicos"
-  | "Sin Tercero"
-  | "Bancolombia";
+  | 'Terminados'
+  | 'Insolvencia'
+  | 'Reintegra'
+  | 'Lios Juridicos'
+  | 'Sin Tercero'
+  | 'Bancolombia';
 
 // Converts JSON strings to/from your types
 export class Convert {
-  public static toRawDb(json: string): RawDb[] {
-    return JSON.parse(json);
+  public static toRawDb(
+    json: string 
+  ): RawDb[] {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static rawDbToJson(value: RawDb[]): string {
-    return JSON.stringify(value);
+  public static rawDbToJson(
+    value: RawDb[] 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 }

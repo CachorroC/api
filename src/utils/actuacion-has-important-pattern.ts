@@ -1,31 +1,48 @@
-import { client } from "../services/prisma.js";
-import { intActuacion } from "../types/actuaciones.js";
-import * as fs from "fs/promises";
+import { client } from '../services/prisma.js';
+import { intActuacion } from '../types/actuaciones.js';
+import * as fs from 'fs/promises';
 
 export async function actuacionesGetAuto() {
   const actuaciones = await client.actuacion.findMany();
 
-  const newActs = actuaciones.map((actuacion) => {
-    return actuacionHasAuto(actuacion);
-  });
+  const newActs = actuaciones.map(
+    (
+      actuacion 
+    ) => {
+      return actuacionHasAuto(
+        actuacion 
+      );
+    } 
+  );
 
-  fs.writeFile("actuacionesNewMap.json", JSON.stringify(newActs));
+  fs.writeFile(
+    'actuacionesNewMap.json', JSON.stringify(
+      newActs 
+    ) 
+  );
+
   return newActs;
 }
 
-export function actuacionHasAuto(incomingActuacion: intActuacion) {
-  const { actuacion } = incomingActuacion;
+export function actuacionHasAuto(
+  incomingActuacion: intActuacion 
+) {
+  const {
+    actuacion 
+  } = incomingActuacion;
 
-  const hasAuto = /([Aa][Uu][Tt][Oo]+)\s([A-Z a-zÓÍÚÉÀóíúáé,.()\w/]+)/.test(
+  const hasAuto = /([Aa][Uu][Tt][Oo]+)\s([A-Z a-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,.()\w/]+)/.test(
     actuacion,
   );
 
-  const hasRadicado =
-    /([Rr][Aa][Dd][Ii][Cc][Aa]+)([A-Z a-zÓÍÚÉÀóíúáé,.()\w/]+)/.test(actuacion);
+  const hasRadicado
+    = /([Rr][Aa][Dd][Ii][Cc][Aa]+)([A-Z a-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,.()\w/]+)/.test(
+      actuacion 
+    );
 
   return {
     ...incomingActuacion,
-    hasAuto: hasAuto,
+    hasAuto    : hasAuto,
     hasRadicado: hasRadicado,
   };
 }

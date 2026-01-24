@@ -1,15 +1,6 @@
 {
-  "name": "rest-express",
-  "version": "1.0.0",
-  "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "dev": "ts-node src/index.ts",
-    "dist": "tsc",
-    "lint": "eslint --fix .",
-    "carpetafix": "node dist/try-carpeta-async-model.js"
-  },
   "dependencies": {
+    "@eslint/eslintrc": "^3.3.3",
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "7.3.0",
     "@stylistic/eslint-plugin": "^2.13.0",
@@ -20,19 +11,31 @@
     "async-sema": "^3.1.1",
     "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
+    "eslint-plugin-react": "^7.37.5",
     "express": "4.19.2",
+    "jiti": "^2.6.1",
     "pg": "^8.16.3",
     "ts-node": "10.9.2",
     "typescript": "5.5.4",
     "web-push": "^3.6.7",
     "xlsx": "^0.18.5"
   },
-  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1",
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "globals": "^15.15.0",
     "prisma": "^7.3.0",
     "tsx": "^4.21.0",
     "typescript-eslint": "^8.52.0"
-  }
+  },
+  "license": "MIT",
+  "name": "rest-express",
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1",
+  "scripts": {
+    "carpetafix": "node dist/try-carpeta-async-model.js",
+    "dev": "ts-node src/index.ts",
+    "dist": "tsc",
+    "lint": "eslint --fix ."
+  },
+  "type": "module",
+  "version": "1.0.0"
 }

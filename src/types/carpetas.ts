@@ -4,10 +4,10 @@
 //
 //   const CarpetaRaw = Convert.toCarpetaRaw(json);
 
-import { Prisma } from "@prisma/client";
-import { outActuacion } from "./actuaciones";
-import { outProceso } from "./procesos";
-import { NotasBuilder } from "../models/nota";
+import { Prisma } from '@prisma/client';
+import { outActuacion } from './actuaciones';
+import { outProceso } from './procesos';
+import { NotasBuilder } from '../models/nota';
 
 export type IntCarpeta = {
   category: string;
@@ -40,12 +40,12 @@ export type Obligacion = {
 };
 
 export type Category =
-  | "Terminados"
-  | "Insolvencia"
-  | "Reintegra"
-  | "Lios Juridicos"
-  | "Sin Tercero"
-  | "Bancolombia";
+  | 'Terminados'
+  | 'Insolvencia'
+  | 'Reintegra'
+  | 'Lios Juridicos'
+  | 'Sin Tercero'
+  | 'Bancolombia';
 
 export interface Codeudor {
   cedula: string | null;
@@ -56,52 +56,52 @@ export interface Codeudor {
 }
 
 export type ResultadoEnum =
-  | ""
-  | "31/03/1901"
-  | "POSITIVO"
-  | "CERTIMAIL"
-  | "06/07/2018"
-  | "FISICA"
-  | "NEGATIVO"
-  | "FISICO"
-  | "20/06/2018 JAIME"
-  | "28/11/2017"
-  | "09/04/2018 CERTIMAIL"
-  | "15/06/2018"
-  | "14/09/2018 WILSON"
-  | "PERSONAL"
-  | "20/06/2018"
-  | "8/03/2018"
-  | "16/05/2018"
-  | "14/09/2018 GLADIS"
-  | "04/05/2018"
-  | "06/06/2018"
-  | "20/06 ANGELICA FISICO"
-  | "10/06/2018"
-  | "18/07/2018"
-  | "11/05/2018";
+  | ''
+  | '31/03/1901'
+  | 'POSITIVO'
+  | 'CERTIMAIL'
+  | '06/07/2018'
+  | 'FISICA'
+  | 'NEGATIVO'
+  | 'FISICO'
+  | '20/06/2018 JAIME'
+  | '28/11/2017'
+  | '09/04/2018 CERTIMAIL'
+  | '15/06/2018'
+  | '14/09/2018 WILSON'
+  | 'PERSONAL'
+  | '20/06/2018'
+  | '8/03/2018'
+  | '16/05/2018'
+  | '14/09/2018 GLADIS'
+  | '04/05/2018'
+  | '06/06/2018'
+  | '20/06 ANGELICA FISICO'
+  | '10/06/2018'
+  | '18/07/2018'
+  | '11/05/2018';
 
 export type FisicoEnum =
-  | ""
-  | "NO"
-  | "PERSONAL"
-  | "EMBARGO VEHICULO"
-  | "SI"
-  | "INMUEBLE"
-  | "EMBARGO APTO"
-  | "NO TIENE EN CUENTA"
-  | "VEHICULO"
-  | "INMUEBLE/BANCOS"
-  | "CERTIMAIL"
-  | "13/09/2017"
-  | "X"
-  | "ENVIADO 292 24/08/2018"
-  | "FISICO"
-  | "ENVIADO 24/08"
-  | "OK"
-  | "17/09/2018 ENVIO 291"
-  | "30/10/2018"
-  | "13/11/2018";
+  | ''
+  | 'NO'
+  | 'PERSONAL'
+  | 'EMBARGO VEHICULO'
+  | 'SI'
+  | 'INMUEBLE'
+  | 'EMBARGO APTO'
+  | 'NO TIENE EN CUENTA'
+  | 'VEHICULO'
+  | 'INMUEBLE/BANCOS'
+  | 'CERTIMAIL'
+  | '13/09/2017'
+  | 'X'
+  | 'ENVIADO 292 24/08/2018'
+  | 'FISICO'
+  | 'ENVIADO 24/08'
+  | 'OK'
+  | '17/09/2018 ENVIO 291'
+  | '30/10/2018'
+  | '13/11/2018';
 
 export interface The291 {
   fechaRecibido?: number | string;
@@ -116,21 +116,21 @@ export interface The292 {
 }
 
 export type DepartamentoRaw =
-  | "CUNDINAMARCA"
-  | "ATLANTICO"
-  | "META"
-  | "CUNDINNAMARCA"
-  | "CUNDINAMARCA "
-  | "18/01/2018"
-  | "SINGULAR"
-  | "HIPOTECARIO"
-  | "TOLIMA"
-  | "CUN DINAMARCA"
-  | "CUNDINNAMARCA "
-  | "BOYACÁ"
-  | "CUNDINAMRCA"
-  | "CNDINAMARCA"
-  | "";
+  | 'CUNDINAMARCA'
+  | 'ATLANTICO'
+  | 'META'
+  | 'CUNDINNAMARCA'
+  | 'CUNDINAMARCA '
+  | '18/01/2018'
+  | 'SINGULAR'
+  | 'HIPOTECARIO'
+  | 'TOLIMA'
+  | 'CUN DINAMARCA'
+  | 'CUNDINNAMARCA '
+  | 'BOYACï¿½'
+  | 'CUNDINAMRCA'
+  | 'CNDINAMARCA'
+  | '';
 
 export interface IntDeudor {
   cedula: string;
@@ -193,7 +193,7 @@ export interface intNotificacion {
 }
 
 export interface intNotifier {
-  tipo: "291" | "292";
+  tipo: '291' | '292';
   carpetaNumero: number;
   fechaRecibido: Date | null;
   resultado: boolean | null;
@@ -208,27 +208,27 @@ export type Juzgado = {
 };
 
 export type TipoProcesoRaw =
-  | "HIPOTECARIO"
-  | "PRENDARIO"
-  | "SINGULAR"
-  | "SINGULAR ACUMULADO CON HIPOTECARIO"
-  | "SINGULAR ACUM HIPOTECARIO"
-  | "11001400308320170071700"
-  | "25473418900120170092400"
-  | "PRENDARO"
-  | " HIPOTECARIO"
-  | "HMM PISO 1"
-  | "  SINGULAR"
-  | "HIPOTECARIA"
-  | "HIPOTECARO"
-  | "SINGULAR ACUMULADO CON HIPOTECARIO CAJA SOCIAL"
-  | "SOACHA"
-  | "ACUMULADO"
-  | "HIPOTECARIO ";
+  | 'HIPOTECARIO'
+  | 'PRENDARIO'
+  | 'SINGULAR'
+  | 'SINGULAR ACUMULADO CON HIPOTECARIO'
+  | 'SINGULAR ACUM HIPOTECARIO'
+  | '11001400308320170071700'
+  | '25473418900120170092400'
+  | 'PRENDARO'
+  | ' HIPOTECARIO'
+  | 'HMM PISO 1'
+  | '  SINGULAR'
+  | 'HIPOTECARIA'
+  | 'HIPOTECARO'
+  | 'SINGULAR ACUMULADO CON HIPOTECARIO CAJA SOCIAL'
+  | 'SOACHA'
+  | 'ACUMULADO'
+  | 'HIPOTECARIO ';
 
 export type TipoProceso =
-  | "HIPOTECARIO"
-  | "PRENDARIO"
-  | "SINGULAR"
-  | "ACUMULADO"
-  | "VERBAL";
+  | 'HIPOTECARIO'
+  | 'PRENDARIO'
+  | 'SINGULAR'
+  | 'ACUMULADO'
+  | 'VERBAL';

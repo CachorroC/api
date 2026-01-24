@@ -15,36 +15,51 @@ const prisma = client;
 // (In a real project, these would be imported from your data/types files)
 
 // Helper to normalize strings
-const normalizeText = (text: string): string => {
+const normalizeText = (
+  text: string 
+): string => {
   return text
     .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
+    .normalize(
+      'NFD' 
+    )
+    .replace(
+      /\p{Diacritic}/gu, '' 
+    )
     .trim();
 };
 
-const sleep = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (
+  ms: number 
+) => {
+  return new Promise(
+    (
+      resolve 
+    ) => {
+      return setTimeout(
+        resolve, ms 
+      );
+    } 
+  );
+};
 
 // Mock Despachos Data (for JuzgadoClass lookup)
 
 // --- 2. INTERFACES (Matching your ClassCarpeta requirements) ---
 
-type TipoProceso =
-  | 'SINGULAR'
-  | 'HIPOTECARIO'
-  | 'PRENDARIO'
-  | 'ACUMULADO';
+type TipoProceso = 'SINGULAR' | 'HIPOTECARIO' | 'PRENDARIO' | 'ACUMULADO';
 
 const typeMap: Record<string, TipoProceso> = {
-  SINGULAR: 'SINGULAR',
+  SINGULAR   : 'SINGULAR',
   HIPOTECARIO: 'HIPOTECARIO',
-  PRENDARIO: 'PRENDARIO',
-  ACUMULADO: 'ACUMULADO',
+  PRENDARIO  : 'PRENDARIO',
+  ACUMULADO  : 'ACUMULADO',
 };
 
-function tipoProcesoBuilder(raw: string): TipoProceso {
-  return typeMap[raw] || 'SINGULAR';
+function tipoProcesoBuilder(
+  raw: string 
+): TipoProceso {
+  return typeMap[ raw ] || 'SINGULAR';
 }
 
 interface Codeudor {
@@ -94,21 +109,31 @@ interface Juzgado {
 // --- 3. UTILITIES ---
 
 class FileLogger {
-  constructor(private filename: string) {}
+  constructor(
+    private filename: string 
+  ) {}
 
-  log(error: any, context: object) {
-    const entry =
-      JSON.stringify({
-        timestamp: new Date().toISOString(),
-        error:
-          error instanceof Error
+  log(
+    error: any, context: object 
+  ) {
+    const entry
+      = JSON.stringify(
+        {
+          timestamp: new Date()
+            .toISOString(),
+          error: error instanceof Error
             ? error.message
-            : String(error),
-        context,
-      }) + '\n';
+            : String(
+                error 
+              ),
+          context,
+        } 
+      ) + '\n';
+
     fs.appendFileSync(
-      path.join(__dirname, this.filename),
-      entry
+      path.join(
+        __dirname, this.filename 
+      ), entry 
     );
   }
 }
@@ -116,38 +141,52 @@ class FileLogger {
 // --- 4. JUZGADO CLASS (With Regex Fixes) ---
 
 export function extrapolateTipoToCorrectType(
-  tipo: string
+  tipo: string 
 ): string {
   let output = tipo;
-  const hasEjecucion = /EJE|E|EJ/im.test(tipo);
-  const isPequenasCausas = /PCCM|PCYCM|Peque|causas/im.test(
-    tipo
-  );
-  const isPromiscuoMunicipal = /PM|PROM|P M/im.test(tipo);
-  const isCivilMunicipal = /(CM|municipal|C M)/im.test(
-    tipo
-  );
-  const isCivilCircuito =
-    /(CCTO|CIRCUITO|CTO|C CTO|CC)/im.test(tipo);
 
-  if (hasEjecucion) {
-    if (isPequenasCausas)
+  const hasEjecucion = /EJE|E|EJ/im.test(
+    tipo 
+  );
+
+  const isPequenasCausas = /PCCM|PCYCM|Peque|causas/im.test(
+    tipo 
+  );
+
+  const isPromiscuoMunicipal = /PM|PROM|P M/im.test(
+    tipo 
+  );
+
+  const isCivilMunicipal = /(CM|municipal|C M)/im.test(
+    tipo 
+  );
+
+  const isCivilCircuito = /(CCTO|CIRCUITO|CTO|C CTO|CC)/im.test(
+    tipo 
+  );
+
+  if ( hasEjecucion ) {
+    if ( isPequenasCausas ) {
       output = 'DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE';
-    else if (isPromiscuoMunicipal)
+    } else if ( isPromiscuoMunicipal ) {
       output = 'PROMISCUO MUNICIPAL';
-    else if (isCivilCircuito)
-      output =
-        'CIVIL DEL CIRCUITO DE EJECUCIÓN DE SENTENCIAS';
-    else if (isCivilMunicipal)
+    } else if ( isCivilCircuito ) {
+      output = 'CIVIL DEL CIRCUITO DE EJECUCIÓN DE SENTENCIAS';
+    } else if ( isCivilMunicipal ) {
       output = 'CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS';
+    }
   } else {
-    if (isPequenasCausas)
+    if ( isPequenasCausas ) {
       output = 'DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE';
-    else if (isPromiscuoMunicipal)
+    } else if ( isPromiscuoMunicipal ) {
       output = 'PROMISCUO MUNICIPAL';
-    else if (isCivilCircuito) output = 'CIVIL DEL CIRCUITO';
-    else if (isCivilMunicipal) output = 'CIVIL MUNICIPAL';
+    } else if ( isCivilCircuito ) {
+      output = 'CIVIL DEL CIRCUITO';
+    } else if ( isCivilMunicipal ) {
+      output = 'CIVIL MUNICIPAL';
+    }
   }
+
   return output;
 }
 
@@ -157,38 +196,55 @@ export class JuzgadoClass implements Juzgado {
   ciudad: string;
   url: string;
 
-  constructor({
-    id,
-    tipo,
-    ciudad,
-  }: {
-    id: string;
-    tipo: string;
-    ciudad: string;
-  }) {
-    this.id = id.padStart(3, '000');
-    this.tipo = tipo.toUpperCase().trim();
-    this.ciudad = ciudad.toUpperCase().trim();
+  constructor(
+    {
+      id,
+      tipo,
+      ciudad,
+    }: {
+      id: string;
+      tipo: string;
+      ciudad: string;
+    } 
+  ) {
+    this.id = id.padStart(
+      3, '000' 
+    );
+    this.tipo = tipo.toUpperCase()
+      .trim();
+    this.ciudad = ciudad.toUpperCase()
+      .trim();
 
-    const constructorString = `JUZGADO ${this.id} ${this.tipo} DE ${this.ciudad}`;
-    const normalizedName = normalizeText(constructorString);
+    const constructorString = `JUZGADO ${ this.id } ${ this.tipo } DE ${ this.ciudad }`;
 
-    const matchedDespacho = Despachos.find((despacho) => {
-      return (
-        normalizeText(despacho.nombre) === normalizedName
+    const normalizedName = normalizeText(
+      constructorString 
+    );
+
+    const matchedDespacho = Despachos.find(
+      (
+        despacho 
+      ) => {
+        return normalizeText(
+          despacho.nombre 
+        ) === normalizedName;
+      } 
+    );
+
+    if ( matchedDespacho ) {
+      this.url = `https://www.ramajudicial.gov.co${ matchedDespacho.url }`;
+
+      const matchedDespachoParts = matchedDespacho.nombre.match(
+        /JUZGADO (\d+) ([A-ZÁÉÍÓÚÑ\s]+) DE ([.A-ZÁÉÍÓÚÑ\s-]+)/im,
       );
-    });
 
-    if (matchedDespacho) {
-      this.url = `https://www.ramajudicial.gov.co${matchedDespacho.url}`;
-      const matchedDespachoParts =
-        matchedDespacho.nombre.match(
-          /JUZGADO (\d+) ([A-ZÁÉÍÓÚÑ\s]+) DE ([.A-ZÁÉÍÓÚÑ\s-]+)/im
-        );
+      if ( matchedDespachoParts ) {
+        const [
+          , newId,
+          newTipo,
+          newCiudad
+        ] = matchedDespachoParts;
 
-      if (matchedDespachoParts) {
-        const [, newId, newTipo, newCiudad] =
-          matchedDespachoParts;
         this.id = newId;
         this.tipo = newTipo.trim();
         this.ciudad = newCiudad.trim();
@@ -198,49 +254,76 @@ export class JuzgadoClass implements Juzgado {
     }
   }
 
-  static fromShortName({
-    ciudad,
-    juzgadoRaw,
-  }: {
-    ciudad: string;
-    juzgadoRaw: string;
-  }) {
+  static fromShortName(
+    {
+      ciudad,
+      juzgadoRaw,
+    }: {
+      ciudad: string;
+      juzgadoRaw: string;
+    } 
+  ) {
     const matchedRegexNumberAndLetters = juzgadoRaw.match(
-      /(\d+)(\s?)([A-ZÁÉÍÓÚÑ\s-]+)/im
+      /(\d+)(\s?)([A-ZÁÉÍÓÚÑ\s-]+)/im,
     );
 
-    if (!matchedRegexNumberAndLetters) {
-      return new JuzgadoClass({
-        id: '',
-        tipo: juzgadoRaw,
-        ciudad,
-      });
+    if ( !matchedRegexNumberAndLetters ) {
+      return new JuzgadoClass(
+        {
+          id  : '',
+          tipo: juzgadoRaw,
+          ciudad,
+        } 
+      );
     }
 
-    const [, rawId, , rawTipo] =
-      matchedRegexNumberAndLetters;
-    return new JuzgadoClass({
-      id: rawId.padStart(3, '000'),
-      tipo: extrapolateTipoToCorrectType(rawTipo),
-      ciudad,
-    });
+    const [
+      , rawId, , rawTipo
+    ] = matchedRegexNumberAndLetters;
+
+    return new JuzgadoClass(
+      {
+        id: rawId.padStart(
+          3, '000' 
+        ),
+        tipo: extrapolateTipoToCorrectType(
+          rawTipo 
+        ),
+        ciudad,
+      } 
+    );
   }
 
-  static fromProceso(proceso: outProceso) {
+  static fromProceso(
+    proceso: outProceso 
+  ) {
     const matchedDespachoParts = proceso.despacho.match(
-      /JUZGADO (\d+) ([A-ZÁÉÍÓÚÑ\s]+) DE ([.A-ZÁÉÍÓÚÑ\s-]+)/im
+      /JUZGADO (\d+) ([A-ZÁÉÍÓÚÑ\s]+) DE ([.A-ZÁÉÍÓÚÑ\s-]+)/im,
     );
 
-    if (!matchedDespachoParts) {
-      return new JuzgadoClass({
-        id: '',
-        tipo: proceso.despacho,
-        ciudad: proceso.departamento,
-      });
+    if ( !matchedDespachoParts ) {
+      return new JuzgadoClass(
+        {
+          id    : '',
+          tipo  : proceso.despacho,
+          ciudad: proceso.departamento,
+        } 
+      );
     }
 
-    const [, id, tipo, ciudad] = matchedDespachoParts;
-    return new JuzgadoClass({ id, tipo, ciudad });
+    const [
+      , id,
+      tipo,
+      ciudad
+    ] = matchedDespachoParts;
+
+    return new JuzgadoClass(
+      {
+        id,
+        tipo,
+        ciudad,
+      } 
+    );
   }
 }
 
@@ -280,10 +363,14 @@ export class ClassCarpeta {
   juzgado: JuzgadoClass;
   fechaUltimaRevision: Date | null;
 
-  constructor(rawCarpeta: RawDb) {
-    this.baseUrl =
-      'https://consultaprocesos.ramajudicial.gov.co:448/api/v2';
-    this.logger = new FileLogger('failed_sync_ops.json');
+  constructor(
+    rawCarpeta: RawDb 
+  ) {
+    this.baseUrl = 'https://consultaprocesos.ramajudicial.gov.co:448/api/v2';
+    this.logger = new FileLogger(
+      'failed_sync_ops.json' 
+    );
+
     const {
       NUMERO,
       category,
@@ -308,89 +395,147 @@ export class ClassCarpeta {
     let notasCounter = 0;
 
     this.fechaUltimaRevision = FECHA_ULTIMA_REVISION
-      ? new Date(FECHA_ULTIMA_REVISION)
+      ? new Date(
+        FECHA_ULTIMA_REVISION 
+      )
       : null;
     this.fecha = FECHA_ULTIMA_ACTUACION
-      ? new Date(FECHA_ULTIMA_ACTUACION)
+      ? new Date(
+        FECHA_ULTIMA_ACTUACION 
+      )
       : null;
 
-    if (OBSERVACIONES) {
-      const extras = OBSERVACIONES.split('//');
-      extras.forEach((nota: string) => {
-        notasCounter++;
-        this.notas.push(
-          new NotasBuilder(
-            nota,
-            Number(NUMERO),
-            notasCounter
-          )
-        );
-      });
+    if ( OBSERVACIONES ) {
+      const extras = OBSERVACIONES.split(
+        '//' 
+      );
+
+      extras.forEach(
+        (
+          nota: string 
+        ) => {
+          notasCounter++;
+          this.notas.push(
+            new NotasBuilder(
+              nota, Number(
+                NUMERO 
+              ), notasCounter 
+            ) 
+          );
+        } 
+      );
     }
 
-    if (EXTRA) {
-      const extras = String(EXTRA).split('//');
-      extras.forEach((nota: string) => {
-        notasCounter++;
-        this.notas.push(
-          new NotasBuilder(
-            nota,
-            Number(NUMERO),
-            notasCounter
-          )
+    if ( EXTRA ) {
+      const extras = String(
+        EXTRA 
+      )
+        .split(
+          '//' 
         );
-      });
+
+      extras.forEach(
+        (
+          nota: string 
+        ) => {
+          notasCounter++;
+          this.notas.push(
+            new NotasBuilder(
+              nota, Number(
+                NUMERO 
+              ), notasCounter 
+            ) 
+          );
+        } 
+      );
     }
 
-    const cedulaAsNumber = Number(DEMANDADO_IDENTIFICACION);
-    idBuilder = isNaN(cedulaAsNumber)
-      ? Number(NUMERO)
+    const cedulaAsNumber = Number(
+      DEMANDADO_IDENTIFICACION 
+    );
+
+    idBuilder = isNaN(
+      cedulaAsNumber 
+    )
+      ? Number(
+          NUMERO 
+        )
       : cedulaAsNumber;
 
     this.notasCount = notasCounter;
     this.id = idBuilder;
-    this.ciudad = String(JUZGADO_CIUDAD);
+    this.ciudad = String(
+      JUZGADO_CIUDAD 
+    );
     this.idRegUltimaAct = null;
-    this.numero = isNaN(Number(NUMERO))
+    this.numero = isNaN(
+      Number(
+        NUMERO 
+      ) 
+    )
       ? this.id
-      : Number(NUMERO);
+      : Number(
+          NUMERO 
+        );
     this.category = category;
-    this.deudor = new ClassDeudor(rawCarpeta);
+    this.deudor = new ClassDeudor(
+      rawCarpeta 
+    );
 
     this.llaveProceso = EXPEDIENTE
-      ? String(EXPEDIENTE)
+      ? String(
+          EXPEDIENTE 
+        )
       : 'SinEspecificar';
-    this.demanda = new ClassDemanda(rawCarpeta);
-    this.nombre = String(DEMANDADO_NOMBRE);
+    this.demanda = new ClassDemanda(
+      rawCarpeta 
+    );
+    this.nombre = String(
+      DEMANDADO_NOMBRE 
+    );
     this.revisado = false;
     this.codeudor = {
       nombre: CODEUDOR_NOMBRE
-        ? String(CODEUDOR_NOMBRE)
+        ? String(
+            CODEUDOR_NOMBRE 
+          )
         : null,
       cedula: CODEUDOR_IDENTIFICACION
-        ? String(CODEUDOR_IDENTIFICACION)
+        ? String(
+            CODEUDOR_IDENTIFICACION 
+          )
         : null,
       direccion: CODEUDOR_DIRECCION
-        ? String(CODEUDOR_DIRECCION)
+        ? String(
+            CODEUDOR_DIRECCION 
+          )
         : null,
       telefono: CODEUDOR_TELEFONOS
-        ? String(CODEUDOR_TELEFONOS)
+        ? String(
+            CODEUDOR_TELEFONOS 
+          )
         : null,
       id: this.numero,
     };
     this.tipoProceso = TIPO_PROCESO
-      ? tipoProcesoBuilder(TIPO_PROCESO)
+      ? tipoProcesoBuilder(
+          TIPO_PROCESO 
+        )
       : 'SINGULAR';
     this.terminado = category === 'Terminados';
     this.ultimaActuacion = null;
-    this.juzgado = JuzgadoClass.fromShortName({
-      ciudad: String(JUZGADO_CIUDAD),
-      juzgadoRaw: JUZGADO_EJECUCION
-        ? JUZGADO_EJECUCION
-        : JUZGADO_ORIGEN
-          ? JUZGADO_ORIGEN
-          : '',
-    });
+    this.juzgado = JuzgadoClass.fromShortName(
+      {
+        ciudad: String(
+          JUZGADO_CIUDAD 
+        ),
+        juzgadoRaw: JUZGADO_EJECUCION
+          ? JUZGADO_EJECUCION
+          : JUZGADO_ORIGEN
+            ? JUZGADO_ORIGEN
+            : '',
+      } 
+    );
     this.juzgadoTipo = this.juzgado.tipo;
   }
 
@@ -398,85 +543,120 @@ export class ClassCarpeta {
 
   private async fetchWithRetry<T>(
     url: string,
-    context: string
+    context: string,
   ): Promise<T | null> {
     let attempts = 0;
+
     const maxAttempts = 2;
 
-    while (attempts < maxAttempts) {
+    while ( attempts < maxAttempts ) {
       try {
         console.log(
-          `Waiting ${this.RATE_LIMIT_DELAY_MS}ms...`
+          `Waiting ${ this.RATE_LIMIT_DELAY_MS }ms...` 
         );
-        await sleep(this.RATE_LIMIT_DELAY_MS);
+        await sleep(
+          this.RATE_LIMIT_DELAY_MS 
+        );
 
-        console.log(`Fetching: ${url}`);
-        const response = await fetch(url);
+        console.log(
+          `Fetching: ${ url }` 
+        );
 
-        if (!response.ok)
+        const response = await fetch(
+          url 
+        );
+
+        if ( !response.ok ) {
           throw new Error(
-            `HTTP ${response.status} ${response.statusText}`
+            `HTTP ${ response.status } ${ response.statusText }` 
           );
-        return (await response.json()) as T;
-      } catch (error) {
+        }
+
+        return ( await response.json() ) as T;
+      } catch ( error ) {
         attempts++;
-        console.error(`Attempt ${attempts} failed:`, error);
-        if (attempts >= maxAttempts) {
-          this.logger.log(error, {
-            url,
-            context,
-            carpeta: this.numero,
-          });
+        console.error(
+          `Attempt ${ attempts } failed:`, error 
+        );
+
+        if ( attempts >= maxAttempts ) {
+          this.logger.log(
+            error, {
+              url,
+              context,
+              carpeta: this.numero,
+            } 
+          );
+
           return null;
         }
       }
     }
+
     return null;
   }
 
   public async syncWithApi() {
     console.log(
-      `\nStarting Sync for Carpeta ${this.numero}`
+      `\nStarting Sync for Carpeta ${ this.numero }` 
     );
 
-    const procesosUrl = `${this.baseUrl}/Procesos/Consulta/NumeroRadicacion?numero=${this.llaveProceso}`;
+    const procesosUrl = `${ this.baseUrl }/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }`;
+
     const procesosRes = await this.fetchWithRetry<{
       procesos: outProceso[];
-    }>(procesosUrl, 'FETCH_PROCESOS');
+    }>(
+      procesosUrl, 'FETCH_PROCESOS' 
+    );
 
-    if (
-      procesosRes &&
-      Array.isArray(procesosRes.procesos)
-    ) {
+    if ( procesosRes && Array.isArray(
+      procesosRes.procesos 
+    ) ) {
       this.procesos = procesosRes.procesos;
       this.idProcesos = this.procesos.map(
-        (p) => p.idProceso
+        (
+          p 
+        ) => {
+          return p.idProceso;
+        } 
       );
 
-      for (const proceso of this.procesos) {
+      for ( const proceso of this.procesos ) {
         // Fetch Actuaciones
-        const actuacionesUrl = `${this.baseUrl}/Procesos/Actuaciones/${proceso.idProceso}`;
+        const actuacionesUrl = `${ this.baseUrl }/Procesos/Actuaciones/${ proceso.idProceso }`;
+
         const actRes = await this.fetchWithRetry<{
           actuaciones: outActuacion[];
         }>(
-          actuacionesUrl,
-          `FETCH_ACTUACIONES_${proceso.idProceso}`
+          actuacionesUrl, `FETCH_ACTUACIONES_${ proceso.idProceso }` 
         );
 
-        if (actRes && Array.isArray(actRes.actuaciones)) {
-          this.actuaciones.push( ...actRes.actuaciones );
-          const ultimaActuacion = actRes.actuaciones.find( ( act ) => { return act.cant === act.consActuacion; } )
-          if ( ultimaActuacion )
-          {
-            this.ultimaActuacion =  ultimaActuacion ;
-          this.fecha= new Date(ultimaActuacion.fechaActuacion);
-          }
+        if ( actRes && Array.isArray(
+          actRes.actuaciones 
+        ) ) {
+          this.actuaciones.push(
+            ...actRes.actuaciones 
+          );
 
+          const ultimaActuacion = actRes.actuaciones.find(
+            (
+              act 
+            ) => {
+              return act.cant === act.consActuacion;
+            } 
+          );
+
+          if ( ultimaActuacion ) {
+            this.ultimaActuacion = ultimaActuacion;
+            this.fecha = new Date(
+              ultimaActuacion.fechaActuacion 
+            );
+          }
         }
       }
     } else {
       console.log(
-        `No processes found for ${this.llaveProceso}`
+        `No processes found for ${ this.llaveProceso }` 
       );
     }
   }
@@ -485,117 +665,141 @@ export class ClassCarpeta {
 
   public async persistToDb() {
     console.log(
-      `Persisting data for Carpeta ${this.numero}...`
+      `Persisting data for Carpeta ${ this.numero }...` 
     );
 
     // 1. Ensure Dependencies Exist (Juzgado)
     // We execute this outside the main transaction or as the first step to ensure ID availability
-    const dbJuzgado = await prisma.juzgado.upsert({
-      where: {
-        id_tipo_ciudad: {
-          id: this.juzgado.id,
-          tipo: this.juzgado.tipo,
-          ciudad: this.juzgado.ciudad,
+    const dbJuzgado = await prisma.juzgado.upsert(
+      {
+        where: {
+          id_tipo_ciudad: {
+            id    : this.juzgado.id,
+            tipo  : this.juzgado.tipo,
+            ciudad: this.juzgado.ciudad,
+          },
         },
-      },
-      create: {
-        id: this.juzgado.id,
-        tipo: this.juzgado.tipo,
-        ciudad: this.juzgado.ciudad,
-        url: this.juzgado.url,
-      },
-      update: { url: this.juzgado.url },
-    });
+        create: {
+          id    : this.juzgado.id,
+          tipo  : this.juzgado.tipo,
+          ciudad: this.juzgado.ciudad,
+          url   : this.juzgado.url,
+        },
+        update: {
+          url: this.juzgado.url,
+        },
+      } 
+    );
 
     const txOps: any[] = [];
 
     // 2. Upsert Carpeta (Base)
     txOps.push(
-      prisma.carpeta.upsert({
-        where: { numero: this.numero },
-        create: {
-          numero: this.numero,
-          llaveProceso: this.llaveProceso,
-          nombre: this.nombre,
-          id: this.id,
-          category: this.category,
-          tipoProceso: this.tipoProceso,
-          revisado: this.revisado,
-          terminado: this.terminado,
-          ciudad: this.ciudad,
-          juzgadoTipo: dbJuzgado.tipo,
-          juzgadoCiudad: dbJuzgado.ciudad,
-          juzgadoId: dbJuzgado.id,
-          idProcesos: this.idProcesos,
-          notasCount: this.notasCount,
-          fechaUltimaRevision: this.fechaUltimaRevision,
-          fecha: this.fecha,
-        },
-        update: {
-          updatedAt: new Date(),
-          fecha: this.fecha
-        },
-      })
+      prisma.carpeta.upsert(
+        {
+          where: {
+            numero: this.numero,
+          },
+          create: {
+            numero             : this.numero,
+            llaveProceso       : this.llaveProceso,
+            nombre             : this.nombre,
+            id                 : this.id,
+            category           : this.category,
+            tipoProceso        : this.tipoProceso,
+            revisado           : this.revisado,
+            terminado          : this.terminado,
+            ciudad             : this.ciudad,
+            juzgadoTipo        : dbJuzgado.tipo,
+            juzgadoCiudad      : dbJuzgado.ciudad,
+            juzgadoId          : dbJuzgado.id,
+            idProcesos         : this.idProcesos,
+            notasCount         : this.notasCount,
+            fechaUltimaRevision: this.fechaUltimaRevision,
+            fecha              : this.fecha,
+          },
+          update: {
+            updatedAt: new Date(),
+            fecha    : this.fecha,
+          },
+        } 
+      ),
     );
 
     // 3. Upsert Procesos
-    for (const proc of this.procesos) {
+    for ( const proc of this.procesos ) {
       // Logic: Proceso might have a different Juzgado than the folder
-      const procJuzgadoObj = JuzgadoClass.fromProceso(proc);
+      const procJuzgadoObj = JuzgadoClass.fromProceso(
+        proc 
+      );
 
       // We must ensure this Juzgado exists too.
       // Since we can't await inside the tx array easily without making it complex,
       // we add the upsert of the Juzgado to the transaction queue before the proceso.
       txOps.push(
-        prisma.juzgado.upsert({
-          where: {
-            id_tipo_ciudad: {
-              id: procJuzgadoObj.id,
-              tipo: procJuzgadoObj.tipo,
-              ciudad: procJuzgadoObj.ciudad,
+        prisma.juzgado.upsert(
+          {
+            where: {
+              id_tipo_ciudad: {
+                id    : procJuzgadoObj.id,
+                tipo  : procJuzgadoObj.tipo,
+                ciudad: procJuzgadoObj.ciudad,
+              },
             },
-          },
-          create: {
-            id: procJuzgadoObj.id,
-            tipo: procJuzgadoObj.tipo,
-            ciudad: procJuzgadoObj.ciudad,
-            url: procJuzgadoObj.url,
-          },
-          update: { url: procJuzgadoObj.url },
-        })
+            create: {
+              id    : procJuzgadoObj.id,
+              tipo  : procJuzgadoObj.tipo,
+              ciudad: procJuzgadoObj.ciudad,
+              url   : procJuzgadoObj.url,
+            },
+            update: {
+              url: procJuzgadoObj.url,
+            },
+          } 
+        ),
       );
 
       txOps.push(
-        prisma.proceso.upsert({
-          where: { idProceso: proc.idProceso },
-          create: {
-            idProceso: proc.idProceso,
-            llaveProceso: proc.llaveProceso,
-            idConexion:
-              proc.idConexion ||
-              Math.floor(Math.random() * 9999),
-            fechaProceso: proc.fechaProceso
-              ? new Date(proc.fechaProceso)
-              : null,
-            fechaUltimaActuacion: proc.fechaUltimaActuacion
-              ? new Date(proc.fechaUltimaActuacion)
-              : null,
-            despacho: proc.despacho,
-            departamento: proc.departamento,
-            sujetosProcesales: proc.sujetosProcesales,
-            esPrivado: proc.esPrivado,
-            cantFilas: proc.cantFilas,
-            juzgadoTipo: procJuzgadoObj.tipo,
-            juzgadoCiudad: procJuzgadoObj.ciudad,
-            juzgadoId: procJuzgadoObj.id,
-            carpetaNumero: this.numero,
-          },
-          update: {
-            fechaUltimaActuacion: proc.fechaUltimaActuacion
-              ? new Date(proc.fechaUltimaActuacion)
-              : null,
-          },
-        })
+        prisma.proceso.upsert(
+          {
+            where: {
+              idProceso: proc.idProceso,
+            },
+            create: {
+              idProceso   : proc.idProceso,
+              llaveProceso: proc.llaveProceso,
+              idConexion  : proc.idConexion || Math.floor(
+                Math.random() * 9999 
+              ),
+              fechaProceso: proc.fechaProceso
+                ? new Date(
+                  proc.fechaProceso 
+                )
+                : null,
+              fechaUltimaActuacion: proc.fechaUltimaActuacion
+                ? new Date(
+                  proc.fechaUltimaActuacion 
+                )
+                : null,
+              despacho         : proc.despacho,
+              departamento     : proc.departamento,
+              sujetosProcesales: proc.sujetosProcesales,
+              esPrivado        : proc.esPrivado,
+              cantFilas        : proc.cantFilas,
+              juzgadoTipo      : procJuzgadoObj.tipo,
+              juzgadoCiudad    : procJuzgadoObj.ciudad,
+              juzgadoId        : procJuzgadoObj.id,
+              carpetaNumero    : this.numero,
+            },
+            update: {
+              fechaUltimaActuacion: proc.fechaUltimaActuacion
+                ? new Date(
+                  proc.fechaUltimaActuacion 
+                )
+                : null,
+            },
+          } 
+        ),
       );
     }
 
@@ -606,97 +810,135 @@ export class ClassCarpeta {
 
     // Filter Acts that belong to our processes
     const validProcessIds = this.procesos.map(
-      (p) => p.idProceso
+      (
+        p 
+      ) => {
+        return p.idProceso;
+      } 
     );
     // Find acts where the process matches via llaveProceso (since idProceso might be missing in raw act)
     // We assume this.procesos contains the correct llaves.
 
-    for (const act of this.actuaciones) {
+    for ( const act of this.actuaciones ) {
       // Find parent process
       const parentProc = this.procesos.find(
-        (p) => p.llaveProceso === act.llaveProceso
+        (
+          p 
+        ) => {
+          return p.llaveProceso === act.llaveProceso;
+        } 
       );
-      if (!parentProc) continue;
+
+      if ( !parentProc ) {
+        continue;
+      }
 
       // LOGIC: isUltimaAct based on count vs cons
-      const isUltimaCalculated =
-        act.cant === act.consActuacion;
+      const isUltimaCalculated = act.cant === act.consActuacion;
 
       // LOGIC: Is this the winner for the Carpeta?
-      if (
-        isUltimaCalculated &&
-        act.consActuacion > maxCons
-      ) {
+      if ( isUltimaCalculated && act.consActuacion > maxCons ) {
         maxCons = act.consActuacion;
-        latestActId = String(act.idRegActuacion);
-        latestActDate = new Date(act.fechaActuacion);
+        latestActId = String(
+          act.idRegActuacion 
+        );
+        latestActDate = new Date(
+          act.fechaActuacion 
+        );
       }
 
       txOps.push(
-        prisma.actuacion.upsert({
-          where: {
-            idRegActuacion: String(act.idRegActuacion),
-          },
-          create: {
-            idRegActuacion: String(act.idRegActuacion),
-            llaveProceso: act.llaveProceso,
-            consActuacion: act.consActuacion,
-            fechaActuacion: new Date(act.fechaActuacion),
-            actuacion: act.actuacion,
-            anotacion: act.anotacion,
-            fechaRegistro: new Date(act.fechaRegistro),
-            fechaInicial: act.fechaInicial
-              ? new Date(act.fechaInicial)
-              : null,
-            fechaFinal: act.fechaFinal
-              ? new Date(act.fechaFinal)
-              : null,
-            cant: act.cant,
-            codRegla: act.codRegla,
-            conDocumentos: act.conDocumentos,
-            isUltimaAct: isUltimaCalculated, // LOGIC APPLIED
-            idProceso: parentProc.idProceso,
-            // Per schema, Actuacion relates to Carpeta via implicit/explicit connection
-            Carpeta: { connect: { numero: this.numero } },
-          },
-          update: {
-            isUltimaAct: isUltimaCalculated, // LOGIC APPLIED
-            anotacion: act.anotacion,
-          },
-        })
+        prisma.actuacion.upsert(
+          {
+            where: {
+              idRegActuacion: String(
+                act.idRegActuacion 
+              ),
+            },
+            create: {
+              idRegActuacion: String(
+                act.idRegActuacion 
+              ),
+              llaveProceso  : act.llaveProceso,
+              consActuacion : act.consActuacion,
+              fechaActuacion: new Date(
+                act.fechaActuacion 
+              ),
+              actuacion    : act.actuacion,
+              anotacion    : act.anotacion,
+              fechaRegistro: new Date(
+                act.fechaRegistro 
+              ),
+              fechaInicial: act.fechaInicial
+                ? new Date(
+                  act.fechaInicial 
+                )
+                : null,
+              fechaFinal: act.fechaFinal
+                ? new Date(
+                  act.fechaFinal 
+                )
+                : null,
+              cant         : act.cant,
+              codRegla     : act.codRegla,
+              conDocumentos: act.conDocumentos,
+              isUltimaAct  : isUltimaCalculated, // LOGIC APPLIED
+              idProceso    : parentProc.idProceso,
+              // Per schema, Actuacion relates to Carpeta via implicit/explicit connection
+              Carpeta      : {
+                connect: {
+                  numero: this.numero,
+                },
+              },
+            },
+            update: {
+              isUltimaAct: isUltimaCalculated, // LOGIC APPLIED
+              anotacion  : act.anotacion,
+            },
+          } 
+        ),
       );
     }
 
     // 5. Link Latest Actuacion to Carpeta
-    if (latestActId && latestActDate) {
+    if ( latestActId && latestActDate ) {
       txOps.push(
-        prisma.carpeta.update({
-          where: { numero: this.numero },
-          data: {
-            fecha: latestActDate, // Update carpeta date
-            ultimaActuacion: {
-              connect: { idRegActuacion: latestActId },
+        prisma.carpeta.update(
+          {
+            where: {
+              numero: this.numero,
             },
-          },
-        })
+            data: {
+              fecha          : latestActDate, // Update carpeta date
+              ultimaActuacion: {
+                connect: {
+                  idRegActuacion: latestActId,
+                },
+              },
+            },
+          } 
+        ),
       );
     }
 
     // EXECUTE TRANSACTION
     try {
-      await prisma.$transaction(txOps);
+      await prisma.$transaction(
+        txOps 
+      );
       console.log(
-        `Successfully synced Carpeta ${this.numero}`
+        `Successfully synced Carpeta ${ this.numero }` 
       );
-    } catch (error) {
+    } catch ( error ) {
       console.error(
-        `Transaction failed for Carpeta ${this.numero}:`,
-        error
+        `Transaction failed for Carpeta ${ this.numero }:`, error 
       );
-      this.logger.log(error, {
-        type: 'DB_TX_FAIL',
-        carpeta: this.numero,
-      });
+      this.logger.log(
+        error, {
+          type   : 'DB_TX_FAIL',
+          carpeta: this.numero,
+        } 
+      );
     }
   }
 }
@@ -705,13 +947,19 @@ export class ClassCarpeta {
 
 async function main() {
   // Example Input Data
-  const rawInput: RawDb[] = RawCarpetas
+  const rawInput: RawDb[] = RawCarpetas;
 
   const carpetas = rawInput.map(
-    (raw) => new ClassCarpeta(raw)
+    (
+      raw 
+    ) => {
+      return new ClassCarpeta(
+        raw 
+      );
+    } 
   );
 
-  for (const carpeta of carpetas) {
+  for ( const carpeta of carpetas ) {
     // 1. Fetch from API
     await carpeta.syncWithApi();
 
@@ -721,5 +969,17 @@ async function main() {
 }
 
 main()
-  .catch((e) => console.error(e))
-  .finally(async () => await prisma.$disconnect());
+  .catch(
+    (
+      e 
+    ) => {
+      return console.error(
+        e 
+      );
+    } 
+  )
+  .finally(
+    async () => {
+      return await prisma.$disconnect();
+    } 
+  );

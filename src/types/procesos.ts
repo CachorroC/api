@@ -4,7 +4,7 @@
 //
 //   const consultaNumeroRadicacion = Convert.toConsultaNumeroRadicacion(json);
 
-import { Juzgado } from "./carpetas.js";
+import { Juzgado } from './carpetas.js';
 
 // To parse this data:
 //
@@ -71,10 +71,10 @@ export type Parametros = {
 };
 
 export type Message =
-  | "OK"
+  | 'OK'
   | 'El parametro "NumeroRadicacion" ha de contener 23 digitos.'
-  | "Object reference not set to an instance of an object."
-  | "No se pueden ver actuaciones de un proceso privado";
+  | 'Object reference not set to an instance of an object.'
+  | 'No se pueden ver actuaciones de un proceso privado';
 
 export type DetalleProceso = {
   [key: string]: string | null | boolean | Date | number | Juzgado | undefined;
@@ -97,58 +97,58 @@ export type DetalleProceso = {
 };
 
 export type ClaseProceso =
-  | "EJECUTIVO"
-  | "Ejecutivo con T�tulo Hipotecario"
-  | "Ejecutivo Singular"
-  | "Ejecutivo con T�tulo Prendario"
-  | "Abreviado"
-  | "PROCESOS EJECUTIVOS HIPOTECARIOS O PRENDARIOS"
-  | "Despachos Comisorios"
-  | "Sin Tipo de Proceso"
-  | "Ejecutivo Mixto"
-  | "Solicitud entrega inmueble"
-  | "Sucesi�n"
-  | "SUCESI�N"
-  | "EJECUTIVOS DE MENOR Y MINIMA CUANTIA"
-  | "DESPACHOS COMISORIOS"
-  | "EJECUTIVO HIPOTECARIO"
-  | "Tutelas"
-  | "EJECUTIVO SINGULAR"
-  | "Ordinario";
+  | 'EJECUTIVO'
+  | 'Ejecutivo con T�tulo Hipotecario'
+  | 'Ejecutivo Singular'
+  | 'Ejecutivo con T�tulo Prendario'
+  | 'Abreviado'
+  | 'PROCESOS EJECUTIVOS HIPOTECARIOS O PRENDARIOS'
+  | 'Despachos Comisorios'
+  | 'Sin Tipo de Proceso'
+  | 'Ejecutivo Mixto'
+  | 'Solicitud entrega inmueble'
+  | 'Sucesi�n'
+  | 'SUCESI�N'
+  | 'EJECUTIVOS DE MENOR Y MINIMA CUANTIA'
+  | 'DESPACHOS COMISORIOS'
+  | 'EJECUTIVO HIPOTECARIO'
+  | 'Tutelas'
+  | 'EJECUTIVO SINGULAR'
+  | 'Ordinario';
 
-export type Recurso = "Sin Tipo de Recurso";
+export type Recurso = 'Sin Tipo de Recurso';
 
 export type SubclaseProceso =
-  | "En general / Sin subclase"
-  | "Sin Subclase de Proceso"
-  | "Por sumas de dinero"
-  | "Restituci�n del inmueble arrendado"
-  | "TITULO VALOR"
-  | "En general"
-  | "SINGULARES";
+  | 'En general / Sin subclase'
+  | 'Sin Subclase de Proceso'
+  | 'Por sumas de dinero'
+  | 'Restituci�n del inmueble arrendado'
+  | 'TITULO VALOR'
+  | 'En general'
+  | 'SINGULARES';
 
 export type TipoProceso =
-  | "EJECUTIVO C.G.P"
-  | "De Ejecuci�n"
-  | "Declarativo"
-  | "Codigo General del Proceso"
-  | "Especial"
-  | "EjecucionTramitePosterior"
-  | "Especiales"
-  | "De Liquidaci�n"
-  | "LIQUIDACI�N C.G.P"
-  | "Acci�n de Tutela"
-  | "Otros Asuntos";
+  | 'EJECUTIVO C.G.P'
+  | 'De Ejecuci�n'
+  | 'Declarativo'
+  | 'Codigo General del Proceso'
+  | 'Especial'
+  | 'EjecucionTramitePosterior'
+  | 'Especiales'
+  | 'De Liquidaci�n'
+  | 'LIQUIDACI�N C.G.P'
+  | 'Acci�n de Tutela'
+  | 'Otros Asuntos';
 
 export type Departamento =
-  | "BOGOT�"
-  | "CUNDINAMARCA"
-  | "META"
-  | "HUILA"
-  | "ANTIOQUIA"
-  | "ATL�NTICO";
+  | 'BOGOT�'
+  | 'CUNDINAMARCA'
+  | 'META'
+  | 'HUILA'
+  | 'ANTIOQUIA'
+  | 'ATL�NTICO';
 
-export type TipoConsulta = "NumeroRadicacion" | "NombreRazonSocial";
+export type TipoConsulta = 'NumeroRadicacion' | 'NombreRazonSocial';
 
 export type outProceso = {
   fechaProceso: Date | null;

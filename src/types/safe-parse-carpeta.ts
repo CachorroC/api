@@ -22,11 +22,11 @@ export interface PrismaCarpeta {
 }
 
 export type Category =
-  | "Terminados"
-  | "LiosJuridicos"
-  | "Bancolombia"
-  | "Reintegra"
-  | "Insolvencia";
+  | 'Terminados'
+  | 'LiosJuridicos'
+  | 'Bancolombia'
+  | 'Reintegra'
+  | 'Insolvencia';
 
 export interface PrismaDemanda {
   id: number;
@@ -47,20 +47,20 @@ export interface PrismaDemanda {
 }
 
 export type Departamento =
-  | "BOGOTÁ"
-  | "CUNDINAMARCA"
-  | "TOLIMA"
-  | "CUN DINAMARCA"
-  | "CUNDINNAMARCA"
-  | "BOYACÁ"
-  | "CNDINAMARCA"
-  | "ANTIOQUIA";
+  | 'BOGOTï¿½'
+  | 'CUNDINAMARCA'
+  | 'TOLIMA'
+  | 'CUN DINAMARCA'
+  | 'CUNDINNAMARCA'
+  | 'BOYACï¿½'
+  | 'CNDINAMARCA'
+  | 'ANTIOQUIA';
 
 export type TipoProceso =
-  | "HIPOTECARIO"
-  | "PRENDARIO"
-  | "SINGULAR"
-  | "ACUMULADO";
+  | 'HIPOTECARIO'
+  | 'PRENDARIO'
+  | 'SINGULAR'
+  | 'ACUMULADO';
 
 export interface PrismaDeudor {
   id: number;
@@ -144,79 +144,151 @@ export interface PrismaUltimaActuacion {
   procesoIdProceso: null;
 }
 
-export type CodRegla = "00                              ";
+export type CodRegla = '00                              ';
 
 // Converts JSON strings to/from your types
 export class Convert {
-  public static toPrismaCarpeta(json: string): PrismaCarpeta {
-    return JSON.parse(json);
+  public static toPrismaCarpeta(
+    json: string 
+  ): PrismaCarpeta {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static prismaCarpetaToJson(value: PrismaCarpeta): string {
-    return JSON.stringify(value);
+  public static prismaCarpetaToJson(
+    value: PrismaCarpeta 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 
-  public static toPrismaDemanda(json: string): PrismaDemanda {
-    return JSON.parse(json);
+  public static toPrismaDemanda(
+    json: string 
+  ): PrismaDemanda {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static PrismademandaToJson(value: PrismaDemanda): string {
-    return JSON.stringify(value);
+  public static PrismademandaToJson(
+    value: PrismaDemanda 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 
-  public static toPrismaDeudor(json: string): PrismaDeudor {
-    return JSON.parse(json);
+  public static toPrismaDeudor(
+    json: string 
+  ): PrismaDeudor {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static deudorToJson(value: PrismaDeudor): string {
-    return JSON.stringify(value);
+  public static deudorToJson(
+    value: PrismaDeudor 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 
-  public static toPrismaJuzgado(json: string): PrismaJuzgado {
-    return JSON.parse(json);
+  public static toPrismaJuzgado(
+    json: string 
+  ): PrismaJuzgado {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static juzgadoToJson(value: PrismaJuzgado): string {
-    return JSON.stringify(value);
+  public static juzgadoToJson(
+    value: PrismaJuzgado 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 
-  public static toPrismaNota(json: string): PrismaNota {
-    return JSON.parse(json);
+  public static toPrismaNota(
+    json: string 
+  ): PrismaNota {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static notaToJson(value: PrismaNota): string {
-    return JSON.stringify(value);
+  public static notaToJson(
+    value: PrismaNota 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 
-  public static toProceso(json: string): PrismaProceso {
-    return JSON.parse(json);
+  public static toProceso(
+    json: string 
+  ): PrismaProceso {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static procesoToJson(value: PrismaProceso): string {
-    return JSON.stringify(value);
+  public static procesoToJson(
+    value: PrismaProceso 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 
-  public static toPrismaTarea(json: string): PrismaTarea {
-    return JSON.parse(json);
+  public static toPrismaTarea(
+    json: string 
+  ): PrismaTarea {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static tareaToJson(value: PrismaTarea): string {
-    return JSON.stringify(value);
+  public static tareaToJson(
+    value: PrismaTarea 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 
-  public static toPrismaSubPrismaTarea(json: string): PrismaSubPrismaTarea {
-    return JSON.parse(json);
+  public static toPrismaSubPrismaTarea(
+    json: string 
+  ): PrismaSubPrismaTarea {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static subPrismaTareaToJson(value: PrismaSubPrismaTarea): string {
-    return JSON.stringify(value);
+  public static subPrismaTareaToJson(
+    value: PrismaSubPrismaTarea 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 
-  public static toUltimaActuacion(json: string): PrismaUltimaActuacion {
-    return JSON.parse(json);
+  public static toUltimaActuacion(
+    json: string 
+  ): PrismaUltimaActuacion {
+    return JSON.parse(
+      json 
+    );
   }
 
-  public static ultimaActuacionToJson(value: PrismaUltimaActuacion): string {
-    return JSON.stringify(value);
+  public static ultimaActuacionToJson(
+    value: PrismaUltimaActuacion 
+  ): string {
+    return JSON.stringify(
+      value 
+    );
   }
 }

@@ -1,34 +1,116 @@
 import { RawCarpetas } from './data/carpetas.js';
 import { ClassCarpeta } from './models/carpeta.js';
 
-export async function* generateCarpetas(carpetasMap: { carpeta: ClassCarpeta, numero: number }[]) {
-  for await (const { carpeta } of carpetasMap) {
-    console.log(`carpeta numero ${carpeta.numero}`);
-    await carpeta.getProcesos();
-    await carpeta.getActuaciones();
-    yield carpeta;
+// Add this helper function at the bottom or in utils
+async function processBatch<T>(
+  items: T[],
+  batchSize: number,
+  handler: ( item: T ) => Promise<void>,
+) {
+  for ( let i = 0; i < items.length; i += batchSize ) {
+    const batch = items.slice(
+      i, i + batchSize
+    );
+
+    console.log(
+      `Processing batch ${ i / batchSize + 1 }...`
+    );
+    // Run this batch in parallel
+    await Promise.all(
+      batch.map(
+        (
+          item
+        ) => {
+          return handler(
+            item
+          );
+        }
+      ),
+    );
   }
 }
+
+// ---------------------------------------------------------
 
 async function tryAsyncClassCarpetas() {
-  // Now that ClassCarpeta is defined, we can map the raw data
-  const carpetasMap = RawCarpetas.map((carpeta) => {
-    return {
-      carpeta: new ClassCarpeta(carpeta),
-      numero: Number(carpeta.NUMERO),
-    };
-  });
+  console.log(
+    '🚀 Starting Optimized Sync...'
+  );
 
-  const mapClassCarpetas: Map<number, ClassCarpeta> = new Map();
+  // 1. Convert Raw Data to lightweight objects (Don't instantiate ClassCarpeta yet if not needed)
+  const rawData = RawCarpetas.map(
+    (
+      r
+    ) => {
+      return {
+        raw   : r,
+        numero: Number(
+          r.NUMERO
+        ),
+      };
+    }
+  );
 
-  for await (const carpeta of generateCarpetas(carpetasMap)) {
-    mapClassCarpetas.set(carpeta.numero, carpeta);
-    await ClassCarpeta.insertCarpeta(carpeta);
-  }
+  // 2. Process in Batches
+  // We use a batch size of 1 because your RATE_LIMIT is strict (12.5s).
+  // If you lower the rate limit, increase this to 5 or 10.
+  const BATCH_SIZE = 1;
 
-  const asAnArray = Array.from(mapClassCarpetas.values());
-  return asAnArray;
+  await processBatch(
+    rawData, BATCH_SIZE, async (
+      item
+    ) => {
+      try {
+      // Instantiate only when needed to save memory
+        const carpeta = new ClassCarpeta(
+          item.raw
+        );
+
+        console.log(
+          `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }`
+        );
+
+        // Fetch Data
+        await carpeta.getProcesos();
+        await carpeta.getActuaciones();
+
+        // Write to DB
+        await ClassCarpeta.insertCarpeta(
+          carpeta
+        );
+
+      // Force Garbage Collection hint (optional, logic handles it naturally here)
+      // The 'carpeta' variable goes out of scope here and is freed from memory.
+      } catch ( error ) {
+        console.error(
+          `❌ Error processing ${ item.numero }:`, error
+        );
+      }
+    }
+  );
+
+  console.log(
+    '✅ Sync Complete'
+  );
 }
 
-// Start execution
-tryAsyncClassCarpetas();
+// ... End of tryAsyncClassCarpetas function }
+
+// MISSING LINE: You must add this to actually run the script!
+tryAsyncClassCarpetas()
+  .then(
+    () => {
+      return console.log(
+        'Script finished successfully.'
+      );
+    }
+  )
+  .catch(
+    (
+      e
+    ) => {
+      return console.error(
+        'Script crashed:', e
+      );
+    }
+  );
