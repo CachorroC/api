@@ -21,6 +21,10 @@ export default defineConfig(
         'js/recommended'
       ],
       languageOptions: {
+        parserOptions: {
+          project        : './tsconfig.json',
+          tsconfigRootDir: __dirname,
+        },
         globals: {
           ...globals.browser,
           ...globals.node,
@@ -91,11 +95,11 @@ export default defineConfig(
         ],
         '@stylistic/jsx-closing-bracket-location': [
           'error',
-          'tag-aligned'
+          'tag-aligned',
         ],
         '@stylistic/template-curly-spacing': [
           'error',
-          'always'
+          'always',
         ],
         'function-paren-newline': [
           'error',
@@ -274,5 +278,5 @@ export default defineConfig(
         ],
       },
     },
-  ]
+  ] 
 );

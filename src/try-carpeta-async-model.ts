@@ -1,5 +1,6 @@
 import { RawCarpetas } from './data/carpetas.js';
 import { ClassCarpeta } from './models/carpeta.js';
+import { sleep } from './utils/awaiter.js';
 
 // Add this helper function at the bottom or in utils
 async function processBatch<T>(
@@ -72,6 +73,9 @@ async function tryAsyncClassCarpetas() {
 
         // Fetch Data
         await carpeta.getProcesos();
+        /* await sleep(
+          1000
+        ); */
         await carpeta.getActuaciones();
 
         // Write to DB
