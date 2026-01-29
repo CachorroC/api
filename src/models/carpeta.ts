@@ -63,7 +63,7 @@ async function enforceRateLimit() {
  */
 async function fetchWithSmartRetry(
   url: string | URL,
-  // eslint-disable-next-line no-undef
+
   options?: RequestInit,
   retries = MAX_RETRIES,
 ): Promise<Response> {
@@ -576,6 +576,347 @@ export class ClassCarpeta implements IntCarpeta {
   //!ASYNC
   //STATIC
 
+  async agregateToDBMethod() {
+
+    console.log(
+      `💾 Saving updates for ${ this.numero }...`
+    );
+
+
+
+
+    const newDemanda = ClassDemanda.prismaDemanda(
+      this.demanda
+    );
+
+    const newDeudor = ClassDeudor.prismaDeudor(
+      this.deudor
+    );
+
+    const newCarpeta = ClassCarpeta.prismaCarpeta(
+      this
+    );
+
+    // 1. Upsert carpeta base (sin relaciones)
+
+    try {
+      console.log(
+        '📁 try carpeta upsert'
+      );
+      await client.carpeta.upsert(
+        {
+          where: {
+            numero: this.numero
+          },
+          create: {
+            ...newCarpeta
+          },
+          update: {
+            ...newCarpeta
+          },
+        }
+      );
+    } catch ( error ) {
+      console.log(
+        `❌ Error al crear carpeta base: ${ error }`
+      );
+
+      //return;
+    }
+
+    // 2. Relacionar juzgado
+    try {
+      console.log(
+        '🧑‍⚖️ carpeta update juzgado'
+      );
+      await client.carpeta.update(
+        {
+          where: {
+            numero: this.numero
+          },
+          data: {
+            juzgado: {
+              connectOrCreate: {
+                where: {
+                  id_tipo_ciudad: {
+                    tipo  : this.juzgado.tipo,
+                    id    : this.juzgado.id,
+                    ciudad: this.juzgado.ciudad,
+                  },
+                },
+                create: {
+                  tipo  : this.juzgado.tipo,
+                  id    : this.juzgado.id,
+                  ciudad: this.juzgado.ciudad,
+                  url   : this.juzgado.url,
+                },
+              },
+            },
+          },
+        }
+      );
+    } catch ( error ) {
+      console.log(
+        `❌ Error al conectar juzgado: ${ error }`
+      );
+    }
+
+    // 3. Relacionar ultimaActuacion
+    if ( this.ultimaActuacion ) {
+      try {
+        console.log(
+          '☢️ try ultimaActuacion upsert and update carpeta'
+        );
+        await client.carpeta.update(
+          {
+            where: {
+              numero: this.numero
+            },
+            data: {
+              ultimaActuacion: {
+                connectOrCreate: {
+                  where: {
+                    idRegActuacion: this.ultimaActuacion.idRegActuacion
+                  },
+                  create: {
+                    ...this.ultimaActuacion,
+                    idRegActuacion: `${ this.ultimaActuacion.idRegActuacion }`,
+                  },
+                },
+              },
+            },
+          }
+        );
+      } catch ( error ) {
+        console.log(
+          `❌ Error al conectar ultimaActuacion: ${ error }`
+        );
+      }
+    }
+
+    // 4. Relacionar deudor
+    try {
+      console.log(
+        `
+        🙆 update carpeta with deudor`
+
+      );
+      await client.carpeta.update(
+        {
+          where: {
+            numero: this.numero
+          },
+          data: {
+            deudor: {
+              connectOrCreate: {
+                where: {
+                  id: this.numero
+                },
+                create: newDeudor,
+              },
+            },
+          },
+        }
+      );
+    } catch ( error ) {
+      console.log(
+        `❌ Error al conectar deudor: ${ error }`
+      );
+    }
+
+    // 5. Relacionar demanda
+    try {
+      console.log(
+        '🕴️update carpeta with demanda'
+      );
+      await client.carpeta.update(
+        {
+          where: {
+            numero: this.numero
+          },
+          data: {
+            demanda: {
+              connectOrCreate: {
+                where: {
+                  id: this.numero
+                },
+                create: newDemanda,
+              },
+            },
+          },
+        }
+      );
+    } catch ( error ) {
+      console.log(
+        `❌ Error al conectar demanda: ${ error }`
+      );
+    }
+
+    // 6. Relacionar codeudor
+    try {
+      console.log(
+        '🧜 update carpeta with codeudor'
+      );
+      await client.carpeta.update(
+        {
+          where: {
+            numero: this.numero
+          },
+          data: {
+            codeudor: {
+              connectOrCreate: {
+                where: {
+                  id: this.numero
+                },
+                create: {
+                  ...this.codeudor
+                },
+              },
+            },
+          },
+        }
+      );
+    } catch ( error ) {
+      console.log(
+        `❌ Error al conectar codeudor: ${ error }`
+      );
+    }
+
+    // 7. Crear notas
+    if ( this.notas && this.notas.length > 0 ) {
+      try {
+        console.log(
+          '📓create notes'
+        );
+        await client.nota.createMany(
+          {
+            data          : this.notas,
+            skipDuplicates: true,
+          }
+        );
+      } catch ( error ) {
+        console.log(
+          `❌ Error al crear notas: ${ error }`
+        );
+      }
+    }
+
+    // 8. Relacionar procesos y actuaciones
+    if ( this.procesos && this.procesos.length > 0 ) {
+      for ( const proceso of this.procesos ) {
+        try {
+          const {
+            juzgado, ...restProceso
+          } = proceso;
+
+          // Construir input para juzgado solo si existe
+          const createData = {
+            ...restProceso,
+            ...( juzgado && {
+              juzgado: {
+                connectOrCreate: {
+                  where: {
+                    id_tipo_ciudad: {
+                      tipo  : juzgado.tipo,
+                      id    : juzgado.id,
+                      ciudad: juzgado.ciudad,
+                    },
+                  },
+                  create: {
+                    tipo  : juzgado.tipo,
+                    id    : juzgado.id,
+                    ciudad: juzgado.ciudad,
+                    url   : juzgado.url,
+                  },
+                },
+              },
+            } ),
+            carpeta: {
+              connect: {
+                numero: this.numero
+              }
+            },
+          };
+
+          const updateData = {
+            ...restProceso,
+            ...( juzgado && {
+              juzgado: {
+                connectOrCreate: {
+                  where: {
+                    id_tipo_ciudad: {
+                      tipo  : juzgado.tipo,
+                      id    : juzgado.id,
+                      ciudad: juzgado.ciudad,
+                    },
+                  },
+                  create: {
+                    tipo  : juzgado.tipo,
+                    id    : juzgado.id,
+                    ciudad: juzgado.ciudad,
+                    url   : juzgado.url,
+                  },
+                },
+              },
+            } ),
+          };
+
+          await client.proceso.upsert(
+            {
+              where: {
+                idProceso: proceso.idProceso
+              },
+              create: createData,
+              update: updateData,
+            }
+          );
+        } catch ( error ) {
+          console.log(
+            `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`
+          );
+        }
+
+        // Actuaciones para este proceso
+        const processActuaciones = this.actuaciones.filter(
+          (
+            a
+          ) => {
+            return a.idProceso === proceso.idProceso;
+          }
+        );
+
+        for ( const actuacion of processActuaciones ) {
+          try {
+            await client.actuacion.upsert(
+              {
+                where: {
+                  idRegActuacion: actuacion.idRegActuacion
+                },
+                create: {
+                  ...actuacion,
+                  idRegActuacion: `${ actuacion.idRegActuacion }`,
+                  proceso       : {
+                    connect: {
+                      idProceso: proceso.idProceso
+                    }
+                  },
+                },
+                update: {
+                  ...actuacion,
+                  isUltimaAct: actuacion.cant === actuacion.consActuacion,
+                },
+              }
+            );
+          } catch ( error ) {
+            console.log(
+              `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`
+            );
+          }
+        }
+      }
+    }
+  }
+
   static prismaCarpeta(
     carpeta: IntCarpeta
   ) {
@@ -722,6 +1063,7 @@ export class ClassCarpeta implements IntCarpeta {
       inserter
     );
   } */
+
   static async insertCarpeta(
     incomingCarpeta: ClassCarpeta
   ) {

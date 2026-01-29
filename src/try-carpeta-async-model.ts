@@ -1,6 +1,5 @@
 import { RawCarpetas } from './data/carpetas.js';
 import { ClassCarpeta } from './models/carpeta.js';
-import { sleep } from './utils/awaiter.js';
 
 // Add this helper function at the bottom or in utils
 async function processBatch<T>(
@@ -79,9 +78,7 @@ async function tryAsyncClassCarpetas() {
         await carpeta.getActuaciones();
 
         // Write to DB
-        await ClassCarpeta.insertCarpeta(
-          carpeta
-        );
+        await carpeta.agregateToDBMethod();
 
       // Force Garbage Collection hint (optional, logic handles it naturally here)
       // The 'carpeta' variable goes out of scope here and is freed from memory.
