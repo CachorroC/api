@@ -7,9 +7,7 @@ export default async function fetchActuaciones(
   let json;
 
   try {
-    const response = await fetch(
-      `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }`,
-    );
+    const response = await fetch( `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }`, );
 
     json = ( await response.json() ) as ConsultaActuacion;
   } catch ( error ) {
@@ -35,39 +33,25 @@ export default async function fetchActuaciones(
     } = json;
 
     if ( actuaciones ) {
-      return actuaciones.map(
-        (
-          actuacion 
-        ) => {
-          return {
-            ...actuacion,
-            fechaActuacion: new Date(
-              actuacion.fechaActuacion 
-            ),
-            fechaRegistro: new Date(
-              actuacion.fechaRegistro 
-            ),
-            fechaInicial: actuacion.fechaInicial
-              ? new Date(
-                actuacion.fechaInicial 
-              )
-              : null,
-            fechaFinal: actuacion.fechaFinal
-              ? new Date(
-                actuacion.fechaFinal 
-              )
-              : null,
-            isUltimaAct: actuacion.cant === actuacion.consActuacion,
-            idProceso  : idProceso,
-            createdAt  : new Date(
-              actuacion.fechaRegistro 
-            ),
-            carpetaNumero: carpetaNumero
-              ? carpetaNumero
-              : null,
-          };
-        } 
-      );
+      return actuaciones.map( ( actuacion ) => {
+        return {
+          ...actuacion,
+          fechaActuacion: new Date( actuacion.fechaActuacion ),
+          fechaRegistro : new Date( actuacion.fechaRegistro ),
+          fechaInicial  : actuacion.fechaInicial
+            ? new Date( actuacion.fechaInicial )
+            : null,
+          fechaFinal: actuacion.fechaFinal
+            ? new Date( actuacion.fechaFinal )
+            : null,
+          isUltimaAct  : actuacion.cant === actuacion.consActuacion,
+          idProceso    : idProceso,
+          createdAt    : new Date( actuacion.fechaRegistro ),
+          carpetaNumero: carpetaNumero
+            ? carpetaNumero
+            : null,
+        };
+      } );
     }
 
     return json;

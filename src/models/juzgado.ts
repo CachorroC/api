@@ -3,49 +3,31 @@ import { Juzgado } from '../types/carpetas.js';
 import { fetchResponseProceso, intProceso } from '../types/procesos.js';
 
 // Helper to normalize strings for comparison (removes accents, trims, lowercase)
-const normalizeText = (
-  text: string 
-): string => {
+const normalizeText = ( text: string ): string => {
   return text
     .toLowerCase()
-    .normalize(
-      'NFD' 
-    )
+    .normalize( 'NFD' )
     .replace(
       /\p{Diacritic}/gu, '' 
     )
     .trim();
 };
 
-export function extrapolateTipoToCorrectType(
-  tipo: string 
-): string {
+export function extrapolateTipoToCorrectType( tipo: string ): string {
   let output = tipo;
 
   // Removed 'g' flag, it is unnecessary for .test() and can cause state issues
-  const hasEjecucion = /EJE|E|EJ/im.test(
-    tipo 
-  );
+  const hasEjecucion = /EJE|E|EJ/im.test( tipo );
 
-  const isPromiscuoCircuito = /PCTO/im.test(
-    tipo 
-  );
+  const isPromiscuoCircuito = /PCTO/im.test( tipo );
 
-  const isPequenasCausas = /PCCM|PCYCM|Peque|causas/im.test(
-    tipo 
-  );
+  const isPequenasCausas = /PCCM|PCYCM|Peque|causas/im.test( tipo );
 
-  const isPromiscuoMunicipal = /PM|PROM|P M/im.test(
-    tipo 
-  );
+  const isPromiscuoMunicipal = /PM|PROM|P M/im.test( tipo );
 
-  const isCivilMunicipal = /(CM|municipal|C M)/im.test(
-    tipo 
-  );
+  const isCivilMunicipal = /(CM|municipal|C M)/im.test( tipo );
 
-  const isCivilCircuito = /(CCTO|CIRCUITO|CTO|C CTO|CC)/im.test(
-    tipo 
-  );
+  const isCivilCircuito = /(CCTO|CIRCUITO|CTO|C CTO|CC)/im.test( tipo );
 
   // Fixed corrupted characters (� -> ?, � -> ?, � -> ?)
   if ( hasEjecucion ) {
@@ -81,17 +63,15 @@ class JuzgadoClass implements Juzgado {
   ciudad: string;
   url   : string;
 
-  constructor(
-    {
-      id,
-      tipo,
-      ciudad,
-    }: {
-      id    : string;
-      tipo  : string;
-      ciudad: string;
-    } 
-  ) {
+  constructor( {
+    id,
+    tipo,
+    ciudad,
+  }: {
+    id    : string;
+    tipo  : string;
+    ciudad: string;
+  } ) {
     this.id = id.padStart(
       3, '000' 
     );
@@ -103,30 +83,20 @@ class JuzgadoClass implements Juzgado {
     // Construct the standard name for comparison
     const constructorString = `JUZGADO ${ this.id } ${ this.tipo } DE ${ this.ciudad }`;
 
-    const normalizedName = normalizeText(
-      constructorString 
-    );
+    const normalizedName = normalizeText( constructorString );
 
     // Use .find() instead of .filter() for better performance (O(n) -> Stops at first match)
-    const matchedDespacho = Despachos.find(
-      (
-        despacho 
-      ) => {
-        const normalizedIteratedName = normalizeText(
-          despacho.nombre 
-        );
+    const matchedDespacho = Despachos.find( ( despacho ) => {
+      const normalizedIteratedName = normalizeText( despacho.nombre );
 
-        return normalizedIteratedName === normalizedName;
-      } 
-    );
+      return normalizedIteratedName === normalizedName;
+    } );
 
     if ( matchedDespacho ) {
       this.url = `https://www.ramajudicial.gov.co${ matchedDespacho.url }`;
 
       // regex updated to accept Spanish characters (?, ?, etc) instead of corrupted unicode
-      const matchedDespachoParts = matchedDespacho.nombre.match(
-        /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im,
-      );
+      const matchedDespachoParts = matchedDespacho.nombre.match( /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im, );
 
       if ( matchedDespachoParts ) {
         const [
@@ -144,28 +114,22 @@ class JuzgadoClass implements Juzgado {
     }
   }
 
-  static fromShortName(
-    {
-      ciudad,
-      juzgadoRaw,
-    }: {
-      ciudad    : string;
-      juzgadoRaw: string;
-    } 
-  ) {
+  static fromShortName( {
+    ciudad,
+    juzgadoRaw,
+  }: {
+    ciudad    : string;
+    juzgadoRaw: string;
+  } ) {
     // Regex updated to capture standard alphanumeric + Spanish chars
-    const matchedRegexNumberAndLetters = juzgadoRaw.match(
-      /(\d+)(\s?)([A-Z??????\s-]+)/im,
-    );
+    const matchedRegexNumberAndLetters = juzgadoRaw.match( /(\d+)(\s?)([A-Z??????\s-]+)/im, );
 
     if ( !matchedRegexNumberAndLetters ) {
-      return new JuzgadoClass(
-        {
-          id  : '',
-          tipo: juzgadoRaw,
-          ciudad,
-        } 
-      );
+      return new JuzgadoClass( {
+        id  : '',
+        tipo: juzgadoRaw,
+        ciudad,
+      } );
     }
 
     const [
@@ -176,34 +140,24 @@ class JuzgadoClass implements Juzgado {
       3, '000' 
     );
 
-    const newTipo = extrapolateTipoToCorrectType(
-      rawTipo 
-    );
+    const newTipo = extrapolateTipoToCorrectType( rawTipo );
 
-    return new JuzgadoClass(
-      {
-        id  : newId,
-        tipo: newTipo,
-        ciudad,
-      } 
-    );
+    return new JuzgadoClass( {
+      id  : newId,
+      tipo: newTipo,
+      ciudad,
+    } );
   }
 
-  static fromLongName(
-    despacho: string 
-  ) {
-    const matchedDespachoParts = despacho.match(
-      /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im,
-    );
+  static fromLongName( despacho: string ) {
+    const matchedDespachoParts = despacho.match( /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im, );
 
     if ( !matchedDespachoParts ) {
-      return new JuzgadoClass(
-        {
-          id    : '',
-          tipo  : despacho,
-          ciudad: '',
-        } 
-      );
+      return new JuzgadoClass( {
+        id    : '',
+        tipo  : despacho,
+        ciudad: '',
+      } );
     }
 
     const [
@@ -213,30 +167,22 @@ class JuzgadoClass implements Juzgado {
       ciudad
     ] = matchedDespachoParts;
 
-    return new JuzgadoClass(
-      {
-        id,
-        tipo,
-        ciudad,
-      } 
-    );
+    return new JuzgadoClass( {
+      id,
+      tipo,
+      ciudad,
+    } );
   }
 
-  static fromProceso(
-    proceso: fetchResponseProceso | intProceso 
-  ) {
-    const matchedDespachoParts = proceso.despacho.match(
-      /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im,
-    );
+  static fromProceso( proceso: fetchResponseProceso | intProceso ) {
+    const matchedDespachoParts = proceso.despacho.match( /JUZGADO (\d+) ([A-Z??????\s]+) DE ([.A-Z??????\s-]+)/im, );
 
     if ( !matchedDespachoParts ) {
-      return new JuzgadoClass(
-        {
-          id    : '',
-          tipo  : proceso.despacho,
-          ciudad: proceso.departamento,
-        } 
-      );
+      return new JuzgadoClass( {
+        id    : '',
+        tipo  : proceso.despacho,
+        ciudad: proceso.departamento,
+      } );
     }
 
     const [
@@ -246,13 +192,11 @@ class JuzgadoClass implements Juzgado {
       ciudad
     ] = matchedDespachoParts;
 
-    return new JuzgadoClass(
-      {
-        id,
-        tipo,
-        ciudad,
-      } 
-    );
+    return new JuzgadoClass( {
+      id,
+      tipo,
+      ciudad,
+    } );
   }
 }
 

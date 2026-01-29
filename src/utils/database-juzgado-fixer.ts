@@ -7,35 +7,25 @@ const outgoingJuzgados = [];
 
 for ( const carpeta of RawCarpetas ) {
   const juzgadoByCarpeta = extrapolateIdCiudadyTipo(
-    String(
-      carpeta.JUZGADO_CIUDAD 
-    ),
+    String( carpeta.JUZGADO_CIUDAD ),
     carpeta.JUZGADO_EJECUCION,
     carpeta.JUZGADO_ORIGEN,
   );
 
-  const juzgadoByCareta = JuzgadoClass.fromShortName(
-    {
-      ciudad: String(
-        carpeta.JUZGADO_CIUDAD 
-      ),
-      juzgadoRaw: carpeta.JUZGADO_EJECUCION
-        ? carpeta.JUZGADO_EJECUCION
-        : carpeta.JUZGADO_ORIGEN
-          ? carpeta.JUZGADO_ORIGEN
-          : '1 CM',
-    } 
-  );
+  const juzgadoByCareta = JuzgadoClass.fromShortName( {
+    ciudad    : String( carpeta.JUZGADO_CIUDAD ),
+    juzgadoRaw: carpeta.JUZGADO_EJECUCION
+      ? carpeta.JUZGADO_EJECUCION
+      : carpeta.JUZGADO_ORIGEN
+        ? carpeta.JUZGADO_ORIGEN
+        : '1 CM',
+  } );
 
-  console.log(
-    juzgadoByCarpeta 
-  );
-  outgoingJuzgados.push(
-    {
-      ...juzgadoByCarpeta,
-      ...juzgadoByCareta,
-    } 
-  );
+  console.log( juzgadoByCarpeta );
+  outgoingJuzgados.push( {
+    ...juzgadoByCarpeta,
+    ...juzgadoByCareta,
+  } );
 }
 
 fs.writeFile(
@@ -66,41 +56,29 @@ export function extrapolateIdCiudadyTipo(
   let matchedRegexNumberAndLetters;
 
   if ( ejecucion ) {
-    matchedRegexNumberAndLetters = ejecucion.match(
-      /(\d+)(\s?)([A-Z������\s-]+)/im,
-    );
+    matchedRegexNumberAndLetters = ejecucion.match( /(\d+)(\s?)([A-Z������\s-]+)/im, );
   } else if ( origen ) {
-    matchedRegexNumberAndLetters = origen.match(
-      /(\d+)(\s?)([A-Z������\s-]+)/im,
-    );
+    matchedRegexNumberAndLetters = origen.match( /(\d+)(\s?)([A-Z������\s-]+)/im, );
   }
 
   if ( matchedRegexNumberAndLetters ) {
-    const asAnArray = Array.from(
-      matchedRegexNumberAndLetters 
-    );
+    const asAnArray = Array.from( matchedRegexNumberAndLetters );
 
     if ( asAnArray.length === 0 ) {
       return {
-        fullArray: JSON.stringify(
-          matchedRegexNumberAndLetters 
-        ),
-        id    : '',
-        tipo  : '',
-        ciudad: ciudad,
-        value : ejecucion
+        fullArray: JSON.stringify( matchedRegexNumberAndLetters ),
+        id       : '',
+        tipo     : '',
+        ciudad   : ciudad,
+        value    : ejecucion
           ? ejecucion
           : origen
             ? origen
             : '',
-        tipoRaw: String(
-          matchedRegexNumberAndLetters 
-        ),
+        tipoRaw: String( matchedRegexNumberAndLetters ),
       };
     } else if ( asAnArray.length >= 2 ) {
-      const temporaryTipo = extrapolateTipoToCorrectType(
-        asAnArray[ 3 ] 
-      );
+      const temporaryTipo = extrapolateTipoToCorrectType( asAnArray[ 3 ] );
 
       return {
         id       : asAnArray[ 1 ],
@@ -115,9 +93,7 @@ export function extrapolateIdCiudadyTipo(
       };
     }
 
-    const temporaryTipo = extrapolateTipoToCorrectType(
-      asAnArray[ 3 ] 
-    );
+    const temporaryTipo = extrapolateTipoToCorrectType( asAnArray[ 3 ] );
 
     return {
       id       : asAnArray[ 1 ],

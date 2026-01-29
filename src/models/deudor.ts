@@ -5,36 +5,18 @@ import { RawDb } from '../types/raw-db.js';
 export class Tel {
   fijo   : string | null;
   celular: string | null;
-  constructor(
-    telefono: string 
-  ) {
-    const celularStringArray = telefono.match(
-      /\d{10}/g 
-    );
+  constructor( telefono: string ) {
+    const celularStringArray = telefono.match( /\d{10}/g );
 
-    const fijoStringArray = telefono.match(
-      /\d{7}\s/g 
-    );
+    const fijoStringArray = telefono.match( /\d{7}\s/g );
 
-    const celularNumber = celularStringArray?.map(
-      (
-        f 
-      ) => {
-        return String(
-          f 
-        );
-      } 
-    );
+    const celularNumber = celularStringArray?.map( ( f ) => {
+      return String( f );
+    } );
 
-    const fijoNumber = fijoStringArray?.map(
-      (
-        f 
-      ) => {
-        return String(
-          f 
-        );
-      } 
-    );
+    const fijoNumber = fijoStringArray?.map( ( f ) => {
+      return String( f );
+    } );
 
     this.fijo = fijoNumber
       ? fijoNumber[ 0 ]
@@ -46,9 +28,7 @@ export class Tel {
 }
 
 export class ClassDeudor implements IntDeudor {
-  constructor(
-    rawCarpeta: RawDb 
-  ) {
+  constructor( rawCarpeta: RawDb ) {
     const {
       DEMANDADO_IDENTIFICACION: cedula,
       DEMANDADO_DIRECCION: direccion,
@@ -58,12 +38,8 @@ export class ClassDeudor implements IntDeudor {
       NUMERO: id,
     } = rawCarpeta;
 
-    this.id = Number(
-      id 
-    );
-    this.cedula = String(
-      cedula 
-    );
+    this.id = Number( id );
+    this.cedula = String( cedula );
     this.direccion = direccion
       ? direccion.toString()
       : null;
@@ -73,23 +49,15 @@ export class ClassDeudor implements IntDeudor {
 
     const {
       fijo, celular 
-    } = new Tel(
-      String(
-        telefono 
-      ) 
-    );
+    } = new Tel( String( telefono ) );
 
     this.telCelular = celular;
     this.telFijo = fijo;
 
     const nameStringArray = nombre
       ? nombre.trim()
-          .split(
-            ' ' 
-          )
-      : 'Nelson Nu�ez'.split(
-          ' ' 
-        );
+          .split( ' ' )
+      : 'Nelson Nu�ez'.split( ' ' );
 
     const nameArrayLength = nameStringArray.length;
 
@@ -158,9 +126,7 @@ export class ClassDeudor implements IntDeudor {
   direccion      : string | null;
   email          : string | null;
 
-  static prismaDeudor(
-    deudor: IntDeudor 
-  ) {
+  static prismaDeudor( deudor: IntDeudor ) {
     const newDeudor: Prisma.DeudorCreateWithoutCarpetaInput = {
       id             : deudor.id,
       cedula         : deudor.cedula,

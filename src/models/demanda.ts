@@ -7,9 +7,7 @@ import { ClassNotificacion } from './notificacion.js';
 import { tipoProcesoBuilder } from './tipoProceso.js';
 
 export class ClassDemanda implements IntDemanda {
-  constructor(
-    rawCarpeta: RawDb 
-  ) {
+  constructor( rawCarpeta: RawDb ) {
     const {
       VALOR_CAPITAL_ADEUDADO: capitalAdeudado,
       JUZGADO_EJECUCION,
@@ -37,65 +35,37 @@ export class ClassDemanda implements IntDemanda {
 
     const [
       newFechaOrdenaMedida
-    ] = datesExtractor(
-      fechaOrdenaMedidas 
-    );
+    ] = datesExtractor( fechaOrdenaMedidas );
 
-    this.id = Number(
-      NUMERO 
-    );
+    this.id = Number( NUMERO );
     this.bienes = BIENES
-      ? String(
-          BIENES 
-        )
+      ? String( BIENES )
       : BIENES_SECUESTRADOS
-        ? String(
-            BIENES_SECUESTRADOS 
-          )
+        ? String( BIENES_SECUESTRADOS )
         : null;
     this.medidasCautelares = {
-      id: Number(
-        NUMERO 
-      ),
+      id               : Number( NUMERO ),
       fechaOrdenaMedida: newFechaOrdenaMedida ?? null,
       medidaSolicitada : medidaSolicitada
-        ? String(
-            medidaSolicitada 
-          )
+        ? String( medidaSolicitada )
         : null,
     };
 
     const obligacionesSet = new Set<string>();
 
     if ( A ) {
-      obligacionesSet.add(
-        String(
-          A 
-        ) 
-      );
+      obligacionesSet.add( String( A ) );
     }
 
     if ( B ) {
-      obligacionesSet.add(
-        String(
-          B 
-        ) 
-      );
+      obligacionesSet.add( String( B ) );
     }
 
-    this.fechaPresentacion = datesExtractor(
-      fechaPresentacion 
-    ) ?? null;
-    this.notificacion = new ClassNotificacion(
-      rawCarpeta 
-    );
-    this.mandamientoPago = datesExtractor(
-      mandamientoPago 
-    ) ?? null;
+    this.fechaPresentacion = datesExtractor( fechaPresentacion ) ?? null;
+    this.notificacion = new ClassNotificacion( rawCarpeta );
+    this.mandamientoPago = datesExtractor( mandamientoPago ) ?? null;
 
-    const NewEntregaDeGarantias = datesExtractor(
-      entregaGarantiasAbogado 
-    );
+    const NewEntregaDeGarantias = datesExtractor( entregaGarantiasAbogado );
 
     if ( NewEntregaDeGarantias.length === 0 ) {
       this.entregaGarantiasAbogado = null;
@@ -107,31 +77,19 @@ export class ClassDemanda implements IntDemanda {
       this.entregaGarantiasAbogado = firstEntrega;
     }
 
-    this.capitalAdeudado = new Prisma.Decimal(
-      capitalBuilder(
-        capitalAdeudado 
-      ) 
-    );
-    this.tipoProceso = tipoProcesoBuilder(
-      tipoProceso 
-    );
+    this.capitalAdeudado = new Prisma.Decimal( capitalBuilder( capitalAdeudado ) );
+    this.tipoProceso = tipoProcesoBuilder( tipoProceso );
     this.etapaProcesal = etapaProcesal
       ? `${ etapaProcesal }`
       : null;
     this.municipio = municipio
-      ? String(
-          municipio 
-        )
+      ? String( municipio )
       : null;
-    this.obligacion = Array.from(
-      obligacionesSet 
-    );
+    this.obligacion = Array.from( obligacionesSet );
     this.radicado = radicado
       ? `${ radicado }`
       : null;
-    this.vencimientoPagare = datesExtractor(
-      vencimientoPagare 
-    );
+    this.vencimientoPagare = datesExtractor( vencimientoPagare );
     this.departamento = departamento
       ? departamento
       : null;
@@ -141,20 +99,10 @@ export class ClassDemanda implements IntDemanda {
         ? JUZGADO_ORIGEN
         : null;
     this.llaveProceso = llaveProceso
-      ? String(
-          llaveProceso 
-        )
+      ? String( llaveProceso )
       : null;
-    this.avaluo = new Prisma.Decimal(
-      capitalBuilder(
-        VALOR_AVALUO 
-      ) 
-    );
-    this.liquidacion = new Prisma.Decimal(
-      capitalBuilder(
-        VALOR_LIQUIDACION_DEL_CREDITO 
-      ),
-    );
+    this.avaluo = new Prisma.Decimal( capitalBuilder( VALOR_AVALUO ) );
+    this.liquidacion = new Prisma.Decimal( capitalBuilder( VALOR_LIQUIDACION_DEL_CREDITO ), );
   }
   liquidacion            : Prisma.Decimal;
   avaluo                 : Prisma.Decimal;
@@ -180,9 +128,7 @@ export class ClassDemanda implements IntDemanda {
     fechaOrdenaMedida: Date | null;
     medidaSolicitada : string | null;
   };
-  static prismaDemanda(
-    demanda: IntDemanda 
-  ) {
+  static prismaDemanda( demanda: IntDemanda ) {
     const newMedidas: Prisma.MedidasCautelaresCreateWithoutDemandaInput = {
       id               : demanda.id,
       fechaOrdenaMedida: demanda.medidasCautelares.fechaOrdenaMedida,
@@ -190,9 +136,7 @@ export class ClassDemanda implements IntDemanda {
     };
 
     const newNotificacion: Prisma.NotificacionCreateWithoutDemandaInput
-      = ClassNotificacion.prismaNotificacion(
-        demanda.notificacion 
-      );
+      = ClassNotificacion.prismaNotificacion( demanda.notificacion );
 
     const newDemanda: Prisma.DemandaCreateWithoutCarpetaInput = {
       id                     : demanda.id,

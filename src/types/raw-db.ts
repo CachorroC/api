@@ -141,19 +141,11 @@ export type Category =
 
 // Converts JSON strings to/from your types
 export class Convert {
-  public static toRawDb(
-    json: string 
-  ): RawDb[] {
-    return JSON.parse(
-      json 
-    );
+  public static toRawDb( json: string ): RawDb[] {
+    return JSON.parse( json );
   }
 
-  public static rawDbToJson(
-    value: RawDb[] 
-  ): string {
-    return JSON.stringify(
-      value 
-    );
+  public static rawDbToJson( value: RawDb[] ): string {
+    return JSON.stringify( value );
   }
 }

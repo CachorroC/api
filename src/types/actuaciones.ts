@@ -79,51 +79,27 @@ export interface Paginacion {
 
 // Converts JSON strings to/from your types
 export class actuacionConvert {
-  public static actuacioneToJson(
-    value: intActuacion 
-  ): string {
-    return JSON.stringify(
-      value 
-    );
+  public static actuacioneToJson( value: intActuacion ): string {
+    return JSON.stringify( value );
   }
 
-  public static consultaActuacionToJson(
-    value: ConsultaActuacion 
-  ): string {
-    return JSON.stringify(
-      value 
-    );
+  public static consultaActuacionToJson( value: ConsultaActuacion ): string {
+    return JSON.stringify( value );
   }
 
-  public static paginacionToJson(
-    value: Paginacion 
-  ): string {
-    return JSON.stringify(
-      value 
-    );
+  public static paginacionToJson( value: Paginacion ): string {
+    return JSON.stringify( value );
   }
 
-  public static toActuacione(
-    json: string 
-  ): outActuacion {
-    return JSON.parse(
-      json 
-    );
+  public static toActuacione( json: string ): outActuacion {
+    return JSON.parse( json );
   }
 
-  public static toConsultaActuacion(
-    json: string 
-  ): ConsultaActuacion {
-    return JSON.parse(
-      json 
-    );
+  public static toConsultaActuacion( json: string ): ConsultaActuacion {
+    return JSON.parse( json );
   }
 
-  public static toPaginacion(
-    json: string 
-  ): Paginacion {
-    return JSON.parse(
-      json 
-    );
+  public static toPaginacion( json: string ): Paginacion {
+    return JSON.parse( json );
   }
 }

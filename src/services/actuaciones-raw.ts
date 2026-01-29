@@ -4,44 +4,28 @@ import fetchActuaciones from './fetch-actuaciones.js';
 import { RateLimit } from 'async-sema';
 
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
-console.log(
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED 
-);
+console.log( process.env.NODE_TLS_REJECT_UNAUTHORIZED );
 
 async function getIdProcesos() {
   const carpetas = await client.carpeta.findMany();
 
-  return carpetas.flatMap(
-    (
-      carpeta 
-    ) => {
-      return carpeta.idProcesos.map(
-        (
-          idProceso 
-        ) => {
-          return {
-            idProceso,
-            numero: carpeta.numero,
-          };
-        } 
-      );
-    } 
-  );
+  return carpetas.flatMap( ( carpeta ) => {
+    return carpeta.idProcesos.map( ( idProceso ) => {
+      return {
+        idProceso,
+        numero: carpeta.numero,
+      };
+    } );
+  } );
 }
 
-async function* AsyncGenerateActuaciones(
-  procesos: { idProceso: number; numero: number }[],
-) {
+async function* AsyncGenerateActuaciones( procesos: { idProceso: number; numero: number }[], ) {
   for ( const {
     idProceso, numero 
   } of procesos ) {
-    console.log(
-      numero 
-    );
+    console.log( numero );
 
-    const fetcherIdProceso = await fetchActuaciones(
-      idProceso 
-    );
+    const fetcherIdProceso = await fetchActuaciones( idProceso );
 
     yield {
       fetchBody: fetcherIdProceso,
@@ -77,9 +61,7 @@ async function main() {
 
   const idProcesos = await getIdProcesos();
 
-  const lim = RateLimit(
-    5 
-  );
+  const lim = RateLimit( 5 );
 
   for ( const {
     idProceso, numero 
@@ -90,9 +72,7 @@ async function main() {
       idProceso, numero 
     );
 
-    ActsMap.push(
-      acts 
-    );
+    ActsMap.push( acts );
   }
 
   fs.writeFile(
@@ -105,6 +85,4 @@ async function main() {
 }
 
 main();
-console.log(
-  'the end' 
-);
+console.log( 'the end' );

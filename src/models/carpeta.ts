@@ -14,9 +14,7 @@ import { sleep } from '../utils/awaiter.js';
 import JuzgadoClass from './juzgado.js';
 import { Prisma } from '../prisma/generated/prisma/client.js';
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
-console.log(
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED 
-);
+console.log( process.env.NODE_TLS_REJECT_UNAUTHORIZED );
 
 // --- CONFIGURATION ---
 const RATE_LIMIT_DELAY = 12500; // 12.5 seconds (allows ~4.8 requests per minute)
@@ -45,14 +43,8 @@ async function enforceRateLimit() {
   if ( timeSinceLastCall < RATE_LIMIT_DELAY ) {
     const waitTime = RATE_LIMIT_DELAY - timeSinceLastCall;
 
-    console.log(
-      `Rate Limit: Waiting ${ ( waitTime / 1000 ).toFixed(
-        1 
-      ) }s...` 
-    );
-    await sleep(
-      waitTime 
-    );
+    console.log( `Rate Limit: Waiting ${ ( waitTime / 1000 ).toFixed( 1 ) }s...` );
+    await sleep( waitTime );
   }
 
   lastApiCallTime = Date.now();
@@ -81,15 +73,9 @@ async function fetchWithSmartRetry(
     }
 
     // 3. Retry Logic for specific HTTP Status Codes
-    if ( RETRY_STATUS_CODES.includes(
-      response.status 
-    ) && retries > 0 ) {
-      console.warn(
-        `⚠️ API Error ${ response.status }. Retrying... (${ retries } attempts left)`,
-      );
-      console.log(
-        `⚠️ API Error ${ response.status }. Retrying... (${ retries } attempts left)`,
-      );
+    if ( RETRY_STATUS_CODES.includes( response.status ) && retries > 0 ) {
+      console.warn( `⚠️ API Error ${ response.status }. Retrying... (${ retries } attempts left)`, );
+      console.log( `⚠️ API Error ${ response.status }. Retrying... (${ retries } attempts left)`, );
 
       // We assume the 'enforceRateLimit' at the start of the recursion
       // provides enough backoff time (12.5s), so we don't need extra sleep here.
@@ -103,9 +89,7 @@ async function fetchWithSmartRetry(
   } catch ( error ) {
     // 5. Network Errors (DNS, Offline, Connection Refused)
     // You requested NOT to retry these.
-    console.error(
-      `❌ Network/Fetch Error: ${ error }` 
-    );
+    console.error( `❌ Network/Fetch Error: ${ error }` );
     throw error;
   }
 }
@@ -147,9 +131,7 @@ export class ClassCarpeta implements IntCarpeta {
   //!PROPERTIES
   //!PROPERTIES
   //CONSTRUCTOR - EL CONSTRUCTOR DE LA CARPETA
-  constructor(
-    rawCarpeta: RawDb 
-  ) {
+  constructor( rawCarpeta: RawDb ) {
     const {
       NUMERO,
       category,
@@ -175,82 +157,48 @@ export class ClassCarpeta implements IntCarpeta {
     let notasCounter = 0;
 
     this.fechaUltimaRevision = FECHA_ULTIMA_REVISION
-      ? new Date(
-        FECHA_ULTIMA_REVISION 
-      )
+      ? new Date( FECHA_ULTIMA_REVISION )
       : null;
 
     this.fecha = FECHA_ULTIMA_ACTUACION
-      ? new Date(
-        FECHA_ULTIMA_ACTUACION 
-      )
+      ? new Date( FECHA_ULTIMA_ACTUACION )
       : null;
 
     if ( OBSERVACIONES ) {
-      const extras = OBSERVACIONES.split(
-        '//' 
-      );
+      const extras = OBSERVACIONES.split( '//' );
 
-      extras.forEach(
-        (
-          nota 
-        ) => {
-          notasCounter++;
+      extras.forEach( ( nota ) => {
+        notasCounter++;
 
-          const newNoter = new NotasBuilder(
-            nota, Number(
-              NUMERO 
-            ), notasCounter 
-          );
+        const newNoter = new NotasBuilder(
+          nota, Number( NUMERO ), notasCounter 
+        );
 
-          this.notas.push(
-            newNoter 
-          );
-        } 
-      );
+        this.notas.push( newNoter );
+      } );
     }
 
     if ( EXTRA ) {
-      console.log(
-        `EXTRAS === ${ EXTRA }` 
-      );
+      console.log( `EXTRAS === ${ EXTRA }` );
 
-      const extras = String(
-        EXTRA 
-      )
-        .split(
-          '//' 
+      const extras = String( EXTRA )
+        .split( '//' );
+
+      extras.forEach( ( nota ) => {
+        notasCounter++;
+
+        const newNoter = new NotasBuilder(
+          nota, Number( NUMERO ), notasCounter 
         );
 
-      extras.forEach(
-        (
-          nota 
-        ) => {
-          notasCounter++;
-
-          const newNoter = new NotasBuilder(
-            nota, Number(
-              NUMERO 
-            ), notasCounter 
-          );
-
-          this.notas.push(
-            newNoter 
-          );
-        } 
-      );
+        this.notas.push( newNoter );
+      } );
     }
 
-    const cedulaAsNumber = Number(
-      cedula 
-    );
+    const cedulaAsNumber = Number( cedula );
 
-    if ( isNaN(
-      cedulaAsNumber 
-    ) ) {
-      idBuilder = Number(
-        NUMERO 
-      );
+    if ( isNaN( cedulaAsNumber ) ) {
+      idBuilder = Number( NUMERO );
     } else {
       idBuilder = cedulaAsNumber;
     }
@@ -259,59 +207,33 @@ export class ClassCarpeta implements IntCarpeta {
     this.id = idBuilder;
     this.idRegUltimaAct = null;
     this.category = category;
-    this.ciudad = String(
-      JUZGADO_CIUDAD 
-    );
-    this.numero = isNaN(
-      Number(
-        NUMERO 
-      ) 
-    )
+    this.ciudad = String( JUZGADO_CIUDAD );
+    this.numero = isNaN( Number( NUMERO ) )
       ? this.id
-      : Number(
-          NUMERO 
-        );
-    this.deudor = new ClassDeudor(
-      rawCarpeta 
-    );
+      : Number( NUMERO );
+    this.deudor = new ClassDeudor( rawCarpeta );
 
-    this.llaveProceso = String(
-      EXPEDIENTE 
-    );
-    this.demanda = new ClassDemanda(
-      rawCarpeta 
-    );
-    this.nombre = String(
-      DEMANDADO_NOMBRE 
-    );
+    this.llaveProceso = String( EXPEDIENTE );
+    this.demanda = new ClassDemanda( rawCarpeta );
+    this.nombre = String( DEMANDADO_NOMBRE );
     this.revisado = false;
     this.codeudor = {
       nombre: CODEUDOR_NOMBRE
-        ? String(
-            CODEUDOR_NOMBRE 
-          )
+        ? String( CODEUDOR_NOMBRE )
         : null,
       cedula: CODEUDOR_IDENTIFICACION
-        ? String(
-            CODEUDOR_IDENTIFICACION 
-          )
+        ? String( CODEUDOR_IDENTIFICACION )
         : null,
       direccion: CODEUDOR_DIRECCION
-        ? String(
-            CODEUDOR_DIRECCION 
-          )
+        ? String( CODEUDOR_DIRECCION )
         : null,
       telefono: CODEUDOR_TELEFONOS
-        ? String(
-            CODEUDOR_TELEFONOS 
-          )
+        ? String( CODEUDOR_TELEFONOS )
         : null,
       id: this.numero,
     };
     this.tipoProceso = TIPO_PROCESO
-      ? tipoProcesoBuilder(
-          TIPO_PROCESO 
-        )
+      ? tipoProcesoBuilder( TIPO_PROCESO )
       : 'SINGULAR';
 
     this.terminado = category === 'Terminados'
@@ -320,28 +242,18 @@ export class ClassCarpeta implements IntCarpeta {
     this.idRegUltimaAct = null;
     this.ultimaActuacion = null;
     this.llaveProceso = EXPEDIENTE
-      ? String(
-          EXPEDIENTE 
-        )
+      ? String( EXPEDIENTE )
       : 'SinEspecificar';
-    this.numero = Number(
-      NUMERO 
-    );
-    this.ciudad = String(
-      JUZGADO_CIUDAD 
-    );
-    this.juzgado = JuzgadoClass.fromShortName(
-      {
-        ciudad: String(
-          JUZGADO_CIUDAD 
-        ),
-        juzgadoRaw: JUZGADO_EJECUCION
-          ? JUZGADO_EJECUCION
-          : JUZGADO_ORIGEN
-            ? JUZGADO_ORIGEN
-            : '',
-      } 
-    );
+    this.numero = Number( NUMERO );
+    this.ciudad = String( JUZGADO_CIUDAD );
+    this.juzgado = JuzgadoClass.fromShortName( {
+      ciudad    : String( JUZGADO_CIUDAD ),
+      juzgadoRaw: JUZGADO_EJECUCION
+        ? JUZGADO_EJECUCION
+        : JUZGADO_ORIGEN
+          ? JUZGADO_ORIGEN
+          : '',
+    } );
     this.juzgadoTipo = this.juzgado.tipo;
   }
   //!CONSTRUCTOR -
@@ -349,23 +261,15 @@ export class ClassCarpeta implements IntCarpeta {
   //ASYNC - getProcesos
   async getProcesos() {
     try {
-      console.log(
-        '🧡 initiating getProcesos' 
-      );
+      console.log( '🧡 initiating getProcesos' );
 
       // !!! UPDATED: Using fetchWithSmartRetry !!!
-      const request = await fetchWithSmartRetry(
-        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1`,
-      );
+      const request = await fetchWithSmartRetry( `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1`, );
 
       if ( !request.ok ) {
         const json = await request.json();
 
-        throw new Error(
-          `📉${ request.status } : ${ request.statusText } === ${ JSON.stringify(
-            json,
-          ) }`,
-        );
+        throw new Error( `📉${ request.status } : ${ request.statusText } === ${ JSON.stringify( json, ) }`, );
       }
 
       const consultaProcesos = ( await request.json() ) as ConsultaProcesos;
@@ -378,31 +282,19 @@ export class ClassCarpeta implements IntCarpeta {
         const proceso: outProceso = {
           ...rawProceso,
           fechaProceso: rawProceso.fechaProceso
-            ? new Date(
-              rawProceso.fechaProceso 
-            )
+            ? new Date( rawProceso.fechaProceso )
             : null,
           fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
-            ? new Date(
-              rawProceso.fechaUltimaActuacion 
-            )
+            ? new Date( rawProceso.fechaUltimaActuacion )
             : null,
-          juzgado: JuzgadoClass.fromProceso(
-            rawProceso 
-          ),
+          juzgado: JuzgadoClass.fromProceso( rawProceso ),
         };
 
-        this.procesos.push(
-          proceso 
-        );
-        this.idProcesos.push(
-          proceso.idProceso 
-        );
+        this.procesos.push( proceso );
+        this.idProcesos.push( proceso.idProceso );
       }
     } catch ( error ) {
-      console.log(
-        `💩${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }`,
-      );
+      console.log( `💩${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }`, );
     }
 
     return this.procesos;
@@ -410,9 +302,7 @@ export class ClassCarpeta implements IntCarpeta {
 
   //ASYNC - getActuaciones
   async getActuaciones() {
-    console.log(
-      '🧡 initiating getActuaciones' 
-    );
+    console.log( '🧡 initiating getActuaciones' );
 
     if ( this.idProcesos.length === 0 ) {
       return [];
@@ -421,14 +311,10 @@ export class ClassCarpeta implements IntCarpeta {
     for ( const idProceso of this.idProcesos ) {
       try {
         // !!! UPDATED: Using fetchWithSmartRetry !!!
-        const request = await fetchWithSmartRetry(
-          `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }`,
-        );
+        const request = await fetchWithSmartRetry( `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }`, );
 
         if ( !request.ok ) {
-          throw new Error(
-            request.statusText 
-          );
+          throw new Error( request.statusText );
         }
 
         const consultaActuaciones = ( await request.json() ) as ConsultaActuacion;
@@ -437,65 +323,41 @@ export class ClassCarpeta implements IntCarpeta {
           actuaciones 
         } = consultaActuaciones;
 
-        const outActuaciones = actuaciones.map(
-          (
-            actuacion 
-          ) => {
-            return {
-              ...actuacion,
-              idRegActuacion: `${ actuacion.idRegActuacion }`,
-              idProceso     : Number(
-                idProceso 
-              ),
-              isUltimaAct   : actuacion.cant === actuacion.consActuacion,
-              fechaActuacion: new Date(
-                actuacion.fechaActuacion 
-              ),
-              fechaRegistro: new Date(
-                actuacion.fechaRegistro 
-              ),
-              fechaInicial: actuacion.fechaInicial
-                ? new Date(
-                  actuacion.fechaInicial 
-                )
-                : null,
-              fechaFinal: actuacion.fechaFinal
-                ? new Date(
-                  actuacion.fechaFinal 
-                )
-                : null,
-              createdAt: new Date(
-                actuacion.fechaRegistro 
-              ),
-              carpetaNumero: this.numero,
-            };
-          } 
-        );
+        const outActuaciones = actuaciones.map( ( actuacion ) => {
+          return {
+            ...actuacion,
+            idRegActuacion: `${ actuacion.idRegActuacion }`,
+            idProceso     : Number( idProceso ),
+            isUltimaAct   : actuacion.cant === actuacion.consActuacion,
+            fechaActuacion: new Date( actuacion.fechaActuacion ),
+            fechaRegistro : new Date( actuacion.fechaRegistro ),
+            fechaInicial  : actuacion.fechaInicial
+              ? new Date( actuacion.fechaInicial )
+              : null,
+            fechaFinal: actuacion.fechaFinal
+              ? new Date( actuacion.fechaFinal )
+              : null,
+            createdAt    : new Date( actuacion.fechaRegistro ),
+            carpetaNumero: this.numero,
+          };
+        } );
 
-        outActuaciones.forEach(
-          (
-            actuacion 
-          ) => {
-            this.actuaciones.push(
-              actuacion 
-            );
+        outActuaciones.forEach( ( actuacion ) => {
+          this.actuaciones.push( actuacion );
 
-            if ( actuacion.isUltimaAct ) {
-              this.ultimaActuacion = actuacion;
-              this.fecha = actuacion.fechaActuacion;
-              this.idRegUltimaAct = actuacion.idRegActuacion;
-            }
-          } 
-        );
+          if ( actuacion.isUltimaAct ) {
+            this.ultimaActuacion = actuacion;
+            this.fecha = actuacion.fechaActuacion;
+            this.idRegUltimaAct = actuacion.idRegActuacion;
+          }
+        } );
         continue;
       } catch ( error ) {
-        console.log(
-          `💩${ this.numero } ERROR ==> getActuaciones ${ idProceso } => ${ JSON.stringify(
-            error,
-            null,
-            2,
-          ) }`,
-        );
+        console.log( `💩${ this.numero } ERROR ==> getActuaciones ${ idProceso } => ${ JSON.stringify(
+          error,
+          null,
+          2,
+        ) }`, );
         continue;
       }
     }
@@ -506,18 +368,12 @@ export class ClassCarpeta implements IntCarpeta {
     const fetchUrl = `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NombreRazonSocial?nombre=${ this.nombre }&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`;
 
     try {
-      const request = await fetchWithSmartRetry(
-        fetchUrl 
-      ); // Use SmartRetry here too
+      const request = await fetchWithSmartRetry( fetchUrl ); // Use SmartRetry here too
 
       if ( !request.ok ) {
         const json = await request.json();
 
-        throw new Error(
-          JSON.stringify(
-            json 
-          ) 
-        );
+        throw new Error( JSON.stringify( json ) );
       }
 
       const consultaProcesos = await request.json();
@@ -534,33 +390,21 @@ export class ClassCarpeta implements IntCarpeta {
         const proceso = {
           ...rawProceso,
           fechaProceso: rawProceso.fechaProceso
-            ? new Date(
-              rawProceso.fechaProceso 
-            )
+            ? new Date( rawProceso.fechaProceso )
             : null,
           fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
-            ? new Date(
-              rawProceso.fechaUltimaActuacion 
-            )
+            ? new Date( rawProceso.fechaUltimaActuacion )
             : null,
-          juzgado: JuzgadoClass.fromProceso(
-            rawProceso 
-          ),
+          juzgado: JuzgadoClass.fromProceso( rawProceso ),
         };
 
-        this.procesos.push(
-          proceso 
-        );
-        this.idProcesos.push(
-          proceso.idProceso 
-        );
+        this.procesos.push( proceso );
+        this.idProcesos.push( proceso.idProceso );
       }
 
       return this.procesos;
     } catch ( error ) {
-      console.log(
-        `${ this.numero } => error en getProcesosByName => ${ error }` 
-      );
+      console.log( `${ this.numero } => error en getProcesosByName => ${ error }` );
 
       return [];
     }
@@ -572,222 +416,172 @@ export class ClassCarpeta implements IntCarpeta {
   //STATIC
 
   async agregateToDBMethod() {
-    console.log(
-      `💾 Saving updates for ${ this.numero }...` 
-    );
+    console.log( `💾 Saving updates for ${ this.numero }...` );
 
-    const newDemanda = ClassDemanda.prismaDemanda(
-      this.demanda 
-    );
+    const newDemanda = ClassDemanda.prismaDemanda( this.demanda );
 
-    const newDeudor = ClassDeudor.prismaDeudor(
-      this.deudor 
-    );
+    const newDeudor = ClassDeudor.prismaDeudor( this.deudor );
 
-    const newCarpeta = ClassCarpeta.prismaCarpeta(
-      this 
-    );
+    const newCarpeta = ClassCarpeta.prismaCarpeta( this );
 
     // 1. Upsert carpeta base (sin relaciones)
 
     try {
-      console.log(
-        '📁 try carpeta upsert' 
-      );
-      await client.carpeta.upsert(
-        {
-          where: {
-            numero: this.numero,
-          },
-          create: {
-            ...newCarpeta,
-          },
-          update: {
-            ...newCarpeta,
-          },
-        } 
-      );
+      console.log( '📁 try carpeta upsert' );
+      await client.carpeta.upsert( {
+        where: {
+          numero: this.numero,
+        },
+        create: {
+          ...newCarpeta,
+        },
+        update: {
+          ...newCarpeta,
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al crear carpeta base: ${ error }` 
-      );
+      console.log( `❌ Error al crear carpeta base: ${ error }` );
 
       //return;
     }
 
     // 2. Relacionar juzgado
     try {
-      console.log(
-        '🧑‍⚖️ carpeta update juzgado' 
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: this.numero,
-          },
-          data: {
-            juzgado: {
-              connectOrCreate: {
-                where: {
-                  id_tipo_ciudad: {
-                    tipo  : this.juzgado.tipo,
-                    id    : this.juzgado.id,
-                    ciudad: this.juzgado.ciudad,
-                  },
-                },
-                create: {
+      console.log( '🧑‍⚖️ carpeta update juzgado' );
+      await client.carpeta.update( {
+        where: {
+          numero: this.numero,
+        },
+        data: {
+          juzgado: {
+            connectOrCreate: {
+              where: {
+                id_tipo_ciudad: {
                   tipo  : this.juzgado.tipo,
                   id    : this.juzgado.id,
                   ciudad: this.juzgado.ciudad,
-                  url   : this.juzgado.url,
                 },
+              },
+              create: {
+                tipo  : this.juzgado.tipo,
+                id    : this.juzgado.id,
+                ciudad: this.juzgado.ciudad,
+                url   : this.juzgado.url,
               },
             },
           },
-        } 
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar juzgado: ${ error }` 
-      );
+      console.log( `❌ Error al conectar juzgado: ${ error }` );
     }
 
     // 3. Relacionar ultimaActuacion
     if ( this.ultimaActuacion ) {
       try {
-        console.log(
-          '☢️ try ultimaActuacion upsert and update carpeta' 
-        );
-        await client.carpeta.update(
-          {
-            where: {
-              numero: this.numero,
-            },
-            data: {
-              ultimaActuacion: {
-                connectOrCreate: {
-                  where: {
-                    idRegActuacion: this.ultimaActuacion.idRegActuacion,
-                  },
-                  create: {
-                    ...this.ultimaActuacion,
-                    idRegActuacion: `${ this.ultimaActuacion.idRegActuacion }`,
-                  },
+        console.log( '☢️ try ultimaActuacion upsert and update carpeta' );
+        await client.carpeta.update( {
+          where: {
+            numero: this.numero,
+          },
+          data: {
+            ultimaActuacion: {
+              connectOrCreate: {
+                where: {
+                  idRegActuacion: this.ultimaActuacion.idRegActuacion,
+                },
+                create: {
+                  ...this.ultimaActuacion,
+                  idRegActuacion: `${ this.ultimaActuacion.idRegActuacion }`,
                 },
               },
             },
-          } 
-        );
+          },
+        } );
       } catch ( error ) {
-        console.log(
-          `❌ Error al conectar ultimaActuacion: ${ error }` 
-        );
+        console.log( `❌ Error al conectar ultimaActuacion: ${ error }` );
       }
     }
 
     // 4. Relacionar deudor
     try {
-      console.log(
-        `
-        🙆 update carpeta with deudor`,
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: this.numero,
-          },
-          data: {
-            deudor: {
-              connectOrCreate: {
-                where: {
-                  id: this.numero,
-                },
-                create: newDeudor,
+      console.log( `
+        🙆 update carpeta with deudor`, );
+      await client.carpeta.update( {
+        where: {
+          numero: this.numero,
+        },
+        data: {
+          deudor: {
+            connectOrCreate: {
+              where: {
+                id: this.numero,
               },
+              create: newDeudor,
             },
           },
-        } 
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar deudor: ${ error }` 
-      );
+      console.log( `❌ Error al conectar deudor: ${ error }` );
     }
 
     // 5. Relacionar demanda
     try {
-      console.log(
-        '🕴️update carpeta with demanda' 
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: this.numero,
-          },
-          data: {
-            demanda: {
-              connectOrCreate: {
-                where: {
-                  id: this.numero,
-                },
-                create: newDemanda,
+      console.log( '🕴️update carpeta with demanda' );
+      await client.carpeta.update( {
+        where: {
+          numero: this.numero,
+        },
+        data: {
+          demanda: {
+            connectOrCreate: {
+              where: {
+                id: this.numero,
               },
+              create: newDemanda,
             },
           },
-        } 
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar demanda: ${ error }` 
-      );
+      console.log( `❌ Error al conectar demanda: ${ error }` );
     }
 
     // 6. Relacionar codeudor
     try {
-      console.log(
-        '🧜 update carpeta with codeudor' 
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: this.numero,
-          },
-          data: {
-            codeudor: {
-              connectOrCreate: {
-                where: {
-                  id: this.numero,
-                },
-                create: {
-                  ...this.codeudor,
-                },
+      console.log( '🧜 update carpeta with codeudor' );
+      await client.carpeta.update( {
+        where: {
+          numero: this.numero,
+        },
+        data: {
+          codeudor: {
+            connectOrCreate: {
+              where: {
+                id: this.numero,
+              },
+              create: {
+                ...this.codeudor,
               },
             },
           },
-        } 
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar codeudor: ${ error }` 
-      );
+      console.log( `❌ Error al conectar codeudor: ${ error }` );
     }
 
     // 7. Crear notas
     if ( this.notas && this.notas.length > 0 ) {
       try {
-        console.log(
-          '📓create notes' 
-        );
-        await client.nota.createMany(
-          {
-            data          : this.notas,
-            skipDuplicates: true,
-          } 
-        );
+        console.log( '📓create notes' );
+        await client.nota.createMany( {
+          data          : this.notas,
+          skipDuplicates: true,
+        } );
       } catch ( error ) {
-        console.log(
-          `❌ Error al crear notas: ${ error }` 
-        );
+        console.log( `❌ Error al crear notas: ${ error }` );
       }
     }
 
@@ -851,65 +645,51 @@ export class ClassCarpeta implements IntCarpeta {
             } ),
           };
 
-          await client.proceso.upsert(
-            {
-              where: {
-                idProceso: proceso.idProceso,
-              },
-              create: createData,
-              update: updateData,
-            } 
-          );
+          await client.proceso.upsert( {
+            where: {
+              idProceso: proceso.idProceso,
+            },
+            create: createData,
+            update: updateData,
+          } );
         } catch ( error ) {
-          console.log(
-            `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`,
-          );
+          console.log( `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`, );
         }
 
         // Actuaciones para este proceso
-        const processActuaciones = this.actuaciones.filter(
-          (
-            a 
-          ) => {
-            return a.idProceso === proceso.idProceso;
-          } 
-        );
+        const processActuaciones = this.actuaciones.filter( ( a ) => {
+          return a.idProceso === proceso.idProceso;
+        } );
 
         for ( const actuacion of processActuaciones ) {
           try {
-            await client.actuacion.upsert(
-              {
-                where: {
-                  idRegActuacion: actuacion.idRegActuacion,
-                },
-                create: {
-                  ...actuacion,
-                  idRegActuacion: `${ actuacion.idRegActuacion }`,
-                  proceso       : {
-                    connect: {
-                      idProceso: proceso.idProceso,
-                    },
+            await client.actuacion.upsert( {
+              where: {
+                idRegActuacion: actuacion.idRegActuacion,
+              },
+              create: {
+                ...actuacion,
+                idRegActuacion: `${ actuacion.idRegActuacion }`,
+                proceso       : {
+                  connect: {
+                    idProceso: proceso.idProceso,
                   },
                 },
-                update: {
-                  ...actuacion,
-                  isUltimaAct: actuacion.cant === actuacion.consActuacion,
-                },
-              } 
-            );
+              },
+              update: {
+                ...actuacion,
+                isUltimaAct: actuacion.cant === actuacion.consActuacion,
+              },
+            } );
           } catch ( error ) {
-            console.log(
-              `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`,
-            );
+            console.log( `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`, );
           }
         }
       }
     }
   }
 
-  static prismaCarpeta(
-    carpeta: IntCarpeta 
-  ) {
+  static prismaCarpeta( carpeta: IntCarpeta ) {
     const newCarpeta: Prisma.CarpetaCreateInput = {
       id                 : carpeta.id,
       llaveProceso       : carpeta.llaveProceso,
@@ -930,58 +710,48 @@ export class ClassCarpeta implements IntCarpeta {
   }
   //!STATIC
   //STATICASYNC
-  static async updateNotes(
-    incomingCarpeta: ClassCarpeta 
-  ) {
+  static async updateNotes( incomingCarpeta: ClassCarpeta ) {
     const {
       notas 
     } = incomingCarpeta;
 
-    const updater = await client.nota.createMany(
-      {
-        data          : notas,
-        skipDuplicates: true,
-      } 
-    );
+    const updater = await client.nota.createMany( {
+      data          : notas,
+      skipDuplicates: true,
+    } );
 
-    console.log(
-      updater 
-    );
+    console.log( updater );
 
     return updater.count;
   }
-  static async getCarpeta(
-    numero: number 
-  ) {
-    return await client.carpeta.findFirstOrThrow(
-      {
-        where: {
-          numero: numero,
-        },
-        include: {
-          ultimaActuacion: true,
-          deudor         : true,
-          codeudor       : true,
-          notas          : true,
-          tareas         : true,
-          demanda        : {
-            include: {
-              notificacion: {
-                include: {
-                  notifiers: true,
-                },
+  static async getCarpeta( numero: number ) {
+    return await client.carpeta.findFirstOrThrow( {
+      where: {
+        numero: numero,
+      },
+      include: {
+        ultimaActuacion: true,
+        deudor         : true,
+        codeudor       : true,
+        notas          : true,
+        tareas         : true,
+        demanda        : {
+          include: {
+            notificacion: {
+              include: {
+                notifiers: true,
               },
-              medidasCautelares: true,
             },
-          },
-          procesos: {
-            include: {
-              juzgado: true,
-            },
+            medidasCautelares: true,
           },
         },
-      } 
-    );
+        procesos: {
+          include: {
+            juzgado: true,
+          },
+        },
+      },
+    } );
   }
   /*   static async updateCarpeta(
     incomingCarpeta: ClassCarpeta
@@ -1054,12 +824,8 @@ export class ClassCarpeta implements IntCarpeta {
     );
   } */
 
-  static async insertCarpeta(
-    incomingCarpeta: ClassCarpeta 
-  ) {
-    console.log(
-      `💾 Saving updates for ${ incomingCarpeta.numero }...` 
-    );
+  static async insertCarpeta( incomingCarpeta: ClassCarpeta ) {
+    console.log( `💾 Saving updates for ${ incomingCarpeta.numero }...` );
 
     const {
       ultimaActuacion,
@@ -1071,218 +837,170 @@ export class ClassCarpeta implements IntCarpeta {
       notas,
     } = incomingCarpeta;
 
-    const newDemanda = ClassDemanda.prismaDemanda(
-      demanda 
-    );
+    const newDemanda = ClassDemanda.prismaDemanda( demanda );
 
-    const newDeudor = ClassDeudor.prismaDeudor(
-      deudor 
-    );
+    const newDeudor = ClassDeudor.prismaDeudor( deudor );
 
-    const newCarpeta = ClassCarpeta.prismaCarpeta(
-      incomingCarpeta 
-    );
+    const newCarpeta = ClassCarpeta.prismaCarpeta( incomingCarpeta );
 
     // 1. Upsert carpeta base (sin relaciones)
 
     try {
-      console.log(
-        '📁 try carpeta upsert' 
-      );
-      await client.carpeta.upsert(
-        {
-          where: {
-            numero: incomingCarpeta.numero,
-          },
-          create: {
-            ...newCarpeta,
-          },
-          update: {
-            fecha: newCarpeta.fecha,
-          },
-        } 
-      );
+      console.log( '📁 try carpeta upsert' );
+      await client.carpeta.upsert( {
+        where: {
+          numero: incomingCarpeta.numero,
+        },
+        create: {
+          ...newCarpeta,
+        },
+        update: {
+          fecha: newCarpeta.fecha,
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al crear carpeta base: ${ error }` 
-      );
+      console.log( `❌ Error al crear carpeta base: ${ error }` );
 
       //return;
     }
 
     // 2. Relacionar juzgado
     try {
-      console.log(
-        '🧑‍⚖️ carpeta update juzgado' 
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: incomingCarpeta.numero,
-          },
-          data: {
-            juzgado: {
-              connectOrCreate: {
-                where: {
-                  id_tipo_ciudad: {
-                    tipo  : incomingCarpeta.juzgado.tipo,
-                    id    : incomingCarpeta.juzgado.id,
-                    ciudad: incomingCarpeta.juzgado.ciudad,
-                  },
-                },
-                create: {
+      console.log( '🧑‍⚖️ carpeta update juzgado' );
+      await client.carpeta.update( {
+        where: {
+          numero: incomingCarpeta.numero,
+        },
+        data: {
+          juzgado: {
+            connectOrCreate: {
+              where: {
+                id_tipo_ciudad: {
                   tipo  : incomingCarpeta.juzgado.tipo,
                   id    : incomingCarpeta.juzgado.id,
                   ciudad: incomingCarpeta.juzgado.ciudad,
-                  url   : incomingCarpeta.juzgado.url,
                 },
+              },
+              create: {
+                tipo  : incomingCarpeta.juzgado.tipo,
+                id    : incomingCarpeta.juzgado.id,
+                ciudad: incomingCarpeta.juzgado.ciudad,
+                url   : incomingCarpeta.juzgado.url,
               },
             },
           },
-        } 
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar juzgado: ${ error }` 
-      );
+      console.log( `❌ Error al conectar juzgado: ${ error }` );
     }
 
     // 3. Relacionar ultimaActuacion
     if ( ultimaActuacion ) {
       try {
-        console.log(
-          '☢️ try ultimaActuacion upsert and update carpeta' 
-        );
-        await client.carpeta.update(
-          {
-            where: {
-              numero: incomingCarpeta.numero,
-            },
-            data: {
-              ultimaActuacion: {
-                connectOrCreate: {
-                  where: {
-                    idRegActuacion: ultimaActuacion.idRegActuacion,
-                  },
-                  create: {
-                    ...ultimaActuacion,
-                    idRegActuacion: `${ ultimaActuacion.idRegActuacion }`,
-                  },
+        console.log( '☢️ try ultimaActuacion upsert and update carpeta' );
+        await client.carpeta.update( {
+          where: {
+            numero: incomingCarpeta.numero,
+          },
+          data: {
+            ultimaActuacion: {
+              connectOrCreate: {
+                where: {
+                  idRegActuacion: ultimaActuacion.idRegActuacion,
+                },
+                create: {
+                  ...ultimaActuacion,
+                  idRegActuacion: `${ ultimaActuacion.idRegActuacion }`,
                 },
               },
             },
-          } 
-        );
+          },
+        } );
       } catch ( error ) {
-        console.log(
-          `❌ Error al conectar ultimaActuacion: ${ error }` 
-        );
+        console.log( `❌ Error al conectar ultimaActuacion: ${ error }` );
       }
     }
 
     // 4. Relacionar deudor
     try {
-      console.log(
-        `
-        🙆 update carpeta with deudor`,
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: incomingCarpeta.numero,
-          },
-          data: {
-            deudor: {
-              connectOrCreate: {
-                where: {
-                  id: incomingCarpeta.numero,
-                },
-                create: newDeudor,
+      console.log( `
+        🙆 update carpeta with deudor`, );
+      await client.carpeta.update( {
+        where: {
+          numero: incomingCarpeta.numero,
+        },
+        data: {
+          deudor: {
+            connectOrCreate: {
+              where: {
+                id: incomingCarpeta.numero,
               },
+              create: newDeudor,
             },
           },
-        } 
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar deudor: ${ error }` 
-      );
+      console.log( `❌ Error al conectar deudor: ${ error }` );
     }
 
     // 5. Relacionar demanda
     try {
-      console.log(
-        '🕴️update carpeta with demanda' 
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: incomingCarpeta.numero,
-          },
-          data: {
-            demanda: {
-              connectOrCreate: {
-                where: {
-                  id: incomingCarpeta.numero,
-                },
-                create: newDemanda,
+      console.log( '🕴️update carpeta with demanda' );
+      await client.carpeta.update( {
+        where: {
+          numero: incomingCarpeta.numero,
+        },
+        data: {
+          demanda: {
+            connectOrCreate: {
+              where: {
+                id: incomingCarpeta.numero,
               },
+              create: newDemanda,
             },
           },
-        } 
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar demanda: ${ error }` 
-      );
+      console.log( `❌ Error al conectar demanda: ${ error }` );
     }
 
     // 6. Relacionar codeudor
     try {
-      console.log(
-        '🧜 update carpeta with codeudor' 
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: incomingCarpeta.numero,
-          },
-          data: {
-            codeudor: {
-              connectOrCreate: {
-                where: {
-                  id: incomingCarpeta.numero,
-                },
-                create: {
-                  ...codeudor,
-                },
+      console.log( '🧜 update carpeta with codeudor' );
+      await client.carpeta.update( {
+        where: {
+          numero: incomingCarpeta.numero,
+        },
+        data: {
+          codeudor: {
+            connectOrCreate: {
+              where: {
+                id: incomingCarpeta.numero,
+              },
+              create: {
+                ...codeudor,
               },
             },
           },
-        } 
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar codeudor: ${ error }` 
-      );
+      console.log( `❌ Error al conectar codeudor: ${ error }` );
     }
 
     // 7. Crear notas
     if ( notas && notas.length > 0 ) {
       try {
-        console.log(
-          '📓create notes' 
-        );
-        await client.nota.createMany(
-          {
-            data          : notas,
-            skipDuplicates: true,
-          } 
-        );
+        console.log( '📓create notes' );
+        await client.nota.createMany( {
+          data          : notas,
+          skipDuplicates: true,
+        } );
       } catch ( error ) {
-        console.log(
-          `❌ Error al crear notas: ${ error }` 
-        );
+        console.log( `❌ Error al crear notas: ${ error }` );
       }
     }
 
@@ -1346,56 +1064,44 @@ export class ClassCarpeta implements IntCarpeta {
             } ),
           };
 
-          await client.proceso.upsert(
-            {
-              where: {
-                idProceso: proceso.idProceso,
-              },
-              create: createData,
-              update: updateData,
-            } 
-          );
+          await client.proceso.upsert( {
+            where: {
+              idProceso: proceso.idProceso,
+            },
+            create: createData,
+            update: updateData,
+          } );
         } catch ( error ) {
-          console.log(
-            `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`,
-          );
+          console.log( `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`, );
         }
 
         // Actuaciones para este proceso
-        const processActuaciones = actuaciones.filter(
-          (
-            a 
-          ) => {
-            return a.idProceso === proceso.idProceso;
-          } 
-        );
+        const processActuaciones = actuaciones.filter( ( a ) => {
+          return a.idProceso === proceso.idProceso;
+        } );
 
         for ( const actuacion of processActuaciones ) {
           try {
-            await client.actuacion.upsert(
-              {
-                where: {
-                  idRegActuacion: actuacion.idRegActuacion,
-                },
-                create: {
-                  ...actuacion,
-                  idRegActuacion: `${ actuacion.idRegActuacion }`,
-                  proceso       : {
-                    connect: {
-                      idProceso: proceso.idProceso,
-                    },
+            await client.actuacion.upsert( {
+              where: {
+                idRegActuacion: actuacion.idRegActuacion,
+              },
+              create: {
+                ...actuacion,
+                idRegActuacion: `${ actuacion.idRegActuacion }`,
+                proceso       : {
+                  connect: {
+                    idProceso: proceso.idProceso,
                   },
                 },
-                update: {
-                  ...actuacion,
-                  isUltimaAct: actuacion.cant === actuacion.consActuacion,
-                },
-              } 
-            );
+              },
+              update: {
+                ...actuacion,
+                isUltimaAct: actuacion.cant === actuacion.consActuacion,
+              },
+            } );
           } catch ( error ) {
-            console.log(
-              `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`,
-            );
+            console.log( `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`, );
           }
         }
       }
