@@ -269,4 +269,7 @@ dist
 
 
 *.actuaciones
+*.carpetas.txt
 src/date
+
+*.json
