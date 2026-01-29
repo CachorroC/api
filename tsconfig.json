@@ -8,6 +8,7 @@
     "jsx": "react",
     "strict": true,
     "lib": [
+      "DOM",
       "WebWorker",
       "ESNext.Array",
       "ESNext.AsyncIterable",
@@ -16,5 +17,5 @@
     ],
     "esModuleInterop": true
   },
-  "exclude": ["node_modules"]
+  "exclude": [ "node_modules" ]
 }

@@ -189,7 +189,6 @@ model Actuacion {
   actuacion      String
   anotacion      String?
   cant           Int
-  Carpeta        Carpeta[]
   carpetaNumero  Int?
   codRegla       String
   conDocumentos  Boolean
@@ -203,8 +202,9 @@ model Actuacion {
   idRegActuacion String    @id
   isUltimaAct    Boolean
   llaveProceso   String
-  proceso        Proceso?  @relation(fields: [procesoId], references: [idProceso])
-  procesoId      Int?
+  proceso        Proceso   @relation(fields: [procesoId], references: [idProceso])
+  procesoId      Int
+  carpetas       Carpeta[]
 }
 
 model Juzgado {
