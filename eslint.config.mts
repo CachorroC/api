@@ -21,10 +21,6 @@ export default defineConfig(
         'js/recommended'
       ],
       languageOptions: {
-        parserOptions: {
-          project        : './tsconfig.json',
-          tsconfigRootDir: __dirname,
-        },
         globals: {
           ...globals.browser,
           ...globals.node,
@@ -278,5 +274,5 @@ export default defineConfig(
         ],
       },
     },
-  ] 
+  ]
 );
