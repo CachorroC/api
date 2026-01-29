@@ -63,47 +63,47 @@ function tipoProcesoBuilder(
 }
 
 interface Codeudor {
-  nombre: string | null;
-  cedula: string | null;
+  nombre   : string | null;
+  cedula   : string | null;
   direccion: string | null;
-  telefono: string | null;
-  id: number;
+  telefono : string | null;
+  id       : number;
 }
 
 interface outProceso {
-  idProceso: number;
-  idConexion: number;
-  llaveProceso: string;
-  fechaProceso?: string | Date;
+  idProceso            : number;
+  idConexion           : number;
+  llaveProceso         : string;
+  fechaProceso?        : string | Date;
   fechaUltimaActuacion?: string | Date;
-  despacho: string;
-  departamento: string;
-  sujetosProcesales: string;
-  esPrivado: boolean;
-  cantFilas: number;
+  despacho             : string;
+  departamento         : string;
+  sujetosProcesales    : string;
+  esPrivado            : boolean;
+  cantFilas            : number;
 }
 
 interface outActuacion {
   idRegActuacion: number;
-  llaveProceso: string;
-  consActuacion: number;
+  llaveProceso  : string;
+  consActuacion : number;
   fechaActuacion: string;
-  actuacion: string;
-  anotacion?: string;
-  fechaRegistro: string;
-  fechaInicial?: string;
-  fechaFinal?: string;
-  cant: number;
-  codRegla: string;
-  conDocumentos: boolean;
-  isUltimaAct: boolean;
+  actuacion     : string;
+  anotacion?    : string;
+  fechaRegistro : string;
+  fechaInicial? : string;
+  fechaFinal?   : string;
+  cant          : number;
+  codRegla      : string;
+  conDocumentos : boolean;
+  isUltimaAct   : boolean;
 }
 
 interface Juzgado {
-  id: string;
-  tipo: string;
+  id    : string;
+  tipo  : string;
   ciudad: string;
-  url: string;
+  url   : string;
 }
 
 // --- 3. UTILITIES ---
@@ -191,10 +191,10 @@ export function extrapolateTipoToCorrectType(
 }
 
 export class JuzgadoClass implements Juzgado {
-  id: string;
-  tipo: string;
+  id    : string;
+  tipo  : string;
   ciudad: string;
-  url: string;
+  url   : string;
 
   constructor(
     {
@@ -202,8 +202,8 @@ export class JuzgadoClass implements Juzgado {
       tipo,
       ciudad,
     }: {
-      id: string;
-      tipo: string;
+      id    : string;
+      tipo  : string;
       ciudad: string;
     } 
   ) {
@@ -259,7 +259,7 @@ export class JuzgadoClass implements Juzgado {
       ciudad,
       juzgadoRaw,
     }: {
-      ciudad: string;
+      ciudad    : string;
       juzgadoRaw: string;
     } 
   ) {
@@ -331,36 +331,36 @@ export class JuzgadoClass implements Juzgado {
 
 export class ClassCarpeta {
   private baseUrl: string;
-  private logger: FileLogger;
+  private logger : FileLogger;
   private readonly RATE_LIMIT_DELAY_MS = 12000; // 12 seconds per request
 
   //PROPERTIES
-  procesos: outProceso[] = [];
-  idProcesos: number[] = [];
+  procesos   : outProceso[] = [];
+  idProcesos : number[] = [];
   actuaciones: outActuacion[] = [];
-  notas: NotasBuilder[] = [];
+  notas      : NotasBuilder[] = [];
 
   //PROPERTIES reg objects
   ultimaActuacion: outActuacion | null;
-  codeudor: Codeudor;
-  demanda: ClassDemanda;
-  deudor: ClassDeudor;
+  codeudor       : Codeudor;
+  demanda        : ClassDemanda;
+  deudor         : ClassDeudor;
 
   //PROPERTIES primitive types
-  numero: number;
-  llaveProceso: string;
-  fecha: Date | null;
-  idRegUltimaAct: string | null;
-  id: number;
-  category: string;
-  nombre: string;
-  revisado: boolean;
-  terminado: boolean;
-  tipoProceso: TipoProceso;
-  notasCount: number | null;
-  juzgadoTipo: string | null;
-  ciudad: string | null;
-  juzgado: JuzgadoClass;
+  numero             : number;
+  llaveProceso       : string;
+  fecha              : Date | null;
+  idRegUltimaAct     : string | null;
+  id                 : number;
+  category           : string;
+  nombre             : string;
+  revisado           : boolean;
+  terminado          : boolean;
+  tipoProceso        : TipoProceso;
+  notasCount         : number | null;
+  juzgadoTipo        : string | null;
+  ciudad             : string | null;
+  juzgado            : JuzgadoClass;
   fechaUltimaRevision: Date | null;
 
   constructor(

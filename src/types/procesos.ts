@@ -14,60 +14,60 @@ import { Juzgado } from './carpetas.js';
 
 export type Paginacion = {
   cantidadRegistros: number;
-  registrosPagina: number;
-  cantidadPaginas: number;
-  pagina: number;
-  paginas: null;
+  registrosPagina  : number;
+  cantidadPaginas  : number;
+  pagina           : number;
+  paginas          : null;
 };
 
 export type fetchResponseProceso = {
-  cantFilas: number;
-  departamento: string;
-  despacho: string;
-  esPrivado: boolean;
-  fechaProceso: string | Date;
+  cantFilas           : number;
+  departamento        : string;
+  despacho            : string;
+  esPrivado           : boolean;
+  fechaProceso        : string | Date;
   fechaUltimaActuacion: string | Date;
-  idConexion: number;
-  idProceso: number;
-  llaveProceso: string;
-  sujetosProcesales: string;
+  idConexion          : number;
+  idProceso           : number;
+  llaveProceso        : string;
+  sujetosProcesales   : string;
 };
 
 export type intProceso = {
-  cantFilas: number;
-  departamento: string;
-  despacho: string;
-  esPrivado: boolean;
-  fechaProceso: Date | null;
+  cantFilas           : number;
+  departamento        : string;
+  despacho            : string;
+  esPrivado           : boolean;
+  fechaProceso        : Date | null;
   fechaUltimaActuacion: Date | null;
-  idConexion: number;
-  idProceso: number;
-  llaveProceso: string;
-  sujetosProcesales: string;
+  idConexion          : number;
+  idProceso           : number;
+  llaveProceso        : string;
+  sujetosProcesales   : string;
 };
 
 export interface databaseProceso extends fetchResponseProceso {
-  fechaProceso: Date;
+  fechaProceso        : Date;
   fechaUltimaActuacion: Date;
 }
 // Converts JSON strings to/from your types
 
 export type ConsultaProcesos = {
   tipoConsulta: TipoConsulta;
-  procesos: intProceso[] | fetchResponseProceso[];
-  parametros: Parametros;
-  paginacion: Paginacion;
+  procesos    : intProceso[] | fetchResponseProceso[];
+  parametros  : Parametros;
+  paginacion  : Paginacion;
 };
 
 export type Parametros = {
-  numero: null | string;
-  nombre: null | string;
-  tipoPersona: null | string;
-  idSujeto: null;
-  ponente: null;
-  claseProceso: null;
+  numero              : null | string;
+  nombre              : null | string;
+  tipoPersona         : null | string;
+  idSujeto            : null;
+  ponente             : null;
+  claseProceso        : null;
   codificacionDespacho: null;
-  soloActivos: boolean;
+  soloActivos         : boolean;
 };
 
 export type Message =
@@ -77,22 +77,22 @@ export type Message =
   | 'No se pueden ver actuaciones de un proceso privado';
 
 export type DetalleProceso = {
-  [key: string]: string | null | boolean | Date | number | Juzgado | undefined;
-  claseProceso: ClaseProceso;
+  [key: string]      : string | null | boolean | Date | number | Juzgado | undefined;
+  claseProceso       : ClaseProceso;
   contenidoRadicacion: null | string;
-  despacho: string;
-  esPrivado: boolean;
-  fechaConsulta: Date;
-  fechaProceso: Date;
-  idConexion: number;
-  idRegProceso: number;
-  juzgado?: Juzgado;
-  llaveProceso: string;
-  ponente: string;
-  recurso: Recurso | null;
-  subclaseProceso: SubclaseProceso;
-  tipoProceso: TipoProceso;
-  ubicacion: null | string;
+  despacho           : string;
+  esPrivado          : boolean;
+  fechaConsulta      : Date;
+  fechaProceso       : Date;
+  idConexion         : number;
+  idRegProceso       : number;
+  juzgado?           : Juzgado;
+  llaveProceso       : string;
+  ponente            : string;
+  recurso            : Recurso | null;
+  subclaseProceso    : SubclaseProceso;
+  tipoProceso        : TipoProceso;
+  ubicacion          : null | string;
   ultimaActualizacion: Date;
 };
 
@@ -151,15 +151,15 @@ export type Departamento =
 export type TipoConsulta = 'NumeroRadicacion' | 'NombreRazonSocial';
 
 export type outProceso = {
-  fechaProceso: Date | null;
+  fechaProceso        : Date | null;
   fechaUltimaActuacion: Date | null;
-  juzgado: Juzgado;
-  idProceso: number;
-  idConexion: number;
-  llaveProceso: string;
-  despacho: string;
-  departamento: string;
-  sujetosProcesales: string;
-  esPrivado: boolean;
-  cantFilas: number;
+  juzgado             : Juzgado;
+  idProceso           : number;
+  idConexion          : number;
+  llaveProceso        : string;
+  despacho            : string;
+  departamento        : string;
+  sujetosProcesales   : string;
+  esPrivado           : boolean;
+  cantFilas           : number;
 };

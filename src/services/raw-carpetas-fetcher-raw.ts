@@ -11,14 +11,14 @@ export const ramaJudicialBaseURL
 /* TODO hacer la clase de proceso que tenga como entrada el idProceso y mas bien  desde la carpeta pedir los procesos disponibles con esa clase proceso a partir de los procesos que salgan en llave proceso */
 
 export class ProcesoJudicial {
-  idProceso: number;
-  numero: number;
-  llaveProceso: string;
-  actuaciones: outActuacion[] = [];
+  idProceso      : number;
+  numero         : number;
+  llaveProceso   : string;
+  actuaciones    : outActuacion[] = [];
   ultimaActuacion: outActuacion | null = null;
-  fecha: Date | null = null;
-  idRegUltimaAct: number | null = null;
-  detalleProceso: DetalleProceso | null = null;
+  fecha          : Date | null = null;
+  idRegUltimaAct : number | null = null;
+  detalleProceso : DetalleProceso | null = null;
   constructor(
     numero: number, idProceso: number, llaveProceso: string 
   ) {
@@ -143,9 +143,9 @@ export class ProcesoJudicial {
 
 export class FetcherJudicial {
   llaveProceso: string;
-  procesos: unknown[] = [];
-  idProcesos: number[] = [];
-  numero: number;
+  procesos    : unknown[] = [];
+  idProcesos  : number[] = [];
+  numero      : number;
   constructor(
     llaveProceso: string, numero: number 
   ) {

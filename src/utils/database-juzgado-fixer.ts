@@ -46,11 +46,11 @@ fs.writeFile(
 );
 
 export type TransformedJuzgadoValue = {
-  id: string;
-  tipo: string;
-  tipoRaw: string;
-  ciudad: string;
-  value: string;
+  id       : string;
+  tipo     : string;
+  tipoRaw  : string;
+  ciudad   : string;
+  value    : string;
   fullArray:
     | RegExpMatchArray
     | IterableIterator<RegExpExecArray>

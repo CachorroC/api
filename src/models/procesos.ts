@@ -4,9 +4,9 @@ import JuzgadoClass from './juzgado.js';
 
 export class ClassProcesos {
   idProcesosSet: Set<number> = new Set();
-  procesos: outProceso[] = [];
-  numero: number;
-  carpetaId: number;
+  procesos     : outProceso[] = [];
+  numero       : number;
+  carpetaId    : number;
   constructor(
     procesos: outProceso[], numero: number, carpetaId: number 
   ) {

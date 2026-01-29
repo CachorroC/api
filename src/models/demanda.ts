@@ -156,29 +156,29 @@ export class ClassDemanda implements IntDemanda {
       ),
     );
   }
-  liquidacion: Prisma.Decimal;
-  avaluo: Prisma.Decimal;
-  capitalAdeudado: Prisma.Decimal;
-  carpetaNumero!: number;
-  departamento: string | null;
-  despacho: string | null;
-  bienes: string | null;
+  liquidacion            : Prisma.Decimal;
+  avaluo                 : Prisma.Decimal;
+  capitalAdeudado        : Prisma.Decimal;
+  carpetaNumero!         : number;
+  departamento           : string | null;
+  despacho               : string | null;
+  bienes                 : string | null;
   entregaGarantiasAbogado: Date | null;
-  etapaProcesal: string | null;
-  fechaPresentacion: Date[];
-  id: number;
-  llaveProceso: string | null;
-  mandamientoPago: Date[];
-  municipio: string | null;
-  notificacion: intNotificacion;
-  obligacion: string[];
-  radicado: string | null;
-  tipoProceso: TipoProceso;
-  vencimientoPagare: Date[];
+  etapaProcesal          : string | null;
+  fechaPresentacion      : Date[];
+  id                     : number;
+  llaveProceso           : string | null;
+  mandamientoPago        : Date[];
+  municipio              : string | null;
+  notificacion           : intNotificacion;
+  obligacion             : string[];
+  radicado               : string | null;
+  tipoProceso            : TipoProceso;
+  vencimientoPagare      : Date[];
   medidasCautelares: {
-    id: number;
+    id               : number;
     fechaOrdenaMedida: Date | null;
-    medidaSolicitada: string | null;
+    medidaSolicitada : string | null;
   };
   static prismaDemanda(
     demanda: IntDemanda 

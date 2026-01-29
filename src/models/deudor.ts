@@ -3,7 +3,7 @@ import { IntDeudor } from '../types/carpetas.js';
 import { RawDb } from '../types/raw-db.js';
 
 export class Tel {
-  fijo: string | null;
+  fijo   : string | null;
   celular: string | null;
   constructor(
     telefono: string 
@@ -147,16 +147,16 @@ export class ClassDeudor implements IntDeudor {
           break;
     }
   }
-  id: number;
-  telCelular: string | null;
-  telFijo: string | null;
-  primerNombre: string;
-  segundoNombre: string | null;
-  primerApellido: string;
+  id             : number;
+  telCelular     : string | null;
+  telFijo        : string | null;
+  primerNombre   : string;
+  segundoNombre  : string | null;
+  primerApellido : string;
   segundoApellido: string | null;
-  cedula: string;
-  direccion: string | null;
-  email: string | null;
+  cedula         : string;
+  direccion      : string | null;
+  email          : string | null;
 
   static prismaDeudor(
     deudor: IntDeudor 

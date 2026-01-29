@@ -1,20 +1,18 @@
-
-import { ConsultaActuacion,
-  intActuacion, } from './types/actuaciones.js';
+import { ConsultaActuacion, intActuacion } from './types/actuaciones.js';
 import { client } from './services/prisma.js';
 import { sleep } from './utils/awaiter.js';
 import Actuacion from './models/actuacion.js';
 import { RobustApiClient } from './utils/fetcher.js';
 
 async function fetcher(
-  idProceso: number
+  idProceso: number 
 ) {
   console.log(
-    `fetching idProceso: ${ idProceso }`
+    `fetching idProceso: ${ idProceso }` 
   );
 
   await sleep(
-    10000
+    10000 
   );
 
   try {
@@ -35,12 +33,12 @@ async function fetcher(
     const json = ( await request.json() ) as ConsultaActuacion;
 
     const {
-      actuaciones
+      actuaciones 
     } = json;
 
     return actuaciones.map(
       (
-        actuacion
+        actuacion 
       ) => {
         const {
           fechaActuacion,
@@ -55,33 +53,33 @@ async function fetcher(
         return {
           ...actuacion,
           fechaActuacion: new Date(
-            fechaActuacion
+            fechaActuacion 
           ),
           fechaRegistro: new Date(
-            fechaRegistro
+            fechaRegistro 
           ),
           fechaInicial: fechaInicial
             ? new Date(
-              fechaInicial
+              fechaInicial 
             )
             : null,
           fechaFinal: fechaFinal
             ? new Date(
-              fechaFinal
+              fechaFinal 
             )
             : null,
           isUltimaAct: cant === consActuacion,
           idProceso  : idProceso,
           createdAt  : new Date(
-            fechaRegistro
+            fechaRegistro 
           ),
           idRegActuacion: `${ idRegActuacion }`,
         };
-      }
+      } 
     );
   } catch ( error ) {
     console.log(
-      error
+      error 
     );
 
     return null;
@@ -94,11 +92,11 @@ async function getIdProcesos() {
   return carpetas
     .flatMap(
       (
-        carpeta
+        carpeta 
       ) => {
         return carpeta.idProcesos.map(
           (
-            idProceso
+            idProceso 
           ) => {
             return {
               idProceso,
@@ -106,16 +104,16 @@ async function getIdProcesos() {
               llaveProceso : carpeta.llaveProceso,
               carpetaId    : carpeta.id,
             };
-          }
+          } 
         );
-      }
+      } 
     )
     .sort(
       (
-        a, b
+        a, b 
       ) => {
         return b.carpetaNumero - a.carpetaNumero;
-      }
+      } 
     );
 }
 
@@ -128,14 +126,14 @@ async function* AsyncGenerateActuaciones(
   }[],
 ) {
   for ( const {
-    idProceso, carpetaNumero, carpetaId
+    idProceso, carpetaNumero, carpetaId 
   } of procesos ) {
     await sleep(
-      10000
+      10000 
     );
 
     const fetcherIdProceso = await fetcher(
-      idProceso
+      idProceso 
     );
 
     if ( fetcherIdProceso && fetcherIdProceso.length > 0 ) {
@@ -145,7 +143,7 @@ async function* AsyncGenerateActuaciones(
       );
 
       console.log(
-        actsActualizadas
+        actsActualizadas 
       );
       await Actuacion.prismaUpdaterActuaciones(
         fetcherIdProceso,
@@ -204,14 +202,14 @@ async function runSync() {
 
     // Step 1: Build URL
     (
-      proc
+      proc 
     ) => {
       return `/api/v2/Proceso/Actuaciones/${ proc.idProceso }`;
     },
 
     // Step 2: Handle Database (Runs once for EACH item in the 'actuaciones' array)
     async (
-      actuacion: intActuacion, parentProc
+      actuacion: intActuacion, parentProc 
     ) => {
       // Perform Prisma Upsert
       await client.actuacion.upsert(
@@ -222,19 +220,19 @@ async function runSync() {
           },
           update: {
             fechaActuacion: new Date(
-              actuacion.fechaActuacion
+              actuacion.fechaActuacion 
             ),
             fechaRegistro: new Date(
-              actuacion.fechaRegistro
+              actuacion.fechaRegistro 
             ),
             fechaInicial: actuacion.fechaInicial
               ? new Date(
-                actuacion.fechaInicial
+                actuacion.fechaInicial 
               )
               : null,
             fechaFinal: actuacion.fechaFinal
               ? new Date(
-                actuacion.fechaFinal
+                actuacion.fechaFinal 
               )
               : null,
             isUltimaAct   : actuacion.cant === actuacion.consActuacion,
@@ -254,7 +252,7 @@ async function runSync() {
             createdAt     : new Date(),
             llaveProceso  : parentProc.llaveProceso,
             fechaRegistro : new Date(
-              actuacion.fechaRegistro
+              actuacion.fechaRegistro 
             ),
             proceso: {
               connect: {
@@ -262,27 +260,27 @@ async function runSync() {
               },
             },
             fechaActuacion: new Date(
-              actuacion.fechaActuacion
+              actuacion.fechaActuacion 
             ),
             fechaInicial: actuacion.fechaInicial
               ? new Date(
-                actuacion.fechaInicial
+                actuacion.fechaInicial 
               )
               : null,
             fechaFinal: actuacion.fechaFinal
               ? new Date(
-                actuacion.fechaFinal
+                actuacion.fechaFinal 
               )
               : null,
             isUltimaAct: actuacion.cant === actuacion.consActuacion,
           },
-        }
+        } 
       );
     },
   );
 
   console.log(
-    'Sync Complete'
+    'Sync Complete' 
   );
 }
 

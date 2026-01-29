@@ -9,22 +9,22 @@ export default class Actuacion {
   ) {
     const outputActuaciones = new Set<{
       idRegActuacion: string;
-      actuacion: string;
-      anotacion: string | null;
-      cant: number;
-      carpetaNumero: number | null;
-      codRegla: string;
-      conDocumentos: boolean;
-      consActuacion: number;
-      createdAt: Date;
+      actuacion     : string;
+      anotacion     : string | null;
+      cant          : number;
+      carpetaNumero : number | null;
+      codRegla      : string;
+      conDocumentos : boolean;
+      consActuacion : number;
+      createdAt     : Date;
       fechaActuacion: Date;
-      fechaFinal: Date | null;
-      fechaInicial: Date | null;
-      fechaRegistro: Date;
-      isUltimaAct: boolean;
-      llaveProceso: string;
-      procesoId: number | null;
-      idProceso: number;
+      fechaFinal    : Date | null;
+      fechaInicial  : Date | null;
+      fechaRegistro : Date;
+      isUltimaAct   : boolean;
+      llaveProceso  : string;
+      procesoId     : number | null;
+      idProceso     : number;
     }>();
 
     try {
@@ -240,7 +240,7 @@ export default class Actuacion {
       numero,
     }: {
       ultimaActuacion: outActuacion;
-      numero: number;
+      numero         : number;
     } 
   ) {
     try {

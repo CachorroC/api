@@ -3,11 +3,11 @@ import { datesExtractor } from '../utils/date-validator.js';
 
 export class NotasBuilder implements IntNota {
   createdAt: Date;
-  pathname: string | null;
-  dueDate: Date | null;
-  text: string;
-  content: string[] = [];
-  id: string;
+  pathname : string | null;
+  dueDate  : Date | null;
+  text     : string;
+  content  : string[] = [];
+  id       : string;
   constructor(
     incomingNote: string, carpetaNumero?: number, index?: number 
   ) {

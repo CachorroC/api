@@ -5,20 +5,20 @@
 //   const prismaCarpeta = Convert.toPrismaCarpeta(json);
 
 export interface PrismaCarpeta {
-  id: number;
-  numero: number;
-  llaveProceso: null | string;
-  nombre: string;
-  idProcesos: number[];
-  category: Category;
-  fecha: Date | null;
-  Prismademanda: PrismaDemanda | null;
-  deudor: PrismaDeudor;
+  id             : number;
+  numero         : number;
+  llaveProceso   : null | string;
+  nombre         : string;
+  idProcesos     : number[];
+  category       : Category;
+  fecha          : Date | null;
+  Prismademanda  : PrismaDemanda | null;
+  deudor         : PrismaDeudor;
   ultimaActuacion: PrismaUltimaActuacion | null;
-  juzgados: PrismaJuzgado[];
-  procesos: PrismaProceso[];
-  notas: PrismaNota[];
-  tareas: PrismaTarea[];
+  juzgados       : PrismaJuzgado[];
+  procesos       : PrismaProceso[];
+  notas          : PrismaNota[];
+  tareas         : PrismaTarea[];
 }
 
 export type Category =
@@ -29,21 +29,21 @@ export type Category =
   | 'Insolvencia';
 
 export interface PrismaDemanda {
-  id: number;
-  departamento: Departamento;
-  capitalAdeudado: string;
+  id                     : number;
+  departamento           : Departamento;
+  capitalAdeudado        : string;
   entregaGarantiasAbogado: Date | null;
-  tipoProceso: TipoProceso;
-  mandamientoPago: Date | null;
-  etapaProcesal: null | string;
-  fechaPresentacion: Date | null;
-  municipio: string;
-  obligacion: string[];
-  radicado: null | string;
-  vencimientoPagare: Date[];
-  expediente: null | string;
-  carpetaNumero: number;
-  despacho: null;
+  tipoProceso            : TipoProceso;
+  mandamientoPago        : Date | null;
+  etapaProcesal          : null | string;
+  fechaPresentacion      : Date | null;
+  municipio              : string;
+  obligacion             : string[];
+  radicado               : null | string;
+  vencimientoPagare      : Date[];
+  expediente             : null | string;
+  carpetaNumero          : number;
+  despacho               : null;
 }
 
 export type Departamento =
@@ -63,84 +63,84 @@ export type TipoProceso =
   | 'ACUMULADO';
 
 export interface PrismaDeudor {
-  id: number;
-  cedula: string;
-  primerNombre: string;
-  primerApellido: string;
-  segundoNombre: null | string;
+  id             : number;
+  cedula         : string;
+  primerNombre   : string;
+  primerApellido : string;
+  segundoNombre  : null | string;
   segundoApellido: null | string;
-  direccion: null | string;
-  email: null | string;
-  telCelular: null | string;
-  telFijo: null | string;
-  carpetaNumero: number;
+  direccion      : null | string;
+  email          : null | string;
+  telCelular     : null | string;
+  telFijo        : null | string;
+  carpetaNumero  : number;
 }
 
 export interface PrismaJuzgado {
-  id: number;
+  id  : number;
   tipo: string;
-  url: string;
+  url : string;
 }
 
 export interface PrismaNota {
-  id: number;
-  date: Date;
-  createdAt: Date;
-  pathname: null | string;
+  id           : number;
+  date         : Date;
+  createdAt    : Date;
+  pathname     : null | string;
   carpetaNumero: number;
-  content: string;
-  title: string;
-  updatedAt: Date;
+  content      : string;
+  title        : string;
+  updatedAt    : Date;
 }
 
 export interface PrismaProceso {
-  idProceso: number;
-  idConexion: number;
-  llaveProceso: string;
-  fechaProceso: Date;
+  idProceso           : number;
+  idConexion          : number;
+  llaveProceso        : string;
+  fechaProceso        : Date;
   fechaUltimaActuacion: Date | null;
-  despacho: string;
-  departamento: Departamento;
-  sujetosProcesales: string;
-  esPrivado: boolean;
-  cantFilas: number;
-  carpetaNumero: number;
+  despacho            : string;
+  departamento        : Departamento;
+  sujetosProcesales   : string;
+  esPrivado           : boolean;
+  cantFilas           : number;
+  carpetaNumero       : number;
 }
 
 export interface PrismaTarea {
-  id: number;
-  dueDate: null;
+  id       : number;
+  dueDate  : null;
   carpetaId: number;
-  complete: boolean;
-  content: string;
+  complete : boolean;
+  content  : string;
   createdAt: Date;
-  title: string;
+  title    : string;
   updatedAt: Date;
   subTareas: PrismaSubPrismaTarea[];
 }
 
 export interface PrismaSubPrismaTarea {
-  text: string;
-  date: Date;
+  text      : string;
+  date      : Date;
   isComplete: boolean;
-  tareaId: number;
+  tareaId   : number;
 }
 
 export interface PrismaUltimaActuacion {
-  createdAt: Date;
-  idRegActuacion: number;
-  llaveProceso: string;
-  consActuacion: number;
-  fechaActuacion: Date;
-  actuacion: string;
-  anotacion: null | string;
-  fechaInicial: Date | null;
-  fechaRegistro: Date;
-  fechaFinal: Date | null;
-  codRegla: CodRegla;
-  conDocumentos: boolean;
-  cant: number;
-  carpetaNumero: number;
+  createdAt       : Date;
+  idRegActuacion  : number;
+  llaveProceso    : string;
+  consActuacion   : number;
+  fechaActuacion  : Date;
+  actuacion       : string;
+  anotacion       : null | string;
+  fechaInicial    : Date | null;
+  fechaRegistro   : Date;
+  fechaFinal      : Date | null;
+  codRegla        : CodRegla;
+  conDocumentos   : boolean;
+  cant            : number;
+  carpetaNumero   : number;
   procesoIdProceso: null;
 }
 

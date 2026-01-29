@@ -15,7 +15,7 @@ import JuzgadoClass from './juzgado.js';
 import { Prisma } from '../prisma/generated/prisma/client.js';
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 console.log(
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED 
 );
 
 // --- CONFIGURATION ---
@@ -47,11 +47,11 @@ async function enforceRateLimit() {
 
     console.log(
       `Rate Limit: Waiting ${ ( waitTime / 1000 ).toFixed(
-        1
-      ) }s...`
+        1 
+      ) }s...` 
     );
     await sleep(
-      waitTime
+      waitTime 
     );
   }
 
@@ -72,7 +72,7 @@ async function fetchWithSmartRetry(
 
   try {
     const response = await fetch(
-      url, options
+      url, options 
     );
 
     // 2. Success Case
@@ -82,7 +82,7 @@ async function fetchWithSmartRetry(
 
     // 3. Retry Logic for specific HTTP Status Codes
     if ( RETRY_STATUS_CODES.includes(
-      response.status
+      response.status 
     ) && retries > 0 ) {
       console.warn(
         `⚠️ API Error ${ response.status }. Retrying... (${ retries } attempts left)`,
@@ -94,7 +94,7 @@ async function fetchWithSmartRetry(
       // We assume the 'enforceRateLimit' at the start of the recursion
       // provides enough backoff time (12.5s), so we don't need extra sleep here.
       return fetchWithSmartRetry(
-        url, options, retries - 1
+        url, options, retries - 1 
       );
     }
 
@@ -104,7 +104,7 @@ async function fetchWithSmartRetry(
     // 5. Network Errors (DNS, Offline, Connection Refused)
     // You requested NOT to retry these.
     console.error(
-      `❌ Network/Fetch Error: ${ error }`
+      `❌ Network/Fetch Error: ${ error }` 
     );
     throw error;
   }
@@ -148,7 +148,7 @@ export class ClassCarpeta implements IntCarpeta {
   //!PROPERTIES
   //CONSTRUCTOR - EL CONSTRUCTOR DE LA CARPETA
   constructor(
-    rawCarpeta: RawDb
+    rawCarpeta: RawDb 
   ) {
     const {
       NUMERO,
@@ -176,80 +176,80 @@ export class ClassCarpeta implements IntCarpeta {
 
     this.fechaUltimaRevision = FECHA_ULTIMA_REVISION
       ? new Date(
-        FECHA_ULTIMA_REVISION
+        FECHA_ULTIMA_REVISION 
       )
       : null;
 
     this.fecha = FECHA_ULTIMA_ACTUACION
       ? new Date(
-        FECHA_ULTIMA_ACTUACION
+        FECHA_ULTIMA_ACTUACION 
       )
       : null;
 
     if ( OBSERVACIONES ) {
       const extras = OBSERVACIONES.split(
-        '//'
+        '//' 
       );
 
       extras.forEach(
         (
-          nota
+          nota 
         ) => {
           notasCounter++;
 
           const newNoter = new NotasBuilder(
             nota, Number(
-              NUMERO
-            ), notasCounter
+              NUMERO 
+            ), notasCounter 
           );
 
           this.notas.push(
-            newNoter
+            newNoter 
           );
-        }
+        } 
       );
     }
 
     if ( EXTRA ) {
       console.log(
-        `EXTRAS === ${ EXTRA }`
+        `EXTRAS === ${ EXTRA }` 
       );
 
       const extras = String(
-        EXTRA
+        EXTRA 
       )
         .split(
-          '//'
+          '//' 
         );
 
       extras.forEach(
         (
-          nota
+          nota 
         ) => {
           notasCounter++;
 
           const newNoter = new NotasBuilder(
             nota, Number(
-              NUMERO
-            ), notasCounter
+              NUMERO 
+            ), notasCounter 
           );
 
           this.notas.push(
-            newNoter
+            newNoter 
           );
-        }
+        } 
       );
     }
 
     const cedulaAsNumber = Number(
-      cedula
+      cedula 
     );
 
     if ( isNaN(
-      cedulaAsNumber
+      cedulaAsNumber 
     ) ) {
       idBuilder = Number(
-        NUMERO
+        NUMERO 
       );
     } else {
       idBuilder = cedulaAsNumber;
@@ -260,57 +260,57 @@ export class ClassCarpeta implements IntCarpeta {
     this.idRegUltimaAct = null;
     this.category = category;
     this.ciudad = String(
-      JUZGADO_CIUDAD
+      JUZGADO_CIUDAD 
     );
     this.numero = isNaN(
       Number(
-        NUMERO
-      )
+        NUMERO 
+      ) 
     )
       ? this.id
       : Number(
-          NUMERO
+          NUMERO 
         );
     this.deudor = new ClassDeudor(
-      rawCarpeta
+      rawCarpeta 
     );
 
     this.llaveProceso = String(
-      EXPEDIENTE
+      EXPEDIENTE 
     );
     this.demanda = new ClassDemanda(
-      rawCarpeta
+      rawCarpeta 
     );
     this.nombre = String(
-      DEMANDADO_NOMBRE
+      DEMANDADO_NOMBRE 
     );
     this.revisado = false;
     this.codeudor = {
       nombre: CODEUDOR_NOMBRE
         ? String(
-            CODEUDOR_NOMBRE
+            CODEUDOR_NOMBRE 
           )
         : null,
       cedula: CODEUDOR_IDENTIFICACION
         ? String(
-            CODEUDOR_IDENTIFICACION
+            CODEUDOR_IDENTIFICACION 
           )
         : null,
       direccion: CODEUDOR_DIRECCION
         ? String(
-            CODEUDOR_DIRECCION
+            CODEUDOR_DIRECCION 
           )
         : null,
       telefono: CODEUDOR_TELEFONOS
         ? String(
-            CODEUDOR_TELEFONOS
+            CODEUDOR_TELEFONOS 
           )
         : null,
       id: this.numero,
     };
     this.tipoProceso = TIPO_PROCESO
       ? tipoProcesoBuilder(
-          TIPO_PROCESO
+          TIPO_PROCESO 
         )
       : 'SINGULAR';
 
@@ -321,26 +321,26 @@ export class ClassCarpeta implements IntCarpeta {
     this.ultimaActuacion = null;
     this.llaveProceso = EXPEDIENTE
       ? String(
-          EXPEDIENTE
+          EXPEDIENTE 
         )
       : 'SinEspecificar';
     this.numero = Number(
-      NUMERO
+      NUMERO 
     );
     this.ciudad = String(
-      JUZGADO_CIUDAD
+      JUZGADO_CIUDAD 
     );
     this.juzgado = JuzgadoClass.fromShortName(
       {
         ciudad: String(
-          JUZGADO_CIUDAD
+          JUZGADO_CIUDAD 
         ),
         juzgadoRaw: JUZGADO_EJECUCION
           ? JUZGADO_EJECUCION
           : JUZGADO_ORIGEN
             ? JUZGADO_ORIGEN
             : '',
-      }
+      } 
     );
     this.juzgadoTipo = this.juzgado.tipo;
   }
@@ -350,13 +350,12 @@ export class ClassCarpeta implements IntCarpeta {
   async getProcesos() {
     try {
       console.log(
-        '🧡 initiating getProcesos'
+        '🧡 initiating getProcesos' 
       );
 
       // !!! UPDATED: Using fetchWithSmartRetry !!!
       const request = await fetchWithSmartRetry(
         `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1`,
-
       );
 
       if ( !request.ok ) {
@@ -372,42 +371,38 @@ export class ClassCarpeta implements IntCarpeta {
       const consultaProcesos = ( await request.json() ) as ConsultaProcesos;
 
       const {
-        procesos
+        procesos 
       } = consultaProcesos;
 
       for ( const rawProceso of procesos ) {
-
         const proceso: outProceso = {
           ...rawProceso,
           fechaProceso: rawProceso.fechaProceso
             ? new Date(
-              rawProceso.fechaProceso
+              rawProceso.fechaProceso 
             )
             : null,
           fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
             ? new Date(
-              rawProceso.fechaUltimaActuacion
+              rawProceso.fechaUltimaActuacion 
             )
             : null,
           juzgado: JuzgadoClass.fromProceso(
-            rawProceso
+            rawProceso 
           ),
         };
 
         this.procesos.push(
-          proceso
+          proceso 
         );
         this.idProcesos.push(
-          proceso.idProceso
+          proceso.idProceso 
         );
       }
-
     } catch ( error ) {
       console.log(
         `💩${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }`,
       );
-
-
     }
 
     return this.procesos;
@@ -416,7 +411,7 @@ export class ClassCarpeta implements IntCarpeta {
   //ASYNC - getActuaciones
   async getActuaciones() {
     console.log(
-      '🧡 initiating getActuaciones'
+      '🧡 initiating getActuaciones' 
     );
 
     if ( this.idProcesos.length === 0 ) {
@@ -432,57 +427,57 @@ export class ClassCarpeta implements IntCarpeta {
 
         if ( !request.ok ) {
           throw new Error(
-            request.statusText
+            request.statusText 
           );
         }
 
         const consultaActuaciones = ( await request.json() ) as ConsultaActuacion;
 
         const {
-          actuaciones
+          actuaciones 
         } = consultaActuaciones;
 
         const outActuaciones = actuaciones.map(
           (
-            actuacion
+            actuacion 
           ) => {
             return {
               ...actuacion,
               idRegActuacion: `${ actuacion.idRegActuacion }`,
               idProceso     : Number(
-                idProceso
+                idProceso 
               ),
               isUltimaAct   : actuacion.cant === actuacion.consActuacion,
               fechaActuacion: new Date(
-                actuacion.fechaActuacion
+                actuacion.fechaActuacion 
               ),
               fechaRegistro: new Date(
-                actuacion.fechaRegistro
+                actuacion.fechaRegistro 
               ),
               fechaInicial: actuacion.fechaInicial
                 ? new Date(
-                  actuacion.fechaInicial
+                  actuacion.fechaInicial 
                 )
                 : null,
               fechaFinal: actuacion.fechaFinal
                 ? new Date(
-                  actuacion.fechaFinal
+                  actuacion.fechaFinal 
                 )
                 : null,
               createdAt: new Date(
-                actuacion.fechaRegistro
+                actuacion.fechaRegistro 
               ),
               carpetaNumero: this.numero,
             };
-          }
+          } 
         );
 
         outActuaciones.forEach(
           (
-            actuacion
+            actuacion 
           ) => {
             this.actuaciones.push(
-              actuacion
+              actuacion 
             );
 
             if ( actuacion.isUltimaAct ) {
@@ -490,7 +485,7 @@ export class ClassCarpeta implements IntCarpeta {
               this.fecha = actuacion.fechaActuacion;
               this.idRegUltimaAct = actuacion.idRegActuacion;
             }
-          }
+          } 
         );
         continue;
       } catch ( error ) {
@@ -512,7 +507,7 @@ export class ClassCarpeta implements IntCarpeta {
 
     try {
       const request = await fetchWithSmartRetry(
-        fetchUrl
+        fetchUrl 
       ); // Use SmartRetry here too
 
       if ( !request.ok ) {
@@ -520,15 +515,15 @@ export class ClassCarpeta implements IntCarpeta {
 
         throw new Error(
           JSON.stringify(
-            json
-          )
+            json 
+          ) 
         );
       }
 
       const consultaProcesos = await request.json();
 
       const {
-        procesos
+        procesos 
       } = consultaProcesos;
 
       for ( const rawProceso of procesos ) {
@@ -540,31 +535,31 @@ export class ClassCarpeta implements IntCarpeta {
           ...rawProceso,
           fechaProceso: rawProceso.fechaProceso
             ? new Date(
-              rawProceso.fechaProceso
+              rawProceso.fechaProceso 
             )
             : null,
           fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
             ? new Date(
-              rawProceso.fechaUltimaActuacion
+              rawProceso.fechaUltimaActuacion 
             )
             : null,
           juzgado: JuzgadoClass.fromProceso(
-            rawProceso
+            rawProceso 
           ),
         };
 
         this.procesos.push(
-          proceso
+          proceso 
         );
         this.idProcesos.push(
-          proceso.idProceso
+          proceso.idProceso 
         );
       }
 
       return this.procesos;
     } catch ( error ) {
       console.log(
-        `${ this.numero } => error en getProcesosByName => ${ error }`
+        `${ this.numero } => error en getProcesosByName => ${ error }` 
       );
 
       return [];
@@ -577,48 +572,44 @@ export class ClassCarpeta implements IntCarpeta {
   //STATIC
 
   async agregateToDBMethod() {
-
     console.log(
-      `💾 Saving updates for ${ this.numero }...`
+      `💾 Saving updates for ${ this.numero }...` 
     );
 
-
-
-
     const newDemanda = ClassDemanda.prismaDemanda(
-      this.demanda
+      this.demanda 
     );
 
     const newDeudor = ClassDeudor.prismaDeudor(
-      this.deudor
+      this.deudor 
     );
 
     const newCarpeta = ClassCarpeta.prismaCarpeta(
-      this
+      this 
     );
 
     // 1. Upsert carpeta base (sin relaciones)
 
     try {
       console.log(
-        '📁 try carpeta upsert'
+        '📁 try carpeta upsert' 
       );
       await client.carpeta.upsert(
         {
           where: {
-            numero: this.numero
+            numero: this.numero,
           },
           create: {
-            ...newCarpeta
+            ...newCarpeta,
           },
           update: {
-            ...newCarpeta
+            ...newCarpeta,
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al crear carpeta base: ${ error }`
+        `❌ Error al crear carpeta base: ${ error }` 
       );
 
       //return;
@@ -627,12 +618,12 @@ export class ClassCarpeta implements IntCarpeta {
     // 2. Relacionar juzgado
     try {
       console.log(
-        '🧑‍⚖️ carpeta update juzgado'
+        '🧑‍⚖️ carpeta update juzgado' 
       );
       await client.carpeta.update(
         {
           where: {
-            numero: this.numero
+            numero: this.numero,
           },
           data: {
             juzgado: {
@@ -653,11 +644,11 @@ export class ClassCarpeta implements IntCarpeta {
               },
             },
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al conectar juzgado: ${ error }`
+        `❌ Error al conectar juzgado: ${ error }` 
       );
     }
 
@@ -665,18 +656,18 @@ export class ClassCarpeta implements IntCarpeta {
     if ( this.ultimaActuacion ) {
       try {
         console.log(
-          '☢️ try ultimaActuacion upsert and update carpeta'
+          '☢️ try ultimaActuacion upsert and update carpeta' 
         );
         await client.carpeta.update(
           {
             where: {
-              numero: this.numero
+              numero: this.numero,
             },
             data: {
               ultimaActuacion: {
                 connectOrCreate: {
                   where: {
-                    idRegActuacion: this.ultimaActuacion.idRegActuacion
+                    idRegActuacion: this.ultimaActuacion.idRegActuacion,
                   },
                   create: {
                     ...this.ultimaActuacion,
@@ -685,11 +676,11 @@ export class ClassCarpeta implements IntCarpeta {
                 },
               },
             },
-          }
+          } 
         );
       } catch ( error ) {
         console.log(
-          `❌ Error al conectar ultimaActuacion: ${ error }`
+          `❌ Error al conectar ultimaActuacion: ${ error }` 
         );
       }
     }
@@ -698,87 +689,86 @@ export class ClassCarpeta implements IntCarpeta {
     try {
       console.log(
         `
-        🙆 update carpeta with deudor`
-
+        🙆 update carpeta with deudor`,
       );
       await client.carpeta.update(
         {
           where: {
-            numero: this.numero
+            numero: this.numero,
           },
           data: {
             deudor: {
               connectOrCreate: {
                 where: {
-                  id: this.numero
+                  id: this.numero,
                 },
                 create: newDeudor,
               },
             },
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al conectar deudor: ${ error }`
+        `❌ Error al conectar deudor: ${ error }` 
       );
     }
 
     // 5. Relacionar demanda
     try {
       console.log(
-        '🕴️update carpeta with demanda'
+        '🕴️update carpeta with demanda' 
       );
       await client.carpeta.update(
         {
           where: {
-            numero: this.numero
+            numero: this.numero,
           },
           data: {
             demanda: {
               connectOrCreate: {
                 where: {
-                  id: this.numero
+                  id: this.numero,
                 },
                 create: newDemanda,
               },
             },
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al conectar demanda: ${ error }`
+        `❌ Error al conectar demanda: ${ error }` 
       );
     }
 
     // 6. Relacionar codeudor
     try {
       console.log(
-        '🧜 update carpeta with codeudor'
+        '🧜 update carpeta with codeudor' 
       );
       await client.carpeta.update(
         {
           where: {
-            numero: this.numero
+            numero: this.numero,
           },
           data: {
             codeudor: {
               connectOrCreate: {
                 where: {
-                  id: this.numero
+                  id: this.numero,
                 },
                 create: {
-                  ...this.codeudor
+                  ...this.codeudor,
                 },
               },
             },
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al conectar codeudor: ${ error }`
+        `❌ Error al conectar codeudor: ${ error }` 
       );
     }
 
@@ -786,17 +776,17 @@ export class ClassCarpeta implements IntCarpeta {
     if ( this.notas && this.notas.length > 0 ) {
       try {
         console.log(
-          '📓create notes'
+          '📓create notes' 
         );
         await client.nota.createMany(
           {
             data          : this.notas,
             skipDuplicates: true,
-          }
+          } 
         );
       } catch ( error ) {
         console.log(
-          `❌ Error al crear notas: ${ error }`
+          `❌ Error al crear notas: ${ error }` 
         );
       }
     }
@@ -806,7 +796,7 @@ export class ClassCarpeta implements IntCarpeta {
       for ( const proceso of this.procesos ) {
         try {
           const {
-            juzgado, ...restProceso
+            juzgado, ...restProceso 
           } = proceso;
 
           // Construir input para juzgado solo si existe
@@ -833,8 +823,8 @@ export class ClassCarpeta implements IntCarpeta {
             } ),
             carpeta: {
               connect: {
-                numero: this.numero
-              }
+                numero: this.numero,
+              },
             },
           };
 
@@ -864,25 +854,25 @@ export class ClassCarpeta implements IntCarpeta {
           await client.proceso.upsert(
             {
               where: {
-                idProceso: proceso.idProceso
+                idProceso: proceso.idProceso,
               },
               create: createData,
               update: updateData,
-            }
+            } 
           );
         } catch ( error ) {
           console.log(
-            `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`
+            `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`,
           );
         }
 
         // Actuaciones para este proceso
         const processActuaciones = this.actuaciones.filter(
           (
-            a
+            a 
           ) => {
             return a.idProceso === proceso.idProceso;
-          }
+          } 
         );
 
         for ( const actuacion of processActuaciones ) {
@@ -890,26 +880,26 @@ export class ClassCarpeta implements IntCarpeta {
             await client.actuacion.upsert(
               {
                 where: {
-                  idRegActuacion: actuacion.idRegActuacion
+                  idRegActuacion: actuacion.idRegActuacion,
                 },
                 create: {
                   ...actuacion,
                   idRegActuacion: `${ actuacion.idRegActuacion }`,
                   proceso       : {
                     connect: {
-                      idProceso: proceso.idProceso
-                    }
+                      idProceso: proceso.idProceso,
+                    },
                   },
                 },
                 update: {
                   ...actuacion,
                   isUltimaAct: actuacion.cant === actuacion.consActuacion,
                 },
-              }
+              } 
             );
           } catch ( error ) {
             console.log(
-              `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`
+              `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`,
             );
           }
         }
@@ -918,7 +908,7 @@ export class ClassCarpeta implements IntCarpeta {
   }
 
   static prismaCarpeta(
-    carpeta: IntCarpeta
+    carpeta: IntCarpeta 
   ) {
     const newCarpeta: Prisma.CarpetaCreateInput = {
       id                 : carpeta.id,
@@ -941,27 +931,27 @@ export class ClassCarpeta implements IntCarpeta {
   //!STATIC
   //STATICASYNC
   static async updateNotes(
-    incomingCarpeta: ClassCarpeta
+    incomingCarpeta: ClassCarpeta 
   ) {
     const {
-      notas
+      notas 
     } = incomingCarpeta;
 
     const updater = await client.nota.createMany(
       {
         data          : notas,
         skipDuplicates: true,
-      }
+      } 
     );
 
     console.log(
-      updater
+      updater 
     );
 
     return updater.count;
   }
   static async getCarpeta(
-    numero: number
+    numero: number 
   ) {
     return await client.carpeta.findFirstOrThrow(
       {
@@ -990,7 +980,7 @@ export class ClassCarpeta implements IntCarpeta {
             },
           },
         },
-      }
+      } 
     );
   }
   /*   static async updateCarpeta(
@@ -1065,11 +1055,10 @@ export class ClassCarpeta implements IntCarpeta {
   } */
 
   static async insertCarpeta(
-    incomingCarpeta: ClassCarpeta
+    incomingCarpeta: ClassCarpeta 
   ) {
-
     console.log(
-      `💾 Saving updates for ${ incomingCarpeta.numero }...`
+      `💾 Saving updates for ${ incomingCarpeta.numero }...` 
     );
 
     const {
@@ -1082,41 +1071,40 @@ export class ClassCarpeta implements IntCarpeta {
       notas,
     } = incomingCarpeta;
 
-
     const newDemanda = ClassDemanda.prismaDemanda(
-      demanda
+      demanda 
     );
 
     const newDeudor = ClassDeudor.prismaDeudor(
-      deudor
+      deudor 
     );
 
     const newCarpeta = ClassCarpeta.prismaCarpeta(
-      incomingCarpeta
+      incomingCarpeta 
     );
 
     // 1. Upsert carpeta base (sin relaciones)
 
     try {
       console.log(
-        '📁 try carpeta upsert'
+        '📁 try carpeta upsert' 
       );
       await client.carpeta.upsert(
         {
           where: {
-            numero: incomingCarpeta.numero
+            numero: incomingCarpeta.numero,
           },
           create: {
-            ...newCarpeta
+            ...newCarpeta,
           },
           update: {
-            fecha: newCarpeta.fecha
+            fecha: newCarpeta.fecha,
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al crear carpeta base: ${ error }`
+        `❌ Error al crear carpeta base: ${ error }` 
       );
 
       //return;
@@ -1125,12 +1113,12 @@ export class ClassCarpeta implements IntCarpeta {
     // 2. Relacionar juzgado
     try {
       console.log(
-        '🧑‍⚖️ carpeta update juzgado'
+        '🧑‍⚖️ carpeta update juzgado' 
       );
       await client.carpeta.update(
         {
           where: {
-            numero: incomingCarpeta.numero
+            numero: incomingCarpeta.numero,
           },
           data: {
             juzgado: {
@@ -1151,11 +1139,11 @@ export class ClassCarpeta implements IntCarpeta {
               },
             },
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al conectar juzgado: ${ error }`
+        `❌ Error al conectar juzgado: ${ error }` 
       );
     }
 
@@ -1163,18 +1151,18 @@ export class ClassCarpeta implements IntCarpeta {
     if ( ultimaActuacion ) {
       try {
         console.log(
-          '☢️ try ultimaActuacion upsert and update carpeta'
+          '☢️ try ultimaActuacion upsert and update carpeta' 
         );
         await client.carpeta.update(
           {
             where: {
-              numero: incomingCarpeta.numero
+              numero: incomingCarpeta.numero,
             },
             data: {
               ultimaActuacion: {
                 connectOrCreate: {
                   where: {
-                    idRegActuacion: ultimaActuacion.idRegActuacion
+                    idRegActuacion: ultimaActuacion.idRegActuacion,
                   },
                   create: {
                     ...ultimaActuacion,
@@ -1183,11 +1171,11 @@ export class ClassCarpeta implements IntCarpeta {
                 },
               },
             },
-          }
+          } 
         );
       } catch ( error ) {
         console.log(
-          `❌ Error al conectar ultimaActuacion: ${ error }`
+          `❌ Error al conectar ultimaActuacion: ${ error }` 
         );
       }
     }
@@ -1196,87 +1184,86 @@ export class ClassCarpeta implements IntCarpeta {
     try {
       console.log(
         `
-        🙆 update carpeta with deudor`
-
+        🙆 update carpeta with deudor`,
       );
       await client.carpeta.update(
         {
           where: {
-            numero: incomingCarpeta.numero
+            numero: incomingCarpeta.numero,
           },
           data: {
             deudor: {
               connectOrCreate: {
                 where: {
-                  id: incomingCarpeta.numero
+                  id: incomingCarpeta.numero,
                 },
                 create: newDeudor,
               },
             },
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al conectar deudor: ${ error }`
+        `❌ Error al conectar deudor: ${ error }` 
       );
     }
 
     // 5. Relacionar demanda
     try {
       console.log(
-        '🕴️update carpeta with demanda'
+        '🕴️update carpeta with demanda' 
       );
       await client.carpeta.update(
         {
           where: {
-            numero: incomingCarpeta.numero
+            numero: incomingCarpeta.numero,
           },
           data: {
             demanda: {
               connectOrCreate: {
                 where: {
-                  id: incomingCarpeta.numero
+                  id: incomingCarpeta.numero,
                 },
                 create: newDemanda,
               },
             },
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al conectar demanda: ${ error }`
+        `❌ Error al conectar demanda: ${ error }` 
       );
     }
 
     // 6. Relacionar codeudor
     try {
       console.log(
-        '🧜 update carpeta with codeudor'
+        '🧜 update carpeta with codeudor' 
       );
       await client.carpeta.update(
         {
           where: {
-            numero: incomingCarpeta.numero
+            numero: incomingCarpeta.numero,
           },
           data: {
             codeudor: {
               connectOrCreate: {
                 where: {
-                  id: incomingCarpeta.numero
+                  id: incomingCarpeta.numero,
                 },
                 create: {
-                  ...codeudor
+                  ...codeudor,
                 },
               },
             },
           },
-        }
+        } 
       );
     } catch ( error ) {
       console.log(
-        `❌ Error al conectar codeudor: ${ error }`
+        `❌ Error al conectar codeudor: ${ error }` 
       );
     }
 
@@ -1284,17 +1271,17 @@ export class ClassCarpeta implements IntCarpeta {
     if ( notas && notas.length > 0 ) {
       try {
         console.log(
-          '📓create notes'
+          '📓create notes' 
         );
         await client.nota.createMany(
           {
             data          : notas,
             skipDuplicates: true,
-          }
+          } 
         );
       } catch ( error ) {
         console.log(
-          `❌ Error al crear notas: ${ error }`
+          `❌ Error al crear notas: ${ error }` 
         );
       }
     }
@@ -1304,7 +1291,7 @@ export class ClassCarpeta implements IntCarpeta {
       for ( const proceso of procesos ) {
         try {
           const {
-            juzgado, ...restProceso
+            juzgado, ...restProceso 
           } = proceso;
 
           // Construir input para juzgado solo si existe
@@ -1331,8 +1318,8 @@ export class ClassCarpeta implements IntCarpeta {
             } ),
             carpeta: {
               connect: {
-                numero: incomingCarpeta.numero
-              }
+                numero: incomingCarpeta.numero,
+              },
             },
           };
 
@@ -1362,25 +1349,25 @@ export class ClassCarpeta implements IntCarpeta {
           await client.proceso.upsert(
             {
               where: {
-                idProceso: proceso.idProceso
+                idProceso: proceso.idProceso,
               },
               create: createData,
               update: updateData,
-            }
+            } 
           );
         } catch ( error ) {
           console.log(
-            `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`
+            `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`,
           );
         }
 
         // Actuaciones para este proceso
         const processActuaciones = actuaciones.filter(
           (
-            a
+            a 
           ) => {
             return a.idProceso === proceso.idProceso;
-          }
+          } 
         );
 
         for ( const actuacion of processActuaciones ) {
@@ -1388,26 +1375,26 @@ export class ClassCarpeta implements IntCarpeta {
             await client.actuacion.upsert(
               {
                 where: {
-                  idRegActuacion: actuacion.idRegActuacion
+                  idRegActuacion: actuacion.idRegActuacion,
                 },
                 create: {
                   ...actuacion,
                   idRegActuacion: `${ actuacion.idRegActuacion }`,
                   proceso       : {
                     connect: {
-                      idProceso: proceso.idProceso
-                    }
+                      idProceso: proceso.idProceso,
+                    },
                   },
                 },
                 update: {
                   ...actuacion,
                   isUltimaAct: actuacion.cant === actuacion.consActuacion,
                 },
-              }
+              } 
             );
           } catch ( error ) {
             console.log(
-              `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`
+              `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`,
             );
           }
         }

@@ -111,10 +111,10 @@ export class ClassNotificacion implements intNotificacion {
       } 
     );
   }
-  id: number;
-  notifiers: intNotifier[] = [];
-  certimail: boolean | null;
-  fisico: boolean | null;
+  id            : number;
+  notifiers     : intNotifier[] = [];
+  certimail     : boolean | null;
+  fisico        : boolean | null;
   autoNotificado: Date | null;
 
   static prismaNotificacion(

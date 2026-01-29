@@ -10,28 +10,28 @@ import { outProceso } from './procesos';
 import { NotasBuilder } from '../models/nota';
 
 export type IntCarpeta = {
-  category: string;
-  ciudad: string | null;
-  codeudor: Codeudor;
-  demanda: IntDemanda;
-  juzgado: Juzgado | null;
-  juzgadoTipo: string | null;
-  deudor: IntDeudor;
-  notasCount: number | null;
-  fecha: Date | null;
-  id: number;
-  idProcesos: number[];
-  idRegUltimaAct: string | null;
-  llaveProceso: string;
-  nombre: string;
-  numero: number;
-  procesos: outProceso[];
-  revisado: boolean;
+  category           : string;
+  ciudad             : string | null;
+  codeudor           : Codeudor;
+  demanda            : IntDemanda;
+  juzgado            : Juzgado | null;
+  juzgadoTipo        : string | null;
+  deudor             : IntDeudor;
+  notasCount         : number | null;
+  fecha              : Date | null;
+  id                 : number;
+  idProcesos         : number[];
+  idRegUltimaAct     : string | null;
+  llaveProceso       : string;
+  nombre             : string;
+  numero             : number;
+  procesos           : outProceso[];
+  revisado           : boolean;
   fechaUltimaRevision: Date | null;
-  terminado: boolean;
-  tipoProceso: TipoProceso;
-  ultimaActuacion: outActuacion | null;
-  notas: NotasBuilder[];
+  terminado          : boolean;
+  tipoProceso        : TipoProceso;
+  ultimaActuacion    : outActuacion | null;
+  notas              : NotasBuilder[];
 };
 
 export type Obligacion = {
@@ -48,11 +48,11 @@ export type Category =
   | 'Bancolombia';
 
 export interface Codeudor {
-  cedula: string | null;
+  cedula   : string | null;
   direccion: string | null;
-  id: number;
-  nombre: string | null;
-  telefono: string | null;
+  id       : number;
+  nombre   : string | null;
+  telefono : string | null;
 }
 
 export type ResultadoEnum =
@@ -105,14 +105,14 @@ export type FisicoEnum =
 
 export interface The291 {
   fechaRecibido?: number | string;
-  resultado?: number | string;
-  fechaAporta?: number | string;
+  resultado?    : number | string;
+  fechaAporta?  : number | string;
 }
 
 export interface The292 {
   fechaRecibido?: string;
-  fechaAporta?: number | string;
-  resultado?: ResultadoEnum | number;
+  fechaAporta?  : number | string;
+  resultado?    : ResultadoEnum | number;
 }
 
 export type DepartamentoRaw =
@@ -133,78 +133,78 @@ export type DepartamentoRaw =
   | '';
 
 export interface IntDeudor {
-  cedula: string;
-  direccion: string | null;
-  email: string | null;
-  id: number;
-  primerNombre: string;
-  segundoNombre: string | null;
-  primerApellido: string;
+  cedula         : string;
+  direccion      : string | null;
+  email          : string | null;
+  id             : number;
+  primerNombre   : string;
+  segundoNombre  : string | null;
+  primerApellido : string;
   segundoApellido: string | null;
-  telCelular: string | null;
-  telFijo: string | null;
+  telCelular     : string | null;
+  telFijo        : string | null;
 }
 
 export interface IntTel {
-  fijo: number | null;
+  fijo   : number | null;
   celular: number | null;
 }
 
 export interface IntDemanda {
-  capitalAdeudado: Prisma.Decimal;
-  departamento: string | null;
-  carpetaNumero: number;
-  despacho: null | string;
+  capitalAdeudado        : Prisma.Decimal;
+  departamento           : string | null;
+  carpetaNumero          : number;
+  despacho               : null | string;
   entregaGarantiasAbogado: Date | null;
-  etapaProcesal: null | string;
-  fechaPresentacion: Date[];
-  id: number;
-  llaveProceso: string | null;
-  mandamientoPago: Date[];
-  medidasCautelares: intMedidasCautelares;
-  municipio: string | null;
-  notificacion: intNotificacion;
-  obligacion: string[];
-  radicado: string | null;
-  tipoProceso: TipoProceso;
-  vencimientoPagare: Date[];
-  avaluo: Prisma.Decimal;
-  liquidacion: Prisma.Decimal;
+  etapaProcesal          : null | string;
+  fechaPresentacion      : Date[];
+  id                     : number;
+  llaveProceso           : string | null;
+  mandamientoPago        : Date[];
+  medidasCautelares      : intMedidasCautelares;
+  municipio              : string | null;
+  notificacion           : intNotificacion;
+  obligacion             : string[];
+  radicado               : string | null;
+  tipoProceso            : TipoProceso;
+  vencimientoPagare      : Date[];
+  avaluo                 : Prisma.Decimal;
+  liquidacion            : Prisma.Decimal;
 }
 
 export type intLiquidacion = {
-  valor: Prisma.Decimal;
-  fechaAprobacion: Date | null;
+  valor            : Prisma.Decimal;
+  fechaAprobacion  : Date | null;
   fechaPresentacion: Date | null;
 };
 
 export interface intMedidasCautelares {
-  id: number;
+  id               : number;
   fechaOrdenaMedida: Date | null;
-  medidaSolicitada: string | null;
+  medidaSolicitada : string | null;
 }
 
 export interface intNotificacion {
-  id: number;
-  certimail: boolean | null;
-  fisico: boolean | null;
+  id            : number;
+  certimail     : boolean | null;
+  fisico        : boolean | null;
   autoNotificado: Date | null;
-  notifiers: intNotifier[];
+  notifiers     : intNotifier[];
 }
 
 export interface intNotifier {
-  tipo: '291' | '292';
+  tipo         : '291' | '292';
   carpetaNumero: number;
   fechaRecibido: Date | null;
-  resultado: boolean | null;
-  fechaAporta: Date | null;
+  resultado    : boolean | null;
+  fechaAporta  : Date | null;
 }
 
 export type Juzgado = {
-  id: string;
-  tipo: string;
+  id    : string;
+  tipo  : string;
   ciudad: string;
-  url: string;
+  url   : string;
 };
 
 export type TipoProcesoRaw =

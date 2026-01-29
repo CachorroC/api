@@ -95,11 +95,11 @@ export default defineConfig(
         ],
         '@stylistic/jsx-closing-bracket-location': [
           'error',
-          'tag-aligned',
+          'tag-aligned'
         ],
         '@stylistic/template-curly-spacing': [
           'error',
-          'always',
+          'always'
         ],
         'function-paren-newline': [
           'error',

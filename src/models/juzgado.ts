@@ -76,10 +76,10 @@ export function extrapolateTipoToCorrectType(
 }
 
 class JuzgadoClass implements Juzgado {
-  id: string;
-  tipo: string;
+  id    : string;
+  tipo  : string;
   ciudad: string;
-  url: string;
+  url   : string;
 
   constructor(
     {
@@ -87,8 +87,8 @@ class JuzgadoClass implements Juzgado {
       tipo,
       ciudad,
     }: {
-      id: string;
-      tipo: string;
+      id    : string;
+      tipo  : string;
       ciudad: string;
     } 
   ) {
@@ -149,7 +149,7 @@ class JuzgadoClass implements Juzgado {
       ciudad,
       juzgadoRaw,
     }: {
-      ciudad: string;
+      ciudad    : string;
       juzgadoRaw: string;
     } 
   ) {

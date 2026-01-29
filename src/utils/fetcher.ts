@@ -10,7 +10,7 @@ export async function fetchWithSmartRetry(
   while ( attempt < maxRetries ) {
     try {
       const response = await fetch(
-        url, options
+        url, options 
       );
 
       // Reintentar solo si el status es 429, 500, 502, 503, 504
@@ -21,11 +21,11 @@ export async function fetchWithSmartRetry(
         503,
         504
       ].includes(
-        response.status
+        response.status 
       ) ) {
         if ( attempt < maxRetries - 1 ) {
           await wait(
-            retryDelay
+            retryDelay 
           );
           attempt++;
           continue;
@@ -44,7 +44,7 @@ export async function fetchWithSmartRetry(
 
       if ( isNetworkError && attempt < maxRetries - 1 ) {
         await wait(
-          retryDelay
+          retryDelay 
         );
         attempt++;
         continue;
@@ -73,7 +73,7 @@ export class ApiError extends Error {
     public statusCode?: number,
   ) {
     super(
-      message
+      message 
     );
     this.name = 'ApiError';
   }
@@ -81,16 +81,16 @@ export class ApiError extends Error {
 
 //GG --- Helper: Delay ---
 export const wait = (
-  ms: number
+  ms: number 
 ) => {
   return new Promise(
     (
-      resolve
+      resolve 
     ) => {
       return setTimeout(
-        resolve, ms
+        resolve, ms 
       );
-    }
+    } 
   );
 };
 
@@ -99,10 +99,10 @@ export class FileLogger {
   private filePath: string;
 
   constructor(
-    filename: string
+    filename: string 
   ) {
     this.filePath = path.join(
-      __dirname, filename
+      __dirname, filename 
     );
   }
 
@@ -117,15 +117,17 @@ export class FileLogger {
     let currentLog = [];
 
     if ( fs.existsSync(
-      this.filePath
+      this.filePath 
     ) ) {
       try {
         currentLog = JSON.parse(
           fs.readFileSync(
-            this.filePath, 'utf-8'
-          )
+            this.filePath, 'utf-8' 
+          ) 
         );
-      } catch {/*ignore*/}
+      } catch {
+        /*ignore*/
+      }
     }
 
     currentLog.push(
@@ -136,13 +138,13 @@ export class FileLogger {
         parentId: contextId, //? The ID used for the fetch URL
         error,
         data    : subItem, //? The specific item that failed (or the whole request if phase is FETCH)
-      }
+      } 
     );
 
     fs.writeFileSync(
       this.filePath, JSON.stringify(
-        currentLog, null, 2
-      )
+        currentLog, null, 2 
+      ) 
     );
   }
 }
@@ -154,11 +156,11 @@ export class RobustApiClient {
   private readonly RATE_LIMIT_DELAY_MS = 12000; //? 12 seconds per request
 
   constructor(
-    baseUrl: string
+    baseUrl: string 
   ) {
     this.baseUrl = baseUrl;
     this.logger = new FileLogger(
-      'failed_sync_ops.json'
+      'failed_sync_ops.json' 
     );
   }
 
@@ -172,12 +174,12 @@ export class RobustApiClient {
     while ( attempt < maxRetries ) {
       try {
         const response = await fetch(
-          `${ this.baseUrl }${ endpoint }`
+          `${ this.baseUrl }${ endpoint }` 
         );
 
         if ( !response.ok ) {
           throw new ApiError(
-            `HTTP Error: ${ response.status }`, response.status
+            `HTTP Error: ${ response.status }`, response.status 
           );
         }
 
@@ -196,13 +198,13 @@ export class RobustApiClient {
         }
 
         await wait(
-          2000
+          2000 
         ); //? Short wait for retry
       }
     }
 
     throw new Error(
-      'Unreachable'
+      'Unreachable' 
     );
   }
 
@@ -220,7 +222,7 @@ export class RobustApiClient {
     dbHandler: ( actuacion: any, parentItem: U ) => Promise<void>,
   ): Promise<void> {
     console.log(
-      `🚀 Starting process for ${ items.length } URL targets...`
+      `🚀 Starting process for ${ items.length } URL targets...` 
     );
 
     for ( const [
@@ -230,10 +232,10 @@ export class RobustApiClient {
       //GG --- A. Rate Limiting (Throttle the Fetch) ---
       if ( index > 0 ) {
         console.log(
-          '⏳ Waiting 12s for rate limit...'
+          '⏳ Waiting 12s for rate limit...' 
         );
         await wait(
-          this.RATE_LIMIT_DELAY_MS
+          this.RATE_LIMIT_DELAY_MS 
         );
       }
 
@@ -242,14 +244,14 @@ export class RobustApiClient {
 
       try {
         const endpoint = pathBuilder(
-          parentItem
+          parentItem 
         );
 
         console.log(
-          `🌐 Fetching: ${ endpoint }`
+          `🌐 Fetching: ${ endpoint }` 
         );
         responseData = await this.fetchWithRetry<ConsultaActuacion>(
-          endpoint
+          endpoint 
         );
       } catch ( err ) {
         const msg = err instanceof Error
@@ -261,7 +263,7 @@ export class RobustApiClient {
         );
         //?? Log the PARENT item as failed because we couldn't even get the list
         this.logger.logFailure(
-          parentItem.idProceso, parentItem, msg, 'FETCH'
+          parentItem.idProceso, parentItem, msg, 'FETCH' 
         );
         continue; //? Move to next URL
       }
@@ -282,30 +284,32 @@ export class RobustApiClient {
       for ( const actuacion of actuacionesList ) {
         const outActuacion: outActuacion = {
           ...actuacion,
-          fechaActuacion: actuacion.fechaActuacion instanceof Date
-            ? actuacion.fechaActuacion
-            : new Date(
-              actuacion.fechaActuacion
-            ),
+          fechaActuacion:
+            actuacion.fechaActuacion instanceof Date
+              ? actuacion.fechaActuacion
+              : new Date(
+                actuacion.fechaActuacion 
+              ),
           fechaFinal: actuacion.fechaFinal
-            ? ( actuacion.fechaFinal instanceof Date
-                ? actuacion.fechaFinal
-                : new Date(
-                  actuacion.fechaFinal
-                ) )
+            ? actuacion.fechaFinal instanceof Date
+              ? actuacion.fechaFinal
+              : new Date(
+                actuacion.fechaFinal 
+              )
             : null,
           fechaInicial: actuacion.fechaInicial
-            ? ( actuacion.fechaInicial instanceof Date
-                ? actuacion.fechaInicial
-                : new Date(
-                  actuacion.fechaInicial
-                ) )
+            ? actuacion.fechaInicial instanceof Date
+              ? actuacion.fechaInicial
+              : new Date(
+                actuacion.fechaInicial 
+              )
             : null,
-          fechaRegistro: actuacion.fechaRegistro instanceof Date
-            ? actuacion.fechaRegistro
-            : new Date(
-              actuacion.fechaRegistro
-            ),
+          fechaRegistro:
+            actuacion.fechaRegistro instanceof Date
+              ? actuacion.fechaRegistro
+              : new Date(
+                actuacion.fechaRegistro 
+              ),
           createdAt     : new Date(),
           idProceso     : parentItem.idProceso,
           isUltimaAct   : actuacion.cant === actuacion.consActuacion,
@@ -315,7 +319,7 @@ export class RobustApiClient {
         try {
           //? Call the Prisma handler for this specific sub-item
           await dbHandler(
-            outActuacion, parentItem
+            outActuacion, parentItem 
           );
 
           //? Optional: Add a tiny delay here if DB is overwhelmed, usually not needed for upserts
@@ -343,41 +347,42 @@ export class RobustApiClient {
         await Actuacion.prismaUpdaterActuaciones(
           actuacionesList.map(
             (
-              actuacion
+              actuacion 
             ) => {
-
               return {
                 ...actuacion,
-                fechaActuacion: actuacion.fechaActuacion instanceof Date
+                fechaActuacion:
+                actuacion.fechaActuacion instanceof Date
                   ? actuacion.fechaActuacion
                   : new Date(
-                    actuacion.fechaActuacion
+                    actuacion.fechaActuacion 
                   ),
                 fechaFinal: actuacion.fechaFinal
-                  ? ( actuacion.fechaFinal instanceof Date
-                      ? actuacion.fechaFinal
-                      : new Date(
-                        actuacion.fechaFinal
-                      ) )
+                  ? actuacion.fechaFinal instanceof Date
+                    ? actuacion.fechaFinal
+                    : new Date(
+                      actuacion.fechaFinal 
+                    )
                   : null,
                 fechaInicial: actuacion.fechaInicial
-                  ? ( actuacion.fechaInicial instanceof Date
-                      ? actuacion.fechaInicial
-                      : new Date(
-                        actuacion.fechaInicial
-                      ) )
+                  ? actuacion.fechaInicial instanceof Date
+                    ? actuacion.fechaInicial
+                    : new Date(
+                      actuacion.fechaInicial 
+                    )
                   : null,
-                fechaRegistro: actuacion.fechaRegistro instanceof Date
+                fechaRegistro:
+                actuacion.fechaRegistro instanceof Date
                   ? actuacion.fechaRegistro
                   : new Date(
-                    actuacion.fechaRegistro
+                    actuacion.fechaRegistro 
                   ),
                 createdAt     : new Date(),
                 idProceso     : parentItem.idProceso,
                 isUltimaAct   : actuacion.cant === actuacion.consActuacion,
                 idRegActuacion: `${ actuacion.idRegActuacion }`,
               };
-            }
+            } 
           ),
           parentItem.carpetaNumero,
           parentItem.carpetaId,

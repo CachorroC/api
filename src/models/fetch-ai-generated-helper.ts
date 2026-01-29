@@ -98,10 +98,10 @@ export function extrapolateTipoToCorrectType(
 }
 
 class JuzgadoClass {
-  id: string;
-  tipo: string;
+  id    : string;
+  tipo  : string;
   ciudad: string;
-  url: string;
+  url   : string;
 
   constructor(
     {
@@ -109,8 +109,8 @@ class JuzgadoClass {
       tipo,
       ciudad,
     }: {
-      id: string;
-      tipo: string;
+      id    : string;
+      tipo  : string;
       ciudad: string;
     } 
   ) {
@@ -166,7 +166,7 @@ class JuzgadoClass {
       ciudad,
       juzgadoRaw,
     }: {
-      ciudad: string;
+      ciudad    : string;
       juzgadoRaw: string;
     } 
   ) {
@@ -286,36 +286,36 @@ const sleep = (
 
 export class ClassCarpeta {
   private baseUrl: string;
-  private logger: FileLogger;
+  private logger : FileLogger;
   private readonly RATE_LIMIT_DELAY_MS = 12500; // Increased slightly to be safe (5 req/min)
 
   //PROPERTIES
-  procesos: databaseProceso[] = [];
-  idProcesos: number[] = [];
+  procesos   : databaseProceso[] = [];
+  idProcesos : number[] = [];
   actuaciones: databaseActuacion[] = [];
-  notas: NotasBuilder[] = [];
+  notas      : NotasBuilder[] = [];
 
   //PROPERTIES reg objects
   ultimaActuacion: databaseActuacion | null;
-  codeudor: Codeudor;
-  demanda: ClassDemanda;
-  deudor: ClassDeudor;
+  codeudor       : Codeudor;
+  demanda        : ClassDemanda;
+  deudor         : ClassDeudor;
 
   //PROPERTIES primitive types
-  numero: number;
-  llaveProceso: string;
-  fecha: Date | null;
-  idRegUltimaAct: string | null;
-  id: number;
-  category: string;
-  nombre: string;
-  revisado: boolean;
-  terminado: boolean;
-  tipoProceso: TipoProceso;
-  notasCount: number | null;
-  juzgadoTipo: string | null;
-  ciudad: string | null;
-  juzgado: JuzgadoClass;
+  numero             : number;
+  llaveProceso       : string;
+  fecha              : Date | null;
+  idRegUltimaAct     : string | null;
+  id                 : number;
+  category           : string;
+  nombre             : string;
+  revisado           : boolean;
+  terminado          : boolean;
+  tipoProceso        : TipoProceso;
+  notasCount         : number | null;
+  juzgadoTipo        : string | null;
+  ciudad             : string | null;
+  juzgado            : JuzgadoClass;
   fechaUltimaRevision: Date | null;
 
   constructor(
