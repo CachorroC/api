@@ -245,18 +245,18 @@ async function runSync() {
             idRegActuacion: `${ actuacion.idRegActuacion }`,
             idProceso     : parentProc.idProceso, // Linking back to our local Parent ID
             consActuacion : actuacion.consActuacion,
+            actuacion     : actuacion.actuacion,
+            anotacion     : actuacion.anotacion,
+            cant          : actuacion.cant,
+            carpetaNumero : parentProc.carpetaNumero,
+            codRegla      : actuacion.codRegla,
+            conDocumentos : actuacion.conDocumentos,
+            createdAt     : new Date(),
+            llaveProceso  : parentProc.llaveProceso,
             fechaRegistro : new Date(
               actuacion.fechaRegistro
             ),
-            actuacion    : actuacion.actuacion,
-            anotacion    : actuacion.anotacion,
-            cant         : actuacion.cant,
-            carpetaNumero: parentProc.carpetaNumero,
-            codRegla     : actuacion.codRegla,
-            conDocumentos: actuacion.conDocumentos,
-            createdAt    : new Date(),
-            llaveProceso : parentProc.llaveProceso,
-            proceso      : {
+            proceso: {
               connect: {
                 idProceso: parentProc.idProceso,
               },

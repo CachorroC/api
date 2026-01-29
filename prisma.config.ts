@@ -8,7 +8,9 @@ export default defineConfig(
       path: 'prisma/migrations',
     },
     datasource: {
-      url: 'postgresql://postgres:Tengo1amo@192.168.1.101:5432/RyS?schema=public',
+      url: env(
+        'DATABASE_URL' 
+      )
     },
-  } 
+  }
 );
