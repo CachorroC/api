@@ -273,3 +273,4 @@ dist
 src/date
 
 *.json
+*.txt
