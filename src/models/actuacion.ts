@@ -137,7 +137,7 @@ export default class Actuacion {
             } );
 
           console.log( JSON.stringify(
-            updateCarpeta, null, 2 
+            updateCarpeta, null, 2
           ) );
 
           await fs.mkdir(
@@ -219,6 +219,11 @@ export default class Actuacion {
                 idRegActuacion: `${ ultimaActuacion.idRegActuacion }`,
                 idProceso     : Number( ultimaActuacion.idProceso ),
                 carpetaNumero : numero,
+                proceso       : {
+                  connect: {
+                    idProceso: ultimaActuacion.idProceso,
+                  }
+                }
               },
             },
           },

@@ -20,7 +20,7 @@ model Carpeta {
   revisado            Boolean    @default(false)
   terminado           Boolean    @default(false)
   updatedAt           DateTime   @updatedAt
-  category            String     @default("SinEspecificar")
+  category            Category   @default(SinEspecificar)
   tipoProceso         String     @default("SINGULAR")
   notasCount          Int?
   fechaUltimaRevision DateTime?  @db.Date
@@ -250,6 +250,7 @@ enum Category {
   Reintegra
   Insolvencia
   SinEspecificar
+  SinTercero
   todos
 }
 

@@ -49,7 +49,7 @@ export type CarpetaMinAggregateOutputType = {
   revisado: boolean | null
   terminado: boolean | null
   updatedAt: Date | null
-  category: string | null
+  category: $Enums.Category | null
   tipoProceso: string | null
   notasCount: number | null
   fechaUltimaRevision: Date | null
@@ -69,7 +69,7 @@ export type CarpetaMaxAggregateOutputType = {
   revisado: boolean | null
   terminado: boolean | null
   updatedAt: Date | null
-  category: string | null
+  category: $Enums.Category | null
   tipoProceso: string | null
   notasCount: number | null
   fechaUltimaRevision: Date | null
@@ -275,7 +275,7 @@ export type CarpetaGroupByOutputType = {
   revisado: boolean
   terminado: boolean
   updatedAt: Date
-  category: string
+  category: $Enums.Category
   tipoProceso: string
   notasCount: number | null
   fechaUltimaRevision: Date | null
@@ -319,7 +319,7 @@ export type CarpetaWhereInput = {
   revisado?: Prisma.BoolFilter<"Carpeta"> | boolean
   terminado?: Prisma.BoolFilter<"Carpeta"> | boolean
   updatedAt?: Prisma.DateTimeFilter<"Carpeta"> | Date | string
-  category?: Prisma.StringFilter<"Carpeta"> | string
+  category?: Prisma.EnumCategoryFilter<"Carpeta"> | $Enums.Category
   tipoProceso?: Prisma.StringFilter<"Carpeta"> | string
   notasCount?: Prisma.IntNullableFilter<"Carpeta"> | number | null
   fechaUltimaRevision?: Prisma.DateTimeNullableFilter<"Carpeta"> | Date | string | null
@@ -382,7 +382,7 @@ export type CarpetaWhereUniqueInput = Prisma.AtLeast<{
   revisado?: Prisma.BoolFilter<"Carpeta"> | boolean
   terminado?: Prisma.BoolFilter<"Carpeta"> | boolean
   updatedAt?: Prisma.DateTimeFilter<"Carpeta"> | Date | string
-  category?: Prisma.StringFilter<"Carpeta"> | string
+  category?: Prisma.EnumCategoryFilter<"Carpeta"> | $Enums.Category
   tipoProceso?: Prisma.StringFilter<"Carpeta"> | string
   notasCount?: Prisma.IntNullableFilter<"Carpeta"> | number | null
   fechaUltimaRevision?: Prisma.DateTimeNullableFilter<"Carpeta"> | Date | string | null
@@ -441,7 +441,7 @@ export type CarpetaScalarWhereWithAggregatesInput = {
   revisado?: Prisma.BoolWithAggregatesFilter<"Carpeta"> | boolean
   terminado?: Prisma.BoolWithAggregatesFilter<"Carpeta"> | boolean
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Carpeta"> | Date | string
-  category?: Prisma.StringWithAggregatesFilter<"Carpeta"> | string
+  category?: Prisma.EnumCategoryWithAggregatesFilter<"Carpeta"> | $Enums.Category
   tipoProceso?: Prisma.StringWithAggregatesFilter<"Carpeta"> | string
   notasCount?: Prisma.IntNullableWithAggregatesFilter<"Carpeta"> | number | null
   fechaUltimaRevision?: Prisma.DateTimeNullableWithAggregatesFilter<"Carpeta"> | Date | string | null
@@ -462,7 +462,7 @@ export type CarpetaCreateInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -488,7 +488,7 @@ export type CarpetaUncheckedCreateInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -516,7 +516,7 @@ export type CarpetaUpdateInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -542,7 +542,7 @@ export type CarpetaUncheckedUpdateInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -570,7 +570,7 @@ export type CarpetaCreateManyInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -591,7 +591,7 @@ export type CarpetaUpdateManyMutationInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -608,7 +608,7 @@ export type CarpetaUncheckedUpdateManyInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -753,6 +753,10 @@ export type BoolFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type EnumCategoryFieldUpdateOperationsInput = {
+  set?: $Enums.Category
 }
 
 export type NullableIntFieldUpdateOperationsInput = {
@@ -965,7 +969,7 @@ export type CarpetaCreateWithoutFacturasInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -990,7 +994,7 @@ export type CarpetaUncheckedCreateWithoutFacturasInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1033,7 +1037,7 @@ export type CarpetaUpdateWithoutFacturasInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1058,7 +1062,7 @@ export type CarpetaUncheckedUpdateWithoutFacturasInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1085,7 +1089,7 @@ export type CarpetaCreateWithoutDeudorInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1110,7 +1114,7 @@ export type CarpetaUncheckedCreateWithoutDeudorInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1153,7 +1157,7 @@ export type CarpetaUpdateWithoutDeudorInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1178,7 +1182,7 @@ export type CarpetaUncheckedUpdateWithoutDeudorInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1205,7 +1209,7 @@ export type CarpetaCreateWithoutCodeudorInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1230,7 +1234,7 @@ export type CarpetaUncheckedCreateWithoutCodeudorInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1273,7 +1277,7 @@ export type CarpetaUpdateWithoutCodeudorInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1298,7 +1302,7 @@ export type CarpetaUncheckedUpdateWithoutCodeudorInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1325,7 +1329,7 @@ export type CarpetaCreateWithoutDemandaInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1350,7 +1354,7 @@ export type CarpetaUncheckedCreateWithoutDemandaInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1393,7 +1397,7 @@ export type CarpetaUpdateWithoutDemandaInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1418,7 +1422,7 @@ export type CarpetaUncheckedUpdateWithoutDemandaInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1445,7 +1449,7 @@ export type CarpetaCreateWithoutNotasInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1470,7 +1474,7 @@ export type CarpetaUncheckedCreateWithoutNotasInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1513,7 +1517,7 @@ export type CarpetaUpdateWithoutNotasInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1538,7 +1542,7 @@ export type CarpetaUncheckedUpdateWithoutNotasInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1565,7 +1569,7 @@ export type CarpetaCreateWithoutTareasInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1590,7 +1594,7 @@ export type CarpetaUncheckedCreateWithoutTareasInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1633,7 +1637,7 @@ export type CarpetaUpdateWithoutTareasInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1658,7 +1662,7 @@ export type CarpetaUncheckedUpdateWithoutTareasInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1685,7 +1689,7 @@ export type CarpetaCreateWithoutUltimaActuacionInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1710,7 +1714,7 @@ export type CarpetaUncheckedCreateWithoutUltimaActuacionInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1766,7 +1770,7 @@ export type CarpetaScalarWhereInput = {
   revisado?: Prisma.BoolFilter<"Carpeta"> | boolean
   terminado?: Prisma.BoolFilter<"Carpeta"> | boolean
   updatedAt?: Prisma.DateTimeFilter<"Carpeta"> | Date | string
-  category?: Prisma.StringFilter<"Carpeta"> | string
+  category?: Prisma.EnumCategoryFilter<"Carpeta"> | $Enums.Category
   tipoProceso?: Prisma.StringFilter<"Carpeta"> | string
   notasCount?: Prisma.IntNullableFilter<"Carpeta"> | number | null
   fechaUltimaRevision?: Prisma.DateTimeNullableFilter<"Carpeta"> | Date | string | null
@@ -1787,7 +1791,7 @@ export type CarpetaCreateWithoutJuzgadoInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1812,7 +1816,7 @@ export type CarpetaUncheckedCreateWithoutJuzgadoInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1863,7 +1867,7 @@ export type CarpetaCreateWithoutProcesosInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1888,7 +1892,7 @@ export type CarpetaUncheckedCreateWithoutProcesosInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -1931,7 +1935,7 @@ export type CarpetaUpdateWithoutProcesosInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1956,7 +1960,7 @@ export type CarpetaUncheckedUpdateWithoutProcesosInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1983,7 +1987,7 @@ export type CarpetaCreateManyUltimaActuacionInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -2003,7 +2007,7 @@ export type CarpetaUpdateWithoutUltimaActuacionInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2028,7 +2032,7 @@ export type CarpetaUncheckedUpdateWithoutUltimaActuacionInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2055,7 +2059,7 @@ export type CarpetaUncheckedUpdateManyWithoutUltimaActuacionInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2075,7 +2079,7 @@ export type CarpetaCreateManyJuzgadoInput = {
   revisado?: boolean
   terminado?: boolean
   updatedAt?: Date | string
-  category?: string
+  category?: $Enums.Category
   tipoProceso?: string
   notasCount?: number | null
   fechaUltimaRevision?: Date | string | null
@@ -2093,7 +2097,7 @@ export type CarpetaUpdateWithoutJuzgadoInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2118,7 +2122,7 @@ export type CarpetaUncheckedUpdateWithoutJuzgadoInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2143,7 +2147,7 @@ export type CarpetaUncheckedUpdateManyWithoutJuzgadoInput = {
   revisado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   terminado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   tipoProceso?: Prisma.StringFieldUpdateOperationsInput | string
   notasCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fechaUltimaRevision?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2352,7 +2356,7 @@ export type $CarpetaPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     revisado: boolean
     terminado: boolean
     updatedAt: Date
-    category: string
+    category: $Enums.Category
     tipoProceso: string
     notasCount: number | null
     fechaUltimaRevision: Date | null
@@ -2802,7 +2806,7 @@ export interface CarpetaFieldRefs {
   readonly revisado: Prisma.FieldRef<"Carpeta", 'Boolean'>
   readonly terminado: Prisma.FieldRef<"Carpeta", 'Boolean'>
   readonly updatedAt: Prisma.FieldRef<"Carpeta", 'DateTime'>
-  readonly category: Prisma.FieldRef<"Carpeta", 'String'>
+  readonly category: Prisma.FieldRef<"Carpeta", 'Category'>
   readonly tipoProceso: Prisma.FieldRef<"Carpeta", 'String'>
   readonly notasCount: Prisma.FieldRef<"Carpeta", 'Int'>
   readonly fechaUltimaRevision: Prisma.FieldRef<"Carpeta", 'DateTime'>

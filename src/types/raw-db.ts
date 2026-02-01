@@ -4,6 +4,8 @@
 //
 //   const rawDb = Convert.toRawDb(json);
 
+import { Category } from './carpetas';
+
 export type RawDb = {
   NUMERO                                   : number;
   DEMANDADO_IDENTIFICACION?                : Empty;
@@ -131,13 +133,6 @@ export type FechaNotificacionEnum =
   | '08/10/2018'
   | '|';
 
-export type Category =
-  | 'Terminados'
-  | 'Insolvencia'
-  | 'Reintegra'
-  | 'Lios Juridicos'
-  | 'Sin Tercero'
-  | 'Bancolombia';
 
 // Converts JSON strings to/from your types
 export class Convert {

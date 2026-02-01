@@ -4,13 +4,13 @@
 //
 //   const CarpetaRaw = Convert.toCarpetaRaw(json);
 
-import { Prisma } from '@prisma/client';
 import { outActuacion } from './actuaciones';
 import { outProceso } from './procesos';
 import { NotasBuilder } from '../models/nota';
+import { Prisma } from '../prisma/generated/prisma/client';
 
 export type IntCarpeta = {
-  category           : string;
+  category           : Category;
   ciudad             : string | null;
   codeudor           : Codeudor;
   demanda            : IntDemanda;
@@ -43,8 +43,8 @@ export type Category =
   | 'Terminados'
   | 'Insolvencia'
   | 'Reintegra'
-  | 'Lios Juridicos'
-  | 'Sin Tercero'
+  | 'LiosJuridicos'
+  | 'SinTercero'
   | 'Bancolombia';
 
 export interface Codeudor {

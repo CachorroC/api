@@ -1,5 +1,5 @@
 import { ConsultaActuacion, outActuacion } from '../types/actuaciones.js';
-import { Codeudor,
+import { Category, Codeudor,
   IntCarpeta,
   Juzgado,
   TipoProceso, } from '../types/carpetas.js';
@@ -12,7 +12,7 @@ import { tipoProcesoBuilder } from './tipoProceso.js';
 import { client } from '../services/prisma.js';
 import { sleep } from '../utils/awaiter.js';
 import JuzgadoClass from './juzgado.js';
-import { Prisma } from '../prisma/generated/prisma/client.js';
+import {  Prisma } from '../prisma/generated/prisma/client.js';
 
 // ⚠️ Desactiva la verificación de certificados SSL/TLS.
 // Esto es común cuando se consumen APIs gubernamentales antiguas o mal configuradas,
@@ -68,7 +68,7 @@ async function enforceRateLimit() {
  * 2. Hace la petición.
  * 3. Si falla con un error recuperable (500, 429), se llama a sí misma recursivamente (reintenta).
  */
-async function fetchWithSmartRetry(
+export async function fetchWithSmartRetry(
   url: string | URL,
 
   options?: RequestInit,
@@ -132,7 +132,7 @@ export class ClassCarpeta implements IntCarpeta {
   fecha              : Date | null;
   idRegUltimaAct     : string | null;
   id                 : number;
-  category           : string;
+  category           : Category;
   nombre             : string;
   revisado           : boolean;
   terminado          : boolean;
@@ -225,19 +225,17 @@ export class ClassCarpeta implements IntCarpeta {
     this.notasCount = notasCounter;
     this.id = idBuilder;
     this.idRegUltimaAct = null;
-    this.category = category;
+    this.category = category.replaceAll(
+      ' ', ''
+    ) as Category;
     this.ciudad = String( JUZGADO_CIUDAD );
     this.numero = isNaN( Number( NUMERO ) )
       ? this.id
       : Number( NUMERO );
     this.deudor = new ClassDeudor( rawCarpeta );
-
-    this.llaveProceso = String( EXPEDIENTE )
-      .trim();
     this.demanda = new ClassDemanda( rawCarpeta );
     this.nombre = String( DEMANDADO_NOMBRE );
     this.revisado = false;
-
     // 👥 Construcción del objeto Codeudor
     this.codeudor = {
       nombre: CODEUDOR_NOMBRE
@@ -265,6 +263,9 @@ export class ClassCarpeta implements IntCarpeta {
     this.ultimaActuacion = null;
     this.llaveProceso = EXPEDIENTE
       ? String( EXPEDIENTE )
+          .replace(
+            /\s/g, ''
+          )
       : 'SinEspecificar';
     this.numero = Number( NUMERO );
     this.ciudad = String( JUZGADO_CIUDAD );
@@ -410,7 +411,7 @@ export class ClassCarpeta implements IntCarpeta {
 
       // 🔄 Itera sobre los procesos encontrados y los formatea
       for ( const rawProceso of procesos ) {
-        if ( rawProceso.esPrivado ) {
+        if ( rawProceso.esPrivado || rawProceso.idProceso === 3175205751 ) {
           continue;
         }
 

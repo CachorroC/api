@@ -15,7 +15,7 @@ const __dirname = dirname( __filename );
 
 // 2. Define the interface for your output object
 interface ProcessedExpediente {
-  llaveProceso: string;
+  ciudad: string;
 }
 
 /**
@@ -31,14 +31,20 @@ async function exportExpedientesToJson(
     // We iterate over the array, convert EXPEDIENTE to string, and return the new object structure
     const outputData: ProcessedExpediente[] = rawData.map( ( item ) => {
       return {
-        llaveProceso: String( item.EXPEDIENTE ) // Ensures it is converted to a string
+        ciudad: String( item.JUZGADO_CIUDAD ) // Ensures it is converted to a string
       };
     } );
+
+    const setData = new Set();
+
+    for ( const data of outputData ) {
+      setData.add( data.ciudad );
+    }
 
     // Step 2: Convert to JSON string
     // The 'null, 2' arguments make the JSON readable (pretty-printed) as requested
     const jsonContent = JSON.stringify(
-      outputData, null, 2
+      Array.from( setData ), null, 2
     );
 
     // Step 3: Write to file
@@ -65,5 +71,5 @@ async function exportExpedientesToJson(
 
 // Run the function
 exportExpedientesToJson(
-  RawCarpetas, 'expedientes.json'
+  RawCarpetas, 'ciudades.json'
 );

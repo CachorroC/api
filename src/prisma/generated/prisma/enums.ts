@@ -24,6 +24,7 @@ export const Category = {
   Reintegra: 'Reintegra',
   Insolvencia: 'Insolvencia',
   SinEspecificar: 'SinEspecificar',
+  SinTercero: 'SinTercero',
   todos: 'todos'
 } as const
 

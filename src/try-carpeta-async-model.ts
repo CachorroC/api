@@ -37,11 +37,30 @@ async function tryAsyncClassCarpetas() {
   const BATCH_SIZE = 1;
 
   await processBatch(
-    rawData, BATCH_SIZE, async ( item ) => {
+    rawData,
+    BATCH_SIZE,
+    async ( item ) => {
       try {
       // Instantiate only when needed to save memory
         const carpeta = new ClassCarpeta( item.raw );
         console.log( `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }` );
+        /* try {
+          const existingCarpeta = await client.carpeta.findUnique( {
+          where: {
+            numero: carpeta.numero
+          }
+        } )
+        if ( existingCarpeta && existingCarpeta.llaveProceso === carpeta.llaveProceso )
+        {
+          return
+        }
+        } catch (error) {
+          console.error(
+          `❌ Error processing prisma find unique  ${ item.numero }:`,
+          error
+        );
+        } */
+
         // Fetch Data
         await carpeta.getProcesos();
         /* await sleep(
