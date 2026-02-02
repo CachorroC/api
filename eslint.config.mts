@@ -23,7 +23,7 @@ export default defineConfig( [
       globals: {
         ...globals.browser,
         ...globals.node,
-        'RequestInit': true
+        RequestInit: true,
       },
     },
     ignores: [

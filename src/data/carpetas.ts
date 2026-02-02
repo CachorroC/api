@@ -11,7 +11,7 @@ const workbook = xlsx.readFile(
 );
 
 const {
-  SheetNames, Sheets
+  SheetNames, Sheets 
 } = workbook;
 
 const outputSheets: unknown[] = [];
@@ -34,13 +34,13 @@ const mapperSheets = SheetNames.flatMap( ( sheetname ) => {
 } );
 
 fs.writeFile(
-  'outputSheets.json', JSON.stringify( outputSheets )
+  'outputSheets.json', JSON.stringify( outputSheets ) 
 );
 
 export const RawCarpetas = [
   ...mapperSheets
 ].sort( (
-  a, b
+  a, b 
 ) => {
   const x = a.NUMERO;
 
@@ -57,14 +57,14 @@ export const RawCarpetas = [
 
 fs.writeFile(
   'carpetas.json', JSON.stringify(
-    RawCarpetas, null, 2
-  )
+    RawCarpetas, null, 2 
+  ) 
 );
 
 const outputData: string[] = [];
 
 RawCarpetas.forEach( (
-  carpeta, index
+  carpeta, index 
 ) => {
   const newString = `${
     Number( carpeta.NUMERO ) === index + 1
@@ -75,6 +75,6 @@ RawCarpetas.forEach( (
 } );
 fs.writeFile(
   'numbers.json', JSON.stringify(
-    outputData, null, 2
-  )
+    outputData, null, 2 
+  ) 
 );

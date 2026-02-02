@@ -125,7 +125,7 @@ export class FetcherJudicial {
       if ( !request.ok ) {
         const json = await request.json();
 
-        throw new Error( `${ request.status } : ${ request.statusText } === ${ JSON.stringify( json, ) }`, );
+        throw new Error( `${ request.status } : ${ request.statusText } === ${ JSON.stringify( json ) }`, );
       }
 
       const consultaProcesos = ( await request.json() ) as ConsultaProcesos;

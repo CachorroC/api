@@ -21,7 +21,7 @@ async function fetcher( idProceso: number ) {
 
     const json = ( await request.json() ) as ConsultaActuacion;
     const {
-      actuaciones
+      actuaciones 
     } = json;
 
     return actuaciones.map( ( actuacion ) => {
@@ -73,7 +73,7 @@ async function getIdProcesos() {
       } );
     } )
     .sort( (
-      a, b
+      a, b 
     ) => {
       return b.carpetaNumero - a.carpetaNumero;
     } );
@@ -86,9 +86,7 @@ async function* AsyncGenerateActuaciones( procesos: {
   llaveProceso : string;
 }[], ) {
   for ( const {
-    idProceso,
-    carpetaNumero,
-    carpetaId
+    idProceso, carpetaNumero, carpetaId 
   } of procesos ) {
     await sleep( 10000 );
 
@@ -161,7 +159,7 @@ async function runSync() {
 
     // Step 2: Handle Database (Runs once for EACH item in the 'actuaciones' array)
     async (
-      actuacion: intActuacion, parentProc
+      actuacion: intActuacion, parentProc 
     ) => {
       // Perform Prisma Upsert
       await client.actuacion.upsert( {

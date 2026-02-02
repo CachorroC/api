@@ -133,7 +133,6 @@ export type FechaNotificacionEnum =
   | '08/10/2018'
   | '|';
 
-
 // Converts JSON strings to/from your types
 export class Convert {
   public static toRawDb( json: string ): RawDb[] {

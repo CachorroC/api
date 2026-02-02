@@ -11,7 +11,7 @@ export async function fetchWithSmartRetry(
   while ( attempt < maxRetries ) {
     try {
       const response = await fetch(
-        url, options
+        url, options 
       );
 
       // Reintentar solo si el status es 429, 500, 502, 503, 504
@@ -49,7 +49,6 @@ export async function fetchWithSmartRetry(
 
       throw error;
     }
-
   }
 
   throw new Error( 'fetchWithSmartRetry: No se pudo obtener respuesta satisfactoria', );
@@ -75,7 +74,7 @@ export class ApiError extends Error {
 export const wait = ( ms: number ) => {
   return new Promise( ( resolve ) => {
     return setTimeout(
-      resolve, ms
+      resolve, ms 
     );
   } );
 };
@@ -86,7 +85,7 @@ export class FileLogger {
 
   constructor( filename: string ) {
     this.filePath = path.join(
-      __dirname, filename
+      __dirname, filename 
     );
   }
 
@@ -103,7 +102,7 @@ export class FileLogger {
     if ( fs.existsSync( this.filePath ) ) {
       try {
         currentLog = JSON.parse( fs.readFileSync(
-          this.filePath, 'utf-8'
+          this.filePath, 'utf-8' 
         ) );
       } catch {
         /*ignore*/
@@ -121,8 +120,8 @@ export class FileLogger {
 
     fs.writeFileSync(
       this.filePath, JSON.stringify(
-        currentLog, null, 2
-      )
+        currentLog, null, 2 
+      ) 
     );
   }
 }
@@ -147,11 +146,11 @@ export class RobustApiClient {
 
     while ( attempt < maxRetries ) {
       try {
-        const response = await fetchWithSmartRetry( `${ this.baseUrl }${ endpoint }` );
+        const response = await fetchWithSmartRetry( `${ this.baseUrl }${ endpoint }`, );
 
         if ( !response.ok ) {
           throw new ApiError(
-            `HTTP Error: ${ response.status }`, response.status
+            `HTTP Error: ${ response.status }`, response.status 
           );
         }
 
@@ -217,7 +216,7 @@ export class RobustApiClient {
         console.error( `❌ FETCH FAILED for Parent ID ${ parentItem.idProceso }: ${ msg }`, );
         //?? Log the PARENT item as failed because we couldn't even get the list
         this.logger.logFailure(
-          parentItem.idProceso, parentItem, msg, 'FETCH'
+          parentItem.idProceso, parentItem, msg, 'FETCH' 
         );
 
         continue; //? Move to next URL
@@ -262,7 +261,7 @@ export class RobustApiClient {
         try {
           //? Call the Prisma handler for this specific sub-item
           await dbHandler(
-            outActuacion, parentItem
+            outActuacion, parentItem 
           );
 
           //? Optional: Add a tiny delay here if DB is overwhelmed, usually not needed for upserts

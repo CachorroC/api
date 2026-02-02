@@ -5,17 +5,17 @@ import { ClassCarpeta } from './models/carpeta.js';
 async function processBatch<T>(
   items: T[],
   batchSize: number,
-  handler: ( item: T ) => Promise<void>
+  handler: ( item: T ) => Promise<void>,
 ) {
   for ( let i = 0; i < items.length; i += batchSize ) {
     const batch = items.slice(
-      i, i + batchSize
+      i, i + batchSize 
     );
     console.log( `Processing batch ${ i / batchSize + 1 }...` );
     // Run this batch in parallel
     await Promise.all( batch.map( ( item ) => {
       return handler( item );
-    } ) );
+    } ), );
   }
 }
 
@@ -37,9 +37,7 @@ async function tryAsyncClassCarpetas() {
   const BATCH_SIZE = 1;
 
   await processBatch(
-    rawData,
-    BATCH_SIZE,
-    async ( item ) => {
+    rawData, BATCH_SIZE, async ( item ) => {
       try {
       // Instantiate only when needed to save memory
         const carpeta = new ClassCarpeta( item.raw );
@@ -73,11 +71,10 @@ async function tryAsyncClassCarpetas() {
       // The 'carpeta' variable goes out of scope here and is freed from memory.
       } catch ( error ) {
         console.error(
-          `❌ Error processing ${ item.numero }:`,
-          error
+          `❌ Error processing ${ item.numero }:`, error 
         );
       }
-    }
+    } 
   );
 
   console.log( '✅ Sync Complete' );
@@ -92,6 +89,6 @@ tryAsyncClassCarpetas()
   } )
   .catch( ( e ) => {
     return console.error(
-      'Script crashed:', e
+      'Script crashed:', e 
     );
   } );

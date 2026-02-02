@@ -222,8 +222,8 @@ export default class Actuacion {
                 proceso       : {
                   connect: {
                     idProceso: ultimaActuacion.idProceso,
-                  }
-                }
+                  },
+                },
               },
             },
           },

@@ -4,7 +4,7 @@ export const sleep = ( ms: number ) => {
       .toString() } 😴` );
 
     return setTimeout(
-      resolve, ms
+      resolve, ms 
     );
   } );
 };

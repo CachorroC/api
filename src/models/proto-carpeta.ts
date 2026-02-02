@@ -64,7 +64,7 @@ async function fetchWithSmartRetry(
 
   try {
     const response = await fetch(
-      url, options
+      url, options 
     );
 
     // 2. Success Case
@@ -80,7 +80,7 @@ async function fetchWithSmartRetry(
       // We assume the 'enforceRateLimit' at the start of the recursion
       // provides enough backoff time (12.5s), so we don't need extra sleep here.
       return fetchWithSmartRetry(
-        url, options, retries - 1
+        url, options, retries - 1 
       );
     }
 
@@ -172,7 +172,7 @@ export class ClassCarpeta implements IntCarpeta {
         notasCounter++;
 
         const newNoter = new NotasBuilder(
-          nota, Number( NUMERO ), notasCounter
+          nota, Number( NUMERO ), notasCounter 
         );
 
         this.notas.push( newNoter );
@@ -189,7 +189,7 @@ export class ClassCarpeta implements IntCarpeta {
         notasCounter++;
 
         const newNoter = new NotasBuilder(
-          nota, Number( NUMERO ), notasCounter
+          nota, Number( NUMERO ), notasCounter 
         );
 
         this.notas.push( newNoter );
@@ -270,13 +270,13 @@ export class ClassCarpeta implements IntCarpeta {
       if ( !request.ok ) {
         const json = await request.json();
 
-        throw new Error( `📉${ request.status } : ${ request.statusText } === ${ JSON.stringify( json, ) }`, );
+        throw new Error( `📉${ request.status } : ${ request.statusText } === ${ JSON.stringify( json ) }`, );
       }
 
       const consultaProcesos = ( await request.json() ) as ConsultaProcesos;
 
       const {
-        procesos
+        procesos 
       } = consultaProcesos;
 
       for ( const rawProceso of procesos ) {
@@ -321,7 +321,7 @@ export class ClassCarpeta implements IntCarpeta {
         const consultaActuaciones = ( await request.json() ) as ConsultaActuacion;
 
         const {
-          actuaciones
+          actuaciones 
         } = consultaActuaciones;
 
         const outActuaciones = actuaciones.map( ( actuacion ) => {
@@ -382,7 +382,7 @@ export class ClassCarpeta implements IntCarpeta {
       const consultaProcesos = await request.json();
 
       const {
-        procesos
+        procesos 
       } = consultaProcesos;
 
       for ( const rawProceso of procesos ) {
@@ -509,7 +509,7 @@ export class ClassCarpeta implements IntCarpeta {
     // 4. Relacionar deudor
     try {
       console.log( `
-        🙆 update carpeta with deudor`, );
+        🙆 update carpeta with deudor` );
       await client.carpeta.update( {
         where: {
           numero: this.numero,
@@ -593,7 +593,7 @@ export class ClassCarpeta implements IntCarpeta {
       for ( const proceso of this.procesos ) {
         try {
           const {
-            juzgado, ...restProceso
+            juzgado, ...restProceso 
           } = proceso;
 
           // Construir input para juzgado solo si existe
@@ -715,7 +715,7 @@ export class ClassCarpeta implements IntCarpeta {
   //STATICASYNC
   static async updateNotes( incomingCarpeta: ClassCarpeta ) {
     const {
-      notas
+      notas 
     } = incomingCarpeta;
 
     const updater = await client.nota.createMany( {
@@ -928,7 +928,7 @@ export class ClassCarpeta implements IntCarpeta {
     // 4. Relacionar deudor
     try {
       console.log( `
-        🙆 update carpeta with deudor`, );
+        🙆 update carpeta with deudor` );
       await client.carpeta.update( {
         where: {
           numero: incomingCarpeta.numero,
@@ -1012,7 +1012,7 @@ export class ClassCarpeta implements IntCarpeta {
       for ( const proceso of procesos ) {
         try {
           const {
-            juzgado, ...restProceso
+            juzgado, ...restProceso 
           } = proceso;
 
           // Construir input para juzgado solo si existe

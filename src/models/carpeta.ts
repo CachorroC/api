@@ -1,5 +1,6 @@
 import { ConsultaActuacion, outActuacion } from '../types/actuaciones.js';
-import { Category, Codeudor,
+import { Category,
+  Codeudor,
   IntCarpeta,
   Juzgado,
   TipoProceso, } from '../types/carpetas.js';
@@ -12,7 +13,7 @@ import { tipoProcesoBuilder } from './tipoProceso.js';
 import { client } from '../services/prisma.js';
 import { sleep } from '../utils/awaiter.js';
 import JuzgadoClass from './juzgado.js';
-import {  Prisma } from '../prisma/generated/prisma/client.js';
+import { Prisma } from '../prisma/generated/prisma/client.js';
 
 // ⚠️ Desactiva la verificación de certificados SSL/TLS.
 // Esto es común cuando se consumen APIs gubernamentales antiguas o mal configuradas,
@@ -80,7 +81,7 @@ export async function fetchWithSmartRetry(
 
   try {
     const response = await fetch(
-      url, options
+      url, options 
     );
 
     // 2. Success Case
@@ -99,7 +100,7 @@ export async function fetchWithSmartRetry(
       // provides enough backoff time (12.5s), so we don't need extra sleep here.
       // 🔁 Llamada recursiva disminuyendo el contador de retries.
       return fetchWithSmartRetry(
-        url, options, retries - 1
+        url, options, retries - 1 
       );
     }
 
@@ -187,7 +188,7 @@ export class ClassCarpeta implements IntCarpeta {
         notasCounter++;
 
         const newNoter = new NotasBuilder(
-          nota, Number( NUMERO ), notasCounter
+          nota, Number( NUMERO ), notasCounter 
         );
 
         this.notas.push( newNoter );
@@ -205,7 +206,7 @@ export class ClassCarpeta implements IntCarpeta {
         notasCounter++;
 
         const newNoter = new NotasBuilder(
-          nota, Number( NUMERO ), notasCounter
+          nota, Number( NUMERO ), notasCounter 
         );
 
         this.notas.push( newNoter );
@@ -226,7 +227,7 @@ export class ClassCarpeta implements IntCarpeta {
     this.id = idBuilder;
     this.idRegUltimaAct = null;
     this.category = category.replaceAll(
-      ' ', ''
+      ' ', '' 
     ) as Category;
     this.ciudad = String( JUZGADO_CIUDAD );
     this.numero = isNaN( Number( NUMERO ) )
@@ -264,7 +265,7 @@ export class ClassCarpeta implements IntCarpeta {
     this.llaveProceso = EXPEDIENTE
       ? String( EXPEDIENTE )
           .replace(
-            /\s/g, ''
+            /\s/g, '' 
           )
       : 'SinEspecificar';
     this.numero = Number( NUMERO );
@@ -297,20 +298,19 @@ export class ClassCarpeta implements IntCarpeta {
         const json = await request.json();
 
         if ( request.status === 404 ) {
-
           // Loguear el error 404 con la data relevante
           try {
             const fs = await import( 'fs' );
             const path = await import( 'path' );
             const logPath = path.resolve(
-              __dirname, 'carpeta-404-log.json'
+              __dirname, 'carpeta-404-log.json' 
             );
             let logArr = [];
 
             try {
               const prev = fs.existsSync( logPath )
                 ? fs.readFileSync(
-                    logPath, 'utf8'
+                    logPath, 'utf8' 
                   )
                 : '[]';
               logArr = JSON.parse( prev );
@@ -325,34 +325,34 @@ export class ClassCarpeta implements IntCarpeta {
               llaveProceso: this.llaveProceso,
               numero      : this.numero,
               status      : request.status,
-              json
+              json,
             } );
 
             try {
               fs.writeFileSync(
                 logPath, JSON.stringify(
-                  logArr, null, 2
-                )
+                  logArr, null, 2 
+                ) 
               );
             } catch ( e ) {
               console.error(
-                'No se pudo escribir el log 404:', e
+                'No se pudo escribir el log 404:', e 
               );
             }
           } catch ( e ) {
             console.error(
-              'Error al intentar loguear el 404:', e
+              'Error al intentar loguear el 404:', e 
             );
           }
         }
 
-        throw new Error( `📉${ request.status } : ${ request.statusText } === ${ JSON.stringify( json, ) }`, );
+        throw new Error( `📉${ request.status } : ${ request.statusText } === ${ JSON.stringify( json ) }`, );
       }
 
       const consultaProcesos = ( await request.json() ) as ConsultaProcesos;
 
       const {
-        procesos
+        procesos 
       } = consultaProcesos;
       console.log( consultaProcesos );
       console.log( `
@@ -360,21 +360,19 @@ export class ClassCarpeta implements IntCarpeta {
           ` );
 
       if ( procesos.length === 0 && this.llaveProceso.startsWith( '1' ) ) {
-
-
         // Loguear el error 404 con la data relevante
         try {
           const fs = await import( 'fs' );
           const path = await import( 'path' );
           const logPath = path.resolve(
-            __dirname, 'carpeta-404-log.json'
+            __dirname, 'carpeta-404-log.json' 
           );
           let logArr = [];
 
           try {
             const prev = fs.existsSync( logPath )
               ? fs.readFileSync(
-                  logPath, 'utf8'
+                  logPath, 'utf8' 
                 )
               : '[]';
             logArr = JSON.parse( prev );
@@ -388,23 +386,23 @@ export class ClassCarpeta implements IntCarpeta {
               .toISOString(),
             llaveProceso: this.llaveProceso,
             numero      : this.numero,
-            procesos    : 'no hay procesos para esta carpeta, revisar el radicado'
+            procesos    : 'no hay procesos para esta carpeta, revisar el radicado',
           } );
 
           try {
             fs.writeFileSync(
               logPath, JSON.stringify(
-                logArr, null, 2
-              )
+                logArr, null, 2 
+              ) 
             );
           } catch ( e ) {
             console.error(
-              'No se pudo escribir el log 404:', e
+              'No se pudo escribir el log 404:', e 
             );
           }
         } catch ( e ) {
           console.error(
-            'Error al intentar loguear el 404:', e
+            'Error al intentar loguear el 404:', e 
           );
         }
       }
@@ -459,7 +457,7 @@ export class ClassCarpeta implements IntCarpeta {
         const consultaActuaciones = ( await request.json() ) as ConsultaActuacion;
 
         const {
-          actuaciones
+          actuaciones 
         } = consultaActuaciones;
         console.log( `
           💾 hay ${ actuaciones.length } actuaciones en ${ this.numero }
@@ -526,7 +524,7 @@ export class ClassCarpeta implements IntCarpeta {
       const consultaProcesos = await request.json();
 
       const {
-        procesos
+        procesos 
       } = consultaProcesos;
 
       for ( const rawProceso of procesos ) {
@@ -627,12 +625,11 @@ export class ClassCarpeta implements IntCarpeta {
       console.log( `❌ Error al conectar juzgado: ${ error }` );
     }
 
-
     // 4. Relacionar deudor
     // 👤 Asocia al deudor a la carpeta.
     try {
       console.log( `
-        🙆 update carpeta with deudor`, );
+        🙆 update carpeta with deudor` );
       await client.carpeta.update( {
         where: {
           numero: this.numero,
@@ -720,7 +717,7 @@ export class ClassCarpeta implements IntCarpeta {
       for ( const proceso of this.procesos ) {
         try {
           const {
-            juzgado, ...restProceso
+            juzgado, ...restProceso 
           } = proceso;
 
           // Construir input para juzgado solo si existe
@@ -814,8 +811,6 @@ export class ClassCarpeta implements IntCarpeta {
                 isUltimaAct: actuacion.cant === actuacion.consActuacion,
               },
             } );
-
-
           } catch ( error ) {
             console.log( `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`, );
           }
@@ -842,8 +837,8 @@ export class ClassCarpeta implements IntCarpeta {
                         proceso       : {
                           connect: {
                             idProceso: actuacion.idProceso,
-                          }
-                        }
+                          },
+                        },
                       },
                     },
                   },
@@ -852,7 +847,6 @@ export class ClassCarpeta implements IntCarpeta {
             } catch ( error ) {
               console.log( `❌ Error al conectar ultimaActuacion: ${ error }` );
             }
-
           }
         }
       }
@@ -883,7 +877,7 @@ export class ClassCarpeta implements IntCarpeta {
   //STATICASYNC
   static async updateNotes( incomingCarpeta: ClassCarpeta ) {
     const {
-      notas
+      notas 
     } = incomingCarpeta;
 
     const updater = await client.nota.createMany( {
@@ -925,7 +919,6 @@ export class ClassCarpeta implements IntCarpeta {
       },
     } );
   }
-
 
   // 💾 MÉTODO ESTÁTICO DE GUARDADO
   // Funciona igual que agregateToDBMethod pero recibe la carpeta como argumento
@@ -1021,8 +1014,8 @@ export class ClassCarpeta implements IntCarpeta {
                   proceso       : {
                     connect: {
                       idProceso: ultimaActuacion.idProceso,
-                    }
-                  }
+                    },
+                  },
                 },
               },
             },
@@ -1036,7 +1029,7 @@ export class ClassCarpeta implements IntCarpeta {
     // 4. Relacionar deudor
     try {
       console.log( `
-        🙆 update carpeta with deudor`, );
+        🙆 update carpeta with deudor` );
       await client.carpeta.update( {
         where: {
           numero: incomingCarpeta.numero,
@@ -1120,7 +1113,7 @@ export class ClassCarpeta implements IntCarpeta {
       for ( const proceso of procesos ) {
         try {
           const {
-            juzgado, ...restProceso
+            juzgado, ...restProceso 
           } = proceso;
 
           // Construir input para juzgado solo si existe

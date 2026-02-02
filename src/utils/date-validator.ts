@@ -85,7 +85,7 @@ export function dateValidator( incomingDate: Date ): Date | null {
   console.log( `
     string date:
     ${ String( incomingDate ) }
-    `, );
+    ` );
 
   const dateYear = incomingDate.getFullYear();
 
