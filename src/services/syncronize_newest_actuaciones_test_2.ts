@@ -66,6 +66,7 @@ export class ApiError extends Error {
   ) {
     super( message );
     this.name = 'ApiError';
+    console.log( `ApiError: ${ message }` );
   }
 }
 
@@ -93,7 +94,7 @@ function ensureDate( dateInput: string | Date | null | undefined ): Date | null 
     : d;
 }
 
-// Optimization: Run promises with limited concurrency
+// Optimization: Run promises with limited concurrency (Used for DB updates)
 async function pMap<T, R>(
   array: T[],
   mapper: ( item: T ) => Promise<R>,
@@ -211,6 +212,9 @@ class FileLogger {
       console.error(
         'Failed to write to log file', e
       );
+      console.log(
+        'Failed to write to log file', e
+      );
     }
   }
 
@@ -256,6 +260,9 @@ class FileLogger {
       );
     } catch ( error ) {
       console.error(
+        '❌ Failed to save new items to JSON file:', error
+      );
+      console.log(
         '❌ Failed to save new items to JSON file:', error
       );
     }
@@ -338,10 +345,11 @@ ${ cleanAnotacion
       if ( !response.ok ) {
         const errorData = ( await response.json() ) as any;
 
-        throw new Error( `${ response.statusText } - ${ errorData.description }` );
+        throw new ApiError( `${ response.statusText } - ${ errorData.description }` );
       }
     } catch ( err ) {
       console.warn( '⚠️ Standard HTML message failed, attempting fallback...' );
+      console.log( '⚠️ Standard HTML message failed, attempting fallback...' );
       await this.sendFallbackMessage(
         actuacion, processInfo
       );
@@ -489,10 +497,11 @@ class ActuacionService {
           );
 
           if ( !response.ok ) {
-            throw new Error( `Status ${ response.status }` );
+            throw new ApiError( `Status ${ response.status }` );
           }
         } catch ( postError: any ) {
           console.error( `⚠️ Webhook Failed: ${ postError.message }` );
+          console.log( `⚠️ Webhook Failed: ${ postError.message }` );
           await logger.logFailure(
             parentProc.idProceso, act, postError.message, 'WEBHOOK'
           );
@@ -507,6 +516,7 @@ class ActuacionService {
         await wait( 300 );
       } catch ( teleError: any ) {
         console.error( `⚠️ Telegram Failed: ${ teleError.message }` );
+        console.log( `⚠️ Telegram Failed: ${ teleError.message }` );
         await logger.logFailure(
           parentProc.idProceso, act, teleError.message, 'TELEGRAM'
         );
@@ -563,6 +573,7 @@ class ActuacionService {
           console.log( `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.` );
         } catch ( error: any ) {
           console.error( `   ❌ Bulk Insert Failed: ${ error.message }` );
+          console.log( `   ❌ Bulk Insert Failed: ${ error.message }` );
           await logger.logFailure(
             parentProc.idProceso, newItems, error.message, 'DB_ITEM'
           );
@@ -686,6 +697,9 @@ class ActuacionService {
       console.error(
         `❌ Error updating carpeta ${ parentProc.carpetaNumero }:`, error
       );
+      console.log(
+        `❌ Error updating carpeta ${ parentProc.carpetaNumero }:`, error
+      );
     }
   }
 }
@@ -704,7 +718,7 @@ export class RobustApiClient {
     this.logger = new FileLogger( 'failed_sync_ops.json' );
   }
 
-  private async fetchWithRetry<T>( endpoint: string ): Promise<T> {
+  private async fetchWithRetry<T> ( endpoint: string ): Promise<T> {
     const response = await fetchWithSmartRetry( `${ this.baseUrl }${ endpoint }` );
 
     if ( !response.ok ) {
@@ -715,7 +729,6 @@ export class RobustApiClient {
 
     return ( await response.json() ) as T;
   }
-
   public async processBatch(
     items: ProcessRequest[], pathBuilder: ( item: ProcessRequest ) => string
   ): Promise<void> {
@@ -733,6 +746,7 @@ export class RobustApiClient {
         const endpoint = pathBuilder( parentItem );
         console.log( `🌐 [${ index + 1 }/${ items.length }] Fetching: ${ parentItem.carpetaNumero } ${ parentItem.idProceso }` );
 
+        // This call handles the rate limit wait internally
         const apiResponse = await this.fetchWithRetry<ConsultaActuacionResponse>( endpoint );
         const actuacionesList = apiResponse.actuaciones || [];
 
@@ -796,14 +810,20 @@ async function runSync() {
 
   try {
     const processesToCheck = await getProcesosToUpdate();
+
+    // The processor now handles strict sequential fetching + rate limiting
     await api.processBatch(
       processesToCheck, ( proc ) => {
         return `/api/v2/Proceso/Actuaciones/${ proc.idProceso }`;
       }
     );
+
     console.log( '🎉 Sync Complete' );
   } catch ( error ) {
     console.error(
+      'Fatal Error in runSync:', error
+    );
+    console.log(
       'Fatal Error in runSync:', error
     );
   } finally {
