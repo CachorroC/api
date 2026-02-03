@@ -137,7 +137,7 @@ export default class Actuacion {
             } );
 
           console.log( JSON.stringify(
-            updateCarpeta, null, 2
+            updateCarpeta, null, 2 
           ) );
 
           await fs.mkdir(

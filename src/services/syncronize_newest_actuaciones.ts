@@ -16,10 +16,13 @@ import { Prisma } from '../prisma/generated/prisma/client.js';
 // Define endpoints and tokens here to keep them centralized.
 // WE CHANGED THIS: Now using process.env with safe fallbacks
 const WEBHOOK_URL = process.env.WEBHOOK_URL || '';
-const NEW_ITEMS_LOG_FILE = process.env.NEW_ITEMS_LOG_FILE || 'new_actuaciones_accumulator.json';
+const NEW_ITEMS_LOG_FILE
+  = process.env.NEW_ITEMS_LOG_FILE || 'new_actuaciones_accumulator.json';
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '';
-const RAMA_JUDICIAL_BASE_URL = process.env.RAMA_JUDICIAL_BASE_URL || 'https://consultaprocesos.ramajudicial.gov.co:448';
+const RAMA_JUDICIAL_BASE_URL
+  = process.env.RAMA_JUDICIAL_BASE_URL
+  || 'https://consultaprocesos.ramajudicial.gov.co:448';
 
 // ==========================================
 // SECTION 1: TYPES & INTERFACES
@@ -79,7 +82,7 @@ export class ApiError extends Error {
 const wait = ( ms: number ) => {
   return new Promise( ( resolve ) => {
     return setTimeout(
-      resolve, ms
+      resolve, ms 
     );
   } );
 };
@@ -103,7 +106,7 @@ class FileLogger {
 
   constructor( filename: string ) {
     this.filePath = path.join(
-      process.cwd(), 'logs', filename
+      process.cwd(), 'logs', filename 
     );
     this.ensureDir();
   }
@@ -113,7 +116,7 @@ class FileLogger {
       await fs.mkdir(
         path.dirname( this.filePath ), {
           recursive: true,
-        }
+        } 
       );
     } catch {
       /* ignore */
@@ -138,11 +141,11 @@ class FileLogger {
 
     try {
       await fs.appendFile(
-        this.filePath, JSON.stringify( logEntry ) + ',\n'
+        this.filePath, JSON.stringify( logEntry ) + ',\n' 
       );
     } catch ( e ) {
       console.error(
-        'Failed to write to log file', e
+        'Failed to write to log file', e 
       );
     }
   }
@@ -165,25 +168,25 @@ class TelegramService {
     const escaped = text
       .toString()
       .replace(
-        /&/g, '&amp;'
+        /&/g, '&amp;' 
       )
       .replace(
-        /</g, '&lt;'
+        /</g, '&lt;' 
       )
       .replace(
-        />/g, '&gt;'
+        />/g, '&gt;' 
       )
       .replace(
-        /"/g, '&quot;'
+        /"/g, '&quot;' 
       )
       .replace(
-        /'/g, '&#039;'
+        /'/g, '&#039;' 
       );
 
     // 2. Truncate if too long (Telegram limit is 4096, we keep it safe)
     if ( escaped.length > 3000 ) {
       return escaped.substring(
-        0, 3000
+        0, 3000 
       ) + '... (cortado)';
     }
 
@@ -243,7 +246,7 @@ ${ cleanAnotacion
             parse_mode              : 'HTML',
             disable_web_page_preview: true,
           } ),
-        }
+        } 
       );
 
       if ( !response.ok ) {
@@ -256,7 +259,7 @@ ${ cleanAnotacion
       // If HTML fails (rare edge case), fallback to plain text so you still get the alert
       console.warn( '⚠️ Standard HTML message failed, attempting fallback...' );
       await this.sendFallbackMessage(
-        actuacion, processInfo
+        actuacion, processInfo 
       );
     }
   }
@@ -291,7 +294,7 @@ Anotación: ${ actuacion.anotacion || 'N/A' }
           text   : message,
         // No parse_mode here = Safe plain text
         } ),
-      }
+      } 
     );
   }
 }
@@ -434,7 +437,7 @@ class ActuacionService {
     parentProc: ProcessRequest,
   ) {
     const filePath = path.join(
-      process.cwd(), 'logs', NEW_ITEMS_LOG_FILE
+      process.cwd(), 'logs', NEW_ITEMS_LOG_FILE 
     );
 
     const itemsToSave = newItems.map( ( item ) => {
@@ -453,13 +456,13 @@ class ActuacionService {
       await fs.mkdir(
         path.dirname( filePath ), {
           recursive: true,
-        }
+        } 
       );
       let currentData: any[] = [];
 
       try {
         const fileContent = await fs.readFile(
-          filePath, 'utf-8'
+          filePath, 'utf-8' 
         );
         currentData = JSON.parse( fileContent );
 
@@ -474,13 +477,13 @@ class ActuacionService {
       await fs.writeFile(
         filePath,
         JSON.stringify(
-          currentData, null, 2
+          currentData, null, 2 
         ),
         'utf-8',
       );
     } catch ( error ) {
       console.error(
-        '❌ Failed to save new items to JSON file:', error
+        '❌ Failed to save new items to JSON file:', error 
       );
     }
   }
@@ -521,7 +524,7 @@ class ActuacionService {
 
       // 3. Save to JSON File
       await this.saveNewItemsToLog(
-        newActuaciones, parentProc
+        newActuaciones, parentProc 
       );
 
       // 4. Process Each New Item
@@ -539,7 +542,7 @@ class ActuacionService {
                 carpetaNumero: parentProc.carpetaNumero,
                 llaveProceso : parentProc.llaveProceso,
               } ),
-            }
+            } 
           );
 
           if ( !response.ok ) {
@@ -558,7 +561,7 @@ class ActuacionService {
         // B. [NEW] Send Telegram Notification
         try {
           await TelegramService.sendNotification(
-            act, parentProc
+            act, parentProc 
           );
           console.log( `   📱 Telegram sent for Actuacion ${ act.idRegActuacion }`, );
           // Small delay to prevent Telegram rate limits
@@ -594,7 +597,7 @@ export async function fetchWithSmartRetry(
   while ( attempt < maxRetries ) {
     try {
       const response = await fetch(
-        url, options
+        url, options 
       );
 
       if ( [
@@ -637,7 +640,7 @@ export class RobustApiClient {
 
     if ( !response.ok ) {
       throw new ApiError(
-        `HTTP ${ response.status }`, response.status
+        `HTTP ${ response.status }`, response.status 
       );
     }
 
@@ -694,7 +697,7 @@ export class RobustApiClient {
       for ( const act of actuacionesList ) {
         try {
           await ActuacionService.upsertActuacion(
-            act, parentItem
+            act, parentItem 
           );
         } catch ( dbErr: any ) {
           console.error( `   ❌ DB UPSERT ERROR: ${ dbErr.message }` );
@@ -708,7 +711,7 @@ export class RobustApiClient {
       }
 
       await ActuacionService.updateCarpetaIfNewer(
-        actuacionesList, parentItem
+        actuacionesList, parentItem 
       );
       console.log( `   ✅ Synced ${ actuacionesList.length } items for Carpeta ${ parentItem.carpetaNumero }`, );
     }
@@ -743,7 +746,7 @@ async function getProcesosToUpdate(): Promise<ProcessRequest[]> {
       } );
     } )
     .sort( (
-      a, b
+      a, b 
     ) => {
       return b.carpetaNumero - a.carpetaNumero;
     } );
@@ -757,12 +760,12 @@ async function runSync() {
     await api.processBatch(
       processesToCheck, ( proc ) => {
         return `/api/v2/Proceso/Actuaciones/${ proc.idProceso }`;
-      }
+      } 
     );
     console.log( '🎉 Sync Complete' );
   } catch ( error ) {
     console.error(
-      'Fatal Error in runSync:', error
+      'Fatal Error in runSync:', error 
     );
   } finally {
     await client.$disconnect();

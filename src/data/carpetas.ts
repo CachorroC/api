@@ -11,70 +11,94 @@ const workbook = xlsx.readFile(
 );
 
 const {
-  SheetNames, Sheets 
+  SheetNames, Sheets
 } = workbook;
 
 const outputSheets: unknown[] = [];
 
-const mapperSheets = SheetNames.flatMap( ( sheetname ) => {
-  const sheet = Sheets[ sheetname ];
+const mapperSheets = SheetNames.flatMap(
+  (
+    sheetname 
+  ) => {
+    const sheet = Sheets[ sheetname ];
 
-  const tableSheet = xlsx.utils.sheet_to_json<RawDb>( sheet );
+    const tableSheet = xlsx.utils.sheet_to_json<RawDb>(
+      sheet 
+    );
 
-  outputSheets.push( tableSheet );
+    outputSheets.push(
+      tableSheet 
+    );
 
-  return tableSheet.map( ( table ) => {
-    return {
-      ...table,
-      category: sheetname.replaceAll(
-        ' ', '' 
-      ) as Category,
-    };
-  } );
-} );
+    return tableSheet.map(
+      (
+        table 
+      ) => {
+        return {
+          ...table,
+          category: sheetname.replaceAll(
+            ' ', ''
+          ) as Category,
+        };
+      } 
+    );
+  } 
+);
 
 fs.writeFile(
-  'outputSheets.json', JSON.stringify( outputSheets ) 
+  'outputSheets.json', JSON.stringify(
+    outputSheets 
+  )
 );
 
 export const RawCarpetas = [
   ...mapperSheets
-].sort( (
-  a, b 
-) => {
-  const x = a.NUMERO;
+].sort(
+  (
+    a, b
+  ) => {
+    const x = a.NUMERO;
 
-  const y = b.NUMERO;
+    const y = b.NUMERO;
 
-  if ( x < y ) {
-    return -1;
-  } else if ( x > y ) {
-    return 1;
-  }
+    if ( x < y ) {
+      return -1;
+    } else if ( x > y ) {
+      return 1;
+    }
 
-  return 0;
-} );
+    return 0;
+  } 
+);
 
 fs.writeFile(
   'carpetas.json', JSON.stringify(
-    RawCarpetas, null, 2 
-  ) 
+    RawCarpetas, null, 2
+  )
 );
 
 const outputData: string[] = [];
 
-RawCarpetas.forEach( (
-  carpeta, index 
-) => {
-  const newString = `${
-    Number( carpeta.NUMERO ) === index + 1
-  } numero: ${ carpeta.NUMERO }, index:${ index + 1 } `;
+RawCarpetas.forEach(
+  (
+    carpeta, index
+  ) => {
+    const newString = `${
+      Number(
+        carpeta.NUMERO 
+      ) === index + 1
+    } numero: ${ carpeta.NUMERO }, index:${ index + 1 } `;
 
-  console.log( newString );
-  outputData.push( newString );
-} );
+    console.log(
+      newString 
+    );
+    outputData.push(
+      newString 
+    );
+  } 
+);
 fs.writeFile(
   'numbers.json', JSON.stringify(
-    outputData, null, 2 
-  ) 
+    outputData, null, 2
+  )
 );

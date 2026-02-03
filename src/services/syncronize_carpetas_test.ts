@@ -1,5 +1,5 @@
-import { RawCarpetas } from './data/carpetas.js';
-import { ClassCarpeta } from './models/carpeta.js';
+import { RawCarpetas } from '../data/carpetas.js';
+
 
 // Add this helper function at the bottom or in utils
 async function processBatch<T>(
