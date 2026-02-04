@@ -79,7 +79,6 @@ async function enforceRateLimit() {
  */
 export async function fetchWithSmartRetry(
   url: string | URL,
-
   options?: RequestInit,
   retries = MAX_RETRIES,
 ): Promise<Response> {

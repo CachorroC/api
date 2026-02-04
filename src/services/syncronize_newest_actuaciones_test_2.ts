@@ -17,6 +17,8 @@ import { Prisma } from '../prisma/generated/prisma/client.js';
 // 2. CONFIGURATION & CONSTANTS
 // ==========================================
 const WEBHOOK_URL = process.env.WEBHOOK_URL || '';
+const NEW_ACTUACION_WEBHOOK_URL = process.env.NEW_ACTUACION_WEBHOOK_URL || '';
+
 const NEW_ITEMS_LOG_FILE
   = process.env.NEW_ITEMS_LOG_FILE || 'new_actuaciones_accumulator.json';
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
@@ -701,8 +703,7 @@ class ActuacionService {
               body: JSON.stringify(
                 {
                   ...act,
-                  carpetaNumero: parentProc.carpetaNumero,
-                  llaveProceso : parentProc.llaveProceso,
+                  ...parentProc
                 }
               ),
             }
@@ -726,6 +727,7 @@ class ActuacionService {
         }
       }
 
+
       // 2. Telegram
       try {
         await TelegramService.sendNotification(
@@ -741,6 +743,41 @@ class ActuacionService {
         await logger.logFailure(
           parentProc.idProceso, act, teleError.message, 'TELEGRAM'
         );
+      }
+
+      if ( NEW_ACTUACION_WEBHOOK_URL ) {
+        try {
+          const response = await fetch(
+            NEW_ACTUACION_WEBHOOK_URL, {
+              method : 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(
+                {
+                  ...act,
+                  ...parentProc
+                }
+              ),
+            }
+          );
+
+          if ( !response.ok ) {
+            throw new ApiError(
+              `Status ${ response.status }`, 'ActuacionService.processNotifications Webhook'
+            );
+          }
+        } catch ( postError: any ) {
+          console.error(
+            `⚠️ Webhook Failed: ${ postError.message }`
+          );
+          console.log(
+            `⚠️ Webhook Failed: ${ postError.message }`
+          );
+          await logger.logFailure(
+            parentProc.idProceso, act, postError.message, 'WEBHOOK'
+          );
+        }
       }
     }
   }
@@ -1026,7 +1063,7 @@ export class RobustApiClient {
   private baseUrl: string;
   private logger : FileLogger;
   // Increased delay to be safer
-  private readonly RATE_LIMIT_DELAY_MS = 3500;
+  private readonly RATE_LIMIT_DELAY_MS = 12000;
 
   constructor(
     baseUrl: string
@@ -1064,7 +1101,7 @@ export class RobustApiClient {
 
     if ( !response.ok ) {
       throw new ApiError(
-        `HTTP ${ response.status } ${ response.statusText }`, `🚫 failed request: fetchWithRetry: ${ this.baseUrl }${ endpoint }`, response.status
+        `HTTP ${ response.status } ${ response.statusText }`, '🚫 failed request: fetchWithRetry:', response.status
       );
     }
 
