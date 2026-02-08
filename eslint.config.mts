@@ -100,7 +100,7 @@ export default defineConfig( [
       'function-paren-newline': [
         'error',
         {
-          minItems: 1,
+          minItems: 2,
         },
       ],
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /* eslint-disable no-unused-vars */
 //process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 //console.log(
@@ -13,6 +13,8 @@ import path from 'path';
 import * as fs from 'fs/promises';
 import { client } from './prisma.js';
 import { Prisma } from '../prisma/generated/prisma/client.js';
+import { ensureDate } from '../utils/ensureDate.js';
+import { TelegramService } from './telegramService.js';
 // ==========================================
 // 2. CONFIGURATION & CONSTANTS
 // ==========================================
@@ -21,8 +23,6 @@ const NEW_ACTUACION_WEBHOOK_URL = process.env.NEW_ACTUACION_WEBHOOK_URL || '';
 
 const NEW_ITEMS_LOG_FILE
   = process.env.NEW_ITEMS_LOG_FILE || 'new_actuaciones_accumulator.json';
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '';
 const RAMA_JUDICIAL_BASE_URL
   = process.env.RAMA_JUDICIAL_BASE_URL
   || 'https://consultaprocesos.ramajudicial.gov.co:448';
@@ -72,51 +72,25 @@ export class ApiError extends Error {
     public callerId: string,
     public statusCode?: number,
   ) {
-    super(
-      message
-    );
+    super( message );
     this.name = 'ApiError';
     this.callerId = callerId;
-    console.log(
-      `${ callerId }ApiError: ${ message }`
-    );
+    console.log( `${ callerId }ApiError: ${ message }` );
   }
 }
 // ==========================================
 // 4. GENERIC UTILITIES (UPDATED)
 // ==========================================
 
-const wait = (
-  ms: number
-) => {
-  return new Promise(
-    (
-      resolve
-    ) => {
-      return setTimeout(
-        resolve, ms
-      );
-    }
-  );
+const wait = ( ms: number ) => {
+  return new Promise( ( resolve ) => {
+    return setTimeout(
+      resolve, ms
+    );
+  } );
 };
 
-function ensureDate(
-  dateInput: string | Date | null | undefined
-): Date | null {
-  if ( !dateInput ) {
-    return null;
-  }
 
-  const d = new Date(
-    dateInput
-  );
-
-  return isNaN(
-    d.getTime()
-  )
-    ? null
-    : d;
-}
 
 // Optimization: Run promises with limited concurrency
 async function pMap<T, R>(
@@ -129,40 +103,24 @@ async function pMap<T, R>(
 
   for ( const item of array ) {
     const p = Promise.resolve()
-      .then(
-        () => {
-          return mapper(
-            item
-          );
-        }
-      );
-    results.push(
-      p as unknown as R
-    );
+      .then( () => {
+        return mapper( item );
+      } );
 
-    const e: Promise<void> = p.then(
-      () => {
-        executing.splice(
-          executing.indexOf(
-            e
-          ), 1
-        );
-      }
-    );
-    executing.push(
-      e
-    );
+    results.push( p as unknown as R );
+    const e: Promise<void> = p.then( () => {
+      executing.splice(
+        executing.indexOf( e ), 1
+      );
+    } );
+    executing.push( e );
 
     if ( executing.length >= concurrency ) {
-      await Promise.race(
-        executing
-      );
+      await Promise.race( executing );
     }
   }
 
-  return Promise.all(
-    results
-  );
+  return Promise.all( results );
 }
 
 //Wrapper for fetch with retries
@@ -181,9 +139,7 @@ export async function fetchWithSmartRetry(
 
   while ( attempt <= totalAttempts ) {
     if ( attempt > 1 ) {
-      console.log(
-        `🔄 fetchWithSmartRetry Attempt ${ attempt } for ${ url }`
-      );
+      console.log( `🔄 fetchWithSmartRetry Attempt ${ attempt } for ${ url }` );
     }
 
     try {
@@ -193,9 +149,7 @@ export async function fetchWithSmartRetry(
 
       // --- HANDLE 429 (RATE LIMITS) ---
       if ( response.status === 429 ) {
-        const retryAfterHeader = response.headers.get(
-          'retry-after'
-        );
+        const retryAfterHeader = response.headers.get( 'retry-after' );
         // Telegram often sends retry-after in seconds
         const waitTime = retryAfterHeader
           ? ( parseInt(
@@ -205,28 +159,18 @@ export async function fetchWithSmartRetry(
             2, attempt
           );
 
-        console.warn(
-          `⚠️ [429 Too Many Requests] Pausing for ${ waitTime }ms...`
-        );
-        console.log(
-          `⚠️ [429 Too Many Requests] Pausing for ${ waitTime }ms...`
-        );
-        await wait(
-          waitTime
-        );
+        console.warn( `⚠️ [429 Too Many Requests] Pausing for ${ waitTime }ms...` );
+        console.log( `⚠️ [429 Too Many Requests] Pausing for ${ waitTime }ms...` );
+        await wait( waitTime );
         attempt++;
 
         continue;
       }
 
       if ( response.status === 403 ) {
-        await wait(
-          2000
-        );
+        await wait( 2000 );
         attempt++;
-        console.log(
-          response.statusText
-        );
+        console.log( response.statusText );
 
         continue;
 
@@ -248,9 +192,7 @@ export async function fetchWithSmartRetry(
         502,
         503,
         504
-      ].includes(
-        response.status
-      ) ) {
+      ].includes( response.status ) ) {
         throw new ApiError(
           `Server Status ${ response.status }`, `🚫 failed request: fetchWithSmartRetry: ${ url } statusCode<500`
         );
@@ -265,15 +207,9 @@ export async function fetchWithSmartRetry(
       }
 
       const delay = ( baseDelay * attempt );
-      console.warn(
-        `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...`
-      );
-      console.log(
-        `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...`
-      );
-      await wait(
-        delay
-      );
+      console.warn( `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...` );
+      console.log( `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...` );
+      await wait( delay );
       attempt++;
     }
   }
@@ -290,9 +226,7 @@ export async function fetchWithSmartRetry(
 class FileLogger {
   private filePath: string;
 
-  constructor(
-    filename: string
-  ) {
+  constructor( filename: string ) {
     this.filePath = path.join(
       process.cwd(), 'logs', filename
     );
@@ -302,9 +236,7 @@ class FileLogger {
   private async ensureDir() {
     try {
       await fs.mkdir(
-        path.dirname(
-          this.filePath
-        ), {
+        path.dirname( this.filePath ), {
           recursive: true,
         }
       );
@@ -328,9 +260,7 @@ class FileLogger {
 
     try {
       await fs.appendFile(
-        this.filePath, JSON.stringify(
-          logEntry
-        ) + ',\n'
+        this.filePath, JSON.stringify( logEntry ) + ',\n'
       );
     } catch ( e ) {
       console.error(
@@ -349,21 +279,17 @@ class FileLogger {
     const filePath = path.join(
       process.cwd(), 'logs', NEW_ITEMS_LOG_FILE
     );
-    const itemsToSave = newItems.map(
-      (
-        item
-      ) => {
-        return {
-          ...item,
-          _meta: {
-            detectedAt: new Date()
-              .toISOString(),
-            carpetaNumero: parentProc.carpetaNumero,
-            processId    : parentProc.idProceso,
-          },
-        };
-      }
-    );
+    const itemsToSave = newItems.map( ( item ) => {
+      return {
+        ...item,
+        _meta: {
+          detectedAt: new Date()
+            .toISOString(),
+          carpetaNumero: parentProc.carpetaNumero,
+          processId    : parentProc.idProceso,
+        },
+      };
+    } );
 
     try {
       let currentData: any[] = [];
@@ -372,22 +298,16 @@ class FileLogger {
         const fileContent = await fs.readFile(
           filePath, 'utf-8'
         );
-        currentData = JSON.parse(
-          fileContent
-        );
+        currentData = JSON.parse( fileContent );
 
-        if ( !Array.isArray(
-          currentData
-        ) ) {
+        if ( !Array.isArray( currentData ) ) {
           currentData = [];
         }
       } catch {
         currentData = [];
       }
 
-      currentData.push(
-        ...itemsToSave
-      );
+      currentData.push( ...itemsToSave );
       await fs.writeFile(
         filePath,
         JSON.stringify(
@@ -407,211 +327,47 @@ class FileLogger {
 }
 
 // ==========================================
-// 5. INFRASTRUCTURE SERVICES (TELEGRAM FIX)
-// ==========================================
-
-class TelegramService {
-  // ... (keep cleanText method as is) ...
-  private static cleanText(
-    text: string | null | undefined
-  ): string {
-    // ... your existing code ...
-    if ( !text ) {
-      return '';
-    }
-
-    return text.toString()
-      .replace(
-        /&/g, '&amp;'
-      )
-      .replace(
-        /</g, '&lt;'
-      )
-      .replace(
-        />/g, '&gt;'
-      )
-      .replace(
-        /"/g, '&quot;'
-      )
-      .replace(
-        /'/g, '&#039;'
-      );
-  }
-
-  static async sendNotification(
-    actuacion: FetchResponseActuacion,
-    processInfo: ProcessRequest,
-  ) {
-    if ( !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID ) {
-      return;
-    }
-
-    const cleanActuacion = this.cleanText(
-      actuacion.actuacion
-    );
-    const cleanAnotacion = this.cleanText(
-      actuacion.anotacion
-    );
-    const cleanLlave = this.cleanText(
-      processInfo.llaveProceso
-    );
-
-    const message = `
-🚨 <b>NUEVA ACTUACIÓN DETECTADA</b> 🚨
-
-👤 <b>Nombre:</b> ${ processInfo.nombre }
-📂 <b>Expediente:</b> ${ cleanLlave }
-📁 <b>Carpeta:</b> ${ processInfo.carpetaNumero }
-
-📅 <b>Fecha:</b> ${ new Date(
-  actuacion.fechaActuacion
-)
-  .toLocaleDateString() }
-📝 <b>Actuación:</b> ${ cleanActuacion }
-${ cleanAnotacion
-  ? `ℹ️ <b>Anotación:</b> ${ cleanAnotacion }`
-  : '' }
-🔗 <a href='https://app.rsasesorjuridico.com/Carpeta/${ processInfo.carpetaNumero }/ultimasActuaciones/${ processInfo.idProceso }'>Ver en app</a>`;
-
-    try {
-      // ✅ USE SMART RETRY HERE
-      // We DO NOT pass headers for 'Origin' or 'User-Agent' here, Telegram doesn't need them.
-      await fetchWithSmartRetry(
-        `https://api.telegram.org/bot${ TELEGRAM_BOT_TOKEN }/sendMessage`,
-        {
-          method : 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(
-            {
-              chat_id                 : TELEGRAM_CHAT_ID,
-              text                    : message,
-              parse_mode              : 'HTML',
-              disable_web_page_preview: true,
-            }
-          ),
-        },
-        3,    // Max Retries
-        3000  // Base Delay (3 seconds is safer for Telegram)
-      );
-
-    } catch ( err: any ) {
-      if ( err.statusCode === 403 ) {
-        console.error(
-          '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.'
-        );
-        console.log(
-          '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.'
-        );
-
-        return; // Don't try fallback if we are blocked
-      }
-
-      console.warn(
-        '⚠️ Standard HTML message failed, attempting fallback...'
-      );
-      console.log(
-        '⚠️ Standard HTML message failed, attempting fallback...'
-      );
-      await this.sendFallbackMessage(
-        actuacion, processInfo
-      );
-    }
-  }
-
-  private static async sendFallbackMessage(
-    actuacion: FetchResponseActuacion,
-    processInfo: ProcessRequest,
-  ) {
-    try {
-
-      const message = `🚨 NUEVA ACTUACIÓN 🚨\n\nNombre: ${ processInfo.nombre }\nExpediente: ${ processInfo.carpetaNumero }\nActuación: ${ actuacion.actuacion }${ actuacion.anotacion
-        ? `\nAnotación: ${ actuacion.anotacion }`
-        : '' } \n https://app.rsasesorjuridico.com/Carpeta/${ processInfo.carpetaNumero }/ultimasActuaciones/${ processInfo.idProceso }`;
-
-      // Simple fetch for fallback, no complex retry needed to avoid infinite loops
-      await fetch(
-        `https://api.telegram.org/bot${ TELEGRAM_BOT_TOKEN }/sendMessage`, {
-          method : 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(
-            {
-              chat_id: TELEGRAM_CHAT_ID,
-              text   : message
-            }
-          ),
-        }
-      );
-    } catch ( error ) {
-      if ( error instanceof Error ) {
-        throw new ApiError(
-          error.message, `${ processInfo.carpetaNumero } TelegramService.sendFallbackMessage `
-        );
-      }
-    }
-  }
-}
-// ==========================================
 // 6. BUSINESS LOGIC (Database & Sync)
 // ==========================================
 
 class ActuacionService {
   // Priority: Event Date > Registration Date > ID Stability
-  private static getLatestByDate(
-    actuaciones: FetchResponseActuacion[],
-  ): FetchResponseActuacion | null {
+  private static getLatestByDate( actuaciones: FetchResponseActuacion[], ): FetchResponseActuacion | null {
     if ( !actuaciones || actuaciones.length === 0 ) {
       return null;
     }
 
-    return actuaciones.reduce(
-      (
-        prev, current
-      ) => {
-        const prevDate = ensureDate(
-          prev.fechaActuacion
-        )
+    return actuaciones.reduce( (
+      prev, current
+    ) => {
+      const prevDate = ensureDate( prev.fechaActuacion )
+        ?.getTime() || 0;
+      const currDate = ensureDate( current.fechaActuacion )
+        ?.getTime() || 0;
+
+      if ( currDate > prevDate ) {
+        return current;
+      }
+
+      if ( currDate === prevDate ) {
+        const prevReg = ensureDate( prev.fechaRegistro )
           ?.getTime() || 0;
-        const currDate = ensureDate(
-          current.fechaActuacion
-        )
+        const currReg = ensureDate( current.fechaRegistro )
           ?.getTime() || 0;
 
-        if ( currDate > prevDate ) {
+        if ( currReg > prevReg ) {
           return current;
         }
 
-        if ( currDate === prevDate ) {
-          const prevReg = ensureDate(
-            prev.fechaRegistro
-          )
-            ?.getTime() || 0;
-          const currReg = ensureDate(
-            current.fechaRegistro
-          )
-            ?.getTime() || 0;
-
-          if ( currReg > prevReg ) {
-            return current;
-          }
-
-          if ( currReg === prevReg ) {
-            return String(
-              current.consActuacion
-            ) > String(
-              prev.consActuacion
-            )
-              ? current
-              : prev;
-          }
+        if ( currReg === prevReg ) {
+          return current.consActuacion > prev.consActuacion
+            ? current
+            : prev;
         }
-
-        return prev;
       }
-    );
+
+      return prev;
+    } );
   }
 
   private static mapToPrismaInput(
@@ -620,17 +376,11 @@ class ActuacionService {
     actualLatestItem: FetchResponseActuacion | null,
   ): Prisma.ActuacionCreateInput {
     const isUltima = actualLatestItem
-      ? String(
-        apiData.idRegActuacion
-      ) === String(
-        actualLatestItem.idRegActuacion
-      )
+      ? String( apiData.idRegActuacion ) === String( actualLatestItem.idRegActuacion )
       : false;
 
     return {
-      idRegActuacion: String(
-        apiData.idRegActuacion
-      ),
+      idRegActuacion: String( apiData.idRegActuacion ),
       consActuacion : apiData.consActuacion,
       actuacion     : apiData.actuacion,
       anotacion     : apiData.anotacion,
@@ -640,21 +390,13 @@ class ActuacionService {
       conDocumentos : apiData.conDocumentos,
       createdAt     : new Date(),
       llaveProceso  : parentProc.llaveProceso,
-      fechaActuacion: ensureDate(
-        apiData.fechaActuacion
-      ) ?? new Date(),
-      fechaRegistro: ensureDate(
-        apiData.fechaRegistro
-      ) ?? new Date(),
-      fechaInicial: ensureDate(
-        apiData.fechaInicial
-      ),
-      fechaFinal: ensureDate(
-        apiData.fechaFinal
-      ),
-      idProceso  : parentProc.idProceso,
-      isUltimaAct: isUltima,
-      proceso    : {
+      fechaActuacion: ensureDate( apiData.fechaActuacion ) ?? new Date(),
+      fechaRegistro : ensureDate( apiData.fechaRegistro ) ?? new Date(),
+      fechaInicial  : ensureDate( apiData.fechaInicial ),
+      fechaFinal    : ensureDate( apiData.fechaFinal ),
+      idProceso     : parentProc.idProceso,
+      isUltimaAct   : isUltima,
+      proceso       : {
         connect: {
           idProceso: parentProc.idProceso,
         },
@@ -671,9 +413,7 @@ class ActuacionService {
       return;
     }
 
-    console.log(
-      `✨ Found ${ newItems.length } NEW Actuaciones. Processing notifications...`
-    );
+    console.log( `✨ Found ${ newItems.length } NEW Actuaciones. Processing notifications...` );
     await logger.logNewItems(
       newItems, parentProc
     );
@@ -686,13 +426,13 @@ class ActuacionService {
       // 🛑 SLOW DOWN!
       // If we have multiple updates, wait 2 seconds between sending messages.
       if ( index > 0 ) {
-        await wait(
-          2000
-        );
+        await wait( 2000 );
       }
 
       // 1. Webhook (Optional)
       if ( WEBHOOK_URL ) {
+        console.log( `🗯️ Iniciando el webhook para enviar las notificaciones: ${ WEBHOOK_URL }`  );
+
         try {
           const response = await fetch(
             WEBHOOK_URL, {
@@ -700,12 +440,28 @@ class ActuacionService {
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify(
-                {
-                  ...act,
-                  ...parentProc
-                }
-              ),
+              body: JSON.stringify( {
+
+                title: `${ parentProc.carpetaNumero } ${ parentProc.nombre }`,
+                body : `${ act.actuacion } ${ act.anotacion }`,
+                icon : '/icons/notification_icon.png',
+                data : {
+                  numero   : parentProc.carpetaNumero,
+                  idProceso: parentProc.idProceso,
+                  url      : `/Carpeta/${ parentProc.carpetaNumero }/ultimasActuaciones/${ parentProc.idProceso }`,
+                },
+                actions: [
+                  {
+                    action: 'openCarpeta',
+                    title : 'Abrir Carpeta'
+                  },
+                  {
+                    action: 'openActuaciones',
+                    title : 'Abrir Actuaciones'
+                  }
+                ]
+
+              } ),
             }
           );
 
@@ -715,12 +471,8 @@ class ActuacionService {
             );
           }
         } catch ( postError: any ) {
-          console.error(
-            `⚠️ Webhook Failed: ${ postError.message }`
-          );
-          console.log(
-            `⚠️ Webhook Failed: ${ postError.message }`
-          );
+          console.error( `⚠️ Webhook Failed: ${ postError.message }` );
+          console.log( `⚠️ Webhook Failed: ${ postError.message }` );
           await logger.logFailure(
             parentProc.idProceso, act, postError.message, 'WEBHOOK'
           );
@@ -734,12 +486,8 @@ class ActuacionService {
           act, parentProc
         );
       } catch ( teleError: any ) {
-        console.error(
-          `⚠️ Telegram Failed: ${ teleError.message }`
-        );
-        console.log(
-          `⚠️ Telegram Failed: ${ teleError.message }`
-        );
+        console.error( `⚠️ Telegram Failed: ${ teleError.message }` );
+        console.log( `⚠️ Telegram Failed: ${ teleError.message }` );
         await logger.logFailure(
           parentProc.idProceso, act, teleError.message, 'TELEGRAM'
         );
@@ -747,33 +495,32 @@ class ActuacionService {
 
       if ( NEW_ACTUACION_WEBHOOK_URL ) {
         try {
+          const body = JSON.stringify( {
+
+            ...act,
+            ...parentProc
+
+          } );
+
           const response = await fetch(
             NEW_ACTUACION_WEBHOOK_URL, {
               method : 'POST',
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify(
-                {
-                  ...act,
-                  ...parentProc
-                }
-              ),
+              body: body,
+
             }
           );
 
           if ( !response.ok ) {
             throw new ApiError(
-              `Status ${ response.status }`, 'ActuacionService.processNotifications Webhook'
+              `Status ${ response.status }: Message: ${ response.statusText }`, 'ActuacionService.processNotifications Webhook'
             );
           }
         } catch ( postError: any ) {
-          console.error(
-            `⚠️ Webhook Failed: ${ postError.message }`
-          );
-          console.log(
-            `⚠️ Webhook Failed: ${ postError.message }`
-          );
+          console.error( `⚠️ Webhook Failed: ${ postError.message }` );
+          console.log( `⚠️ Webhook Failed: ${ postError.message }` );
           await logger.logFailure(
             parentProc.idProceso, act, postError.message, 'WEBHOOK'
           );
@@ -786,91 +533,54 @@ class ActuacionService {
     parentProc: ProcessRequest,
     logger: FileLogger,
   ) {
-    const latestItemByDate = this.getLatestByDate(
-      apiActuaciones
-    );
+    const latestItemByDate = this.getLatestByDate( apiActuaciones );
 
     // 1. Identify New vs Existing
-    const existingRecords = await client.actuacion.findMany(
-      {
-        where: {
-          idProceso: parentProc.idProceso,
-        },
-        select: {
-          idRegActuacion: true,
-        },
-      }
-    );
-    const existingIds = new Set(
-      existingRecords.map(
-        (
-          r
-        ) => {
-          return r.idRegActuacion;
-        }
-      ),
-    );
+    const existingRecords = await client.actuacion.findMany( {
+      where: {
+        idProceso: parentProc.idProceso,
+      },
+      select: {
+        idRegActuacion: true,
+      },
+    } );
+    const existingIds = new Set( existingRecords.map( ( r ) => {
+      return r.idRegActuacion;
+    } ), );
 
-    const newItems = apiActuaciones.filter(
-      (
-        item
-      ) => {
-        return !existingIds.has(
-          String(
-            item.idRegActuacion
-          )
-        );
-      }
-    );
-    const existingItems = apiActuaciones.filter(
-      (
-        item
-      ) => {
-        return existingIds.has(
-          String(
-            item.idRegActuacion
-          )
-        );
-      }
-    );
+    const newItems = apiActuaciones.filter( ( item ) => {
+      return !existingIds.has( String( item.idRegActuacion ) );
+    } );
+    const existingItems = apiActuaciones.filter( ( item ) => {
+      return existingIds.has( String( item.idRegActuacion ) );
+    } );
 
     // 2. Insert New
     if ( newItems.length > 0 ) {
-      const createData = newItems.map(
-        (
-          item
-        ) => {
-          return this.mapToPrismaInput(
-            item, parentProc, latestItemByDate
-          );
-        }
-      );
+      const createData = newItems.map( ( item ) => {
+        return this.mapToPrismaInput(
+          item, parentProc, latestItemByDate
+        );
+      } );
 
       for ( const actuacionNueva of createData ) {
-        console.log(
-          `Processing new actuacion: ${ actuacionNueva.idRegActuacion }`,
-        );
+        console.log( `Processing new actuacion: ${ actuacionNueva.idRegActuacion }`, );
 
         try {
-          await client.actuacion.upsert(
-            {
-              where: {
-                idRegActuacion: actuacionNueva.idRegActuacion,
-              },
-              create: actuacionNueva,
-              update: actuacionNueva,
-            }
-          );
-          console.log(
-            `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.`,
-          );
+          await client.actuacion.upsert( {
+            where: {
+              idRegActuacion: actuacionNueva.idRegActuacion,
+            },
+            create: actuacionNueva,
+            update: {
+              cant         : actuacionNueva.cant,
+              consActuacion: actuacionNueva.consActuacion,
+            },
+          } );
+          console.log( `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.`, );
         } catch ( error: any ) {
-          console.error(
-            `   ❌ Bulk Insert Failed: ${ error.message }`
-          );
-          console.log(
-            `   ❌ Bulk Insert Failed: ${ error.message }`
-          );
+          console.error( `   ❌ Bulk Insert Failed: ${ error.message }` );
+          console.log( `   ❌ Bulk Insert Failed: ${ error.message }` );
           await logger.logFailure(
             parentProc.idProceso,
             newItems,
@@ -880,9 +590,7 @@ class ActuacionService {
         }
       }
 
-      console.log(
-        `   ✅ Inserted ${ newItems.length } new records.`
-      );
+      console.log( `   ✅ Inserted ${ newItems.length } new records.` );
       /* try {
         await client.actuacion.createMany( {
           data          : createData,
@@ -905,47 +613,37 @@ class ActuacionService {
     if ( existingItems.length > 0 ) {
       await pMap(
         existingItems,
-        async (
-          item
-        ) => {
+        async ( item ) => {
           const isUltima = latestItemByDate
-            ? String(
-              item.idRegActuacion
-            )
-              === String(
-                latestItemByDate.idRegActuacion
-              )
+            ? String( item.idRegActuacion )
+              === String( latestItemByDate.idRegActuacion )
             : item.cant === item.consActuacion;
 
           try {
-            await client.actuacion.update(
-              {
-                where: {
-                  idRegActuacion: String(
-                    item.idRegActuacion
-                  ),
-                },
-                data: {
-                  fechaActuacion: ensureDate(
-                    item.fechaActuacion
-                  ) ?? undefined,
-                  fechaRegistro: ensureDate(
-                    item.fechaRegistro
-                  ) ?? undefined,
-                  fechaInicial: ensureDate(
-                    item.fechaInicial
-                  ),
-                  fechaFinal: ensureDate(
-                    item.fechaFinal
-                  ),
-                  isUltimaAct  : isUltima,
-                  consActuacion: item.consActuacion,
-                  cant         : item.cant,
-                },
-              }
+            await client.actuacion.update( {
+              where: {
+                idRegActuacion: String( item.idRegActuacion ),
+              },
+              data: {
+                fechaActuacion: ensureDate( item.fechaActuacion ) ?? undefined,
+                fechaRegistro : ensureDate( item.fechaRegistro ) ?? undefined,
+                fechaInicial  : ensureDate( item.fechaInicial ),
+                fechaFinal    : ensureDate( item.fechaFinal ),
+                isUltimaAct   : isUltima,
+                consActuacion : item.consActuacion,
+                cant          : item.cant,
+              },
+            } );
+          } catch ( err: any ) {
+
+            console.error( `   ❌ Bulk existing items change Failed: ${ err.message }` );
+            console.log( `   ❌ Bulk existing items change Failed: ${ err.message }` );
+            await logger.logFailure(
+              parentProc.idProceso,
+              existingItems,
+              err.message,
+              'DB_ITEM',
             );
-          } catch ( err ) {
-            /* silent fail */
           }
         },
         10,
@@ -962,86 +660,96 @@ class ActuacionService {
     actuaciones: FetchResponseActuacion[],
     parentProc: ProcessRequest,
   ) {
-    const incomingLast = this.getLatestByDate(
-      actuaciones
-    );
+    const incomingLast = this.getLatestByDate( actuaciones );
 
     if ( !incomingLast ) {
       return;
     }
 
     try {
-      const carpeta = await client.carpeta.findUnique(
-        {
-          where: {
-            numero: parentProc.carpetaNumero,
-          },
-          select: {
-            idRegUltimaAct: true,
-            fecha         : true,
-          },
-        }
-      );
+      const carpeta = await client.carpeta.findUnique( {
+        where: {
+          numero: parentProc.carpetaNumero,
+        },
+        select: {
+          idRegUltimaAct: true,
+          fecha         : true,
+        },
+      } );
 
       if ( !carpeta ) {
         return;
       }
 
       const incomingDate
-        = ensureDate(
-          incomingLast.fechaActuacion
-        )
-          ?.getTime() || 0;
-      const savedDate = ensureDate(
-        carpeta.fecha
-      )
-        ?.getTime() || 0;
+        = ensureDate( incomingLast.fechaActuacion )
+          ?.getTime() || 0 ;
+      const savedDate = ensureDate( carpeta.fecha )
+        ?.getTime() ;
 
-      if ( incomingDate > savedDate ) {
-        console.log(
-          `🔄 Updating Carpeta ${ parentProc.carpetaNumero } date.`
-        );
+      if ( !savedDate || incomingDate > savedDate  ) {
+        console.log( `🔄 Updating Carpeta ${ parentProc.carpetaNumero } date.` );
 
         // Reset old ultima flag
-        if (
-          carpeta.idRegUltimaAct
-          && carpeta.idRegUltimaAct !== String(
-            incomingLast.idRegActuacion
-          )
-        ) {
-          await client.actuacion.updateMany(
-            {
+        try {
+          if (
+            carpeta.idRegUltimaAct
+          && carpeta.idRegUltimaAct !== String( incomingLast.idRegActuacion )
+          ) {
+            await client.actuacion.updateMany( {
               where: {
                 idRegActuacion: carpeta.idRegUltimaAct,
               },
               data: {
                 isUltimaAct: false,
               },
-            }
-          );
+            } );
+          }
+
+        } catch ( error ) {
+          console.log( `🚫error tratando de actualizar la previa ultima actuacion: ${ JSON.stringify( error ) }` );
         }
 
-        await client.carpeta.update(
-          {
-            where: {
-              numero: parentProc.carpetaNumero,
-            },
-            data: {
-              fecha: ensureDate(
-                incomingLast.fechaActuacion
-              ),
-              revisado       : false,
-              updatedAt      : new Date(),
-              ultimaActuacion: {
-                connect: {
-                  idRegActuacion: String(
-                    incomingLast.idRegActuacion
-                  ),
-                },
+        // 1. Create or Update the Actuacion FIRST
+        const savedActuacion = await client.actuacion.upsert( {
+          where: {
+            idRegActuacion: `${ incomingLast.idRegActuacion }`
+          },
+          create: {
+            ...incomingLast,
+            idProceso     : parentProc.idProceso,
+            isUltimaAct   : true,
+            idRegActuacion: `${ incomingLast.idRegActuacion }`,
+            fechaActuacion: ensureDate( incomingLast.fechaActuacion ) ?? new Date(),
+            fechaRegistro : ensureDate( incomingLast.fechaRegistro ) ?? new Date(),
+            fechaInicial  : ensureDate( incomingLast.fechaInicial ) ?? undefined,
+            fechaFinal    : ensureDate( incomingLast.fechaFinal ) ?? undefined,
+            proceso       : {
+              connect: {
+                idProceso: parentProc.idProceso
+              }
+            }
+          },
+          update: {},
+        } );
+
+        // 2. THEN update the Carpeta to connect to it
+
+        await client.carpeta.update( {
+          where: {
+            numero: parentProc.carpetaNumero,
+          },
+          data: {
+            fecha          : ensureDate( savedActuacion.fechaActuacion ),
+            revisado       : false,
+            updatedAt      : new Date(),
+            ultimaActuacion: {
+              connect: {
+                idRegActuacion: String( savedActuacion.idRegActuacion ),
               },
             },
-          }
-        );
+          },
+        } );
       }
     } catch ( error ) {
       console.error(
@@ -1065,13 +773,9 @@ export class RobustApiClient {
   // Increased delay to be safer
   private readonly RATE_LIMIT_DELAY_MS = 12000;
 
-  constructor(
-    baseUrl: string
-  ) {
+  constructor( baseUrl: string ) {
     this.baseUrl = baseUrl;
-    this.logger = new FileLogger(
-      'failed_sync_ops.json'
-    );
+    this.logger = new FileLogger( 'failed_sync_ops.json' );
   }
 
   // Helper for Headers
@@ -1088,9 +792,7 @@ export class RobustApiClient {
     };
   }
 
-  private async fetchWithRetry<T>(
-    endpoint: string
-  ): Promise<T> {
+  private async fetchWithRetry<T>( endpoint: string ): Promise<T> {
     // ✅ PASS HEADERS HERE
     const options = {
       headers: this.getHeaders()
@@ -1112,9 +814,7 @@ export class RobustApiClient {
     items: ProcessRequest[],
     pathBuilder: ( item: ProcessRequest ) => string,
   ): Promise<void> {
-    console.log(
-      `🚀 Starting process for ${ items.length } targets...`
-    );
+    console.log( `🚀 Starting process for ${ items.length } targets...` );
 
     for ( const [
       index,
@@ -1122,25 +822,15 @@ export class RobustApiClient {
     ] of items.entries() ) {
       // Add dynamic delay (3.5s to 4.5s) to look more human
       if ( index > 0 ) {
-        const variableDelay = this.RATE_LIMIT_DELAY_MS + Math.floor(
-          Math.random() * 1000
-        );
-        await wait(
-          variableDelay
-        );
+        const variableDelay = this.RATE_LIMIT_DELAY_MS + Math.floor( Math.random() * 1000 );
+        await wait( variableDelay );
       }
 
       try {
-        const endpoint = pathBuilder(
-          parentItem
-        );
-        console.log(
-          `🌐 [${ index + 1 }/${ items.length }] Fetching: ${ parentItem.carpetaNumero }`
-        );
+        const endpoint = pathBuilder( parentItem );
+        console.log( `🌐 [${ index + 1 }/${ items.length }] Fetching: ${ parentItem.carpetaNumero }` );
 
-        const apiResponse = await this.fetchWithRetry<ConsultaActuacionResponse>(
-          endpoint
-        );
+        const apiResponse = await this.fetchWithRetry<ConsultaActuacionResponse>( endpoint );
         const actuacionesList = apiResponse.actuaciones || [];
 
         if ( actuacionesList.length > 0 ) {
@@ -1151,9 +841,7 @@ export class RobustApiClient {
           );
         }
       } catch ( err: any ) {
-        console.error(
-          `❌ FAILED ${ parentItem.carpetaNumero }: ${ err.message }`
-        );
+        console.error( `❌ FAILED ${ parentItem.carpetaNumero }: ${ err.message }` );
         await this.logger.logFailure(
           parentItem.idProceso,
           parentItem,
@@ -1172,69 +860,51 @@ async function getProcesosToUpdate(): Promise<ProcessRequest[]> {
   const carpetas = await client.carpeta.findMany();
 
   return carpetas
-    .flatMap(
-      (
-        carpeta
-      ) => {
-        if ( !carpeta.idProcesos || carpeta.idProcesos.length === 0 ) {
-          return {
-            carpetaNumero: carpeta.numero,
-            llaveProceso : carpeta.llaveProceso,
-            carpetaId    : carpeta.id,
-            idProceso    : 0,
-            nombre       : carpeta.nombre,
-          };
-        }
+    .flatMap( ( carpeta ) => {
+      if ( !carpeta.idProcesos || carpeta.idProcesos.length === 0 ) {
+        return {
+          carpetaNumero: carpeta.numero,
+          llaveProceso : carpeta.llaveProceso,
+          carpetaId    : carpeta.id,
+          idProceso    : 0,
+          nombre       : carpeta.nombre,
+        };
+      }
 
-        return carpeta.idProcesos.map(
-          (
-            idProceso
-          ) => {
-            return {
-              idProceso,
-              carpetaNumero: carpeta.numero,
-              llaveProceso : carpeta.llaveProceso,
-              carpetaId    : carpeta.id,
-              nombre       : carpeta.nombre,
-            };
-          }
-        );
-      }
-    )
-    .sort(
-      (
-        a, b
-      ) => {
-        return b.carpetaNumero - a.carpetaNumero;
-      }
-    );
+      return carpeta.idProcesos.map( ( idProceso ) => {
+        return {
+          idProceso,
+          carpetaNumero: carpeta.numero,
+          llaveProceso : carpeta.llaveProceso,
+          carpetaId    : carpeta.id,
+          nombre       : carpeta.nombre,
+        };
+      } );
+    } )
+    .sort( (
+      a, b
+    ) => {
+      return b.carpetaNumero - a.carpetaNumero;
+    } );
 }
 
 async function runSync() {
   // 1. RECORD START TIME
   const startTime = new Date();
-  console.log(
-    `\n⏱️  Execution Started at: ${ startTime.toISOString() }`
-  );
-  const api = new RobustApiClient(
-    RAMA_JUDICIAL_BASE_URL
-  );
+  console.log( `\n⏱️  Execution Started at: ${ startTime.toISOString() }` );
+  const api = new RobustApiClient( RAMA_JUDICIAL_BASE_URL );
 
   try {
     const processesToCheck = await getProcesosToUpdate();
 
     // The processor now handles strict sequential fetching + rate limiting
     await api.processBatch(
-      processesToCheck, (
-        proc
-      ) => {
+      processesToCheck, ( proc ) => {
         return `/api/v2/Proceso/Actuaciones/${ proc.idProceso }`;
       }
     );
 
-    console.log(
-      '🎉 Sync Complete'
-    );
+    console.log( '🎉 Sync Complete' );
   } catch ( error ) {
     console.error(
       'Fatal Error in runSync:', error
@@ -1249,23 +919,13 @@ async function runSync() {
     // 3. CALCULATE DURATION
     const durationMs = endTime.getTime() - startTime.getTime();
     // Convert to readable format (Hours, Minutes, Seconds)
-    const seconds = Math.floor(
-      ( durationMs / 1000 ) % 60
-    );
-    const minutes = Math.floor(
-      ( durationMs / ( 1000 * 60 ) ) % 60
-    );
-    const hours = Math.floor(
-      durationMs / ( 1000 * 60 * 60 )
-    );
+    const seconds = Math.floor( ( durationMs / 1000 ) % 60 );
+    const minutes = Math.floor( ( durationMs / ( 1000 * 60 ) ) % 60 );
+    const hours = Math.floor( durationMs / ( 1000 * 60 * 60 ) );
     const durationString = `${ hours }h ${ minutes }m ${ seconds }s`;
     // 4. LOG TOTALS
-    console.log(
-      `\n🏁 Execution Finished at: ${ endTime.toISOString() }`
-    );
-    console.log(
-      `⏱️  Total Duration: ${ durationString } (${ durationMs }ms)`
-    );
+    console.log( `\n🏁 Execution Finished at: ${ endTime.toISOString() }` );
+    console.log( `⏱️  Total Duration: ${ durationString } (${ durationMs }ms)` );
   }
 }
 

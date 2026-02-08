@@ -14,14 +14,14 @@ import { client } from '../services/prisma.js';
 import { sleep } from '../utils/awaiter.js';
 import JuzgadoClass from './juzgado.js';
 import { Prisma } from '../prisma/generated/prisma/client.js';
+import { getLatestByDate } from '../utils/latestActuacion.js';
+import { TelegramService } from '../services/telegramService.js';
 
 // ⚠️ Desactiva la verificación de certificados SSL/TLS.
 // Esto es común cuando se consumen APIs gubernamentales antiguas o mal configuradas,
 // pero implica un riesgo de seguridad en producción.
 process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
-console.log(
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED
-);
+console.log( process.env.NODE_TLS_REJECT_UNAUTHORIZED );
 
 // ⏱️ Configuración de Rate Limiting (Límite de velocidad)
 // Se define una espera de 12.5 segundos entre peticiones para evitar bloqueos por parte del servidor.
@@ -57,14 +57,8 @@ async function enforceRateLimit() {
   if ( timeSinceLastCall < RATE_LIMIT_DELAY ) {
     const waitTime = RATE_LIMIT_DELAY - timeSinceLastCall;
 
-    console.log(
-      `⏲️ Rate Limit: Waiting ${ ( waitTime / 1000 ).toFixed(
-        1
-      ) }s...`
-    );
-    await sleep(
-      waitTime
-    ); // 💤 Pausa la ejecución.
+    console.log( `⏲️ Rate Limit: Waiting ${ ( waitTime / 1000 ).toFixed( 1 ) }s...` );
+    await sleep( waitTime ); // 💤 Pausa la ejecución.
   }
 
   lastApiCallTime = Date.now();
@@ -99,15 +93,9 @@ export async function fetchWithSmartRetry(
 
     // 3. Retry Logic for specific HTTP Status Codes
     // 🔄 Si el error está en la lista de reintentos y quedan intentos disponibles.
-    if ( RETRY_STATUS_CODES.includes(
-      response.status
-    ) && retries > 0 ) {
-      console.warn(
-        `⚠️ API Error ${ response.status }. Retrying... (${ retries } attempts left)`,
-      );
-      console.log(
-        `⚠️ API Error ${ response.status }. Retrying... (${ retries } attempts left)`,
-      );
+    if ( RETRY_STATUS_CODES.includes( response.status ) && retries > 0 ) {
+      console.warn( `⚠️ API Error ${ response.status }. Retrying... (${ retries } attempts left)`, );
+      console.log( `⚠️ API Error ${ response.status }. Retrying... (${ retries } attempts left)`, );
 
       // We assume the 'enforceRateLimit' at the start of the recursion
       // provides enough backoff time (12.5s), so we don't need extra sleep here.
@@ -123,9 +111,7 @@ export async function fetchWithSmartRetry(
   } catch ( error ) {
     // 5. Network Errors (DNS, Offline, Connection Refused)
     // You requested NOT to retry these.
-    console.error(
-      `❌ Network/Fetch Error: ${ error }`
-    );
+    console.error( `❌ Network/Fetch Error: ${ error }` );
 
     throw error;
   }
@@ -160,9 +146,7 @@ export class ClassCarpeta implements IntCarpeta {
   fechaUltimaRevision: Date | null;
 
   // 🏗️ Constructor: Transforma los datos crudos (RawDb) a la estructura de la clase.
-  constructor(
-    rawCarpeta: RawDb
-  ) {
+  constructor( rawCarpeta: RawDb ) {
     const {
       NUMERO,
       category,
@@ -189,86 +173,52 @@ export class ClassCarpeta implements IntCarpeta {
 
     // 📅 Conversión de fechas string a objetos Date
     this.fechaUltimaRevision = FECHA_ULTIMA_REVISION
-      ? new Date(
-        FECHA_ULTIMA_REVISION
-      )
+      ? new Date( FECHA_ULTIMA_REVISION )
       : null;
 
     this.fecha = FECHA_ULTIMA_ACTUACION
-      ? new Date(
-        FECHA_ULTIMA_ACTUACION
-      )
+      ? new Date( FECHA_ULTIMA_ACTUACION )
       : null;
 
     // 📝 Procesamiento de Observaciones:
     // Separa las notas por '//' y crea objetos NotasBuilder
     if ( OBSERVACIONES ) {
-      const extras = OBSERVACIONES.split(
-        '//'
-      );
+      const extras = OBSERVACIONES.split( '//' );
 
-      extras.forEach(
-        (
-          nota
-        ) => {
-          notasCounter++;
+      extras.forEach( ( nota ) => {
+        notasCounter++;
 
-          const newNoter = new NotasBuilder(
-            nota, Number(
-              NUMERO
-            ), notasCounter
-          );
+        const newNoter = new NotasBuilder(
+          nota, Number( NUMERO ), notasCounter
+        );
 
-          this.notas.push(
-            newNoter
-          );
-        }
-      );
+        this.notas.push( newNoter );
+      } );
     }
 
     // 📝 Procesamiento de Extras (similar a observaciones):
     if ( EXTRA ) {
-      console.log(
-        `EXTRAS === ${ EXTRA }`
-      );
+      console.log( `EXTRAS === ${ EXTRA }` );
 
-      const extras = String(
-        EXTRA
-      )
-        .split(
-          '//'
+      const extras = String( EXTRA )
+        .split( '//' );
+
+      extras.forEach( ( nota ) => {
+        notasCounter++;
+
+        const newNoter = new NotasBuilder(
+          nota, Number( NUMERO ), notasCounter
         );
 
-      extras.forEach(
-        (
-          nota
-        ) => {
-          notasCounter++;
-
-          const newNoter = new NotasBuilder(
-            nota, Number(
-              NUMERO
-            ), notasCounter
-          );
-
-          this.notas.push(
-            newNoter
-          );
-        }
-      );
+        this.notas.push( newNoter );
+      } );
     }
 
     // 🆔 Lógica para definir el ID: usa la cédula si es número válido, si no, usa el NUMERO interno.
-    const cedulaAsNumber = Number(
-      cedula
-    );
+    const cedulaAsNumber = Number( cedula );
 
-    if ( isNaN(
-      cedulaAsNumber
-    ) ) {
-      idBuilder = Number(
-        NUMERO
-      );
+    if ( isNaN( cedulaAsNumber ) ) {
+      idBuilder = Number( NUMERO );
     } else {
       idBuilder = cedulaAsNumber;
     }
@@ -280,56 +230,32 @@ export class ClassCarpeta implements IntCarpeta {
     this.category = category.replaceAll(
       ' ', ''
     ) as Category;
-    this.ciudad = String(
-      JUZGADO_CIUDAD
-    );
-    this.numero = isNaN(
-      Number(
-        NUMERO
-      )
-    )
+    this.ciudad = String( JUZGADO_CIUDAD );
+    this.numero = isNaN( Number( NUMERO ) )
       ? this.id
-      : Number(
-          NUMERO
-        );
-    this.deudor = new ClassDeudor(
-      rawCarpeta
-    );
-    this.demanda = new ClassDemanda(
-      rawCarpeta
-    );
-    this.nombre = String(
-      DEMANDADO_NOMBRE
-    );
+      : Number( NUMERO );
+    this.deudor = new ClassDeudor( rawCarpeta );
+    this.demanda = new ClassDemanda( rawCarpeta );
+    this.nombre = String( DEMANDADO_NOMBRE );
     this.revisado = false;
     // 👥 Construcción del objeto Codeudor
     this.codeudor = {
       nombre: CODEUDOR_NOMBRE
-        ? String(
-            CODEUDOR_NOMBRE
-          )
+        ? String( CODEUDOR_NOMBRE )
         : null,
       cedula: CODEUDOR_IDENTIFICACION
-        ? String(
-            CODEUDOR_IDENTIFICACION
-          )
+        ? String( CODEUDOR_IDENTIFICACION )
         : null,
       direccion: CODEUDOR_DIRECCION
-        ? String(
-            CODEUDOR_DIRECCION
-          )
+        ? String( CODEUDOR_DIRECCION )
         : null,
       telefono: CODEUDOR_TELEFONOS
-        ? String(
-            CODEUDOR_TELEFONOS
-          )
+        ? String( CODEUDOR_TELEFONOS )
         : null,
       id: this.numero,
     };
     this.tipoProceso = TIPO_PROCESO
-      ? tipoProcesoBuilder(
-          TIPO_PROCESO
-        )
+      ? tipoProcesoBuilder( TIPO_PROCESO )
       : 'SINGULAR';
 
     this.terminado = category === 'Terminados'
@@ -338,33 +264,23 @@ export class ClassCarpeta implements IntCarpeta {
     this.idRegUltimaAct = null;
     this.ultimaActuacion = null;
     this.llaveProceso = EXPEDIENTE
-      ? String(
-          EXPEDIENTE
-        )
+      ? String( EXPEDIENTE )
           .replace(
             /\s/g, ''
           )
       : 'SinEspecificar';
-    this.numero = Number(
-      NUMERO
-    );
-    this.ciudad = String(
-      JUZGADO_CIUDAD
-    );
+    this.numero = Number( NUMERO );
+    this.ciudad = String( JUZGADO_CIUDAD );
 
     // ⚖️ Normalización del Juzgado
-    this.juzgado = JuzgadoClass.fromShortName(
-      {
-        ciudad: String(
-          JUZGADO_CIUDAD
-        ),
-        juzgadoRaw: JUZGADO_EJECUCION
-          ? JUZGADO_EJECUCION
-          : JUZGADO_ORIGEN
-            ? JUZGADO_ORIGEN
-            : '',
-      }
-    );
+    this.juzgado = JuzgadoClass.fromShortName( {
+      ciudad    : String( JUZGADO_CIUDAD ),
+      juzgadoRaw: JUZGADO_EJECUCION
+        ? JUZGADO_EJECUCION
+        : JUZGADO_ORIGEN
+          ? JUZGADO_ORIGEN
+          : '',
+    } );
     this.juzgadoTipo = this.juzgado.tipo;
   }
   //!CONSTRUCTOR -
@@ -373,15 +289,11 @@ export class ClassCarpeta implements IntCarpeta {
   // 🌐 Método para consultar procesos en la API de la Rama Judicial usando el expediente (llaveProceso)
   async getProcesos() {
     try {
-      console.log(
-        '🧡 initiating getProcesos'
-      );
+      console.log( '🧡 initiating getProcesos' );
 
       // !!! UPDATED: Using fetchWithSmartRetry !!!
       // 📡 Llamada a la API externa
-      const request = await fetchWithSmartRetry(
-        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1`,
-      );
+      const request = await fetchWithSmartRetry( `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ this.llaveProceso }&SoloActivos=false&pagina=1`, );
 
       if ( !request.ok ) {
         const json = await request.json();
@@ -389,45 +301,33 @@ export class ClassCarpeta implements IntCarpeta {
         if ( request.status === 404 ) {
           // Loguear el error 404 con la data relevante
           try {
-            const fs = await import(
-              'fs'
-            );
-            const path = await import(
-              'path'
-            );
+            const fs = await import( 'fs' );
+            const path = await import( 'path' );
             const logPath = path.resolve(
               __dirname, 'carpeta-404-log.json'
             );
             let logArr = [];
 
             try {
-              const prev = fs.existsSync(
-                logPath
-              )
+              const prev = fs.existsSync( logPath )
                 ? fs.readFileSync(
                     logPath, 'utf8'
                   )
                 : '[]';
-              logArr = JSON.parse(
-                prev
-              );
+              logArr = JSON.parse( prev );
             } catch ( e ) {
-              console.log(
-                e
-              );
+              console.log( e );
               logArr = [];
             }
 
-            logArr.push(
-              {
-                fecha: new Date()
-                  .toISOString(),
-                llaveProceso: this.llaveProceso,
-                numero      : this.numero,
-                status      : request.status,
-                json,
-              }
-            );
+            logArr.push( {
+              fecha: new Date()
+                .toISOString(),
+              llaveProceso: this.llaveProceso,
+              numero      : this.numero,
+              status      : request.status,
+              json,
+            } );
 
             try {
               fs.writeFileSync(
@@ -447,11 +347,7 @@ export class ClassCarpeta implements IntCarpeta {
           }
         }
 
-        throw new Error(
-          `📉${ request.status } : ${ request.statusText } === ${ JSON.stringify(
-            json
-          ) }`,
-        );
+        throw new Error( `📉${ request.status } : ${ request.statusText } === ${ JSON.stringify( json ) }`, );
       }
 
       const consultaProcesos = ( await request.json() ) as ConsultaProcesos;
@@ -459,58 +355,40 @@ export class ClassCarpeta implements IntCarpeta {
       const {
         procesos
       } = consultaProcesos;
-      console.log(
-        consultaProcesos
-      );
-      console.log(
-        `
+      console.log( consultaProcesos );
+      console.log( `
           📰 hay ${ procesos.length } procesos en ${ this.numero }
-          `
-      );
+          ` );
 
-      if ( procesos.length === 0 && this.llaveProceso.startsWith(
-        '1'
-      ) ) {
+      if ( procesos.length === 0 && this.llaveProceso.startsWith( '1' ) ) {
         // Loguear el error 404 con la data relevante
         try {
-          const fs = await import(
-            'fs'
-          );
-          const path = await import(
-            'path'
-          );
+          const fs = await import( 'fs' );
+          const path = await import( 'path' );
           const logPath = path.resolve(
             __dirname, 'carpeta-404-log.json'
           );
           let logArr = [];
 
           try {
-            const prev = fs.existsSync(
-              logPath
-            )
+            const prev = fs.existsSync( logPath )
               ? fs.readFileSync(
                   logPath, 'utf8'
                 )
               : '[]';
-            logArr = JSON.parse(
-              prev
-            );
+            logArr = JSON.parse( prev );
           } catch ( e ) {
-            console.log(
-              e
-            );
+            console.log( e );
             logArr = [];
           }
 
-          logArr.push(
-            {
-              fecha: new Date()
-                .toISOString(),
-              llaveProceso: this.llaveProceso,
-              numero      : this.numero,
-              procesos    : 'no hay procesos para esta carpeta, revisar el radicado',
-            }
-          );
+          logArr.push( {
+            fecha: new Date()
+              .toISOString(),
+            llaveProceso: this.llaveProceso,
+            numero      : this.numero,
+            procesos    : 'no hay procesos para esta carpeta, revisar el radicado',
+          } );
 
           try {
             fs.writeFileSync(
@@ -539,31 +417,19 @@ export class ClassCarpeta implements IntCarpeta {
         const proceso: outProceso = {
           ...rawProceso,
           fechaProceso: rawProceso.fechaProceso
-            ? new Date(
-              rawProceso.fechaProceso
-            )
+            ? new Date( rawProceso.fechaProceso )
             : null,
           fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
-            ? new Date(
-              rawProceso.fechaUltimaActuacion
-            )
+            ? new Date( rawProceso.fechaUltimaActuacion )
             : null,
-          juzgado: JuzgadoClass.fromProceso(
-            rawProceso
-          ),
+          juzgado: JuzgadoClass.fromProceso( rawProceso ),
         };
 
-        this.procesos.push(
-          proceso
-        );
-        this.idProcesos.push(
-          proceso.idProceso
-        ); // Guarda los IDs para usarlos luego en getActuaciones
+        this.procesos.push( proceso );
+        this.idProcesos.push( proceso.idProceso ); // Guarda los IDs para usarlos luego en getActuaciones
       }
     } catch ( error ) {
-      console.log(
-        `💩${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }`,
-      );
+      console.log( `💩${ this.numero } => error en CarpetaBuilder.getProcesos(${ this.llaveProceso }) => ${ error }`, );
     }
 
     return this.procesos;
@@ -572,9 +438,7 @@ export class ClassCarpeta implements IntCarpeta {
   //ASYNC - getActuaciones
   // 📜 Obtiene el historial de actuaciones (movimientos) para cada proceso encontrado.
   async getActuaciones() {
-    console.log(
-      '🧡 initiating getActuaciones'
-    );
+    console.log( '🧡 initiating getActuaciones' );
 
     if ( this.idProcesos.length === 0 ) {
       return [];
@@ -585,14 +449,10 @@ export class ClassCarpeta implements IntCarpeta {
       try {
         // !!! UPDATED: Using fetchWithSmartRetry !!!
         // 📡 Consulta a la API de Actuaciones por ID de proceso
-        const request = await fetchWithSmartRetry(
-          `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }`,
-        );
+        const request = await fetchWithSmartRetry( `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/${ idProceso }`, );
 
         if ( !request.ok ) {
-          throw new Error(
-            request.statusText
-          );
+          throw new Error( request.statusText );
         }
 
         const consultaActuaciones = ( await request.json() ) as ConsultaActuacion;
@@ -600,74 +460,69 @@ export class ClassCarpeta implements IntCarpeta {
         const {
           actuaciones
         } = consultaActuaciones;
-        console.log(
-          `
+        console.log( `
           💾 hay ${ actuaciones.length } actuaciones en ${ this.numero }
-          `
-        );
+          ` );
+        const ultimaAct = getLatestByDate( actuaciones );
 
         // 🛠️ Mapeo y transformación de datos de actuación
-        const outActuaciones = actuaciones.map(
-          (
-            actuacion
-          ) => {
+        const outActuaciones = actuaciones.map( ( actuacion ) => {
+          if ( ultimaAct && String( ultimaAct.idRegActuacion ) === String( actuacion.idRegActuacion ) ) {
             return {
               ...actuacion,
               idRegActuacion: `${ actuacion.idRegActuacion }`,
-              idProceso     : Number(
-                idProceso
-              ),
-              isUltimaAct   : actuacion.cant === actuacion.consActuacion, // Detecta si es la última
-              fechaActuacion: new Date(
-                actuacion.fechaActuacion
-              ),
-              fechaRegistro: new Date(
-                actuacion.fechaRegistro
-              ),
-              fechaInicial: actuacion.fechaInicial
-                ? new Date(
-                  actuacion.fechaInicial
-                )
+              idProceso     : Number( idProceso ),
+              isUltimaAct   : true,
+              fechaActuacion: new Date( actuacion.fechaActuacion ),
+              fechaRegistro : new Date( actuacion.fechaRegistro ),
+              fechaInicial  : actuacion.fechaInicial
+                ? new Date( actuacion.fechaInicial )
                 : null,
               fechaFinal: actuacion.fechaFinal
-                ? new Date(
-                  actuacion.fechaFinal
-                )
+                ? new Date( actuacion.fechaFinal )
                 : null,
-              createdAt: new Date(
-                actuacion.fechaRegistro
-              ),
+              createdAt    : new Date( actuacion.fechaRegistro ),
               carpetaNumero: this.numero,
             };
           }
-        );
+
+          return {
+            ...actuacion,
+            idRegActuacion: `${ actuacion.idRegActuacion }`,
+            idProceso     : Number( idProceso ),
+            isUltimaAct   : actuacion.cant === actuacion.consActuacion, // Detecta si es la última
+            fechaActuacion: new Date( actuacion.fechaActuacion ),
+            fechaRegistro : new Date( actuacion.fechaRegistro ),
+            fechaInicial  : actuacion.fechaInicial
+              ? new Date( actuacion.fechaInicial )
+              : null,
+            fechaFinal: actuacion.fechaFinal
+              ? new Date( actuacion.fechaFinal )
+              : null,
+            createdAt    : new Date( actuacion.fechaRegistro ),
+            carpetaNumero: this.numero,
+          };
+        } );
 
         // 📥 Guardado en el array de la clase y detección de la "Ultima Actuación" global
-        outActuaciones.forEach(
-          (
-            actuacion
-          ) => {
-            this.actuaciones.push(
-              actuacion
-            );
 
-            if ( actuacion.isUltimaAct ) {
-              this.ultimaActuacion = actuacion;
-              this.fecha = actuacion.fechaActuacion;
-              this.idRegUltimaAct = actuacion.idRegActuacion;
-            }
+        outActuaciones.forEach( ( actuacion ) => {
+          this.actuaciones.push( actuacion );
+
+          if ( actuacion.isUltimaAct ) {
+            this.ultimaActuacion = actuacion;
+            this.fecha = actuacion.fechaActuacion;
+            this.idRegUltimaAct = actuacion.idRegActuacion;
           }
-        );
+        } );
 
         continue;
       } catch ( error ) {
-        console.log(
-          `💩${ this.numero } ERROR ==> getActuaciones ${ idProceso } => ${ JSON.stringify(
-            error,
-            null,
-            2,
-          ) }`,
-        );
+        console.log( `💩${ this.numero } ERROR ==> getActuaciones ${ idProceso } => ${ JSON.stringify(
+          error,
+          null,
+          2,
+        ) }`, );
 
         continue;
       }
@@ -680,18 +535,12 @@ export class ClassCarpeta implements IntCarpeta {
     const fetchUrl = `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NombreRazonSocial?nombre=${ this.nombre }&tipoPersona=nat&SoloActivos=false&codificacionDespacho=&pagina=1`;
 
     try {
-      const request = await fetchWithSmartRetry(
-        fetchUrl
-      ); // Use SmartRetry here too
+      const request = await fetchWithSmartRetry( fetchUrl ); // Use SmartRetry here too
 
       if ( !request.ok ) {
         const json = await request.json();
 
-        throw new Error(
-          JSON.stringify(
-            json
-          )
-        );
+        throw new Error( JSON.stringify( json ) );
       }
 
       const consultaProcesos = await request.json();
@@ -708,33 +557,21 @@ export class ClassCarpeta implements IntCarpeta {
         const proceso = {
           ...rawProceso,
           fechaProceso: rawProceso.fechaProceso
-            ? new Date(
-              rawProceso.fechaProceso
-            )
+            ? new Date( rawProceso.fechaProceso )
             : null,
           fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
-            ? new Date(
-              rawProceso.fechaUltimaActuacion
-            )
+            ? new Date( rawProceso.fechaUltimaActuacion )
             : null,
-          juzgado: JuzgadoClass.fromProceso(
-            rawProceso
-          ),
+          juzgado: JuzgadoClass.fromProceso( rawProceso ),
         };
 
-        this.procesos.push(
-          proceso
-        );
-        this.idProcesos.push(
-          proceso.idProceso
-        );
+        this.procesos.push( proceso );
+        this.idProcesos.push( proceso.idProceso );
       }
 
       return this.procesos;
     } catch ( error ) {
-      console.log(
-        `${ this.numero } => error en getProcesosByName => ${ error }`
-      );
+      console.log( `${ this.numero } => error en getProcesosByName => ${ error }` );
 
       return [];
     }
@@ -748,46 +585,32 @@ export class ClassCarpeta implements IntCarpeta {
   // 💾 MÉTODO PRINCIPAL DE GUARDADO (Instancia)
   // Guarda/Actualiza toda la información recolectada en la base de datos local usando Prisma.
   async agregateToDBMethod() {
-    console.log(
-      `💾 Saving updates for ${ this.numero }...`
-    );
+    console.log( `💾 Saving updates for ${ this.numero }...` );
 
     // 🔨 Preparación de objetos para Prisma
-    const newDemanda = ClassDemanda.prismaDemanda(
-      this.demanda
-    );
+    const newDemanda = ClassDemanda.prismaDemanda( this.demanda );
 
-    const newDeudor = ClassDeudor.prismaDeudor(
-      this.deudor
-    );
+    const newDeudor = ClassDeudor.prismaDeudor( this.deudor );
 
-    const newCarpeta = ClassCarpeta.prismaCarpeta(
-      this
-    );
+    const newCarpeta = ClassCarpeta.prismaCarpeta( this );
 
     // 1. Upsert carpeta base (sin relaciones)
     // 📁 Crea la carpeta si no existe, o la actualiza si ya existe.
     try {
-      console.log(
-        '📁 try carpeta upsert'
-      );
-      await client.carpeta.upsert(
-        {
-          where: {
-            numero: this.numero,
-          },
-          create: {
-            ...newCarpeta,
-          },
-          update: {
-            ...newCarpeta,
-          },
-        }
-      );
+      console.log( '📁 try carpeta upsert' );
+      await client.carpeta.upsert( {
+        where: {
+          numero: this.numero,
+        },
+        create: {
+          ...newCarpeta,
+        },
+        update: {
+          ...newCarpeta,
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al crear carpeta base: ${ error }`
-      );
+      console.log( `❌ Error al crear carpeta base: ${ error }` );
 
       //return;
     }
@@ -795,148 +618,118 @@ export class ClassCarpeta implements IntCarpeta {
     // 2. Relacionar juzgado
     // 🏛️ Conecta la carpeta con el Juzgado, creándolo si no existe.
     try {
-      console.log(
-        '🧑‍⚖️ carpeta update juzgado'
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: this.numero,
-          },
-          data: {
-            juzgado: {
-              connectOrCreate: {
-                where: {
-                  id_tipo_ciudad: {
-                    tipo  : this.juzgado.tipo,
-                    id    : this.juzgado.id,
-                    ciudad: this.juzgado.ciudad,
-                  },
-                },
-                create: {
+      console.log( '🧑‍⚖️ carpeta update juzgado' );
+      await client.carpeta.update( {
+        where: {
+          numero: this.numero,
+        },
+        data: {
+          juzgado: {
+            connectOrCreate: {
+              where: {
+                id_tipo_ciudad: {
                   tipo  : this.juzgado.tipo,
                   id    : this.juzgado.id,
                   ciudad: this.juzgado.ciudad,
-                  url   : this.juzgado.url,
                 },
+              },
+              create: {
+                tipo  : this.juzgado.tipo,
+                id    : this.juzgado.id,
+                ciudad: this.juzgado.ciudad,
+                url   : this.juzgado.url,
               },
             },
           },
-        }
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar juzgado: ${ error }`
-      );
+      console.log( `❌ Error al conectar juzgado: ${ error }` );
     }
 
     // 4. Relacionar deudor
     // 👤 Asocia al deudor a la carpeta.
     try {
-      console.log(
-        `
-        🙆 update carpeta with deudor`
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: this.numero,
-          },
-          data: {
-            deudor: {
-              connectOrCreate: {
-                where: {
-                  id: this.numero,
-                },
-                create: newDeudor,
+      console.log( `
+        🙆 update carpeta with deudor` );
+      await client.carpeta.update( {
+        where: {
+          numero: this.numero,
+        },
+        data: {
+          deudor: {
+            connectOrCreate: {
+              where: {
+                id: this.numero,
               },
+              create: newDeudor,
             },
           },
-        }
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar deudor: ${ error }`
-      );
+      console.log( `❌ Error al conectar deudor: ${ error }` );
     }
 
     // 5. Relacionar demanda
     // 📜 Asocia los datos de la demanda.
     try {
-      console.log(
-        '🕴️update carpeta with demanda'
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: this.numero,
-          },
-          data: {
-            demanda: {
-              connectOrCreate: {
-                where: {
-                  id: this.numero,
-                },
-                create: newDemanda,
+      console.log( '🕴️update carpeta with demanda' );
+      await client.carpeta.update( {
+        where: {
+          numero: this.numero,
+        },
+        data: {
+          demanda: {
+            connectOrCreate: {
+              where: {
+                id: this.numero,
               },
+              create: newDemanda,
             },
           },
-        }
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar demanda: ${ error }`
-      );
+      console.log( `❌ Error al conectar demanda: ${ error }` );
     }
 
     // 6. Relacionar codeudor
     // 👥 Asocia al codeudor si existe.
     try {
-      console.log(
-        '🧜 update carpeta with codeudor'
-      );
-      await client.carpeta.update(
-        {
-          where: {
-            numero: this.numero,
-          },
-          data: {
-            codeudor: {
-              connectOrCreate: {
-                where: {
-                  id: this.numero,
-                },
-                create: {
-                  ...this.codeudor,
-                },
+      console.log( '🧜 update carpeta with codeudor' );
+      await client.carpeta.update( {
+        where: {
+          numero: this.numero,
+        },
+        data: {
+          codeudor: {
+            connectOrCreate: {
+              where: {
+                id: this.numero,
+              },
+              create: {
+                ...this.codeudor,
               },
             },
           },
-        }
-      );
+        },
+      } );
     } catch ( error ) {
-      console.log(
-        `❌ Error al conectar codeudor: ${ error }`
-      );
+      console.log( `❌ Error al conectar codeudor: ${ error }` );
     }
 
     // 7. Crear notas
     // 📒 Guarda notas masivamente, saltando duplicados.
     if ( this.notas && this.notas.length > 0 ) {
       try {
-        console.log(
-          '📓create notes'
-        );
-        await client.nota.createMany(
-          {
-            data          : this.notas,
-            skipDuplicates: true,
-          }
-        );
+        console.log( '📓create notes' );
+        await client.nota.createMany( {
+          data          : this.notas,
+          skipDuplicates: true,
+        } );
       } catch ( error ) {
-        console.log(
-          `❌ Error al crear notas: ${ error }`
-        );
+        console.log( `❌ Error al crear notas: ${ error }` );
       }
     }
 
@@ -1002,38 +795,54 @@ export class ClassCarpeta implements IntCarpeta {
           };
 
           // 💾 Upsert del Proceso
-          await client.proceso.upsert(
-            {
-              where: {
-                idProceso: proceso.idProceso,
-              },
-              create: createData,
-              update: updateData,
-            }
-          );
+          await client.proceso.upsert( {
+            where: {
+              idProceso: proceso.idProceso,
+            },
+            create: createData,
+            update: updateData,
+          } );
         } catch ( error ) {
-          console.log(
-            `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`,
-          );
+          console.log( `❌ Error al crear proceso ${ proceso.idProceso }: ${ error }`, );
         }
 
         // Actuaciones para este proceso
         // 🔍 Filtra las actuaciones que pertenecen a este proceso específico.
 
         //lo voy a comment porque el código que maneja las actuaciones debe estar manejado exclusivamente por el helper que sí notifica cuando hay una nueva y por consiguiente el manejo de las Actuaciones
-        /* const processActuaciones = this.actuaciones.filter(
-          (
-            a
-          ) => {
-            return a.idProceso === proceso.idProceso;
-          }
-        );
+        const processActuaciones = this.actuaciones.filter( ( a ) => {
+          return a.idProceso === proceso.idProceso;
+        } );
+        const ultimaActuacion = getLatestByDate( processActuaciones );
 
         // 💾 Guarda cada actuación.
         for ( const actuacion of processActuaciones ) {
           try {
-            await client.actuacion.upsert(
-              {
+            if ( ultimaActuacion ) {
+
+              await client.actuacion.upsert( {
+                where: {
+                  idRegActuacion: actuacion.idRegActuacion,
+                },
+                create: {
+                  ...actuacion,
+                  isUltimaAct   : true,
+                  idRegActuacion: `${ actuacion.idRegActuacion }`,
+                  proceso       : {
+                    connect: {
+                      idProceso: proceso.idProceso,
+                    },
+                  },
+                },
+                update: {
+                  ...actuacion,
+                  isUltimaAct: true,
+                  cant       : actuacion.cant
+                },
+              } );
+            } else {
+
+              await client.actuacion.upsert( {
                 where: {
                   idRegActuacion: actuacion.idRegActuacion,
                 },
@@ -1050,62 +859,69 @@ export class ClassCarpeta implements IntCarpeta {
                   ...actuacion,
                   isUltimaAct: actuacion.cant === actuacion.consActuacion,
                 },
-              }
-            );
+              } );
+            }
           } catch ( error ) {
-            console.log(
-              `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`,
-            );
+            console.log( `❌ Error al crear actuacion ${ actuacion.idRegActuacion }: ${ error }`, );
           }
 
-          if ( actuacion.isUltimaAct ) {
+          if ( String( actuacion.idRegActuacion ) === String( ultimaActuacion?.idRegActuacion ) ) {
             // 3. Relacionar ultimaActuacion
             // 🆕 Actualiza la referencia a la actuación más reciente.
 
             try {
-              console.log(
-                '☢️ try ultimaActuacion upsert and update carpeta'
-              );
-              await client.carpeta.update(
-                {
-                  where: {
-                    numero: this.numero,
-                  },
-                  data: {
-                    ultimaActuacion: {
-                      connectOrCreate: {
-                        where: {
-                          idRegActuacion: actuacion.idRegActuacion,
-                        },
-                        create: {
-                          ...actuacion,
-                          idRegActuacion: `${ actuacion.idRegActuacion }`,
-                          proceso       : {
-                            connect: {
-                              idProceso: actuacion.idProceso,
-                            },
+              console.log( '☢️ try ultimaActuacion upsert and update carpeta' );
+              await client.carpeta.update( {
+                where: {
+                  numero: this.numero,
+                },
+                data: {
+                  ultimaActuacion: {
+                    connectOrCreate: {
+                      where: {
+                        idRegActuacion: actuacion.idRegActuacion,
+                      },
+                      create: {
+                        ...actuacion,
+                        idRegActuacion: `${ actuacion.idRegActuacion }`,
+                        proceso       : {
+                          connect: {
+                            idProceso: actuacion.idProceso,
                           },
                         },
                       },
                     },
                   },
-                }
-              );
+                },
+              } );
+
+              /* try {
+                await TelegramService.sendNotification(
+                  {
+                    ...actuacion,
+                    idRegActuacion: Number( actuacion.idRegActuacion )
+                  }, {
+                    idProceso    : proceso.idProceso,
+                    carpetaNumero: this.numero,
+                    llaveProceso : this.llaveProceso,
+                    carpetaId    : this.id,
+                    nombre       : this.nombre
+                  }
+                );
+              } catch ( error ) {
+                console.log( `❌ Error al conectar ultimaActuacion: ${ error }` );
+              } */
             } catch ( error ) {
-              console.log(
-                `❌ Error al conectar ultimaActuacion: ${ error }`
-              );
+              console.log( `❌ Error al conectar ultimaActuacion: ${ error }` );
             }
           }
-        } */
+        }
       }
     }
   }
 
   // 🛠️ Helper Estático para formatear datos
-  static prismaCarpeta(
-    carpeta: IntCarpeta
-  ) {
+  static prismaCarpeta( carpeta: IntCarpeta ) {
     const newCarpeta: Prisma.CarpetaCreateInput = {
       id                 : carpeta.id,
       llaveProceso       : carpeta.llaveProceso,
@@ -1126,59 +942,49 @@ export class ClassCarpeta implements IntCarpeta {
   }
   //!STATIC
   //STATICASYNC
-  static async updateNotes(
-    incomingCarpeta: ClassCarpeta
-  ) {
+  static async updateNotes( incomingCarpeta: ClassCarpeta ) {
     const {
       notas
     } = incomingCarpeta;
 
-    const updater = await client.nota.createMany(
-      {
-        data          : notas,
-        skipDuplicates: true,
-      }
-    );
+    const updater = await client.nota.createMany( {
+      data          : notas,
+      skipDuplicates: true,
+    } );
 
-    console.log(
-      updater
-    );
+    console.log( updater );
 
     return updater.count;
   }
   // 👓 Método para LEER una carpeta completa de la DB con todas sus relaciones.
-  static async getCarpeta(
-    numero: number
-  ) {
-    return await client.carpeta.findFirstOrThrow(
-      {
-        where: {
-          numero: numero,
-        },
-        include: {
-          ultimaActuacion: true,
-          deudor         : true,
-          codeudor       : true,
-          notas          : true,
-          tareas         : true,
-          demanda        : {
-            include: {
-              notificacion: {
-                include: {
-                  notifiers: true,
-                },
+  static async getCarpeta( numero: number ) {
+    return await client.carpeta.findFirstOrThrow( {
+      where: {
+        numero: numero,
+      },
+      include: {
+        ultimaActuacion: true,
+        deudor         : true,
+        codeudor       : true,
+        notas          : true,
+        tareas         : true,
+        demanda        : {
+          include: {
+            notificacion: {
+              include: {
+                notifiers: true,
               },
-              medidasCautelares: true,
             },
-          },
-          procesos: {
-            include: {
-              juzgado: true,
-            },
+            medidasCautelares: true,
           },
         },
-      }
-    );
+        procesos: {
+          include: {
+            juzgado: true,
+          },
+        },
+      },
+    } );
   }
 
   // 💾 MÉTODO ESTÁTICO DE GUARDADO
