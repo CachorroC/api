@@ -87,3 +87,8 @@ export type Juzgado = Prisma.JuzgadoModel
  * 
  */
 export type Proceso = Prisma.ProcesoModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel

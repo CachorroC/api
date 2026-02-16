@@ -60,6 +60,8 @@ async function tryAsyncClassCarpetas() {
             `❌ Error processing prisma find unique  ${ item.numero }:`,
             error
           );
+
+          return;
         }
 
         // Fetch Data

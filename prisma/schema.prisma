@@ -238,6 +238,14 @@ model Proceso {
   sujetosProcesales    String
 }
 
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+}
+
 enum NotifierName {
   DOS91
   DOS92

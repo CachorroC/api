@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 //!SECTION
 //SECTION first step: extract the date
 export function datesExtractor( incomingDate?: string | number | Date | null ) {
@@ -8,7 +9,7 @@ export function datesExtractor( incomingDate?: string | number | Date | null ) {
   }
 
   if ( typeof incomingDate === 'object' ) {
-    console.log( incomingDate );
+    //console.log( incomingDate );
 
     if ( incomingDate.toString() !== 'Invalid Date' ) {
       outputDates.push( incomingDate );
@@ -60,15 +61,15 @@ export function fixSingleFecha( rawFecha: string ) {
     const newMonth = Number( secondNumber ) - 1;
 
     const newYear = Number( thirdNumber.padStart(
-      4, '2015' 
+      4, '2015'
     ) );
 
     const newDay = Number( firstNumber.padStart(
-      2, '00' 
+      2, '00'
     ) );
 
     const outputDate = new Date(
-      newYear, newMonth, newDay 
+      newYear, newMonth, newDay
     );
 
     datesOutput.push( outputDate );
@@ -81,27 +82,27 @@ export function fixSingleFecha( rawFecha: string ) {
 export function dateValidator( incomingDate: Date ): Date | null {
   const stringifiedDate = incomingDate.toString();
 
-  console.log( stringifiedDate );
-  console.log( `
+  //console.log( stringifiedDate );
+  /*console.log( `
     string date:
     ${ String( incomingDate ) }
-    ` );
+    ` );*/
 
   const dateYear = incomingDate.getFullYear();
 
-  console.log( dateYear );
+  //console.log( dateYear );
 
   if (
     stringifiedDate === 'Invalid Date'
     || dateYear <= 2000
     || dateYear > 2200
   ) {
-    console.log( dateYear );
+    //console.log( dateYear );
 
     return null;
   }
 
-  console.log( incomingDate );
+  //console.log( incomingDate );
 
   return incomingDate;
 }

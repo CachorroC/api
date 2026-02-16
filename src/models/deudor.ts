@@ -99,7 +99,7 @@ export class ClassDeudor implements IntDeudor {
             this.segundoNombre,
             this.primerApellido
           ]
-          = nameStringArray;
+            = nameStringArray;
           this.segundoApellido = null;
 
           break;

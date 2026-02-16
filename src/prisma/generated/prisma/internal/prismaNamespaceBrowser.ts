@@ -64,7 +64,8 @@ export const ModelName = {
   Task: 'Task',
   Actuacion: 'Actuacion',
   Juzgado: 'Juzgado',
-  Proceso: 'Proceso'
+  Proceso: 'Proceso',
+  User: 'User'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -317,6 +318,17 @@ export const ProcesoScalarFieldEnum = {
 } as const
 
 export type ProcesoScalarFieldEnum = (typeof ProcesoScalarFieldEnum)[keyof typeof ProcesoScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  name: 'name',
+  createdAt: 'createdAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const SortOrder = {

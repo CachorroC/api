@@ -8,7 +8,7 @@ const normalizeText = ( text: string ): string => {
     .toLowerCase()
     .normalize( 'NFD' )
     .replace(
-      /\p{Diacritic}/gu, '' 
+      /\p{Diacritic}/gu, ''
     )
     .trim();
 };
@@ -29,16 +29,21 @@ export function extrapolateTipoToCorrectType( tipo: string ): string {
 
   const isCivilCircuito = /(CCTO|CIRCUITO|CTO|C CTO|CC)/im.test( tipo );
 
+  const isAdministrativo = /ADMIN|ADMON|SECCI(Ó|O)N/im.test( tipo );
+
   // Fixed corrupted characters (� -> ?, � -> ?, � -> ?)
   if ( hasEjecucion ) {
     if ( isPequenasCausas ) {
-      output = 'DE PEQUE?AS CAUSAS Y COMPETENCIA M?LTIPLE';
+      output = 'DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE';
     } else if ( isPromiscuoMunicipal ) {
       output = 'PROMISCUO MUNICIPAL';
     } else if ( isCivilCircuito ) {
-      output = 'CIVIL DEL CIRCUITO DE EJECUCI?N DE SENTENCIAS';
+      output = 'CIVIL DEL CIRCUITO DE EJECUCIÓN DE SENTENCIAS';
     } else if ( isCivilMunicipal ) {
-      output = 'CIVIL MUNICIPAL DE EJECUCI?N DE SENTENCIAS';
+      output = 'CIVIL MUNICIPAL DE EJECUCIÓN DE SENTENCIAS';
+    } else if ( isAdministrativo ) {
+       // Just in case there is an execution court for administrative (rare, but possible)
+       output = 'ADMINISTRATIVO DE EJECUCIÓN DE SENTENCIAS';
     }
   } else {
     if ( isPequenasCausas ) {
@@ -51,7 +56,13 @@ export function extrapolateTipoToCorrectType( tipo: string ): string {
       output = 'CIVIL DEL CIRCUITO';
     } else if ( isCivilMunicipal ) {
       output = 'CIVIL MUNICIPAL';
+    } // --- NEW CODE START ---
+    else if ( isAdministrativo ) {
+      // Returns the standard "ADMINISTRATIVO" type.
+      // If you need the specific section included, you can modify this string.
+      output = 'ADMINISTRATIVO DE LA SECCIÓN CUARTA';
     }
+    // --- NEW CODE END ---
   }
 
   return output;
@@ -73,7 +84,7 @@ class JuzgadoClass implements Juzgado {
     ciudad: string;
   } ) {
     this.id = id.padStart(
-      3, '000' 
+      3, '000'
     );
     this.tipo = tipo.toUpperCase()
       .trim();
@@ -137,7 +148,7 @@ class JuzgadoClass implements Juzgado {
     ] = matchedRegexNumberAndLetters;
 
     const newId = rawId.padStart(
-      3, '000' 
+      3, '000'
     );
 
     const newTipo = extrapolateTipoToCorrectType( rawTipo );

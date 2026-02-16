@@ -1,3 +1,4 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* eslint-disable no-unused-vars */
@@ -15,17 +16,15 @@ import { client } from './prisma.js';
 import { Prisma } from '../prisma/generated/prisma/client.js';
 import { ensureDate } from '../utils/ensureDate.js';
 import { TelegramService } from './telegramService.js';
+
 // ==========================================
 // 2. CONFIGURATION & CONSTANTS
 // ==========================================
 const WEBHOOK_URL = process.env.WEBHOOK_URL || '';
 const NEW_ACTUACION_WEBHOOK_URL = process.env.NEW_ACTUACION_WEBHOOK_URL || '';
 
-const NEW_ITEMS_LOG_FILE
-  = process.env.NEW_ITEMS_LOG_FILE || 'new_actuaciones_accumulator.json';
-const RAMA_JUDICIAL_BASE_URL
-  = process.env.RAMA_JUDICIAL_BASE_URL
-  || 'https://consultaprocesos.ramajudicial.gov.co:448';
+const NEW_ITEMS_LOG_FILE = process.env.NEW_ITEMS_LOG_FILE || 'new_actuaciones_accumulator.json';
+const RAMA_JUDICIAL_BASE_URL = process.env.RAMA_JUDICIAL_BASE_URL || 'https://consultaprocesos.ramajudicial.gov.co:448';
 
 // ==========================================
 // 3. TYPES, INTERFACES & ERRORS
@@ -37,6 +36,7 @@ export interface ProcessRequest {
   llaveProceso : string;
   carpetaId    : number;
   nombre       : string;
+  category?    : string | null;
 }
 
 // External: Raw data from Rama Judicial API
@@ -78,6 +78,7 @@ export class ApiError extends Error {
     console.log( `${ callerId }ApiError: ${ message }` );
   }
 }
+
 // ==========================================
 // 4. GENERIC UTILITIES (UPDATED)
 // ==========================================
@@ -90,8 +91,50 @@ const wait = ( ms: number ) => {
   } );
 };
 
+/**
+ * 🧼 SANITIZATION UTILITY
+ * Cleans strings to prevent Postgres encoding errors.
+ * explicitly handles Rama Judicial's Latin-1 (ISO-8859-1) encoding issues.
+ *//*
+function fixEncoding( text: string | null | undefined ): string | null {
+  if ( !text ) {
+    return null;
+  }
 
+  // 1. Remove Null Bytes and common binary garbage
+  let cleaned = text.replace(
+    // eslint-disable-next-line no-control-regex
+    /[\u0000\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, ''
+  );
 
+  // 2. Transcode Latin-1 to UTF-8
+  // The error "0xf3 0x6e" implies Latin-1 bytes are present.
+  // We convert the string to a binary buffer (preserving 0xF3),
+  // then decode it as ISO-8859-1 to get the correct UTF-8 string.
+  try {
+    // Check if the string actually contains high-bit characters likely to be Latin-1
+    if ( /[\xC0-\xFF]/.test( cleaned ) ) {
+      const buffer = Buffer.from(
+        cleaned, 'binary'
+      );
+      const decoder = new TextDecoder( 'iso-8859-1' );
+      cleaned = decoder.decode( buffer );
+    }
+  } catch ( e ) {
+    console.error(
+      '⚠️ Encoding correction failed, falling back to ASCII cleaning:', e
+    );
+    // Fallback: If transcoding fails, strip non-ASCII characters to prevent crash
+    // (This ensures the DB insert works, even if we lose an accent mark)
+    cleaned = cleaned.replace(
+      /[^\x20-\x7E]/g, ''
+    );
+  }
+
+  return cleaned.normalize( 'NFC' )
+    .trim();
+}
+ */
 // Optimization: Run promises with limited concurrency
 async function pMap<T, R>(
   array: T[],
@@ -124,10 +167,6 @@ async function pMap<T, R>(
 }
 
 //Wrapper for fetch with retries
-// ==========================================
-// 4. GENERIC UTILITIES (FIXED)
-// ==========================================
-
 export async function fetchWithSmartRetry(
   url: string,
   options: RequestInit = {},
@@ -150,7 +189,6 @@ export async function fetchWithSmartRetry(
       // --- HANDLE 429 (RATE LIMITS) ---
       if ( response.status === 429 ) {
         const retryAfterHeader = response.headers.get( 'retry-after' );
-        // Telegram often sends retry-after in seconds
         const waitTime = retryAfterHeader
           ? ( parseInt(
               retryAfterHeader, 10
@@ -159,7 +197,6 @@ export async function fetchWithSmartRetry(
             2, attempt
           );
 
-        console.warn( `⚠️ [429 Too Many Requests] Pausing for ${ waitTime }ms...` );
         console.log( `⚠️ [429 Too Many Requests] Pausing for ${ waitTime }ms...` );
         await wait( waitTime );
         attempt++;
@@ -173,18 +210,7 @@ export async function fetchWithSmartRetry(
         console.log( response.statusText );
 
         continue;
-
       }
-
-      // --- HANDLE 403 (FORBIDDEN) ---
-      // If it's Telegram, a 403 usually means the user hasn't started the bot.
-      // We should NOT retry this indefinitely, or we'll get stuck.
-      /* if ( response.status === 403 ) {
-        // We throw a specific error so we can log it gracefully without retrying
-        throw new ApiError(
-          `403 Forbidden: Check permissions or Bot settings. URL: ${ url }`, 403
-        );
-      } */
 
       // Check for server errors
       if ( [
@@ -194,20 +220,19 @@ export async function fetchWithSmartRetry(
         504
       ].includes( response.status ) ) {
         throw new ApiError(
-          `Server Status ${ response.status }`, `🚫 failed request: fetchWithSmartRetry: ${ url } statusCode<500`
+          `Server Status ${ response.status }`,
+          `🚫 failed request: fetchWithSmartRetry: ${ url } statusCode<500`
         );
       }
 
       return response;
 
     } catch ( error: any ) {
-      // Stop if we ran out of attempts or if it's a 403 (don't retry forbidden)
-      if ( attempt >= totalAttempts /* || error.name === 'AbortError'  || error.statusCode === 403 */ ) {
+      if ( attempt >= totalAttempts ) {
         throw error;
       }
 
       const delay = ( baseDelay * attempt );
-      console.warn( `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...` );
       console.log( `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...` );
       await wait( delay );
       attempt++;
@@ -215,9 +240,14 @@ export async function fetchWithSmartRetry(
   }
 
   throw new ApiError(
-    'fetchWithSmartRetry failed unexpectedly', `🚫 failed request: fetchWithSmartRetry: ${ url }`
+    'fetchWithSmartRetry failed unexpectedly',
+    `🚫 failed request: fetchWithSmartRetry: ${ url }`
   );
 }
+
+// ==========================================
+// 5. INFRASTRUCTURE SERVICES (Logging & Alerts)
+// ==========================================
 
 // ==========================================
 // 5. INFRASTRUCTURE SERVICES (Logging & Alerts)
@@ -237,35 +267,102 @@ class FileLogger {
     try {
       await fs.mkdir(
         path.dirname( this.filePath ), {
-          recursive: true,
+          recursive: true
         }
       );
-    } catch {      /* ignore */}
+    } catch { /* ignore */ }
   }
 
   public async logFailure(
     contextId: string | number,
-    subItem: unknown,
+    subItem: any,
     error: string,
     phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM',
   ) {
+    // 1. Extract Carpeta Number carefully
+    // We check subItem directly, then subItem.data (common in your JSON logs), then subItem.proceso
+    const carpetaNumero
+      = subItem?.carpetaNumero
+      || subItem?.data?.carpetaNumero // specifically for your 'data' object structure
+      || subItem?.proceso?.carpetaNumero
+      || null;
+    const logTime = new Date;
+    const formatedLogTime = new Intl.DateTimeFormat(
+      'es-CO',  {
+        weekday     : 'long',
+        year        : 'numeric',
+        month       : 'long',
+        day         : 'numeric',
+        hour        : 'numeric',
+        minute      : 'numeric',
+        second      : 'numeric',
+        timeZoneName: 'short'
+      }
+    )
+      .format( logTime );
     const logEntry = {
-      timestamp: new Date()
-        .toISOString(),
+      timestamp        : logTime.toISOString(),
+      formatedTimeStamp: formatedLogTime,
       phase,
-      parentId: contextId,
+      parentId         : contextId,
       error,
-      data    : subItem,
+      data             : subItem,
+      carpetaNumero    : carpetaNumero // Store at top level for easier lookup next time
     };
 
     try {
-      await fs.appendFile(
-        this.filePath, JSON.stringify( logEntry ) + ',\n'
+      let currentData: any[] = [];
+
+      try {
+        const fileContent = await fs.readFile(
+          this.filePath, 'utf-8'
+        );
+        currentData = JSON.parse( fileContent );
+
+        if ( !Array.isArray( currentData ) ) {
+          currentData = [];
+        }
+      } catch {
+        currentData = [];
+      }
+
+      // --- LOGIC CHANGE START ---
+      const existingIndex = currentData.findIndex( ( item ) => {
+        const incomingId = String( contextId );
+        const itemId = String( item.parentId );
+
+        // 1. If we have a REAL Process ID (not 0), match strictly on ID
+        if ( incomingId !== '0' && itemId === incomingId ) {
+          return true;
+        }
+
+        // 2. If Process ID is 0 (or missing), we MUST match on Carpeta Numero
+        // Try to find carpeta number in the existing item (either top level or inside data)
+        const itemCarpeta = item.carpetaNumero || item.data?.carpetaNumero;
+
+        // Only match if both have a valid number
+        if ( carpetaNumero && itemCarpeta && String( itemCarpeta ) === String( carpetaNumero ) ) {
+          return true;
+        }
+
+        return false;
+      } );
+
+      if ( existingIndex !== -1 ) {
+        // Update the existing log entry with the new timestamp/error
+        currentData[ existingIndex ] = logEntry;
+      } else {
+        // No matching log found, create a new one
+        currentData.push( logEntry );
+      }
+      // --- LOGIC CHANGE END ---
+
+      await fs.writeFile(
+        this.filePath, JSON.stringify(
+          currentData, null, 2
+        ), 'utf-8'
       );
     } catch ( e ) {
-      console.error(
-        'Failed to write to log file', e
-      );
       console.log(
         'Failed to write to log file', e
       );
@@ -279,6 +376,8 @@ class FileLogger {
     const filePath = path.join(
       process.cwd(), 'logs', NEW_ITEMS_LOG_FILE
     );
+
+    // Flatten the object so carpetaNumero is easily accessible
     const itemsToSave = newItems.map( ( item ) => {
       return {
         ...item,
@@ -307,18 +406,27 @@ class FileLogger {
         currentData = [];
       }
 
-      currentData.push( ...itemsToSave );
+      // Upsert logic for New Items
+      for ( const newItem of itemsToSave ) {
+        const existingIndex = currentData.findIndex( ( existing ) => {
+          return existing._meta && existing._meta.carpetaNumero === newItem._meta.carpetaNumero;
+        } );
+
+        if ( existingIndex !== -1 ) {
+          // Replace with newer info
+          currentData[ existingIndex ] = newItem;
+        } else {
+          // Add new
+          currentData.push( newItem );
+        }
+      }
+
       await fs.writeFile(
-        filePath,
-        JSON.stringify(
+        filePath, JSON.stringify(
           currentData, null, 2
-        ),
-        'utf-8',
+        ), 'utf-8'
       );
     } catch ( error ) {
-      console.error(
-        '❌ Failed to save new items to JSON file:', error
-      );
       console.log(
         '❌ Failed to save new items to JSON file:', error
       );
@@ -331,8 +439,7 @@ class FileLogger {
 // ==========================================
 
 class ActuacionService {
-  // Priority: Event Date > Registration Date > ID Stability
-  private static getLatestByDate( actuaciones: FetchResponseActuacion[], ): FetchResponseActuacion | null {
+  private static getLatestByDate( actuaciones: FetchResponseActuacion[] ): FetchResponseActuacion | null {
     if ( !actuaciones || actuaciones.length === 0 ) {
       return null;
     }
@@ -378,12 +485,29 @@ class ActuacionService {
     const isUltima = actualLatestItem
       ? String( apiData.idRegActuacion ) === String( actualLatestItem.idRegActuacion )
       : false;
+    /* let cleanActuacion, cleanAnotacion;
+
+    const isFailedTarget = apiData.idRegActuacion === 2665047680 || apiData.idRegActuacion === 1176372381 || apiData.idRegActuacion === 2650029770 || apiData.idRegActuacion === 2649586500 || apiData.idRegActuacion === 2661117570 || apiData.idRegActuacion === 2651329310;
+
+    if ( isFailedTarget ) {
+      cleanActuacion = fixEncoding( apiData.actuacion ) || 'Sin descripción';
+      cleanAnotacion = fixEncoding( apiData.anotacion ) || '';
+    } else {
+      cleanActuacion = String( apiData.actuacion ) || 'Sin descripción';
+      cleanAnotacion = String( apiData.anotacion );
+    } */
+
+    const cleanActuacion = String( apiData.actuacion ) || 'Sin descripción';
+    const cleanAnotacion = String( apiData.anotacion );
+
+    // ✅ APPLY CLEANING HERE
+
 
     return {
       idRegActuacion: String( apiData.idRegActuacion ),
       consActuacion : apiData.consActuacion,
-      actuacion     : apiData.actuacion,
-      anotacion     : apiData.anotacion,
+      actuacion     : cleanActuacion,
+      anotacion     : cleanAnotacion,
       cant          : apiData.cant,
       carpetaNumero : parentProc.carpetaNumero,
       codRegla      : apiData.codRegla,
@@ -422,16 +546,13 @@ class ActuacionService {
       index,
       act
     ] of newItems.entries() ) {
-
-      // 🛑 SLOW DOWN!
-      // If we have multiple updates, wait 2 seconds between sending messages.
       if ( index > 0 ) {
         await wait( 2000 );
       }
 
       // 1. Webhook (Optional)
       if ( WEBHOOK_URL ) {
-        console.log( `🗯️ Iniciando el webhook para enviar las notificaciones: ${ WEBHOOK_URL }`  );
+        console.log( `🗯️ Iniciando el webhook: ${ WEBHOOK_URL }` );
 
         try {
           const response = await fetch(
@@ -441,14 +562,13 @@ class ActuacionService {
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify( {
-
                 title: `${ parentProc.carpetaNumero } ${ parentProc.nombre }`,
-                body : `${ act.actuacion } ${ act.anotacion }`,
+                body : `${ String( act.actuacion ) } ${ String( act.anotacion ) || '' }`,
                 icon : '/icons/notification_icon.png',
                 data : {
                   numero   : parentProc.carpetaNumero,
                   idProceso: parentProc.idProceso,
-                  url      : `/Carpeta/${ parentProc.carpetaNumero }/ultimasActuaciones/${ parentProc.idProceso }`,
+                  url      : `/Carpeta/${ parentProc.carpetaNumero }/ultimasActuaciones/${ parentProc.idProceso }#actuacion-${ act.idRegActuacion }`,
                 },
                 actions: [
                   {
@@ -460,7 +580,6 @@ class ActuacionService {
                     title : 'Abrir Actuaciones'
                   }
                 ]
-
               } ),
             }
           );
@@ -471,7 +590,6 @@ class ActuacionService {
             );
           }
         } catch ( postError: any ) {
-          console.error( `⚠️ Webhook Failed: ${ postError.message }` );
           console.log( `⚠️ Webhook Failed: ${ postError.message }` );
           await logger.logFailure(
             parentProc.idProceso, act, postError.message, 'WEBHOOK'
@@ -479,14 +597,12 @@ class ActuacionService {
         }
       }
 
-
       // 2. Telegram
       try {
         await TelegramService.sendNotification(
           act, parentProc
         );
       } catch ( teleError: any ) {
-        console.error( `⚠️ Telegram Failed: ${ teleError.message }` );
         console.log( `⚠️ Telegram Failed: ${ teleError.message }` );
         await logger.logFailure(
           parentProc.idProceso, act, teleError.message, 'TELEGRAM'
@@ -496,12 +612,9 @@ class ActuacionService {
       if ( NEW_ACTUACION_WEBHOOK_URL ) {
         try {
           const body = JSON.stringify( {
-
             ...act,
             ...parentProc
-
           } );
-
           const response = await fetch(
             NEW_ACTUACION_WEBHOOK_URL, {
               method : 'POST',
@@ -509,17 +622,15 @@ class ActuacionService {
                 'Content-Type': 'application/json'
               },
               body: body,
-
             }
           );
 
           if ( !response.ok ) {
             throw new ApiError(
-              `Status ${ response.status }: Message: ${ response.statusText }`, 'ActuacionService.processNotifications Webhook'
+              `Status ${ response.status }`, 'ActuacionService.processNotifications Webhook'
             );
           }
         } catch ( postError: any ) {
-          console.error( `⚠️ Webhook Failed: ${ postError.message }` );
           console.log( `⚠️ Webhook Failed: ${ postError.message }` );
           await logger.logFailure(
             parentProc.idProceso, act, postError.message, 'WEBHOOK'
@@ -528,6 +639,7 @@ class ActuacionService {
       }
     }
   }
+
   static async syncBatch(
     apiActuaciones: FetchResponseActuacion[],
     parentProc: ProcessRequest,
@@ -538,15 +650,15 @@ class ActuacionService {
     // 1. Identify New vs Existing
     const existingRecords = await client.actuacion.findMany( {
       where: {
-        idProceso: parentProc.idProceso,
+        idProceso: parentProc.idProceso
       },
       select: {
-        idRegActuacion: true,
+        idRegActuacion: true
       },
     } );
     const existingIds = new Set( existingRecords.map( ( r ) => {
       return r.idRegActuacion;
-    } ), );
+    } ) );
 
     const newItems = apiActuaciones.filter( ( item ) => {
       return !existingIds.has( String( item.idRegActuacion ) );
@@ -564,12 +676,12 @@ class ActuacionService {
       } );
 
       for ( const actuacionNueva of createData ) {
-        console.log( `Processing new actuacion: ${ actuacionNueva.idRegActuacion }`, );
+        console.log( `Processing new actuacion: ${ actuacionNueva.idRegActuacion }` );
 
         try {
           await client.actuacion.upsert( {
             where: {
-              idRegActuacion: actuacionNueva.idRegActuacion,
+              idRegActuacion: actuacionNueva.idRegActuacion
             },
             create: actuacionNueva,
             update: {
@@ -577,32 +689,18 @@ class ActuacionService {
               consActuacion: actuacionNueva.consActuacion,
             },
           } );
-          console.log( `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.`, );
+          console.log( `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.` );
         } catch ( error: any ) {
-          console.error( `   ❌ Bulk Insert Failed: ${ error.message }` );
-          console.log( `   ❌ Bulk Insert Failed: ${ error.message }` );
+          console.log( `   ❌ Insert Failed for ${ actuacionNueva.idRegActuacion }: ${ error.message }` );
+          // Log specific detail about the offending record
           await logger.logFailure(
             parentProc.idProceso,
-            newItems,
+            actuacionNueva, // Log the actual object causing the crash
             error.message,
             'DB_ITEM',
           );
         }
       }
-
-      console.log( `   ✅ Inserted ${ newItems.length } new records.` );
-      /* try {
-        await client.actuacion.createMany( {
-          data          : createData,
-          skipDuplicates: true
-        } );
-        console.log( `   ✅ Inserted ${ newItems.length } new records.` );
-      } catch ( err: any ) {
-        console.error( `   ❌ Bulk Insert Failed: ${ err.message }` );
-        await logger.logFailure(
-          parentProc.idProceso, newItems, err.message, 'DB_ITEM'
-        );
-      } */
 
       await this.processNotifications(
         newItems, parentProc, logger
@@ -615,29 +713,21 @@ class ActuacionService {
         existingItems,
         async ( item ) => {
           const isUltima = latestItemByDate
-            ? String( item.idRegActuacion )
-              === String( latestItemByDate.idRegActuacion )
+            ? String( item.idRegActuacion ) === String( latestItemByDate.idRegActuacion )
             : item.cant === item.consActuacion;
 
           try {
             await client.actuacion.update( {
               where: {
-                idRegActuacion: String( item.idRegActuacion ),
+                idRegActuacion: String( item.idRegActuacion )
               },
               data: {
-                fechaActuacion: ensureDate( item.fechaActuacion ) ?? undefined,
-                fechaRegistro : ensureDate( item.fechaRegistro ) ?? undefined,
-                fechaInicial  : ensureDate( item.fechaInicial ),
-                fechaFinal    : ensureDate( item.fechaFinal ),
-                isUltimaAct   : isUltima,
-                consActuacion : item.consActuacion,
-                cant          : item.cant,
+                isUltimaAct: isUltima,
+                cant       : item.cant,
               },
             } );
           } catch ( err: any ) {
-
-            console.error( `   ❌ Bulk existing items change Failed: ${ err.message }` );
-            console.log( `   ❌ Bulk existing items change Failed: ${ err.message }` );
+            console.log( `   ❌ Update Failed: ${ err.message }` );
             await logger.logFailure(
               parentProc.idProceso,
               existingItems,
@@ -669,11 +759,11 @@ class ActuacionService {
     try {
       const carpeta = await client.carpeta.findUnique( {
         where: {
-          numero: parentProc.carpetaNumero,
+          numero: parentProc.carpetaNumero
         },
         select: {
           idRegUltimaAct: true,
-          fecha         : true,
+          fecha         : true
         },
       } );
 
@@ -681,42 +771,41 @@ class ActuacionService {
         return;
       }
 
-      const incomingDate
-        = ensureDate( incomingLast.fechaActuacion )
-          ?.getTime() || 0 ;
+      const incomingDate = ensureDate( incomingLast.fechaActuacion )
+        ?.getTime() ?? 0;
       const savedDate = ensureDate( carpeta.fecha )
-        ?.getTime() ;
+        ?.getTime();
 
-      if ( !savedDate || incomingDate > savedDate  ) {
+      if ( !savedDate || incomingDate > savedDate ) {
         console.log( `🔄 Updating Carpeta ${ parentProc.carpetaNumero } date.` );
 
         // Reset old ultima flag
         try {
-          if (
-            carpeta.idRegUltimaAct
-          && carpeta.idRegUltimaAct !== String( incomingLast.idRegActuacion )
-          ) {
+          if ( carpeta.idRegUltimaAct && carpeta.idRegUltimaAct !== String( incomingLast.idRegActuacion ) ) {
             await client.actuacion.updateMany( {
               where: {
-                idRegActuacion: carpeta.idRegUltimaAct,
+                idRegActuacion: carpeta.idRegUltimaAct
               },
               data: {
                 isUltimaAct: false,
               },
             } );
           }
-
         } catch ( error ) {
-          console.log( `🚫error tratando de actualizar la previa ultima actuacion: ${ JSON.stringify( error ) }` );
+          console.log( `🚫 error resetting previous flag: ${ JSON.stringify( error ) }` );
+
         }
 
-        // 1. Create or Update the Actuacion FIRST
+        // 1. Create or Update the Actuacion FIRST with CLEAN data
         const savedActuacion = await client.actuacion.upsert( {
           where: {
             idRegActuacion: `${ incomingLast.idRegActuacion }`
           },
           create: {
             ...incomingLast,
+            // Apply cleaning here too
+            actuacion     : String( incomingLast.actuacion ) || 'Sin descripción',
+            anotacion     : String( incomingLast.anotacion ),
             idProceso     : parentProc.idProceso,
             isUltimaAct   : true,
             idRegActuacion: `${ incomingLast.idRegActuacion }`,
@@ -730,14 +819,15 @@ class ActuacionService {
               }
             }
           },
-          update: {},
+          update: {
+            cant: incomingLast.cant,
+          },
         } );
-
-        // 2. THEN update the Carpeta to connect to it
-
-        await client.carpeta.update( {
+        console.log( `🔄 Updated the last actuacion:  ${ savedActuacion.fechaActuacion } date.` );
+        // 2. THEN update the Carpeta
+        const updateCarpeta = await client.carpeta.update( {
           where: {
-            numero: parentProc.carpetaNumero,
+            numero: parentProc.carpetaNumero
           },
           data: {
             fecha          : ensureDate( savedActuacion.fechaActuacion ),
@@ -745,24 +835,37 @@ class ActuacionService {
             updatedAt      : new Date(),
             ultimaActuacion: {
               connect: {
-                idRegActuacion: String( savedActuacion.idRegActuacion ),
+                idRegActuacion: String( savedActuacion.idRegActuacion )
               },
             },
           },
         } );
+
+        if ( updateCarpeta.fecha ) {
+          console.log( `🔄 Updated carpeta:  ${ new Intl.DateTimeFormat(
+            'es-CO',  {
+              weekday     : 'long',
+              year        : 'numeric',
+              month       : 'long',
+              day         : 'numeric',
+              hour        : 'numeric',
+              minute      : 'numeric',
+              second      : 'numeric',
+              timeZoneName: 'short'
+            }
+          )
+            .format( updateCarpeta.fecha ) } date.` );
+        }
+
       }
     } catch ( error ) {
-      console.error(
-        `❌ Error updating carpeta ${ parentProc.carpetaNumero }:`,
-        error,
-      );
       console.log(
-        `❌ Error updating carpeta ${ parentProc.carpetaNumero }:`,
-        error,
+        `❌ Error updating carpeta ${ parentProc.carpetaNumero }:`, error
       );
     }
   }
 }
+
 // ==========================================
 // 7. EXTERNAL API CLIENT (UPDATED)
 // ==========================================
@@ -770,7 +873,6 @@ class ActuacionService {
 export class RobustApiClient {
   private baseUrl: string;
   private logger : FileLogger;
-  // Increased delay to be safer
   private readonly RATE_LIMIT_DELAY_MS = 12000;
 
   constructor( baseUrl: string ) {
@@ -778,7 +880,6 @@ export class RobustApiClient {
     this.logger = new FileLogger( 'failed_sync_ops.json' );
   }
 
-  // Helper for Headers
   private getHeaders() {
     return {
       'User-Agent'     : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -786,14 +887,9 @@ export class RobustApiClient {
       'Sec-Fetch-Dest' : 'document',
       'Sec-Fetch-Mode' : 'navigate',
       'Sec-Fetch-Site' : 'none',
-      // These are crucial for Rama Judicial:
-      //'Origin'         : 'https://consultaprocesos.ramajudicial.gov.co',
-      //'Host'           : 'consultaprocesos.ramajudicial.gov.co',
     };
   }
-
   private async fetchWithRetry<T>( endpoint: string ): Promise<T> {
-    // ✅ PASS HEADERS HERE
     const options = {
       headers: this.getHeaders()
     };
@@ -803,13 +899,31 @@ export class RobustApiClient {
 
     if ( !response.ok ) {
       throw new ApiError(
-        `HTTP ${ response.status } ${ response.statusText }`, '🚫 failed request: fetchWithRetry:', response.status
+        `HTTP ${ response.status } ${ response.statusText }`,
+        '🚫 failed request: fetchWithRetry:',
+        response.status
       );
     }
 
-    return ( await response.json() ) as T;
-  }
+    // ✅ FIX: Manually decode the buffer as ISO-8859-1 (Latin-1)
+    // This catches the 'ó', 'ú', 'ñ' bytes before JSON.parse mangles them.
+    const arrayBuffer = await response.arrayBuffer();
+    const decoder = new TextDecoder( 'iso-8859-1' );
+    const text = decoder.decode( arrayBuffer );
 
+    try {
+      return JSON.parse( text ) as T;
+    } catch ( e ) {
+      // Fallback in case the response wasn't actually JSON
+      console.error(
+        'Error parsing JSON after decoding:', e
+      );
+
+      throw new ApiError(
+        'Invalid JSON response', '🚫 failed request: fetchWithRetry: JSON.parse'
+      );
+    }
+  }
   public async processBatch(
     items: ProcessRequest[],
     pathBuilder: ( item: ProcessRequest ) => string,
@@ -820,7 +934,6 @@ export class RobustApiClient {
       index,
       parentItem
     ] of items.entries() ) {
-      // Add dynamic delay (3.5s to 4.5s) to look more human
       if ( index > 0 ) {
         const variableDelay = this.RATE_LIMIT_DELAY_MS + Math.floor( Math.random() * 1000 );
         await wait( variableDelay );
@@ -835,49 +948,49 @@ export class RobustApiClient {
 
         if ( actuacionesList.length > 0 ) {
           await ActuacionService.syncBatch(
-            actuacionesList,
-            parentItem,
-            this.logger,
+            actuacionesList, parentItem, this.logger
           );
         }
       } catch ( err: any ) {
-        console.error( `❌ FAILED ${ parentItem.carpetaNumero }: ${ err.message }` );
+        console.log( `❌ FAILED ${ parentItem.carpetaNumero }: ${ err.message }` );
         await this.logger.logFailure(
-          parentItem.idProceso,
-          parentItem,
-          err.message,
-          'FETCH',
+          parentItem.idProceso, parentItem, err.message, 'FETCH'
         );
       }
     }
   }
 }
+
 // ==========================================
 // 8. MAIN EXECUTION ENTRY POINT
 // ==========================================
 
 async function getProcesosToUpdate(): Promise<ProcessRequest[]> {
+  // Ensure your Prisma schema has 'category' on the Carpeta model
   const carpetas = await client.carpeta.findMany();
 
   return carpetas
     .flatMap( ( carpeta ) => {
+      // Common data structure
+      const baseData = {
+        carpetaNumero: carpeta.numero,
+        llaveProceso : carpeta.llaveProceso,
+        carpetaId    : carpeta.id,
+        nombre       : carpeta.nombre,
+        category     : carpeta.category,
+      };
+
       if ( !carpeta.idProcesos || carpeta.idProcesos.length === 0 ) {
         return {
-          carpetaNumero: carpeta.numero,
-          llaveProceso : carpeta.llaveProceso,
-          carpetaId    : carpeta.id,
-          idProceso    : 0,
-          nombre       : carpeta.nombre,
+          ...baseData,
+          idProceso: 0,
         };
       }
 
       return carpeta.idProcesos.map( ( idProceso ) => {
         return {
+          ...baseData,
           idProceso,
-          carpetaNumero: carpeta.numero,
-          llaveProceso : carpeta.llaveProceso,
-          carpetaId    : carpeta.id,
-          nombre       : carpeta.nombre,
         };
       } );
     } )
@@ -888,43 +1001,116 @@ async function getProcesosToUpdate(): Promise<ProcessRequest[]> {
     } );
 }
 
+
 async function runSync() {
-  // 1. RECORD START TIME
   const startTime = new Date();
-  console.log( `\n⏱️  Execution Started at: ${ startTime.toISOString() }` );
+  ;
+
+  const formattedCustomStartTime = new Intl.DateTimeFormat(
+    'es-CO',  {
+      weekday     : 'long',
+      year        : 'numeric',
+      month       : 'long',
+      day         : 'numeric',
+      hour        : 'numeric',
+      minute      : 'numeric',
+      second      : 'numeric',
+      timeZoneName: 'short'
+    }
+  )
+    .format( startTime );
+  console.log( formattedCustomStartTime ); // Example output: "Monday, February 16, 2026 at 12:49 PM EST"
+
+  console.log( `\n⏱️  Execution Started at: ${ formattedCustomStartTime }` );
+
+  // --- FREQUENCY LOGIC ---
+  const currentHour = startTime.getHours();
+  const currentDay = startTime.getDay();
+  // --- 1. Define Time Windows ---
+
+  // Catches the 00:00 run (Range: 00:00 - 05:59)
+  const isMidnightRun = currentHour < 6;
+
+  // Catches the 12:00 run (Range: 12:00 - 17:59)
+  const isNoonRun = currentHour >= 12 && currentHour < 18;
+
   const api = new RobustApiClient( RAMA_JUDICIAL_BASE_URL );
 
   try {
-    const processesToCheck = await getProcesosToUpdate();
+    const allProcesses = await getProcesosToUpdate();
 
-    // The processor now handles strict sequential fetching + rate limiting
-    await api.processBatch(
-      processesToCheck, ( proc ) => {
-        return `/api/v2/Proceso/Actuaciones/${ proc.idProceso }`;
+    const processesToCheck = allProcesses.filter( ( proc ) => {
+      // Normalize the category name
+      const category = ( proc.category || 'default' ).toString()
+        .toLowerCase()
+        .trim();
+
+/*
+      // --- 2. Apply Logic ---
+
+      // A. Bancolombia: Runs every 6 hours (00, 06, 12, 18)
+      if ( category === 'bancolombia' ) {
+        console.log( `category is bancolombia ${ proc.carpetaNumero }` );
+
+        return true;
       }
-    );
+
+      // B. Terminados: Runs once a week, ONLY at Midnight on Monday
+      if ( category === 'terminados' ) {
+        return isMidnightRun && currentDay === 1;
+      }
+
+      // C. Reintegra: Runs once a day, ONLY at Noon
+      if ( category === 'reintegra' ) {
+        return isNoonRun;
+      }
+
+      // D. Default / Others: Runs once a day, ONLY at Noon
+      return isNoonRun; */
+      return true;
+    } );
+
+    console.log( `🔎 Filter applied: Processing ${ processesToCheck.length } of ${ allProcesses.length } items.` );
+
+    if ( processesToCheck.length > 0 ) {
+      await api.processBatch(
+        processesToCheck, ( proc ) => {
+          return `/api/v2/Proceso/Actuaciones/${ proc.idProceso }`;
+        }
+      );
+    } else {
+      console.log( '😴 No processes scheduled for this run window.' );
+    }
 
     console.log( '🎉 Sync Complete' );
   } catch ( error ) {
-    console.error(
-      'Fatal Error in runSync:', error
-    );
     console.log(
       'Fatal Error in runSync:', error
     );
   } finally {
     await client.$disconnect();
-    // 2. RECORD END TIME
     const endTime = new Date();
-    // 3. CALCULATE DURATION
     const durationMs = endTime.getTime() - startTime.getTime();
-    // Convert to readable format (Hours, Minutes, Seconds)
     const seconds = Math.floor( ( durationMs / 1000 ) % 60 );
     const minutes = Math.floor( ( durationMs / ( 1000 * 60 ) ) % 60 );
     const hours = Math.floor( durationMs / ( 1000 * 60 * 60 ) );
     const durationString = `${ hours }h ${ minutes }m ${ seconds }s`;
-    // 4. LOG TOTALS
-    console.log( `\n🏁 Execution Finished at: ${ endTime.toISOString() }` );
+
+    const formattedCustomEndTime = new Intl.DateTimeFormat(
+      'es-CO',  {
+        weekday     : 'long',
+        year        : 'numeric',
+        month       : 'long',
+        day         : 'numeric',
+        hour        : 'numeric',
+        minute      : 'numeric',
+        second      : 'numeric',
+        timeZoneName: 'short'
+      }
+    )
+      .format( endTime );
+    console.log( formattedCustomEndTime );
+    console.log( `\n🏁 Execution Finished at: ${ formattedCustomEndTime }` );
     console.log( `⏱️  Total Duration: ${ durationString } (${ durationMs }ms)` );
   }
 }

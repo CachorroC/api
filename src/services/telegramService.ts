@@ -65,7 +65,7 @@ ${ cleanAnotacion
     try {
       // ✅ USE SMART RETRY HERE
       // We DO NOT pass headers for 'Origin' or 'User-Agent' here, Telegram doesn't need them.
-      await fetchWithSmartRetry(
+      const fetchTelegramBot = await fetchWithSmartRetry(
         `https://api.telegram.org/bot${ TELEGRAM_BOT_TOKEN }/sendMessage`,
         {
           method : 'POST',
@@ -83,6 +83,11 @@ ${ cleanAnotacion
         3000  // Base Delay (3 seconds is safer for Telegram)
       );
 
+      if ( !fetchTelegramBot.ok ) {
+        throw new Error( `📛Telegram API request failed with status ${ fetchTelegramBot.status } code ${ fetchTelegramBot.statusText }` );
+      } else if ( fetchTelegramBot.ok ) {
+        console.log( `✅ Telegram notification sent successfully for expediente ${ processInfo.carpetaNumero }, ${ fetchTelegramBot.statusText }` );
+      }
     } catch ( err: any ) {
       if ( err.statusCode === 403 ) {
         console.error( '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.' );
@@ -110,7 +115,7 @@ ${ cleanAnotacion
         : '' } \n https://app.rsasesorjuridico.com/Carpeta/${ processInfo.carpetaNumero }/ultimasActuaciones/${ processInfo.idProceso }`;
 
       // Simple fetch for fallback, no complex retry needed to avoid infinite loops
-      await fetch(
+      await fetchWithSmartRetry(
         `https://api.telegram.org/bot${ TELEGRAM_BOT_TOKEN }/sendMessage`, {
           method : 'POST',
           headers: {

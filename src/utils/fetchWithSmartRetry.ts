@@ -10,9 +10,7 @@ export async function fetchWithSmartRetry(
 
   while ( attempt <= totalAttempts ) {
     if ( attempt > 1 ) {
-      console.log(
-        `🔄 fetchWithSmartRetry Attempt ${ attempt } for ${ url }`
-      );
+      console.log( `🔄 fetchWithSmartRetry Attempt ${ attempt } for ${ url }` );
     }
 
     try {
@@ -22,9 +20,7 @@ export async function fetchWithSmartRetry(
 
       // --- HANDLE 429 (RATE LIMITS) ---
       if ( response.status === 429 ) {
-        const retryAfterHeader = response.headers.get(
-          'retry-after'
-        );
+        const retryAfterHeader = response.headers.get( 'retry-after' );
         // Telegram often sends retry-after in seconds
         const waitTime = retryAfterHeader
           ? ( parseInt(
@@ -34,25 +30,17 @@ export async function fetchWithSmartRetry(
             2, attempt
           );
 
-        console.warn(
-          `⚠️ [429 Too Many Requests] Pausing for ${ waitTime }ms...`
-        );
-        await wait(
-          waitTime
-        );
+        console.warn( `⚠️ [429 Too Many Requests] Pausing for ${ waitTime }ms...` );
+        await wait( waitTime );
         attempt++;
 
         continue;
       }
 
       if ( response.status === 403 ) {
-        await wait(
-          2000
-        );
+        await wait( 2000 );
         attempt++;
-        console.log(
-          response.statusText
-        );
+        console.log( response.statusText );
 
         continue;
       }
@@ -73,9 +61,7 @@ export async function fetchWithSmartRetry(
         502,
         503,
         504
-      ].includes(
-        response.status
-      ) ) {
+      ].includes( response.status ) ) {
         throw new ApiError(
           `Server Status ${ response.status }`, `🚫 failed request: fetchWithSmartRetry: ${ url } statusCode<500`
         );
@@ -90,15 +76,9 @@ export async function fetchWithSmartRetry(
       }
 
       const delay = ( baseDelay * attempt );
-      console.warn(
-        `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...`
-      );
-      console.log(
-        `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...`
-      );
-      await wait(
-        delay
-      );
+      console.warn( `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...` );
+      console.log( `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...` );
+      await wait( delay );
       attempt++;
     }
   }
