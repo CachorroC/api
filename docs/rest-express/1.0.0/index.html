@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3>rest-express 1.0.0</h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>rest-express – API de Gestión Jurídica (Rama Judicial)</h1>
+<blockquote>
+<p>Sistema de sincronización y gestión de actuaciones
+judiciales, carpetas y procesos para el bufete <strong>RS Asesor
+Jurídico</strong>, integrado con la API pública de la
+<a href="https://consultaprocesos.ramajudicial.gov.co:448">Rama Judicial de Colombia</a>.</p>
+</blockquote>
+<h2>Tabla de Contenidos</h2>
+<ul>
+<li><a href="#descripci%C3%B3n">Descripción</a></li>
+<li><a href="#stack-tecnol%C3%B3gico">Stack Tecnológico</a></li>
+<li><a href="#arquitectura-del-proyecto">Arquitectura del Proyecto</a></li>
+<li><a href="#modelos-de-datos">Modelos de Datos</a></li>
+<li><a href="#scripts-principales">Scripts Principales</a></li>
+<li><a href="#servicios">Servicios</a></li>
+<li><a href="#utilidades">Utilidades</a></li>
+<li><a href="#base-de-datos">Base de Datos</a></li>
+<li><a href="#configuraci%C3%B3n">Configuración</a></li>
+<li><a href="#ejecuci%C3%B3n">Ejecución</a></li>
+<li><a href="#archivos-generados">Archivos Generados</a></li>
+</ul>
+<h2>Descripción</h2>
+<p>Este proyecto es una API REST y conjunto de scripts de
+sincronización que:</p>
+<ul>
+<li><strong>Importa datos</strong> desde un archivo Excel maestro
+(<code>general.xlsx</code>) con información de ~500 carpetas
+jurídicas.</li>
+<li><strong>Consulta la API de Rama Judicial</strong> para obtener procesos
+y actuaciones judiciales.</li>
+<li><strong>Sincroniza con PostgreSQL</strong> vía Prisma ORM, manteniendo
+actualizada la base de datos con actuaciones, procesos,
+juzgados, demandas y deudores.</li>
+<li><strong>Envía notificaciones</strong> por Telegram cuando se detectan
+nuevas actuaciones relevantes.</li>
+<li><strong>Clasifica inteligentemente</strong> juzgados, tipos de proceso
+y patrones de actuaciones.</li>
+</ul>
+<h2>Stack Tecnológico</h2>
+<table>
+<thead>
+<tr>
+<th>Tecnología</th>
+<th>Versión</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TypeScript</strong></td>
+<td>5.9.3</td>
+<td>Lenguaje principal</td>
+</tr>
+<tr>
+<td><strong>Node.js</strong></td>
+<td>ESNext</td>
+<td>Runtime</td>
+</tr>
+<tr>
+<td><strong>Prisma ORM</strong></td>
+<td>7.3.0</td>
+<td>Acceso a base de datos</td>
+</tr>
+<tr>
+<td><strong>PostgreSQL</strong></td>
+<td>-</td>
+<td>Base de datos (vía <code>@prisma/adapter-pg</code>)</td>
+</tr>
+<tr>
+<td><strong>Express</strong></td>
+<td>5.2.1</td>
+<td>Framework HTTP (REST API)</td>
+</tr>
+<tr>
+<td><strong>xlsx</strong></td>
+<td>-</td>
+<td>Parsing de hojas de cálculo Excel</td>
+</tr>
+<tr>
+<td><strong>async-sema</strong></td>
+<td>-</td>
+<td>Rate-limiting y semáforos</td>
+</tr>
+<tr>
+<td><strong>web-push</strong></td>
+<td>-</td>
+<td>Notificaciones push</td>
+</tr>
+<tr>
+<td><strong>dotenv</strong></td>
+<td>-</td>
+<td>Variables de entorno</td>
+</tr>
+</tbody>
+</table>
+<h2>Arquitectura del Proyecto</h2>
+<pre class="prettyprint source"><code>src/
+├── models/          # Clases de dominio (Carpeta, Actuacion, Demanda, Deudor, etc.)
+├── services/        # Servicios (Prisma client, fetchers, sincronización, Telegram)
+├── types/           # Interfaces y tipos TypeScript
+├── utils/           # Utilidades (fechas, sanitización, retry, rate-limiting)
+├── data/            # Importación de datos desde Excel
+├── actuaciones.ts   # Script: sincronizar actuaciones
+├── procesos.ts      # Script: sincronizar procesos
+├── procesos_from_name.ts  # Script: buscar procesos por nombre
+└── getLlaves.ts     # Script: extraer ciudades únicas
+prisma/
+├── schema.prisma    # Esquema de base de datos
+└── migrations/      # Migraciones SQL
+</code></pre>
+<h3>Flujo de Datos</h3>
+<pre class="prettyprint source"><code>Excel (general.xlsx)
+        │
+        ▼
+  data/carpetas.ts ──► RawCarpetas[] ──► ClassCarpeta[]
+        │                                      │
+        ▼                                      ▼
+  API Rama Judicial ◄──── llaveProceso ────► Procesos
+        │                                      │
+        ▼                                      ▼
+  Actuaciones (fetch) ──► Prisma Upsert ──► PostgreSQL
+        │
+        ▼
+  Telegram (notificaciones de nuevas actuaciones)
+</code></pre>
+<h2>Modelos de Datos</h2>
+<table>
+<thead>
+<tr>
+<th>Modelo</th>
+<th>Archivo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ClassCarpeta</code></td>
+<td><code>models/carpeta.ts</code></td>
+<td>Carpeta jurídica completa con demanda, deudor, procesos</td>
+</tr>
+<tr>
+<td><code>Actuacion</code></td>
+<td><code>models/actuacion.ts</code></td>
+<td>Actuaciones judiciales con lógica de upsert y última actuación</td>
+</tr>
+<tr>
+<td><code>ClassDemanda</code></td>
+<td><code>models/demanda.ts</code></td>
+<td>Demanda con valores monetarios, fechas y obligaciones</td>
+</tr>
+<tr>
+<td><code>ClassDeudor</code></td>
+<td><code>models/deudor.ts</code></td>
+<td>Deudor con parsing inteligente de nombres y teléfonos</td>
+</tr>
+<tr>
+<td><code>JuzgadoClass</code></td>
+<td><code>models/juzgado.ts</code></td>
+<td>Normalización de nombres de juzgados y extracción de componentes</td>
+</tr>
+<tr>
+<td><code>NotasBuilder</code></td>
+<td><code>models/nota.ts</code></td>
+<td>Notas con fechas extraídas y contenido separado por <code>//</code></td>
+</tr>
+<tr>
+<td><code>ClassNotificacion</code></td>
+<td><code>models/notificacion.ts</code></td>
+<td>Notificaciones judiciales (arts. 291/292 CGP)</td>
+</tr>
+<tr>
+<td><code>ClassProcesos</code></td>
+<td><code>models/procesos.ts</code></td>
+<td>Colecciones de procesos con consulta a API y sync a Prisma</td>
+</tr>
+<tr>
+<td><code>tipoProceso()</code></td>
+<td><code>models/tipoProceso.ts</code></td>
+<td>Clasificación de tipo de proceso vía regex</td>
+</tr>
+</tbody>
+</table>
+<h2>Scripts Principales</h2>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Comando</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/actuaciones.ts</code></td>
+<td><code>npx tsx src/actuaciones.ts</code></td>
+<td>Sincroniza actuaciones de todos los procesos</td>
+</tr>
+<tr>
+<td><code>src/procesos.ts</code></td>
+<td><code>npx tsx src/procesos.ts</code></td>
+<td>Sincroniza procesos por llave de proceso</td>
+</tr>
+<tr>
+<td><code>src/procesos_from_name.ts</code></td>
+<td><code>npx tsx src/procesos_from_name.ts</code></td>
+<td>Busca procesos por nombre del deudor</td>
+</tr>
+<tr>
+<td><code>src/getLlaves.ts</code></td>
+<td><code>npx tsx src/getLlaves.ts</code></td>
+<td>Extrae ciudades únicas del Excel</td>
+</tr>
+</tbody>
+</table>
+<h2>Servicios</h2>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Archivo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prisma Client</td>
+<td><code>services/prisma.ts</code></td>
+<td>Conexión a PostgreSQL con adaptador <code>PrismaPg</code></td>
+</tr>
+<tr>
+<td>Fetch Actuaciones</td>
+<td><code>services/fetch-actuaciones.ts</code></td>
+<td>Consulta individual de actuaciones por <code>idProceso</code></td>
+</tr>
+<tr>
+<td>Sync Actuaciones</td>
+<td><code>services/actuaciones-raw.ts</code></td>
+<td>Sincronización masiva con generador asíncrono</td>
+</tr>
+<tr>
+<td>Sync Carpetas</td>
+<td><code>services/syncronize_carpetas_test.ts</code></td>
+<td>Importación batch de carpetas Excel → BD</td>
+</tr>
+<tr>
+<td>Fetcher Judicial</td>
+<td><code>services/raw-carpetas-fetcher-raw.ts</code></td>
+<td>Cliente para API de Rama Judicial (procesos + detalle)</td>
+</tr>
+<tr>
+<td>Telegram</td>
+<td><code>services/telegramService.ts</code></td>
+<td>Notificaciones de nuevas actuaciones vía bot</td>
+</tr>
+<tr>
+<td>Sync Newest</td>
+<td><code>services/syncronize_newest_actuaciones_test_2.ts</code></td>
+<td>Sincronización incremental con logging a archivo</td>
+</tr>
+</tbody>
+</table>
+<h2>Utilidades</h2>
+<table>
+<thead>
+<tr>
+<th>Utilidad</th>
+<th>Archivo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sleep()</code></td>
+<td><code>utils/awaiter.ts</code></td>
+<td>Pausa asíncrona para rate-limiting</td>
+</tr>
+<tr>
+<td><code>capitalBuilder()</code></td>
+<td><code>utils/capital-builder.ts</code></td>
+<td>Parseo de valores monetarios desde formatos mixtos</td>
+</tr>
+<tr>
+<td><code>cleanUtf8()</code></td>
+<td><code>utils/cleanUTF8.ts</code></td>
+<td>Limpieza de bytes UTF-8 inválidos para PostgreSQL</td>
+</tr>
+<tr>
+<td><code>datesExtractor()</code></td>
+<td><code>utils/date-validator.ts</code></td>
+<td>Extracción de fechas desde múltiples formatos</td>
+</tr>
+<tr>
+<td><code>ensureDate()</code></td>
+<td><code>utils/ensureDate.ts</code></td>
+<td>Conversión segura a Date con timezone Colombia</td>
+</tr>
+<tr>
+<td><code>fetchWithSmartRetry()</code></td>
+<td><code>utils/fetchWithSmartRetry.ts</code></td>
+<td>HTTP fetch con retry exponencial y rate-limit headers</td>
+</tr>
+<tr>
+<td><code>getLatestByDate()</code></td>
+<td><code>utils/latestActuacion.ts</code></td>
+<td>Determina la actuación más reciente</td>
+</tr>
+<tr>
+<td><code>textSanitizer()</code></td>
+<td><code>utils/textSanitizer.ts</code></td>
+<td>Sanitización de texto para nombres y anotaciones</td>
+</tr>
+<tr>
+<td><code>searchForLastActuacion()</code></td>
+<td><code>utils/search-last-actuacion.ts</code></td>
+<td>Búsqueda de última actuación relevante</td>
+</tr>
+<tr>
+<td><code>actuacionHasAuto()</code></td>
+<td><code>utils/actuacion-has-important-pattern.ts</code></td>
+<td>Detección de patrones &quot;auto&quot;/&quot;radicado&quot;</td>
+</tr>
+</tbody>
+</table>
+<h2>Base de Datos</h2>
+<h3>Esquema Prisma (modelos principales)</h3>
+<ul>
+<li><strong>Carpeta</strong>: Caso jurídico con número, nombre, categoría,
+llaveProceso</li>
+<li><strong>Demanda</strong>: Datos financieros y procesales de la demanda</li>
+<li><strong>Deudor</strong>: Información personal del demandado</li>
+<li><strong>Proceso</strong>: Proceso judicial vinculado a Rama Judicial</li>
+<li><strong>Actuacion</strong>: Movimiento procesal con fechas y
+consecutivo</li>
+<li><strong>Juzgado</strong>: Despacho normalizado con tipo, ciudad y URL</li>
+<li><strong>Nota</strong>: Anotaciones del abogado con fechas extraídas</li>
+<li><strong>Tarea</strong>: Tareas pendientes con subtareas</li>
+</ul>
+<h3>Migraciones</h3>
+<p>Las migraciones se encuentran en <code>prisma/migrations/</code> y se
+ejecutan con:</p>
+<pre class="prettyprint source lang-bash"><code>npx prisma migrate deploy
+</code></pre>
+<h2>Configuración</h2>
+<h3>Variables de Entorno</h3>
+<p>Crear un archivo <code>.env</code> en la raíz con:</p>
+<pre class="prettyprint source lang-env"><code>DATABASE_URL=postgresql://usuario:password@host:5432/dbname
+</code></pre>
+<h3>Dependencias</h3>
+<pre class="prettyprint source lang-bash"><code>pnpm install
+</code></pre>
+<h2>Ejecución</h2>
+<pre class="prettyprint source lang-bash"><code># Sincronizar actuaciones
+npx tsx src/actuaciones.ts
+
+# Sincronizar procesos
+npx tsx src/procesos.ts
+
+# Importar carpetas desde Excel
+npx tsx src/procesos_from_name.ts
+
+# Generar cliente Prisma
+npx prisma generate
+
+# Aplicar migraciones
+npx prisma migrate deploy
+</code></pre>
+<h2>Archivos Generados</h2>
+<table>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>actuacionesOutput.json</code></td>
+<td>Resultado de sincronización de actuaciones</td>
+</tr>
+<tr>
+<td><code>carpetas.json</code></td>
+<td>Carpetas importadas del Excel</td>
+</tr>
+<tr>
+<td><code>outputSheets.json</code></td>
+<td>Hojas del Excel parseadas a JSON</td>
+</tr>
+<tr>
+<td><code>numbers.json</code></td>
+<td>Verificación de numeración de carpetas</td>
+</tr>
+<tr>
+<td><code>ClasscarpetasModelPostAwait.json</code></td>
+<td>Carpetas procesadas con procesos y actuaciones</td>
+</tr>
+<tr>
+<td><code>logs/*.txt</code></td>
+<td>Logs diarios de sincronización</td>
+</tr>
+</tbody>
+</table>
+<h2>Requisitos</h2>
+<ul>
+<li>Node.js &gt;= 18</li>
+<li>Prisma ORM</li>
+<li>Acceso a la API pública de la Rama Judicial</li>
+</ul>
+<h2>Instalación y configuración</h2>
+<ol>
+<li>Instala las dependencias:<pre class="prettyprint source lang-bash"><code>pnpm install
+# o npm install
+</code></pre>
+</li>
+<li>Configura la base de datos en <code>prisma/schema.prisma</code> y
+ejecuta las migraciones:<pre class="prettyprint source lang-bash"><code>npx prisma migrate dev
+</code></pre>
+</li>
+<li>Ajusta las variables de entorno si es necesario.</li>
+</ol>
+<h2>Uso</h2>
+<p>Ejecuta el script principal para sincronizar actuaciones:</p>
+<pre class="prettyprint source lang-bash"><code>node src/actuaciones.ts
+</code></pre>
+<h2>Notas adicionales</h2>
+<ul>
+<li>El script implementa retardos automáticos entre peticiones
+para evitar bloqueos por parte de la API externa.</li>
+<li>El manejo de errores es robusto: los fallos en la consulta
+de un proceso no detienen la sincronización global.</li>
+<li>El código es fácilmente extensible para agregar nuevas
+fuentes de datos o modificar la lógica de actualización.</li>
+</ul>
+<h2>Licencia</h2>
+<p>MIT</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Despachos.html">Despachos</a></li><li><a href="module-RawCarpetas.html">RawCarpetas</a></li><li><a href="module-client.html">client</a></li><li><a href="module-data_arrayofarrays.html">data/arrayofarrays</a></li><li><a href="module-data_carpetas.html">data/carpetas</a></li><li><a href="module-data_despachos.html">data/despachos</a></li><li><a href="module-models_actuacion.html">models/actuacion</a></li><li><a href="module-models_demanda.html">models/demanda</a></li><li><a href="module-models_procesos.html">models/procesos</a></li><li><a href="module-models_tipoProceso.html">models/tipoProceso</a></li><li><a href="module-services_actuaciones-raw.html">services/actuaciones-raw</a></li><li><a href="module-services_prisma.html">services/prisma</a></li><li><a href="module-services_semaphore.html">services/semaphore</a></li><li><a href="module-services_syncronize_carpetas_test.html">services/syncronize_carpetas_test</a></li><li><a href="module-src_getLlaves.html">src/getLlaves</a></li><li><a href="module-src_procesos.html">src/procesos</a></li><li><a href="module-src_procesos_from_name.html">src/procesos_from_name</a></li><li><a href="module-types_actuaciones.html">types/actuaciones</a></li><li><a href="module-types_contabilidad.html">types/contabilidad</a></li><li><a href="module-types_juzgados.html">types/juzgados</a></li><li><a href="module-types_notas.html">types/notas</a></li><li><a href="module-types_safe-parse-carpeta.html">types/safe-parse-carpeta</a></li><li><a href="module-utils_actuacion-has-important-pattern.html">utils/actuacion-has-important-pattern</a></li><li><a href="module-utils_awaiter.html">utils/awaiter</a></li><li><a href="module-utils_cleanUTF8.html">utils/cleanUTF8</a></li><li><a href="module-utils_database-juzgado-fixer.html">utils/database-juzgado-fixer</a></li><li><a href="module-utils_date-validator.html">utils/date-validator</a></li><li><a href="module-utils_ensureDate.html">utils/ensureDate</a></li><li><a href="module-utils_getAllDespachos.html">utils/getAllDespachos</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_actuacion.Actuacion.html">Actuacion</a></li><li><a href="module-models_demanda.ClassDemanda.html">ClassDemanda</a></li></ul><h3>Classes</h3><ul><li><a href="ActuacionService.html">ActuacionService</a></li><li><a href="ApiError.html">ApiError</a></li><li><a href="ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassCarpeta_ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassDeudor_ClassDeudor.html">ClassDeudor</a></li><li><a href="ClassNotificacion_ClassNotificacion.html">ClassNotificacion</a></li><li><a href="FileLogger.html">FileLogger</a></li><li><a href="JuzgadoClass.html">JuzgadoClass</a></li><li><a href="NotasBuilder_NotasBuilder.html">NotasBuilder</a></li><li><a href="RobustApiClient.html">RobustApiClient</a></li><li><a href="Tel_Tel.html">Tel</a></li><li><a href="TelegramService.html">TelegramService</a></li><li><a href="module-models_deudor.ClassDeudor.html">ClassDeudor</a></li><li><a href="module-models_deudor.Tel.html">Tel</a></li><li><a href="module-models_nota.NotasBuilder.html">NotasBuilder</a></li><li><a href="module-models_notificacion.ClassNotificacion.html">ClassNotificacion</a></li><li><a href="module-models_procesos.ClassProcesos.html">ClassProcesos</a></li><li><a href="module-types_actuaciones.actuacionConvert.html">actuacionConvert</a></li><li><a href="module-types_raw-db.Convert.html">Convert</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AnyNull">AnyNull</a></li><li><a href="global.html#DbNull">DbNull</a></li><li><a href="global.html#Decimal">Decimal</a></li><li><a href="global.html#JsonNull">JsonNull</a></li><li><a href="global.html#PrismaClient">PrismaClient</a></li><li><a href="global.html#PrismaClientKnownRequestError">PrismaClientKnownRequestError</a></li><li><a href="global.html#RATE_LIMIT_DELAY_MS">RATE_LIMIT_DELAY_MS</a></li><li><a href="global.html#TransactionIsolationLevel">TransactionIsolationLevel</a></li><li><a href="global.html#agregateToDBMethod">agregateToDBMethod</a></li><li><a href="global.html#enforceRateLimit">enforceRateLimit</a></li><li><a href="global.html#extrapolateTipoToCorrectType">extrapolateTipoToCorrectType</a></li><li><a href="global.html#fetchWithSmartRetry">fetchWithSmartRetry</a></li><li><a href="global.html#getActuaciones">getActuaciones</a></li><li><a href="global.html">getCarpeta</a></li><li><a href="global.html#getProcesos">getProcesos</a></li><li><a href="global.html#getProcesosByName">getProcesosByName</a></li><li><a href="global.html#getProcesosToUpdate">getProcesosToUpdate</a></li><li><a href="global.html#getRateLimitKey">getRateLimitKey</a></li><li><a href="global.html#normalizeText">normalizeText</a></li><li><a href="global.html#pMap">pMap</a></li><li><a href="global.html">prismaCarpeta</a></li><li><a href="global.html#prismaVersion">prismaVersion</a></li><li><a href="global.html#runSync">runSync</a></li><li><a href="global.html#sanitizeText">sanitizeText</a></li><li><a href="global.html">sendNotification</a></li><li><a href="global.html#sql">sql</a></li><li><a href="global.html">updateNotes</a></li><li><a href="global.html#urlQueues">urlQueues</a></li><li><a href="global.html#wait">wait</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 26 2026 16:40:19 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

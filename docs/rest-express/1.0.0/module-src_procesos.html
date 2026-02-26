@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: src/procesos</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: src/procesos</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Script de sincronización de procesos judiciales.
+Consulta la API de Rama Judicial por llave de proceso,
+normaliza los datos (fechas, juzgados) y los persiste en PostgreSQL
+usando <code>connectOrCreate</code> para juzgados y procesos.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="procesos.js.html">procesos.js</a>, <a href="procesos.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li>module:types/procesos</li>
+        
+            <li>module:models/juzgado</li>
+        
+            <li><a href="module-models_procesos.html">module:models/procesos</a></li>
+        
+            <li><a href="module-services_prisma.html">module:services/prisma</a></li>
+        </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".AsyncGenerateActuaciones"><span class="type-signature">(async, generator, static) </span>AsyncGenerateActuaciones<span class="signature">(llaves)</span><span class="type-signature"> &rarr; {<a href="ClassProcesos.html">ClassProcesos</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Generador asíncrono que itera carpetas, consulta procesos y los persiste en BD.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>llaves</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;{llaveProceso: string, id: number, numero: number}></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Lista de llaves.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="procesos.js.html">procesos.js</a>, <a href="procesos.js.html#line74">line 74</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Yields:</h5>
+
+        
+<div class="param-desc">
+    Instancia con procesos actualizados para cada carpeta.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="ClassProcesos.html">ClassProcesos</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fetcher"><span class="type-signature">(async, static) </span>fetcher<span class="signature">(llaveProceso)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;outProceso>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Consulta procesos judiciales por llave en la API de Rama Judicial
+y normaliza las fechas y juzgados de cada proceso encontrado.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>llaveProceso</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Llave de 23 dígitos del proceso.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="procesos.js.html">procesos.js</a>, <a href="procesos.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>Si la respuesta HTTP no es exitosa.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array de procesos normalizados. Vacío si falla.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;outProceso>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getLLaves"><span class="type-signature">(async, static) </span>getLLaves<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{llaveProceso: string, numero: number, id: number}>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Obtiene todas las llaves de proceso de las carpetas en base de datos.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="procesos.js.html">procesos.js</a>, <a href="procesos.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array con llaveProceso y metadatos de cada carpeta.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;{llaveProceso: string, numero: number, id: number}>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".main"><span class="type-signature">(async, static) </span>main<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="ClassProcesos.html">ClassProcesos</a>>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Punto de entrada: sincroniza todos los procesos de todas las carpetas.
+Itera sobre todas las llaves, consulta la API, y escribe el resultado a JSON.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="procesos.js.html">procesos.js</a>, <a href="procesos.js.html#line163">line 163</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array de todos los procesos sincronizados.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;<a href="ClassProcesos.html">ClassProcesos</a>>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".prismaUpdaterProcesos"><span class="type-signature">(async, static) </span>prismaUpdaterProcesos<span class="signature">(proceso, numero)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Persiste un proceso en PostgreSQL usando <code>connectOrCreate</code> para el juzgado.
+Actualiza el array <code>idProcesos</code> de la carpeta con el nuevo ID.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>proceso</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">outProceso</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Proceso normalizado a persistir.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>numero</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Número de carpeta asociada.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="procesos.js.html">procesos.js</a>, <a href="procesos.js.html#line97">line 97</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Despachos.html">Despachos</a></li><li><a href="module-RawCarpetas.html">RawCarpetas</a></li><li><a href="module-client.html">client</a></li><li><a href="module-data_arrayofarrays.html">data/arrayofarrays</a></li><li><a href="module-data_carpetas.html">data/carpetas</a></li><li><a href="module-data_despachos.html">data/despachos</a></li><li><a href="module-models_actuacion.html">models/actuacion</a></li><li><a href="module-models_demanda.html">models/demanda</a></li><li><a href="module-models_procesos.html">models/procesos</a></li><li><a href="module-models_tipoProceso.html">models/tipoProceso</a></li><li><a href="module-services_actuaciones-raw.html">services/actuaciones-raw</a></li><li><a href="module-services_prisma.html">services/prisma</a></li><li><a href="module-services_semaphore.html">services/semaphore</a></li><li><a href="module-services_syncronize_carpetas_test.html">services/syncronize_carpetas_test</a></li><li><a href="module-src_getLlaves.html">src/getLlaves</a></li><li><a href="module-src_procesos.html">src/procesos</a></li><li><a href="module-src_procesos_from_name.html">src/procesos_from_name</a></li><li><a href="module-types_actuaciones.html">types/actuaciones</a></li><li><a href="module-types_contabilidad.html">types/contabilidad</a></li><li><a href="module-types_juzgados.html">types/juzgados</a></li><li><a href="module-types_notas.html">types/notas</a></li><li><a href="module-types_safe-parse-carpeta.html">types/safe-parse-carpeta</a></li><li><a href="module-utils_actuacion-has-important-pattern.html">utils/actuacion-has-important-pattern</a></li><li><a href="module-utils_awaiter.html">utils/awaiter</a></li><li><a href="module-utils_cleanUTF8.html">utils/cleanUTF8</a></li><li><a href="module-utils_database-juzgado-fixer.html">utils/database-juzgado-fixer</a></li><li><a href="module-utils_date-validator.html">utils/date-validator</a></li><li><a href="module-utils_ensureDate.html">utils/ensureDate</a></li><li><a href="module-utils_getAllDespachos.html">utils/getAllDespachos</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_actuacion.Actuacion.html">Actuacion</a></li><li><a href="module-models_demanda.ClassDemanda.html">ClassDemanda</a></li></ul><h3>Classes</h3><ul><li><a href="ActuacionService.html">ActuacionService</a></li><li><a href="ApiError.html">ApiError</a></li><li><a href="ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassCarpeta_ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassDeudor_ClassDeudor.html">ClassDeudor</a></li><li><a href="ClassNotificacion_ClassNotificacion.html">ClassNotificacion</a></li><li><a href="FileLogger.html">FileLogger</a></li><li><a href="JuzgadoClass.html">JuzgadoClass</a></li><li><a href="NotasBuilder_NotasBuilder.html">NotasBuilder</a></li><li><a href="RobustApiClient.html">RobustApiClient</a></li><li><a href="Tel_Tel.html">Tel</a></li><li><a href="TelegramService.html">TelegramService</a></li><li><a href="module-models_deudor.ClassDeudor.html">ClassDeudor</a></li><li><a href="module-models_deudor.Tel.html">Tel</a></li><li><a href="module-models_nota.NotasBuilder.html">NotasBuilder</a></li><li><a href="module-models_notificacion.ClassNotificacion.html">ClassNotificacion</a></li><li><a href="module-models_procesos.ClassProcesos.html">ClassProcesos</a></li><li><a href="module-types_actuaciones.actuacionConvert.html">actuacionConvert</a></li><li><a href="module-types_raw-db.Convert.html">Convert</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AnyNull">AnyNull</a></li><li><a href="global.html#DbNull">DbNull</a></li><li><a href="global.html#Decimal">Decimal</a></li><li><a href="global.html#JsonNull">JsonNull</a></li><li><a href="global.html#PrismaClient">PrismaClient</a></li><li><a href="global.html#PrismaClientKnownRequestError">PrismaClientKnownRequestError</a></li><li><a href="global.html#RATE_LIMIT_DELAY_MS">RATE_LIMIT_DELAY_MS</a></li><li><a href="global.html#TransactionIsolationLevel">TransactionIsolationLevel</a></li><li><a href="global.html#agregateToDBMethod">agregateToDBMethod</a></li><li><a href="global.html#enforceRateLimit">enforceRateLimit</a></li><li><a href="global.html#extrapolateTipoToCorrectType">extrapolateTipoToCorrectType</a></li><li><a href="global.html#fetchWithSmartRetry">fetchWithSmartRetry</a></li><li><a href="global.html#getActuaciones">getActuaciones</a></li><li><a href="global.html">getCarpeta</a></li><li><a href="global.html#getProcesos">getProcesos</a></li><li><a href="global.html#getProcesosByName">getProcesosByName</a></li><li><a href="global.html#getProcesosToUpdate">getProcesosToUpdate</a></li><li><a href="global.html#getRateLimitKey">getRateLimitKey</a></li><li><a href="global.html#normalizeText">normalizeText</a></li><li><a href="global.html#pMap">pMap</a></li><li><a href="global.html">prismaCarpeta</a></li><li><a href="global.html#prismaVersion">prismaVersion</a></li><li><a href="global.html#runSync">runSync</a></li><li><a href="global.html#sanitizeText">sanitizeText</a></li><li><a href="global.html">sendNotification</a></li><li><a href="global.html#sql">sql</a></li><li><a href="global.html">updateNotes</a></li><li><a href="global.html#urlQueues">urlQueues</a></li><li><a href="global.html#wait">wait</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 26 2026 16:40:19 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

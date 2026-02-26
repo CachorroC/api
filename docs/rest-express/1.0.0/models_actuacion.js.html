@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/actuacion.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/actuacion.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview Modelo de Actuación Judicial.
+ * Provee métodos estáticos para la sincronización y persistencia de actuaciones
+ * judiciales obtenidas de la API de la Rama Judicial de Colombia.
+ *
+ * @module models/actuacion
+ * @requires fs/promises
+ * @requires services/prisma
+ * @requires types/actuaciones
+ * @see {@link https://consultaprocesos.ramajudicial.gov.co:448 Rama Judicial API}
+ * @package rest-express
+ */
+import * as fs from 'fs/promises';
+import { client } from '../services/prisma.js';
+/**
+ * @class Actuacion
+ * @classdesc Clase estática que encapsula toda la lógica de persistencia y sincronización
+ * de actuaciones judiciales con la base de datos PostgreSQL a través de Prisma ORM.
+ *
+ * No se instancia directamente; todos sus métodos son `static`.
+ *
+ * @namespace Actuacion
+ * @memberof module:models/actuacion
+ *
+ * @example
+ * // Actualizar actuaciones para la carpeta 123
+ * const actuaciones = await fetchActuaciones(idProceso);
+ * await Actuacion.updateAllActuaciones(actuaciones, 123);
+ *
+ * @example
+ * // Sincronizar la última actuación de una carpeta
+ * await Actuacion.prismaUpdaterActuaciones(actuaciones, 123, 456);
+ */
+export default class Actuacion {
+    /**
+     * Realiza upsert (inserción o actualización) de todas las actuaciones proporcionadas
+     * en la base de datos, vinculándolas a una carpeta específica.
+     *
+     * @static
+     * @async
+     * @method updateAllActuaciones
+     * @memberof Actuacion
+     * @param {outActuacion[]} actuacionesComplete - Array completo de actuaciones obtenidas de la API.
+     * @param {number} numeroCarpeta - Número identificador de la carpeta a la que pertenecen las actuaciones.
+     * @returns {Promise&lt;Array&lt;{idRegActuacion: string, actuacion: string, anotacion: string|null, cant: number, carpetaNumero: number|null, codRegla: string, conDocumentos: boolean, consActuacion: number, createdAt: Date, fechaActuacion: Date, fechaFinal: Date|null, fechaInicial: Date|null, fechaRegistro: Date, isUltimaAct: boolean, llaveProceso: string, procesoId: number|null, idProceso: number}>>} Array de actuaciones upsertadas exitosamente.
+     * @throws {Error} Errores de Prisma se capturan internamente y se registran en consola.
+     */
+    static async updateAllActuaciones(actuacionesComplete, numeroCarpeta) {
+        const outputActuaciones = new Set();
+        try {
+            for (const actuacion of actuacionesComplete) {
+                const upsertActuacion = await client.actuacion.upsert({
+                    where: {
+                        idRegActuacion: `${actuacion.idRegActuacion}`,
+                    },
+                    update: {
+                        ...actuacion,
+                        idRegActuacion: `${actuacion.idRegActuacion}`,
+                        idProceso: Number(actuacion.idProceso),
+                        carpetaNumero: numeroCarpeta,
+                        isUltimaAct: actuacion.consActuacion === actuacion.cant,
+                        Carpeta: {
+                            connect: {
+                                numero: numeroCarpeta,
+                            },
+                        },
+                        proceso: {
+                            connect: {
+                                idProceso: actuacion.idProceso,
+                            },
+                        },
+                    },
+                    create: {
+                        ...actuacion,
+                        idRegActuacion: `${actuacion.idRegActuacion}`,
+                        idProceso: Number(actuacion.idProceso),
+                        carpetaNumero: numeroCarpeta,
+                        isUltimaAct: actuacion.consActuacion === actuacion.cant,
+                        Carpeta: {
+                            connect: {
+                                numero: numeroCarpeta,
+                            },
+                        },
+                        proceso: {
+                            connect: {
+                                idProceso: actuacion.idProceso,
+                            },
+                        },
+                    },
+                });
+                console.log(JSON.stringify(upsertActuacion));
+                outputActuaciones.add(upsertActuacion);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+        return Array.from(outputActuaciones);
+    }
+    /**
+     * Sincroniza las actuaciones con la base de datos, actualizando la "última actuación" de la carpeta
+     * cuando se detecta que la nueva fecha es más reciente que la almacenada.
+     *
+     * Flujo:
+     * 1. Identifica la actuación con `consActuacion === cant` (la última).
+     * 2. Busca la carpeta asociada en la base de datos.
+     * 3. Compara fechas: si la entrante es más reciente, actualiza la referencia `idRegUltimaAct`.
+     * 4. Escribe un archivo JSON de respaldo en `./src/date/{año}/{mes}/{día}/`.
+     *
+     * @static
+     * @async
+     * @method prismaUpdaterActuaciones
+     * @memberof Actuacion
+     * @param {outActuacion[]} actuacionesComplete - Array de actuaciones procesadas.
+     * @param {number} numeroCarpeta - Número de la carpeta judicial.
+     * @param {number} numeroId - ID alternativo de la carpeta (usado como fallback en búsqueda).
+     * @returns {Promise&lt;void>}
+     * @throws {Error} Errores de Prisma o I/O se capturan internamente.
+     */
+    static async prismaUpdaterActuaciones(actuacionesComplete, numeroCarpeta, numeroId) {
+        const ultimaActuacion = actuacionesComplete.find((a) => {
+            console.log(`carpeta numero ${numeroCarpeta}: a.consActuacion: ${a.consActuacion} a.cant: ${a.cant} es ultima Actuacion : ${a.consActuacion === a.cant}`);
+            return a.consActuacion === a.cant;
+        });
+        if (ultimaActuacion) {
+            try {
+                console.log(`${numeroCarpeta}: ultima Actuacion isUltimaAct ${ultimaActuacion.isUltimaAct ?? 'no hay ultima act'}`);
+                const carpeta = await client.carpeta.findFirstOrThrow({
+                    where: {
+                        OR: [
+                            {
+                                llaveProceso: ultimaActuacion.llaveProceso,
+                            },
+                            {
+                                numero: numeroCarpeta,
+                            },
+                            {
+                                id: numeroId,
+                            },
+                        ],
+                    },
+                    include: {
+                        ultimaActuacion: true,
+                    },
+                });
+                const incomingDate = new Date(ultimaActuacion.fechaActuacion)
+                    .getTime();
+                const savedDate = carpeta.fecha
+                    ? new Date(carpeta.fecha)
+                        .getTime()
+                    : null;
+                if (!savedDate || savedDate &lt; incomingDate) {
+                    console.log('no hay saved date o la saved date es menor que incoming date');
+                    const updateLastActuacion = await Actuacion.updatePreviousLastActuacion(carpeta.idRegUltimaAct);
+                    const updateCarpeta = await Actuacion.updateCarpetaWithNewLastActuacion({
+                        ultimaActuacion,
+                        numero: numeroCarpeta,
+                    });
+                    console.log(JSON.stringify(updateCarpeta, null, 2));
+                    await fs.mkdir(`./src/date/${new Date()
+                        .getFullYear()}/${new Date()
+                        .getMonth()}/${new Date()
+                        .getDate()}`, {
+                        recursive: true,
+                    });
+                    fs.writeFile(`./src/date/${new Date()
+                        .getFullYear()}/${new Date()
+                        .getMonth()}/${new Date()
+                        .getDate()}/${ultimaActuacion.idRegActuacion}.json`, JSON.stringify(updateLastActuacion));
+                } /*
+              console.log('prisma will start now');
+              for (const actuacion of actuacionesComplete) {
+                const upsertActuacion =
+                  await client.actuacion.upsert({
+                    where: {
+                      idRegActuacion: `${actuacion.idRegActuacion}`,
+                    },
+                    update: {
+                      ...actuacion,
+                      idRegActuacion: `${actuacion.idRegActuacion}`,
+                      idProceso: Number(actuacion.idProceso),
+                      isUltimaAct:
+                        actuacion.consActuacion === actuacion.cant,
+        
+                    },
+                    create: {
+                      ...actuacion,
+                      idRegActuacion: `${actuacion.idRegActuacion}`,
+                      idProceso: Number(actuacion.idProceso),
+                      isUltimaAct:
+                        actuacion.consActuacion === actuacion.cant,
+        
+                    },
+                  });
+                upsertActuacion;
+                console.log(`created ${JSON.stringify(upsertActuacion)}`);
+              } */
+            }
+            catch (error) {
+                console.log(`prisma updater actuaciones error : ${error}`);
+            }
+        }
+    }
+    /**
+     * Actualiza una carpeta judicial en la base de datos conectando la nueva última actuación.
+     * Utiliza `connectOrCreate` para asegurar que la actuación exista antes de vincularla.
+     *
+     * @static
+     * @async
+     * @method updateCarpetaWithNewLastActuacion
+     * @memberof Actuacion
+     * @param {Object} params - Parámetros de actualización.
+     * @param {outActuacion} params.ultimaActuacion - La actuación más reciente a vincular.
+     * @param {number} params.numero - Número de la carpeta a actualizar.
+     * @returns {Promise&lt;import('../prisma/generated/prisma/client').Carpeta | null>} La carpeta actualizada con su última actuación, o `null` si ocurre un error.
+     * @throws {Error} Errores de Prisma se capturan y se retorna `null`.
+     */
+    static async updateCarpetaWithNewLastActuacion({ ultimaActuacion, numero, }) {
+        try {
+            const carpetaUpdate = await client.carpeta.update({
+                where: {
+                    numero: numero,
+                },
+                data: {
+                    fecha: new Date(ultimaActuacion.fechaActuacion),
+                    revisado: false,
+                    ultimaActuacion: {
+                        connectOrCreate: {
+                            where: {
+                                idRegActuacion: `${ultimaActuacion.idRegActuacion}`,
+                            },
+                            create: {
+                                ...ultimaActuacion,
+                                isUltimaAct: ultimaActuacion.cant === ultimaActuacion.consActuacion,
+                                idRegActuacion: `${ultimaActuacion.idRegActuacion}`,
+                                idProceso: Number(ultimaActuacion.idProceso),
+                                carpetaNumero: numero,
+                                proceso: {
+                                    connect: {
+                                        idProceso: ultimaActuacion.idProceso,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                include: {
+                    ultimaActuacion: true,
+                },
+            });
+            return carpetaUpdate;
+        }
+        catch (error) {
+            console.log(`error al cambiar la carpeta y actualizar la ultima actuacion: ${error}`);
+            return null;
+        }
+    }
+    /**
+     * Marca la actuación previamente señalada como "última" (`isUltimaAct = true`)
+     * como no última (`isUltimaAct = false`), permitiendo que una nueva tome su lugar.
+     *
+     * @static
+     * @async
+     * @method updatePreviousLastActuacion
+     * @memberof Actuacion
+     * @param {string | null} idRegUltimaAct - El ID de registro de la actuación anteriormente marcada como última.
+     * @returns {Promise&lt;import('../prisma/generated/prisma/client').Actuacion | null>} La actuación actualizada, o `null` si el ID es nulo o hay error.
+     * @throws {Error} Lanza error interno si `idRegUltimaAct` es `null`; errores de Prisma se capturan.
+     */
+    static async updatePreviousLastActuacion(idRegUltimaAct) {
+        try {
+            if (idRegUltimaAct === null) {
+                throw new Error('la idRegAct de la ultima actuacion es null');
+            }
+            const updateCarpeta = await client.actuacion.update({
+                where: {
+                    idRegActuacion: idRegUltimaAct,
+                },
+                data: {
+                    isUltimaAct: false,
+                },
+            });
+            return updateCarpeta;
+        }
+        catch (error) {
+            console.log(`error al cambiar la ultima actuacion: ${error}`);
+            return null;
+        }
+    }
+}
+//# sourceMappingURL=actuacion.js.map</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Despachos.html">Despachos</a></li><li><a href="module-RawCarpetas.html">RawCarpetas</a></li><li><a href="module-client.html">client</a></li><li><a href="module-data_arrayofarrays.html">data/arrayofarrays</a></li><li><a href="module-data_carpetas.html">data/carpetas</a></li><li><a href="module-data_despachos.html">data/despachos</a></li><li><a href="module-models_actuacion.html">models/actuacion</a></li><li><a href="module-models_demanda.html">models/demanda</a></li><li><a href="module-models_procesos.html">models/procesos</a></li><li><a href="module-models_tipoProceso.html">models/tipoProceso</a></li><li><a href="module-services_actuaciones-raw.html">services/actuaciones-raw</a></li><li><a href="module-services_prisma.html">services/prisma</a></li><li><a href="module-services_semaphore.html">services/semaphore</a></li><li><a href="module-services_syncronize_carpetas_test.html">services/syncronize_carpetas_test</a></li><li><a href="module-src_getLlaves.html">src/getLlaves</a></li><li><a href="module-src_procesos.html">src/procesos</a></li><li><a href="module-src_procesos_from_name.html">src/procesos_from_name</a></li><li><a href="module-types_actuaciones.html">types/actuaciones</a></li><li><a href="module-types_contabilidad.html">types/contabilidad</a></li><li><a href="module-types_juzgados.html">types/juzgados</a></li><li><a href="module-types_notas.html">types/notas</a></li><li><a href="module-types_safe-parse-carpeta.html">types/safe-parse-carpeta</a></li><li><a href="module-utils_actuacion-has-important-pattern.html">utils/actuacion-has-important-pattern</a></li><li><a href="module-utils_awaiter.html">utils/awaiter</a></li><li><a href="module-utils_cleanUTF8.html">utils/cleanUTF8</a></li><li><a href="module-utils_database-juzgado-fixer.html">utils/database-juzgado-fixer</a></li><li><a href="module-utils_date-validator.html">utils/date-validator</a></li><li><a href="module-utils_ensureDate.html">utils/ensureDate</a></li><li><a href="module-utils_getAllDespachos.html">utils/getAllDespachos</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_actuacion.Actuacion.html">Actuacion</a></li><li><a href="module-models_demanda.ClassDemanda.html">ClassDemanda</a></li></ul><h3>Classes</h3><ul><li><a href="ActuacionService.html">ActuacionService</a></li><li><a href="ApiError.html">ApiError</a></li><li><a href="ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassCarpeta_ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassDeudor_ClassDeudor.html">ClassDeudor</a></li><li><a href="ClassNotificacion_ClassNotificacion.html">ClassNotificacion</a></li><li><a href="FileLogger.html">FileLogger</a></li><li><a href="JuzgadoClass.html">JuzgadoClass</a></li><li><a href="NotasBuilder_NotasBuilder.html">NotasBuilder</a></li><li><a href="RobustApiClient.html">RobustApiClient</a></li><li><a href="Tel_Tel.html">Tel</a></li><li><a href="TelegramService.html">TelegramService</a></li><li><a href="module-models_deudor.ClassDeudor.html">ClassDeudor</a></li><li><a href="module-models_deudor.Tel.html">Tel</a></li><li><a href="module-models_nota.NotasBuilder.html">NotasBuilder</a></li><li><a href="module-models_notificacion.ClassNotificacion.html">ClassNotificacion</a></li><li><a href="module-models_procesos.ClassProcesos.html">ClassProcesos</a></li><li><a href="module-types_actuaciones.actuacionConvert.html">actuacionConvert</a></li><li><a href="module-types_raw-db.Convert.html">Convert</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AnyNull">AnyNull</a></li><li><a href="global.html#DbNull">DbNull</a></li><li><a href="global.html#Decimal">Decimal</a></li><li><a href="global.html#JsonNull">JsonNull</a></li><li><a href="global.html#PrismaClient">PrismaClient</a></li><li><a href="global.html#PrismaClientKnownRequestError">PrismaClientKnownRequestError</a></li><li><a href="global.html#RATE_LIMIT_DELAY_MS">RATE_LIMIT_DELAY_MS</a></li><li><a href="global.html#TransactionIsolationLevel">TransactionIsolationLevel</a></li><li><a href="global.html#agregateToDBMethod">agregateToDBMethod</a></li><li><a href="global.html#enforceRateLimit">enforceRateLimit</a></li><li><a href="global.html#extrapolateTipoToCorrectType">extrapolateTipoToCorrectType</a></li><li><a href="global.html#fetchWithSmartRetry">fetchWithSmartRetry</a></li><li><a href="global.html#getActuaciones">getActuaciones</a></li><li><a href="global.html">getCarpeta</a></li><li><a href="global.html#getProcesos">getProcesos</a></li><li><a href="global.html#getProcesosByName">getProcesosByName</a></li><li><a href="global.html#getProcesosToUpdate">getProcesosToUpdate</a></li><li><a href="global.html#getRateLimitKey">getRateLimitKey</a></li><li><a href="global.html#normalizeText">normalizeText</a></li><li><a href="global.html#pMap">pMap</a></li><li><a href="global.html">prismaCarpeta</a></li><li><a href="global.html#prismaVersion">prismaVersion</a></li><li><a href="global.html#runSync">runSync</a></li><li><a href="global.html#sanitizeText">sanitizeText</a></li><li><a href="global.html">sendNotification</a></li><li><a href="global.html#sql">sql</a></li><li><a href="global.html">updateNotes</a></li><li><a href="global.html#urlQueues">urlQueues</a></li><li><a href="global.html#wait">wait</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 26 2026 16:40:19 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

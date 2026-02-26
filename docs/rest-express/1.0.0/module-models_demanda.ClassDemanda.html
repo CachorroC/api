@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: ClassDemanda</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Namespace: ClassDemanda</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="module-models_demanda.html">models/demanda</a>.</span>ClassDemanda</h2>
+        
+            <div class="class-description"><p>Representa una demanda judicial dentro del sistema.
+Encapsula la lógica de transformación de datos crudos (RawDb) a una estructura
+tipada que incluye obligaciones, fechas procesales, medidas cautelares,
+notificaciones y montos económicos (capital adeudado, avalúo, liquidación).</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li>IntDemanda</li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line21">line 21</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+            <h3>Example</h3>
+            
+    <pre class="prettyprint"><code>const demanda = new ClassDemanda(rawCarpetaData);
+console.log(demanda.capitalAdeudado); // Prisma.Decimal
+console.log(demanda.tipoProceso);     // 'SINGULAR' | 'HIPOTECARIO' | ...</code></pre>
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="avaluo"><span class="type-signature"></span>avaluo<span class="type-signature"> :Prisma.Decimal</span></h4>
+
+
+
+
+<div class="description">
+    <p>Valor del avalúo del bien asociado.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Prisma.Decimal</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line110">line 110</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="bienes"><span class="type-signature"></span>bienes<span class="type-signature"> :string|null</span></h4>
+
+
+
+
+<div class="description">
+    <p>Bienes asociados a la demanda.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line120">line 120</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="capitalAdeudado"><span class="type-signature"></span>capitalAdeudado<span class="type-signature"> :Prisma.Decimal</span></h4>
+
+
+
+
+<div class="description">
+    <p>Capital total adeudado por el demandado.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Prisma.Decimal</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line112">line 112</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="carpetaNumero"><span class="type-signature"></span>carpetaNumero<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Número de la carpeta asociada a esta demanda. Asignado externamente.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line114">line 114</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="departamento"><span class="type-signature"></span>departamento<span class="type-signature"> :string|null</span></h4>
+
+
+
+
+<div class="description">
+    <p>Departamento donde se radicó la demanda.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="despacho"><span class="type-signature"></span>despacho<span class="type-signature"> :string|null</span></h4>
+
+
+
+
+<div class="description">
+    <p>Despacho judicial encargado.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line118">line 118</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="entregaGarantiasAbogado"><span class="type-signature"></span>entregaGarantiasAbogado<span class="type-signature"> :Date|null</span></h4>
+
+
+
+
+<div class="description">
+    <p>Fecha de entrega de garantías al abogado.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Date</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line122">line 122</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="etapaProcesal"><span class="type-signature"></span>etapaProcesal<span class="type-signature"> :string|null</span></h4>
+
+
+
+
+<div class="description">
+    <p>Etapa procesal actual de la demanda.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line124">line 124</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="fechaPresentacion"><span class="type-signature"></span>fechaPresentacion<span class="type-signature"> :Array.&lt;Date></span></h4>
+
+
+
+
+<div class="description">
+    <p>Fechas de presentación de la demanda (puede haber múltiples).</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;Date></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line126">line 126</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="id"><span class="type-signature"></span>id<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    <p>Identificador numérico único de la demanda.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line128">line 128</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="liquidacion"><span class="type-signature"></span>liquidacion<span class="type-signature"> :Prisma.Decimal</span></h4>
+
+
+
+
+<div class="description">
+    <p>Valor de liquidación del crédito en moneda colombiana.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Prisma.Decimal</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line108">line 108</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="llaveProceso"><span class="type-signature"></span>llaveProceso<span class="type-signature"> :string|null</span></h4>
+
+
+
+
+<div class="description">
+    <p>Llave de proceso (número de radicado de 23 dígitos).</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line130">line 130</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="mandamientoPago"><span class="type-signature"></span>mandamientoPago<span class="type-signature"> :Array.&lt;Date></span></h4>
+
+
+
+
+<div class="description">
+    <p>Fechas de mandamiento de pago.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;Date></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line132">line 132</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="medidasCautelares"><span class="type-signature"></span>medidasCautelares<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    <p>Medidas cautelares asociadas a la demanda.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line149">line 149</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="municipio"><span class="type-signature"></span>municipio<span class="type-signature"> :string|null</span></h4>
+
+
+
+
+<div class="description">
+    <p>Municipio donde se tramita la demanda.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line134">line 134</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="notificacion"><span class="type-signature"></span>notificacion<span class="type-signature"> :intNotificacion</span></h4>
+
+
+
+
+<div class="description">
+    <p>Datos de notificación judicial asociados.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">intNotificacion</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line136">line 136</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="obligacion"><span class="type-signature"></span>obligacion<span class="type-signature"> :Array.&lt;string></span></h4>
+
+
+
+
+<div class="description">
+    <p>Números de las obligaciones crediticias vinculadas.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;string></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line138">line 138</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="radicado"><span class="type-signature"></span>radicado<span class="type-signature"> :string|null</span></h4>
+
+
+
+
+<div class="description">
+    <p>Número de radicado del proceso.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line140">line 140</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="tipoProceso"><span class="type-signature"></span>tipoProceso<span class="type-signature"> :TipoProceso</span></h4>
+
+
+
+
+<div class="description">
+    <p>Tipo de proceso ejecutivo: SINGULAR, HIPOTECARIO, PRENDARIO o ACUMULADO.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">TipoProceso</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line142">line 142</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="vencimientoPagare"><span class="type-signature"></span>vencimientoPagare<span class="type-signature"> :Array.&lt;Date></span></h4>
+
+
+
+
+<div class="description">
+    <p>Fechas de vencimiento del pagaré.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;Date></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_demanda.js.html">models/demanda.js</a>, <a href="models_demanda.js.html#line144">line 144</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Despachos.html">Despachos</a></li><li><a href="module-RawCarpetas.html">RawCarpetas</a></li><li><a href="module-client.html">client</a></li><li><a href="module-data_arrayofarrays.html">data/arrayofarrays</a></li><li><a href="module-data_carpetas.html">data/carpetas</a></li><li><a href="module-data_despachos.html">data/despachos</a></li><li><a href="module-models_actuacion.html">models/actuacion</a></li><li><a href="module-models_demanda.html">models/demanda</a></li><li><a href="module-models_procesos.html">models/procesos</a></li><li><a href="module-models_tipoProceso.html">models/tipoProceso</a></li><li><a href="module-services_actuaciones-raw.html">services/actuaciones-raw</a></li><li><a href="module-services_prisma.html">services/prisma</a></li><li><a href="module-services_semaphore.html">services/semaphore</a></li><li><a href="module-services_syncronize_carpetas_test.html">services/syncronize_carpetas_test</a></li><li><a href="module-src_getLlaves.html">src/getLlaves</a></li><li><a href="module-src_procesos.html">src/procesos</a></li><li><a href="module-src_procesos_from_name.html">src/procesos_from_name</a></li><li><a href="module-types_actuaciones.html">types/actuaciones</a></li><li><a href="module-types_contabilidad.html">types/contabilidad</a></li><li><a href="module-types_juzgados.html">types/juzgados</a></li><li><a href="module-types_notas.html">types/notas</a></li><li><a href="module-types_safe-parse-carpeta.html">types/safe-parse-carpeta</a></li><li><a href="module-utils_actuacion-has-important-pattern.html">utils/actuacion-has-important-pattern</a></li><li><a href="module-utils_awaiter.html">utils/awaiter</a></li><li><a href="module-utils_cleanUTF8.html">utils/cleanUTF8</a></li><li><a href="module-utils_database-juzgado-fixer.html">utils/database-juzgado-fixer</a></li><li><a href="module-utils_date-validator.html">utils/date-validator</a></li><li><a href="module-utils_ensureDate.html">utils/ensureDate</a></li><li><a href="module-utils_getAllDespachos.html">utils/getAllDespachos</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_actuacion.Actuacion.html">Actuacion</a></li><li><a href="module-models_demanda.ClassDemanda.html">ClassDemanda</a></li></ul><h3>Classes</h3><ul><li><a href="ActuacionService.html">ActuacionService</a></li><li><a href="ApiError.html">ApiError</a></li><li><a href="ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassCarpeta_ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassDeudor_ClassDeudor.html">ClassDeudor</a></li><li><a href="ClassNotificacion_ClassNotificacion.html">ClassNotificacion</a></li><li><a href="FileLogger.html">FileLogger</a></li><li><a href="JuzgadoClass.html">JuzgadoClass</a></li><li><a href="NotasBuilder_NotasBuilder.html">NotasBuilder</a></li><li><a href="RobustApiClient.html">RobustApiClient</a></li><li><a href="Tel_Tel.html">Tel</a></li><li><a href="TelegramService.html">TelegramService</a></li><li><a href="module-models_deudor.ClassDeudor.html">ClassDeudor</a></li><li><a href="module-models_deudor.Tel.html">Tel</a></li><li><a href="module-models_nota.NotasBuilder.html">NotasBuilder</a></li><li><a href="module-models_notificacion.ClassNotificacion.html">ClassNotificacion</a></li><li><a href="module-models_procesos.ClassProcesos.html">ClassProcesos</a></li><li><a href="module-types_actuaciones.actuacionConvert.html">actuacionConvert</a></li><li><a href="module-types_raw-db.Convert.html">Convert</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AnyNull">AnyNull</a></li><li><a href="global.html#DbNull">DbNull</a></li><li><a href="global.html#Decimal">Decimal</a></li><li><a href="global.html#JsonNull">JsonNull</a></li><li><a href="global.html#PrismaClient">PrismaClient</a></li><li><a href="global.html#PrismaClientKnownRequestError">PrismaClientKnownRequestError</a></li><li><a href="global.html#RATE_LIMIT_DELAY_MS">RATE_LIMIT_DELAY_MS</a></li><li><a href="global.html#TransactionIsolationLevel">TransactionIsolationLevel</a></li><li><a href="global.html#agregateToDBMethod">agregateToDBMethod</a></li><li><a href="global.html#enforceRateLimit">enforceRateLimit</a></li><li><a href="global.html#extrapolateTipoToCorrectType">extrapolateTipoToCorrectType</a></li><li><a href="global.html#fetchWithSmartRetry">fetchWithSmartRetry</a></li><li><a href="global.html#getActuaciones">getActuaciones</a></li><li><a href="global.html">getCarpeta</a></li><li><a href="global.html#getProcesos">getProcesos</a></li><li><a href="global.html#getProcesosByName">getProcesosByName</a></li><li><a href="global.html#getProcesosToUpdate">getProcesosToUpdate</a></li><li><a href="global.html#getRateLimitKey">getRateLimitKey</a></li><li><a href="global.html#normalizeText">normalizeText</a></li><li><a href="global.html#pMap">pMap</a></li><li><a href="global.html">prismaCarpeta</a></li><li><a href="global.html#prismaVersion">prismaVersion</a></li><li><a href="global.html#runSync">runSync</a></li><li><a href="global.html#sanitizeText">sanitizeText</a></li><li><a href="global.html">sendNotification</a></li><li><a href="global.html#sql">sql</a></li><li><a href="global.html">updateNotes</a></li><li><a href="global.html#urlQueues">urlQueues</a></li><li><a href="global.html#wait">wait</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 26 2026 16:40:19 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

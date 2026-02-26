@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/demanda.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/demanda.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview Modelo de Demanda Judicial.
+ * Transforma datos crudos de la hoja de cálculo (RawDb) en la estructura de demanda
+ * utilizada por el sistema, incluyendo medidas cautelares, notificaciones y montos.
+ *
+ * @module models/demanda
+ * @requires prisma/generated/prisma/client
+ * @requires types/carpetas
+ * @requires types/raw-db
+ * @requires utils/capital-builder
+ * @requires utils/date-validator
+ * @requires models/notificacion
+ * @requires models/tipoProceso
+ * @package rest-express
+ */
+import { Prisma } from '../prisma/generated/prisma/client.js';
+import { capitalBuilder } from '../utils/capital-builder.js';
+import { datesExtractor } from '../utils/date-validator.js';
+import { ClassNotificacion } from './notificacion.js';
+import { tipoProcesoBuilder } from './tipoProceso.js';
+/**
+ * @class ClassDemanda
+ * @classdesc Representa una demanda judicial dentro del sistema.
+ * Encapsula la lógica de transformación de datos crudos (RawDb) a una estructura
+ * tipada que incluye obligaciones, fechas procesales, medidas cautelares,
+ * notificaciones y montos económicos (capital adeudado, avalúo, liquidación).
+ *
+ * @implements {IntDemanda}
+ * @namespace ClassDemanda
+ * @memberof module:models/demanda
+ *
+ * @example
+ * const demanda = new ClassDemanda(rawCarpetaData);
+ * console.log(demanda.capitalAdeudado); // Prisma.Decimal
+ * console.log(demanda.tipoProceso);     // 'SINGULAR' | 'HIPOTECARIO' | ...
+ */
+export class ClassDemanda {
+    /**
+     * Construye una instancia de ClassDemanda a partir de datos crudos.
+     *
+     * @constructor
+     * @param {RawDb} rawCarpeta - Objeto con los datos crudos provenientes de la hoja de cálculo.
+     *   Se extraen: capital adeudado, juzgados, fechas de presentación, tipo de proceso,
+     *   mandamiento de pago, obligaciones, medidas cautelares, y valores de avalúo/liquidación.
+     */
+    constructor(rawCarpeta) {
+        const { VALOR_CAPITAL_ADEUDADO: capitalAdeudado, JUZGADO_EJECUCION, JUZGADO_ORIGEN, FECHA_ENTREGA_GARANTIAS_ABOGADO: entregaGarantiasAbogado, ETAPA_PROCESAL: etapaProcesal, DEPARTAMENTO: departamento, NUMERO, FECHA_PRESENTACION_DEMANDA: fechaPresentacion, TIPO_PROCESO: tipoProceso, FECHA_MANDAMIENTO_PAGO: mandamientoPago, JUZGADO_CIUDAD: municipio, RADICADO: radicado, EXPEDIENTE: llaveProceso, FECHA_VENCIMIENTO_PAGARE: vencimientoPagare, FECHA_ORDENA_MEDIDAS_CAUTELARES: fechaOrdenaMedidas, MEDIDA_SOLICITADA: medidaSolicitada, OBLIGACION_1: A, OBLIGACION_2: B, VALOR_LIQUIDACION_DEL_CREDITO, VALOR_AVALUO, BIENES, BIENES_SECUESTRADOS, } = rawCarpeta;
+        const [newFechaOrdenaMedida] = datesExtractor(fechaOrdenaMedidas);
+        this.id = Number(NUMERO);
+        this.bienes = BIENES
+            ? String(BIENES)
+            : BIENES_SECUESTRADOS
+                ? String(BIENES_SECUESTRADOS)
+                : null;
+        this.medidasCautelares = {
+            id: Number(NUMERO),
+            fechaOrdenaMedida: newFechaOrdenaMedida ?? null,
+            medidaSolicitada: medidaSolicitada
+                ? String(medidaSolicitada)
+                : null,
+        };
+        const obligacionesSet = new Set();
+        if (A) {
+            obligacionesSet.add(String(A));
+        }
+        if (B) {
+            obligacionesSet.add(String(B));
+        }
+        this.fechaPresentacion = datesExtractor(fechaPresentacion) ?? null;
+        this.notificacion = new ClassNotificacion(rawCarpeta);
+        this.mandamientoPago = datesExtractor(mandamientoPago) ?? null;
+        const NewEntregaDeGarantias = datesExtractor(entregaGarantiasAbogado);
+        if (NewEntregaDeGarantias.length === 0) {
+            this.entregaGarantiasAbogado = null;
+        }
+        else {
+            const [firstEntrega] = NewEntregaDeGarantias;
+            this.entregaGarantiasAbogado = firstEntrega;
+        }
+        this.capitalAdeudado = new Prisma.Decimal(capitalBuilder(capitalAdeudado));
+        this.tipoProceso = tipoProcesoBuilder(tipoProceso);
+        this.etapaProcesal = etapaProcesal
+            ? `${etapaProcesal}`
+            : null;
+        this.municipio = municipio
+            ? String(municipio)
+            : null;
+        this.obligacion = Array.from(obligacionesSet);
+        this.radicado = radicado
+            ? `${radicado}`
+            : null;
+        this.vencimientoPagare = datesExtractor(vencimientoPagare);
+        this.departamento = departamento
+            ? departamento
+            : null;
+        this.despacho = JUZGADO_EJECUCION
+            ? JUZGADO_EJECUCION
+            : JUZGADO_ORIGEN
+                ? JUZGADO_ORIGEN
+                : null;
+        this.llaveProceso = llaveProceso
+            ? String(llaveProceso)
+            : null;
+        this.avaluo = new Prisma.Decimal(capitalBuilder(VALOR_AVALUO));
+        this.liquidacion = new Prisma.Decimal(capitalBuilder(VALOR_LIQUIDACION_DEL_CREDITO));
+    }
+    /** @type {Prisma.Decimal} Valor de liquidación del crédito en moneda colombiana. */
+    liquidacion;
+    /** @type {Prisma.Decimal} Valor del avalúo del bien asociado. */
+    avaluo;
+    /** @type {Prisma.Decimal} Capital total adeudado por el demandado. */
+    capitalAdeudado;
+    /** @type {number} Número de la carpeta asociada a esta demanda. Asignado externamente. */
+    carpetaNumero;
+    /** @type {string | null} Departamento donde se radicó la demanda. */
+    departamento;
+    /** @type {string | null} Despacho judicial encargado. */
+    despacho;
+    /** @type {string | null} Bienes asociados a la demanda. */
+    bienes;
+    /** @type {Date | null} Fecha de entrega de garantías al abogado. */
+    entregaGarantiasAbogado;
+    /** @type {string | null} Etapa procesal actual de la demanda. */
+    etapaProcesal;
+    /** @type {Date[]} Fechas de presentación de la demanda (puede haber múltiples). */
+    fechaPresentacion;
+    /** @type {number} Identificador numérico único de la demanda. */
+    id;
+    /** @type {string | null} Llave de proceso (número de radicado de 23 dígitos). */
+    llaveProceso;
+    /** @type {Date[]} Fechas de mandamiento de pago. */
+    mandamientoPago;
+    /** @type {string | null} Municipio donde se tramita la demanda. */
+    municipio;
+    /** @type {intNotificacion} Datos de notificación judicial asociados. */
+    notificacion;
+    /** @type {string[]} Números de las obligaciones crediticias vinculadas. */
+    obligacion;
+    /** @type {string | null} Número de radicado del proceso. */
+    radicado;
+    /** @type {TipoProceso} Tipo de proceso ejecutivo: SINGULAR, HIPOTECARIO, PRENDARIO o ACUMULADO. */
+    tipoProceso;
+    /** @type {Date[]} Fechas de vencimiento del pagaré. */
+    vencimientoPagare;
+    /**
+     * Medidas cautelares asociadas a la demanda.
+     * @type {{id: number, fechaOrdenaMedida: Date|null, medidaSolicitada: string|null}}
+     */
+    medidasCautelares;
+    /**
+     * Transforma una instancia de `IntDemanda` en un objeto Prisma `DemandaCreateWithoutCarpetaInput`
+     * listo para ser insertado en la base de datos, incluyendo medidas cautelares y notificaciones
+     * con lógica `connectOrCreate`.
+     *
+     * @static
+     * @method prismaDemanda
+     * @memberof ClassDemanda
+     * @param {IntDemanda} demanda - Instancia de demanda con todos sus campos procesados.
+     * @returns {Prisma.DemandaCreateWithoutCarpetaInput} Objeto compatible con Prisma para inserción.
+     */
+    static prismaDemanda(demanda) {
+        const newMedidas = {
+            id: demanda.id,
+            fechaOrdenaMedida: demanda.medidasCautelares.fechaOrdenaMedida,
+            medidaSolicitada: demanda.medidasCautelares.medidaSolicitada,
+        };
+        const newNotificacion = ClassNotificacion.prismaNotificacion(demanda.notificacion);
+        const newDemanda = {
+            id: demanda.id,
+            tipoProceso: demanda.tipoProceso,
+            avaluo: demanda.avaluo,
+            capitalAdeudado: demanda.capitalAdeudado,
+            departamento: demanda.departamento,
+            despacho: demanda.despacho,
+            entregaGarantiasAbogado: demanda.entregaGarantiasAbogado,
+            fechaPresentacion: demanda.fechaPresentacion,
+            vencimientoPagare: demanda.vencimientoPagare,
+            etapaProcesal: demanda.etapaProcesal,
+            liquidacion: demanda.liquidacion,
+            llaveProceso: demanda.llaveProceso,
+            mandamientoPago: demanda.mandamientoPago,
+            municipio: demanda.municipio,
+            obligacion: demanda.obligacion,
+            radicado: demanda.radicado,
+            medidasCautelares: {
+                connectOrCreate: {
+                    where: {
+                        id: demanda.id,
+                    },
+                    create: newMedidas,
+                },
+            },
+            notificacion: {
+                connectOrCreate: {
+                    where: {
+                        id: demanda.id,
+                    },
+                    create: newNotificacion,
+                },
+            },
+        };
+        return newDemanda;
+    }
+}
+//# sourceMappingURL=demanda.js.map</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Despachos.html">Despachos</a></li><li><a href="module-RawCarpetas.html">RawCarpetas</a></li><li><a href="module-client.html">client</a></li><li><a href="module-data_arrayofarrays.html">data/arrayofarrays</a></li><li><a href="module-data_carpetas.html">data/carpetas</a></li><li><a href="module-data_despachos.html">data/despachos</a></li><li><a href="module-models_actuacion.html">models/actuacion</a></li><li><a href="module-models_demanda.html">models/demanda</a></li><li><a href="module-models_procesos.html">models/procesos</a></li><li><a href="module-models_tipoProceso.html">models/tipoProceso</a></li><li><a href="module-services_actuaciones-raw.html">services/actuaciones-raw</a></li><li><a href="module-services_prisma.html">services/prisma</a></li><li><a href="module-services_semaphore.html">services/semaphore</a></li><li><a href="module-services_syncronize_carpetas_test.html">services/syncronize_carpetas_test</a></li><li><a href="module-src_getLlaves.html">src/getLlaves</a></li><li><a href="module-src_procesos.html">src/procesos</a></li><li><a href="module-src_procesos_from_name.html">src/procesos_from_name</a></li><li><a href="module-types_actuaciones.html">types/actuaciones</a></li><li><a href="module-types_contabilidad.html">types/contabilidad</a></li><li><a href="module-types_juzgados.html">types/juzgados</a></li><li><a href="module-types_notas.html">types/notas</a></li><li><a href="module-types_safe-parse-carpeta.html">types/safe-parse-carpeta</a></li><li><a href="module-utils_actuacion-has-important-pattern.html">utils/actuacion-has-important-pattern</a></li><li><a href="module-utils_awaiter.html">utils/awaiter</a></li><li><a href="module-utils_cleanUTF8.html">utils/cleanUTF8</a></li><li><a href="module-utils_database-juzgado-fixer.html">utils/database-juzgado-fixer</a></li><li><a href="module-utils_date-validator.html">utils/date-validator</a></li><li><a href="module-utils_ensureDate.html">utils/ensureDate</a></li><li><a href="module-utils_getAllDespachos.html">utils/getAllDespachos</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_actuacion.Actuacion.html">Actuacion</a></li><li><a href="module-models_demanda.ClassDemanda.html">ClassDemanda</a></li></ul><h3>Classes</h3><ul><li><a href="ActuacionService.html">ActuacionService</a></li><li><a href="ApiError.html">ApiError</a></li><li><a href="ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassCarpeta_ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassDeudor_ClassDeudor.html">ClassDeudor</a></li><li><a href="ClassNotificacion_ClassNotificacion.html">ClassNotificacion</a></li><li><a href="FileLogger.html">FileLogger</a></li><li><a href="JuzgadoClass.html">JuzgadoClass</a></li><li><a href="NotasBuilder_NotasBuilder.html">NotasBuilder</a></li><li><a href="RobustApiClient.html">RobustApiClient</a></li><li><a href="Tel_Tel.html">Tel</a></li><li><a href="TelegramService.html">TelegramService</a></li><li><a href="module-models_deudor.ClassDeudor.html">ClassDeudor</a></li><li><a href="module-models_deudor.Tel.html">Tel</a></li><li><a href="module-models_nota.NotasBuilder.html">NotasBuilder</a></li><li><a href="module-models_notificacion.ClassNotificacion.html">ClassNotificacion</a></li><li><a href="module-models_procesos.ClassProcesos.html">ClassProcesos</a></li><li><a href="module-types_actuaciones.actuacionConvert.html">actuacionConvert</a></li><li><a href="module-types_raw-db.Convert.html">Convert</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AnyNull">AnyNull</a></li><li><a href="global.html#DbNull">DbNull</a></li><li><a href="global.html#Decimal">Decimal</a></li><li><a href="global.html#JsonNull">JsonNull</a></li><li><a href="global.html#PrismaClient">PrismaClient</a></li><li><a href="global.html#PrismaClientKnownRequestError">PrismaClientKnownRequestError</a></li><li><a href="global.html#RATE_LIMIT_DELAY_MS">RATE_LIMIT_DELAY_MS</a></li><li><a href="global.html#TransactionIsolationLevel">TransactionIsolationLevel</a></li><li><a href="global.html#agregateToDBMethod">agregateToDBMethod</a></li><li><a href="global.html#enforceRateLimit">enforceRateLimit</a></li><li><a href="global.html#extrapolateTipoToCorrectType">extrapolateTipoToCorrectType</a></li><li><a href="global.html#fetchWithSmartRetry">fetchWithSmartRetry</a></li><li><a href="global.html#getActuaciones">getActuaciones</a></li><li><a href="global.html">getCarpeta</a></li><li><a href="global.html#getProcesos">getProcesos</a></li><li><a href="global.html#getProcesosByName">getProcesosByName</a></li><li><a href="global.html#getProcesosToUpdate">getProcesosToUpdate</a></li><li><a href="global.html#getRateLimitKey">getRateLimitKey</a></li><li><a href="global.html#normalizeText">normalizeText</a></li><li><a href="global.html#pMap">pMap</a></li><li><a href="global.html">prismaCarpeta</a></li><li><a href="global.html#prismaVersion">prismaVersion</a></li><li><a href="global.html#runSync">runSync</a></li><li><a href="global.html#sanitizeText">sanitizeText</a></li><li><a href="global.html">sendNotification</a></li><li><a href="global.html#sql">sql</a></li><li><a href="global.html">updateNotes</a></li><li><a href="global.html#urlQueues">urlQueues</a></li><li><a href="global.html#wait">wait</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 26 2026 16:40:19 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

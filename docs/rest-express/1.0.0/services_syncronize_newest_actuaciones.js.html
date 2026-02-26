@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/syncronize_newest_actuaciones.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/syncronize_newest_actuaciones.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+// 1. ADD THIS: Import dotenv to load variables from .env file
+import 'dotenv/config';
+import path from 'path';
+import * as fs from 'fs/promises';
+import { client } from './prisma.js';
+// ==========================================
+// CONFIGURATION
+// ==========================================
+// Define endpoints and tokens here to keep them centralized.
+// WE CHANGED THIS: Now using process.env with safe fallbacks
+const WEBHOOK_URL = process.env.WEBHOOK_URL || '';
+const NEW_ITEMS_LOG_FILE = process.env.NEW_ITEMS_LOG_FILE || 'new_actuaciones_accumulator.json';
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '';
+const RAMA_JUDICIAL_BASE_URL = process.env.RAMA_JUDICIAL_BASE_URL
+    || 'https://consultaprocesos.ramajudicial.gov.co:448';
+// Custom error class for better error handling in logs
+export class ApiError extends Error {
+    message;
+    statusCode;
+    constructor(message, statusCode) {
+        super(message);
+        this.message = message;
+        this.statusCode = statusCode;
+        this.name = 'ApiError';
+    }
+}
+// ==========================================
+// SECTION 2: UTILITIES
+// ==========================================
+// Standard wait function to prevent rate limiting issues
+const wait = (ms) => {
+    return new Promise((resolve) => {
+        return setTimeout(resolve, ms);
+    });
+};
+// Helper to sanitize dates. If the API returns invalid strings, this returns null
+// to prevent the Database from crashing.
+function ensureDate(dateInput) {
+    if (!dateInput) {
+        return null;
+    }
+    const d = new Date(dateInput);
+    return isNaN(d.getTime())
+        ? null
+        : d;
+}
+class FileLogger {
+    filePath;
+    constructor(filename) {
+        this.filePath = path.join(process.cwd(), 'logs', filename);
+        this.ensureDir();
+    }
+    async ensureDir() {
+        try {
+            await fs.mkdir(path.dirname(this.filePath), {
+                recursive: true,
+            });
+        }
+        catch {
+            /* ignore */
+        }
+    }
+    // Logs failures (e.g. failed webhook, failed DB write)
+    async logFailure(contextId, subItem, error, phase) {
+        const logEntry = {
+            timestamp: new Date()
+                .toISOString(),
+            phase,
+            parentId: contextId,
+            error,
+            data: subItem,
+        };
+        try {
+            await fs.appendFile(this.filePath, JSON.stringify(logEntry) + ',\n');
+        }
+        catch (e) {
+            console.error('Failed to write to log file', e);
+        }
+    }
+}
+// ==========================================
+// SECTION 3: NOTIFICATION SERVICES
+// ==========================================
+class TelegramService {
+    /**
+     * Cleans text to ensure it doesn't break Telegram's HTML parser.
+     * If text contains &lt; or >, telegram might think it's a tag and crash.
+     */
+    static cleanText(text) {
+        if (!text) {
+            return '';
+        }
+        // 1. Escape special HTML chars
+        const escaped = text
+            .toString()
+            .replace(/&amp;/g, '&amp;amp;')
+            .replace(/&lt;/g, '&amp;lt;')
+            .replace(/>/g, '&amp;gt;')
+            .replace(/"/g, '&amp;quot;')
+            .replace(/'/g, '&amp;#039;');
+        // 2. Truncate if too long (Telegram limit is 4096, we keep it safe)
+        if (escaped.length > 3000) {
+            return escaped.substring(0, 3000) + '... (cortado)';
+        }
+        return escaped;
+    }
+    static async sendNotification(actuacion, processInfo) {
+        // Basic check to ensure we have tokens before trying to send
+        if (!TELEGRAM_BOT_TOKEN
+            || !TELEGRAM_CHAT_ID
+            || TELEGRAM_BOT_TOKEN.includes('YOUR_BOT')) {
+            console.warn('⚠️ Telegram Token not configured.');
+            return;
+        }
+        // Prepare clean variables
+        const cleanActuacion = this.cleanText(actuacion.actuacion);
+        const cleanAnotacion = this.cleanText(actuacion.anotacion);
+        const cleanLlave = this.cleanText(processInfo.llaveProceso);
+        const cleanCarpeta = this.cleanText(String(processInfo.carpetaNumero));
+        // Build the message safely
+        const message = `
+🚨 &lt;b>NUEVA ACTUACIÓN DETECTADA&lt;/b> 🚨
+
+📂 &lt;b>Proceso:&lt;/b> ${cleanLlave}
+📁 &lt;b>Carpeta:&lt;/b> ${cleanCarpeta}
+
+📅 &lt;b>Fecha:&lt;/b> ${new Date(actuacion.fechaActuacion)
+            .toLocaleDateString()}
+📝 &lt;b>Actuación:&lt;/b> ${cleanActuacion}
+${cleanAnotacion
+            ? `ℹ️ &lt;b>Anotación:&lt;/b> ${cleanAnotacion}`
+            : ''}
+
+🔗 &lt;a href="https://consultaprocesos.ramajudicial.gov.co/Procesos/NumeroRadicacion?NumeroRadicacion=${processInfo.llaveProceso}">Ver en Rama Judicial&lt;/a>
+    `;
+        try {
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML',
+                    disable_web_page_preview: true,
+                }),
+            });
+            if (!response.ok) {
+                // Log the specific error from Telegram to help debug if it happens again
+                const errorData = (await response.json());
+                throw new Error(`${response.statusText} - ${errorData.description}`);
+            }
+        }
+        catch (err) {
+            // If HTML fails (rare edge case), fallback to plain text so you still get the alert
+            console.warn('⚠️ Standard HTML message failed, attempting fallback...');
+            await this.sendFallbackMessage(actuacion, processInfo);
+        }
+    }
+    /**
+     * Fallback method that sends PLAIN TEXT if the fancy HTML version fails
+     */
+    static async sendFallbackMessage(actuacion, processInfo) {
+        const message = `
+🚨 NUEVA ACTUACIÓN (TEXTO PLANO) 🚨
+
+Proceso: ${processInfo.llaveProceso}
+Carpeta: ${processInfo.carpetaNumero}
+Fecha: ${new Date(actuacion.fechaActuacion)
+            .toLocaleDateString()}
+Actuación: ${actuacion.actuacion}
+Anotación: ${actuacion.anotacion || 'N/A'}
+    `;
+        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+        await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                // No parse_mode here = Safe plain text
+            }),
+        });
+    }
+}
+// ==========================================
+// SECTION 4: DATABASE SERVICE
+// ==========================================
+class ActuacionService {
+    static async upsertActuacion(apiData, parentProc) {
+        const fechaActuacion = ensureDate(apiData.fechaActuacion) || new Date();
+        const fechaRegistro = ensureDate(apiData.fechaRegistro) || new Date();
+        const fechaInicial = ensureDate(apiData.fechaInicial);
+        const fechaFinal = ensureDate(apiData.fechaFinal);
+        const isUltima = apiData.cant === apiData.consActuacion;
+        const idRegString = String(apiData.idRegActuacion);
+        const dataPayload = {
+            idRegActuacion: idRegString,
+            consActuacion: apiData.consActuacion,
+            actuacion: apiData.actuacion,
+            anotacion: apiData.anotacion,
+            cant: apiData.cant,
+            carpetaNumero: parentProc.carpetaNumero,
+            codRegla: apiData.codRegla,
+            conDocumentos: apiData.conDocumentos,
+            createdAt: new Date(),
+            llaveProceso: parentProc.llaveProceso,
+            fechaActuacion: fechaActuacion,
+            fechaRegistro: fechaRegistro,
+            fechaInicial: fechaInicial,
+            fechaFinal: fechaFinal,
+            idProceso: parentProc.idProceso,
+            isUltimaAct: isUltima,
+            proceso: {
+                connect: {
+                    idProceso: parentProc.idProceso,
+                },
+            },
+        };
+        return await client.actuacion.upsert({
+            where: {
+                idRegActuacion: idRegString,
+            },
+            create: dataPayload,
+            update: {
+                fechaActuacion,
+                fechaRegistro,
+                fechaInicial,
+                fechaFinal,
+                isUltimaAct: isUltima,
+                consActuacion: apiData.consActuacion,
+                cant: apiData.cant,
+            },
+        });
+    }
+    static async updateCarpetaIfNewer(actuaciones, parentProc) {
+        const incomingLast = actuaciones.find((a) => {
+            return a.consActuacion === a.cant;
+        });
+        if (!incomingLast) {
+            return;
+        }
+        try {
+            const carpeta = await client.carpeta.findUnique({
+                where: {
+                    numero: parentProc.carpetaNumero,
+                },
+                select: {
+                    idRegUltimaAct: true,
+                    fecha: true,
+                },
+            });
+            if (!carpeta) {
+                return;
+            }
+            const incomingDate = ensureDate(incomingLast.fechaActuacion)
+                ?.getTime() || 0;
+            const savedDate = ensureDate(carpeta.fecha)
+                ?.getTime() || 0;
+            if (incomingDate > savedDate) {
+                console.log(`🔄 Updating Carpeta ${parentProc.carpetaNumero} with new Actuacion date.`);
+                if (carpeta.idRegUltimaAct) {
+                    await client.actuacion
+                        .update({
+                        where: {
+                            idRegActuacion: carpeta.idRegUltimaAct,
+                        },
+                        data: {
+                            isUltimaAct: false,
+                        },
+                    })
+                        .catch(() => {
+                        return null;
+                    });
+                }
+                await client.carpeta.update({
+                    where: {
+                        numero: parentProc.carpetaNumero,
+                    },
+                    data: {
+                        fecha: ensureDate(incomingLast.fechaActuacion),
+                        revisado: false,
+                        updatedAt: new Date(),
+                        ultimaActuacion: {
+                            connect: {
+                                idRegActuacion: String(incomingLast.idRegActuacion),
+                            },
+                        },
+                    },
+                });
+            }
+        }
+        catch (error) {
+            console.error(`❌ Error updating carpeta ${parentProc.carpetaNumero}:`, error);
+        }
+    }
+    static async saveNewItemsToLog(newItems, parentProc) {
+        const filePath = path.join(process.cwd(), 'logs', NEW_ITEMS_LOG_FILE);
+        const itemsToSave = newItems.map((item) => {
+            return {
+                ...item,
+                _meta: {
+                    detectedAt: new Date()
+                        .toISOString(),
+                    carpetaNumero: parentProc.carpetaNumero,
+                    processId: parentProc.idProceso,
+                },
+            };
+        });
+        try {
+            await fs.mkdir(path.dirname(filePath), {
+                recursive: true,
+            });
+            let currentData = [];
+            try {
+                const fileContent = await fs.readFile(filePath, 'utf-8');
+                currentData = JSON.parse(fileContent);
+                if (!Array.isArray(currentData)) {
+                    currentData = [];
+                }
+            }
+            catch (e) {
+                currentData = [];
+            }
+            currentData.push(...itemsToSave);
+            await fs.writeFile(filePath, JSON.stringify(currentData, null, 2), 'utf-8');
+        }
+        catch (error) {
+            console.error('❌ Failed to save new items to JSON file:', error);
+        }
+    }
+    // ==========================================
+    // LOGIC: DETECT &amp; NOTIFY
+    // ==========================================
+    static async handleNewActuacionNotifications(apiActuaciones, parentProc, logger) {
+        try {
+            // 1. Get existing IDs
+            const existingRecords = await client.actuacion.findMany({
+                where: {
+                    idProceso: parentProc.idProceso,
+                },
+                select: {
+                    idRegActuacion: true,
+                },
+            });
+            const existingIds = new Set(existingRecords.map((r) => {
+                return r.idRegActuacion;
+            }));
+            // 2. Find NEW items
+            const newActuaciones = apiActuaciones.filter((apiAct) => {
+                return !existingIds.has(String(apiAct.idRegActuacion));
+            });
+            if (newActuaciones.length === 0) {
+                return;
+            }
+            console.log(`✨ Found ${newActuaciones.length} NEW Actuaciones. Processing notifications...`);
+            // 3. Save to JSON File
+            await this.saveNewItemsToLog(newActuaciones, parentProc);
+            // 4. Process Each New Item
+            for (const act of newActuaciones) {
+                // A. Send Webhook
+                try {
+                    const response = await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            ...act,
+                            carpetaNumero: parentProc.carpetaNumero,
+                            llaveProceso: parentProc.llaveProceso,
+                        }),
+                    });
+                    if (!response.ok) {
+                        throw new Error(`Status ${response.status}`);
+                    }
+                }
+                catch (postError) {
+                    console.error(`⚠️ Webhook Failed: ${postError.message}`);
+                    await logger.logFailure(parentProc.idProceso, act, postError.message, 'WEBHOOK');
+                }
+                // B. [NEW] Send Telegram Notification
+                try {
+                    await TelegramService.sendNotification(act, parentProc);
+                    console.log(`   📱 Telegram sent for Actuacion ${act.idRegActuacion}`);
+                    // Small delay to prevent Telegram rate limits
+                    await wait(500);
+                }
+                catch (teleError) {
+                    console.error(`⚠️ Telegram Failed: ${teleError.message}`);
+                    await logger.logFailure(parentProc.idProceso, act, teleError.message, 'TELEGRAM');
+                }
+            }
+        }
+        catch (error) {
+            console.error(`❌ Error in handleNewActuacionNotifications: ${error.message}`);
+        }
+    }
+}
+// ==========================================
+// SECTION 5: API CLIENT
+// ==========================================
+export async function fetchWithSmartRetry(url, options, maxRetries = 3, retryDelay = 2000) {
+    let attempt = 0;
+    while (attempt &lt; maxRetries) {
+        try {
+            const response = await fetch(url, options);
+            if ([
+                429,
+                500,
+                502,
+                503,
+                504
+            ].includes(response.status)) {
+                throw new Error(`Server Status ${response.status}`);
+            }
+            return response;
+        }
+        catch (error) {
+            attempt++;
+            if (attempt >= maxRetries) {
+                throw error;
+            }
+            await wait(retryDelay * attempt);
+        }
+    }
+    throw new Error('fetchWithSmartRetry failed');
+}
+export class RobustApiClient {
+    baseUrl;
+    logger;
+    RATE_LIMIT_DELAY_MS = 12000;
+    constructor(baseUrl) {
+        this.baseUrl = baseUrl;
+        this.logger = new FileLogger('failed_sync_ops.json');
+    }
+    async fetchWithRetry(endpoint) {
+        const response = await fetchWithSmartRetry(`${this.baseUrl}${endpoint}`);
+        if (!response.ok) {
+            throw new ApiError(`HTTP ${response.status}`, response.status);
+        }
+        return (await response.json());
+    }
+    async processBatch(items, pathBuilder) {
+        console.log(`🚀 Starting process for ${items.length} targets...`);
+        for (const [index, parentItem] of items.entries()) {
+            if (index > 0) {
+                await wait(this.RATE_LIMIT_DELAY_MS);
+            }
+            let apiResponse;
+            try {
+                const endpoint = pathBuilder(parentItem);
+                console.log(`🌐 [${index + 1}/${items.length}] Fetching: ${parentItem.idProceso}`);
+                apiResponse
+                    = await this.fetchWithRetry(endpoint);
+            }
+            catch (err) {
+                console.error(`❌ FETCH FAILED ID ${parentItem.idProceso}: ${err.message}`);
+                await this.logger.logFailure(parentItem.idProceso, parentItem, err.message, 'FETCH');
+                continue;
+            }
+            const actuacionesList = apiResponse.actuaciones || [];
+            if (actuacionesList.length === 0) {
+                continue;
+            }
+            // Handle Notifications (File, Webhook, Telegram)
+            await ActuacionService.handleNewActuacionNotifications(actuacionesList, parentItem, this.logger);
+            // Upsert to DB
+            for (const act of actuacionesList) {
+                try {
+                    await ActuacionService.upsertActuacion(act, parentItem);
+                }
+                catch (dbErr) {
+                    console.error(`   ❌ DB UPSERT ERROR: ${dbErr.message}`);
+                    await this.logger.logFailure(parentItem.idProceso, act, dbErr.message, 'DB_ITEM');
+                }
+            }
+            await ActuacionService.updateCarpetaIfNewer(actuacionesList, parentItem);
+            console.log(`   ✅ Synced ${actuacionesList.length} items for Carpeta ${parentItem.carpetaNumero}`);
+        }
+    }
+}
+// ==========================================
+// SECTION 6: MAIN EXECUTION
+// ==========================================
+async function getProcesosToUpdate() {
+    const carpetas = await client.carpeta.findMany();
+    return carpetas
+        .flatMap((carpeta) => {
+        if (!carpeta.idProcesos || carpeta.idProcesos.length === 0) {
+            return {
+                carpetaNumero: carpeta.numero,
+                llaveProceso: carpeta.llaveProceso,
+                carpetaId: carpeta.id,
+                idProceso: 0,
+            };
+        }
+        return carpeta.idProcesos.map((idProceso) => {
+            return {
+                idProceso,
+                carpetaNumero: carpeta.numero,
+                llaveProceso: carpeta.llaveProceso,
+                carpetaId: carpeta.id,
+            };
+        });
+    })
+        .sort((a, b) => {
+        return b.carpetaNumero - a.carpetaNumero;
+    });
+}
+async function runSync() {
+    const api = new RobustApiClient('https://consultaprocesos.ramajudicial.gov.co:448');
+    try {
+        const processesToCheck = await getProcesosToUpdate();
+        await api.processBatch(processesToCheck, (proc) => {
+            return `/api/v2/Proceso/Actuaciones/${proc.idProceso}`;
+        });
+        console.log('🎉 Sync Complete');
+    }
+    catch (error) {
+        console.error('Fatal Error in runSync:', error);
+    }
+    finally {
+        await client.$disconnect();
+    }
+}
+runSync();
+//# sourceMappingURL=syncronize_newest_actuaciones.js.map</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Despachos.html">Despachos</a></li><li><a href="module-RawCarpetas.html">RawCarpetas</a></li><li><a href="module-client.html">client</a></li><li><a href="module-data_arrayofarrays.html">data/arrayofarrays</a></li><li><a href="module-data_carpetas.html">data/carpetas</a></li><li><a href="module-data_despachos.html">data/despachos</a></li><li><a href="module-models_actuacion.html">models/actuacion</a></li><li><a href="module-models_demanda.html">models/demanda</a></li><li><a href="module-models_procesos.html">models/procesos</a></li><li><a href="module-models_tipoProceso.html">models/tipoProceso</a></li><li><a href="module-services_actuaciones-raw.html">services/actuaciones-raw</a></li><li><a href="module-services_prisma.html">services/prisma</a></li><li><a href="module-services_semaphore.html">services/semaphore</a></li><li><a href="module-services_syncronize_carpetas_test.html">services/syncronize_carpetas_test</a></li><li><a href="module-src_getLlaves.html">src/getLlaves</a></li><li><a href="module-src_procesos.html">src/procesos</a></li><li><a href="module-src_procesos_from_name.html">src/procesos_from_name</a></li><li><a href="module-types_actuaciones.html">types/actuaciones</a></li><li><a href="module-types_contabilidad.html">types/contabilidad</a></li><li><a href="module-types_juzgados.html">types/juzgados</a></li><li><a href="module-types_notas.html">types/notas</a></li><li><a href="module-types_safe-parse-carpeta.html">types/safe-parse-carpeta</a></li><li><a href="module-utils_actuacion-has-important-pattern.html">utils/actuacion-has-important-pattern</a></li><li><a href="module-utils_awaiter.html">utils/awaiter</a></li><li><a href="module-utils_cleanUTF8.html">utils/cleanUTF8</a></li><li><a href="module-utils_database-juzgado-fixer.html">utils/database-juzgado-fixer</a></li><li><a href="module-utils_date-validator.html">utils/date-validator</a></li><li><a href="module-utils_ensureDate.html">utils/ensureDate</a></li><li><a href="module-utils_getAllDespachos.html">utils/getAllDespachos</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_actuacion.Actuacion.html">Actuacion</a></li><li><a href="module-models_demanda.ClassDemanda.html">ClassDemanda</a></li></ul><h3>Classes</h3><ul><li><a href="ActuacionService.html">ActuacionService</a></li><li><a href="ApiError.html">ApiError</a></li><li><a href="ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassCarpeta_ClassCarpeta.html">ClassCarpeta</a></li><li><a href="ClassDeudor_ClassDeudor.html">ClassDeudor</a></li><li><a href="ClassNotificacion_ClassNotificacion.html">ClassNotificacion</a></li><li><a href="FileLogger.html">FileLogger</a></li><li><a href="JuzgadoClass.html">JuzgadoClass</a></li><li><a href="NotasBuilder_NotasBuilder.html">NotasBuilder</a></li><li><a href="RobustApiClient.html">RobustApiClient</a></li><li><a href="Tel_Tel.html">Tel</a></li><li><a href="TelegramService.html">TelegramService</a></li><li><a href="module-models_deudor.ClassDeudor.html">ClassDeudor</a></li><li><a href="module-models_deudor.Tel.html">Tel</a></li><li><a href="module-models_nota.NotasBuilder.html">NotasBuilder</a></li><li><a href="module-models_notificacion.ClassNotificacion.html">ClassNotificacion</a></li><li><a href="module-models_procesos.ClassProcesos.html">ClassProcesos</a></li><li><a href="module-types_actuaciones.actuacionConvert.html">actuacionConvert</a></li><li><a href="module-types_raw-db.Convert.html">Convert</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AnyNull">AnyNull</a></li><li><a href="global.html#DbNull">DbNull</a></li><li><a href="global.html#Decimal">Decimal</a></li><li><a href="global.html#JsonNull">JsonNull</a></li><li><a href="global.html#PrismaClient">PrismaClient</a></li><li><a href="global.html#PrismaClientKnownRequestError">PrismaClientKnownRequestError</a></li><li><a href="global.html#RATE_LIMIT_DELAY_MS">RATE_LIMIT_DELAY_MS</a></li><li><a href="global.html#TransactionIsolationLevel">TransactionIsolationLevel</a></li><li><a href="global.html#agregateToDBMethod">agregateToDBMethod</a></li><li><a href="global.html#enforceRateLimit">enforceRateLimit</a></li><li><a href="global.html#extrapolateTipoToCorrectType">extrapolateTipoToCorrectType</a></li><li><a href="global.html#fetchWithSmartRetry">fetchWithSmartRetry</a></li><li><a href="global.html#getActuaciones">getActuaciones</a></li><li><a href="global.html">getCarpeta</a></li><li><a href="global.html#getProcesos">getProcesos</a></li><li><a href="global.html#getProcesosByName">getProcesosByName</a></li><li><a href="global.html#getProcesosToUpdate">getProcesosToUpdate</a></li><li><a href="global.html#getRateLimitKey">getRateLimitKey</a></li><li><a href="global.html#normalizeText">normalizeText</a></li><li><a href="global.html#pMap">pMap</a></li><li><a href="global.html">prismaCarpeta</a></li><li><a href="global.html#prismaVersion">prismaVersion</a></li><li><a href="global.html#runSync">runSync</a></li><li><a href="global.html#sanitizeText">sanitizeText</a></li><li><a href="global.html">sendNotification</a></li><li><a href="global.html#sql">sql</a></li><li><a href="global.html">updateNotes</a></li><li><a href="global.html#urlQueues">urlQueues</a></li><li><a href="global.html#wait">wait</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 26 2026 16:40:19 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
