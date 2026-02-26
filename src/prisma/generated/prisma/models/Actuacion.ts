@@ -30,16 +30,12 @@ export type ActuacionAvgAggregateOutputType = {
   cant: number | null
   carpetaNumero: number | null
   consActuacion: number | null
-  idProceso: number | null
-  procesoId: number | null
 }
 
 export type ActuacionSumAggregateOutputType = {
   cant: number | null
   carpetaNumero: number | null
   consActuacion: number | null
-  idProceso: number | null
-  procesoId: number | null
 }
 
 export type ActuacionMinAggregateOutputType = {
@@ -55,11 +51,11 @@ export type ActuacionMinAggregateOutputType = {
   fechaFinal: Date | null
   fechaInicial: Date | null
   fechaRegistro: Date | null
-  idProceso: number | null
+  idProceso: string | null
   idRegActuacion: string | null
   isUltimaAct: boolean | null
   llaveProceso: string | null
-  procesoId: number | null
+  procesoId: string | null
 }
 
 export type ActuacionMaxAggregateOutputType = {
@@ -75,11 +71,11 @@ export type ActuacionMaxAggregateOutputType = {
   fechaFinal: Date | null
   fechaInicial: Date | null
   fechaRegistro: Date | null
-  idProceso: number | null
+  idProceso: string | null
   idRegActuacion: string | null
   isUltimaAct: boolean | null
   llaveProceso: string | null
-  procesoId: number | null
+  procesoId: string | null
 }
 
 export type ActuacionCountAggregateOutputType = {
@@ -108,16 +104,12 @@ export type ActuacionAvgAggregateInputType = {
   cant?: true
   carpetaNumero?: true
   consActuacion?: true
-  idProceso?: true
-  procesoId?: true
 }
 
 export type ActuacionSumAggregateInputType = {
   cant?: true
   carpetaNumero?: true
   consActuacion?: true
-  idProceso?: true
-  procesoId?: true
 }
 
 export type ActuacionMinAggregateInputType = {
@@ -280,11 +272,11 @@ export type ActuacionGroupByOutputType = {
   fechaFinal: Date | null
   fechaInicial: Date | null
   fechaRegistro: Date
-  idProceso: number
+  idProceso: string
   idRegActuacion: string
   isUltimaAct: boolean
   llaveProceso: string
-  procesoId: number
+  procesoId: string
   _count: ActuacionCountAggregateOutputType | null
   _avg: ActuacionAvgAggregateOutputType | null
   _sum: ActuacionSumAggregateOutputType | null
@@ -323,11 +315,11 @@ export type ActuacionWhereInput = {
   fechaFinal?: Prisma.DateTimeNullableFilter<"Actuacion"> | Date | string | null
   fechaInicial?: Prisma.DateTimeNullableFilter<"Actuacion"> | Date | string | null
   fechaRegistro?: Prisma.DateTimeFilter<"Actuacion"> | Date | string
-  idProceso?: Prisma.IntFilter<"Actuacion"> | number
+  idProceso?: Prisma.StringFilter<"Actuacion"> | string
   idRegActuacion?: Prisma.StringFilter<"Actuacion"> | string
   isUltimaAct?: Prisma.BoolFilter<"Actuacion"> | boolean
   llaveProceso?: Prisma.StringFilter<"Actuacion"> | string
-  procesoId?: Prisma.IntFilter<"Actuacion"> | number
+  procesoId?: Prisma.StringFilter<"Actuacion"> | string
   proceso?: Prisma.XOR<Prisma.ProcesoScalarRelationFilter, Prisma.ProcesoWhereInput>
   carpetas?: Prisma.CarpetaListRelationFilter
 }
@@ -371,10 +363,10 @@ export type ActuacionWhereUniqueInput = Prisma.AtLeast<{
   fechaFinal?: Prisma.DateTimeNullableFilter<"Actuacion"> | Date | string | null
   fechaInicial?: Prisma.DateTimeNullableFilter<"Actuacion"> | Date | string | null
   fechaRegistro?: Prisma.DateTimeFilter<"Actuacion"> | Date | string
-  idProceso?: Prisma.IntFilter<"Actuacion"> | number
+  idProceso?: Prisma.StringFilter<"Actuacion"> | string
   isUltimaAct?: Prisma.BoolFilter<"Actuacion"> | boolean
   llaveProceso?: Prisma.StringFilter<"Actuacion"> | string
-  procesoId?: Prisma.IntFilter<"Actuacion"> | number
+  procesoId?: Prisma.StringFilter<"Actuacion"> | string
   proceso?: Prisma.XOR<Prisma.ProcesoScalarRelationFilter, Prisma.ProcesoWhereInput>
   carpetas?: Prisma.CarpetaListRelationFilter
 }, "idRegActuacion">
@@ -420,11 +412,11 @@ export type ActuacionScalarWhereWithAggregatesInput = {
   fechaFinal?: Prisma.DateTimeNullableWithAggregatesFilter<"Actuacion"> | Date | string | null
   fechaInicial?: Prisma.DateTimeNullableWithAggregatesFilter<"Actuacion"> | Date | string | null
   fechaRegistro?: Prisma.DateTimeWithAggregatesFilter<"Actuacion"> | Date | string
-  idProceso?: Prisma.IntWithAggregatesFilter<"Actuacion"> | number
+  idProceso?: Prisma.StringWithAggregatesFilter<"Actuacion"> | string
   idRegActuacion?: Prisma.StringWithAggregatesFilter<"Actuacion"> | string
   isUltimaAct?: Prisma.BoolWithAggregatesFilter<"Actuacion"> | boolean
   llaveProceso?: Prisma.StringWithAggregatesFilter<"Actuacion"> | string
-  procesoId?: Prisma.IntWithAggregatesFilter<"Actuacion"> | number
+  procesoId?: Prisma.StringWithAggregatesFilter<"Actuacion"> | string
 }
 
 export type ActuacionCreateInput = {
@@ -440,7 +432,7 @@ export type ActuacionCreateInput = {
   fechaFinal?: Date | string | null
   fechaInicial?: Date | string | null
   fechaRegistro: Date | string
-  idProceso: number
+  idProceso: string
   idRegActuacion: string
   isUltimaAct: boolean
   llaveProceso: string
@@ -461,11 +453,11 @@ export type ActuacionUncheckedCreateInput = {
   fechaFinal?: Date | string | null
   fechaInicial?: Date | string | null
   fechaRegistro: Date | string
-  idProceso: number
+  idProceso: string
   idRegActuacion: string
   isUltimaAct: boolean
   llaveProceso: string
-  procesoId: number
+  procesoId: string
   carpetas?: Prisma.CarpetaUncheckedCreateNestedManyWithoutUltimaActuacionInput
 }
 
@@ -482,7 +474,7 @@ export type ActuacionUpdateInput = {
   fechaFinal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaInicial?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaRegistro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   idRegActuacion?: Prisma.StringFieldUpdateOperationsInput | string
   isUltimaAct?: Prisma.BoolFieldUpdateOperationsInput | boolean
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
@@ -503,11 +495,11 @@ export type ActuacionUncheckedUpdateInput = {
   fechaFinal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaInicial?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaRegistro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   idRegActuacion?: Prisma.StringFieldUpdateOperationsInput | string
   isUltimaAct?: Prisma.BoolFieldUpdateOperationsInput | boolean
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
-  procesoId?: Prisma.IntFieldUpdateOperationsInput | number
+  procesoId?: Prisma.StringFieldUpdateOperationsInput | string
   carpetas?: Prisma.CarpetaUncheckedUpdateManyWithoutUltimaActuacionNestedInput
 }
 
@@ -524,11 +516,11 @@ export type ActuacionCreateManyInput = {
   fechaFinal?: Date | string | null
   fechaInicial?: Date | string | null
   fechaRegistro: Date | string
-  idProceso: number
+  idProceso: string
   idRegActuacion: string
   isUltimaAct: boolean
   llaveProceso: string
-  procesoId: number
+  procesoId: string
 }
 
 export type ActuacionUpdateManyMutationInput = {
@@ -544,7 +536,7 @@ export type ActuacionUpdateManyMutationInput = {
   fechaFinal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaInicial?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaRegistro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   idRegActuacion?: Prisma.StringFieldUpdateOperationsInput | string
   isUltimaAct?: Prisma.BoolFieldUpdateOperationsInput | boolean
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
@@ -563,11 +555,11 @@ export type ActuacionUncheckedUpdateManyInput = {
   fechaFinal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaInicial?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaRegistro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   idRegActuacion?: Prisma.StringFieldUpdateOperationsInput | string
   isUltimaAct?: Prisma.BoolFieldUpdateOperationsInput | boolean
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
-  procesoId?: Prisma.IntFieldUpdateOperationsInput | number
+  procesoId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ActuacionNullableScalarRelationFilter = {
@@ -599,8 +591,6 @@ export type ActuacionAvgOrderByAggregateInput = {
   cant?: Prisma.SortOrder
   carpetaNumero?: Prisma.SortOrder
   consActuacion?: Prisma.SortOrder
-  idProceso?: Prisma.SortOrder
-  procesoId?: Prisma.SortOrder
 }
 
 export type ActuacionMaxOrderByAggregateInput = {
@@ -647,8 +637,6 @@ export type ActuacionSumOrderByAggregateInput = {
   cant?: Prisma.SortOrder
   carpetaNumero?: Prisma.SortOrder
   consActuacion?: Prisma.SortOrder
-  idProceso?: Prisma.SortOrder
-  procesoId?: Prisma.SortOrder
 }
 
 export type ActuacionListRelationFilter = {
@@ -732,7 +720,7 @@ export type ActuacionCreateWithoutCarpetasInput = {
   fechaFinal?: Date | string | null
   fechaInicial?: Date | string | null
   fechaRegistro: Date | string
-  idProceso: number
+  idProceso: string
   idRegActuacion: string
   isUltimaAct: boolean
   llaveProceso: string
@@ -752,11 +740,11 @@ export type ActuacionUncheckedCreateWithoutCarpetasInput = {
   fechaFinal?: Date | string | null
   fechaInicial?: Date | string | null
   fechaRegistro: Date | string
-  idProceso: number
+  idProceso: string
   idRegActuacion: string
   isUltimaAct: boolean
   llaveProceso: string
-  procesoId: number
+  procesoId: string
 }
 
 export type ActuacionCreateOrConnectWithoutCarpetasInput = {
@@ -788,7 +776,7 @@ export type ActuacionUpdateWithoutCarpetasInput = {
   fechaFinal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaInicial?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaRegistro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   idRegActuacion?: Prisma.StringFieldUpdateOperationsInput | string
   isUltimaAct?: Prisma.BoolFieldUpdateOperationsInput | boolean
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
@@ -808,11 +796,11 @@ export type ActuacionUncheckedUpdateWithoutCarpetasInput = {
   fechaFinal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaInicial?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaRegistro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   idRegActuacion?: Prisma.StringFieldUpdateOperationsInput | string
   isUltimaAct?: Prisma.BoolFieldUpdateOperationsInput | boolean
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
-  procesoId?: Prisma.IntFieldUpdateOperationsInput | number
+  procesoId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ActuacionCreateWithoutProcesoInput = {
@@ -828,7 +816,7 @@ export type ActuacionCreateWithoutProcesoInput = {
   fechaFinal?: Date | string | null
   fechaInicial?: Date | string | null
   fechaRegistro: Date | string
-  idProceso: number
+  idProceso: string
   idRegActuacion: string
   isUltimaAct: boolean
   llaveProceso: string
@@ -848,7 +836,7 @@ export type ActuacionUncheckedCreateWithoutProcesoInput = {
   fechaFinal?: Date | string | null
   fechaInicial?: Date | string | null
   fechaRegistro: Date | string
-  idProceso: number
+  idProceso: string
   idRegActuacion: string
   isUltimaAct: boolean
   llaveProceso: string
@@ -897,11 +885,11 @@ export type ActuacionScalarWhereInput = {
   fechaFinal?: Prisma.DateTimeNullableFilter<"Actuacion"> | Date | string | null
   fechaInicial?: Prisma.DateTimeNullableFilter<"Actuacion"> | Date | string | null
   fechaRegistro?: Prisma.DateTimeFilter<"Actuacion"> | Date | string
-  idProceso?: Prisma.IntFilter<"Actuacion"> | number
+  idProceso?: Prisma.StringFilter<"Actuacion"> | string
   idRegActuacion?: Prisma.StringFilter<"Actuacion"> | string
   isUltimaAct?: Prisma.BoolFilter<"Actuacion"> | boolean
   llaveProceso?: Prisma.StringFilter<"Actuacion"> | string
-  procesoId?: Prisma.IntFilter<"Actuacion"> | number
+  procesoId?: Prisma.StringFilter<"Actuacion"> | string
 }
 
 export type ActuacionCreateManyProcesoInput = {
@@ -917,7 +905,7 @@ export type ActuacionCreateManyProcesoInput = {
   fechaFinal?: Date | string | null
   fechaInicial?: Date | string | null
   fechaRegistro: Date | string
-  idProceso: number
+  idProceso: string
   idRegActuacion: string
   isUltimaAct: boolean
   llaveProceso: string
@@ -936,7 +924,7 @@ export type ActuacionUpdateWithoutProcesoInput = {
   fechaFinal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaInicial?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaRegistro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   idRegActuacion?: Prisma.StringFieldUpdateOperationsInput | string
   isUltimaAct?: Prisma.BoolFieldUpdateOperationsInput | boolean
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
@@ -956,7 +944,7 @@ export type ActuacionUncheckedUpdateWithoutProcesoInput = {
   fechaFinal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaInicial?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaRegistro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   idRegActuacion?: Prisma.StringFieldUpdateOperationsInput | string
   isUltimaAct?: Prisma.BoolFieldUpdateOperationsInput | boolean
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
@@ -976,7 +964,7 @@ export type ActuacionUncheckedUpdateManyWithoutProcesoInput = {
   fechaFinal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaInicial?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaRegistro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   idRegActuacion?: Prisma.StringFieldUpdateOperationsInput | string
   isUltimaAct?: Prisma.BoolFieldUpdateOperationsInput | boolean
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1130,11 +1118,11 @@ export type $ActuacionPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     fechaFinal: Date | null
     fechaInicial: Date | null
     fechaRegistro: Date
-    idProceso: number
+    idProceso: string
     idRegActuacion: string
     isUltimaAct: boolean
     llaveProceso: string
-    procesoId: number
+    procesoId: string
   }, ExtArgs["result"]["actuacion"]>
   composites: {}
 }
@@ -1572,11 +1560,11 @@ export interface ActuacionFieldRefs {
   readonly fechaFinal: Prisma.FieldRef<"Actuacion", 'DateTime'>
   readonly fechaInicial: Prisma.FieldRef<"Actuacion", 'DateTime'>
   readonly fechaRegistro: Prisma.FieldRef<"Actuacion", 'DateTime'>
-  readonly idProceso: Prisma.FieldRef<"Actuacion", 'Int'>
+  readonly idProceso: Prisma.FieldRef<"Actuacion", 'String'>
   readonly idRegActuacion: Prisma.FieldRef<"Actuacion", 'String'>
   readonly isUltimaAct: Prisma.FieldRef<"Actuacion", 'Boolean'>
   readonly llaveProceso: Prisma.FieldRef<"Actuacion", 'String'>
-  readonly procesoId: Prisma.FieldRef<"Actuacion", 'Int'>
+  readonly procesoId: Prisma.FieldRef<"Actuacion", 'String'>
 }
     
 

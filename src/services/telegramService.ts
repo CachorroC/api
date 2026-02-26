@@ -4,48 +4,91 @@
 // 5. INFRASTRUCTURE SERVICES (TELEGRAM FIX)
 // ==========================================
 
-import { ApiError, FetchResponseActuacion, fetchWithSmartRetry, ProcessRequest } from './syncronize_newest_actuaciones_test_2.js';
+import { fetchWithSmartRetry } from '../utils/fetchWithSmartRetry.js';
+import { ApiError, FetchResponseActuacion, ProcessRequest } from './syncronize_newest_actuaciones_test_2.js';
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '';
 
+/**
+ * @class TelegramService
+ * @description Infrastructure service responsible for dispatching alerts to a configured Telegram chat.
+ * Used primarily to notify users or administrators about newly detected judicial updates (actuaciones).
+ * Includes an automatic text-sanitization process and a plain-text fallback mechanism in case
+ * Telegram's strict HTML parser rejects the primary message.
+ */
 export class TelegramService {
-  // ... (keep cleanText method as is) ...
-  private static cleanText( text: string | null | undefined ): string {
-    // ... your existing code ...
+
+  /**
+   * @private
+   * @static
+   * @method cleanText
+   * @description Sanitizes strings by escaping characters that conflict with Telegram's HTML `parse_mode`.
+   * Replaces `&`, `<`, `>`, `"`, and `'` with their respective HTML entities to prevent API 400 errors.
+   * * @param {string | null | undefined} text - The raw string that needs to be escaped.
+   * @returns {string} The safely escaped string, or an empty string if the input is null/undefined.
+   */
+  private static cleanText(
+    text: string | null | undefined 
+  ): string {
     if ( !text ) {
       return '';
     }
 
     return text.toString()
       .replace(
-        /&/g, '&amp;'
+        /&/g, '&amp;' 
       )
       .replace(
-        /</g, '&lt;'
+        /</g, '&lt;' 
       )
       .replace(
-        />/g, '&gt;'
+        />/g, '&gt;' 
       )
       .replace(
-        /"/g, '&quot;'
+        /"/g, '&quot;' 
       )
       .replace(
-        /'/g, '&#039;'
+        /'/g, '&#039;' 
       );
   }
 
+  /**
+   * @static
+   * @async
+   * @method sendNotification
+   * @description Constructs and sends an HTML-formatted Telegram notification about a new "Actuación".
+   * Utilizes `fetchWithSmartRetry` to handle rate limits or temporary network issues.
+   * If the formatted message fails (e.g., due to unescaped HTML edge cases), it automatically
+   * triggers `sendFallbackMessage`.
+   * * @param {FetchResponseActuacion} actuacion - The data object containing details of the new judicial update.
+   * @param {ProcessRequest} processInfo - Contextual information about the process (name, folder number, IDs).
+   * @returns {Promise<void>} Resolves when the message is successfully sent or caught by the fallback.
+   * * @example
+   * await TelegramService.sendNotification(nuevaActuacion, {
+   * nombre: 'Juan Perez',
+   * carpetaNumero: 123,
+   * llaveProceso: '11001400...',
+   * idProceso: 456
+   * });
+   */
   static async sendNotification(
     actuacion: FetchResponseActuacion,
     processInfo: ProcessRequest,
-  ) {
+  ): Promise<void> {
     if ( !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID ) {
       return;
     }
 
-    const cleanActuacion = this.cleanText( actuacion.actuacion );
-    const cleanAnotacion = this.cleanText( actuacion.anotacion );
-    const cleanLlave = this.cleanText( processInfo.llaveProceso );
+    const cleanActuacion = this.cleanText(
+      actuacion.actuacion 
+    );
+    const cleanAnotacion = this.cleanText(
+      actuacion.anotacion 
+    );
+    const cleanLlave = this.cleanText(
+      processInfo.llaveProceso 
+    );
 
     const message = `
 🚨 <b>NUEVA ACTUACIÓN DETECTADA</b> 🚨
@@ -54,7 +97,9 @@ export class TelegramService {
 📂 <b>Expediente:</b> ${ cleanLlave }
 📁 <b>Carpeta:</b> ${ processInfo.carpetaNumero }
 
-📅 <b>Fecha:</b> ${ new Date( actuacion.fechaActuacion )
+📅 <b>Fecha:</b> ${ new Date(
+  actuacion.fechaActuacion 
+)
   .toLocaleDateString() }
 📝 <b>Actuación:</b> ${ cleanActuacion }
 ${ cleanAnotacion
@@ -72,65 +117,90 @@ ${ cleanAnotacion
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify( {
-            chat_id                 : TELEGRAM_CHAT_ID,
-            text                    : message,
-            parse_mode              : 'HTML',
-            disable_web_page_preview: true,
-          } ),
+          body: JSON.stringify(
+            {
+              chat_id                 : TELEGRAM_CHAT_ID,
+              text                    : message,
+              parse_mode              : 'HTML',
+              disable_web_page_preview: true,
+            } 
+          ),
         },
         3,    // Max Retries
         3000  // Base Delay (3 seconds is safer for Telegram)
       );
 
       if ( !fetchTelegramBot.ok ) {
-        throw new Error( `📛Telegram API request failed with status ${ fetchTelegramBot.status } code ${ fetchTelegramBot.statusText }` );
+        throw new Error(
+          `📛Telegram API request failed with status ${ fetchTelegramBot.status } code ${ fetchTelegramBot.statusText }`
+        );
       } else if ( fetchTelegramBot.ok ) {
-        console.log( `✅ Telegram notification sent successfully for expediente ${ processInfo.carpetaNumero }, ${ fetchTelegramBot.statusText }` );
+        console.log(
+          `✅ Telegram notification sent successfully for expediente ${ processInfo.carpetaNumero }, ${ fetchTelegramBot.statusText }`
+        );
       }
     } catch ( err: any ) {
-      if ( err.statusCode === 403 ) {
-        console.error( '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.' );
-        console.log( '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.' );
+      // 🚫 403 signifies the user blocked the bot or hasn't started it
+      if ( err.statusCode === 403 || err.message?.includes(
+        '403' 
+      ) ) {
+        console.error(
+          '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.' 
+        );
 
-        return; // Don't try fallback if we are blocked
+        return; // Don't try fallback if we are actively blocked
       }
 
-      console.warn( '⚠️ Standard HTML message failed, attempting fallback...' );
-      console.log( '⚠️ Standard HTML message failed, attempting fallback...' );
+      console.warn(
+        '⚠️ Standard HTML message failed, attempting fallback...' 
+      );
       await this.sendFallbackMessage(
-        actuacion, processInfo
+        actuacion, processInfo 
       );
     }
   }
 
+  /**
+   * @private
+   * @static
+   * @async
+   * @method sendFallbackMessage
+   * @description A recovery mechanism that sends a simplified, plain-text version of the alert.
+   * Triggered when `sendNotification` fails, typically due to malformed HTML that bypasses `cleanText`.
+   * * @param {FetchResponseActuacion} actuacion - The data object containing the update details.
+   * @param {ProcessRequest} processInfo - Contextual information about the associated process.
+   * @throws {ApiError} Throws a custom API error if the fallback message also fails to send.
+   * @returns {Promise<void>}
+   */
   private static async sendFallbackMessage(
     actuacion: FetchResponseActuacion,
     processInfo: ProcessRequest,
-  ) {
+  ): Promise<void> {
     try {
-
       const message = `🚨 NUEVA ACTUACIÓN 🚨\n\nNombre: ${ processInfo.nombre }\nExpediente: ${ processInfo.carpetaNumero }\nActuación: ${ actuacion.actuacion }${ actuacion.anotacion
         ? `\nAnotación: ${ actuacion.anotacion }`
         : '' } \n https://app.rsasesorjuridico.com/Carpeta/${ processInfo.carpetaNumero }/ultimasActuaciones/${ processInfo.idProceso }`;
 
-      // Simple fetch for fallback, no complex retry needed to avoid infinite loops
+      // Simple fetch for fallback, retaining smart retry but without formatting complexity
       await fetchWithSmartRetry(
         `https://api.telegram.org/bot${ TELEGRAM_BOT_TOKEN }/sendMessage`, {
           method : 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify( {
-            chat_id: TELEGRAM_CHAT_ID,
-            text   : message
-          } ),
+          body: JSON.stringify(
+            {
+              chat_id: TELEGRAM_CHAT_ID,
+              text   : message
+            } 
+          ),
         }
       );
     } catch ( error ) {
       if ( error instanceof Error ) {
         throw new ApiError(
-          error.message, `${ processInfo.carpetaNumero } TelegramService.sendFallbackMessage `
+          error.message,
+          `${ processInfo.carpetaNumero } TelegramService.sendFallbackMessage `
         );
       }
     }

@@ -154,7 +154,7 @@ export type outProceso = {
   fechaProceso        : Date | null;
   fechaUltimaActuacion: Date | null;
   juzgado             : Juzgado;
-  idProceso           : number;
+  idProceso           : string;
   idConexion          : number;
   llaveProceso        : string;
   despacho            : string;

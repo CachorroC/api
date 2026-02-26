@@ -1,11 +1,10 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 /* eslint-disable no-unused-vars */
 //process.env[ 'NODE_TLS_REJECT_UNAUTHORIZED' ] = '0';
 //console.log(
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED
 //);
+
 // ==========================================
 // 1. IMPORTS & SETUP
 // ==========================================
@@ -14,8 +13,9 @@ import path from 'path';
 import * as fs from 'fs/promises';
 import { client } from './prisma.js';
 import { Prisma } from '../prisma/generated/prisma/client.js';
-import { ensureDate } from '../utils/ensureDate.js';
+import { ensureDate, formatDateToString } from '../utils/ensureDate.js';
 import { TelegramService } from './telegramService.js';
+import { fetchWithSmartRetry } from '../utils/fetchWithSmartRetry.js';
 
 // ==========================================
 // 2. CONFIGURATION & CONSTANTS
@@ -29,9 +29,14 @@ const RAMA_JUDICIAL_BASE_URL = process.env.RAMA_JUDICIAL_BASE_URL || 'https://co
 // ==========================================
 // 3. TYPES, INTERFACES & ERRORS
 // ==========================================
-// Internal: Process object to iterate over
+
+/**
+ * Internal representation of a legal process to be synced.
+ * Contains the necessary identifiers to fetch data from the Rama Judicial API
+ * and map it back to the local database.
+ */
 export interface ProcessRequest {
-  idProceso    : number;
+  idProceso    : string;
   carpetaNumero: number;
   llaveProceso : string;
   carpetaId    : number;
@@ -39,7 +44,9 @@ export interface ProcessRequest {
   category?    : string | null;
 }
 
-// External: Raw data from Rama Judicial API
+/**
+ * Raw data structure returned by the Rama Judicial API for a single "Actuación".
+ */
 export interface FetchResponseActuacion {
   actuacion     : string;
   anotacion     : string | null;
@@ -55,7 +62,9 @@ export interface FetchResponseActuacion {
   llaveProceso  : string;
 }
 
-// External: Full API response wrapper
+/**
+ * Full paginated response wrapper from the Rama Judicial Actuaciones endpoint.
+ */
 export interface ConsultaActuacionResponse {
   actuaciones: FetchResponseActuacion[];
   paginacion: {
@@ -66,229 +75,175 @@ export interface ConsultaActuacionResponse {
   };
 }
 
+/**
+ * Custom error class for API interactions.
+ * Includes a `callerId` to easily trace which part of the sync process failed.
+ */
 export class ApiError extends Error {
+  /**
+   * @param message - The error description.
+   * @param callerId - Identifier of the function or process that threw the error.
+   * @param statusCode - Optional HTTP status code associated with the error.
+   */
   constructor(
     public message: string,
     public callerId: string,
-    public statusCode?: number,
+    public statusCode?: number
   ) {
-    super( message );
+    super(
+      message
+    );
     this.name = 'ApiError';
     this.callerId = callerId;
-    console.log( `${ callerId }ApiError: ${ message }` );
+    console.log(
+      `${ callerId }ApiError: ${ message }`
+    );
   }
 }
 
 // ==========================================
-// 4. GENERIC UTILITIES (UPDATED)
+// 4. GENERIC UTILITIES
 // ==========================================
 
-const wait = ( ms: number ) => {
-  return new Promise( ( resolve ) => {
-    return setTimeout(
-      resolve, ms
-    );
-  } );
+/**
+ * Halts execution for a specified number of milliseconds.
+ * Useful for rate-limiting and preventing server blocks.
+ * * @param ms - Milliseconds to wait.
+ * @returns A promise that resolves after the timeout.
+ */
+const wait = (
+  ms: number
+) => {
+  return new Promise(
+    (
+      resolve
+    ) => {
+      return setTimeout(
+        resolve, ms
+      );
+    }
+  );
 };
 
 /**
- * 🧼 SANITIZATION UTILITY
- * Cleans strings to prevent Postgres encoding errors.
- * explicitly handles Rama Judicial's Latin-1 (ISO-8859-1) encoding issues.
- *//*
-function fixEncoding( text: string | null | undefined ): string | null {
-  if ( !text ) {
-    return null;
-  }
-
-  // 1. Remove Null Bytes and common binary garbage
-  let cleaned = text.replace(
-    // eslint-disable-next-line no-control-regex
-    /[\u0000\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, ''
-  );
-
-  // 2. Transcode Latin-1 to UTF-8
-  // The error "0xf3 0x6e" implies Latin-1 bytes are present.
-  // We convert the string to a binary buffer (preserving 0xF3),
-  // then decode it as ISO-8859-1 to get the correct UTF-8 string.
-  try {
-    // Check if the string actually contains high-bit characters likely to be Latin-1
-    if ( /[\xC0-\xFF]/.test( cleaned ) ) {
-      const buffer = Buffer.from(
-        cleaned, 'binary'
-      );
-      const decoder = new TextDecoder( 'iso-8859-1' );
-      cleaned = decoder.decode( buffer );
-    }
-  } catch ( e ) {
-    console.error(
-      '⚠️ Encoding correction failed, falling back to ASCII cleaning:', e
-    );
-    // Fallback: If transcoding fails, strip non-ASCII characters to prevent crash
-    // (This ensures the DB insert works, even if we lose an accent mark)
-    cleaned = cleaned.replace(
-      /[^\x20-\x7E]/g, ''
-    );
-  }
-
-  return cleaned.normalize( 'NFC' )
-    .trim();
-}
+ * Executes a mapper function over an array of items with controlled concurrency.
+ * Ensures that no more than `concurrency` promises are running at the same time.
+ * * @template T - The type of items in the input array.
+ * @template R - The expected return type from the mapper function.
+ * @param array - The array of items to process.
+ * @param mapper - An async function applied to each item.
+ * @param concurrency - Maximum number of concurrent operations.
+ * @returns A promise resolving to an array of mapped results.
  */
-// Optimization: Run promises with limited concurrency
 async function pMap<T, R>(
   array: T[],
   mapper: ( item: T ) => Promise<R>,
-  concurrency: number,
+  concurrency: number
 ): Promise<R[]> {
   const results: R[] = [];
   const executing: Promise<void>[] = [];
 
   for ( const item of array ) {
     const p = Promise.resolve()
-      .then( () => {
-        return mapper( item );
-      } );
-
-    results.push( p as unknown as R );
-    const e: Promise<void> = p.then( () => {
-      executing.splice(
-        executing.indexOf( e ), 1
-      );
-    } );
-    executing.push( e );
-
-    if ( executing.length >= concurrency ) {
-      await Promise.race( executing );
-    }
-  }
-
-  return Promise.all( results );
-}
-
-//Wrapper for fetch with retries
-export async function fetchWithSmartRetry(
-  url: string,
-  options: RequestInit = {},
-  maxRetries = 5,
-  baseDelay = 4000,
-): Promise<Response> {
-  const totalAttempts = maxRetries + 1;
-  let attempt = 1;
-
-  while ( attempt <= totalAttempts ) {
-    if ( attempt > 1 ) {
-      console.log( `🔄 fetchWithSmartRetry Attempt ${ attempt } for ${ url }` );
-    }
-
-    try {
-      const response = await fetch(
-        url, options
-      );
-
-      // --- HANDLE 429 (RATE LIMITS) ---
-      if ( response.status === 429 ) {
-        const retryAfterHeader = response.headers.get( 'retry-after' );
-        const waitTime = retryAfterHeader
-          ? ( parseInt(
-              retryAfterHeader, 10
-            ) * 1000 ) + 1000
-          : baseDelay * Math.pow(
-            2, attempt
+      .then(
+        () => {
+          return mapper(
+            item
           );
+        }
+      );
+    results.push(
+      p as unknown as R
+    );
 
-        console.log( `⚠️ [429 Too Many Requests] Pausing for ${ waitTime }ms...` );
-        await wait( waitTime );
-        attempt++;
-
-        continue;
-      }
-
-      if ( response.status === 403 ) {
-        await wait( 2000 );
-        attempt++;
-        console.log( response.statusText );
-
-        continue;
-      }
-
-      // Check for server errors
-      if ( [
-        500,
-        502,
-        503,
-        504
-      ].includes( response.status ) ) {
-        throw new ApiError(
-          `Server Status ${ response.status }`,
-          `🚫 failed request: fetchWithSmartRetry: ${ url } statusCode<500`
+    const e: Promise<void> = p.then(
+      () => {
+        executing.splice(
+          executing.indexOf(
+            e
+          ), 1
         );
       }
+    );
+    executing.push(
+      e
+    );
 
-      return response;
-
-    } catch ( error: any ) {
-      if ( attempt >= totalAttempts ) {
-        throw error;
-      }
-
-      const delay = ( baseDelay * attempt );
-      console.log( `⚠️ [Retry] Attempt ${ attempt }/${ totalAttempts } failed for ${ url }. Retrying in ${ delay }ms...` );
-      await wait( delay );
-      attempt++;
+    if ( executing.length >= concurrency ) {
+      await Promise.race(
+        executing
+      );
     }
   }
 
-  throw new ApiError(
-    'fetchWithSmartRetry failed unexpectedly',
-    `🚫 failed request: fetchWithSmartRetry: ${ url }`
+  return Promise.all(
+    results
   );
 }
 
-// ==========================================
-// 5. INFRASTRUCTURE SERVICES (Logging & Alerts)
-// ==========================================
 
 // ==========================================
 // 5. INFRASTRUCTURE SERVICES (Logging & Alerts)
 // ==========================================
 
+/**
+ * Service responsible for writing system logs to local JSON files.
+ * Provides a persistent fallback for monitoring sync failures and accumulating new items.
+ */
 class FileLogger {
   private filePath: string;
 
-  constructor( filename: string ) {
+  /**
+   * @param filename - The name of the JSON log file to target within the `/logs` directory.
+   */
+  constructor(
+    filename: string
+  ) {
     this.filePath = path.join(
       process.cwd(), 'logs', filename
     );
     this.ensureDir();
   }
 
+  /**
+   * Ensures the `logs` directory exists, creating it recursively if necessary.
+   */
   private async ensureDir() {
     try {
       await fs.mkdir(
-        path.dirname( this.filePath ), {
+        path.dirname(
+          this.filePath
+        ), {
           recursive: true
         }
       );
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
 
+  /**
+   * Logs a failed operation during the synchronization process.
+   * Upserts the error log based on Process ID or Carpeta Numero to avoid duplicate entries.
+   * * @param contextId - The ID of the parent process (or '0' if unknown).
+   * @param subItem - The specific data item being processed when the failure occurred.
+   * @param error - The error message string.
+   * @param phase - The pipeline phase where the error occurred ('FETCH', 'DB_ITEM', 'WEBHOOK', 'TELEGRAM').
+   */
   public async logFailure(
     contextId: string | number,
     subItem: any,
     error: string,
-    phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM',
+    phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM'
   ) {
-    // 1. Extract Carpeta Number carefully
-    // We check subItem directly, then subItem.data (common in your JSON logs), then subItem.proceso
-    const carpetaNumero
-      = subItem?.carpetaNumero
-      || subItem?.data?.carpetaNumero // specifically for your 'data' object structure
+    const carpetaNumero = subItem?.carpetaNumero
+      || subItem?.data?.carpetaNumero
       || subItem?.proceso?.carpetaNumero
       || null;
-    const logTime = new Date;
+
+    const logTime = new Date();
     const formatedLogTime = new Intl.DateTimeFormat(
-      'es-CO',  {
+      'es-CO', {
         weekday     : 'long',
         year        : 'numeric',
         month       : 'long',
@@ -296,10 +251,13 @@ class FileLogger {
         hour        : 'numeric',
         minute      : 'numeric',
         second      : 'numeric',
-        timeZoneName: 'short'
+        timeZoneName: 'short',
       }
     )
-      .format( logTime );
+      .format(
+        logTime
+      );
+
     const logEntry = {
       timestamp        : logTime.toISOString(),
       formatedTimeStamp: formatedLogTime,
@@ -307,7 +265,7 @@ class FileLogger {
       parentId         : contextId,
       error,
       data             : subItem,
-      carpetaNumero    : carpetaNumero // Store at top level for easier lookup next time
+      carpetaNumero    : carpetaNumero,
     };
 
     try {
@@ -317,45 +275,55 @@ class FileLogger {
         const fileContent = await fs.readFile(
           this.filePath, 'utf-8'
         );
-        currentData = JSON.parse( fileContent );
+        currentData = JSON.parse(
+          fileContent
+        );
 
-        if ( !Array.isArray( currentData ) ) {
+        if ( !Array.isArray(
+          currentData
+        ) ) {
           currentData = [];
         }
       } catch {
         currentData = [];
       }
 
-      // --- LOGIC CHANGE START ---
-      const existingIndex = currentData.findIndex( ( item ) => {
-        const incomingId = String( contextId );
-        const itemId = String( item.parentId );
+      const existingIndex = currentData.findIndex(
+        (
+          item
+        ) => {
+          const incomingId = String(
+            contextId
+          );
+          const itemId = String(
+            item.parentId
+          );
 
-        // 1. If we have a REAL Process ID (not 0), match strictly on ID
-        if ( incomingId !== '0' && itemId === incomingId ) {
-          return true;
+          if ( incomingId !== '0' && itemId === incomingId ) {
+            return true;
+          }
+
+          const itemCarpeta = item.carpetaNumero || item.data?.carpetaNumero;
+
+          if ( carpetaNumero && itemCarpeta && String(
+            itemCarpeta
+          ) === String(
+            carpetaNumero
+          ) ) {
+            return true;
+          }
+
+          return false;
         }
-
-        // 2. If Process ID is 0 (or missing), we MUST match on Carpeta Numero
-        // Try to find carpeta number in the existing item (either top level or inside data)
-        const itemCarpeta = item.carpetaNumero || item.data?.carpetaNumero;
-
-        // Only match if both have a valid number
-        if ( carpetaNumero && itemCarpeta && String( itemCarpeta ) === String( carpetaNumero ) ) {
-          return true;
-        }
-
-        return false;
-      } );
+      );
 
       if ( existingIndex !== -1 ) {
-        // Update the existing log entry with the new timestamp/error
         currentData[ existingIndex ] = logEntry;
       } else {
-        // No matching log found, create a new one
-        currentData.push( logEntry );
+        currentData.push(
+          logEntry
+        );
       }
-      // --- LOGIC CHANGE END ---
 
       await fs.writeFile(
         this.filePath, JSON.stringify(
@@ -369,26 +337,35 @@ class FileLogger {
     }
   }
 
+  /**
+   * Accumulates newly detected 'Actuaciones' into a JSON file for backup and review.
+   * Uses an upsert logic based on the `carpetaNumero` to maintain the latest status.
+   * * @param newItems - Array of newly fetched Actuaciones.
+   * @param parentProc - The parent process metadata.
+   */
   public async logNewItems(
     newItems: FetchResponseActuacion[],
-    parentProc: ProcessRequest,
+    parentProc: ProcessRequest
   ) {
     const filePath = path.join(
       process.cwd(), 'logs', NEW_ITEMS_LOG_FILE
     );
 
-    // Flatten the object so carpetaNumero is easily accessible
-    const itemsToSave = newItems.map( ( item ) => {
-      return {
-        ...item,
-        _meta: {
-          detectedAt: new Date()
-            .toISOString(),
-          carpetaNumero: parentProc.carpetaNumero,
-          processId    : parentProc.idProceso,
-        },
-      };
-    } );
+    const itemsToSave = newItems.map(
+      (
+        item
+      ) => {
+        return {
+          ...item,
+          _meta: {
+            detectedAt: new Date()
+              .toISOString(),
+            carpetaNumero: parentProc.carpetaNumero,
+            processId    : parentProc.idProceso,
+          },
+        };
+      }
+    );
 
     try {
       let currentData: any[] = [];
@@ -397,27 +374,34 @@ class FileLogger {
         const fileContent = await fs.readFile(
           filePath, 'utf-8'
         );
-        currentData = JSON.parse( fileContent );
+        currentData = JSON.parse(
+          fileContent
+        );
 
-        if ( !Array.isArray( currentData ) ) {
+        if ( !Array.isArray(
+          currentData
+        ) ) {
           currentData = [];
         }
       } catch {
         currentData = [];
       }
 
-      // Upsert logic for New Items
       for ( const newItem of itemsToSave ) {
-        const existingIndex = currentData.findIndex( ( existing ) => {
-          return existing._meta && existing._meta.carpetaNumero === newItem._meta.carpetaNumero;
-        } );
+        const existingIndex = currentData.findIndex(
+          (
+            existing
+          ) => {
+            return existing._meta && existing._meta.carpetaNumero === newItem._meta.carpetaNumero;
+          }
+        );
 
         if ( existingIndex !== -1 ) {
-          // Replace with newer info
           currentData[ existingIndex ] = newItem;
         } else {
-          // Add new
-          currentData.push( newItem );
+          currentData.push(
+            newItem
+          );
         }
       }
 
@@ -438,73 +422,100 @@ class FileLogger {
 // 6. BUSINESS LOGIC (Database & Sync)
 // ==========================================
 
+/**
+ * Core business logic for comparing, transforming, and saving legal records.
+ * Handles the Prisma database integration and triggering external notifications.
+ */
 class ActuacionService {
-  private static getLatestByDate( actuaciones: FetchResponseActuacion[] ): FetchResponseActuacion | null {
+
+  /**
+   * Evaluates an array of API records to determine the absolute latest one based on
+   * `fechaActuacion`, falling back to `fechaRegistro`, and finally `consActuacion`.
+   * * @param actuaciones - List of raw Actuaciones from the API.
+   * @returns The most recent Actuacion object, or null if the array is empty.
+   */
+  private static getLatestByDate(
+    actuaciones: FetchResponseActuacion[]
+  ): FetchResponseActuacion | null {
     if ( !actuaciones || actuaciones.length === 0 ) {
       return null;
     }
 
-    return actuaciones.reduce( (
-      prev, current
-    ) => {
-      const prevDate = ensureDate( prev.fechaActuacion )
-        ?.getTime() || 0;
-      const currDate = ensureDate( current.fechaActuacion )
-        ?.getTime() || 0;
-
-      if ( currDate > prevDate ) {
-        return current;
-      }
-
-      if ( currDate === prevDate ) {
-        const prevReg = ensureDate( prev.fechaRegistro )
+    return actuaciones.reduce(
+      (
+        prev, current
+      ) => {
+        const prevDate = ensureDate(
+          prev.fechaActuacion
+        )
           ?.getTime() || 0;
-        const currReg = ensureDate( current.fechaRegistro )
+        const currDate = ensureDate(
+          current.fechaActuacion
+        )
           ?.getTime() || 0;
 
-        if ( currReg > prevReg ) {
+        if ( currDate > prevDate ) {
           return current;
         }
 
-        if ( currReg === prevReg ) {
-          return current.consActuacion > prev.consActuacion
-            ? current
-            : prev;
-        }
-      }
+        if ( currDate === prevDate ) {
+          const prevReg = ensureDate(
+            prev.fechaRegistro
+          )
+            ?.getTime() || 0;
+          const currReg = ensureDate(
+            current.fechaRegistro
+          )
+            ?.getTime() || 0;
 
-      return prev;
-    } );
+          if ( currReg > prevReg ) {
+            return current;
+          }
+
+          if ( currReg === prevReg ) {
+            return current.consActuacion > prev.consActuacion
+              ? current
+              : prev;
+          }
+        }
+
+        return prev;
+      }
+    );
   }
 
+  /**
+   * Transforms the raw API data object into a standardized Prisma input object
+   * suitable for database insertion or updating.
+   * * @param apiData - Raw item from the Rama Judicial API.
+   * @param parentProc - Metadata regarding the parent process.
+   * @param actualLatestItem - The latest item determined from the batch to flag `isUltimaAct`.
+   * @returns A strongly-typed Prisma CreateInput object.
+   */
   private static mapToPrismaInput(
     apiData: FetchResponseActuacion,
     parentProc: ProcessRequest,
-    actualLatestItem: FetchResponseActuacion | null,
+    actualLatestItem: FetchResponseActuacion | null
   ): Prisma.ActuacionCreateInput {
     const isUltima = actualLatestItem
-      ? String( apiData.idRegActuacion ) === String( actualLatestItem.idRegActuacion )
+      ? String(
+        apiData.idRegActuacion
+      ) === String(
+        actualLatestItem.idRegActuacion
+      )
       : false;
-    /* let cleanActuacion, cleanAnotacion;
 
-    const isFailedTarget = apiData.idRegActuacion === 2665047680 || apiData.idRegActuacion === 1176372381 || apiData.idRegActuacion === 2650029770 || apiData.idRegActuacion === 2649586500 || apiData.idRegActuacion === 2661117570 || apiData.idRegActuacion === 2651329310;
-
-    if ( isFailedTarget ) {
-      cleanActuacion = fixEncoding( apiData.actuacion ) || 'Sin descripción';
-      cleanAnotacion = fixEncoding( apiData.anotacion ) || '';
-    } else {
-      cleanActuacion = String( apiData.actuacion ) || 'Sin descripción';
-      cleanAnotacion = String( apiData.anotacion );
-    } */
-
-    const cleanActuacion = String( apiData.actuacion ) || 'Sin descripción';
-    const cleanAnotacion = String( apiData.anotacion );
-
-    // ✅ APPLY CLEANING HERE
-
+    const cleanActuacion = String(
+      apiData.actuacion
+    ) || 'Sin descripción';
+    const cleanAnotacion = String(
+      apiData.anotacion
+    );
 
     return {
-      idRegActuacion: String( apiData.idRegActuacion ),
+      idRegActuacion: String(
+        apiData.idRegActuacion
+      ),
       consActuacion : apiData.consActuacion,
       actuacion     : cleanActuacion,
       anotacion     : cleanAnotacion,
@@ -514,13 +525,21 @@ class ActuacionService {
       conDocumentos : apiData.conDocumentos,
       createdAt     : new Date(),
       llaveProceso  : parentProc.llaveProceso,
-      fechaActuacion: ensureDate( apiData.fechaActuacion ) ?? new Date(),
-      fechaRegistro : ensureDate( apiData.fechaRegistro ) ?? new Date(),
-      fechaInicial  : ensureDate( apiData.fechaInicial ),
-      fechaFinal    : ensureDate( apiData.fechaFinal ),
-      idProceso     : parentProc.idProceso,
-      isUltimaAct   : isUltima,
-      proceso       : {
+      fechaActuacion: ensureDate(
+        apiData.fechaActuacion
+      ) ?? new Date(),
+      fechaRegistro: ensureDate(
+        apiData.fechaRegistro
+      ) ?? new Date(),
+      fechaInicial: ensureDate(
+        apiData.fechaInicial
+      ),
+      fechaFinal: ensureDate(
+        apiData.fechaFinal
+      ),
+      idProceso  : parentProc.idProceso,
+      isUltimaAct: isUltima,
+      proceso    : {
         connect: {
           idProceso: parentProc.idProceso,
         },
@@ -528,16 +547,25 @@ class ActuacionService {
     };
   }
 
+  /**
+   * Dispatches alerts (Webhooks and Telegram) for newly discovered 'Actuaciones'.
+   * Includes brief delays between dispatches to respect rate limits.
+   * * @param newItems - The list of Actuaciones that are verified as new to the database.
+   * @param parentProc - Metadata of the parent process.
+   * @param logger - The file logger instance for recording dispatch failures.
+   */
   private static async processNotifications(
     newItems: FetchResponseActuacion[],
     parentProc: ProcessRequest,
-    logger: FileLogger,
+    logger: FileLogger
   ) {
     if ( newItems.length === 0 ) {
       return;
     }
 
-    console.log( `✨ Found ${ newItems.length } NEW Actuaciones. Processing notifications...` );
+    console.log(
+      `✨ Found ${ newItems.length } NEW Actuaciones. Processing notifications...`
+    );
     await logger.logNewItems(
       newItems, parentProc
     );
@@ -547,12 +575,15 @@ class ActuacionService {
       act
     ] of newItems.entries() ) {
       if ( index > 0 ) {
-        await wait( 2000 );
+        await wait(
+          2000
+        );
       }
 
-      // 1. Webhook (Optional)
       if ( WEBHOOK_URL ) {
-        console.log( `🗯️ Iniciando el webhook: ${ WEBHOOK_URL }` );
+        console.log(
+          `🗯️ Iniciando el webhook: ${ WEBHOOK_URL }`
+        );
 
         try {
           const response = await fetch(
@@ -561,26 +592,29 @@ class ActuacionService {
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify( {
-                title: `${ parentProc.carpetaNumero } ${ parentProc.nombre }`,
-                body : `${ String( act.actuacion ) } ${ String( act.anotacion ) || '' }`,
-                icon : '/icons/notification_icon.png',
-                data : {
-                  numero   : parentProc.carpetaNumero,
-                  idProceso: parentProc.idProceso,
-                  url      : `/Carpeta/${ parentProc.carpetaNumero }/ultimasActuaciones/${ parentProc.idProceso }#actuacion-${ act.idRegActuacion }`,
-                },
-                actions: [
-                  {
-                    action: 'openCarpeta',
-                    title : 'Abrir Carpeta'
+              body: JSON.stringify(
+                {
+                  title: `${ parentProc.carpetaNumero } ${ parentProc.nombre }: ${ act.actuacion }`,
+                  body : `${ act.actuacion } ${ act.anotacion || '' }`,
+                  icon : '/icons/notification_icon.png',
+                  data : {
+                    numero        : parentProc.carpetaNumero,
+                    idProceso     : parentProc.idProceso,
+                    idRegActuacion: act.idRegActuacion,
+                    url           : `/Carpeta/${ parentProc.carpetaNumero }/ultimasActuaciones/${ parentProc.idProceso }#actuacion-${ act.idRegActuacion }`,
                   },
-                  {
-                    action: 'openActuaciones',
-                    title : 'Abrir Actuaciones'
-                  }
-                ]
-              } ),
+                  actions: [
+                    {
+                      action: 'openCarpeta',
+                      title : 'Abrir Carpeta'
+                    },
+                    {
+                      action: 'openActuaciones',
+                      title : 'Abrir Actuaciones'
+                    },
+                  ],
+                }
+              ),
             }
           );
 
@@ -590,20 +624,23 @@ class ActuacionService {
             );
           }
         } catch ( postError: any ) {
-          console.log( `⚠️ Webhook Failed: ${ postError.message }` );
+          console.log(
+            `⚠️ Webhook Failed: ${ postError.message }`
+          );
           await logger.logFailure(
             parentProc.idProceso, act, postError.message, 'WEBHOOK'
           );
         }
       }
 
-      // 2. Telegram
       try {
         await TelegramService.sendNotification(
           act, parentProc
         );
       } catch ( teleError: any ) {
-        console.log( `⚠️ Telegram Failed: ${ teleError.message }` );
+        console.log(
+          `⚠️ Telegram Failed: ${ teleError.message }`
+        );
         await logger.logFailure(
           parentProc.idProceso, act, teleError.message, 'TELEGRAM'
         );
@@ -611,10 +648,12 @@ class ActuacionService {
 
       if ( NEW_ACTUACION_WEBHOOK_URL ) {
         try {
-          const body = JSON.stringify( {
-            ...act,
-            ...parentProc
-          } );
+          const body = JSON.stringify(
+            {
+              ...act,
+              ...parentProc
+            }
+          );
           const response = await fetch(
             NEW_ACTUACION_WEBHOOK_URL, {
               method : 'POST',
@@ -631,7 +670,9 @@ class ActuacionService {
             );
           }
         } catch ( postError: any ) {
-          console.log( `⚠️ Webhook Failed: ${ postError.message }` );
+          console.log(
+            `⚠️ Webhook Failed: ${ postError.message }`
+          );
           await logger.logFailure(
             parentProc.idProceso, act, postError.message, 'WEBHOOK'
           );
@@ -640,64 +681,105 @@ class ActuacionService {
     }
   }
 
+  /**
+   * Reconciles a batch of incoming API data against the local database.
+   * Splits records into "New" (to be inserted) and "Existing" (to be updated),
+   * and subsequently delegates to the notification service and parent-folder updater.
+   * * @param apiActuaciones - Full list of actuacion records from the API response.
+   * @param parentProc - Parent process context.
+   * @param logger - Logger instance for capturing DB/Notification failures.
+   */
   static async syncBatch(
     apiActuaciones: FetchResponseActuacion[],
     parentProc: ProcessRequest,
-    logger: FileLogger,
+    logger: FileLogger
   ) {
-    const latestItemByDate = this.getLatestByDate( apiActuaciones );
+    const latestItemByDate = this.getLatestByDate(
+      apiActuaciones
+    );
 
-    // 1. Identify New vs Existing
-    const existingRecords = await client.actuacion.findMany( {
-      where: {
-        idProceso: parentProc.idProceso
-      },
-      select: {
-        idRegActuacion: true
-      },
-    } );
-    const existingIds = new Set( existingRecords.map( ( r ) => {
-      return r.idRegActuacion;
-    } ) );
+    const existingRecords = await client.actuacion.findMany(
+      {
+        where: {
+          idProceso: parentProc.idProceso
+        },
+        select: {
+          idRegActuacion: true
+        },
+      }
+    );
 
-    const newItems = apiActuaciones.filter( ( item ) => {
-      return !existingIds.has( String( item.idRegActuacion ) );
-    } );
-    const existingItems = apiActuaciones.filter( ( item ) => {
-      return existingIds.has( String( item.idRegActuacion ) );
-    } );
+    const existingIds = new Set(
+      existingRecords.map(
+        (
+          r
+        ) => {
+          return r.idRegActuacion;
+        }
+      )
+    );
 
-    // 2. Insert New
-    if ( newItems.length > 0 ) {
-      const createData = newItems.map( ( item ) => {
-        return this.mapToPrismaInput(
-          item, parentProc, latestItemByDate
+    const newItems = apiActuaciones.filter(
+      (
+        item
+      ) => {
+        return !existingIds.has(
+          String(
+            item.idRegActuacion
+          )
         );
-      } );
+      }
+    );
+    const existingItems = apiActuaciones.filter(
+      (
+        item
+      ) => {
+        return existingIds.has(
+          String(
+            item.idRegActuacion
+          )
+        );
+      }
+    );
+
+    if ( newItems.length > 0 ) {
+      const createData = newItems.map(
+        (
+          item
+        ) => {
+          return this.mapToPrismaInput(
+            item, parentProc, latestItemByDate
+          );
+        }
+      );
 
       for ( const actuacionNueva of createData ) {
-        console.log( `Processing new actuacion: ${ actuacionNueva.idRegActuacion }` );
+        console.log(
+          `Processing new actuacion: ${ actuacionNueva.idRegActuacion }`
+        );
 
         try {
-          await client.actuacion.upsert( {
-            where: {
-              idRegActuacion: actuacionNueva.idRegActuacion
-            },
-            create: actuacionNueva,
-            update: {
-              cant         : actuacionNueva.cant,
-              consActuacion: actuacionNueva.consActuacion,
-            },
-          } );
-          console.log( `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.` );
+          await client.actuacion.upsert(
+            {
+              where: {
+                idRegActuacion: actuacionNueva.idRegActuacion
+              },
+              create: actuacionNueva,
+              update: {
+                cant         : actuacionNueva.cant,
+                consActuacion: actuacionNueva.consActuacion,
+              },
+            }
+          );
+          console.log(
+            `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.`
+          );
         } catch ( error: any ) {
-          console.log( `   ❌ Insert Failed for ${ actuacionNueva.idRegActuacion }: ${ error.message }` );
-          // Log specific detail about the offending record
+          console.log(
+            `   ❌ Insert Failed for ${ actuacionNueva.idRegActuacion }: ${ error.message }`
+          );
           await logger.logFailure(
-            parentProc.idProceso,
-            actuacionNueva, // Log the actual object causing the crash
-            error.message,
-            'DB_ITEM',
+            parentProc.idProceso, actuacionNueva, error.message, 'DB_ITEM'
           );
         }
       }
@@ -707,156 +789,243 @@ class ActuacionService {
       );
     }
 
-    // 3. Update Existing
     if ( existingItems.length > 0 ) {
       await pMap(
         existingItems,
-        async ( item ) => {
+        async (
+          item
+        ) => {
           const isUltima = latestItemByDate
-            ? String( item.idRegActuacion ) === String( latestItemByDate.idRegActuacion )
+            ? String(
+              item.idRegActuacion
+            ) === String(
+              latestItemByDate.idRegActuacion
+            )
             : item.cant === item.consActuacion;
 
           try {
-            await client.actuacion.update( {
-              where: {
-                idRegActuacion: String( item.idRegActuacion )
-              },
-              data: {
-                isUltimaAct: isUltima,
-                cant       : item.cant,
-              },
-            } );
+            await client.actuacion.update(
+              {
+                where: {
+                  idRegActuacion: String(
+                    item.idRegActuacion
+                  )
+                },
+                data: {
+                  isUltimaAct: isUltima,
+                  cant       : item.cant,
+                },
+              }
+            );
           } catch ( err: any ) {
-            console.log( `   ❌ Update Failed: ${ err.message }` );
+            console.log(
+              `   ❌ Update Failed: ${ err.message }`
+            );
             await logger.logFailure(
-              parentProc.idProceso,
-              existingItems,
-              err.message,
-              'DB_ITEM',
+              parentProc.idProceso, existingItems, err.message, 'DB_ITEM'
             );
           }
         },
-        10,
+        10
       );
     }
 
-    // 4. Update Carpeta Metadata
     await this.updateCarpetaIfNewer(
       apiActuaciones, parentProc
     );
   }
 
+  /**
+   * Examines the latest Actuacion and updates the parent `Carpeta` record if the date
+   * or specific Actuacion ID differs from what is currently saved in the database.
+   * Resets `isUltimaAct` flags locally to ensure relational integrity.
+   * * @param actuaciones - Full array of fetched items for context.
+   * @param parentProc - Parent process information mapping to the `Carpeta` table.
+   */
   static async updateCarpetaIfNewer(
     actuaciones: FetchResponseActuacion[],
-    parentProc: ProcessRequest,
+    parentProc: ProcessRequest
   ) {
-    const incomingLast = this.getLatestByDate( actuaciones );
+    const incomingLast = this.getLatestByDate(
+      actuaciones
+    );
 
     if ( !incomingLast ) {
       return;
     }
 
     try {
-      const carpeta = await client.carpeta.findUnique( {
-        where: {
-          numero: parentProc.carpetaNumero
-        },
-        select: {
-          idRegUltimaAct: true,
-          fecha         : true
-        },
-      } );
+      const carpeta = await client.carpeta.findUnique(
+        {
+          where: {
+            numero: parentProc.carpetaNumero
+          },
+          select: {
+            idRegUltimaAct: true,
+            fecha         : true
+          },
+        }
+      );
 
       if ( !carpeta ) {
         return;
       }
 
-      const incomingDate = ensureDate( incomingLast.fechaActuacion )
-        ?.getTime() ?? 0;
-      const savedDate = ensureDate( carpeta.fecha )
-        ?.getTime();
+      const incomingParsed = ensureDate(
+        incomingLast.fechaActuacion
+      );
+      const savedParsed = ensureDate(
+        carpeta.fecha
+      );
 
-      if ( !savedDate || incomingDate > savedDate ) {
-        console.log( `🔄 Updating Carpeta ${ parentProc.carpetaNumero } date.` );
+      const incomingTime = incomingParsed?.getTime() ?? 0;
+      const savedTime = savedParsed?.getTime() ?? 0;
 
-        // Reset old ultima flag
+      const isNewerDate = incomingTime > savedTime;
+      const isSameDateDifferentActuacion = ( incomingTime === savedTime )
+                                           && ( carpeta.idRegUltimaAct !== String(
+                                             incomingLast.idRegActuacion
+                                           ) );
+
+      if ( !savedParsed || isNewerDate || isSameDateDifferentActuacion ) {
+        console.log(
+          `carpeta.idRegUltimaAct is different from incomingLast.idRegActuacion? ${ carpeta.idRegUltimaAct !== String(
+            incomingLast.idRegActuacion
+          ) }`
+        );
+
+        if ( isNewerDate ) {
+          console.log(
+            `📅 Incoming actuacion date (${ formatDateToString(
+              incomingParsed ?? new Date()
+            ) }) is newer than Carpeta date (${ formatDateToString(
+              savedParsed ?? new Date()
+            ) }). Updating...`
+          );
+        } else if ( isSameDateDifferentActuacion ) {
+          console.log(
+            '📅 Incoming actuacion date is the same as Carpeta date, but it\'s a different Actuacion ID. Updating...'
+          );
+        } else {
+          console.log(
+            '📅 Carpeta has no previous date. Updating...'
+          );
+        }
+
+        console.log(
+          `🔄 Updating Carpeta ${ parentProc.carpetaNumero } date.`
+        );
+
         try {
-          if ( carpeta.idRegUltimaAct && carpeta.idRegUltimaAct !== String( incomingLast.idRegActuacion ) ) {
-            await client.actuacion.updateMany( {
-              where: {
-                idRegActuacion: carpeta.idRegUltimaAct
-              },
-              data: {
-                isUltimaAct: false,
-              },
-            } );
+          if ( carpeta.idRegUltimaAct && carpeta.idRegUltimaAct !== String(
+            incomingLast.idRegActuacion
+          ) ) {
+            await client.actuacion.updateMany(
+              {
+                where: {
+                  idRegActuacion: carpeta.idRegUltimaAct
+                },
+                data: {
+                  isUltimaAct: false
+                },
+              }
+            );
           }
         } catch ( error ) {
-          console.log( `🚫 error resetting previous flag: ${ JSON.stringify( error ) }` );
-
+          console.log(
+            `🚫 error resetting previous flag: ${ JSON.stringify(
+              error
+            ) }`
+          );
         }
 
-        // 1. Create or Update the Actuacion FIRST with CLEAN data
-        const savedActuacion = await client.actuacion.upsert( {
-          where: {
-            idRegActuacion: `${ incomingLast.idRegActuacion }`
-          },
-          create: {
-            ...incomingLast,
-            // Apply cleaning here too
-            actuacion     : String( incomingLast.actuacion ) || 'Sin descripción',
-            anotacion     : String( incomingLast.anotacion ),
-            idProceso     : parentProc.idProceso,
-            isUltimaAct   : true,
-            idRegActuacion: `${ incomingLast.idRegActuacion }`,
-            fechaActuacion: ensureDate( incomingLast.fechaActuacion ) ?? new Date(),
-            fechaRegistro : ensureDate( incomingLast.fechaRegistro ) ?? new Date(),
-            fechaInicial  : ensureDate( incomingLast.fechaInicial ) ?? undefined,
-            fechaFinal    : ensureDate( incomingLast.fechaFinal ) ?? undefined,
-            proceso       : {
-              connect: {
-                idProceso: parentProc.idProceso
-              }
-            }
-          },
-          update: {
-            cant: incomingLast.cant,
-          },
-        } );
-        console.log( `🔄 Updated the last actuacion:  ${ savedActuacion.fechaActuacion } date.` );
-        // 2. THEN update the Carpeta
-        const updateCarpeta = await client.carpeta.update( {
-          where: {
-            numero: parentProc.carpetaNumero
-          },
-          data: {
-            fecha          : ensureDate( savedActuacion.fechaActuacion ),
-            revisado       : false,
-            updatedAt      : new Date(),
-            ultimaActuacion: {
-              connect: {
-                idRegActuacion: String( savedActuacion.idRegActuacion )
+        const savedActuacion = await client.actuacion.upsert(
+          {
+            where: {
+              idRegActuacion: `${ incomingLast.idRegActuacion }`
+            },
+            create: {
+              ...incomingLast,
+              actuacion: String(
+                incomingLast.actuacion
+              ) || 'Sin descripción',
+              anotacion: String(
+                incomingLast.anotacion
+              ),
+              idProceso     : parentProc.idProceso,
+              isUltimaAct   : true,
+              idRegActuacion: `${ incomingLast.idRegActuacion }`,
+              fechaActuacion: ensureDate(
+                incomingLast.fechaActuacion
+              ) ?? new Date(),
+              fechaRegistro: ensureDate(
+                incomingLast.fechaRegistro
+              ) ?? new Date(),
+              fechaInicial: ensureDate(
+                incomingLast.fechaInicial
+              ) ?? undefined,
+              fechaFinal: ensureDate(
+                incomingLast.fechaFinal
+              ) ?? undefined,
+              proceso: {
+                connect: {
+                  idProceso: parentProc.idProceso
+                }
               },
             },
-          },
-        } );
+            update: {
+              cant          : incomingLast.cant,
+              fechaActuacion: ensureDate(
+                incomingLast.fechaActuacion
+              ) ?? new Date(),
+              fechaRegistro: ensureDate(
+                incomingLast.fechaRegistro
+              ) ?? new Date(),
+              fechaInicial: ensureDate(
+                incomingLast.fechaInicial
+              ) ?? undefined,
+              fechaFinal: ensureDate(
+                incomingLast.fechaFinal
+              ) ?? undefined,
+            },
+          }
+        );
+
+        console.log(
+          `🔄 Updated the last actuacion:  ${ formatDateToString(
+            savedActuacion.fechaActuacion
+          ) } date.`
+        );
+
+        const updateCarpeta = await client.carpeta.update(
+          {
+            where: {
+              numero: parentProc.carpetaNumero
+            },
+            data: {
+              fecha: ensureDate(
+                savedActuacion.fechaActuacion
+              ),
+              revisado       : false,
+              updatedAt      : new Date(),
+              ultimaActuacion: {
+                connect: {
+                  idRegActuacion: String(
+                    savedActuacion.idRegActuacion
+                  )
+                },
+              },
+            },
+          }
+        );
 
         if ( updateCarpeta.fecha ) {
-          console.log( `🔄 Updated carpeta:  ${ new Intl.DateTimeFormat(
-            'es-CO',  {
-              weekday     : 'long',
-              year        : 'numeric',
-              month       : 'long',
-              day         : 'numeric',
-              hour        : 'numeric',
-              minute      : 'numeric',
-              second      : 'numeric',
-              timeZoneName: 'short'
-            }
-          )
-            .format( updateCarpeta.fecha ) } date.` );
+          console.log(
+            `🔄 Updated carpeta:  ${ formatDateToString(
+              updateCarpeta.fecha
+            ) } date.`
+          );
         }
-
       }
     } catch ( error ) {
       console.log(
@@ -867,19 +1036,35 @@ class ActuacionService {
 }
 
 // ==========================================
-// 7. EXTERNAL API CLIENT (UPDATED)
+// 7. EXTERNAL API CLIENT
 // ==========================================
 
+/**
+ * Custom API client built specifically to communicate with the Rama Judicial systems.
+ * Implements randomized delay mechanisms for rate limit compliance, smart retry logic,
+ * and specific Latin-1 (ISO-8859-1) payload decoding to handle Spanish diacritics.
+ */
 export class RobustApiClient {
   private baseUrl: string;
   private logger : FileLogger;
+  /** Fixed baseline delay to adhere to rate limits in ms */
   private readonly RATE_LIMIT_DELAY_MS = 12000;
 
-  constructor( baseUrl: string ) {
+  /**
+   * @param baseUrl - The base URL of the judicial consultation endpoint.
+   */
+  constructor(
+    baseUrl: string
+  ) {
     this.baseUrl = baseUrl;
-    this.logger = new FileLogger( 'failed_sync_ops.json' );
+    this.logger = new FileLogger(
+      'failed_sync_ops.json'
+    );
   }
 
+  /**
+   * Generates specific headers to masquerade as standard browser traffic.
+   */
   private getHeaders() {
     return {
       'User-Agent'     : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -889,7 +1074,19 @@ export class RobustApiClient {
       'Sec-Fetch-Site' : 'none',
     };
   }
-  private async fetchWithRetry<T>( endpoint: string ): Promise<T> {
+
+  /**
+   * Internal fetching mechanism that explicitly intercepts the raw array buffer.
+   * It decodes using ISO-8859-1 to resolve corrupted court identifiers and accents
+   * (e.g., 'ñ', 'ó') before parsing the JSON response.
+   * * @template T - The expected JSON shape of the response.
+   * @param endpoint - The specific API path to append to the baseUrl.
+   * @returns A promise resolving to the decoded JSON object.
+   * @throws {ApiError} If the HTTP status is not OK, or JSON parsing fails.
+   */
+  private async fetchWithRetry<T>(
+    endpoint: string
+  ): Promise<T> {
     const options = {
       headers: this.getHeaders()
     };
@@ -905,16 +1102,19 @@ export class RobustApiClient {
       );
     }
 
-    // ✅ FIX: Manually decode the buffer as ISO-8859-1 (Latin-1)
-    // This catches the 'ó', 'ú', 'ñ' bytes before JSON.parse mangles them.
     const arrayBuffer = await response.arrayBuffer();
-    const decoder = new TextDecoder( 'iso-8859-1' );
-    const text = decoder.decode( arrayBuffer );
+    const decoder = new TextDecoder(
+      'utf-8'
+    );
+    const text = decoder.decode(
+      arrayBuffer
+    );
 
     try {
-      return JSON.parse( text ) as T;
+      return JSON.parse(
+        text
+      ) as T;
     } catch ( e ) {
-      // Fallback in case the response wasn't actually JSON
       console.error(
         'Error parsing JSON after decoding:', e
       );
@@ -924,26 +1124,46 @@ export class RobustApiClient {
       );
     }
   }
+
+  /**
+   * Executes the fetching sequence over an array of processes.
+   * Introduces a randomized delay jitter on top of the strict rate-limit delay
+   * to avoid triggering WAF blocks on the judicial API.
+   * * @param items - Array of standardized ProcessRequests to fetch against.
+   * @param pathBuilder - Callback generating the specific URL path for an item.
+   */
   public async processBatch(
     items: ProcessRequest[],
-    pathBuilder: ( item: ProcessRequest ) => string,
+    pathBuilder: ( item: ProcessRequest ) => string
   ): Promise<void> {
-    console.log( `🚀 Starting process for ${ items.length } targets...` );
+    console.log(
+      `🚀 Starting process for ${ items.length } targets...`
+    );
 
     for ( const [
       index,
       parentItem
     ] of items.entries() ) {
       if ( index > 0 ) {
-        const variableDelay = this.RATE_LIMIT_DELAY_MS + Math.floor( Math.random() * 1000 );
-        await wait( variableDelay );
+        const variableDelay = this.RATE_LIMIT_DELAY_MS + Math.floor(
+          Math.random() * 1000
+        );
+        await wait(
+          variableDelay
+        );
       }
 
       try {
-        const endpoint = pathBuilder( parentItem );
-        console.log( `🌐 [${ index + 1 }/${ items.length }] Fetching: ${ parentItem.carpetaNumero }` );
+        const endpoint = pathBuilder(
+          parentItem
+        );
+        console.log(
+          `🌐 [${ index + 1 }/${ items.length }] Fetching: ${ parentItem.carpetaNumero }`
+        );
 
-        const apiResponse = await this.fetchWithRetry<ConsultaActuacionResponse>( endpoint );
+        const apiResponse = await this.fetchWithRetry<ConsultaActuacionResponse>(
+          endpoint
+        );
         const actuacionesList = apiResponse.actuaciones || [];
 
         if ( actuacionesList.length > 0 ) {
@@ -952,7 +1172,9 @@ export class RobustApiClient {
           );
         }
       } catch ( err: any ) {
-        console.log( `❌ FAILED ${ parentItem.carpetaNumero }: ${ err.message }` );
+        console.log(
+          `❌ FAILED ${ parentItem.carpetaNumero }: ${ err.message }`
+        );
         await this.logger.logFailure(
           parentItem.idProceso, parentItem, err.message, 'FETCH'
         );
@@ -965,49 +1187,65 @@ export class RobustApiClient {
 // 8. MAIN EXECUTION ENTRY POINT
 // ==========================================
 
+/**
+ * Retrieves all registered 'Carpetas' from the database and flattens them
+ * into actionable `ProcessRequest` objects. Accounts for Carpetas without associated
+ * process IDs by injecting a placeholder ID of '0'.
+ * * @returns A promise resolving to a sorted array of processes ready for synchronization.
+ */
 async function getProcesosToUpdate(): Promise<ProcessRequest[]> {
-  // Ensure your Prisma schema has 'category' on the Carpeta model
   const carpetas = await client.carpeta.findMany();
 
   return carpetas
-    .flatMap( ( carpeta ) => {
-      // Common data structure
-      const baseData = {
-        carpetaNumero: carpeta.numero,
-        llaveProceso : carpeta.llaveProceso,
-        carpetaId    : carpeta.id,
-        nombre       : carpeta.nombre,
-        category     : carpeta.category,
-      };
-
-      if ( !carpeta.idProcesos || carpeta.idProcesos.length === 0 ) {
-        return {
-          ...baseData,
-          idProceso: 0,
+    .flatMap(
+      (
+        carpeta
+      ) => {
+        const baseData = {
+          carpetaNumero: carpeta.numero,
+          llaveProceso : carpeta.llaveProceso,
+          carpetaId    : carpeta.id,
+          nombre       : carpeta.nombre,
+          category     : carpeta.category,
         };
+
+        if ( !carpeta.idProcesos || carpeta.idProcesos.length === 0 ) {
+          return {
+            ...baseData,
+            idProceso: '0'
+          };
+        }
+
+        return carpeta.idProcesos.map(
+          (
+            idProceso
+          ) => {
+            return {
+              ...baseData,
+              idProceso
+            };
+          }
+        );
       }
-
-      return carpeta.idProcesos.map( ( idProceso ) => {
-        return {
-          ...baseData,
-          idProceso,
-        };
-      } );
-    } )
-    .sort( (
-      a, b
-    ) => {
-      return b.carpetaNumero - a.carpetaNumero;
-    } );
+    )
+    .sort(
+      (
+        a, b
+      ) => {
+        return b.carpetaNumero - a.carpetaNumero;
+      }
+    );
 }
 
-
+/**
+ * The primary executor function acting as a cron-job controller.
+ * It determines the current time window, filters the database items by their `category`,
+ * and delegates the filtered batch to the `RobustApiClient`.
+ */
 async function runSync() {
   const startTime = new Date();
-  ;
-
   const formattedCustomStartTime = new Intl.DateTimeFormat(
-    'es-CO',  {
+    'es-CO', {
       weekday     : 'long',
       year        : 'numeric',
       month       : 'long',
@@ -1015,89 +1253,106 @@ async function runSync() {
       hour        : 'numeric',
       minute      : 'numeric',
       second      : 'numeric',
-      timeZoneName: 'short'
+      timeZoneName: 'short',
     }
   )
-    .format( startTime );
-  console.log( formattedCustomStartTime ); // Example output: "Monday, February 16, 2026 at 12:49 PM EST"
+    .format(
+      startTime
+    );
 
-  console.log( `\n⏱️  Execution Started at: ${ formattedCustomStartTime }` );
+  console.log(
+    formattedCustomStartTime
+  );
+  console.log(
+    `\n⏱️  Execution Started at: ${ formattedCustomStartTime }`
+  );
 
   // --- FREQUENCY LOGIC ---
   const currentHour = startTime.getHours();
   const currentDay = startTime.getDay();
-  // --- 1. Define Time Windows ---
 
-  // Catches the 00:00 run (Range: 00:00 - 05:59)
+  // Time Windows
   const isMidnightRun = currentHour < 6;
-
-  // Catches the 12:00 run (Range: 12:00 - 17:59)
   const isNoonRun = currentHour >= 12 && currentHour < 18;
 
-  const api = new RobustApiClient( RAMA_JUDICIAL_BASE_URL );
+  const api = new RobustApiClient(
+    RAMA_JUDICIAL_BASE_URL
+  );
 
   try {
     const allProcesses = await getProcesosToUpdate();
 
-    const processesToCheck = allProcesses.filter( ( proc ) => {
-      // Normalize the category name
-      const category = ( proc.category || 'default' ).toString()
-        .toLowerCase()
-        .trim();
+    const processesToCheck = allProcesses.filter(
+      (
+        proc
+      ) => {
+        const category = ( proc.category || 'default' ).toString()
+          .toLowerCase()
+          .trim();
 
-/*
-      // --- 2. Apply Logic ---
+        if ( category === 'bancolombia' ) {
+          console.log(
+            `category is bancolombia ${ proc.carpetaNumero }`
+          );
 
-      // A. Bancolombia: Runs every 6 hours (00, 06, 12, 18)
-      if ( category === 'bancolombia' ) {
-        console.log( `category is bancolombia ${ proc.carpetaNumero }` );
+          return true; // Runs every window
+        }
 
-        return true;
-      }
+        if ( category === 'terminados' ) {
+          return isMidnightRun && currentDay === 3; // Wednesday Midnight (Day 3)
+        }
 
-      // B. Terminados: Runs once a week, ONLY at Midnight on Monday
-      if ( category === 'terminados' ) {
-        return isMidnightRun && currentDay === 1;
-      }
+        if ( category === 'reintegra' ) {
+          return isNoonRun;
+        }
 
-      // C. Reintegra: Runs once a day, ONLY at Noon
-      if ( category === 'reintegra' ) {
         return isNoonRun;
       }
+    );
 
-      // D. Default / Others: Runs once a day, ONLY at Noon
-      return isNoonRun; */
-      return true;
-    } );
-
-    console.log( `🔎 Filter applied: Processing ${ processesToCheck.length } of ${ allProcesses.length } items.` );
+    console.log(
+      `🔎 Filter applied: Processing ${ processesToCheck.length } of ${ allProcesses.length } items.`
+    );
 
     if ( processesToCheck.length > 0 ) {
       await api.processBatch(
-        processesToCheck, ( proc ) => {
+        processesToCheck, (
+          proc
+        ) => {
           return `/api/v2/Proceso/Actuaciones/${ proc.idProceso }`;
         }
       );
     } else {
-      console.log( '😴 No processes scheduled for this run window.' );
+      console.log(
+        '😴 No processes scheduled for this run window.'
+      );
     }
 
-    console.log( '🎉 Sync Complete' );
+    console.log(
+      '🎉 Sync Complete'
+    );
   } catch ( error ) {
     console.log(
       'Fatal Error in runSync:', error
     );
   } finally {
     await client.$disconnect();
+
     const endTime = new Date();
     const durationMs = endTime.getTime() - startTime.getTime();
-    const seconds = Math.floor( ( durationMs / 1000 ) % 60 );
-    const minutes = Math.floor( ( durationMs / ( 1000 * 60 ) ) % 60 );
-    const hours = Math.floor( durationMs / ( 1000 * 60 * 60 ) );
+    const seconds = Math.floor(
+      ( durationMs / 1000 ) % 60
+    );
+    const minutes = Math.floor(
+      ( durationMs / ( 1000 * 60 ) ) % 60
+    );
+    const hours = Math.floor(
+      durationMs / ( 1000 * 60 * 60 )
+    );
     const durationString = `${ hours }h ${ minutes }m ${ seconds }s`;
 
     const formattedCustomEndTime = new Intl.DateTimeFormat(
-      'es-CO',  {
+      'es-CO', {
         weekday     : 'long',
         year        : 'numeric',
         month       : 'long',
@@ -1105,13 +1360,22 @@ async function runSync() {
         hour        : 'numeric',
         minute      : 'numeric',
         second      : 'numeric',
-        timeZoneName: 'short'
+        timeZoneName: 'short',
       }
     )
-      .format( endTime );
-    console.log( formattedCustomEndTime );
-    console.log( `\n🏁 Execution Finished at: ${ formattedCustomEndTime }` );
-    console.log( `⏱️  Total Duration: ${ durationString } (${ durationMs }ms)` );
+      .format(
+        endTime
+      );
+
+    console.log(
+      formattedCustomEndTime
+    );
+    console.log(
+      `\n🏁 Execution Finished at: ${ formattedCustomEndTime }`
+    );
+    console.log(
+      `⏱️  Total Duration: ${ durationString } (${ durationMs }ms)`
+    );
   }
 }
 

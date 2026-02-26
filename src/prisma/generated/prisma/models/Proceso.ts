@@ -30,14 +30,12 @@ export type ProcesoAvgAggregateOutputType = {
   cantFilas: number | null
   carpetaNumero: number | null
   idConexion: number | null
-  idProceso: number | null
 }
 
 export type ProcesoSumAggregateOutputType = {
   cantFilas: number | null
   carpetaNumero: number | null
   idConexion: number | null
-  idProceso: number | null
 }
 
 export type ProcesoMinAggregateOutputType = {
@@ -49,7 +47,7 @@ export type ProcesoMinAggregateOutputType = {
   fechaProceso: Date | null
   fechaUltimaActuacion: Date | null
   idConexion: number | null
-  idProceso: number | null
+  idProceso: string | null
   juzgadoCiudad: string | null
   juzgadoId: string | null
   juzgadoTipo: string | null
@@ -66,7 +64,7 @@ export type ProcesoMaxAggregateOutputType = {
   fechaProceso: Date | null
   fechaUltimaActuacion: Date | null
   idConexion: number | null
-  idProceso: number | null
+  idProceso: string | null
   juzgadoCiudad: string | null
   juzgadoId: string | null
   juzgadoTipo: string | null
@@ -97,14 +95,12 @@ export type ProcesoAvgAggregateInputType = {
   cantFilas?: true
   carpetaNumero?: true
   idConexion?: true
-  idProceso?: true
 }
 
 export type ProcesoSumAggregateInputType = {
   cantFilas?: true
   carpetaNumero?: true
   idConexion?: true
-  idProceso?: true
 }
 
 export type ProcesoMinAggregateInputType = {
@@ -254,7 +250,7 @@ export type ProcesoGroupByOutputType = {
   fechaProceso: Date | null
   fechaUltimaActuacion: Date | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   juzgadoCiudad: string
   juzgadoId: string
   juzgadoTipo: string
@@ -294,7 +290,7 @@ export type ProcesoWhereInput = {
   fechaProceso?: Prisma.DateTimeNullableFilter<"Proceso"> | Date | string | null
   fechaUltimaActuacion?: Prisma.DateTimeNullableFilter<"Proceso"> | Date | string | null
   idConexion?: Prisma.IntFilter<"Proceso"> | number
-  idProceso?: Prisma.IntFilter<"Proceso"> | number
+  idProceso?: Prisma.StringFilter<"Proceso"> | string
   juzgadoCiudad?: Prisma.StringFilter<"Proceso"> | string
   juzgadoId?: Prisma.StringFilter<"Proceso"> | string
   juzgadoTipo?: Prisma.StringFilter<"Proceso"> | string
@@ -326,7 +322,7 @@ export type ProcesoOrderByWithRelationInput = {
 }
 
 export type ProcesoWhereUniqueInput = Prisma.AtLeast<{
-  idProceso?: number
+  idProceso?: string
   AND?: Prisma.ProcesoWhereInput | Prisma.ProcesoWhereInput[]
   OR?: Prisma.ProcesoWhereInput[]
   NOT?: Prisma.ProcesoWhereInput | Prisma.ProcesoWhereInput[]
@@ -382,7 +378,7 @@ export type ProcesoScalarWhereWithAggregatesInput = {
   fechaProceso?: Prisma.DateTimeNullableWithAggregatesFilter<"Proceso"> | Date | string | null
   fechaUltimaActuacion?: Prisma.DateTimeNullableWithAggregatesFilter<"Proceso"> | Date | string | null
   idConexion?: Prisma.IntWithAggregatesFilter<"Proceso"> | number
-  idProceso?: Prisma.IntWithAggregatesFilter<"Proceso"> | number
+  idProceso?: Prisma.StringWithAggregatesFilter<"Proceso"> | string
   juzgadoCiudad?: Prisma.StringWithAggregatesFilter<"Proceso"> | string
   juzgadoId?: Prisma.StringWithAggregatesFilter<"Proceso"> | string
   juzgadoTipo?: Prisma.StringWithAggregatesFilter<"Proceso"> | string
@@ -398,7 +394,7 @@ export type ProcesoCreateInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   llaveProceso: string
   sujetosProcesales: string
   actuaciones?: Prisma.ActuacionCreateNestedManyWithoutProcesoInput
@@ -415,7 +411,7 @@ export type ProcesoUncheckedCreateInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   juzgadoCiudad: string
   juzgadoId: string
   juzgadoTipo: string
@@ -432,7 +428,7 @@ export type ProcesoUpdateInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   sujetosProcesales?: Prisma.StringFieldUpdateOperationsInput | string
   actuaciones?: Prisma.ActuacionUpdateManyWithoutProcesoNestedInput
@@ -449,7 +445,7 @@ export type ProcesoUncheckedUpdateInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoCiudad?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoId?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoTipo?: Prisma.StringFieldUpdateOperationsInput | string
@@ -467,7 +463,7 @@ export type ProcesoCreateManyInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   juzgadoCiudad: string
   juzgadoId: string
   juzgadoTipo: string
@@ -483,7 +479,7 @@ export type ProcesoUpdateManyMutationInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   sujetosProcesales?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -497,7 +493,7 @@ export type ProcesoUncheckedUpdateManyInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoCiudad?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoId?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoTipo?: Prisma.StringFieldUpdateOperationsInput | string
@@ -541,7 +537,6 @@ export type ProcesoAvgOrderByAggregateInput = {
   cantFilas?: Prisma.SortOrder
   carpetaNumero?: Prisma.SortOrder
   idConexion?: Prisma.SortOrder
-  idProceso?: Prisma.SortOrder
 }
 
 export type ProcesoMaxOrderByAggregateInput = {
@@ -582,7 +577,6 @@ export type ProcesoSumOrderByAggregateInput = {
   cantFilas?: Prisma.SortOrder
   carpetaNumero?: Prisma.SortOrder
   idConexion?: Prisma.SortOrder
-  idProceso?: Prisma.SortOrder
 }
 
 export type ProcesoCreateNestedManyWithoutCarpetaInput = {
@@ -691,7 +685,7 @@ export type ProcesoCreateWithoutCarpetaInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   llaveProceso: string
   sujetosProcesales: string
   actuaciones?: Prisma.ActuacionCreateNestedManyWithoutProcesoInput
@@ -706,7 +700,7 @@ export type ProcesoUncheckedCreateWithoutCarpetaInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   juzgadoCiudad: string
   juzgadoId: string
   juzgadoTipo: string
@@ -753,7 +747,7 @@ export type ProcesoScalarWhereInput = {
   fechaProceso?: Prisma.DateTimeNullableFilter<"Proceso"> | Date | string | null
   fechaUltimaActuacion?: Prisma.DateTimeNullableFilter<"Proceso"> | Date | string | null
   idConexion?: Prisma.IntFilter<"Proceso"> | number
-  idProceso?: Prisma.IntFilter<"Proceso"> | number
+  idProceso?: Prisma.StringFilter<"Proceso"> | string
   juzgadoCiudad?: Prisma.StringFilter<"Proceso"> | string
   juzgadoId?: Prisma.StringFilter<"Proceso"> | string
   juzgadoTipo?: Prisma.StringFilter<"Proceso"> | string
@@ -769,7 +763,7 @@ export type ProcesoCreateWithoutActuacionesInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   llaveProceso: string
   sujetosProcesales: string
   carpeta: Prisma.CarpetaCreateNestedOneWithoutProcesosInput
@@ -785,7 +779,7 @@ export type ProcesoUncheckedCreateWithoutActuacionesInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   juzgadoCiudad: string
   juzgadoId: string
   juzgadoTipo: string
@@ -817,7 +811,7 @@ export type ProcesoUpdateWithoutActuacionesInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   sujetosProcesales?: Prisma.StringFieldUpdateOperationsInput | string
   carpeta?: Prisma.CarpetaUpdateOneRequiredWithoutProcesosNestedInput
@@ -833,7 +827,7 @@ export type ProcesoUncheckedUpdateWithoutActuacionesInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoCiudad?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoId?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoTipo?: Prisma.StringFieldUpdateOperationsInput | string
@@ -849,7 +843,7 @@ export type ProcesoCreateWithoutJuzgadoInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   llaveProceso: string
   sujetosProcesales: string
   actuaciones?: Prisma.ActuacionCreateNestedManyWithoutProcesoInput
@@ -865,7 +859,7 @@ export type ProcesoUncheckedCreateWithoutJuzgadoInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   llaveProceso: string
   sujetosProcesales: string
   actuaciones?: Prisma.ActuacionUncheckedCreateNestedManyWithoutProcesoInput
@@ -905,7 +899,7 @@ export type ProcesoCreateManyCarpetaInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   juzgadoCiudad: string
   juzgadoId: string
   juzgadoTipo: string
@@ -921,7 +915,7 @@ export type ProcesoUpdateWithoutCarpetaInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   sujetosProcesales?: Prisma.StringFieldUpdateOperationsInput | string
   actuaciones?: Prisma.ActuacionUpdateManyWithoutProcesoNestedInput
@@ -936,7 +930,7 @@ export type ProcesoUncheckedUpdateWithoutCarpetaInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoCiudad?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoId?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoTipo?: Prisma.StringFieldUpdateOperationsInput | string
@@ -953,7 +947,7 @@ export type ProcesoUncheckedUpdateManyWithoutCarpetaInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoCiudad?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoId?: Prisma.StringFieldUpdateOperationsInput | string
   juzgadoTipo?: Prisma.StringFieldUpdateOperationsInput | string
@@ -970,7 +964,7 @@ export type ProcesoCreateManyJuzgadoInput = {
   fechaProceso?: Date | string | null
   fechaUltimaActuacion?: Date | string | null
   idConexion: number
-  idProceso: number
+  idProceso: string
   llaveProceso: string
   sujetosProcesales: string
 }
@@ -983,7 +977,7 @@ export type ProcesoUpdateWithoutJuzgadoInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   sujetosProcesales?: Prisma.StringFieldUpdateOperationsInput | string
   actuaciones?: Prisma.ActuacionUpdateManyWithoutProcesoNestedInput
@@ -999,7 +993,7 @@ export type ProcesoUncheckedUpdateWithoutJuzgadoInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   sujetosProcesales?: Prisma.StringFieldUpdateOperationsInput | string
   actuaciones?: Prisma.ActuacionUncheckedUpdateManyWithoutProcesoNestedInput
@@ -1014,7 +1008,7 @@ export type ProcesoUncheckedUpdateManyWithoutJuzgadoInput = {
   fechaProceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fechaUltimaActuacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   idConexion?: Prisma.IntFieldUpdateOperationsInput | number
-  idProceso?: Prisma.IntFieldUpdateOperationsInput | number
+  idProceso?: Prisma.StringFieldUpdateOperationsInput | string
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   sujetosProcesales?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -1158,7 +1152,7 @@ export type $ProcesoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     fechaProceso: Date | null
     fechaUltimaActuacion: Date | null
     idConexion: number
-    idProceso: number
+    idProceso: string
     juzgadoCiudad: string
     juzgadoId: string
     juzgadoTipo: string
@@ -1598,7 +1592,7 @@ export interface ProcesoFieldRefs {
   readonly fechaProceso: Prisma.FieldRef<"Proceso", 'DateTime'>
   readonly fechaUltimaActuacion: Prisma.FieldRef<"Proceso", 'DateTime'>
   readonly idConexion: Prisma.FieldRef<"Proceso", 'Int'>
-  readonly idProceso: Prisma.FieldRef<"Proceso", 'Int'>
+  readonly idProceso: Prisma.FieldRef<"Proceso", 'String'>
   readonly juzgadoCiudad: Prisma.FieldRef<"Proceso", 'String'>
   readonly juzgadoId: Prisma.FieldRef<"Proceso", 'String'>
   readonly juzgadoTipo: Prisma.FieldRef<"Proceso", 'String'>

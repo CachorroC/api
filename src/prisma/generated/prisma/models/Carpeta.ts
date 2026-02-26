@@ -28,14 +28,12 @@ export type AggregateCarpeta = {
 
 export type CarpetaAvgAggregateOutputType = {
   id: number | null
-  idProcesos: number | null
   numero: number | null
   notasCount: number | null
 }
 
 export type CarpetaSumAggregateOutputType = {
   id: number | null
-  idProcesos: number[]
   numero: number | null
   notasCount: number | null
 }
@@ -105,14 +103,12 @@ export type CarpetaCountAggregateOutputType = {
 
 export type CarpetaAvgAggregateInputType = {
   id?: true
-  idProcesos?: true
   numero?: true
   notasCount?: true
 }
 
 export type CarpetaSumAggregateInputType = {
   id?: true
-  idProcesos?: true
   numero?: true
   notasCount?: true
 }
@@ -268,7 +264,7 @@ export type CarpetaGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type CarpetaGroupByOutputType = {
   id: number
   fecha: Date | null
-  idProcesos: number[]
+  idProcesos: string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -312,7 +308,7 @@ export type CarpetaWhereInput = {
   NOT?: Prisma.CarpetaWhereInput | Prisma.CarpetaWhereInput[]
   id?: Prisma.IntFilter<"Carpeta"> | number
   fecha?: Prisma.DateTimeNullableFilter<"Carpeta"> | Date | string | null
-  idProcesos?: Prisma.IntNullableListFilter<"Carpeta">
+  idProcesos?: Prisma.StringNullableListFilter<"Carpeta">
   llaveProceso?: Prisma.StringFilter<"Carpeta"> | string
   nombre?: Prisma.StringFilter<"Carpeta"> | string
   numero?: Prisma.IntFilter<"Carpeta"> | number
@@ -376,7 +372,7 @@ export type CarpetaWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CarpetaWhereInput | Prisma.CarpetaWhereInput[]
   id?: Prisma.IntFilter<"Carpeta"> | number
   fecha?: Prisma.DateTimeNullableFilter<"Carpeta"> | Date | string | null
-  idProcesos?: Prisma.IntNullableListFilter<"Carpeta">
+  idProcesos?: Prisma.StringNullableListFilter<"Carpeta">
   llaveProceso?: Prisma.StringFilter<"Carpeta"> | string
   nombre?: Prisma.StringFilter<"Carpeta"> | string
   revisado?: Prisma.BoolFilter<"Carpeta"> | boolean
@@ -434,7 +430,7 @@ export type CarpetaScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CarpetaScalarWhereWithAggregatesInput | Prisma.CarpetaScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Carpeta"> | number
   fecha?: Prisma.DateTimeNullableWithAggregatesFilter<"Carpeta"> | Date | string | null
-  idProcesos?: Prisma.IntNullableListFilter<"Carpeta">
+  idProcesos?: Prisma.StringNullableListFilter<"Carpeta">
   llaveProceso?: Prisma.StringWithAggregatesFilter<"Carpeta"> | string
   nombre?: Prisma.StringWithAggregatesFilter<"Carpeta"> | string
   numero?: Prisma.IntWithAggregatesFilter<"Carpeta"> | number
@@ -455,7 +451,7 @@ export type CarpetaScalarWhereWithAggregatesInput = {
 export type CarpetaCreateInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -481,7 +477,7 @@ export type CarpetaCreateInput = {
 export type CarpetaUncheckedCreateInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -509,7 +505,7 @@ export type CarpetaUncheckedCreateInput = {
 export type CarpetaUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -535,7 +531,7 @@ export type CarpetaUpdateInput = {
 export type CarpetaUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -563,7 +559,7 @@ export type CarpetaUncheckedUpdateInput = {
 export type CarpetaCreateManyInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -584,7 +580,7 @@ export type CarpetaCreateManyInput = {
 export type CarpetaUpdateManyMutationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -601,7 +597,7 @@ export type CarpetaUpdateManyMutationInput = {
 export type CarpetaUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -619,11 +615,11 @@ export type CarpetaUncheckedUpdateManyInput = {
   idRegUltimaAct?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type IntNullableListFilter<$PrismaModel = never> = {
-  equals?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
-  has?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
-  hasEvery?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
-  hasSome?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
   isEmpty?: boolean
 }
 
@@ -650,7 +646,6 @@ export type CarpetaCountOrderByAggregateInput = {
 
 export type CarpetaAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  idProcesos?: Prisma.SortOrder
   numero?: Prisma.SortOrder
   notasCount?: Prisma.SortOrder
 }
@@ -697,7 +692,6 @@ export type CarpetaMinOrderByAggregateInput = {
 
 export type CarpetaSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  idProcesos?: Prisma.SortOrder
   numero?: Prisma.SortOrder
   notasCount?: Prisma.SortOrder
 }
@@ -723,7 +717,7 @@ export type CarpetaOrderByRelationAggregateInput = {
 }
 
 export type CarpetaCreateidProcesosInput = {
-  set: number[]
+  set: string[]
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -739,8 +733,8 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 }
 
 export type CarpetaUpdateidProcesosInput = {
-  set?: number[]
-  push?: number | number[]
+  set?: string[]
+  push?: string | string[]
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -962,7 +956,7 @@ export type CarpetaUpdateOneRequiredWithoutProcesosNestedInput = {
 export type CarpetaCreateWithoutFacturasInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -987,7 +981,7 @@ export type CarpetaCreateWithoutFacturasInput = {
 export type CarpetaUncheckedCreateWithoutFacturasInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1030,7 +1024,7 @@ export type CarpetaUpdateToOneWithWhereWithoutFacturasInput = {
 export type CarpetaUpdateWithoutFacturasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1055,7 +1049,7 @@ export type CarpetaUpdateWithoutFacturasInput = {
 export type CarpetaUncheckedUpdateWithoutFacturasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1082,7 +1076,7 @@ export type CarpetaUncheckedUpdateWithoutFacturasInput = {
 export type CarpetaCreateWithoutDeudorInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1107,7 +1101,7 @@ export type CarpetaCreateWithoutDeudorInput = {
 export type CarpetaUncheckedCreateWithoutDeudorInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1150,7 +1144,7 @@ export type CarpetaUpdateToOneWithWhereWithoutDeudorInput = {
 export type CarpetaUpdateWithoutDeudorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1175,7 +1169,7 @@ export type CarpetaUpdateWithoutDeudorInput = {
 export type CarpetaUncheckedUpdateWithoutDeudorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1202,7 +1196,7 @@ export type CarpetaUncheckedUpdateWithoutDeudorInput = {
 export type CarpetaCreateWithoutCodeudorInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1227,7 +1221,7 @@ export type CarpetaCreateWithoutCodeudorInput = {
 export type CarpetaUncheckedCreateWithoutCodeudorInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1270,7 +1264,7 @@ export type CarpetaUpdateToOneWithWhereWithoutCodeudorInput = {
 export type CarpetaUpdateWithoutCodeudorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1295,7 +1289,7 @@ export type CarpetaUpdateWithoutCodeudorInput = {
 export type CarpetaUncheckedUpdateWithoutCodeudorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1322,7 +1316,7 @@ export type CarpetaUncheckedUpdateWithoutCodeudorInput = {
 export type CarpetaCreateWithoutDemandaInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1347,7 +1341,7 @@ export type CarpetaCreateWithoutDemandaInput = {
 export type CarpetaUncheckedCreateWithoutDemandaInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1390,7 +1384,7 @@ export type CarpetaUpdateToOneWithWhereWithoutDemandaInput = {
 export type CarpetaUpdateWithoutDemandaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1415,7 +1409,7 @@ export type CarpetaUpdateWithoutDemandaInput = {
 export type CarpetaUncheckedUpdateWithoutDemandaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1442,7 +1436,7 @@ export type CarpetaUncheckedUpdateWithoutDemandaInput = {
 export type CarpetaCreateWithoutNotasInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1467,7 +1461,7 @@ export type CarpetaCreateWithoutNotasInput = {
 export type CarpetaUncheckedCreateWithoutNotasInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1510,7 +1504,7 @@ export type CarpetaUpdateToOneWithWhereWithoutNotasInput = {
 export type CarpetaUpdateWithoutNotasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1535,7 +1529,7 @@ export type CarpetaUpdateWithoutNotasInput = {
 export type CarpetaUncheckedUpdateWithoutNotasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1562,7 +1556,7 @@ export type CarpetaUncheckedUpdateWithoutNotasInput = {
 export type CarpetaCreateWithoutTareasInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1587,7 +1581,7 @@ export type CarpetaCreateWithoutTareasInput = {
 export type CarpetaUncheckedCreateWithoutTareasInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1630,7 +1624,7 @@ export type CarpetaUpdateToOneWithWhereWithoutTareasInput = {
 export type CarpetaUpdateWithoutTareasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1655,7 +1649,7 @@ export type CarpetaUpdateWithoutTareasInput = {
 export type CarpetaUncheckedUpdateWithoutTareasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1682,7 +1676,7 @@ export type CarpetaUncheckedUpdateWithoutTareasInput = {
 export type CarpetaCreateWithoutUltimaActuacionInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1707,7 +1701,7 @@ export type CarpetaCreateWithoutUltimaActuacionInput = {
 export type CarpetaUncheckedCreateWithoutUltimaActuacionInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1763,7 +1757,7 @@ export type CarpetaScalarWhereInput = {
   NOT?: Prisma.CarpetaScalarWhereInput | Prisma.CarpetaScalarWhereInput[]
   id?: Prisma.IntFilter<"Carpeta"> | number
   fecha?: Prisma.DateTimeNullableFilter<"Carpeta"> | Date | string | null
-  idProcesos?: Prisma.IntNullableListFilter<"Carpeta">
+  idProcesos?: Prisma.StringNullableListFilter<"Carpeta">
   llaveProceso?: Prisma.StringFilter<"Carpeta"> | string
   nombre?: Prisma.StringFilter<"Carpeta"> | string
   numero?: Prisma.IntFilter<"Carpeta"> | number
@@ -1784,7 +1778,7 @@ export type CarpetaScalarWhereInput = {
 export type CarpetaCreateWithoutJuzgadoInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1809,7 +1803,7 @@ export type CarpetaCreateWithoutJuzgadoInput = {
 export type CarpetaUncheckedCreateWithoutJuzgadoInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1860,7 +1854,7 @@ export type CarpetaUpdateManyWithWhereWithoutJuzgadoInput = {
 export type CarpetaCreateWithoutProcesosInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1885,7 +1879,7 @@ export type CarpetaCreateWithoutProcesosInput = {
 export type CarpetaUncheckedCreateWithoutProcesosInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -1928,7 +1922,7 @@ export type CarpetaUpdateToOneWithWhereWithoutProcesosInput = {
 export type CarpetaUpdateWithoutProcesosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1953,7 +1947,7 @@ export type CarpetaUpdateWithoutProcesosInput = {
 export type CarpetaUncheckedUpdateWithoutProcesosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1980,7 +1974,7 @@ export type CarpetaUncheckedUpdateWithoutProcesosInput = {
 export type CarpetaCreateManyUltimaActuacionInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -2000,7 +1994,7 @@ export type CarpetaCreateManyUltimaActuacionInput = {
 export type CarpetaUpdateWithoutUltimaActuacionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2025,7 +2019,7 @@ export type CarpetaUpdateWithoutUltimaActuacionInput = {
 export type CarpetaUncheckedUpdateWithoutUltimaActuacionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2052,7 +2046,7 @@ export type CarpetaUncheckedUpdateWithoutUltimaActuacionInput = {
 export type CarpetaUncheckedUpdateManyWithoutUltimaActuacionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2072,7 +2066,7 @@ export type CarpetaUncheckedUpdateManyWithoutUltimaActuacionInput = {
 export type CarpetaCreateManyJuzgadoInput = {
   id: number
   fecha?: Date | string | null
-  idProcesos?: Prisma.CarpetaCreateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaCreateidProcesosInput | string[]
   llaveProceso: string
   nombre: string
   numero: number
@@ -2090,7 +2084,7 @@ export type CarpetaCreateManyJuzgadoInput = {
 export type CarpetaUpdateWithoutJuzgadoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2115,7 +2109,7 @@ export type CarpetaUpdateWithoutJuzgadoInput = {
 export type CarpetaUncheckedUpdateWithoutJuzgadoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2140,7 +2134,7 @@ export type CarpetaUncheckedUpdateWithoutJuzgadoInput = {
 export type CarpetaUncheckedUpdateManyWithoutJuzgadoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | number[]
+  idProcesos?: Prisma.CarpetaUpdateidProcesosInput | string[]
   llaveProceso?: Prisma.StringFieldUpdateOperationsInput | string
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   numero?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2349,7 +2343,7 @@ export type $CarpetaPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     fecha: Date | null
-    idProcesos: number[]
+    idProcesos: string[]
     llaveProceso: string
     nombre: string
     numero: number
@@ -2799,7 +2793,7 @@ export interface Prisma__CarpetaClient<T, Null = never, ExtArgs extends runtime.
 export interface CarpetaFieldRefs {
   readonly id: Prisma.FieldRef<"Carpeta", 'Int'>
   readonly fecha: Prisma.FieldRef<"Carpeta", 'DateTime'>
-  readonly idProcesos: Prisma.FieldRef<"Carpeta", 'Int[]'>
+  readonly idProcesos: Prisma.FieldRef<"Carpeta", 'String[]'>
   readonly llaveProceso: Prisma.FieldRef<"Carpeta", 'String'>
   readonly nombre: Prisma.FieldRef<"Carpeta", 'String'>
   readonly numero: Prisma.FieldRef<"Carpeta", 'Int'>

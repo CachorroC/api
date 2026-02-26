@@ -20,7 +20,7 @@ export type IntCarpeta = {
   notasCount         : number | null;
   fecha              : Date | null;
   id                 : number;
-  idProcesos         : number[];
+  idProcesos         : string[];
   idRegUltimaAct     : string | null;
   llaveProceso       : string;
   nombre             : string;

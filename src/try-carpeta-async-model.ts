@@ -2,6 +2,7 @@
 import { RawCarpetas } from './data/carpetas.js';
 import { ClassCarpeta } from './models/carpeta.js';
 import { client } from './services/prisma.js';
+import { sleep } from './utils/awaiter.js';
 
 // Add this helper function at the bottom or in utils
 async function processBatch<T>(
@@ -13,25 +14,50 @@ async function processBatch<T>(
     const batch = items.slice(
       i, i + batchSize
     );
-    console.log( `Processing batch ${ i / batchSize + 1 }...` );
+    console.log(
+      `Processing batch ${ i / batchSize + 1 }...`
+    );
     // Run this batch in parallel
-    await Promise.all( batch.map( ( item ) => {
-      return handler( item );
-    } ), );
+    await Promise.all(
+      batch.map(
+        (
+          item
+        ) => {
+          return handler(
+            item
+          );
+        }
+      ),
+    );
   }
 }
 
 // ---------------------------------------------------------
 
 async function tryAsyncClassCarpetas() {
-  console.log( '🚀 Starting Optimized Sync...' );
+  console.log(
+    '🚀 Starting Optimized Sync...'
+  );
   // 1. Convert Raw Data to lightweight objects (Don't instantiate ClassCarpeta yet if not needed)
-  const rawData = RawCarpetas.map( ( r ) => {
-    return {
-      raw   : r,
-      numero: Number( r.NUMERO ),
-    };
-  } );
+  const rawData = RawCarpetas.map(
+    (
+      r
+    ) => {
+      return {
+        raw   : r,
+        numero: Number(
+          r.NUMERO
+        ),
+      };
+    }
+  )
+    .sort(
+      (
+        a, b
+      ) => {
+        return b.numero - a.numero;
+      }
+    );
 
   // 2. Process in Batches
   // We use a batch size of 1 because your RATE_LIMIT is strict (12.5s).
@@ -39,29 +65,56 @@ async function tryAsyncClassCarpetas() {
   const BATCH_SIZE = 1;
 
   await processBatch(
-    rawData, BATCH_SIZE, async ( item ) => {
+    rawData, BATCH_SIZE, async (
+      item
+    ) => {
       try {
       // Instantiate only when needed to save memory
-        const carpeta = new ClassCarpeta( item.raw );
-        console.log( `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }` );
+        const carpeta = new ClassCarpeta(
+          item.raw
+        );
+        console.log(
+          `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }`
+        );
+        await sleep(
+          3000
+        );
 
         try {
-          const existingCarpeta = await client.carpeta.findUnique( {
-            where: {
-              numero: carpeta.numero
+          const existingCarpeta = await client.carpeta.findUnique(
+            {
+              where: {
+                numero: carpeta.numero
+              }
             }
-          } );
+          );
 
-          if ( existingCarpeta && existingCarpeta.llaveProceso === carpeta.llaveProceso ) {
-            return;
+          // 1. Check if the record already exists
+          if ( existingCarpeta ) {
+            // 2. Evaluate changes
+            const isSameLlave = existingCarpeta.llaveProceso === carpeta.llaveProceso;
+            console.log(
+              `isSameLlave: ${ isSameLlave }`
+            );
+            const isSameCategory = existingCarpeta.category === carpeta.category;
+            console.log(
+              `isSameCategory: ${ isSameCategory }`
+            );
+
+            // 3. Skip ONLY if neither has changed
+            if ( isSameLlave && isSameCategory ) {
+              console.log(
+                `⏭️ Skipping ${ carpeta.numero }: llaveProceso and category are unchanged.`
+              );
+
+              return;
+            }
           }
         } catch ( error ) {
           console.error(
-            `❌ Error processing prisma find unique  ${ item.numero }:`,
-            error
+            `❌ Error processing prisma find unique ${ item.numero }:`, error
           );
 
-          return;
         }
 
         // Fetch Data
@@ -81,18 +134,28 @@ async function tryAsyncClassCarpetas() {
     }
   );
 
-  console.log( '✅ Sync Complete' );
+  console.log(
+    '✅ Sync Complete'
+  );
 }
 
 // ... End of tryAsyncClassCarpetas function }
 
 // MISSING LINE: You must add this to actually run the script!
 tryAsyncClassCarpetas()
-  .then( () => {
-    return console.log( 'Script finished successfully.' );
-  } )
-  .catch( ( e ) => {
-    return console.error(
-      'Script crashed:', e
-    );
-  } );
+  .then(
+    () => {
+      return console.log(
+        'Script finished successfully.'
+      );
+    }
+  )
+  .catch(
+    (
+      e
+    ) => {
+      return console.error(
+        'Script crashed:', e
+      );
+    }
+  );
