@@ -16,6 +16,7 @@ import { Prisma } from '../prisma/generated/prisma/client.js';
 import { ensureDate, formatDateToString } from '../utils/ensureDate.js';
 import { TelegramService } from './telegramService.js';
 import { fetchWithSmartRetry } from '../utils/fetchWithSmartRetry.js';
+import { sanitizeText } from '../utils/textSanitizer.js';
 
 // ==========================================
 // 2. CONFIGURATION & CONSTANTS
@@ -504,13 +505,18 @@ class ActuacionService {
         actualLatestItem.idRegActuacion
       )
       : false;
-
-    const cleanActuacion = String(
-      apiData.actuacion
+    // Apply sanitization here 👇
+    const cleanActuacion = sanitizeText(
+      String(
+        apiData.actuacion
+      )
     ) || 'Sin descripción';
-    const cleanAnotacion = String(
-      apiData.anotacion
+    const cleanAnotacion = sanitizeText(
+      String(
+        apiData.anotacion
+      )
     );
+
 
     return {
       idRegActuacion: String(
@@ -1144,14 +1150,15 @@ export class RobustApiClient {
       index,
       parentItem
     ] of items.entries() ) {
-      if ( index > 0 ) {
+      /*if ( index > 0 ) {
+
         const variableDelay = this.RATE_LIMIT_DELAY_MS + Math.floor(
           Math.random() * 1000
         );
-        await wait(
+          await wait(
           variableDelay
         );
-      }
+      } */
 
       try {
         const endpoint = pathBuilder(

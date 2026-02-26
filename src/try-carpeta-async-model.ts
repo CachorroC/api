@@ -76,9 +76,7 @@ async function tryAsyncClassCarpetas() {
         console.log(
           `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }`
         );
-        await sleep(
-          3000
-        );
+
 
         try {
           const existingCarpeta = await client.carpeta.findUnique(
@@ -100,9 +98,13 @@ async function tryAsyncClassCarpetas() {
             console.log(
               `isSameCategory: ${ isSameCategory }`
             );
+            console.log(
+              `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision }`
+            );
+            const isSamefechaUltimaRevision = existingCarpeta.fechaUltimaRevision?.getTime() === carpeta.fechaUltimaRevision?.getTime();
 
             // 3. Skip ONLY if neither has changed
-            if ( isSameLlave && isSameCategory ) {
+            if ( isSameLlave && isSameCategory && isSamefechaUltimaRevision ) {
               console.log(
                 `⏭️ Skipping ${ carpeta.numero }: llaveProceso and category are unchanged.`
               );
