@@ -1,3 +1,5 @@
+import { sleep } from './awaiter.js';
+
 /**
  * The minimum delay required between requests to the same route group.
  *
@@ -14,25 +16,7 @@ const RATE_LIMIT_DELAY_MS = 13000;
  */
 const urlQueues = new Map<string, Promise<void>>();
 
-/**
- * Promisified setTimeout to pause execution.
- *
- * @param {number} ms - The number of milliseconds to wait.
- * @returns {Promise<void>} A promise that resolves after the specified time.
- */
-const wait = (
-  ms: number
-) => {
-  return new Promise(
-    (
-      resolve
-    ) => {
-      return setTimeout(
-        resolve, ms
-      );
-    }
-  );
-};
+
 
 /**
  * Normalizes a URL to group similar REST endpoints for rate limiting.
@@ -50,35 +34,17 @@ const wait = (
 function getRateLimitKey(
   targetUrl: string | URL
 ): string {
-  // Convert to URL object (this automatically drops the #hash if present)
   const urlObj = new URL(
     targetUrl.toString()
   );
-  console.log(
-    `path: ${ targetUrl }`
-  );
   let path = urlObj.pathname;
-  console.log(
-    `path: ${ path }`
-  );
-
-  // 1. Replace numeric IDs (e.g., /posts/123 -> /posts/{id})
   path = path.replace(
     /\/\d+(?=\/|$)/g, '/{id}'
   );
-  console.log(
-    `path: ${ path }`
-  );
-
-  // 2. Replace UUIDs (e.g., /users/123e4567-e89b... -> /users/{id})
   path = path.replace(
     /\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}(?=\/|$)/g, '/{id}'
   );
-  console.log(
-    `path: ${ path }`
-  );
 
-  // Return the hostname + normalized path (ignoring urlObj.search / query params)
   return `${ urlObj.hostname }${ path }`;
 }
 
@@ -108,7 +74,7 @@ async function enforceRateLimit(
   // Schedule the NEXT request to this route to wait
   const nextWait = currentWait.then(
     async () => {
-      await wait(
+      await sleep(
         RATE_LIMIT_DELAY_MS
       );
 
@@ -202,7 +168,7 @@ export async function fetchWithSmartRetry(
             url
           ) }. Pausing for ${ delay }ms...`
         );
-        await wait(
+        await sleep(
           delay
         );
         attempt++;
@@ -233,7 +199,7 @@ export async function fetchWithSmartRetry(
         console.log(
           `⚠️ [HTTP ${ response.status }] Retrying in ${ delay }ms...`
         );
-        await wait(
+        await sleep(
           delay
         );
         attempt++;
@@ -261,7 +227,7 @@ export async function fetchWithSmartRetry(
       console.error(
         `📡 [Network Error] ${ errorMessage }. Retrying in ${ delay }ms...`
       );
-      await wait(
+      await sleep(
         delay
       );
       attempt++;

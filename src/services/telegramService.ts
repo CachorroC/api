@@ -4,8 +4,9 @@
 // 5. INFRASTRUCTURE SERVICES (TELEGRAM FIX)
 // ==========================================
 
+import { ApiError } from '../models/ApiError.js';
+import { FetchResponseActuacionType, ProcessRequest } from '../types/actuaciones.js';
 import { fetchWithSmartRetry } from '../utils/fetchWithSmartRetry.js';
-import { ApiError, FetchResponseActuacion, ProcessRequest } from './syncronize_newest_actuaciones_test_2.js';
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '';
@@ -29,7 +30,7 @@ export class TelegramService {
    * @returns {string} The safely escaped string, or an empty string if the input is null/undefined.
    */
   private static cleanText(
-    text: string | null | undefined 
+    text: string | null | undefined
   ): string {
     if ( !text ) {
       return '';
@@ -37,19 +38,19 @@ export class TelegramService {
 
     return text.toString()
       .replace(
-        /&/g, '&amp;' 
+        /&/g, '&amp;'
       )
       .replace(
-        /</g, '&lt;' 
+        /</g, '&lt;'
       )
       .replace(
-        />/g, '&gt;' 
+        />/g, '&gt;'
       )
       .replace(
-        /"/g, '&quot;' 
+        /"/g, '&quot;'
       )
       .replace(
-        /'/g, '&#039;' 
+        /'/g, '&#039;'
       );
   }
 
@@ -73,7 +74,7 @@ export class TelegramService {
    * });
    */
   static async sendNotification(
-    actuacion: FetchResponseActuacion,
+    actuacion: FetchResponseActuacionType,
     processInfo: ProcessRequest,
   ): Promise<void> {
     if ( !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID ) {
@@ -81,13 +82,13 @@ export class TelegramService {
     }
 
     const cleanActuacion = this.cleanText(
-      actuacion.actuacion 
+      actuacion.actuacion
     );
     const cleanAnotacion = this.cleanText(
-      actuacion.anotacion 
+      actuacion.anotacion
     );
     const cleanLlave = this.cleanText(
-      processInfo.llaveProceso 
+      processInfo.llaveProceso
     );
 
     const message = `
@@ -98,7 +99,7 @@ export class TelegramService {
 📁 <b>Carpeta:</b> ${ processInfo.carpetaNumero }
 
 📅 <b>Fecha:</b> ${ new Date(
-  actuacion.fechaActuacion 
+  actuacion.fechaActuacion
 )
   .toLocaleDateString() }
 📝 <b>Actuación:</b> ${ cleanActuacion }
@@ -123,7 +124,7 @@ ${ cleanAnotacion
               text                    : message,
               parse_mode              : 'HTML',
               disable_web_page_preview: true,
-            } 
+            }
           ),
         },
         3,    // Max Retries
@@ -142,20 +143,20 @@ ${ cleanAnotacion
     } catch ( err: any ) {
       // 🚫 403 signifies the user blocked the bot or hasn't started it
       if ( err.statusCode === 403 || err.message?.includes(
-        '403' 
+        '403'
       ) ) {
         console.error(
-          '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.' 
+          '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.'
         );
 
         return; // Don't try fallback if we are actively blocked
       }
 
       console.warn(
-        '⚠️ Standard HTML message failed, attempting fallback...' 
+        '⚠️ Standard HTML message failed, attempting fallback...'
       );
       await this.sendFallbackMessage(
-        actuacion, processInfo 
+        actuacion, processInfo
       );
     }
   }
@@ -173,7 +174,7 @@ ${ cleanAnotacion
    * @returns {Promise<void>}
    */
   private static async sendFallbackMessage(
-    actuacion: FetchResponseActuacion,
+    actuacion: FetchResponseActuacionType,
     processInfo: ProcessRequest,
   ): Promise<void> {
     try {
@@ -192,7 +193,7 @@ ${ cleanAnotacion
             {
               chat_id: TELEGRAM_CHAT_ID,
               text   : message
-            } 
+            }
           ),
         }
       );
