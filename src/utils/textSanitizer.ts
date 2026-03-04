@@ -20,28 +20,30 @@
  * sanitizeText('Caf\u0065\u0301'); // returns 'Café' (NFC normalized)
  */
 export function sanitizeText(
-  str: string | null | undefined
+  str: string | null | undefined 
 ): string {
   if ( !str ) {
     return '';
   }
 
-  return str
-    // 1. Remove null bytes (\x00) which Postgres strictly forbids
-    .replace(
-      /\0/g, ''
-    )
-    // 2. Remove unprintable ASCII control characters (keeps newlines and tabs)
-    .replace(
-      /[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, ''
-    )
-    // 3. Remove the Unicode replacement character (mojibake cleanup)
-    .replace(
-      /\uFFFD/g, ''
-    )
-    // 4. Normalize Unicode to Canonical Composition (fixes separated diacritics)
-    .normalize(
-      'NFC'
-    )
-    .trim();
+  return (
+    str
+      // 1. Remove null bytes (\x00) which Postgres strictly forbids
+      .replace(
+        /\0/g, '' 
+      )
+      // 2. Remove unprintable ASCII control characters (keeps newlines and tabs)
+      .replace(
+        /[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '' 
+      )
+      // 3. Remove the Unicode replacement character (mojibake cleanup)
+      .replace(
+        /\uFFFD/g, '' 
+      )
+      // 4. Normalize Unicode to Canonical Composition (fixes separated diacritics)
+      .normalize(
+        'NFC' 
+      )
+      .trim()
+  );
 }

@@ -1,5 +1,5 @@
 export function ensureDate(
-  dateInput: string | Date | null | undefined
+  dateInput: string | Date | null | undefined,
 ): Date | null {
   if ( !dateInput ) {
     return null;
@@ -7,7 +7,7 @@ export function ensureDate(
 
   if ( dateInput instanceof Date ) {
     return isNaN(
-      dateInput.getTime()
+      dateInput.getTime() 
     )
       ? null
       : dateInput;
@@ -18,31 +18,31 @@ export function ensureDate(
   // 1. Handle Date-Only strings (e.g., "2026-02-16")
   // Safely append the time component AND the Colombia timezone offset
   if ( /^\d{4}-\d{2}-\d{2}$/.test(
-    dateString
+    dateString 
   ) ) {
     dateString = `${ dateString }T00:00:00-05:00`;
-  // eslint-disable-next-line brace-style
+    // eslint-disable-next-line brace-style
   }
   // 2. Handle Date-Time strings missing a timezone (e.g., "2026-02-16T14:30:00")
   else if ( !/(Z|[+-]\d{2}:?\d{2})$/.test(
-    dateString
+    dateString 
   ) ) {
     dateString = `${ dateString }-05:00`;
   }
 
   const d = new Date(
-    dateString
+    dateString 
   );
 
   return isNaN(
-    d.getTime()
+    d.getTime() 
   )
     ? null
     : d;
 }
 
 export function formatDateToString(
-  date: Date
+  date: Date 
 ) {
   return new Intl.DateTimeFormat(
     'es-CO', {
@@ -55,9 +55,9 @@ export function formatDateToString(
       minute      : 'numeric',
       second      : 'numeric',
       timeZoneName: 'short',
-    }
+    } 
   )
     .format(
-      date
+      date 
     );
 }

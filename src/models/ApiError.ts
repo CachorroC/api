@@ -1,4 +1,3 @@
-
 /**
  * Custom error class for API interactions.
  * Includes a `callerId` to easily trace which part of the sync process failed.
@@ -12,16 +11,16 @@ export class ApiError extends Error {
   constructor(
     public message: string,
     public callerId: string,
-    public statusCode?: number
+    public statusCode?: number,
   ) {
     super(
-      message
+      message 
     );
     this.name = 'ApiError';
     this.callerId = callerId;
     this.statusCode = statusCode;
     console.log(
-      `${ callerId }ApiError: ${ message }`
+      `${ callerId }ApiError: ${ message }` 
     );
   }
 }

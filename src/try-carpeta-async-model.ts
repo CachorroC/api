@@ -11,21 +11,21 @@ async function processBatch<T>(
 ) {
   for ( let i = 0; i < items.length; i += batchSize ) {
     const batch = items.slice(
-      i, i + batchSize
+      i, i + batchSize 
     );
     console.log(
-      `Processing batch ${ i / batchSize + 1 }...`
+      `Processing batch ${ i / batchSize + 1 }...` 
     );
     // Run this batch in parallel
     await Promise.all(
       batch.map(
         (
-          item
+          item 
         ) => {
           return handler(
-            item
+            item 
           );
-        }
+        } 
       ),
     );
   }
@@ -35,27 +35,27 @@ async function processBatch<T>(
 
 async function tryAsyncClassCarpetas() {
   console.log(
-    '🚀 Starting Optimized Sync...'
+    '🚀 Starting Optimized Sync...' 
   );
   // 1. Convert Raw Data to lightweight objects (Don't instantiate ClassCarpeta yet if not needed)
   const rawData = RawCarpetas.map(
     (
-      r
+      r 
     ) => {
       return {
         raw   : r,
         numero: Number(
-          r.NUMERO
+          r.NUMERO 
         ),
       };
-    }
+    } 
   )
     .sort(
       (
-        a, b
+        a, b 
       ) => {
         return b.numero - a.numero;
-      }
+      } 
     );
 
   // 2. Process in Batches
@@ -65,47 +65,49 @@ async function tryAsyncClassCarpetas() {
 
   await processBatch(
     rawData, BATCH_SIZE, async (
-      item
+      item 
     ) => {
       try {
       // Instantiate only when needed to save memory
         const carpeta = new ClassCarpeta(
-          item.raw
+          item.raw 
         );
         console.log(
-          `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }`
+          `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }` 
         );
-
 
         try {
           const existingCarpeta = await client.carpeta.findUnique(
             {
               where: {
-                numero: carpeta.numero
-              }
-            }
+                numero: carpeta.numero,
+              },
+            } 
           );
 
           // 1. Check if the record already exists
           if ( existingCarpeta ) {
-            // 2. Evaluate changes
-            const isSameLlave = existingCarpeta.llaveProceso === carpeta.llaveProceso;
+          // 2. Evaluate changes
+            const isSameLlave
+              = existingCarpeta.llaveProceso === carpeta.llaveProceso;
             console.log(
-              `isSameLlave: ${ isSameLlave }`
+              `isSameLlave: ${ isSameLlave }` 
             );
             const isSameCategory = existingCarpeta.category === carpeta.category;
             console.log(
-              `isSameCategory: ${ isSameCategory }`
+              `isSameCategory: ${ isSameCategory }` 
             );
             console.log(
-              `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision }`
+              `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision }`,
             );
-            const isSamefechaUltimaRevision = existingCarpeta.fechaUltimaRevision?.getTime() === carpeta.fechaUltimaRevision?.getTime();
+            const isSamefechaUltimaRevision
+              = existingCarpeta.fechaUltimaRevision?.getTime()
+            === carpeta.fechaUltimaRevision?.getTime();
 
             // 3. Skip ONLY if neither has changed
             if ( isSameLlave && isSameCategory && isSamefechaUltimaRevision ) {
               console.log(
-                `⏭️ Skipping ${ carpeta.numero }: llaveProceso and category are unchanged.`
+                `⏭️ Skipping ${ carpeta.numero }: llaveProceso and category are unchanged.`,
               );
 
               return;
@@ -113,9 +115,9 @@ async function tryAsyncClassCarpetas() {
           }
         } catch ( error ) {
           console.error(
-            `❌ Error processing prisma find unique ${ item.numero }:`, error
+            `❌ Error processing prisma find unique ${ item.numero }:`,
+            error,
           );
-
         }
 
         // Fetch Data
@@ -129,14 +131,14 @@ async function tryAsyncClassCarpetas() {
       // The 'carpeta' variable goes out of scope here and is freed from memory.
       } catch ( error ) {
         console.error(
-          `❌ Error processing ${ item.numero }:`, error
+          `❌ Error processing ${ item.numero }:`, error 
         );
       }
-    }
+    } 
   );
 
   console.log(
-    '✅ Sync Complete'
+    '✅ Sync Complete' 
   );
 }
 
@@ -147,16 +149,16 @@ tryAsyncClassCarpetas()
   .then(
     () => {
       return console.log(
-        'Script finished successfully.'
+        'Script finished successfully.' 
       );
-    }
+    } 
   )
   .catch(
     (
-      e
+      e 
     ) => {
       return console.error(
-        'Script crashed:', e
+        'Script crashed:', e 
       );
-    }
+    } 
   );

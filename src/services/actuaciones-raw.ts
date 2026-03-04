@@ -3,29 +3,28 @@ import { client } from './prisma.js';
 import { RateLimit } from 'async-sema';
 import fetchActuacionesRaw from './fetch-actuaciones.js';
 
-
 async function getIdProcesos() {
   const carpetas = await client.carpeta.findMany(
     {
-      take: 100
-    }
+      take: 100,
+    } 
   );
 
   return carpetas.flatMap(
     (
-      carpeta
+      carpeta 
     ) => {
       return carpeta.idProcesos.map(
         (
-          idProceso
+          idProceso 
         ) => {
           return {
             idProceso,
             numero: carpeta.numero,
           };
-        }
+        } 
       );
-    }
+    } 
   );
 }
 
@@ -35,7 +34,7 @@ async function main() {
   const idProcesos = await getIdProcesos();
 
   const lim = RateLimit(
-    5
+    5 
   );
 
   for ( const [
@@ -43,33 +42,31 @@ async function main() {
     parentItem
   ] of idProcesos.entries() ) {
     const {
-      idProceso,
-      numero,
+      idProceso, numero 
     } = parentItem;
     console.log(
-      `🌐 [${ index + 1 }/${ idProcesos.length }] Fetching: ${ numero }`
+      `🌐 [${ index + 1 }/${ idProcesos.length }] Fetching: ${ numero }` 
     );
-
 
     await lim();
 
     const acts = await fetchActuacionesRaw(
-      idProceso
+      idProceso 
     );
 
     ActsMap.push(
-      acts
+      acts 
     );
   }
 
   console.log(
-    `finished processing actuaciones ${ ActsMap.length }`
+    `finished processing actuaciones ${ ActsMap.length }` 
   );
 
   fs.writeFile(
     'actuacionesFullOutput.json', JSON.stringify(
-      ActsMap, null, 2
-    )
+      ActsMap, null, 2 
+    ) 
   );
 
   return ActsMap;
@@ -77,5 +74,5 @@ async function main() {
 
 main();
 console.log(
-  'the end'
+  'the end' 
 );

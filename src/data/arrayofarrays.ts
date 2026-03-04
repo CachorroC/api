@@ -12,13 +12,21 @@ const {
   SheetNames, Sheets 
 } = workbook;
 
-const sheets = SheetNames.map( ( sheetName ) => {
-  return {
-    name : sheetName,
-    sheet: utils.sheet_to_json( Sheets[ sheetName ] ),
-  };
-} );
+const sheets = SheetNames.map(
+  (
+    sheetName 
+  ) => {
+    return {
+      name : sheetName,
+      sheet: utils.sheet_to_json(
+        Sheets[ sheetName ] 
+      ),
+    };
+  } 
+);
 
 fs.writeFile(
-  'arrayofsheets.json', JSON.stringify( sheets ) 
+  'arrayofsheets.json', JSON.stringify(
+    sheets 
+  ) 
 );

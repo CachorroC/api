@@ -16,8 +16,6 @@ const RATE_LIMIT_DELAY_MS = 13000;
  */
 const urlQueues = new Map<string, Promise<void>>();
 
-
-
 /**
  * Normalizes a URL to group similar REST endpoints for rate limiting.
  *
@@ -32,17 +30,18 @@ const urlQueues = new Map<string, Promise<void>>();
  * @returns {string} The normalized key representing the route group (e.g., `api.example.com/posts/{id}`).
  */
 function getRateLimitKey(
-  targetUrl: string | URL
+  targetUrl: string | URL 
 ): string {
   const urlObj = new URL(
-    targetUrl.toString()
+    targetUrl.toString() 
   );
   let path = urlObj.pathname;
   path = path.replace(
-    /\/\d+(?=\/|$)/g, '/{id}'
+    /\/\d+(?=\/|$)/g, '/{id}' 
   );
   path = path.replace(
-    /\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}(?=\/|$)/g, '/{id}'
+    /\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}(?=\/|$)/g,
+    '/{id}',
   );
 
   return `${ urlObj.hostname }${ path }`;
@@ -59,39 +58,39 @@ function getRateLimitKey(
  * @returns {Promise<void>} Resolves when the rate limit delay has passed and the request can proceed.
  */
 async function enforceRateLimit(
-  url: string | URL
+  url: string | URL 
 ): Promise<void> {
   // Use our new helper to get the grouped bucket key
   const routeKey = getRateLimitKey(
-    url
+    url 
   );
 
   // Get the existing queue for this route, or start a fresh one
   const currentWait = urlQueues.get(
-    routeKey
+    routeKey 
   ) || Promise.resolve();
 
   // Schedule the NEXT request to this route to wait
   const nextWait = currentWait.then(
     async () => {
       await sleep(
-        RATE_LIMIT_DELAY_MS
+        RATE_LIMIT_DELAY_MS 
       );
 
       // 🧹 Memory Cleanup
       if ( urlQueues.get(
-        routeKey
+        routeKey 
       ) === nextWait ) {
         urlQueues.delete(
-          routeKey
+          routeKey 
         );
       }
-    }
+    } 
   );
 
   // Update the map with the newly extended queue
   urlQueues.set(
-    routeKey, nextWait
+    routeKey, nextWait 
   );
 
   // Wait for our turn in this specific route's queue
@@ -120,7 +119,7 @@ export async function fetchWithSmartRetry(
   url: string | URL,
   options: RequestInit = {},
   maxRetries = 7,
-  baseDelay = 8000
+  baseDelay = 8000,
 ): Promise<Response> {
   let attempt = 0;
 
@@ -129,12 +128,12 @@ export async function fetchWithSmartRetry(
       // 🛡️ PROACTIVE RATE LIMITING
       if ( attempt === 0 ) {
         await enforceRateLimit(
-          url
+          url 
         );
       }
 
       const response = await fetch(
-        url, options
+        url, options 
       );
 
       // ✅ 1. Success Case
@@ -145,31 +144,31 @@ export async function fetchWithSmartRetry(
       // 🛑 2. Handle Rate Limits (429 Too Many Requests)
       if ( response.status === 429 ) {
         const retryAfter = response.headers.get(
-          'retry-after'
+          'retry-after' 
         );
         let delay = baseDelay * Math.pow(
-          2, attempt
+          2, attempt 
         );
 
         if ( retryAfter ) {
           const parsedSeconds = parseInt(
-            retryAfter, 10
+            retryAfter, 10 
           );
 
           if ( !isNaN(
-            parsedSeconds
+            parsedSeconds 
           ) ) {
-            delay = ( parsedSeconds * 1000 ) + 1000;
+            delay = parsedSeconds * 1000 + 1000;
           }
         }
 
         console.warn(
           `⏳ [429] Route limit hit for ${ getRateLimitKey(
-            url
-          ) }. Pausing for ${ delay }ms...`
+            url,
+          ) }. Pausing for ${ delay }ms...`,
         );
         await sleep(
-          delay
+          delay 
         );
         attempt++;
 
@@ -187,20 +186,20 @@ export async function fetchWithSmartRetry(
       ];
 
       if ( RECOVERABLE_STATUSES.includes(
-        response.status
+        response.status 
       ) ) {
         if ( attempt >= maxRetries ) {
           return response;
         }
 
         const delay = baseDelay * Math.pow(
-          2, attempt
+          2, attempt 
         );
         console.log(
-          `⚠️ [HTTP ${ response.status }] Retrying in ${ delay }ms...`
+          `⚠️ [HTTP ${ response.status }] Retrying in ${ delay }ms...` 
         );
         await sleep(
-          delay
+          delay 
         );
         attempt++;
 
@@ -209,7 +208,6 @@ export async function fetchWithSmartRetry(
 
       // ❌ 4. Fatal Client Errors (400, 401, 404)
       return response;
-
     } catch ( error ) {
       // 📡 5. Network / Connection Errors
       if ( attempt >= maxRetries ) {
@@ -217,18 +215,19 @@ export async function fetchWithSmartRetry(
       }
 
       const delay = baseDelay * Math.pow(
-        2, attempt
+        2, attempt 
       );
-      const errorMessage = error instanceof Error
-        ? error.message
-        : String(
-            error
-          );
+      const errorMessage
+        = error instanceof Error
+          ? error.message
+          : String(
+              error 
+            );
       console.error(
-        `📡 [Network Error] ${ errorMessage }. Retrying in ${ delay }ms...`
+        `📡 [Network Error] ${ errorMessage }. Retrying in ${ delay }ms...`,
       );
       await sleep(
-        delay
+        delay 
       );
       attempt++;
 
@@ -237,6 +236,6 @@ export async function fetchWithSmartRetry(
   }
 
   throw new Error(
-    'Unexpected end of fetch retry loop'
+    'Unexpected end of fetch retry loop' 
   );
 }

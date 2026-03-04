@@ -11,9 +11,13 @@ export class NotasBuilder implements IntNota {
   constructor(
     incomingNote: string, carpetaNumero?: number, index?: number 
   ) {
-    this.content = incomingNote.split( '//' );
+    this.content = incomingNote.split(
+      '//' 
+    );
 
-    const dateExtract = datesExtractor( incomingNote );
+    const dateExtract = datesExtractor(
+      incomingNote 
+    );
 
     if ( dateExtract.length === 0 ) {
       this.dueDate = null;

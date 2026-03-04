@@ -7,25 +7,24 @@ import { formatDateToString } from './ensureDate.js';
  * @returns {Promise<void>} A promise that resolves after the specified time.
  */
 export const sleep = (
-  ms: number
+  ms: number 
 ) => {
   return new Promise(
     (
-      resolve
+      resolve 
     ) => {
-
       const logTime = new Date();
       const formatedLogTime = formatDateToString(
-        logTime
+        logTime 
       );
 
       console.log(
-        `🛌 sleeping ${ ms } ${ formatedLogTime } 😴`
+        `🛌 sleeping ${ ms } ${ formatedLogTime } 😴` 
       );
 
       return setTimeout(
-        resolve, ms
+        resolve, ms 
       );
-    }
+    } 
   );
 };

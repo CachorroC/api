@@ -3,9 +3,11 @@
 import { Prisma } from '../prisma/generated/prisma/client.js';
 import { client } from '../services/prisma.js';
 import { TelegramService } from '../services/telegramService.js';
-import { DatabaseActuacionType, FetchResponseActuacionType, ProcessRequest } from '../types/actuaciones.js';
+import { DatabaseActuacionType,
+  FetchResponseActuacionType,
+  ProcessRequest, } from '../types/actuaciones.js';
 import { sleep } from '../utils/awaiter.js';
-import { ensureDate } from '../utils/ensureDate.js';
+import { ensureDate, formatDateToString } from '../utils/ensureDate.js';
 import { sanitizeText } from '../utils/textSanitizer.js';
 import { ApiError } from './ApiError.js';
 import { FileLogger } from './FileLogger.js';
@@ -15,7 +17,7 @@ const NEW_ACTUACION_WEBHOOK_URL = process.env.NEW_ACTUACION_WEBHOOK_URL || '';
 async function pMap<T, R>(
   array: T[],
   mapper: ( item: T ) => Promise<R>,
-  concurrency: number
+  concurrency: number,
 ): Promise<R[]> {
   const results: R[] = [];
   const executing: Promise<void>[] = [];
@@ -25,36 +27,36 @@ async function pMap<T, R>(
       .then(
         () => {
           return mapper(
-            item
+            item 
           );
-        }
+        } 
       );
     results.push(
-      p as unknown as R
+      p as unknown as R 
     );
 
     const e: Promise<void> = p.then(
       () => {
         executing.splice(
           executing.indexOf(
-            e
-          ), 1
+            e 
+          ), 1 
         );
-      }
+      } 
     );
     executing.push(
-      e
+      e 
     );
 
     if ( executing.length >= concurrency ) {
       await Promise.race(
-        executing
+        executing 
       );
     }
   }
 
   return Promise.all(
-    results
+    results 
   );
 }
 
@@ -62,7 +64,7 @@ export default class Actuacion implements DatabaseActuacionType {
   createdAt     : Date;
   idProceso     : string;
   isUltimaAct   : boolean;
-  carpetaNumero : number ;
+  carpetaNumero : number;
   actuacion     : string;
   anotacion     : string | null;
   cant          : number;
@@ -75,10 +77,18 @@ export default class Actuacion implements DatabaseActuacionType {
   fechaRegistro : Date;
   idRegActuacion: string;
   llaveProceso  : string;
-  constructor (
+  constructor(
     {
-      actuacion, idProceso, isUltimaAct, carpetaNumero
-    }: { actuacion: FetchResponseActuacionType; idProceso: string; isUltimaAct: boolean; carpetaNumero: number; }
+      actuacion,
+      idProceso,
+      isUltimaAct,
+      carpetaNumero,
+    }: {
+      actuacion    : FetchResponseActuacionType;
+      idProceso    : string;
+      isUltimaAct  : boolean;
+      carpetaNumero: number;
+    } 
   ) {
     this.createdAt = new Date();
     this.idProceso = idProceso;
@@ -91,31 +101,27 @@ export default class Actuacion implements DatabaseActuacionType {
     this.conDocumentos = actuacion.conDocumentos;
     this.consActuacion = actuacion.consActuacion;
     this.fechaActuacion = new Date(
-      actuacion.fechaActuacion
+      actuacion.fechaActuacion 
     );
     this.fechaFinal = actuacion.fechaFinal
       ? new Date(
-          actuacion.fechaFinal
+          actuacion.fechaFinal 
         )
       : null;
     this.fechaInicial = actuacion.fechaInicial
       ? new Date(
-          actuacion.fechaInicial
+          actuacion.fechaInicial 
         )
       : null;
     this.fechaRegistro = new Date(
-      actuacion.fechaRegistro
+      actuacion.fechaRegistro 
     );
     this.idRegActuacion = `${ actuacion.idRegActuacion }`;
     this.llaveProceso = actuacion.llaveProceso;
-
   }
 }
 
-
-
 export class ActuacionService {
-
   /**
    * Evaluates an array of API records to determine the absolute latest one based on
    * `fechaActuacion`, falling back to `fechaRegistro`, and finally `consActuacion`.
@@ -123,7 +129,7 @@ export class ActuacionService {
    * @returns The most recent Actuacion object, or null if the array is empty.
    */
   private static getLatestByDate(
-    actuaciones: FetchResponseActuacionType[]
+    actuaciones: FetchResponseActuacionType[],
   ): FetchResponseActuacionType | null {
     if ( !actuaciones || actuaciones.length === 0 ) {
       return null;
@@ -131,14 +137,14 @@ export class ActuacionService {
 
     return actuaciones.reduce(
       (
-        prev, current
+        prev, current 
       ) => {
         const prevDate = ensureDate(
-          prev.fechaActuacion
+          prev.fechaActuacion 
         )
           ?.getTime() || 0;
         const currDate = ensureDate(
-          current.fechaActuacion
+          current.fechaActuacion 
         )
           ?.getTime() || 0;
 
@@ -148,11 +154,11 @@ export class ActuacionService {
 
         if ( currDate === prevDate ) {
           const prevReg = ensureDate(
-            prev.fechaRegistro
+            prev.fechaRegistro 
           )
             ?.getTime() || 0;
           const currReg = ensureDate(
-            current.fechaRegistro
+            current.fechaRegistro 
           )
             ?.getTime() || 0;
 
@@ -168,7 +174,7 @@ export class ActuacionService {
         }
 
         return prev;
-      }
+      } 
     );
   }
 
@@ -183,31 +189,32 @@ export class ActuacionService {
   private static mapToPrismaInput(
     apiData: FetchResponseActuacionType,
     parentProc: ProcessRequest,
-    actualLatestItem: FetchResponseActuacionType | null
+    actualLatestItem: FetchResponseActuacionType | null,
   ): Prisma.ActuacionCreateInput {
     const isUltima = actualLatestItem
       ? String(
-        apiData.idRegActuacion
-      ) === String(
-        actualLatestItem.idRegActuacion
+        apiData.idRegActuacion 
       )
+        === String(
+          actualLatestItem.idRegActuacion 
+        )
       : false;
     // Apply sanitization here 👇
-    const cleanActuacion = sanitizeText(
-      String(
-        apiData.actuacion
-      )
-    ) || 'Sin descripción';
+    const cleanActuacion
+      = sanitizeText(
+        String(
+          apiData.actuacion 
+        ) 
+      ) || 'Sin descripción';
     const cleanAnotacion = sanitizeText(
       String(
-        apiData.anotacion
-      )
+        apiData.anotacion 
+      ) 
     );
-
 
     return {
       idRegActuacion: String(
-        apiData.idRegActuacion
+        apiData.idRegActuacion 
       ),
       consActuacion : apiData.consActuacion,
       actuacion     : cleanActuacion,
@@ -218,16 +225,16 @@ export class ActuacionService {
       conDocumentos : apiData.conDocumentos,
       llaveProceso  : parentProc.llaveProceso,
       fechaActuacion: ensureDate(
-        apiData.fechaActuacion
+        apiData.fechaActuacion 
       ) ?? new Date(),
       fechaRegistro: ensureDate(
-        apiData.fechaRegistro
+        apiData.fechaRegistro 
       ) ?? new Date(),
       fechaInicial: ensureDate(
-        apiData.fechaInicial
+        apiData.fechaInicial 
       ),
       fechaFinal: ensureDate(
-        apiData.fechaFinal
+        apiData.fechaFinal 
       ),
       idProceso  : parentProc.idProceso,
       isUltimaAct: isUltima,
@@ -249,17 +256,17 @@ export class ActuacionService {
   private static async processNotifications(
     newItems: FetchResponseActuacionType[],
     parentProc: ProcessRequest,
-    logger: FileLogger
+    logger: FileLogger,
   ) {
     if ( newItems.length === 0 ) {
       return;
     }
 
     console.log(
-      `✨ Found ${ newItems.length } NEW Actuaciones. Processing notifications...`
+      `✨ Found ${ newItems.length } NEW Actuaciones. Processing notifications...`,
     );
     await logger.logNewItems(
-      newItems, parentProc
+      newItems, parentProc 
     );
 
     for ( const [
@@ -268,13 +275,13 @@ export class ActuacionService {
     ] of newItems.entries() ) {
       if ( index > 0 ) {
         await sleep(
-          2000
+          2000 
         );
       }
 
       if ( WEBHOOK_URL ) {
         console.log(
-          `🗯️ Iniciando el webhook: ${ WEBHOOK_URL }`
+          `🗯️ Iniciando el webhook: ${ WEBHOOK_URL }` 
         );
 
         try {
@@ -282,7 +289,7 @@ export class ActuacionService {
             WEBHOOK_URL, {
               method : 'POST',
               headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
               },
               body: JSON.stringify(
                 {
@@ -298,44 +305,50 @@ export class ActuacionService {
                   actions: [
                     {
                       action: 'openCarpeta',
-                      title : 'Abrir Carpeta'
+                      title : 'Abrir Carpeta',
                     },
                     {
                       action: 'openActuaciones',
-                      title : 'Abrir Actuaciones'
+                      title : 'Abrir Actuaciones',
                     },
                   ],
-                }
+                } 
               ),
-            }
+            } 
           );
 
           if ( !response.ok ) {
             throw new ApiError(
-              `Status ${ response.status }`, 'ActuacionService.processNotifications Webhook'
+              `Status ${ response.status }`,
+              'ActuacionService.processNotifications Webhook',
             );
           }
-
         } catch ( postError: any ) {
           console.log(
-            `⚠️ Webhook Failed: ${ postError.message }`
+            `⚠️ Webhook Failed: ${ postError.message }` 
           );
           await logger.logFailure(
-            parentProc.idProceso, act, postError.message, 'WEBHOOK'
+            parentProc.idProceso,
+            act,
+            postError.message,
+            'WEBHOOK',
           );
         }
       }
 
       try {
         await TelegramService.sendNotification(
-          act, parentProc
+          act, parentProc 
         );
       } catch ( teleError: any ) {
         console.log(
-          `⚠️ Telegram Failed: ${ teleError.message }`
+          `⚠️ Telegram Failed: ${ teleError.message }` 
         );
         await logger.logFailure(
-          parentProc.idProceso, act, teleError.message, 'TELEGRAM'
+          parentProc.idProceso,
+          act,
+          teleError.message,
+          'TELEGRAM',
         );
       }
 
@@ -344,30 +357,34 @@ export class ActuacionService {
           const body = JSON.stringify(
             {
               ...act,
-              ...parentProc
-            }
+              ...parentProc,
+            } 
           );
           const response = await fetch(
             NEW_ACTUACION_WEBHOOK_URL, {
               method : 'POST',
               headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
               },
               body: body,
-            }
+            } 
           );
 
           if ( !response.ok ) {
             throw new ApiError(
-              `Status ${ response.status }`, 'ActuacionService.processNotifications Webhook'
+              `Status ${ response.status }`,
+              'ActuacionService.processNotifications Webhook',
             );
           }
         } catch ( postError: any ) {
           console.log(
-            `⚠️ Webhook Failed: ${ postError.message }`
+            `⚠️ Webhook Failed: ${ postError.message }` 
           );
           await logger.logFailure(
-            parentProc.idProceso, act, postError.message, 'WEBHOOK'
+            parentProc.idProceso,
+            act,
+            postError.message,
+            'WEBHOOK',
           );
         }
       }
@@ -385,100 +402,103 @@ export class ActuacionService {
   static async syncBatch(
     apiActuaciones: FetchResponseActuacionType[],
     parentProc: ProcessRequest,
-    logger: FileLogger
+    logger: FileLogger,
   ) {
     const latestItemByDate = this.getLatestByDate(
-      apiActuaciones
+      apiActuaciones 
     );
 
     const existingRecords = await client.actuacion.findMany(
       {
         where: {
-          idProceso: parentProc.idProceso
+          idProceso: parentProc.idProceso,
         },
         select: {
-          idRegActuacion: true
+          idRegActuacion: true,
         },
-      }
+      } 
     );
 
     const existingIds = new Set(
       existingRecords.map(
         (
-          r
+          r 
         ) => {
           return r.idRegActuacion;
-        }
-      )
+        } 
+      ),
     );
 
     const newItems = apiActuaciones.filter(
       (
-        item
+        item 
       ) => {
         return !existingIds.has(
           String(
-            item.idRegActuacion
-          )
+            item.idRegActuacion 
+          ) 
         );
-      }
+      } 
     );
     const existingItems = apiActuaciones.filter(
       (
-        item
+        item 
       ) => {
         return existingIds.has(
           String(
-            item.idRegActuacion
-          )
+            item.idRegActuacion 
+          ) 
         );
-      }
+      } 
     );
 
     if ( newItems.length > 0 ) {
       const createData = newItems.map(
         (
-          item
+          item 
         ) => {
           return this.mapToPrismaInput(
-            item, parentProc, latestItemByDate
+            item, parentProc, latestItemByDate 
           );
-        }
+        } 
       );
 
       for ( const actuacionNueva of createData ) {
         console.log(
-          `Processing new actuacion: ${ actuacionNueva.idRegActuacion }`
+          `Processing new actuacion: ${ actuacionNueva.idRegActuacion }`,
         );
 
         try {
           await client.actuacion.upsert(
             {
               where: {
-                idRegActuacion: actuacionNueva.idRegActuacion
+                idRegActuacion: actuacionNueva.idRegActuacion,
               },
               create: actuacionNueva,
               update: {
                 cant         : actuacionNueva.cant,
                 consActuacion: actuacionNueva.consActuacion,
               },
-            }
+            } 
           );
           console.log(
-            `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.`
+            `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.`,
           );
         } catch ( error: any ) {
           console.log(
-            `   ❌ Insert Failed for ${ actuacionNueva.idRegActuacion }: ${ error.message }`
+            `   ❌ Insert Failed for ${ actuacionNueva.idRegActuacion }: ${ error.message }`,
           );
           await logger.logFailure(
-            parentProc.idProceso, actuacionNueva, error.message, 'DB_ITEM'
+            parentProc.idProceso,
+            actuacionNueva,
+            error.message,
+            'DB_ITEM',
           );
         }
       }
 
       await this.processNotifications(
-        newItems, parentProc, logger
+        newItems, parentProc, logger 
       );
     }
 
@@ -486,14 +506,15 @@ export class ActuacionService {
       await pMap(
         existingItems,
         async (
-          item
+          item 
         ) => {
           const isUltima = latestItemByDate
             ? String(
-              item.idRegActuacion
-            ) === String(
-              latestItemByDate.idRegActuacion
+              item.idRegActuacion 
             )
+              === String(
+                latestItemByDate.idRegActuacion 
+              )
             : item.cant === item.consActuacion;
 
           try {
@@ -501,30 +522,33 @@ export class ActuacionService {
               {
                 where: {
                   idRegActuacion: String(
-                    item.idRegActuacion
-                  )
+                    item.idRegActuacion 
+                  ),
                 },
                 data: {
                   isUltimaAct: isUltima,
                   cant       : item.cant,
                 },
-              }
+              } 
             );
           } catch ( err: any ) {
             console.log(
-              `   ❌ Update Failed: ${ err.message }`
+              `   ❌ Update Failed: ${ err.message }` 
             );
             await logger.logFailure(
-              parentProc.idProceso, existingItems, err.message, 'DB_ITEM'
+              parentProc.idProceso,
+              existingItems,
+              err.message,
+              'DB_ITEM',
             );
           }
         },
-        10
+        10,
       );
     }
 
     await this.updateCarpetaIfNewer(
-      apiActuaciones, parentProc
+      apiActuaciones, parentProc 
     );
   }
 
@@ -537,10 +561,10 @@ export class ActuacionService {
    */
   static async updateCarpetaIfNewer(
     actuaciones: FetchResponseActuacionType[],
-    parentProc: ProcessRequest
+    parentProc: ProcessRequest,
   ) {
     const incomingLast = this.getLatestByDate(
-      actuaciones
+      actuaciones 
     );
 
     if ( !incomingLast ) {
@@ -551,13 +575,13 @@ export class ActuacionService {
       const carpeta = await client.carpeta.findUnique(
         {
           where: {
-            numero: parentProc.carpetaNumero
+            numero: parentProc.carpetaNumero,
           },
           select: {
             idRegUltimaAct: true,
-            fecha         : true
+            fecha         : true,
           },
-        }
+        } 
       );
 
       if ( !carpeta ) {
@@ -565,164 +589,173 @@ export class ActuacionService {
       }
 
       const incomingParsed = ensureDate(
-        incomingLast.fechaActuacion
+        incomingLast.fechaActuacion 
       );
       const savedParsed = ensureDate(
-        carpeta.fecha
+        carpeta.fecha 
       );
 
       const incomingTime = incomingParsed?.getTime() ?? 0;
       const savedTime = savedParsed?.getTime() ?? 0;
 
       const isNewerDate = incomingTime > savedTime;
-      const isSameDateDifferentActuacion = ( incomingTime === savedTime )
-                                           && ( carpeta.idRegUltimaAct !== String(
-                                             incomingLast.idRegActuacion
-                                           ) );
+      const isSameDateDifferentActuacion
+        = incomingTime === savedTime
+        && carpeta.idRegUltimaAct !== String(
+          incomingLast.idRegActuacion 
+        );
 
       if ( !savedParsed || isNewerDate || isSameDateDifferentActuacion ) {
         console.log(
-          `carpeta.idRegUltimaAct is different from incomingLast.idRegActuacion? ${ carpeta.idRegUltimaAct !== String(
-            incomingLast.idRegActuacion
-          ) }`
+          `carpeta.idRegUltimaAct is different from incomingLast.idRegActuacion? ${
+            carpeta.idRegUltimaAct !== String(
+              incomingLast.idRegActuacion 
+            )
+          }`,
         );
 
         if ( isNewerDate ) {
           console.log(
             `📅 Incoming actuacion date (${ formatDateToString(
-              incomingParsed ?? new Date()
+              incomingParsed ?? new Date(),
             ) }) is newer than Carpeta date (${ formatDateToString(
-              savedParsed ?? new Date()
-            ) }). Updating...`
+              savedParsed ?? new Date(),
+            ) }). Updating...`,
           );
         } else if ( isSameDateDifferentActuacion ) {
           console.log(
-            '📅 Incoming actuacion date is the same as Carpeta date, but it\'s a different Actuacion ID. Updating...'
+            '📅 Incoming actuacion date is the same as Carpeta date, but it\'s a different Actuacion ID. Updating...',
           );
         } else {
           console.log(
-            '📅 Carpeta has no previous date. Updating...'
+            '📅 Carpeta has no previous date. Updating...' 
           );
         }
 
         console.log(
-          `🔄 Updating Carpeta ${ parentProc.carpetaNumero } date.`
+          `🔄 Updating Carpeta ${ parentProc.carpetaNumero } date.` 
         );
 
         try {
-          if ( carpeta.idRegUltimaAct && carpeta.idRegUltimaAct !== String(
-            incomingLast.idRegActuacion
-          ) ) {
+          if (
+            carpeta.idRegUltimaAct
+            && carpeta.idRegUltimaAct !== String(
+              incomingLast.idRegActuacion 
+            )
+          ) {
             await client.actuacion.updateMany(
               {
                 where: {
-                  idRegActuacion: carpeta.idRegUltimaAct
+                  idRegActuacion: carpeta.idRegUltimaAct,
                 },
                 data: {
-                  isUltimaAct: false
+                  isUltimaAct: false,
                 },
-              }
+              } 
             );
           }
         } catch ( error ) {
           console.log(
             `🚫 error resetting previous flag: ${ JSON.stringify(
-              error
-            ) }`
+              error 
+            ) }`,
           );
         }
 
         const savedActuacion = await client.actuacion.upsert(
           {
             where: {
-              idRegActuacion: `${ incomingLast.idRegActuacion }`
+              idRegActuacion: `${ incomingLast.idRegActuacion }`,
             },
             create: {
               ...incomingLast,
               actuacion: String(
-                incomingLast.actuacion
+                incomingLast.actuacion 
               ) || 'Sin descripción',
               anotacion: String(
-                incomingLast.anotacion
+                incomingLast.anotacion 
               ),
               idProceso     : parentProc.idProceso,
               isUltimaAct   : true,
               idRegActuacion: `${ incomingLast.idRegActuacion }`,
-              fechaActuacion: ensureDate(
-                incomingLast.fechaActuacion
+              fechaActuacion:
+              ensureDate(
+                incomingLast.fechaActuacion 
               ) ?? new Date(),
               fechaRegistro: ensureDate(
-                incomingLast.fechaRegistro
+                incomingLast.fechaRegistro 
               ) ?? new Date(),
               fechaInicial: ensureDate(
-                incomingLast.fechaInicial
+                incomingLast.fechaInicial 
               ) ?? undefined,
               fechaFinal: ensureDate(
-                incomingLast.fechaFinal
+                incomingLast.fechaFinal 
               ) ?? undefined,
               proceso: {
                 connect: {
-                  idProceso: parentProc.idProceso
-                }
+                  idProceso: parentProc.idProceso,
+                },
               },
             },
             update: {
-              cant          : incomingLast.cant,
-              fechaActuacion: ensureDate(
-                incomingLast.fechaActuacion
+              cant: incomingLast.cant,
+              fechaActuacion:
+              ensureDate(
+                incomingLast.fechaActuacion 
               ) ?? new Date(),
               fechaRegistro: ensureDate(
-                incomingLast.fechaRegistro
+                incomingLast.fechaRegistro 
               ) ?? new Date(),
               fechaInicial: ensureDate(
-                incomingLast.fechaInicial
+                incomingLast.fechaInicial 
               ) ?? undefined,
               fechaFinal: ensureDate(
-                incomingLast.fechaFinal
+                incomingLast.fechaFinal 
               ) ?? undefined,
             },
-          }
+          } 
         );
 
         console.log(
           `🔄 Updated the last actuacion:  ${ formatDateToString(
-            savedActuacion.fechaActuacion
-          ) } date.`
+            savedActuacion.fechaActuacion,
+          ) } date.`,
         );
 
         const updateCarpeta = await client.carpeta.update(
           {
             where: {
-              numero: parentProc.carpetaNumero
+              numero: parentProc.carpetaNumero,
             },
             data: {
               fecha: ensureDate(
-                savedActuacion.fechaActuacion
+                savedActuacion.fechaActuacion 
               ),
               revisado       : false,
               updatedAt      : new Date(),
               ultimaActuacion: {
                 connect: {
                   idRegActuacion: String(
-                    savedActuacion.idRegActuacion
-                  )
+                    savedActuacion.idRegActuacion 
+                  ),
                 },
               },
             },
-          }
+          } 
         );
 
         if ( updateCarpeta.fecha ) {
           console.log(
             `🔄 Updated carpeta:  ${ formatDateToString(
-              updateCarpeta.fecha
-            ) } date.`
+              updateCarpeta.fecha,
+            ) } date.`,
           );
         }
       }
     } catch ( error ) {
       console.log(
-        `❌ Error updating carpeta ${ parentProc.carpetaNumero }:`, error
+        `❌ Error updating carpeta ${ parentProc.carpetaNumero }:`,
+        error,
       );
     }
   }

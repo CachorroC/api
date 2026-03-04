@@ -6,7 +6,9 @@ const obj = {
 for ( const [
   key,
   val
-] of Object.entries( obj ) ) {
+] of Object.entries(
+    obj 
+  ) ) {
   console.log(
     key, val 
   );

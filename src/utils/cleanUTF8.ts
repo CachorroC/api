@@ -2,7 +2,7 @@
  * Cleans a string of invalid UTF-8 byte sequences and null bytes.
  */
 export function cleanUtf8(
-  str: unknown
+  str: unknown 
 ): string {
   if ( !str ) {
     return '';
@@ -10,16 +10,16 @@ export function cleanUtf8(
 
   return Buffer.from(
     String(
-      str
-    ), 'utf8'
+      str 
+    ), 'utf8' 
   )
     .toString(
-      'utf8'
+      'utf8' 
     )
     .normalize(
-      'NFC'
+      'NFC' 
     )
     .replace(
-      /\0/g, ''
+      /\0/g, '' 
     ); // Strips out literal null bytes which crash Postgres
 }

@@ -5,7 +5,8 @@
 // ==========================================
 
 import { ApiError } from '../models/ApiError.js';
-import { FetchResponseActuacionType, ProcessRequest } from '../types/actuaciones.js';
+import { FetchResponseActuacionType,
+  ProcessRequest, } from '../types/actuaciones.js';
 import { fetchWithSmartRetry } from '../utils/fetchWithSmartRetry.js';
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
@@ -19,7 +20,6 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '';
  * Telegram's strict HTML parser rejects the primary message.
  */
 export class TelegramService {
-
   /**
    * @private
    * @static
@@ -30,27 +30,28 @@ export class TelegramService {
    * @returns {string} The safely escaped string, or an empty string if the input is null/undefined.
    */
   private static cleanText(
-    text: string | null | undefined
+    text: string | null | undefined 
   ): string {
     if ( !text ) {
       return '';
     }
 
-    return text.toString()
+    return text
+      .toString()
       .replace(
-        /&/g, '&amp;'
+        /&/g, '&amp;' 
       )
       .replace(
-        /</g, '&lt;'
+        /</g, '&lt;' 
       )
       .replace(
-        />/g, '&gt;'
+        />/g, '&gt;' 
       )
       .replace(
-        /"/g, '&quot;'
+        /"/g, '&quot;' 
       )
       .replace(
-        /'/g, '&#039;'
+        /'/g, '&#039;' 
       );
   }
 
@@ -82,13 +83,13 @@ export class TelegramService {
     }
 
     const cleanActuacion = this.cleanText(
-      actuacion.actuacion
+      actuacion.actuacion 
     );
     const cleanAnotacion = this.cleanText(
-      actuacion.anotacion
+      actuacion.anotacion 
     );
     const cleanLlave = this.cleanText(
-      processInfo.llaveProceso
+      processInfo.llaveProceso 
     );
 
     const message = `
@@ -99,7 +100,7 @@ export class TelegramService {
 📁 <b>Carpeta:</b> ${ processInfo.carpetaNumero }
 
 📅 <b>Fecha:</b> ${ new Date(
-  actuacion.fechaActuacion
+  actuacion.fechaActuacion 
 )
   .toLocaleDateString() }
 📝 <b>Actuación:</b> ${ cleanActuacion }
@@ -116,7 +117,7 @@ ${ cleanAnotacion
         {
           method : 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(
             {
@@ -124,39 +125,39 @@ ${ cleanAnotacion
               text                    : message,
               parse_mode              : 'HTML',
               disable_web_page_preview: true,
-            }
+            } 
           ),
         },
-        3,    // Max Retries
-        3000  // Base Delay (3 seconds is safer for Telegram)
+        3, // Max Retries
+        3000, // Base Delay (3 seconds is safer for Telegram)
       );
 
       if ( !fetchTelegramBot.ok ) {
         throw new Error(
-          `📛Telegram API request failed with status ${ fetchTelegramBot.status } code ${ fetchTelegramBot.statusText }`
+          `📛Telegram API request failed with status ${ fetchTelegramBot.status } code ${ fetchTelegramBot.statusText }`,
         );
       } else if ( fetchTelegramBot.ok ) {
         console.log(
-          `✅ Telegram notification sent successfully for expediente ${ processInfo.carpetaNumero }, ${ fetchTelegramBot.statusText }`
+          `✅ Telegram notification sent successfully for expediente ${ processInfo.carpetaNumero }, ${ fetchTelegramBot.statusText }`,
         );
       }
     } catch ( err: any ) {
       // 🚫 403 signifies the user blocked the bot or hasn't started it
       if ( err.statusCode === 403 || err.message?.includes(
-        '403'
+        '403' 
       ) ) {
         console.error(
-          '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.'
+          '❌ TELEGRAM 403: The bot cannot message this user. Ensure you have sent /start to the bot.',
         );
 
         return; // Don't try fallback if we are actively blocked
       }
 
       console.warn(
-        '⚠️ Standard HTML message failed, attempting fallback...'
+        '⚠️ Standard HTML message failed, attempting fallback...' 
       );
       await this.sendFallbackMessage(
-        actuacion, processInfo
+        actuacion, processInfo 
       );
     }
   }
@@ -178,30 +179,33 @@ ${ cleanAnotacion
     processInfo: ProcessRequest,
   ): Promise<void> {
     try {
-      const message = `🚨 NUEVA ACTUACIÓN 🚨\n\nNombre: ${ processInfo.nombre }\nExpediente: ${ processInfo.carpetaNumero }\nActuación: ${ actuacion.actuacion }${ actuacion.anotacion
-        ? `\nAnotación: ${ actuacion.anotacion }`
-        : '' } \n https://app.rsasesorjuridico.com/Carpeta/${ processInfo.carpetaNumero }/ultimasActuaciones/${ processInfo.idProceso }`;
+      const message = `🚨 NUEVA ACTUACIÓN 🚨\n\nNombre: ${ processInfo.nombre }\nExpediente: ${ processInfo.carpetaNumero }\nActuación: ${ actuacion.actuacion }${
+        actuacion.anotacion
+          ? `\nAnotación: ${ actuacion.anotacion }`
+          : ''
+      } \n https://app.rsasesorjuridico.com/Carpeta/${ processInfo.carpetaNumero }/ultimasActuaciones/${ processInfo.idProceso }`;
 
       // Simple fetch for fallback, retaining smart retry but without formatting complexity
       await fetchWithSmartRetry(
-        `https://api.telegram.org/bot${ TELEGRAM_BOT_TOKEN }/sendMessage`, {
+        `https://api.telegram.org/bot${ TELEGRAM_BOT_TOKEN }/sendMessage`,
+        {
           method : 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(
             {
               chat_id: TELEGRAM_CHAT_ID,
-              text   : message
-            }
+              text   : message,
+            } 
           ),
-        }
+        },
       );
     } catch ( error ) {
       if ( error instanceof Error ) {
         throw new ApiError(
           error.message,
-          `${ processInfo.carpetaNumero } TelegramService.sendFallbackMessage `
+          `${ processInfo.carpetaNumero } TelegramService.sendFallbackMessage `,
         );
       }
     }

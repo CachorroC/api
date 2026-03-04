@@ -167,7 +167,7 @@ class JuzgadoClass implements Juzgado {
       ),
       normalizeText(
         `JUZGADO ${ paddedId2 } ${ this.tipo } DE ${ this.ciudad }` 
-      )
+      ),
     ];
 
     // Attempt to locate a matching canonical entry in the database
@@ -190,7 +190,7 @@ class JuzgadoClass implements Juzgado {
 
       // Update properties to the pristine, canonical DB format using the smart extractor
       const canonicalParts = JuzgadoClass.extractPartsFromLongName(
-        matchedDespacho.nombre 
+        matchedDespacho.nombre,
       );
 
       if ( canonicalParts.id ) {
@@ -234,7 +234,7 @@ class JuzgadoClass implements Juzgado {
     // 2. Strip noise terms (JUZGADO, DESPACHO, asterisks, and the ID) to isolate Tipo and Ciudad
     const cleanedName = rawName
       .replace(
-        /JUZGADO|DESPACHO/ig, '' 
+        /JUZGADO|DESPACHO/gi, '' 
       )
       .replace(
         id, '' 
@@ -291,7 +291,7 @@ class JuzgadoClass implements Juzgado {
       'SANTA ROSA DE LIMA',
       'SAN ANDRES',
       'BOGOTA',
-      'MEDELLIN'
+      'MEDELLIN',
     ];
 
     const normalizedName = normalizeText(
@@ -301,7 +301,9 @@ class JuzgadoClass implements Juzgado {
 
     // Check if the string ends with any of our known compound cities
     const foundCity = compoundCities.find(
-      c => {
+      (
+        c 
+      ) => {
         return normalizedName.endsWith(
           c 
         );
@@ -317,9 +319,10 @@ class JuzgadoClass implements Juzgado {
         matchIndex 
       )
         .trim();
-      tipo = cleanedName.slice(
-        0, matchIndex 
-      )
+      tipo = cleanedName
+        .slice(
+          0, matchIndex 
+        )
         .replace(
           /\s+(DE|-)\s*$/i, '' 
         )
@@ -327,7 +330,7 @@ class JuzgadoClass implements Juzgado {
     } else {
       // Otherwise, assume a standard format and split at the absolute LAST occurrence of " DE " or " - "
       const lastSeparatorMatch = cleanedName.match(
-        /\s+(DE|-)\s+(?!.*\s+(DE|-)\s+)(.*)$/i 
+        /\s+(DE|-)\s+(?!.*\s+(DE|-)\s+)(.*)$/i,
       );
 
       if ( lastSeparatorMatch ) {
@@ -351,7 +354,7 @@ class JuzgadoClass implements Juzgado {
     return {
       id,
       tipo,
-      ciudad 
+      ciudad,
     };
   }
 

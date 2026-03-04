@@ -1,5 +1,3 @@
-
-
 export type Message =
   | 'OK'
   | 'Object reference not set to an instance of an object.'
@@ -7,8 +5,7 @@ export type Message =
   | 'Internal Server Error'
   | 'Forbidden';
 
-
-export type FetchResponseActuacionType= {
+export type FetchResponseActuacionType = {
   idRegActuacion: number;
   llaveProceso  : string;
   consActuacion : number;
@@ -21,9 +18,16 @@ export type FetchResponseActuacionType= {
   codRegla      : string;
   conDocumentos : boolean;
   cant          : number;
-}
+};
 
-export type DatabaseActuacionType = Omit<FetchResponseActuacionType, 'idRegActuacion' | 'fechaActuacion' | 'fechaInicial' | 'fechaFinal' | 'fechaRegistro'> & {
+export type DatabaseActuacionType = Omit<
+  FetchResponseActuacionType,
+  | 'idRegActuacion'
+  | 'fechaActuacion'
+  | 'fechaInicial'
+  | 'fechaFinal'
+  | 'fechaRegistro'
+> & {
   idRegActuacion: string;
   fechaActuacion: Date;
   fechaInicial  : Date | null;
@@ -41,28 +45,28 @@ export type Paginacion = {
   cantidadPaginas  : number;
   pagina           : number;
   paginas?         : null;
-}
+};
 
 // Converts JSON strings to/from your types
 export class Convert {
   public static toConsultaActuacion(
-    json: string
+    json: string 
   ): ConsultaActuacion[] {
     return JSON.parse(
-      json
+      json 
     );
   }
 
   public static ConsultaActuacionToJson(
-    value: ConsultaActuacion[]
+    value: ConsultaActuacion[] 
   ): string {
     return JSON.stringify(
-      value
+      value 
     );
   }
 }
 
-export interface ConsultaActuacion<T =  FetchResponseActuacionType> {
+export interface ConsultaActuacion<T = FetchResponseActuacionType> {
   actuaciones: T[];
   paginacion : Paginacion;
 }

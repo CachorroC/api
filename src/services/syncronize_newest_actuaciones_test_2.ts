@@ -3,15 +3,17 @@ import { client } from './prisma.js';
 import { formatDateToString } from '../utils/ensureDate.js';
 import { ProcessRequest } from '../types/actuaciones.js';
 import { RobustApiClient } from '../models/RobustApiClient.js';
-const RAMA_JUDICIAL_BASE_URL = process.env.RAMA_JUDICIAL_BASE_URL || 'https://consultaprocesos.ramajudicial.gov.co:448';
+const RAMA_JUDICIAL_BASE_URL
+  = process.env.RAMA_JUDICIAL_BASE_URL
+  || 'https://consultaprocesos.ramajudicial.gov.co:448';
 
-async function getProcesosToUpdate (): Promise<ProcessRequest[]> {
+async function getProcesosToUpdate(): Promise<ProcessRequest[]> {
   const carpetas = await client.carpeta.findMany();
 
   return carpetas
     .flatMap(
       (
-        carpeta
+        carpeta 
       ) => {
         const baseData = {
           carpetaNumero: carpeta.numero,
@@ -24,28 +26,28 @@ async function getProcesosToUpdate (): Promise<ProcessRequest[]> {
         if ( !carpeta.idProcesos || carpeta.idProcesos.length === 0 ) {
           return {
             ...baseData,
-            idProceso: '0'
+            idProceso: '0',
           };
         }
 
         return carpeta.idProcesos.map(
           (
-            idProceso
+            idProceso 
           ) => {
             return {
               ...baseData,
-              idProceso
+              idProceso,
             };
-          }
+          } 
         );
-      }
+      } 
     )
     .sort(
       (
-        a, b
+        a, b 
       ) => {
         return b.carpetaNumero - a.carpetaNumero;
-      }
+      } 
     );
 }
 
@@ -57,14 +59,14 @@ async function getProcesosToUpdate (): Promise<ProcessRequest[]> {
 async function runSync() {
   const startTime = new Date();
   const formattedCustomStartTime = formatDateToString(
-    startTime
+    startTime 
   );
 
   console.log(
-    formattedCustomStartTime
+    formattedCustomStartTime 
   );
   console.log(
-    `\n⏱️  Execution Started at: ${ formattedCustomStartTime }`
+    `\n⏱️  Execution Started at: ${ formattedCustomStartTime }` 
   );
 
   // --- FREQUENCY LOGIC ---
@@ -76,7 +78,7 @@ async function runSync() {
   const isNoonRun = currentHour >= 12 && currentHour < 18;
 
   const api = new RobustApiClient(
-    RAMA_JUDICIAL_BASE_URL
+    RAMA_JUDICIAL_BASE_URL 
   );
 
   try {
@@ -84,15 +86,16 @@ async function runSync() {
 
     const processesToCheck = allProcesses.filter(
       (
-        proc
+        proc 
       ) => {
-        const category = ( proc.category || 'default' ).toString()
+        const category = ( proc.category || 'default' )
+          .toString()
           .toLowerCase()
           .trim();
 
         if ( category === 'bancolombia' ) {
           console.log(
-            `category is bancolombia ${ proc.carpetaNumero }`
+            `category is bancolombia ${ proc.carpetaNumero }` 
           );
 
           return true; // Runs every window
@@ -107,33 +110,33 @@ async function runSync() {
         }
 
         return isNoonRun;
-      }
+      } 
     );
 
     console.log(
-      `🔎 Filter applied: Processing ${ processesToCheck.length } of ${ allProcesses.length } items.`
+      `🔎 Filter applied: Processing ${ processesToCheck.length } of ${ allProcesses.length } items.`,
     );
 
     if ( processesToCheck.length > 0 ) {
       await api.processBatch(
         processesToCheck, (
-          proc
+          proc 
         ) => {
           return `/api/v2/Proceso/Actuaciones/${ proc.idProceso }`;
-        }
+        } 
       );
     } else {
       console.log(
-        '😴 No processes scheduled for this run window.'
+        '😴 No processes scheduled for this run window.' 
       );
     }
 
     console.log(
-      '🎉 Sync Complete'
+      '🎉 Sync Complete' 
     );
   } catch ( error ) {
     console.log(
-      'Fatal Error in runSync:', error
+      'Fatal Error in runSync:', error 
     );
   } finally {
     await client.$disconnect();
@@ -141,28 +144,28 @@ async function runSync() {
     const endTime = new Date();
     const durationMs = endTime.getTime() - startTime.getTime();
     const seconds = Math.floor(
-      ( durationMs / 1000 ) % 60
+      ( durationMs / 1000 ) % 60 
     );
     const minutes = Math.floor(
-      ( durationMs / ( 1000 * 60 ) ) % 60
+      ( durationMs / ( 1000 * 60 ) ) % 60 
     );
     const hours = Math.floor(
-      durationMs / ( 1000 * 60 * 60 )
+      durationMs / ( 1000 * 60 * 60 ) 
     );
     const durationString = `${ hours }h ${ minutes }m ${ seconds }s`;
 
     const formattedCustomEndTime = formatDateToString(
-      endTime
+      endTime 
     );
 
     console.log(
-      formattedCustomEndTime
+      formattedCustomEndTime 
     );
     console.log(
-      `\n🏁 Execution Finished at: ${ formattedCustomEndTime }`
+      `\n🏁 Execution Finished at: ${ formattedCustomEndTime }` 
     );
     console.log(
-      `⏱️  Total Duration: ${ durationString } (${ durationMs }ms)`
+      `⏱️  Total Duration: ${ durationString } (${ durationMs }ms)` 
     );
   }
 }

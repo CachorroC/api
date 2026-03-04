@@ -4,10 +4,10 @@
 //
 //   const CarpetaRaw = Convert.toCarpetaRaw(json);
 
-import { outActuacion } from './actuaciones';
-import { outProceso } from './procesos';
-import { NotasBuilder } from '../models/nota';
-import { Prisma } from '../prisma/generated/prisma/client';
+import { DatabaseActuacionType } from './actuaciones.js';
+import { outProceso } from './procesos.js';
+import { NotasBuilder } from '../models/nota.js';
+import { Prisma } from '../prisma/generated/prisma/client.js';
 
 export type IntCarpeta = {
   category           : Category;
@@ -30,7 +30,7 @@ export type IntCarpeta = {
   fechaUltimaRevision: Date | null;
   terminado          : boolean;
   tipoProceso        : TipoProceso;
-  ultimaActuacion    : outActuacion | null;
+  ultimaActuacion    : DatabaseActuacionType | null;
   notas              : NotasBuilder[];
 };
 
