@@ -1,3 +1,57 @@
+/**
+ * @module types/raw-db
+ * @description Raw Database/Excel Column Type Definitions
+ * 
+ * Generated type definitions mapping Excel worksheet columns to TypeScript properties.
+ * Represents the raw, unvalidated data structure from Excel import before model transformation.
+ * 
+ * DATA FLOW:
+ * Excel Columns (String/Date/Number)
+ *   ↓
+ * xlsx.sheet_to_json<RawDb>() converts to this type
+ *   ↓
+ * RawDb interface preserves original Excel values (minimal transformation)
+ *   ↓
+ * Model classes (ClassDemanda, ClassDeudor, etc.) parse/validate/transform
+ *   ↓
+ * Prisma types (database storage)
+ * 
+ * FIELD ORGANIZATION:
+ * - NUMERO: Case folder identifier (primary key analog)
+ * - DEMANDADO_*: Defendant/debtor information (name, ID, contact)
+ * - JUZGADO_*: Court information (city, court origin, type)
+ * - FECHA_*: Multiple date fields for different case stages
+ * - OBLIGACION_*, VALOR_*: Financial amounts and obligations
+ * - MEDIDA_*, CAUSAL_*: Case measures and termination causes
+ * - status fields: ETAPA_PROCESAL, TIPO_PROCESO
+ * - category: Added by data/carpetas.ts during import (not from Excel)
+ * 
+ * OPTIONAL FIELDS:
+ * Most fields marked with ? (optional) due to sparse Excel data
+ * Many sheets don't populate all columns (workflows vary by case type)
+ * Null/undefined preserved to indicate missing data
+ * 
+ * TYPE UNIONS:
+ * Empty: Fields that can be number | string (alignment with Excel parser)
+ * EtapaProcesal: Can be number | string (inconsistent Excel data)
+ * Departamento: Fixed enum of Colombian departments
+ * Certimail: Notification method (TRUE, FALSE, NO, SI, or dates)
+ * FechaNotificacionUnion: Mixed data types from date field
+ * 
+ * DATA QUALITY NOTES:
+ * - Departamento includes variations: 'CUNDINAMARCA', 'CUNDINNAMARCA', 'CUN DINAMARCA', 'BOYACÁ'
+ * - Date fields stored as strings or numbers (no Date type at import)
+ * - Empty enum includes malformed dates mixed with status values
+ * - __EMPTY_* fields from xlsx parser indicate unnamed columns
+ * - Type inconsistencies handled by model layer during transformation
+ * 
+ * TO PARSE THIS DATA:
+ * ```
+ * import { Convert } from \"./raw-db.ts\";
+ * const rawDb = Convert.toRawDb(jsonString);
+ * ```
+ */
+
 // To parse this data:
 //
 //   import { Convert } from "./file";

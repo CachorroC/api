@@ -1,6 +1,62 @@
+/**
+ * @module utils/date-validator
+ * @description Date Extraction and Validation Utility
+ * 
+ * Handles parsing, validation, and normalization of dates from various sources:
+ * - Excel serial numbers (XLSX format)
+ * - ISO date strings (YYYY-MM-DD, DD/MM/YYYY, DD-MM-YYYY)
+ * - JavaScript Date objects
+ * - Multiple dates separated by \"//\" delimiter
+ * - Null/undefined values
+ * 
+ * DATE PARSING WORKFLOW:
+ * Input (string | number | Date | null)
+ *   ↓
+ * Type detection (object/number/string)
+ *   ↓
+ * If string: Split by \"//\" for multiple dates
+ *   ↓
+ * Per date: Match regex for D/M/Y or D-M-Y format
+ *   ↓
+ * Parse components (day, month, year)
+ *   ↓
+ * Create Date object (ISO 8601)
+ *   ↓
+ * Validate date constraints
+ *   ↓
+ * Return Date[] array via dateArrayValidator
+ * 
+ * EXCEL DATE HANDLING:
+ * XLSX stores dates as serial numbers (days since Jan 1, 1900)
+ * xlsxNumberToDate() converts serial to JavaScript Date
+ * Handles leap year variations between Excel and JavaScript
+ * 
+ * MULTI-DATE SUPPORT:
+ * Incoming strings can contain multiple dates separated by \"//\"
+ * Example: \"01/02/2020 // 15/03/2020\" → [Date(2020,1,1), Date(2020,2,15)]
+ * Useful for cases with multiple deadlines or action dates
+ * 
+ * DATE FORMAT FLEXIBILITY:
+ * Supports both \"/\" and \"-\" as separators
+ * All formats interpreted as DD/MM/YYYY (Colombian locale)
+ * NOT MM/DD/YYYY (American format)
+ * Year normalization: 2-digit → 20xx (2000-2099)
+ * 
+ * ERROR HANDLING:
+ * Invalid Date objects filtered out (Invalid Date toString check)
+ * Failed conversions return empty array (graceful degradation)
+ * No exceptions thrown (safe for batch processing)
+ * dateArrayValidator() performs final validation pass
+ */
+
 /* eslint-disable no-unused-vars */
 //!SECTION
 //SECTION first step: extract the date
+/**
+ * @function datesExtractor
+ * @param {string | number | Date | null | undefined} incomingDate - Raw date value from various sources
+ * @returns {Date[]} Array of validated Date objects (empty if parsing fails)
+ * \n * Extracts one or more Date objects from various input formats.\n * Handles Excel serial numbers, date strings (with // multi-date support), Date objects.\n * Returns array of validated dates.\n */
 export function datesExtractor(
   incomingDate?: string | number | Date | null 
 ) {

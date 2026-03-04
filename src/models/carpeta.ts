@@ -29,11 +29,60 @@ console.log(
 // -----------------------------------
 
 /**
+ * @fileoverview Carpeta (Case Folder) Module
+ * 
+ * This module manages legal case folders (carpetas or expedientes) from the Colombian Judiciary.
+ * It provides comprehensive case management including:
+ * - Raw data transformation to structured models
+ * - API integration with the Rama Judicial system
+ * - Process and action synchronization
+ * - Database persistence via Prisma
+ * 
+ * @module carpeta
+ */
+
+/**
+ * ClassCarpeta - Represents a complete legal case folder/expediente
+ * 
+ * This class encapsulates all aspects of a legal case:
+ * - Case metadata (number, filing key, dates)
+ * - Involved parties (defendant, co-defendant)
+ * - Associated court/judge information
+ * - Related legal processes and actions
+ * - Case notes and categorization
+ *
+ * Workflow:
+ * 1. Constructor transforms raw data from legacy database
+ * 2. getProcesos() fetches processes from Judiciary API
+ * 3. getActuaciones() fetches legal actions per process
+ * 4. prismaIntegration() syncs all data to PostgreSQL via Prisma
+ *
  * @class ClassCarpeta
  * @implements {IntCarpeta}
- * @description Representa un expediente o carpeta legal y encapsula su lógica de negocio.
- * Se encarga de transformar datos crudos, consultar la API de la Rama Judicial para obtener procesos
- * y actuaciones, y sincronizar toda la información estructurada con la base de datos a través de Prisma.
+ * 
+ * @property {number} numero - Unique internal case folder number
+ * @property {string} llaveProceso - The case filing number (radicación) from expediente
+ * @property {number} id - Database identifier (usually cedula or NUMERO)
+ * @property {Date|null} fecha - Latest action date (última actuación)
+ * @property {Date|null} fechaUltimaRevision - Last review/revision date
+ * @property {string|null} idRegUltimaAct - ID of the latest court action record
+ * @property {string} nombre - Name/title of the case (usually defendant's name)
+ * @property {string} ciudad - City where the court is located
+ * @property {string|null} juzgadoTipo - Type of court (e.g., juzgado civil, penal)
+ * @property {Category} category - Case category (Activos, Terminados, etc)
+ * @property {boolean} revisado - Whether case has been reviewed
+ * @property {boolean} terminado - Whether case is closed/terminated
+ * @property {TipoProceso} tipoProceso - Type of judicial process (SINGULAR, EJECUTIVO)
+ * @property {Juzgado} juzgado - Court information object
+ * @property {ClassDeudor} deudor - Defendant information
+ * @property {ClassDemanda} demanda - Demand/complaint information
+ * @property {Codeudor} codeudor - Co-defendant information (if applicable)
+ * @property {outProceso[]} procesos - Associated legal processes
+ * @property {string[]} idProcesos - Array of process IDs
+ * @property {DatabaseActuacionType[]} actuaciones - Legal actions/motions
+ * @property {NotasBuilder[]} notas - Case notes and annotations
+ * @property {DatabaseActuacionType|null} ultimaActuacion - Latest action record
+ * @property {number|null} notasCount - Number of notes/annotations
  */
 export class ClassCarpeta implements IntCarpeta {
   procesos           : outProceso[] = [];
@@ -61,11 +110,64 @@ export class ClassCarpeta implements IntCarpeta {
   fechaUltimaRevision: Date | null;
 
   /**
-   * @constructor
-   * @description Transforma los datos crudos (RawDb) a la estructura de la clase `ClassCarpeta`.
-   * Procesa fechas, extrae y separa notas/observaciones, normaliza IDs (usando cédula o número interno),
-   * y construye las entidades relacionadas como Juzgado, Deudor, Demanda y Codeudor.
-   * * @param {RawDb} rawCarpeta - Objeto con los datos crudos provenientes de la fuente inicial.
+   * Constructs a ClassCarpeta instance from raw legacy database records.
+   * 
+   * The constructor performs extensive data transformation:
+   * 
+   * **Field Processing:**
+   * - Dates: Converts FECHA_ULTIMA_ACTUACION and FECHA_ULTIMA_REVISION to Date objects
+   * - IDs: Uses DEMANDADO_IDENTIFICACION (cedula) if valid, otherwise uses NUMERO
+   * - Names: Normalizes defendant/case names
+   * 
+   * **Notes/Annotations:**
+   * - Splits OBSERVACIONES and EXTRA fields by '//' delimiter
+   * - Creates NotasBuilder instances for each annotation
+   * - Maintains count and ordering
+   * 
+   * **Relationships:**
+   * - Instantiates ClassDeudor (defendant) with full details
+   * - Instantiates ClassDemanda (demand) with claim information
+   * - Builds Codeudor object if co-defendant data exists
+   * - Constructs Juzgado (court) from execution or origin jurisdiction
+   * 
+   * **Categorization:**
+   * - Sets category from raw data (Activos, Terminados, Completados, etc)
+   * - Marks terminated if category === 'Terminados'
+   * - Determines process type (SINGULAR, EJECUTIVO, etc)
+   * 
+   * **Special Handling:**
+   * - Skips nullable date fields when source is missing
+   * - Disables SSL/TLS verification for legacy government API compatibility
+   * - Normalizes case filing number by removing whitespace
+   * 
+   * @param {RawDb} rawCarpeta - Raw database record from legacy system containing:
+   *                            - NUMERO: Case folder number
+   *                            - category: Case status category
+   *                            - DEMANDADO_IDENTIFICACION: Defendant ID/cedula
+   *                            - DEMANDADO_NOMBRE: Defendant name
+   *                            - EXPEDIENTE: Case filing number
+   *                            - FECHA_ULTIMA_ACTUACION: Latest action date
+   *                            - FECHA_ULTIMA_REVISION: Last review date
+   *                            - TIPO_PROCESO: Process type
+   *                            - OBSERVACIONES: Case notes (split by //)
+   *                            - EXTRA: Additional notes (split by //)
+   *                            - CODEUDOR_*: Co-defendant details
+   *                            - JUZGADO_*: Court information
+   * 
+   * @example
+   * const rawData = {
+   *   NUMERO: 1,
+   *   category: 'Activos',
+   *   DEMANDADO_IDENTIFICACION: '123456789',
+   *   DEMANDADO_NOMBRE: 'John Doe',
+   *   EXPEDIENTE: '2024-1234-567',
+   *   FECHA_ULTIMA_ACTUACION: '2024-03-04',
+   *   TIPO_PROCESO: 'EJECUTIVO',
+   *   JUZGADO_CIUDAD: 'Bogotá'
+   * };
+   * const carpeta = new ClassCarpeta(rawData);
+   * console.log(carpeta.numero); // 1
+   * console.log(carpeta.llaveProceso); // "2024-1234-567"
    */
   constructor(
     rawCarpeta: RawDb 
@@ -265,13 +367,57 @@ export class ClassCarpeta implements IntCarpeta {
   }
 
   /**
+   * Fetches all legal processes associated with this case from the Colombian Judiciary API.
+   * 
+   * This method queries the official Rama Judicial API using the case filing number (llaveProceso).
+   * It performs the following operations:
+   * 
+   * **API Query:**
+   * - Endpoint: /api/v2/Procesos/Consulta/NumeroRadicacion
+   * - Parameter: numero={llaveProceso}
+   * - Flags: SoloActivos=false (includes inactive processes)
+   * - Uses smart retry mechanism for reliability
+   * 
+   * **Data Processing:**
+   * - Filters out private processes (esPrivado === true)
+   * - Excludes known confidential process IDs (e.g., 3175205751)
+   * - Transforms API format to internal outProceso type
+   * - Converts date strings to Date objects
+   * - Preserves court (Juzgado) information
+   * 
+   * **Error Handling & Logging:**
+   * - HTTP 404: Logs to carpeta-404-log.json (filing number not found in system)
+   * - Empty results: Logs if llaveProceso starts with '1' (potential missing data)
+   * - Other errors: Throws with detailed error message including status code
+   * 
+   * **Side Effects:**
+   * - Creates/appends to carpeta-404-log.json when applicable
+   * - Logs detailed output to console for debugging
+   * 
    * @async
-   * @method getProcesos
-   * @description Consulta procesos en la API de la Rama Judicial utilizando el expediente (`llaveProceso`).
-   * Omite procesos privados o específicos (e.g., id 3175205751). Registra en un archivo local (`carpeta-404-log.json`)
-   * las respuestas fallidas (HTTP 404) o radicados sin procesos.
-   * * @returns {Promise<outProceso[]>} Un array con los procesos encontrados y procesados.
-   * @throws {Error} Lanza un error si la solicitud falla con un código de estado distinto de 404.
+   * @returns {Promise<outProceso[]>} Array of legal processes associated with this case,
+   *                                  or empty array if none found or API error occurs.
+   *                                  Each process contains:
+   *                                  - idProceso: Unique process identifier
+   *                                  - fechaProceso: Process creation date
+   *                                  - fechaUltimaActuacion: Latest action date
+   *                                  - juzgado: Associated court information
+   *                                  - esPrivado: Confidentiality flag
+   * 
+   * @throws {Error} Throws if HTTP status is not 200/404 (500, 503, etc).
+   *                 Error includes status code and response body.
+   * 
+   * @example
+   * const carpeta = new ClassCarpeta(rawData);
+   * try {
+   *   const processes = await carpeta.getProcesos();
+   *   console.log(`Found ${processes.length} processes`);
+   *   processes.forEach(p => {
+   *     console.log(`Process ${p.idProceso}: ${p.fechaProceso}`);
+   *   });
+   * } catch (err) {
+   *   console.error('Error fetching processes:', err.message);
+   * }
    */
   async getProcesos(): Promise<outProceso[]> {
     try {

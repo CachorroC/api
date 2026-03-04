@@ -1,3 +1,49 @@
+/**
+ * @module data/despachos
+ * @description Colombian Judicial Courts Reference Database
+ * 
+ * Static lookup table of official Colombian courts (despachos) from Rama Judicial system.
+ * Used during carpeta processing to normalize court abbreviations to canonical URLs
+ * and official court metadata.
+ * 
+ * REFERENCE DATABASE STRUCTURE:
+ * Each despacho record contains:
+ * - agrupacion: High-level grouping (PENAL, CIVIL, LABORAL, FAMILIA, etc.)
+ * - especialidad: Specific court type (jurisdiction/specialization)
+ * - nombre: Official court name from Rama Judicial
+ * - url: Canonical URL path on rama judicial website
+ * 
+ * USAGE PATTERN:
+ * JuzgadoClass.constructor performs lookup in this array to:
+ * 1. Match partial/abbreviated court names from raw data
+ * 2. Resolve to official court record
+ * 3. Populate despacho/juzgado relationship with canonical metadata
+ * 4. Store URL for linked document access
+ * 
+ * LOOKUP STRATEGY:
+ * Uses regex-based matching and text normalization to handle:
+ * - Case sensitivity variations
+ * - Abbreviated names (e.g., \"EJE\" → \"Ejecución\")
+ * - Multiple court type combinations
+ * - Colombian diacritical marks (á, é, í, ó, ú)
+ * 
+ * DATA SOURCE:
+ * Static array (hardcoded) from official Rama Judicial court directory
+ * No runtime refresh - assumes stable court list
+ * Manual updates required if court system changes
+ * 
+ * NORMALIZATION EXAMPLE:
+ * Raw: \"Juzgado Ejecución Pequeñas Causas Bogotá\"
+ * ↓ Matches despacho record ↓
+ * URL: \"/web/juzgado-ejecucion-pequenas-causas-bogota\"
+ * 
+ * @typedef {Object} Despacho
+ * @property {string} agrupacion - High-level court grouping
+ * @property {string} especialidad - Court specialization/type  
+ * @property {string} nombre - Official court name
+ * @property {string} url - Rama Judicial canonical URL path
+ */
+
 export const Despachos = [
   {
     agrupacion  : 'SIN SECCIÓN',

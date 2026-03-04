@@ -1,8 +1,36 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// ==========================================
-// 5. INFRASTRUCTURE SERVICES (TELEGRAM FIX)
-// ==========================================
+/**
+ * @module services/telegramService
+ * @description Telegram Notification Infrastructure Service
+ * 
+ * Handles dispatching HTML-formatted notifications to a configured Telegram chat.
+ * Used to alert users/administrators about newly detected judicial updates (actuaciones).
+ * 
+ * NOTIFICATION WORKFLOW:
+ * Actuación Detection → Build HTML Message
+ *   ↓
+ * Escape HTML entities (cleanText) to prevent Telegram API rejections
+ *   ↓
+ * POST to Telegram Bot API with parse_mode: 'HTML'
+ *   ↓
+ * If HTML fails due to parse error:
+ *   → Fall back to plain-text message (sendFallbackMessage)
+ *   → Retry with simplified format
+ * 
+ * ENVIRONMENT VARIABLES REQUIRED:
+ * - TELEGRAM_BOT_TOKEN: Bot API token from @BotFather
+ * - TELEGRAM_CHAT_ID: Target chat ID (user ID or group ID)
+ * 
+ * ERROR HANDLING:
+ * - Status 403: User blocked bot or hasn't started it (skip fallback)
+ * - Other HTTP errors: Attempt fallback message
+ * - JSON parsing errors: Caught and logged, returns gracefully
+ * 
+ * RATE LIMITING:
+ * Uses fetchWithSmartRetry with 3-second base delay to avoid Telegram API throttling.
+ * Telegram typically allows 30 messages/second, so individual retries are safe.
+ */
 
 import { ApiError } from '../models/ApiError.js';
 import { FetchResponseActuacionType,

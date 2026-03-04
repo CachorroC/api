@@ -1,3 +1,20 @@
+/**
+ * @module utils/database-juzgado-fixer
+ * @description Court (Juzgado) Data Extraction and Transformation Utility
+ * 
+ * Processes raw case data to extract, normalize, and transform court information
+ * from multiple source fields. Handles inconsistent formatting and creates structured
+ * court model instances with metadata.
+ * 
+ * EXECUTION FLOW:
+ * RawCarpetas (Excel rows) → For each carpeta → Extract fields → Parse with regex →
+ * Create JuzgadoClass → Export to JSON
+ * 
+ * KEY FUNCTIONS:
+ * - extrapolateIdCiudadyTipo(): Parse court name, extract ID, type, city
+ * - JuzgadoClass.fromShortName(): Create structured court model
+ */
+
 import * as fs from 'fs/promises';
 import { extrapolateTipoToCorrectType } from '../models/juzgado.js';
 import JuzgadoClass from '../models/juzgado.js';

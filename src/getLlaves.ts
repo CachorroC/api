@@ -1,3 +1,19 @@
+/**
+ * @fileoverview Cidade Exporter Module
+ * 
+ * This module extracts and exports unique city (ciudad) information from raw case data.
+ * It transforms raw database records into a deduplicated set of cities and outputs
+ * the results to a JSON file for reference and analysis.
+ * 
+ * Workflow:
+ * - Reads raw carpeta data from RawCarpetas
+ * - Extracts JUZGADO_CIUDAD field from each record
+ * - Deduplicates cities using a Set
+ * - Writes unique cities to ciudades.json
+ * 
+ * @module getLlaves
+ */
+
 import { RawCarpetas } from './data/carpetas.js';
 
 import { writeFile } from 'fs/promises';
@@ -13,18 +29,39 @@ const __filename = fileURLToPath(
 const __dirname = dirname(
   __filename 
 );
-// 1. Define the interface for your input (RawCarpeta)
-// I am assuming EXPEDIENTE exists; add other properties if needed.
 
-// 2. Define the interface for your output object
+/**
+ * Represents a processed expediente (case) with cidade information.
+ * 
+ * @typedef {Object} ProcessedExpediente
+ * @property {string} ciudad - The city where the court is located
+ */
 interface ProcessedExpediente {
   ciudad: string;
 }
 
 /**
- * Iterates over raw carpetas, extracts EXPEDIENTE, and saves to JSON.
- * @param rawData - Array of RawCarpeta objects
- * @param fileName - The name of the output file (e.g., 'output.json')
+ * Extracts unique cities from raw case data and exports to a JSON file.
+ * 
+ * This function performs the following steps:
+ * 1. Transforms raw case data by extracting city information (JUZGADO_CIUDAD)
+ * 2. Deduplicates cities using a Set to ensure each city appears only once
+ * 3. Converts the deduplicated set back to an array
+ * 4. Writes the results to a pretty-printed JSON file (fileName parameter)
+ * 5. Logs success/error messages to the console
+ *
+ * The output file is saved with 2-space indentation for readability.
+ * 
+ * @async
+ * @param {RawDb[]} rawData - Array of raw database records containing case information
+ * @param {string} fileName - The output filename (e.g., 'ciudades.json') within the src directory
+ * @returns {Promise<void>} Promise that resolves when file writing is complete
+ * @throws {Error} Logs errors to console if file writing fails
+ * 
+ * @example
+ * // Extract cities and save to file
+ * await exportExpedientesToJson(RawCarpetas, 'ciudades.json');
+ * // Creates: src/ciudades.json with unique city list
  */
 async function exportExpedientesToJson(
   rawData: RawDb[],
