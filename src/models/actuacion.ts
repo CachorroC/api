@@ -1,17 +1,17 @@
 /**
  * @fileoverview Actuacion Module - Legal Action/Motion Processor
- * 
+ *
  * This module manages legal actions (actuaciones) from the Colombian Judiciary system.
  * It provides:
  * - Data transformation from API responses to database models
  * - Change detection to identify new actuations
  * - Notification dispatching (webhooks, Telegram) for new actions
  * - Concurrent data processing with configurable concurrency limits
- * 
+ *
  * Key Classes:
  * - Actuacion: Represents a single legal action with full metadata
  * - ActuacionService: Service layer for processing batches of actuations
- * 
+ *
  * @module actuacion
  */
 
@@ -33,14 +33,14 @@ const NEW_ACTUACION_WEBHOOK_URL = process.env.NEW_ACTUACION_WEBHOOK_URL || '';
 
 /**
  * Concurrency-limited map function for processing array items asynchronously.
- * 
+ *
  * This function processes an array of items through an async mapper function
  * while limiting the number of concurrent operations. It's useful for rate-limited
  * API interactions or resource-constrained scenarios.
  *
  * Implementation uses Promise.race() to wait for the fastest concurrent promise,
  * then continues when space opens up in the execution queue.
- * 
+ *
  * @async
  * @template T - The type of input array elements
  * @template R - The type of mapped result elements
@@ -48,7 +48,7 @@ const NEW_ACTUACION_WEBHOOK_URL = process.env.NEW_ACTUACION_WEBHOOK_URL || '';
  * @param {(item: T) => Promise<R>} mapper - Async function that transforms each item
  * @param {number} concurrency - Maximum number of concurrent operations allowed
  * @returns {Promise<R[]>} Array of results in the same order as input items
- * 
+ *
  * @example
  * const numbers = [1, 2, 3, 4, 5];
  * const results = await pMap(
@@ -70,55 +70,55 @@ async function pMap<T, R>(
       .then(
         () => {
           return mapper(
-            item 
+            item
           );
-        } 
+        }
       );
     results.push(
-      p as unknown as R 
+      p as unknown as R
     );
 
     const e: Promise<void> = p.then(
       () => {
         executing.splice(
           executing.indexOf(
-            e 
-          ), 1 
+            e
+          ), 1
         );
-      } 
+      }
     );
     executing.push(
-      e 
+      e
     );
 
     if ( executing.length >= concurrency ) {
       await Promise.race(
-        executing 
+        executing
       );
     }
   }
 
   return Promise.all(
-    results 
+    results
   );
 }
 
 /**
  * Represents a single legal action (actuación) in a judicial process.
- * 
+ *
  * This class encapsulates all metadata and details of a court action or motion,
  * including dates, descriptions, documents, and case references. It serves as the
  * data model for storing and processing judicial actions from the Rama Judicial API.
- * 
+ *
  * Properties are automatically converted and validated during construction:
  * - Date strings are converted to Date objects
  * - Null/undefined dates are preserved as null
  * - String identifiers are coerced to ensure consistency
  * - Records the creation timestamp
- * 
+ *
  * @class Actuacion
  * @implements {DatabaseActuacionType} - Implements the database type interface
- * 
+ *
  * @property {Date} createdAt - Timestamp when this record was created locally
  * @property {string} idProceso - The process ID reference
  * @property {boolean} isUltimaAct - Flag indicating if this is the latest action for the process
@@ -156,7 +156,7 @@ export default class Actuacion implements DatabaseActuacionType {
 
   /**
    * Constructs an Actuacion instance from API response data.
-   * 
+   *
    * This constructor transforms raw API data into a strongly-typed Actuacion object:
    * 1. Initializes the creation timestamp to track when this record was added locally
    * 2. Copies and validates all metadata from the API response
@@ -168,13 +168,13 @@ export default class Actuacion implements DatabaseActuacionType {
    * - Links to a specific process via idProceso
    * - Belongs to a case folder via carpetaNumero
    * - Tracks the case filing number via llaveProceso
-   * 
+   *
    * @param {Object} params - Constructor parameters object
    * @param {FetchResponseActuacionType} params.actuacion - Raw actuacion data from the API
    * @param {string} params.idProceso - The process ID this action belongs to
    * @param {boolean} params.isUltimaAct - Whether this is the latest action for the process
    * @param {number} params.carpetaNumero - The case folder number for this action
-   * 
+   *
    * @example
    * const actuacion = new Actuacion({
    *   actuacion: apiData,
@@ -194,7 +194,7 @@ export default class Actuacion implements DatabaseActuacionType {
       idProceso    : string;
       isUltimaAct  : boolean;
       carpetaNumero: number;
-    } 
+    }
   ) {
     this.createdAt = new Date();
     this.idProceso = idProceso;
@@ -207,20 +207,20 @@ export default class Actuacion implements DatabaseActuacionType {
     this.conDocumentos = actuacion.conDocumentos;
     this.consActuacion = actuacion.consActuacion;
     this.fechaActuacion = new Date(
-      actuacion.fechaActuacion 
+      actuacion.fechaActuacion
     );
     this.fechaFinal = actuacion.fechaFinal
       ? new Date(
-          actuacion.fechaFinal 
+          actuacion.fechaFinal
         )
       : null;
     this.fechaInicial = actuacion.fechaInicial
       ? new Date(
-          actuacion.fechaInicial 
+          actuacion.fechaInicial
         )
       : null;
     this.fechaRegistro = new Date(
-      actuacion.fechaRegistro 
+      actuacion.fechaRegistro
     );
     this.idRegActuacion = `${ actuacion.idRegActuacion }`;
     this.llaveProceso = actuacion.llaveProceso;
@@ -229,7 +229,7 @@ export default class Actuacion implements DatabaseActuacionType {
 
 /**
  * Service class for processing batches of legal actions from the Colombian Judiciary API.
- * 
+ *
  * This service handles:
  * 1. **Data transformation**: Converts raw API responses to database-compatible formats
  * 2. **Change detection**: Identifies new actions not yet in the database
@@ -248,25 +248,25 @@ export default class Actuacion implements DatabaseActuacionType {
  * - Compare new actions against existing database records
  * - Log and notify about new actions
  * - Handle database inserts with proper error handling
- * 
+ *
  * @class ActuacionService
  */
 export class ActuacionService {
   /**
    * Finds the most recent legal action from a batch based on temporal precedence.
-   * 
+   *
    * Priority order for determining "latest":
    * 1. **fechaActuacion** (action date) - Primary timestamp
    * 2. **fechaRegistro** (registration date) - Secondary fallback
    * 3. **consActuacion** (consecutive number) - Final tiebreaker
    *
    * This method handles dates that may be null or invalid gracefully.
-   * 
+   *
    * @private
    * @param {FetchResponseActuacionType[]} actuaciones - Array of raw action records from API
    * @returns {FetchResponseActuacionType | null} The action with the latest timestamp,
    *                                              or null if array is empty
-   * 
+   *
    * @example
    * const latestAction = ActuacionService.getLatestByDate(apiResults);
    * if (latestAction) {
@@ -282,14 +282,14 @@ export class ActuacionService {
 
     return actuaciones.reduce(
       (
-        prev, current 
+        prev, current
       ) => {
         const prevDate = ensureDate(
-          prev.fechaActuacion 
+          prev.fechaActuacion
         )
           ?.getTime() || 0;
         const currDate = ensureDate(
-          current.fechaActuacion 
+          current.fechaActuacion
         )
           ?.getTime() || 0;
 
@@ -299,11 +299,11 @@ export class ActuacionService {
 
         if ( currDate === prevDate ) {
           const prevReg = ensureDate(
-            prev.fechaRegistro 
+            prev.fechaRegistro
           )
             ?.getTime() || 0;
           const currReg = ensureDate(
-            current.fechaRegistro 
+            current.fechaRegistro
           )
             ?.getTime() || 0;
 
@@ -319,13 +319,13 @@ export class ActuacionService {
         }
 
         return prev;
-      } 
+      }
     );
   }
 
   /**
    * Transforms raw API action data into a Prisma-compatible CreateInput object.
-   * 
+   *
    * This transformation performs:
    * 1. **Date handling**: Converts string dates to Date objects with fallback to current date
    * 2. **Text sanitization**: Cleans special characters and invalid UTF-8 from action descriptions
@@ -335,14 +335,14 @@ export class ActuacionService {
    *
    * Text sanitization is critical as the Judiciary API may contain encoding issues
    * common in legacy government systems.
-   * 
+   *
    * @private
    * @static
    * @param {FetchResponseActuacionType} apiData - Raw action data from the Judiciary API
    * @param {ProcessRequest} parentProc - Metadata of the parent legal process
    * @param {FetchResponseActuacionType | null} actualLatestItem - The latest action in batch (for flagging)
    * @returns {Prisma.ActuacionCreateInput} Database-ready input object for Prisma createOne
-   * 
+   *
    * @example
    * const input = ActuacionService.mapToPrismaInput(
    *   apiAction,
@@ -358,28 +358,28 @@ export class ActuacionService {
   ): Prisma.ActuacionCreateInput {
     const isUltima = actualLatestItem
       ? String(
-        apiData.idRegActuacion 
+        apiData.idRegActuacion
       )
         === String(
-          actualLatestItem.idRegActuacion 
+          actualLatestItem.idRegActuacion
         )
       : false;
     // Apply sanitization here 👇
     const cleanActuacion
       = sanitizeText(
         String(
-          apiData.actuacion 
-        ) 
+          apiData.actuacion
+        )
       ) || 'Sin descripción';
     const cleanAnotacion = sanitizeText(
       String(
-        apiData.anotacion 
-      ) 
+        apiData.anotacion
+      )
     );
 
     return {
       idRegActuacion: String(
-        apiData.idRegActuacion 
+        apiData.idRegActuacion
       ),
       consActuacion : apiData.consActuacion,
       actuacion     : cleanActuacion,
@@ -390,16 +390,16 @@ export class ActuacionService {
       conDocumentos : apiData.conDocumentos,
       llaveProceso  : parentProc.llaveProceso,
       fechaActuacion: ensureDate(
-        apiData.fechaActuacion 
+        apiData.fechaActuacion
       ) ?? new Date(),
       fechaRegistro: ensureDate(
-        apiData.fechaRegistro 
+        apiData.fechaRegistro
       ) ?? new Date(),
       fechaInicial: ensureDate(
-        apiData.fechaInicial 
+        apiData.fechaInicial
       ),
       fechaFinal: ensureDate(
-        apiData.fechaFinal 
+        apiData.fechaFinal
       ),
       idProceso  : parentProc.idProceso,
       isUltimaAct: isUltima,
@@ -413,7 +413,7 @@ export class ActuacionService {
 
   /**
    * Dispatches notifications for newly discovered legal actions.
-   * 
+   *
    * This method handles alerting external systems about new actions:
    * 1. **File logging**: Records new items to a JSON log for audit trail
    * 2. **Webhook dispatch**: POSTs to configured webhook URL with action details
@@ -434,7 +434,7 @@ export class ActuacionService {
    *   }
    * }
    * ```
-   * 
+   *
    * @private
    * @static
    * @async
@@ -442,7 +442,7 @@ export class ActuacionService {
    * @param {ProcessRequest} parentProc - Metadata of the parent legal process
    * @param {FileLogger} logger - Logger instance for recording dispatch attempts
    * @returns {Promise<void>} Completes after all notifications are sent
-   * 
+   *
    * @example
    * const newActions = [apiAction1, apiAction2];
    * await ActuacionService.processNotifications(
@@ -464,7 +464,7 @@ export class ActuacionService {
       `✨ Found ${ newItems.length } NEW Actuaciones. Processing notifications...`,
     );
     await logger.logNewItems(
-      newItems, parentProc 
+      newItems, parentProc
     );
 
     for ( const [
@@ -473,13 +473,13 @@ export class ActuacionService {
     ] of newItems.entries() ) {
       if ( index > 0 ) {
         await sleep(
-          2000 
+          2000
         );
       }
 
       if ( WEBHOOK_URL ) {
         console.log(
-          `🗯️ Iniciando el webhook: ${ WEBHOOK_URL }` 
+          `🗯️ Iniciando el webhook: ${ WEBHOOK_URL }`
         );
 
         try {
@@ -510,9 +510,9 @@ export class ActuacionService {
                       title : 'Abrir Actuaciones',
                     },
                   ],
-                } 
+                }
               ),
-            } 
+            }
           );
 
           if ( !response.ok ) {
@@ -523,7 +523,7 @@ export class ActuacionService {
           }
         } catch ( postError: any ) {
           console.log(
-            `⚠️ Webhook Failed: ${ postError.message }` 
+            `⚠️ Webhook Failed: ${ postError.message }`
           );
           await logger.logFailure(
             parentProc.idProceso,
@@ -536,11 +536,11 @@ export class ActuacionService {
 
       try {
         await TelegramService.sendNotification(
-          act, parentProc 
+          act, parentProc
         );
       } catch ( teleError: any ) {
         console.log(
-          `⚠️ Telegram Failed: ${ teleError.message }` 
+          `⚠️ Telegram Failed: ${ teleError.message }`
         );
         await logger.logFailure(
           parentProc.idProceso,
@@ -556,7 +556,7 @@ export class ActuacionService {
             {
               ...act,
               ...parentProc,
-            } 
+            }
           );
           const response = await fetch(
             NEW_ACTUACION_WEBHOOK_URL, {
@@ -565,7 +565,7 @@ export class ActuacionService {
                 'Content-Type': 'application/json',
               },
               body: body,
-            } 
+            }
           );
 
           if ( !response.ok ) {
@@ -576,7 +576,7 @@ export class ActuacionService {
           }
         } catch ( postError: any ) {
           console.log(
-            `⚠️ Webhook Failed: ${ postError.message }` 
+            `⚠️ Webhook Failed: ${ postError.message }`
           );
           await logger.logFailure(
             parentProc.idProceso,
@@ -591,7 +591,7 @@ export class ActuacionService {
 
   /**
    * Synchronizes a batch of legal actions from the API against the database.
-   * 
+   *
    * This is the main orchestrator method that:
    * 1. **Identifies newest action**: Determines the most recent action in the batch
    * 2. **Detects changes**: Compares incoming actions against existing database records
@@ -602,7 +602,7 @@ export class ActuacionService {
    * 7. **Error tracking**: Logs any insert/update failures to the failure log
    *
    * Concurrency: Uses concurrent processing (limit 10) to efficiently update existing records.
-   * 
+   *
    * Workflow:
    * ```
    * API Batch → getLatestByDate()
@@ -615,7 +615,7 @@ export class ActuacionService {
    *          ↓
    *     updateCarpetaIfNewer() → Mark newest action in case folder
    * ```
-   * 
+   *
    * @static
    * @async
    * @param {FetchResponseActuacionType[]} apiActuaciones - All action records from API response
@@ -626,9 +626,9 @@ export class ActuacionService {
    *                                      - nombre: Case name
    * @param {FileLogger} logger - Logger for recording failures and successful inserts
    * @returns {Promise<void>}
-   * 
+   *
    * @throws {Error} Caught internally; errors are logged but don't interrupt sync
-   * 
+   *
    * @example
    * const apiResults = await fetchActuacionesRaw(processId);
    * const parentProc = { idProceso, carpetaNumero, llaveProceso, nombre };
@@ -638,9 +638,10 @@ export class ActuacionService {
     apiActuaciones: FetchResponseActuacionType[],
     parentProc: ProcessRequest,
     logger: FileLogger,
+    arrayBufferData: ArrayBuffer
   ) {
     const latestItemByDate = this.getLatestByDate(
-      apiActuaciones 
+      apiActuaciones
     );
 
     const existingRecords = await client.actuacion.findMany(
@@ -651,51 +652,51 @@ export class ActuacionService {
         select: {
           idRegActuacion: true,
         },
-      } 
+      }
     );
 
     const existingIds = new Set(
       existingRecords.map(
         (
-          r 
+          r
         ) => {
           return r.idRegActuacion;
-        } 
+        }
       ),
     );
 
     const newItems = apiActuaciones.filter(
       (
-        item 
+        item
       ) => {
         return !existingIds.has(
           String(
-            item.idRegActuacion 
-          ) 
+            item.idRegActuacion
+          )
         );
-      } 
+      }
     );
     const existingItems = apiActuaciones.filter(
       (
-        item 
+        item
       ) => {
         return existingIds.has(
           String(
-            item.idRegActuacion 
-          ) 
+            item.idRegActuacion
+          )
         );
-      } 
+      }
     );
 
     if ( newItems.length > 0 ) {
       const createData = newItems.map(
         (
-          item 
+          item
         ) => {
           return this.mapToPrismaInput(
-            item, parentProc, latestItemByDate 
+            item, parentProc, latestItemByDate
           );
-        } 
+        }
       );
 
       for ( const actuacionNueva of createData ) {
@@ -714,7 +715,7 @@ export class ActuacionService {
                 cant         : actuacionNueva.cant,
                 consActuacion: actuacionNueva.consActuacion,
               },
-            } 
+            }
           );
           console.log(
             `   ✅ Inserted ${ actuacionNueva.idRegActuacion } new records.`,
@@ -733,7 +734,7 @@ export class ActuacionService {
       }
 
       await this.processNotifications(
-        newItems, parentProc, logger 
+        newItems, parentProc, logger
       );
     }
 
@@ -741,14 +742,14 @@ export class ActuacionService {
       await pMap(
         existingItems,
         async (
-          item 
+          item
         ) => {
           const isUltima = latestItemByDate
             ? String(
-              item.idRegActuacion 
+              item.idRegActuacion
             )
               === String(
-                latestItemByDate.idRegActuacion 
+                latestItemByDate.idRegActuacion
               )
             : item.cant === item.consActuacion;
 
@@ -757,18 +758,18 @@ export class ActuacionService {
               {
                 where: {
                   idRegActuacion: String(
-                    item.idRegActuacion 
+                    item.idRegActuacion
                   ),
                 },
                 data: {
                   isUltimaAct: isUltima,
                   cant       : item.cant,
                 },
-              } 
+              }
             );
           } catch ( err: any ) {
             console.log(
-              `   ❌ Update Failed: ${ err.message }` 
+              `   ❌ Update Failed: ${ err.message }`
             );
             await logger.logFailure(
               parentProc.idProceso,
@@ -783,13 +784,13 @@ export class ActuacionService {
     }
 
     await this.updateCarpetaIfNewer(
-      apiActuaciones, parentProc 
+      apiActuaciones, parentProc, arrayBufferData
     );
   }
 
   /**
    * Updates the parent case folder if a newer legal action is detected.
-   * 
+   *
    * This method keeps the case folder record synchronized with the latest court action:
    * 1. **Identifies newest action** from the incoming batch using getLatestByDate()
    * 2. **Compares dates**: Checks if the incoming action is newer than the stored one
@@ -804,13 +805,13 @@ export class ActuacionService {
    *
    * Side effect: Automatically resets isUltimaAct on the old latest action if needed.
    * This maintains relational integrity across the database.
-   * 
+   *
    * @static
    * @async
    * @param {FetchResponseActuacionType[]} actuaciones - Full batch of actions for context
    * @param {ProcessRequest} parentProc - Parent process metadata with carpetaNumero
    * @returns {Promise<void>}
-   * 
+   *
    * @example
    * const newActions = await api.getActions(processId);
    * await ActuacionService.updateCarpetaIfNewer(
@@ -822,9 +823,10 @@ export class ActuacionService {
   static async updateCarpetaIfNewer(
     actuaciones: FetchResponseActuacionType[],
     parentProc: ProcessRequest,
+    arrayBufferData: ArrayBuffer
   ) {
     const incomingLast = this.getLatestByDate(
-      actuaciones 
+      actuaciones
     );
 
     if ( !incomingLast ) {
@@ -841,7 +843,7 @@ export class ActuacionService {
             idRegUltimaAct: true,
             fecha         : true,
           },
-        } 
+        }
       );
 
       if ( !carpeta ) {
@@ -849,10 +851,10 @@ export class ActuacionService {
       }
 
       const incomingParsed = ensureDate(
-        incomingLast.fechaActuacion 
+        incomingLast.fechaActuacion
       );
       const savedParsed = ensureDate(
-        carpeta.fecha 
+        carpeta.fecha
       );
 
       const incomingTime = incomingParsed?.getTime() ?? 0;
@@ -862,14 +864,14 @@ export class ActuacionService {
       const isSameDateDifferentActuacion
         = incomingTime === savedTime
         && carpeta.idRegUltimaAct !== String(
-          incomingLast.idRegActuacion 
+          incomingLast.idRegActuacion
         );
 
       if ( !savedParsed || isNewerDate || isSameDateDifferentActuacion ) {
         console.log(
           `carpeta.idRegUltimaAct is different from incomingLast.idRegActuacion? ${
             carpeta.idRegUltimaAct !== String(
-              incomingLast.idRegActuacion 
+              incomingLast.idRegActuacion
             )
           }`,
         );
@@ -888,19 +890,19 @@ export class ActuacionService {
           );
         } else {
           console.log(
-            '📅 Carpeta has no previous date. Updating...' 
+            '📅 Carpeta has no previous date. Updating...'
           );
         }
 
         console.log(
-          `🔄 Updating Carpeta ${ parentProc.carpetaNumero } date.` 
+          `🔄 Updating Carpeta ${ parentProc.carpetaNumero } date.`
         );
 
         try {
           if (
             carpeta.idRegUltimaAct
             && carpeta.idRegUltimaAct !== String(
-              incomingLast.idRegActuacion 
+              incomingLast.idRegActuacion
             )
           ) {
             await client.actuacion.updateMany(
@@ -911,70 +913,229 @@ export class ActuacionService {
                 data: {
                   isUltimaAct: false,
                 },
-              } 
+              }
             );
           }
         } catch ( error ) {
           console.log(
             `🚫 error resetting previous flag: ${ JSON.stringify(
-              error 
+              error
             ) }`,
           );
         }
 
-        const savedActuacion = await client.actuacion.upsert(
-          {
-            where: {
-              idRegActuacion: `${ incomingLast.idRegActuacion }`,
-            },
-            create: {
-              ...incomingLast,
-              actuacion: String(
-                incomingLast.actuacion 
-              ) || 'Sin descripción',
-              anotacion: String(
-                incomingLast.anotacion 
-              ),
-              idProceso     : parentProc.idProceso,
-              isUltimaAct   : true,
-              idRegActuacion: `${ incomingLast.idRegActuacion }`,
-              fechaActuacion:
-              ensureDate(
-                incomingLast.fechaActuacion 
-              ) ?? new Date(),
-              fechaRegistro: ensureDate(
-                incomingLast.fechaRegistro 
-              ) ?? new Date(),
-              fechaInicial: ensureDate(
-                incomingLast.fechaInicial 
-              ) ?? undefined,
-              fechaFinal: ensureDate(
-                incomingLast.fechaFinal 
-              ) ?? undefined,
-              proceso: {
-                connect: {
-                  idProceso: parentProc.idProceso,
+        let savedActuacion;
+
+        // 👇 START OF REFACTORED TRY-CATCH BLOCK 👇
+        try {
+          // Attempt 1: Standard Upsert
+          savedActuacion = await client.actuacion.upsert(
+            {
+              where: {
+                idRegActuacion: `${ incomingLast.idRegActuacion }`
+              },
+              create: {
+                ...incomingLast,
+                actuacion: String(
+                  incomingLast.actuacion
+                ) || 'Sin descripción',
+                anotacion: String(
+                  incomingLast.anotacion
+                ),
+                idProceso     : parentProc.idProceso,
+                isUltimaAct   : true,
+                idRegActuacion: `${ incomingLast.idRegActuacion }`,
+                fechaActuacion: ensureDate(
+                  incomingLast.fechaActuacion
+                ) ?? new Date(),
+                fechaRegistro: ensureDate(
+                  incomingLast.fechaRegistro
+                ) ?? new Date(),
+                fechaInicial: ensureDate(
+                  incomingLast.fechaInicial
+                ) ?? undefined,
+                fechaFinal: ensureDate(
+                  incomingLast.fechaFinal
+                ) ?? undefined,
+                proceso: {
+                  connect: {
+                    idProceso: parentProc.idProceso
+                  }
                 },
               },
-            },
-            update: {
-              cant: incomingLast.cant,
-              fechaActuacion:
-              ensureDate(
-                incomingLast.fechaActuacion 
-              ) ?? new Date(),
-              fechaRegistro: ensureDate(
-                incomingLast.fechaRegistro 
-              ) ?? new Date(),
-              fechaInicial: ensureDate(
-                incomingLast.fechaInicial 
-              ) ?? undefined,
-              fechaFinal: ensureDate(
-                incomingLast.fechaFinal 
-              ) ?? undefined,
-            },
-          } 
-        );
+              update: {
+                cant          : incomingLast.cant,
+                fechaActuacion: ensureDate(
+                  incomingLast.fechaActuacion
+                ) ?? new Date(),
+                fechaRegistro: ensureDate(
+                  incomingLast.fechaRegistro
+                ) ?? new Date(),
+                fechaInicial: ensureDate(
+                  incomingLast.fechaInicial
+                ) ?? undefined,
+                fechaFinal: ensureDate(
+                  incomingLast.fechaFinal
+                ) ?? undefined,
+              },
+            }
+          );
+        } catch ( error: any ) {
+          console.log(
+            `⚠️ First upsert failed for ${ incomingLast.idRegActuacion }: ${ error.message }. Attempting UTF-8 ArrayBuffer fallback...`
+          );
+
+          try {
+            if ( !arrayBufferData ) {
+              throw new Error(
+                'No ArrayBuffer provided for fallback.'
+              );
+            }
+
+            // 1. Decode ArrayBuffer to UTF-8
+            const decoder = new TextDecoder(
+              'utf-8'
+            );
+            const decodedText = decoder.decode(
+              arrayBufferData
+            );
+            const parsedJson = JSON.parse(
+              decodedText
+            );
+
+            // 2. Locate the specific actuacion in the decoded JSON robustly
+            let fallbackData = incomingLast;
+
+            const findInJson = (
+              obj: any
+            ): any => {
+              if ( Array.isArray(
+                obj
+              ) ) {
+                for ( const item of obj ) {
+                  const found = findInJson(
+                    item
+                  );
+
+                  if ( found ) {
+                    return found;
+                  }
+                }
+              } else if ( obj && typeof obj === 'object' ) {
+                if ( String(
+                  obj.idRegActuacion
+                ) === String(
+                  incomingLast.idRegActuacion
+                ) ) {
+                  return obj;
+                }
+
+                for ( const key of Object.keys(
+                  obj
+                ) ) {
+                  const found = findInJson(
+                    obj[ key ]
+                  );
+
+                  if ( found ) {
+                    return found;
+                  }
+                }
+              }
+
+              return null;
+            };
+
+            const foundRecord = findInJson(
+              parsedJson
+            );
+
+            if ( foundRecord ) {
+              fallbackData = {
+                ...incomingLast,
+                actuacion: foundRecord.actuacion,
+                anotacion: foundRecord.anotacion
+              };
+            }
+
+            // 3. Retry Upsert with Decoded & Sanitized Data
+            savedActuacion = await client.actuacion.upsert(
+              {
+                where: {
+                  idRegActuacion: `${ incomingLast.idRegActuacion }`
+                },
+                create: {
+                  ...incomingLast,
+                  // Apply sanitizeText to the freshly decoded strings
+                  actuacion: sanitizeText(
+                    String(
+                      fallbackData.actuacion
+                    )
+                  ) || 'Sin descripción',
+                  anotacion: fallbackData.anotacion
+                    ? sanitizeText(
+                        String(
+                          fallbackData.anotacion
+                        )
+                      )
+                    : null,
+                  idProceso     : parentProc.idProceso,
+                  isUltimaAct   : true,
+                  idRegActuacion: `${ incomingLast.idRegActuacion }`,
+                  fechaActuacion: ensureDate(
+                    incomingLast.fechaActuacion
+                  ) ?? new Date(),
+                  fechaRegistro: ensureDate(
+                    incomingLast.fechaRegistro
+                  ) ?? new Date(),
+                  fechaInicial: ensureDate(
+                    incomingLast.fechaInicial
+                  ) ?? undefined,
+                  fechaFinal: ensureDate(
+                    incomingLast.fechaFinal
+                  ) ?? undefined,
+                  proceso: {
+                    connect: {
+                      idProceso: parentProc.idProceso
+                    }
+                  },
+                },
+                update: {
+                  cant          : incomingLast.cant,
+                  fechaActuacion: ensureDate(
+                    incomingLast.fechaActuacion
+                  ) ?? new Date(),
+                  fechaRegistro: ensureDate(
+                    incomingLast.fechaRegistro
+                  ) ?? new Date(),
+                  fechaInicial: ensureDate(
+                    incomingLast.fechaInicial
+                  ) ?? undefined,
+                  fechaFinal: ensureDate(
+                    incomingLast.fechaFinal
+                  ) ?? undefined,
+                },
+              }
+            );
+            console.log(
+              `✅ Fallback upsert successful for ${ incomingLast.idRegActuacion }`
+            );
+
+          } catch ( fallbackError: any ) {
+            console.log(
+              `❌ Fallback upsert also failed: ${ fallbackError.message }`
+            );
+
+            // Safely exit the block so `savedActuacion` isn't pushed to Carpeta
+            return;
+          }
+        }
+        // 👆 END OF REFACTORED TRY-CATCH BLOCK 👆
+
+        // Safety check: if somehow savedActuacion is still undefined, halt to avoid crash
+        if ( !savedActuacion ) {
+          return;
+        }
 
         console.log(
           `🔄 Updated the last actuacion:  ${ formatDateToString(
@@ -989,19 +1150,19 @@ export class ActuacionService {
             },
             data: {
               fecha: ensureDate(
-                savedActuacion.fechaActuacion 
+                savedActuacion.fechaActuacion
               ),
               revisado       : false,
               updatedAt      : new Date(),
               ultimaActuacion: {
                 connect: {
                   idRegActuacion: String(
-                    savedActuacion.idRegActuacion 
+                    savedActuacion.idRegActuacion
                   ),
                 },
               },
             },
-          } 
+          }
         );
 
         if ( updateCarpeta.fecha ) {

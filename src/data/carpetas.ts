@@ -1,10 +1,10 @@
 /**
  * @module data/carpetas
  * @description Raw Case Folder Import from Excel Workbook
- * 
+ *
  * Reads Excel workbook from OneDrive and transforms each worksheet into
  * structured JSON records representing raw case folder data before model transformation.
- * 
+ *
  * DATA PIPELINE:
  * Excel File (.xlsx)
  *   ↓
@@ -17,23 +17,23 @@
  * Add category field (from sheet name)
  *   ↓
  * Accumulate into RawCarpetas[] array
- * 
+ *
  * SHEET STRUCTURE:
  * Each worksheet represents a case category (e.g., \"Pequeñas Causas\", \"Ordinario\")
  * All sheets must have identical columns matching RawDb interface
  * Rows become individual RawDb records, enriched with category metadata
- * 
+ *
  * EXCEL SOURCE:
  * Hardcoded path: /home/cachorro_cami/OneDrive/bases_de_datos/general.xlsx
  * Format: Excel 2007+ (.xlsx with native date cell type handling)
  * Current behavior: cellDates: true preserves Excel date formatting
- * 
+ *
  * OUTPUT:
  * RawCarpetas: Exported array of RawDb records with category field
  * - Used by ClassCarpeta constructor (model instantiation)
  * - Consumed by procesos.ts and procesos_from_name.ts entry points
  * - Contains raw, unvalidated data (validation occurs at model layer)
- * 
+ *
  * DATA TRANSFORMATION:
  * - All columns converted to object properties per RawDb interface
  * - Column names must match Excel headers exactly
