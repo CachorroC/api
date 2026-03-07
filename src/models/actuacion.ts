@@ -731,33 +731,6 @@ export class ActuacionService {
             error.message,
             'DB_ITEM',
           );
-          const decodeArrayBuffer = decodeBufferSafely<FetchResponseActuacionType>( arrayBufferData )
-          if ( 'parseError' in decodeArrayBuffer ) {
-            console.log(
-              `   ❌ Decode Failed for ${ actuacionNueva.idRegActuacion }: ${ decodeArrayBuffer.parseError }`,
-            );
-            await logger.logFailure(
-              parentProc.idProceso,
-              actuacionNueva,
-              decodeArrayBuffer.parseError,
-              'DECODE_ITEM',
-            );
-          } else {
-            await client.actuacion.upsert(
-            {
-              where: {
-                idRegActuacion: `${decodeArrayBuffer.idRegActuacion}`,
-              },
-              create: decodeArrayBuffer,
-              update: {
-                cant         : decodeArrayBuffer.cant,
-                consActuacion: decodeArrayBuffer.consActuacion,
-              },
-            }
-          );
-          }
-
-
 
         }
       }

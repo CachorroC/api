@@ -14,7 +14,7 @@ export function decodeBufferSafely<T>(buffer: ArrayBuffer , encoding = 'utf-8'):
     // 2. Try to parse it as JSON
     return JSON.parse(decodedString);
 
-  } catch (error) {
+  } catch (error : any) {
     console.error("Failed to parse the decoded string as JSON:", error.message);
 
     // Fallback: If it's not JSON, return the raw string so you don't lose the data
@@ -23,7 +23,7 @@ export function decodeBufferSafely<T>(buffer: ArrayBuffer , encoding = 'utf-8'):
       parseError: error.message,
       rawText: new TextDecoder(encoding, { fatal: false }).decode(buffer)
     };
-  }º
+  }
 }
 
 // Usage:
