@@ -164,7 +164,7 @@ export class FileLogger {
     contextId: string | number,
     subItem: any,
     error: string,
-    phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM',
+    phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM' | "DECODE_ITEM",
   ) {
     const carpetaNumero
       = subItem?.carpetaNumero
