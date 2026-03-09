@@ -23,7 +23,6 @@ import { TelegramService } from '../services/telegramService.js';
 import { DatabaseActuacionType,
   FetchResponseActuacionType,
   ProcessRequest, } from '../types/actuaciones.js';
-import { decodeBufferSafely } from '../utils/arrayBufferDecoder.js';
 import { sleep } from '../utils/awaiter.js';
 import { ensureDate, formatDateToString } from '../utils/ensureDate.js';
 import { sanitizeText } from '../utils/textSanitizer.js';
@@ -488,7 +487,9 @@ export class ActuacionService {
             WEBHOOK_URL, {
               method : 'POST',
               headers: {
-                'Content-Type': 'application/json',
+                'Content-Type'           : 'application/json',
+                'CF-Access-Client-Id'    : process.env.CF_ACCESS_CLIENT_ID ?? '',
+                'CF-Access-Client-Secret': process.env.CF_ACCESS_CLIENT_SECRET ?? '',
               },
               body: JSON.stringify(
                 {
@@ -514,6 +515,9 @@ export class ActuacionService {
                 }
               ),
             }
+          );
+          console.log(
+            `webhook fetch post request sent, response: ${ response.status } - ${ response.statusText }` 
           );
 
           if ( !response.ok ) {
