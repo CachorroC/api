@@ -517,7 +517,7 @@ export class ActuacionService {
             }
           );
           console.log(
-            `webhook fetch post request sent, response: ${ response.status } - ${ response.statusText }` 
+            `webhook fetch post request sent, response: ${ response.status } - ${ response.statusText }`
           );
 
           if ( !response.ok ) {
@@ -998,9 +998,9 @@ export class ActuacionService {
               );
             }
 
-            // 1. Decode ArrayBuffer to UTF-8
+            // 1. Decode ArrayBuffer to iso-8859-1
             const decoder = new TextDecoder(
-              'utf-8'
+              'iso-8859-1'
             );
             const decodedText = decoder.decode(
               arrayBufferData

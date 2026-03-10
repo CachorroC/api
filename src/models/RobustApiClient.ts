@@ -279,6 +279,14 @@ export class RobustApiClient {
           `🌐 [${ index + 1 }/${ items.length }] Fetching: ${ parentItem.carpetaNumero }`,
         );
 
+        if ( parentItem.idProceso === '0' ) {
+          console.log(
+            `🧑‍🔧 no hay idProceso, continue with next item. ${ parentItem.idProceso }`
+          );
+
+          continue;
+        }
+
         const apiResponse
           = await this.fetchWithRetry<ConsultaActuacion>(
             endpoint
