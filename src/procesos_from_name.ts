@@ -29,15 +29,15 @@
 
 import * as fs from 'fs/promises';
 import { ClassCarpeta } from './models/carpeta.js';
-import { RawCarpetas } from './data/carpetas.js';
+import { RawCarpetas } from './assets/carpetas.js';
 const carpetasMap = RawCarpetas.map(
   (
-    carpeta 
+    carpeta
   ) => {
     return new ClassCarpeta(
-      carpeta 
+      carpeta
     );
-  } 
+  }
 );
 
 /**

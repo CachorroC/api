@@ -1,15 +1,15 @@
 /**
  * @module utils/database-juzgado-fixer
  * @description Court (Juzgado) Data Extraction and Transformation Utility
- * 
+ *
  * Processes raw case data to extract, normalize, and transform court information
  * from multiple source fields. Handles inconsistent formatting and creates structured
  * court model instances with metadata.
- * 
+ *
  * EXECUTION FLOW:
  * RawCarpetas (Excel rows) → For each carpeta → Extract fields → Parse with regex →
  * Create JuzgadoClass → Export to JSON
- * 
+ *
  * KEY FUNCTIONS:
  * - extrapolateIdCiudadyTipo(): Parse court name, extract ID, type, city
  * - JuzgadoClass.fromShortName(): Create structured court model
@@ -18,14 +18,14 @@
 import * as fs from 'fs/promises';
 import { extrapolateTipoToCorrectType } from '../models/juzgado.js';
 import JuzgadoClass from '../models/juzgado.js';
-import { RawCarpetas } from '../data/carpetas.js';
+import { RawCarpetas } from '../assets/carpetas.js';
 
 const outgoingJuzgados = [];
 
 for ( const carpeta of RawCarpetas ) {
   const juzgadoByCarpeta = extrapolateIdCiudadyTipo(
     String(
-      carpeta.JUZGADO_CIUDAD 
+      carpeta.JUZGADO_CIUDAD
     ),
     carpeta.JUZGADO_EJECUCION,
     carpeta.JUZGADO_ORIGEN,
@@ -34,31 +34,31 @@ for ( const carpeta of RawCarpetas ) {
   const juzgadoByCareta = JuzgadoClass.fromShortName(
     {
       ciudad: String(
-        carpeta.JUZGADO_CIUDAD 
+        carpeta.JUZGADO_CIUDAD
       ),
       juzgadoRaw: carpeta.JUZGADO_EJECUCION
         ? carpeta.JUZGADO_EJECUCION
         : carpeta.JUZGADO_ORIGEN
           ? carpeta.JUZGADO_ORIGEN
           : '1 CM',
-    } 
+    }
   );
 
   console.log(
-    juzgadoByCarpeta 
+    juzgadoByCarpeta
   );
   outgoingJuzgados.push(
     {
       ...juzgadoByCarpeta,
       ...juzgadoByCareta,
-    } 
+    }
   );
 }
 
 fs.writeFile(
   'outgoingJuzgados.json',
   JSON.stringify(
-    outgoingJuzgados, null, 2 
+    outgoingJuzgados, null, 2
   ),
 );
 
@@ -94,13 +94,13 @@ export function extrapolateIdCiudadyTipo(
 
   if ( matchedRegexNumberAndLetters ) {
     const asAnArray = Array.from(
-      matchedRegexNumberAndLetters 
+      matchedRegexNumberAndLetters
     );
 
     if ( asAnArray.length === 0 ) {
       return {
         fullArray: JSON.stringify(
-          matchedRegexNumberAndLetters 
+          matchedRegexNumberAndLetters
         ),
         id    : '',
         tipo  : '',
@@ -111,12 +111,12 @@ export function extrapolateIdCiudadyTipo(
             ? origen
             : '',
         tipoRaw: String(
-          matchedRegexNumberAndLetters 
+          matchedRegexNumberAndLetters
         ),
       };
     } else if ( asAnArray.length >= 2 ) {
       const temporaryTipo = extrapolateTipoToCorrectType(
-        asAnArray[ 3 ] 
+        asAnArray[ 3 ]
       );
 
       return {
@@ -133,7 +133,7 @@ export function extrapolateIdCiudadyTipo(
     }
 
     const temporaryTipo = extrapolateTipoToCorrectType(
-      asAnArray[ 3 ] 
+      asAnArray[ 3 ]
     );
 
     return {

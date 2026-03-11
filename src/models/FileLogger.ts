@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /**
  * @fileoverview FileLogger - JSON-based Audit and Error Tracking
  *
@@ -162,11 +162,14 @@ export class FileLogger {
    */
   public async logFailure(
     contextId: string | number,
-    subItem: any,
+    subItem: FetchResponseActuacionType[] | ProcessRequest,
     error: string,
-    phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM' | "DECODE_ITEM",
+    phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM' | 'DECODE_ITEM',
   ) {
-    const carpetaNumero
+    let carpetaNumero = 0;
+
+
+    carpetaNumero
       = subItem?.carpetaNumero
       || subItem?.data?.carpetaNumero
       || subItem?.proceso?.carpetaNumero
@@ -188,7 +191,7 @@ export class FileLogger {
     };
 
     try {
-      let currentData: any[] = [];
+      let currentData = [];
 
       try {
         const fileContent = await fs.readFile(
@@ -293,7 +296,7 @@ export class FileLogger {
     );
 
     try {
-      let currentData: any[] = [];
+      let currentData = [];
 
       try {
         const fileContent = await fs.readFile(

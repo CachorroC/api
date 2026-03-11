@@ -1,20 +1,20 @@
 /**
  * @fileoverview Cidade Exporter Module
- * 
+ *
  * This module extracts and exports unique city (ciudad) information from raw case data.
  * It transforms raw database records into a deduplicated set of cities and outputs
  * the results to a JSON file for reference and analysis.
- * 
+ *
  * Workflow:
  * - Reads raw carpeta data from RawCarpetas
  * - Extracts JUZGADO_CIUDAD field from each record
  * - Deduplicates cities using a Set
  * - Writes unique cities to ciudades.json
- * 
+ *
  * @module getLlaves
  */
 
-import { RawCarpetas } from './data/carpetas.js';
+import { RawCarpetas } from './assets/carpetas.js';
 
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
@@ -24,15 +24,15 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 const __filename = fileURLToPath(
-  import.meta.url 
+  import.meta.url
 );
 const __dirname = dirname(
-  __filename 
+  __filename
 );
 
 /**
  * Represents a processed expediente (case) with cidade information.
- * 
+ *
  * @typedef {Object} ProcessedExpediente
  * @property {string} ciudad - The city where the court is located
  */
@@ -42,7 +42,7 @@ interface ProcessedExpediente {
 
 /**
  * Extracts unique cities from raw case data and exports to a JSON file.
- * 
+ *
  * This function performs the following steps:
  * 1. Transforms raw case data by extracting city information (JUZGADO_CIUDAD)
  * 2. Deduplicates cities using a Set to ensure each city appears only once
@@ -51,13 +51,13 @@ interface ProcessedExpediente {
  * 5. Logs success/error messages to the console
  *
  * The output file is saved with 2-space indentation for readability.
- * 
+ *
  * @async
  * @param {RawDb[]} rawData - Array of raw database records containing case information
  * @param {string} fileName - The output filename (e.g., 'ciudades.json') within the src directory
  * @returns {Promise<void>} Promise that resolves when file writing is complete
  * @throws {Error} Logs errors to console if file writing fails
- * 
+ *
  * @example
  * // Extract cities and save to file
  * await exportExpedientesToJson(RawCarpetas, 'ciudades.json');
@@ -72,21 +72,21 @@ async function exportExpedientesToJson(
     // We iterate over the array, convert EXPEDIENTE to string, and return the new object structure
     const outputData: ProcessedExpediente[] = rawData.map(
       (
-        item 
+        item
       ) => {
         return {
           ciudad: String(
-            item.JUZGADO_CIUDAD 
+            item.JUZGADO_CIUDAD
           ), // Ensures it is converted to a string
         };
-      } 
+      }
     );
 
     const setData = new Set();
 
     for ( const data of outputData ) {
       setData.add(
-        data.ciudad 
+        data.ciudad
       );
     }
 
@@ -94,16 +94,16 @@ async function exportExpedientesToJson(
     // The 'null, 2' arguments make the JSON readable (pretty-printed) as requested
     const jsonContent = JSON.stringify(
       Array.from(
-        setData 
-      ), null, 2 
+        setData
+      ), null, 2
     );
 
     // Step 3: Write to file
     const filePath = join(
-      __dirname, fileName 
+      __dirname, fileName
     );
     await writeFile(
-      filePath, jsonContent, 'utf-8' 
+      filePath, jsonContent, 'utf-8'
     );
 
     console.log(
@@ -111,7 +111,7 @@ async function exportExpedientesToJson(
     );
   } catch ( error ) {
     console.error(
-      '❌ Error writing file:', error 
+      '❌ Error writing file:', error
     );
   }
 }
@@ -122,5 +122,5 @@ async function exportExpedientesToJson(
 
 // Run the function
 exportExpedientesToJson(
-  RawCarpetas, 'ciudades.json' 
+  RawCarpetas, 'ciudades.json'
 );

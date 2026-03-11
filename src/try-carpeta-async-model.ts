@@ -38,7 +38,7 @@
  */
 
 /* eslint-disable no-unused-vars */
-import { RawCarpetas } from './data/carpetas.js';
+import { RawCarpetas } from './assets/carpetas.js';
 import { ClassCarpeta } from './models/carpeta.js';
 import { client } from './services/prisma.js';
 
