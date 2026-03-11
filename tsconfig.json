@@ -15,7 +15,9 @@
       "ES2022.Object",
       "esnext"
     ],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
+
   },
   "exclude": [ "node_modules" ]
 }
