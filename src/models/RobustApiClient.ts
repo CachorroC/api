@@ -19,7 +19,9 @@
  */
 
 import { ConsultaActuacion, ProcessRequest } from '../types/actuaciones.js';
+import { formatDateToString } from '../utils/ensureDate.js';
 import { fetchWithSmartRetry } from '../utils/fetchWithSmartRetry.js';
+import { isWithinLastSevenDays } from '../utils/isInTheLast7Days.js';
 import { ActuacionService } from './actuacion.js';
 import { ApiError } from './ApiError.js';
 import { FileLogger } from './FileLogger.js';
@@ -291,10 +293,31 @@ export class RobustApiClient {
           = await this.fetchWithRetry<ConsultaActuacion>(
             endpoint
           );
+
         const {
           actuaciones, arrayBufferData
         } = apiResponse;
+
         const actuacionesList = actuaciones || [];
+
+        actuacionesList.forEach(
+          (
+            actuacion
+          ) => {
+
+            if ( isWithinLastSevenDays(
+              actuacion.fechaActuacion
+            ) ) {
+              console.log(
+                `💚 actuacion was in the last 7 days ${ formatDateToString(
+                  new Date(
+                    actuacion.fechaActuacion
+                  )
+                ) }`
+              );
+            }
+          }
+        );
 
         if ( actuacionesList.length > 0 ) {
           await ActuacionService.syncBatch(

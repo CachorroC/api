@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * @fileoverview FileLogger - JSON-based Audit and Error Tracking
@@ -162,7 +163,7 @@ export class FileLogger {
    */
   public async logFailure(
     contextId: string | number,
-    subItem: FetchResponseActuacionType[] | ProcessRequest,
+    subItem: any,
     error: string,
     phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM' | 'DECODE_ITEM',
   ) {

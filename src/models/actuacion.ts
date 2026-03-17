@@ -359,36 +359,35 @@ export class ActuacionService {
     const isUltima = actualLatestItem
       ? String(
         apiData.idRegActuacion
+      ) === String(
+        actualLatestItem.idRegActuacion
       )
-        === String(
-          actualLatestItem.idRegActuacion
-        )
       : false;
-    // Apply sanitization here 👇
-    const cleanActuacion
-      = sanitizeText(
-        String(
-          apiData.actuacion
-        )
-      ) || 'Sin descripción';
-    const cleanAnotacion = sanitizeText(
-      String(
-        apiData.anotacion
-      )
-    );
 
     return {
       idRegActuacion: String(
         apiData.idRegActuacion
       ),
-      consActuacion : apiData.consActuacion,
-      actuacion     : cleanActuacion,
-      anotacion     : cleanAnotacion,
-      cant          : apiData.cant,
-      carpetaNumero : parentProc.carpetaNumero,
-      codRegla      : apiData.codRegla,
-      conDocumentos : apiData.conDocumentos,
-      llaveProceso  : parentProc.llaveProceso,
+      consActuacion: apiData.consActuacion,
+      // Pass directly to avoid String(null) becoming "null"
+      actuacion    : sanitizeText(
+        apiData.actuacion as string
+      ) || 'Sin descripción',
+      anotacion: apiData.anotacion
+        ? sanitizeText(
+            apiData.anotacion as string
+          )
+        : null,
+      cant         : apiData.cant,
+      carpetaNumero: parentProc.carpetaNumero,
+      // Sanitize the remaining string fields
+      codRegla     : String(
+        apiData.codRegla as string
+      ),
+      conDocumentos: apiData.conDocumentos,
+      llaveProceso : String(
+        parentProc.llaveProceso
+      ),
       fechaActuacion: ensureDate(
         apiData.fechaActuacion
       ) ?? new Date(),
@@ -532,7 +531,10 @@ export class ActuacionService {
           );
           await logger.logFailure(
             parentProc.idProceso,
-            act,
+            {
+              data: act,
+              ...parentProc
+            },
             postError.message,
             'WEBHOOK',
           );
@@ -549,7 +551,10 @@ export class ActuacionService {
         );
         await logger.logFailure(
           parentProc.idProceso,
-          act,
+          {
+            data: act,
+            ...parentProc
+          },
           teleError.message,
           'TELEGRAM',
         );
@@ -585,7 +590,10 @@ export class ActuacionService {
           );
           await logger.logFailure(
             parentProc.idProceso,
-            act,
+            {
+              data: act,
+              ...parentProc
+            },
             postError.message,
             'WEBHOOK',
           );
@@ -731,7 +739,9 @@ export class ActuacionService {
           );
           await logger.logFailure(
             parentProc.idProceso,
-            actuacionNueva,
+            {
+              data: actuacionNueva
+            },
             error.message,
             'DB_ITEM',
           );
@@ -779,7 +789,10 @@ export class ActuacionService {
             );
             await logger.logFailure(
               parentProc.idProceso,
-              existingItems,
+              {
+                data: existingItems,
+                ...parentProc
+              },
               err.message,
               'DB_ITEM',
             );
@@ -933,8 +946,9 @@ export class ActuacionService {
         let savedActuacion;
 
         // 👇 START OF REFACTORED TRY-CATCH BLOCK 👇
+        // 👇 START OF REFACTORED TRY-CATCH BLOCK 👇
         try {
-          // Attempt 1: Standard Upsert
+          // Attempt 1: Standard Upsert - Explicitly override ALL string fields
           savedActuacion = await client.actuacion.upsert(
             {
               where: {
@@ -942,11 +956,19 @@ export class ActuacionService {
               },
               create: {
                 ...incomingLast,
-                actuacion: String(
-                  incomingLast.actuacion
+                actuacion: sanitizeText(
+                  incomingLast.actuacion as string
                 ) || 'Sin descripción',
-                anotacion: String(
-                  incomingLast.anotacion
+                anotacion: incomingLast.anotacion
+                  ? sanitizeText(
+                      incomingLast.anotacion as string
+                    )
+                  : null,
+                codRegla: sanitizeText(
+                  incomingLast.codRegla as string
+                ),
+                llaveProceso: sanitizeText(
+                  incomingLast.llaveProceso as string
                 ),
                 idProceso     : parentProc.idProceso,
                 isUltimaAct   : true,
@@ -998,7 +1020,6 @@ export class ActuacionService {
               );
             }
 
-            // 1. Decode ArrayBuffer to iso-8859-1
             const decoder = new TextDecoder(
               'iso-8859-1'
             );
@@ -1009,7 +1030,6 @@ export class ActuacionService {
               decodedText
             );
 
-            // 2. Locate the specific actuacion in the decoded JSON robustly
             let fallbackData = incomingLast;
 
             const findInJson = (
@@ -1059,12 +1079,11 @@ export class ActuacionService {
             if ( foundRecord ) {
               fallbackData = {
                 ...incomingLast,
-                actuacion: foundRecord.actuacion,
-                anotacion: foundRecord.anotacion
+                ...foundRecord
               };
             }
 
-            // 3. Retry Upsert with Decoded & Sanitized Data
+            // Attempt 2: Retry Upsert and override ALL strings with the decoded/sanitized data
             savedActuacion = await client.actuacion.upsert(
               {
                 where: {
@@ -1072,19 +1091,20 @@ export class ActuacionService {
                 },
                 create: {
                   ...incomingLast,
-                  // Apply sanitizeText to the freshly decoded strings
                   actuacion: sanitizeText(
-                    String(
-                      fallbackData.actuacion
-                    )
+                    fallbackData.actuacion as string
                   ) || 'Sin descripción',
                   anotacion: fallbackData.anotacion
                     ? sanitizeText(
-                        String(
-                          fallbackData.anotacion
-                        )
+                        fallbackData.anotacion as string
                       )
                     : null,
+                  codRegla: sanitizeText(
+                    fallbackData.codRegla as string
+                  ),
+                  llaveProceso: sanitizeText(
+                    fallbackData.llaveProceso as string
+                  ),
                   idProceso     : parentProc.idProceso,
                   isUltimaAct   : true,
                   idRegActuacion: `${ incomingLast.idRegActuacion }`,
@@ -1132,10 +1152,10 @@ export class ActuacionService {
               `❌ Fallback upsert also failed: ${ fallbackError.message }`
             );
 
-            // Safely exit the block so `savedActuacion` isn't pushed to Carpeta
             return;
           }
         }
+        // 👆 END OF REFACTORED TRY-CATCH BLOCK 👆
         // 👆 END OF REFACTORED TRY-CATCH BLOCK 👆
 
         // Safety check: if somehow savedActuacion is still undefined, halt to avoid crash

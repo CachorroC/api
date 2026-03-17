@@ -3,13 +3,12 @@
  *
  * This function performs the following operations:
  * 1. Handles `null` or `undefined` inputs by returning an empty string.
- * 2. Removes null bytes (`\x00`) which are strictly forbidden in PostgreSQL text fields.
- * 3. Removes unpaired surrogates (malformed UTF-16) that cause UTF-8 serialization crashes.
- * 4. Removes unprintable ASCII control characters (range \x01-\x1F, \x7F) while preserving
- * essential formatting characters like newlines (`\n`, `\r`) and tabs (`\t`).
- * 5. Removes the Unicode replacement character (`\uFFFD`) often resulting from encoding errors.
- * 6. Normalizes Unicode strings to Canonical Composition (NFC) form to ensure consistent
- * representation of characters (e.g., combining diacritics).
+ * 2. Forces runtime string coercion to prevent crashes from unexpected API data types.
+ * 3. Uses native `.toWellFormed()` to convert malformed UTF-16 surrogates into `\uFFFD`.
+ * 4. Removes Null bytes (`\u0000`) and unprintable ASCII control chars in a single sweep
+ * (while explicitly preserving \t, \n, and \r).
+ * 5. Removes the Unicode replacement character (`\uFFFD`) to clean up mojibake and fixed surrogates.
+ * 6. Normalizes Unicode strings to Canonical Composition (NFC).
  * 7. Trims leading and trailing whitespace.
  *
  * @param {string | null | undefined} str - The input string to sanitize. Can be null or undefined.
@@ -18,32 +17,47 @@
 export function sanitizeText(
   str: string | null | undefined
 ): string {
-  if ( !str ) {
+  // 1. Handle null/undefined
+  if ( str === null || str === undefined ) {
     return '';
   }
 
+  // 2. Force runtime string coercion (protects against accidental numbers/booleans from API)
+  let text = String(
+    str 
+  );
+
+  // 3. Guarantee valid UTF-16 (fixes the "invalid byte sequence for encoding UTF8" error)
+  // toWellFormed() natively replaces unpaired surrogates with the replacement character (\uFFFD).
+  if ( typeof text.toWellFormed === 'function' ) {
+    text = text.toWellFormed();
+  } else {
+    // Fallback regex for Node versions < 20
+    text = text.replace(
+      /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g,
+      '\uFFFD'
+    );
+  }
+
   return (
-    str
-      // 1. Remove null bytes (\x00) which Postgres strictly forbids
+    text
+      // 4. Remove Null bytes (\u0000) AND unprintable ASCII control chars in one sweep
+      // (Keeps \t, \n, \r which correspond to \u0009, \u000A, \u000D)
       .replace(
-        /\0/g, ''
+        /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '' 
       )
-      // 2. Remove unpaired surrogates (fixes the "invalid byte sequence for encoding UTF8" error)
+
+      // 5. Remove the Unicode replacement character (cleans up mojibake and the surrogates we just fixed)
       .replace(
-        /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g, ''
+        /\uFFFD/g, '' 
       )
-      // 3. Remove unprintable ASCII control characters (keeps newlines and tabs)
-      .replace(
-        /[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]/g, ''
-      )
-      // 4. Remove the Unicode replacement character (mojibake cleanup)
-      .replace(
-        /\uFFFD/g, ''
-      )
-      // 5. Normalize Unicode to Canonical Composition (fixes separated diacritics)
+
+      // 6. Normalize Unicode to Canonical Composition (fixes separated diacritics like ó)
       .normalize(
-        'NFC'
+        'NFC' 
       )
+
+      // 7. Trim leading and trailing whitespace
       .trim()
   );
 }
