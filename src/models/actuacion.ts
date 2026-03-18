@@ -18,7 +18,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Prisma } from '../prisma/generated/prisma/client.js';
-import { client } from '../services/prisma.js';
+import { client } from '../services/connection/prisma.js';
 import { TelegramService } from '../services/telegramService.js';
 import { DatabaseActuacionType,
   FetchResponseActuacionType,

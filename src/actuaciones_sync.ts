@@ -2,7 +2,7 @@ import 'dotenv/config'; // Must be first to load .env
 import { ProcessRequest } from './types/actuaciones.js';
 import { formatDateToString } from './utils/ensureDate.js';
 import { RobustApiClient } from './models/RobustApiClient.js';
-import { client } from './services/prisma.js';
+import { client } from './services/connection/prisma.js';
 const RAMA_JUDICIAL_BASE_URL
   = process.env.RAMA_JUDICIAL_BASE_URL
   || 'https://consultaprocesos.ramajudicial.gov.co:448';

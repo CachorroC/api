@@ -40,7 +40,7 @@
 /* eslint-disable no-unused-vars */
 import { RawCarpetas } from './assets/carpetas.js';
 import { ClassCarpeta } from './models/carpeta.js';
-import { client } from './services/prisma.js';
+import { client } from './services/connection/prisma.js';
 
 // Add this helper function at the bottom or in utils
 /**
