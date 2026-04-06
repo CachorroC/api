@@ -17,6 +17,7 @@
     "jiti": "^2.6.1",
     "mongodb": "^7.1.0",
     "pg": "^8.18.0",
+    "prompts": "^2.4.2",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
     "web-push": "^3.6.7",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@types/prompts": "^2.4.9",
     "globals": "^17.3.0",
     "prisma": "^7.4.2",
     "tsx": "^4.21.0",
@@ -33,8 +35,8 @@
   "name": "rest-express",
   "packageManager": "pnpm@10.30.3",
   "scripts": {
-    "carpetafix": "node dist/try-carpeta-async-model.js",
-    "dev": "ts-node src/index.ts",
+    "carpetafix": "tsx dist/try-carpeta-async-model.js",
+    "dev": "tsx src/index.ts",
     "dist": "tsc",
     "lint": "eslint --fix ."
   },

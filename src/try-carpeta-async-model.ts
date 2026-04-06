@@ -123,7 +123,7 @@ async function processBatch<T>(
  * @async
  * @returns {*}
  */
-async function tryAsyncClassCarpetas() {
+export async function tryAsyncClassCarpetas() {
   console.log(
     '🚀 Starting Optimized Sync...'
   );
@@ -233,22 +233,3 @@ async function tryAsyncClassCarpetas() {
 }
 
 // ... End of tryAsyncClassCarpetas function }
-
-// MISSING LINE: You must add this to actually run the script!
-tryAsyncClassCarpetas()
-  .then(
-    () => {
-      return console.log(
-        'Script finished successfully.'
-      );
-    }
-  )
-  .catch(
-    (
-      e
-    ) => {
-      return console.error(
-        'Script crashed:', e
-      );
-    }
-  );

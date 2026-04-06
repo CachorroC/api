@@ -56,7 +56,7 @@ async function getProcesosToUpdate(): Promise<ProcessRequest[]> {
  * It determines the current time window, filters the database items by their `category`,
  * and delegates the filtered batch to the `RobustApiClient`.
  */
-async function runSync() {
+export async function runSync() {
   const startTime = new Date();
   const formattedCustomStartTime = formatDateToString(
     startTime
@@ -169,5 +169,3 @@ async function runSync() {
     );
   }
 }
-
-runSync();
