@@ -41,5 +41,6 @@
     "lint": "eslint --fix ."
   },
   "type": "module",
+  "main": "dist/src/index.js",
   "version": "1.0.0"
 }
