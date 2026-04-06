@@ -38,7 +38,7 @@
  */
 
 /* eslint-disable no-unused-vars */
-import { RawCarpetas } from './assets/carpetas.js';
+import { rawCarpetas } from './assets/carpetas.js';
 import { ClassCarpeta } from './models/carpeta.js';
 import { client } from './services/connection/prisma.js';
 
@@ -127,6 +127,7 @@ export async function tryAsyncClassCarpetas() {
   console.log(
     '🚀 Starting Optimized Sync...'
   );
+  const RawCarpetas = rawCarpetas();
   // 1. Convert Raw Data to lightweight objects (Don't instantiate ClassCarpeta yet if not needed)
   const rawData = RawCarpetas.map(
     (

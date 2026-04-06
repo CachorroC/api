@@ -1,4 +1,4 @@
-import { RawCarpetas } from '../assets/carpetas.js';
+import { rawCarpetas } from '../assets/carpetas.js';
 import { ClassCarpeta } from '../models/carpeta.js';
 
 // Add this helper function at the bottom or in utils
@@ -36,6 +36,7 @@ async function tryAsyncClassCarpetas() {
   console.log(
     '🚀 Starting Optimized Sync...'
   );
+  const RawCarpetas = rawCarpetas();
   // 1. Convert Raw Data to lightweight objects (Don't instantiate ClassCarpeta yet if not needed)
   const rawData = RawCarpetas.map(
     (

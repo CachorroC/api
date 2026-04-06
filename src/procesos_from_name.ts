@@ -29,8 +29,8 @@
 
 import * as fs from 'fs/promises';
 import { ClassCarpeta } from './models/carpeta.js';
-import { RawCarpetas } from './assets/carpetas.js';
-const carpetasMap = RawCarpetas.map(
+import {  rawCarpetas } from './assets/carpetas.js';
+const carpetasMap = rawCarpetas().map(
   (
     carpeta
   ) => {

@@ -47,102 +47,107 @@ import { Category } from '../types/carpetas.js';
 import * as fs from 'fs/promises';
 import { RawDb } from '../types/raw-db.js';
 
-const workbook = xlsx.readFile(
-  '/home/cachorro_cami/OneDrive/bases_de_datos/general.xlsx',
-  {
-    cellDates: true,
-  },
-);
 
-const {
-  SheetNames, Sheets 
-} = workbook;
+export function rawCarpetas() {
+  const workbook = xlsx.readFile(
+    '/home/cachorro_cami/OneDrive/bases_de_datos/general.xlsx',
+    {
+      cellDates: true,
+    },
+  );
 
-const outputSheets: unknown[] = [];
+  const {
+    SheetNames, Sheets
+  } = workbook;
 
-const mapperSheets = SheetNames.flatMap(
-  (
-    sheetname 
-  ) => {
-    const sheet = Sheets[ sheetname ];
+  const outputSheets: unknown[] = [];
 
-    const tableSheet = xlsx.utils.sheet_to_json<RawDb>(
-      sheet 
-    );
+  const mapperSheets = SheetNames.flatMap(
+    (
+      sheetname
+    ) => {
+      const sheet = Sheets[ sheetname ];
 
-    outputSheets.push(
-      tableSheet 
-    );
+      const tableSheet = xlsx.utils.sheet_to_json<RawDb>(
+        sheet
+      );
 
-    return tableSheet.map(
-      (
-        table 
-      ) => {
-        return {
-          ...table,
-          category: sheetname.replaceAll(
-            ' ', '' 
-          ) as Category,
-        };
-      } 
-    );
-  } 
-);
+      outputSheets.push(
+        tableSheet
+      );
 
-fs.writeFile(
-  'outputSheets.json', JSON.stringify(
-    outputSheets 
-  ) 
-);
-
-export const RawCarpetas = [
-  ...mapperSheets
-].sort(
-  (
-    a, b 
-  ) => {
-    const x = a.NUMERO;
-
-    const y = b.NUMERO;
-
-    if ( x < y ) {
-      return -1;
-    } else if ( x > y ) {
-      return 1;
+      return tableSheet.map(
+        (
+          table
+        ) => {
+          return {
+            ...table,
+            category: sheetname.replaceAll(
+              ' ', ''
+            ) as Category,
+          };
+        }
+      );
     }
+  );
 
-    return 0;
-  } 
-);
+  fs.writeFile(
+    'outputSheets.json', JSON.stringify(
+      outputSheets
+    )
+  );
 
-fs.writeFile(
-  'carpetas.json', JSON.stringify(
-    RawCarpetas, null, 2 
-  ) 
-);
+  const RawCarpetas: RawDb[] = [
+    ...mapperSheets
+  ].sort(
+    (
+      a, b
+    ) => {
+      const x = a.NUMERO;
 
-const outputData: string[] = [];
+      const y = b.NUMERO;
 
-RawCarpetas.forEach(
-  (
-    carpeta, index 
-  ) => {
-    const newString = `${
-      Number(
-        carpeta.NUMERO 
-      ) === index + 1
-    } numero: ${ carpeta.NUMERO }, index:${ index + 1 } `;
+      if ( x < y ) {
+        return -1;
+      } else if ( x > y ) {
+        return 1;
+      }
 
-    console.log(
-      newString 
-    );
-    outputData.push(
-      newString 
-    );
-  } 
-);
-fs.writeFile(
-  'numbers.json', JSON.stringify(
-    outputData, null, 2 
-  ) 
-);
+      return 0;
+    }
+  );
+
+  fs.writeFile(
+    'carpetas.json', JSON.stringify(
+      RawCarpetas, null, 2
+    )
+  );
+
+  const outputData: string[] = [];
+
+  RawCarpetas.forEach(
+    (
+      carpeta, index
+    ) => {
+      const newString = `${
+        Number(
+          carpeta.NUMERO
+        ) === index + 1
+      } numero: ${ carpeta.NUMERO }, index:${ index + 1 } `;
+
+      console.log(
+        newString
+      );
+      outputData.push(
+        newString
+      );
+    }
+  );
+  fs.writeFile(
+    'numbers.json', JSON.stringify(
+      outputData, null, 2
+    )
+  );
+
+  return RawCarpetas;
+}

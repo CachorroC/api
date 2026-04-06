@@ -18,9 +18,10 @@
 import * as fs from 'fs/promises';
 import { extrapolateTipoToCorrectType } from '../models/juzgado.js';
 import JuzgadoClass from '../models/juzgado.js';
-import { RawCarpetas } from '../assets/carpetas.js';
+import {  rawCarpetas } from '../assets/carpetas.js';
 
 const outgoingJuzgados = [];
+const RawCarpetas = rawCarpetas();
 
 for ( const carpeta of RawCarpetas ) {
   const juzgadoByCarpeta = extrapolateIdCiudadyTipo(

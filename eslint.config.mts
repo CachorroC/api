@@ -4,15 +4,6 @@ import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import { defineConfig } from 'eslint/config';
 import stylistic from '@stylistic/eslint-plugin';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(
-  import.meta.url 
-);
-const __dirname = path.dirname(
-  __filename 
-);
 
 export default defineConfig(
   [
@@ -33,19 +24,8 @@ export default defineConfig(
         globals: {
           ...globals.browser,
           ...globals.node,
-          RequestInit: true,
-        },
-        parserOptions: {
-          tsconfigRootDir: __dirname,
         },
       },
-      ignores: [
-        'node_modules/**',
-        '.next/**',
-        'out/**',
-        'build/**',
-        'next-env.d.ts',
-      ],
       rules: {
         'react/react-in-jsx-scope'        : 'off',
         '@stylistic/array-bracket-newline': [
@@ -54,21 +34,17 @@ export default defineConfig(
             minItems: 1,
           },
         ],
-
         'array-bracket-spacing': [
           'error',
           'always'
         ],
-
         'array-callback-return': [
           'error',
           {
             checkForEach: true,
           },
         ],
-
-        'max-statements-per-line': 'error',
-
+        'max-statements-per-line'         : 'error',
         '@stylistic/array-element-newline': [
           'error',
           {
@@ -76,14 +52,12 @@ export default defineConfig(
             multiline: true,
           },
         ],
-
         'arrow-body-style': [
           'error',
           'always'
         ],
         'arrow-spacing': 'error',
         'brace-style'  : 'error',
-
         'comma-spacing': [
           'error',
           {
@@ -91,7 +65,6 @@ export default defineConfig(
             before: false,
           },
         ],
-
         'computed-property-spacing': [
           'error',
           'always'
@@ -101,6 +74,10 @@ export default defineConfig(
         'func-call-spacing': [
           'error',
           'never'
+        ],
+        '@stylistic/curly-newline': [
+          'error',
+          'always'
         ],
         '@stylistic/jsx-closing-bracket-location': [
           'error',
@@ -116,9 +93,7 @@ export default defineConfig(
             minItems: 1,
           },
         ],
-
-        'getter-return': 'error',
-
+        'getter-return'       : 'error',
         'prefer-destructuring': [
           'error',
           {
@@ -129,27 +104,22 @@ export default defineConfig(
             enforceForRenamedProperties: false,
           },
         ],
-
         '@stylistic/indent': [
           'error',
           2,
           {
             ArrayExpression: 1,
-
-            CallExpression: {
+            CallExpression : {
               arguments: 1,
             },
-
             FunctionDeclaration: {
               body      : 1,
               parameters: 'first',
             },
-
             FunctionExpression: {
               body      : 1,
               parameters: 'first',
             },
-
             ImportDeclaration       : 1,
             MemberExpression        : 1,
             ObjectExpression        : 1,
@@ -158,14 +128,12 @@ export default defineConfig(
             offsetTernaryExpressions: true,
           },
         ],
-
         '@stylistic/key-spacing': [
           'error',
           {
             align: 'colon',
           },
         ],
-
         'linebreak-style': [
           'error',
           'unix'
@@ -174,26 +142,21 @@ export default defineConfig(
           'error',
           'always'
         ],
-
         'newline-per-chained-call': [
           'error',
           {
-            ignoreChainWithDepth: 1,
+            ignoreChainWithDepth: 3,
           },
         ],
-
         'no-dupe-args'   : 'error',
         'no-dupe-else-if': 'error',
-
-        'no-else-return': [
+        'no-else-return' : [
           'error',
           {
             allowElseIf: true,
           },
         ],
-
-        'no-unreachable': 'error',
-
+        'no-unreachable'      : 'error',
         'object-curly-newline': [
           'error',
           {
@@ -202,15 +165,12 @@ export default defineConfig(
               minProperties: 1,
               multiline    : true,
             },
-
             ImportDeclaration: 'never',
-
-            ObjectExpression: {
+            ObjectExpression : {
               consistent   : true,
               minProperties: 1,
               multiline    : true,
             },
-
             ObjectPattern: {
               consistent   : true,
               minProperties: 1,
@@ -218,7 +178,6 @@ export default defineConfig(
             },
           },
         ],
-
         'object-curly-spacing': [
           'error',
           'always'
@@ -228,13 +187,11 @@ export default defineConfig(
           'error',
           'before'
         ],
-
         '@stylistic/padding-line-between-statements': [
           'error',
           {
             blankLine: 'always',
-
-            next: [
+            next     : [
               'block-like',
               'block',
               'break',
@@ -249,14 +206,12 @@ export default defineConfig(
               'throw',
               'try',
             ],
-
             prev: '*',
           },
           {
             blankLine: 'always',
             next     : '*',
-
-            prev: [
+            prev     : [
               'block',
               'block-like',
               'for',
@@ -268,7 +223,6 @@ export default defineConfig(
             ],
           },
         ],
-
         quotes: [
           'error',
           'single'
@@ -290,5 +244,5 @@ export default defineConfig(
         ],
       },
     },
-  ] 
+  ]
 );

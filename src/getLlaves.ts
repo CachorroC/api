@@ -14,7 +14,6 @@
  * @module getLlaves
  */
 
-import { RawCarpetas } from './assets/carpetas.js';
 
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
@@ -22,6 +21,7 @@ import { RawDb } from './types/raw-db.js';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { rawCarpetas } from './assets/carpetas.js';
 
 const __filename = fileURLToPath(
   import.meta.url
@@ -122,5 +122,5 @@ async function exportExpedientesToJson(
 
 // Run the function
 exportExpedientesToJson(
-  RawCarpetas, 'ciudades.json'
+  rawCarpetas(), 'ciudades.json'
 );

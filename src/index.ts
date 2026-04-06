@@ -1,8 +1,11 @@
 import prompts from 'prompts';
 import { tryAsyncClassCarpetas } from './try-carpeta-async-model.js';
 import { runSync } from './services/syncronize_newest_actuaciones_test_2.js';
+import { argv } from 'node:process';
+
 
 async function main() {
+
   // 1. Check for command-line arguments to bypass the menu
   const args = process.argv.slice(
     2
@@ -38,6 +41,16 @@ async function main() {
     console.clear();
     console.log(
       '🚀 Welcome to the Rest-Express CLI Control Panel\n'
+    );
+    // print process.argv
+    argv.forEach(
+      (
+        val, index
+      ) => {
+        console.log(
+          `${ index }: ${ val }`
+        );
+      }
     );
 
     const response = await prompts(
