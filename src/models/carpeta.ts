@@ -17,6 +17,7 @@ import { Prisma } from '../prisma/generated/prisma/client.js';
 import { getLatestByDate } from '../utils/latestActuacion.js';
 import { fetchWithSmartRetry } from '../utils/fetchWithSmartRetry.js';
 import { ensureDate } from '../utils/ensureDate.js';
+import { TelegramService } from '../services/telegramService.js';
 
 // ⚠️ Desactiva la verificación de certificados SSL/TLS.
 // Esto es común cuando se consumen APIs gubernamentales antiguas o mal configuradas,
@@ -713,6 +714,58 @@ export class ClassCarpeta implements IntCarpeta {
             }
           }
         );
+
+        // 🔔 Detect new actuaciones not yet in the database and notify via Telegram
+        try {
+          const existingRecords = await client.actuacion.findMany(
+            {
+              where : { idProceso },
+              select: { idRegActuacion: true },
+            }
+          );
+          const existingIds = new Set(
+            existingRecords.map(
+              ( r ) => r.idRegActuacion
+            )
+          );
+          const newActuaciones = actuaciones.filter(
+            ( act ) => !existingIds.has(
+              String(
+                act.idRegActuacion
+              )
+            )
+          );
+
+          if ( newActuaciones.length > 0 ) {
+            console.log(
+              `✨ [${ this.numero }] ${ newActuaciones.length } nueva(s) actuacion(es) detectada(s) en proceso ${ idProceso } — enviando notificaciones Telegram`,
+            );
+
+            const processInfo = {
+              idProceso,
+              carpetaNumero: this.numero,
+              llaveProceso : this.llaveProceso,
+              carpetaId    : this.id,
+              nombre       : this.nombre,
+            };
+
+            for ( const newAct of newActuaciones ) {
+              try {
+                await TelegramService.sendNotification(
+                  newAct, processInfo
+                );
+              } catch ( teleError ) {
+                console.log(
+                  `⚠️ Telegram notification failed for actuacion ${ newAct.idRegActuacion }: ${ teleError }`,
+                );
+              }
+            }
+          }
+        } catch ( notifyError ) {
+          console.log(
+            `⚠️ [${ this.numero }] Error al detectar nuevas actuaciones para notificación: ${ notifyError }`,
+          );
+        }
 
         continue;
       } catch ( error ) {
