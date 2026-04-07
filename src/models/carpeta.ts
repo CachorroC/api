@@ -719,21 +719,33 @@ export class ClassCarpeta implements IntCarpeta {
         try {
           const existingRecords = await client.actuacion.findMany(
             {
-              where : { idProceso },
-              select: { idRegActuacion: true },
+              where: {
+                idProceso 
+              },
+              select: {
+                idRegActuacion: true 
+              },
             }
           );
           const existingIds = new Set(
             existingRecords.map(
-              ( r ) => r.idRegActuacion
+              (
+                r 
+              ) => {
+                return r.idRegActuacion;
+              }
             )
           );
           const newActuaciones = actuaciones.filter(
-            ( act ) => !existingIds.has(
-              String(
-                act.idRegActuacion
-              )
-            )
+            (
+              act 
+            ) => {
+              return !existingIds.has(
+                String(
+                  act.idRegActuacion
+                )
+              );
+            }
           );
 
           if ( newActuaciones.length > 0 ) {

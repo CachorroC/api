@@ -1,16 +1,13 @@
 # Agent Rules
 
-1. **Sync First**: Always commit pending changes and
-   `git pull` before editing files.
-2. **Concise Commits**: Auto-commit routine work using
-   Conventional Commits. Get approval only for file
-   deletions or core architecture changes. Make sure to
-   leave the information that git automatically put's on the
-   commit message but removing the #, so the files that
-   where modified, deleted or added are shown in the commit
-   message.
+1. **Pre-Edit Sync**: Auto-commit existing pending changes
+   using Conventional Commits and run `git pull` _before_
+   modifying files. Include the uncommented `git status`
+   file list in the commit message.
+2. **Post-Edit Review**: Do NOT commit your new edits; leave
+   them pending for my review. Ask for approval before
+   deleting files or altering core architecture.
 3. **Clean Code**: TS strict mode, single quotes, functional
-   patterns. Use brief JSDocs only for complex
-   types/returns.
-4. **Water Tracker**: Append a short 1-line estimate of
-   footprint to final summaries.
+   patterns. Brief JSDocs only for complex types/returns.
+4. **Water Tracker**: Append a 1-line footprint estimate to
+   final summaries.
