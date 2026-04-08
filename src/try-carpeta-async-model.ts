@@ -127,174 +127,178 @@ async function processBatch<T>(
  * @returns {*}
  */
 export async function tryAsyncClassCarpetas() {
-  console.log(
-    '🚀 Starting Optimized Sync...'
-  );
-  const RawCarpetas = rawCarpetas();
-  // 1. Convert Raw Data to lightweight objects (Don't instantiate ClassCarpeta yet if not needed)
-  const rawData = RawCarpetas.map(
-    (
-      r
-    ) => {
-      return {
-        raw   : r,
-        numero: Number(
-          r.NUMERO
-        ),
-      };
-    }
-  ).sort(
-    (
-      a, b
-    ) => {
-      return b.numero - a.numero;
-    }
-  );
+  try {
+    console.log(
+      '🚀 Starting Optimized Sync...'
+    );
+    const RawCarpetas = rawCarpetas();
+    // 1. Convert Raw Data to lightweight objects (Don't instantiate ClassCarpeta yet if not needed)
+    const rawData = RawCarpetas.map(
+      (
+        r
+      ) => {
+        return {
+          raw   : r,
+          numero: Number(
+            r.NUMERO
+          ),
+        };
+      }
+    ).sort(
+      (
+        a, b
+      ) => {
+        return b.numero - a.numero;
+      }
+    );
 
-  // 2. Process in Batches
-  // We use a batch size of 1 because your RATE_LIMIT is strict (12.5s).
-  // If you lower the rate limit, increase this to 5 or 10.
-  const BATCH_SIZE = 1;
+    // 2. Process in Batches
+    // We use a batch size of 1 because your RATE_LIMIT is strict (12.5s).
+    // If you lower the rate limit, increase this to 5 or 10.
+    const BATCH_SIZE = 1;
 
-  await processBatch(
-    rawData, BATCH_SIZE, async (
-      item
-    ) => {
-      try {
-      // Instantiate only when needed to save memory
-        const carpeta = new ClassCarpeta(
-          item.raw
-        );
-        console.log(
-          `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }`
-        );
-
+    await processBatch(
+      rawData, BATCH_SIZE, async (
+        item
+      ) => {
         try {
-          const existingCarpeta
-            = await client.carpeta.findUnique(
-              {
-                where: {
-                  numero: carpeta.numero,
-                },
-              }
-            );
+        // Instantiate only when needed to save memory
+          const carpeta = new ClassCarpeta(
+            item.raw
+          );
+          console.log(
+            `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }`
+          );
 
-          // 1. Check if the record already exists
-          if ( existingCarpeta ) {
-          // 1a. Guard: nombre mismatch — skip and alert
-          // Check if existing name has a value before comparing to prevent skipping when it's empty
-            const hasExistingName = existingCarpeta.nombre !== undefined
-                                  && existingCarpeta.nombre !== null
-                                  && existingCarpeta.nombre !== ''
-                                  && existingCarpeta.nombre !== 'undefined';
-
-            if (
-              hasExistingName
-            && existingCarpeta.nombre !== carpeta.nombre
-            ) {
-              const warningMsg
-                = `⚠️ NOMBRE MISMATCH en carpeta #${ carpeta.numero }:\n`
-              + `  DB:    "${ existingCarpeta.nombre }"\n`
-              + `  Local: "${ carpeta.nombre }"\n`
-              + 'Se omite la actualización para evitar sobreescribir con un nombre diferente.';
-
-              console.warn(
-                warningMsg
-              );
-
-              await TelegramService.sendSimpleMessage(
-                warningMsg
-              );
-
-              await NotificationService.processNotifications(
+          try {
+            const existingCarpeta
+              = await client.carpeta.findUnique(
                 {
-                  title         : `${ carpeta.numero } ${ carpeta.nombre }`,
-                  body          : `La carpeta que está procesando no tiene el mismo nombre que la carpeta que existe en la base de datos, por favor revisar la discrepancia entre los valores: ${ existingCarpeta.nombre } y ${ carpeta.nombre }`,
-                  additionalData: {
-                    carpetaId      : existingCarpeta.id,
-                    carpetaNumero  : carpeta.numero,
-                    carpetaNombre  : carpeta.nombre,
-                    llaveProceso   : carpeta.llaveProceso,
-                    category       : carpeta.category,
-                    existingCarpeta: existingCarpeta,
-                    carpeta        : carpeta,
-                  }
+                  where: {
+                    numero: carpeta.numero,
+                  },
                 }
               );
 
-              return; // Skip this carpeta entirely
-            }
+            // 1. Check if the record already exists
+            if ( existingCarpeta ) {
+            // 1a. Guard: nombre mismatch — skip and alert
+            // Check if existing name has a value before comparing to prevent skipping when it's empty
+              const hasExistingName = existingCarpeta.nombre !== undefined
+                                    && existingCarpeta.nombre !== null
+                                    && existingCarpeta.nombre !== ''
+                                    && existingCarpeta.nombre !== 'undefined';
 
-            // 2. Evaluate changes
-            const isSameLlave
-              = existingCarpeta.llaveProceso
-            === carpeta.llaveProceso;
-            console.log(
-              `isSameLlave: ${ isSameLlave }`
-            );
-            const isSameCategory
-              = existingCarpeta.category === carpeta.category;
-            console.log(
-              `isSameCategory: ${ isSameCategory }`
-            );
-            console.log(
-              `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision }`
-            );
-            const isSamefechaUltimaRevision
-              = existingCarpeta.fechaUltimaRevision?.getTime()
-            === carpeta.fechaUltimaRevision?.getTime();
+              if (
+                hasExistingName
+              && existingCarpeta.nombre !== carpeta.nombre
+              ) {
+                const warningMsg
+                  = `⚠️ NOMBRE MISMATCH en carpeta #${ carpeta.numero }:\n`
+                + `  DB:    "${ existingCarpeta.nombre }"\n`
+                + `  Local: "${ carpeta.nombre }"\n`
+                + 'Se omite la actualización para evitar sobreescribir con un nombre diferente.';
 
-            // 3. Skip ONLY if neither has changed
-            // Also enforce that we don't skip if the DB was missing the name but we have it now
-            if (
-              hasExistingName
-            && isSameLlave
-            && isSameCategory
-            && isSamefechaUltimaRevision
-            ) {
+                console.warn(
+                  warningMsg
+                );
+
+                await TelegramService.sendSimpleMessage(
+                  warningMsg
+                );
+
+                await NotificationService.processNotifications(
+                  {
+                    title         : `${ carpeta.numero } ${ carpeta.nombre }`,
+                    body          : `La carpeta que está procesando no tiene el mismo nombre que la carpeta que existe en la base de datos, por favor revisar la discrepancia entre los valores: ${ existingCarpeta.nombre } y ${ carpeta.nombre }`,
+                    additionalData: {
+                      carpetaId      : existingCarpeta.id,
+                      carpetaNumero  : carpeta.numero,
+                      carpetaNombre  : carpeta.nombre,
+                      llaveProceso   : carpeta.llaveProceso,
+                      category       : carpeta.category,
+                      existingCarpeta: existingCarpeta,
+                      carpeta        : carpeta,
+                    }
+                  }
+                );
+
+                return; // Skip this carpeta entirely
+              }
+
+              // 2. Evaluate changes
+              const isSameLlave
+                = existingCarpeta.llaveProceso
+              === carpeta.llaveProceso;
               console.log(
-                `⏭️ Skipping ${ carpeta.numero }: llaveProceso and category are unchanged.`
+                `isSameLlave: ${ isSameLlave }`
               );
-
-              return;
-            }
-
-            if ( !hasExistingName ) {
+              const isSameCategory
+                = existingCarpeta.category === carpeta.category;
               console.log(
-                existingCarpeta.nombre + typeof existingCarpeta.nombre
+                `isSameCategory: ${ isSameCategory }`
               );
-              await sleep(
-                12000
+              console.log(
+                `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision }`
               );
+              const isSamefechaUltimaRevision
+                = existingCarpeta.fechaUltimaRevision?.getTime()
+              === carpeta.fechaUltimaRevision?.getTime();
+
+              // 3. Skip ONLY if neither has changed
+              // Also enforce that we don't skip if the DB was missing the name but we have it now
+              if (
+                hasExistingName
+              && isSameLlave
+              && isSameCategory
+              && isSamefechaUltimaRevision
+              ) {
+                console.log(
+                  `⏭️ Skipping ${ carpeta.numero }: llaveProceso and category are unchanged.`
+                );
+
+                return;
+              }
+
+              if ( !hasExistingName ) {
+                console.log(
+                  existingCarpeta.nombre + typeof existingCarpeta.nombre
+                );
+                await sleep(
+                  12000
+                );
+              }
             }
+          } catch ( error ) {
+            console.error(
+              `❌ Error processing prisma find unique ${ item.numero }:`,
+              error
+            );
           }
+
+
+          // Fetch Data
+          await carpeta.getProcesos();
+
+          // commenting out the method of getActuaciones so that it is handled directly by it's own instance
+          await carpeta.getActuaciones();
+          // Write to DB
+          await carpeta.agregateToDBMethod();
+        // Force Garbage Collection hint (optional, logic handles it naturally here)
+        // The 'carpeta' variable goes out of scope here and is freed from memory.
         } catch ( error ) {
           console.error(
-            `❌ Error processing prisma find unique ${ item.numero }:`,
+            `❌ Error processing ${ item.numero }:`,
             error
           );
         }
-
-
-        // Fetch Data
-        await carpeta.getProcesos();
-
-        // commenting out the method of getActuaciones so that it is handled directly by it's own instance
-        await carpeta.getActuaciones();
-        // Write to DB
-        await carpeta.agregateToDBMethod();
-      // Force Garbage Collection hint (optional, logic handles it naturally here)
-      // The 'carpeta' variable goes out of scope here and is freed from memory.
-      } catch ( error ) {
-        console.error(
-          `❌ Error processing ${ item.numero }:`,
-          error
-        );
       }
-    }
-  );
+    );
 
-  console.log(
-    '✅ Sync Complete'
-  );
+    console.log(
+      '✅ Sync Complete'
+    );
+  } finally {
+    await client.$disconnect();
+  }
 }

@@ -19,6 +19,9 @@ async function main() {
         '🤖 Automated Mode: Starting Sync Processes...' 
       );
       await runSync();
+      console.log(
+        '🏁 Automated Sync Processes Complete.' 
+      );
       process.exit(
         0 
       );
@@ -30,63 +33,73 @@ async function main() {
         '🤖 Automated Mode: Starting Sync Folders...' 
       );
       await tryAsyncClassCarpetas();
-      process.exit(
-        0 
-      );
-    }
-
-    // 2. Fallback to interactive menu if no arguments are provided
-    console.clear();
-    console.log(
-      '🚀 Welcome to the Rest-Express CLI Control Panel\n' 
-    );
-    // print process.argv
-    argv.forEach(
-      (
-        val, index 
-      ) => {
-        console.log(
-          `${ index }: ${ val }` 
-        );
-      } 
-    );
-
-    const response = await prompts(
-      {
-        type   : 'select',
-        name   : 'action',
-        message: 'What would you like to run?',
-        choices: [
-          {
-            title: '1. Sync Processes (Cron Controller)',
-            value: 'sync-processes',
-          },
-          {
-            title: '2. Sync Folders (Optimized Batch Processing)',
-            value: 'sync-folders',
-          },
-          {
-            title: '3. Exit',
-            value: 'exit',
-          },
-        ],
-        initial: 0,
-      } 
-    );
-
-    if ( !response.action || response.action === 'exit' ) {
       console.log(
-        '👋 Goodbye!' 
+        '🏁 Automated Sync Folders Complete.' 
       );
       process.exit(
         0 
       );
     }
 
-    if ( response.action === 'sync-processes' ) {
-      await runSync();
-    } else if ( response.action === 'sync-folders' ) {
-      await tryAsyncClassCarpetas();
+    // 2. Interactive menu loop
+    while ( true ) {
+      console.clear();
+      console.log(
+        '🚀 Welcome to the Rest-Express CLI Control Panel\n' 
+      );
+      
+      const response = await prompts(
+        {
+          type   : 'select',
+          name   : 'action',
+          message: 'What would you like to run?',
+          choices: [
+            {
+              title: '1. Sync Processes (Cron Controller)',
+              value: 'sync-processes',
+            },
+            {
+              title: '2. Sync Folders (Optimized Batch Processing)',
+              value: 'sync-folders',
+            },
+            {
+              title: '3. Exit',
+              value: 'exit',
+            },
+          ],
+          initial: 0,
+        } 
+      );
+
+      if ( !response.action || response.action === 'exit' ) {
+        console.log(
+          '👋 Goodbye!' 
+        );
+        process.exit(
+          0 
+        );
+      }
+
+      console.log(
+        `⏳ Running task: ${ response.action }...` 
+      );
+
+      if ( response.action === 'sync-processes' ) {
+        await runSync();
+      } else if ( response.action === 'sync-folders' ) {
+        await tryAsyncClassCarpetas();
+      }
+
+      console.log(
+        '\n✅ Task finished. Press any key to return to menu...' 
+      );
+      await prompts(
+        {
+          type   : 'invisible',
+          name   : 'continue',
+          message: '',
+        } 
+      );
     }
   } catch ( error ) {
     console.error(
