@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApiError } from '../models/ApiError';
+import { ApiError } from '../models/ApiError.js';
 import { FileLogger } from '../models/FileLogger.js';
 
 const WEBHOOK_URL = process.env.WEBHOOK_URL || '';
