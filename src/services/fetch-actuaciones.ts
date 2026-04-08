@@ -1,11 +1,11 @@
 /**
  * @module services/fetch-actuaciones
  * @description Raw Actuaciones API Fetcher Service
- * 
+ *
  * Provides low-level HTTP interface to Colombian Judiciary API for fetching
  * legal actions (actuaciones) associated with a specific legal process.
  * Acts as a thin wrapper around fetchWithSmartRetry with minimal error handling.
- * 
+ *
  * RESPONSIBILITIES:
  * 1. Construct API endpoint URL with process ID
  * 2. Execute HTTP request via fetchWithSmartRetry (rate limiting + retry + parsing)
@@ -13,12 +13,12 @@
  * 4. Handle SyntaxError exceptions (malformed JSON)
  * 5. Log errors to console
  * 6. Return null on failure (graceful degradation)
- * 
+ *
  * INTEGRATION POINTS:
  * - Input: idProceso (string) from ClassProcesos or Proceso objects
  * - Output: ConsultaActuacion | null
  * - Used by: ActuacionService.syncBatch(), actuaciones sync workflows
- * 
+ *
  * ERROR HANDLING:
  * - SyntaxError: Logs \"There was a SyntaxError\" + error details
  * - General/Network errors: Logs \"There was an error\" + error details
@@ -35,10 +35,10 @@ import { fetchWithSmartRetry } from '../utils/fetchWithSmartRetry.js';
  * @function fetchActuacionesRaw
  * @description Fetches raw legal actions (actuaciones) for a specific process from government API.
  * Returns strongly-typed result via ConsultaActuacion interface, or null on error.
- * 
+ *
  * API ENDPOINT:
  * https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Proceso/Actuaciones/{idProceso}
- * 
+ *
  * EXECUTION FLOW:
  * 1. Construct URL with provided idProceso parameter
  * 2. Call fetchWithSmartRetry() - Applies rate limiting, browser headers, retry logic

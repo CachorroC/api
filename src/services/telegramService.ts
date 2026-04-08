@@ -3,10 +3,10 @@
 /**
  * @module services/telegramService
  * @description Telegram Notification Infrastructure Service
- * 
+ *
  * Handles dispatching HTML-formatted notifications to a configured Telegram chat.
  * Used to alert users/administrators about newly detected judicial updates (actuaciones).
- * 
+ *
  * NOTIFICATION WORKFLOW:
  * Actuación Detection → Build HTML Message
  *   ↓
@@ -17,16 +17,16 @@
  * If HTML fails due to parse error:
  *   → Fall back to plain-text message (sendFallbackMessage)
  *   → Retry with simplified format
- * 
+ *
  * ENVIRONMENT VARIABLES REQUIRED:
  * - TELEGRAM_BOT_TOKEN: Bot API token from @BotFather
  * - TELEGRAM_CHAT_ID: Target chat ID (user ID or group ID)
- * 
+ *
  * ERROR HANDLING:
  * - Status 403: User blocked bot or hasn't started it (skip fallback)
  * - Other HTTP errors: Attempt fallback message
  * - JSON parsing errors: Caught and logged, returns gracefully
- * 
+ *
  * RATE LIMITING:
  * Uses fetchWithSmartRetry with 3-second base delay to avoid Telegram API throttling.
  * Telegram typically allows 30 messages/second, so individual retries are safe.
@@ -129,8 +129,7 @@ export class TelegramService {
 
 📅 <b>Fecha:</b> ${ new Date(
   actuacion.fechaActuacion 
-)
-  .toLocaleDateString() }
+).toLocaleDateString() }
 📝 <b>Actuación:</b> ${ cleanActuacion }
 ${ cleanAnotacion
   ? `ℹ️ <b>Anotación:</b> ${ cleanAnotacion }`
@@ -186,6 +185,53 @@ ${ cleanAnotacion
       );
       await this.sendFallbackMessage(
         actuacion, processInfo 
+      );
+    }
+  }
+
+  /**
+   * @static
+   * @async
+   * @method sendSimpleMessage
+   * @description Sends a plain-text Telegram notification without requiring actuación or process context.
+   * Useful for system-level warnings such as carpeta name mismatches detected during sync.
+   * @param {string} text - The message body to send.
+   * @returns {Promise<void>}
+   */
+  static async sendSimpleMessage(
+    text: string 
+  ): Promise<void> {
+    if ( !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID ) {
+      return;
+    }
+
+    try {
+      const response = await fetchWithSmartRetry(
+        `https://api.telegram.org/bot${ TELEGRAM_BOT_TOKEN }/sendMessage`,
+        {
+          method : 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              chat_id: TELEGRAM_CHAT_ID,
+              text,
+            } 
+          ),
+        },
+        3,
+        3000,
+      );
+
+      if ( !response.ok ) {
+        console.error(
+          `❌ Telegram sendSimpleMessage failed: ${ response.status } ${ response.statusText }`,
+        );
+      }
+    } catch ( err ) {
+      console.error(
+        '❌ Telegram sendSimpleMessage error:', err 
       );
     }
   }

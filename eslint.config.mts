@@ -25,7 +25,13 @@ export default defineConfig(
           ...globals.browser,
           ...globals.node,
         },
+        parserOptions: {
+          projectService : true,
+          tsconfigRootDir: import.meta.dirname,
+
+        }
       },
+
       rules: {
         'react/react-in-jsx-scope'        : 'off',
         '@stylistic/array-bracket-newline': [
@@ -81,11 +87,11 @@ export default defineConfig(
         ],
         '@stylistic/jsx-closing-bracket-location': [
           'error',
-          'tag-aligned'
+          'tag-aligned',
         ],
         '@stylistic/template-curly-spacing': [
           'error',
-          'always'
+          'always',
         ],
         'function-paren-newline': [
           'error',

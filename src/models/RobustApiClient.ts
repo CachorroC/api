@@ -72,11 +72,11 @@ export class RobustApiClient {
    * const processes = await client.processBatch(...);
    */
   constructor(
-    baseUrl: string
+    baseUrl: string 
   ) {
     this.baseUrl = baseUrl;
     this.logger = new FileLogger(
-      'failed_sync_ops.json'
+      'failed_sync_ops.json' 
     );
   }
 
@@ -138,7 +138,7 @@ export class RobustApiClient {
    * @template T - The TypeScript type expected from the JSON response
    * @param {string} endpoint - The API endpoint path (appended to baseUrl)
    *                           Example: '/api/v2/Proceso/Actuaciones/12345'
-  * @returns {Promise<FetchWithRetryResult<T>>} Parsed JSON response with raw buffer metadata
+   * @returns {Promise<FetchWithRetryResult<T>>} Parsed JSON response with raw buffer metadata
    * @throws {ApiError} When status is not OK or JSON parsing fails
    *
    * @example
@@ -148,7 +148,7 @@ export class RobustApiClient {
    * console.log(response.actuaciones.length);
    */
   private async fetchWithRetry<T extends object>(
-    endpoint: string
+    endpoint: string,
   ): Promise<FetchWithRetryResult<T>> {
     const options = {
       headers: this.getHeaders(),
@@ -176,7 +176,7 @@ export class RobustApiClient {
     const arrayBufferPromise = responseClone.arrayBuffer();
 
     // Wait for both promises to resolve
-    const jsonData = await jsonPromise as T;
+    const jsonData = ( await jsonPromise ) as T;
     const arrayBufferData = await arrayBufferPromise;
 
     try {
@@ -187,7 +187,7 @@ export class RobustApiClient {
       };
     } catch ( e ) {
       console.error(
-        'Error parsing JSON after decoding:', e
+        'Error parsing JSON after decoding:', e 
       );
 
       throw new ApiError(
@@ -266,7 +266,7 @@ export class RobustApiClient {
     pathBuilder: ( item: ProcessRequest ) => string,
   ): Promise<void> {
     console.log(
-      `🚀 Starting process for ${ items.length } targets...`
+      `🚀 Starting process for ${ items.length } targets...` 
     );
 
     for ( const [
@@ -275,7 +275,7 @@ export class RobustApiClient {
     ] of items.entries() ) {
       try {
         const endpoint = pathBuilder(
-          parentItem
+          parentItem 
         );
         console.log(
           `🌐 [${ index + 1 }/${ items.length }] Fetching: ${ parentItem.carpetaNumero }`,
@@ -283,7 +283,7 @@ export class RobustApiClient {
 
         if ( parentItem.idProceso === '0' ) {
           console.log(
-            `🧑‍🔧 no hay idProceso, continue with next item. ${ parentItem.idProceso }`
+            `🧑‍🔧 no hay idProceso, continue with next item. ${ parentItem.idProceso }`,
           );
 
           continue;
@@ -291,32 +291,31 @@ export class RobustApiClient {
 
         const apiResponse
           = await this.fetchWithRetry<ConsultaActuacion>(
-            endpoint
+            endpoint 
           );
 
         const {
-          actuaciones, arrayBufferData
+          actuaciones, arrayBufferData 
         } = apiResponse;
 
         const actuacionesList = actuaciones || [];
 
         actuacionesList.forEach(
           (
-            actuacion
+            actuacion 
           ) => {
-
             if ( isWithinLastSevenDays(
-              actuacion.fechaActuacion
+              actuacion.fechaActuacion 
             ) ) {
               console.log(
                 `💚 actuacion was in the last 7 days ${ formatDateToString(
                   new Date(
-                    actuacion.fechaActuacion
-                  )
-                ) }`
+                    actuacion.fechaActuacion 
+                  ),
+                ) }`,
               );
             }
-          }
+          } 
         );
 
         if ( actuacionesList.length > 0 ) {
@@ -329,7 +328,7 @@ export class RobustApiClient {
         }
       } catch ( err: any ) {
         console.log(
-          `❌ FAILED ${ parentItem.carpetaNumero }: ${ err.message }`
+          `❌ FAILED ${ parentItem.carpetaNumero }: ${ err.message }` 
         );
         await this.logger.logFailure(
           parentItem.idProceso,

@@ -34,10 +34,10 @@ export async function actuacionesGetAuto() {
 
   const newActs = actuaciones.map(
     (
-      actuacion
+      actuacion 
     ) => {
       const {
-        carpetaNumero
+        carpetaNumero 
       } = actuacion;
 
       if ( carpetaNumero !== null ) {
@@ -45,7 +45,7 @@ export async function actuacionesGetAuto() {
           {
             ...actuacion,
             carpetaNumero,
-          }
+          } 
         );
       }
 
@@ -53,15 +53,15 @@ export async function actuacionesGetAuto() {
         {
           ...actuacion,
           carpetaNumero: 0,
-        }
+        } 
       );
-    }
+    } 
   );
 
   fs.writeFile(
     'actuacionesNewMap.json', JSON.stringify(
-      newActs
-    )
+      newActs 
+    ) 
   );
 
   return newActs;
@@ -81,7 +81,7 @@ export function actuacionHasAuto(
   incomingActuacion: DatabaseActuacionType | FetchResponseActuacionType,
 ) {
   const {
-    actuacion
+    actuacion 
   } = incomingActuacion;
 
   const hasAuto = /([Aa][Uu][Tt][Oo]+)\s([A-Z a-z\u00C0-\u00FF,.()\w/]+)/.test(
@@ -90,7 +90,7 @@ export function actuacionHasAuto(
 
   const hasRadicado
     = /([Rr][Aa][Dd][Ii][Cc][Aa]+)([A-Z a-z\u00C0-\u00FF,.()\w/]+)/.test(
-      actuacion
+      actuacion,
     );
 
   return {

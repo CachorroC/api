@@ -1,6 +1,6 @@
 /**
  * @fileoverview Type Definitions for Legal Actions (Actuaciones)
- * 
+ *
  * Defines all TypeScript types and interfaces for representing legal actions,
  * judicial motions, and court records from the Colombian Judiciary system.
  *
@@ -21,13 +21,13 @@
 /**
  * API response messages from the Judiciary system.
  * These are standard success/error responses from the government API.
- * 
+ *
  * Common responses:
  * - 'OK': Request succeeded
  * - 'No se pueden ver actuaciones de un proceso privado': Process is confidential
  * - 'Forbidden': Access denied to this resource
  * - 'Internal Server Error': Transient API failure
- * 
+ *
  * @typedef {string} Message
  */
 export type Message =
@@ -39,7 +39,7 @@ export type Message =
 
 /**
  * Raw legal action data as returned from the Judiciary API.
- * 
+ *
  * All date fields are returned as ISO 8601 strings and must be converted
  * to Date objects before storage in the database.
  *
@@ -92,7 +92,7 @@ export type FetchResponseActuacionType = {
 
 /**
  * Transformed legal action stored in the PostgreSQL database.
- * 
+ *
  * This type is derived from FetchResponseActuacionType with key transformations:
  * - All date strings → Date objects
  * - idRegActuacion → String (coerced for consistency)
@@ -152,7 +152,7 @@ export type DatabaseActuacionType = Omit<
 
 /**
  * Pagination metadata from API responses.
- * 
+ *
  * The Judiciary API supports result pagination to avoid overwhelming clients
  * with large result sets. Use these values to iterate through pages.
  *
@@ -185,11 +185,11 @@ export type Paginacion = {
 
 /**
  * JSON conversion utility (legacy pattern).
- * 
+ *
  * This class provides static methods for JSON serialization/deserialization.
  * While functional, modern TypeScript projects typically just use
  * JSON.parse() and JSON.stringify() directly.
- * 
+ *
  * Kept for backward compatibility with existing code patterns.
  *
  * @class Convert
@@ -215,7 +215,7 @@ export class Convert {
 
 /**
  * API response containing a batch of legal actions.
- * 
+ *
  * The Judiciary API returns action data in a paginated, structured format.
  * This interface represents a single page/response from the API.
  *
@@ -242,7 +242,7 @@ export interface ConsultaActuacion<T = FetchResponseActuacionType> {
 
 /**
  * Context/metadata for a process being synchronized.
- * 
+ *
  * This interface passes essential information about a legal process through
  * the sync pipeline, from fetch to database insertion to notification dispatch.
  *

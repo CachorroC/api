@@ -10,7 +10,7 @@ export type ConservationStatus =
   | 'Data Deficient (DD)';
 
 export type Ecosystem =
-//? Páramos
+  //? Páramos
   | 'Páramo'
   | 'Superpáramo'
   | 'Subpáramo'
@@ -19,35 +19,30 @@ export type Ecosystem =
   | 'High Andean Forest'
   | 'Andean Cloud Forest'
   | 'Sub-Andean Forest'
-//? Tropical Rainforest | Tropical Dry Forests
+  //? Tropical Rainforest | Tropical Dry Forests
   | 'Tropical Rainforest'
   | 'Tropical Dry Forest'
   | 'Xerophytic Scrub'
-//? Xerophytic Formations
+  //? Xerophytic Formations
   | 'Desert'
   | 'Seasonal Savanna'
   | 'Flooded Savanna'
-//? Alluvial|Gallery Forests
+  //? Alluvial|Gallery Forests
   | 'Gallery Forest'
   | 'Alluvial Forest'
   | 'Mangrove'
-
   | 'Coral Reef'
   | 'Seagrass Meadow'
   | 'Coastal Lagoon'
-
   | 'Estuary'
   | 'Sandy Beach'
   | 'Rocky Shore'
-
   | 'Pelagic Zone'
   | 'Abyssal Zone'
   | 'Lentic Water System'
-
   | 'Lotic Water System'
   | 'Peatland'
   | 'Insular Ecosystem';
-
 
 export type Regions =
   | 'Amazonas'

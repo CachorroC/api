@@ -51,7 +51,7 @@ const connectionString = process.env.DATABASE_URL;
 
 if ( !connectionString ) {
   throw new Error(
-    'DATABASE_URL no está definida en el archivo .env'
+    'DATABASE_URL no está definida en el archivo .env' 
   );
 }
 
@@ -63,7 +63,7 @@ if ( !connectionString ) {
 const adapter = new PrismaPg(
   {
     connectionString,
-  }
+  } 
 );
 
 /**
@@ -80,5 +80,5 @@ const adapter = new PrismaPg(
 export const client = new PrismaClient(
   {
     adapter,
-  }
+  } 
 );

@@ -88,7 +88,7 @@
  * @note Returns empty string for falsy inputs (not null, not undefined)
  */
 export function cleanUtf8(
-  str: unknown,
+  str: unknown 
 ): string {
   // Step 1: Coerce to string, handling falsy values
   if ( !str ) {
@@ -96,26 +96,25 @@ export function cleanUtf8(
   }
 
   const strValue = String(
-    str,
+    str 
   );
 
   // Step 2: Buffer round-trip to fix invalid UTF-8 sequences (mojibake)
   // This re-encodes and decodes, dropping garbled characters
   const fixed = Buffer.from(
-    strValue, 'utf8',
-  )
-    .toString(
-      'utf8',
-    );
+    strValue, 'utf8' 
+  ).toString(
+    'utf8' 
+  );
 
   // Step 3: Normalize Unicode to NFC (combined form for diacritics)
   const normalized = fixed.normalize(
-    'NFC',
+    'NFC' 
   );
 
   // Step 4: Remove null bytes (PostgreSQL forbidden characters)
   const cleaned = normalized.replace(
-    /\0/g, '',
+    /\0/g, '' 
   );
 
   return cleaned;

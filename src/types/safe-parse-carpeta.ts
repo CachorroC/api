@@ -1,11 +1,11 @@
 /**
  * @module types/safe-parse-carpeta
  * @description Prisma Case Folder Type Definitions
- * 
+ *
  * Auto-generated type definitions for fully-hydrated Prisma case folder objects.
  * Represents the complete database record structure with all relationships loaded
  * from PostgreSQL via Prisma Client with strong typing.
- * 
+ *
  * TYPE HIERARCHY:
  * PrismaCarpeta (root): Complete case folder from database
  *   ├─ PrismaDemanda: Claim/demand information
@@ -15,24 +15,24 @@
  *   ├─ PrismaProceso[]: Array of legal processes
  *   ├─ PrismaNota[]: Array of case notes
  *   └─ PrismaTarea[]: Array of case tasks
- * 
+ *
  * COMPARISON WITH IntCarpeta:
  * IntCarpeta: Application/domain model (transformed, enriched data)
  * PrismaCarpeta: Database model (direct Prisma schema output)
  * Both represent same entity, different layers (application vs. persistence)
- * 
+ *
  * DATA PRECISION:
  * Prisma types use exact database field types:
  * - null for nullable fields
  * - string for monetary (stored as strings in DB for precision)
  * - Date for temporal (PostgreSQL timestamp)
  * - Union types for enum categories
- * 
+ *
  * USAGE:
  * Returned by: await client.carpeta.findUnique({ include: {...} })
  * Used for: Database persistence operations, SQL mappings
  * Not used for: Business logic (use IntCarpeta instead)
- * 
+ *
  * TO PARSE THIS DATA:
  * ```
  * import { Convert } from \"./safe-parse-carpeta.ts\";
@@ -49,7 +49,7 @@
 /**
  * @interface PrismaCarpeta
  * @description Root case folder object from Prisma database query.
- * 
+ *
  * @property {number} id - Database primary key (auto-generated)
  * @property {number} numero - Case folder number (Colombian filing number)
  * @property {string | null} llaveProceso - Process key from judiciary system

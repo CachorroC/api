@@ -1,6 +1,6 @@
 /**
  * @fileoverview Date/Time Utilities for Colombian Judicial System
- * 
+ *
  * This module provides robust date handling for an international system
  * serving Colombian courts. Key challenges:
  * - USA/international systems often return dates without timezone info
@@ -13,13 +13,13 @@
  * - Colombian timezone (America/Bogota) enforcement
  * - Graceful fallback to null for invalid dates
  * - Pretty-printing for human-readable logs
- * 
+ *
  * @module ensureDate
  */
 
 /**
  * Safely parses a date input and returns a valid Date object or null.
- * 
+ *
  * This function handles multiple date input formats and adds timezone context
  * that's often missing from API responses:
  *
@@ -51,7 +51,7 @@
  * - Confusion in international log files
  *
  * This function fixes these issues transparently.
- * 
+ *
  * @param {string | Date | null | undefined} dateInput - The date to parse.
  *                                                       Can be:
  *                                                       - Date object
@@ -127,7 +127,7 @@ export function ensureDate(
 
 /**
  * Formats a Date object as a human-readable string in Colombian locale and timezone.
- * 
+ *
  * Provides a consistent, locale-aware representation of dates for logging and display.
  * Example output: "lunes, 16 de febrero de 2026, 14:30:45 COT"
  *
@@ -176,8 +176,7 @@ export function formatDateToString(
       second      : 'numeric',
       timeZoneName: 'short',
     } 
-  )
-    .format(
-      date 
-    );
+  ).format(
+    date 
+  );
 }

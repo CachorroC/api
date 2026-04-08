@@ -1,8 +1,8 @@
 /**
  * @fileoverview Type Definitions for Legal Processes (Procesos)
- * 
+ *
  * Defines all TypeScript types for legal processes in the Colombian Judiciary.
- * 
+ *
  * **Key Concepts:**
  * - **Proceso**: A legal proceeding/case instance with its own ID
  * - **Carpeta**: A case folder which may contain multiple processes
@@ -38,7 +38,7 @@ import { Juzgado } from './carpetas.js';
 
 /**
  * Pagination metadata from Judiciary API responses.
- * 
+ *
  * Identical structure to Paginacion in actuaciones.ts
  * Used to navigate through paginated process results.
  *
@@ -59,7 +59,7 @@ export type Paginacion = {
 
 /**
  * Raw legal process data as returned from the Judiciary API.
- * 
+ *
  * This is the unmodified response from the Judiciary system.
  * Dates are returned as ISO 8601 strings and must be converted
  * to JavaScript Date objects for proper comparison and storage.
@@ -107,7 +107,7 @@ export type fetchResponseProceso = {
 
 /**
  * Intermediate process type with dates partially transformed.
- * 
+ *
  * This type is used during data transformation when we've converted
  * date strings to Date objects, but haven't yet persisted to database.
  * Both date fields are nullable to handle missing data.
@@ -145,7 +145,7 @@ export type intProceso = {
 
 /**
  * Process type for database storage with required dates.
- * 
+ *
  * Extends fetchResponseProceso with the guarantee that both date fields
  * are always Date objects (never null, never strings).
  * This type represents a validated process ready for Prisma insertion.
@@ -162,7 +162,7 @@ export interface databaseProceso extends fetchResponseProceso {
 
 /**
  * API response containing legal processes.
- * 
+ *
  * Standard response from the Judiciary API when querying by filing number
  * or other process search criteria. Contains the matched processes, query
  * parameters echo, and pagination info.
@@ -188,7 +188,7 @@ export type ConsultaProcesos = {
 
 /**
  * Query parameters used in the API search.
- * 
+ *
  * The API echoes back the parameters used in the request as a confirmation.
  * Most fields may be null if not used as search criteria.
  *
@@ -227,7 +227,7 @@ export type Message =
 
 /**
  * Detailed process information with court metadata.
- * 
+ *
  * Extended information about a single process, including judicial
  * classification, proceeding type, and associated court details.
  *

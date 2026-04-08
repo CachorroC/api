@@ -14,7 +14,6 @@
  * @module getLlaves
  */
 
-
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
 import { RawDb } from './types/raw-db.js';
@@ -24,10 +23,10 @@ import { dirname } from 'path';
 import { rawCarpetas } from './assets/carpetas.js';
 
 const __filename = fileURLToPath(
-  import.meta.url
+  import.meta.url 
 );
 const __dirname = dirname(
-  __filename
+  __filename 
 );
 
 /**
@@ -72,21 +71,21 @@ async function exportExpedientesToJson(
     // We iterate over the array, convert EXPEDIENTE to string, and return the new object structure
     const outputData: ProcessedExpediente[] = rawData.map(
       (
-        item
+        item 
       ) => {
         return {
           ciudad: String(
-            item.JUZGADO_CIUDAD
+            item.JUZGADO_CIUDAD 
           ), // Ensures it is converted to a string
         };
-      }
+      } 
     );
 
     const setData = new Set();
 
     for ( const data of outputData ) {
       setData.add(
-        data.ciudad
+        data.ciudad 
       );
     }
 
@@ -94,16 +93,16 @@ async function exportExpedientesToJson(
     // The 'null, 2' arguments make the JSON readable (pretty-printed) as requested
     const jsonContent = JSON.stringify(
       Array.from(
-        setData
-      ), null, 2
+        setData 
+      ), null, 2 
     );
 
     // Step 3: Write to file
     const filePath = join(
-      __dirname, fileName
+      __dirname, fileName 
     );
     await writeFile(
-      filePath, jsonContent, 'utf-8'
+      filePath, jsonContent, 'utf-8' 
     );
 
     console.log(
@@ -111,7 +110,7 @@ async function exportExpedientesToJson(
     );
   } catch ( error ) {
     console.error(
-      '❌ Error writing file:', error
+      '❌ Error writing file:', error 
     );
   }
 }
@@ -122,5 +121,5 @@ async function exportExpedientesToJson(
 
 // Run the function
 exportExpedientesToJson(
-  rawCarpetas(), 'ciudades.json'
+  rawCarpetas(), 'ciudades.json' 
 );

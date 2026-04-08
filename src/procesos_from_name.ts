@@ -29,15 +29,15 @@
 
 import * as fs from 'fs/promises';
 import { ClassCarpeta } from './models/carpeta.js';
-import {  rawCarpetas } from './assets/carpetas.js';
+import { rawCarpetas } from './assets/carpetas.js';
 const carpetasMap = rawCarpetas().map(
   (
-    carpeta
+    carpeta 
   ) => {
     return new ClassCarpeta(
-      carpeta
+      carpeta 
     );
-  }
+  } 
 );
 
 /**
@@ -83,7 +83,7 @@ async function tryAsyncClassCarpetas() {
 
   for await ( const carpeta of generateCarpetas() ) {
     mapClassCarpetas.set(
-      carpeta.numero, carpeta
+      carpeta.numero, carpeta 
     );
   }
 
@@ -91,13 +91,13 @@ async function tryAsyncClassCarpetas() {
     'ClasscarpetasModelPostAwait.json',
     JSON.stringify(
       Array.from(
-        mapClassCarpetas.values()
-      )
+        mapClassCarpetas.values() 
+      ) 
     ),
   );
 
   const asAnArray = Array.from(
-    mapClassCarpetas.values()
+    mapClassCarpetas.values() 
   );
 
   return asAnArray;

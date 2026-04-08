@@ -1,18 +1,18 @@
 /**
  * @module types/juzgados
  * @description Judicial Court (Juzgado) Type Definitions
- * 
+ *
  * Type definitions for court/despacho identification and template literal construction.
  * Provides compile-time guarantees for court naming conventions.
- * 
+ *
  * COURT NAMING CONVENTION:
  * Spanish format: "juzgado [ID] [TIPO] de [CIUDAD]"
  * Example: "juzgado EJE MERCANTIL de BOGOTÁ"
- * 
+ *
  * TYPE HIERARCHY:
  * JuzgadoGeneralType: Template literal combining id, tipo, ciudad
  * outGOINGJuzgado: Uppercase version for external API responses
- * 
+ *
  * USAGE:
  * Ensures consistent court name formatting across API communication
  * Provides type safety when constructing court identifiers

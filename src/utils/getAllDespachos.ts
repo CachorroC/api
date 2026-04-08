@@ -56,18 +56,18 @@ async function getAllDespachos() {
   const despachosSet = new Set<string>(
     procesos.map(
       (
-        p
+        p 
       ) => {
         return p.despacho;
-      }
+      } 
     ),
   );
   saveDespachos(
-    despachosSet
+    despachosSet 
   );
 
   return Array.from(
-    despachosSet
+    despachosSet 
   );
 }
 
@@ -96,11 +96,11 @@ import { join } from 'path';
  * // Creates ./logs/allDespachos.json
  */
 async function saveDespachos(
-  dataStream: Set<string>
+  dataStream: Set<string> 
 ) {
   const dirPath = './logs';
   const filePath = join(
-    dirPath, 'allDespachos.json'
+    dirPath, 'allDespachos.json' 
   );
 
   try {
@@ -109,7 +109,7 @@ async function saveDespachos(
     await mkdir(
       dirPath, {
         recursive: true,
-      }
+      } 
     );
 
     // 2. Convert Set to Array and stringify
@@ -117,20 +117,20 @@ async function saveDespachos(
     const jsonContent = JSON.stringify(
       [
         ...dataStream
-      ], null, 2
+      ], null, 2 
     );
 
     // 3. Write the file
     await writeFile(
-      filePath, jsonContent, 'utf-8'
+      filePath, jsonContent, 'utf-8' 
     );
 
     console.log(
-      `File successfully written to ${ filePath }`
+      `File successfully written to ${ filePath }` 
     );
   } catch ( error ) {
     console.error(
-      'Error handling file operations:', error
+      'Error handling file operations:', error 
     );
   }
 }

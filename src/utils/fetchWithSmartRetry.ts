@@ -1,10 +1,10 @@
 /**
  * @fileoverview Intelligent Retry and Rate Limiting Fetch Utility
- * 
+ *
  * This module provides a hardened HTTP client wrapper for the standard fetch API.
  * It's specifically designed for interacting with rate-limited APIs like the
  * Colombian Judiciary system, adding:
- * 
+ *
  * **Problem Statement:**
  * - Government APIs often have strict rate limits (e.g., 5 req/min per endpoint)
  * - WAF/DDoS protection may block automated requests with 429/503 responses
@@ -38,9 +38,9 @@ import { sleep } from './awaiter.js';
  * Configured to 13,000ms to allow approximately 4-5 requests per minute,
  * strictly adhering to a 60,000ms / 5 requests limit with a safety buffer.
  * This prevents triggering rate limit 429 errors on the Judiciary API.
- * 
+ *
  * Formula: 60,000ms ÷ 5 requests = 12,000ms per request → 13,000ms with buffer
- * 
+ *
  * @constant {number}
  */
 const RATE_LIMIT_DELAY_MS = 13000;
@@ -48,14 +48,14 @@ const RATE_LIMIT_DELAY_MS = 13000;
 /**
  * A map that holds promise queues for each normalized route key.
  * This ensures that rate limits are enforced per route group rather than globally.
- * 
+ *
  * Structure: Map<routeKey, Promise<void>>
  * - routeKey: Normalized URL (e.g., 'api.gov.co/procesos/{id}')
  * - Promise: Queue of pending requests for that route
  *
  * This allows different endpoints to make requests in parallel,
  * while serializing requests within the same endpoint group.
- * 
+ *
  * @type {Map<string, Promise<void>>}
  */
 const urlQueues = new Map<string, Promise<void>>();
@@ -72,13 +72,13 @@ const urlQueues = new Map<string, Promise<void>>();
  * rate limit bucket, preventing rapid-fire sequential calls to similar endpoints.
  *
  * @param {string | URL} targetUrl - The original URL being requested.
- * @returns {string} The normalized key representing the route group 
+ * @returns {string} The normalized key representing the route group
  *                   (e.g., `api.example.com/posts/{id}`).
- * 
+ *
  * @example
  * getRateLimitKey('https://api.gov.co/Procesos/Consulta/NumeroRadicacion?numero=123');
  * // Returns: 'api.gov.co/Procesos/Consulta/NumeroRadicacion'
- * 
+ *
  * getRateLimitKey('https://api.gov.co/Proceso/Actuaciones/12345');
  * // Returns: 'api.gov.co/Proceso/Actuaciones/{id}'
  */
@@ -117,7 +117,7 @@ function getRateLimitKey(
  * - Request 3 to /api/v2/Procesos/Consulta/333 → waits 0ms (different route)
  *
  * **Memory cleanup**: Automatically deletes queue entries after all requests complete.
- * 
+ *
  * @private
  * @async
  * @param {string | URL} url - The URL to enforce rate limits on.
@@ -173,7 +173,7 @@ async function enforceRateLimit(
 
 /**
  * Fetches a resource from a URL with robust retry logic and intelligent rate limiting.
- * 
+ *
  * This is the main exported function providing "smart" HTTP fetching for
  * production scenarios. It combines multiple resilience strategies:
  *

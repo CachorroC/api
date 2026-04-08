@@ -145,8 +145,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Andean Forest'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Drimys+granadensis&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Drimys+granadensis&tbm=isch',
     regions       : null,
     scientificName: 'Drimys granadensis',
     taxon         : {
@@ -171,7 +170,7 @@ const plantListDB: PlantData[] = [
       'Cundinamarca',
       'Boyacá',
       'Santander',
-      'Tolima',
+      'Tolima'
     ],
     scientificName: 'Myrcianthes leucoxyla',
     taxon         : {
@@ -193,7 +192,7 @@ const plantListDB: PlantData[] = [
     ],
     imageUrl:
       'https://bs.plantnet.org/image/o/081392eacd408487213af3cc9f02db55759f1416',
-    regions       : [    ],
+    regions       : [],
     scientificName: 'Oreopanax bogotensis',
     taxon         : {
       family : 'Araliaceae',
@@ -302,8 +301,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Subpáramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Vaccinium+floribundum&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Vaccinium+floribundum&tbm=isch',
     regions       : null,
     scientificName: 'Vaccinium floribundum',
     taxon         : {
@@ -315,7 +313,7 @@ const plantListDB: PlantData[] = [
       'Mortiño',
       'Agráz',
       'Agraz',
-      'Mortiño de páramo',
+      'Mortiño de páramo'
     ],
     url: 'https://www.google.com/search?q=Vaccinium+floribundum&tbm=isch',
   },
@@ -361,8 +359,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Subpáramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Miconia+squamulosa&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Miconia+squamulosa&tbm=isch',
     regions       : null,
     scientificName: 'Miconia squamulosa',
     taxon         : {
@@ -380,8 +377,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Subpáramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Bucquetia+glutinosa&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Bucquetia+glutinosa&tbm=isch',
     regions       : null,
     scientificName: 'Bucquetia glutinosa',
     taxon         : {
@@ -439,8 +435,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Subpáramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Baccharis+latifolia&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Baccharis+latifolia&tbm=isch',
     regions       : null,
     scientificName: 'Baccharis latifolia',
     taxon         : {
@@ -477,8 +472,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Subpáramo'
     ],
-    imageUrl:
-      'https://google.com/search?q=Diplostephium rosmarinifolium',
+    imageUrl      : 'https://google.com/search?q=Diplostephium rosmarinifolium',
     regions       : null,
     scientificName: 'Diplostephium rosmarinifolium',
     taxon         : {
@@ -520,8 +514,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Subpáramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Symplocos+theiformis&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Symplocos+theiformis&tbm=isch',
     regions       : null,
     scientificName: 'Symplocos theiformis',
     taxon         : {
@@ -557,8 +550,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Páramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Espeletia+grandiflora&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Espeletia+grandiflora&tbm=isch',
     regions       : null,
     scientificName: 'Espeletia grandiflora',
     taxon         : {
@@ -577,9 +569,8 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Páramo'
     ],
-    imageUrl:
-      'https://static.inaturalist.org/photos/39748543/large.jpg',
-    regions: [
+    imageUrl: 'https://static.inaturalist.org/photos/39748543/large.jpg',
+    regions : [
       'Cundinamarca',
       'Boyacá'
     ],
@@ -635,8 +626,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Páramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Polylepis+quadrijuga&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Polylepis+quadrijuga&tbm=isch',
     regions       : null,
     scientificName: 'Polylepis quadrijuga',
     taxon         : {
@@ -656,8 +646,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Páramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Chusquea+tessellata&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Chusquea+tessellata&tbm=isch',
     regions       : null,
     scientificName: 'Chusquea tessellata',
     taxon         : {
@@ -675,8 +664,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Páramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Calamagrostis+effusa&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Calamagrostis+effusa&tbm=isch',
     regions       : null,
     scientificName: 'Calamagrostis effusa',
     taxon         : {
@@ -687,7 +675,7 @@ const plantListDB: PlantData[] = [
     commonNames: [
       'Paja de páramo',
       'Pajonal',
-      'Paja de páramo',
+      'Paja de páramo'
     ],
     url: 'https://www.google.com/search?q=Calamagrostis+effusa&tbm=isch',
   },
@@ -696,8 +684,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : [
       'Páramo'
     ],
-    imageUrl:
-      'https://www.google.com/search?q=Puya+nitida&tbm=isch',
+    imageUrl      : 'https://www.google.com/search?q=Puya+nitida&tbm=isch',
     regions       : null,
     scientificName: 'Puya nitida',
     taxon         : {
@@ -768,11 +755,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Vulnerable (VU)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Espeletia+argentea&tbm=isch',
-    regions       : null,
-    scientificName: 'Espeletia argentea',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Espeletia+argentea&tbm=isch',
+    regions           : null,
+    scientificName    : 'Espeletia argentea',
+    taxon             : {
       family : 'Asteraceae',
       genus  : 'Espeletia',
       species: 'argentea',
@@ -785,11 +771,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Vulnerable (VU)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Espeletia+corymbosa&tbm=isch',
-    regions       : null,
-    scientificName: 'Espeletia corymbosa',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Espeletia+corymbosa&tbm=isch',
+    regions           : null,
+    scientificName    : 'Espeletia corymbosa',
+    taxon             : {
       family : 'Asteraceae',
       genus  : 'Espeletia',
       species: 'corymbosa',
@@ -802,11 +787,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Endangered (EN)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Espeletia+grandiflora&tbm=isch',
-    regions       : null,
-    scientificName: 'Espeletia rabanalensis',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Espeletia+grandiflora&tbm=isch',
+    regions           : null,
+    scientificName    : 'Espeletia rabanalensis',
+    taxon             : {
       family : 'Asteraceae',
       genus  : 'Espeletia',
       species: 'rabanalensis',
@@ -837,11 +821,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Bejaria+resinosa&tbm=isch',
-    regions       : null,
-    scientificName: 'Bejaria resinosa',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Bejaria+resinosa&tbm=isch',
+    regions           : null,
+    scientificName    : 'Bejaria resinosa',
+    taxon             : {
       family : 'Ericaceae',
       genus  : 'Bejaria',
       species: 'resinosa',
@@ -871,11 +854,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Not Evaluated (NE)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Lupinus+alopecuroides&tbm=isch',
-    regions       : null,
-    scientificName: 'Lupinus alopecuroides',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Lupinus+alopecuroides&tbm=isch',
+    regions           : null,
+    scientificName    : 'Lupinus alopecuroides',
+    taxon             : {
       family : 'Fabaceae',
       genus  : 'Lupinus',
       species: 'alopecuroides',
@@ -888,11 +870,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Hypericum+juniperinum&tbm=isch',
-    regions       : null,
-    scientificName: 'Hypericum juniperinum',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Hypericum+juniperinum&tbm=isch',
+    regions           : null,
+    scientificName    : 'Hypericum juniperinum',
+    taxon             : {
       family : 'Hypericaceae',
       genus  : 'Hypericum',
       species: 'juniperinum',
@@ -906,11 +887,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Not Evaluated (NE)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Pentacalia+pulchella&tbm=isch',
-    regions       : null,
-    scientificName: 'Pentacalia pulchella',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Pentacalia+pulchella&tbm=isch',
+    regions           : null,
+    scientificName    : 'Pentacalia pulchella',
+    taxon             : {
       family : 'Asteraceae',
       genus  : 'Pentacalia',
       species: 'pulchella',
@@ -923,11 +903,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://google.com/search?q=Gaiadendron punctatum',
-    regions       : null,
-    scientificName: 'Gaiadendron punctatum',
-    taxon         : {
+    imageUrl          : 'https://google.com/search?q=Gaiadendron punctatum',
+    regions           : null,
+    scientificName    : 'Gaiadendron punctatum',
+    taxon             : {
       family : 'Loranthaceae',
       genus  : 'Gaiadendron',
       species: 'punctatum',
@@ -941,11 +920,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Vulnerable (VU)',
     ecosystems        : null,
-    imageUrl:
-      'https://google.com/search?q=Clethra fimbriata',
-    regions       : null,
-    scientificName: 'Clethra fimbriata',
-    taxon         : {
+    imageUrl          : 'https://google.com/search?q=Clethra fimbriata',
+    regions           : null,
+    scientificName    : 'Clethra fimbriata',
+    taxon             : {
       family : 'Clethraceae',
       genus  : 'Clethra',
       species: 'fimbriata',
@@ -958,11 +936,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Not Evaluated (NE)',
     ecosystems        : null,
-    imageUrl:
-      'https://google.com/search?q=Paepalanthus alpinus',
-    regions       : null,
-    scientificName: 'Paepalanthus alpinus',
-    taxon         : {
+    imageUrl          : 'https://google.com/search?q=Paepalanthus alpinus',
+    regions           : null,
+    scientificName    : 'Paepalanthus alpinus',
+    taxon             : {
       family : 'Eriocaulaceae',
       genus  : 'Paepalanthus',
       species: 'alpinus',
@@ -975,11 +952,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://google.com/search?q=Pernettya prostrata',
-    regions       : null,
-    scientificName: 'Pernettya prostrata',
-    taxon         : {
+    imageUrl          : 'https://google.com/search?q=Pernettya prostrata',
+    regions           : null,
+    scientificName    : 'Pernettya prostrata',
+    taxon             : {
       family : 'Ericaceae',
       genus  : 'Pernettya',
       species: 'prostrata',
@@ -993,11 +969,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://google.com/search?q=Phytolacca bogotensis',
-    regions       : null,
-    scientificName: 'Phytolacca bogotensis',
-    taxon         : {
+    imageUrl          : 'https://google.com/search?q=Phytolacca bogotensis',
+    regions           : null,
+    scientificName    : 'Phytolacca bogotensis',
+    taxon             : {
       family : 'Phytolaccaceae',
       genus  : 'Phytolacca',
       species: 'bogotensis',
@@ -1011,11 +986,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Not Evaluated (NE)',
     ecosystems        : null,
-    imageUrl:
-      'https://google.com/search?q=Arcytophyllum nitidum',
-    regions       : null,
-    scientificName: 'Arcytophyllum nitidum',
-    taxon         : {
+    imageUrl          : 'https://google.com/search?q=Arcytophyllum nitidum',
+    regions           : null,
+    scientificName    : 'Arcytophyllum nitidum',
+    taxon             : {
       family : 'Rubiaceae',
       genus  : 'Arcytophyllum',
       species: 'nitidum',
@@ -1029,11 +1003,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Tibouchina+grossa&tbm=isch',
-    regions       : null,
-    scientificName: 'Tibouchina grossa',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Tibouchina+grossa&tbm=isch',
+    regions           : null,
+    scientificName    : 'Tibouchina grossa',
+    taxon             : {
       family : 'Melastomataceae',
       genus  : 'Tibouchina',
       species: 'grossa',
@@ -1047,11 +1020,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://google.com/search?q=Oreopanax incisus',
-    regions       : null,
-    scientificName: 'Oreopanax incisus',
-    taxon         : {
+    imageUrl          : 'https://google.com/search?q=Oreopanax incisus',
+    regions           : null,
+    scientificName    : 'Oreopanax incisus',
+    taxon             : {
       family : 'Araliaceae',
       genus  : 'Oreopanax',
       species: 'incisus',
@@ -1064,11 +1036,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Passiflora+mixta&tbm=isch',
-    regions       : null,
-    scientificName: 'Passiflora mixta',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Passiflora+mixta&tbm=isch',
+    regions           : null,
+    scientificName    : 'Passiflora mixta',
+    taxon             : {
       family : 'Passifloraceae',
       genus  : 'Passiflora',
       species: 'mixta',
@@ -1097,11 +1068,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Endangered (EN)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Espeletia+chocontana&tbm=isch',
-    regions       : null,
-    scientificName: 'Espeletia chocontana',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Espeletia+chocontana&tbm=isch',
+    regions           : null,
+    scientificName    : 'Espeletia chocontana',
+    taxon             : {
       family : 'Asteraceae',
       genus  : 'Espeletia',
       species: 'chocontana',
@@ -1131,11 +1101,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Endangered (EN)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Aragoa+cupressina&tbm=isch',
-    regions       : null,
-    scientificName: 'Aragoa cupressina',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Aragoa+cupressina&tbm=isch',
+    regions           : null,
+    scientificName    : 'Aragoa cupressina',
+    taxon             : {
       family : 'Plantaginaceae',
       genus  : 'Aragoa',
       species: 'cupressina',
@@ -1148,11 +1117,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Endangered (EN)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Aragoa+abietina&tbm=isch',
-    regions       : null,
-    scientificName: 'Aragoa abietina',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Aragoa+abietina&tbm=isch',
+    regions           : null,
+    scientificName    : 'Aragoa abietina',
+    taxon             : {
       family : 'Plantaginaceae',
       genus  : 'Aragoa',
       species: 'abietina',
@@ -1165,11 +1133,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Not Evaluated (NE)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Aetanthus+mutisii&tbm=isch',
-    regions       : null,
-    scientificName: 'Aetanthus mutisii',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Aetanthus+mutisii&tbm=isch',
+    regions           : null,
+    scientificName    : 'Aetanthus mutisii',
+    taxon             : {
       family : 'Loranthaceae',
       genus  : 'Aetanthus',
       species: 'mutisii',
@@ -1183,11 +1150,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Passiflora+bogotensis&tbm=isch',
-    regions       : null,
-    scientificName: 'Passiflora bogotensis',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Passiflora+bogotensis&tbm=isch',
+    regions           : null,
+    scientificName    : 'Passiflora bogotensis',
+    taxon             : {
       family : 'Passifloraceae',
       genus  : 'Passiflora',
       species: 'bogotensis',
@@ -1200,11 +1166,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Mutisia+clematis&tbm=isch',
-    regions       : null,
-    scientificName: 'Mutisia clematis',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Mutisia+clematis&tbm=isch',
+    regions           : null,
+    scientificName    : 'Mutisia clematis',
+    taxon             : {
       family : 'Asteraceae',
       genus  : 'Mutisia',
       species: 'clematis',
@@ -1218,11 +1183,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Endangered (EN)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Masdevallia+coccinea&tbm=isch',
-    regions       : null,
-    scientificName: 'Masdevallia coccinea',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Masdevallia+coccinea&tbm=isch',
+    regions           : null,
+    scientificName    : 'Masdevallia coccinea',
+    taxon             : {
       family : 'Orchidaceae',
       genus  : 'Masdevallia',
       species: 'coccinea',
@@ -1235,11 +1199,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Endangered (EN)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Odontoglossum+crispum&tbm=isch',
-    regions       : null,
-    scientificName: 'Odontoglossum crispum',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Odontoglossum+crispum&tbm=isch',
+    regions           : null,
+    scientificName    : 'Odontoglossum crispum',
+    taxon             : {
       family : 'Orchidaceae',
       genus  : 'Odontoglossum',
       species: 'crispum',
@@ -1252,11 +1215,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Endangered (EN)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Viburnum+suratense&tbm=isch',
-    regions       : null,
-    scientificName: 'Viburnum suratense',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Viburnum+suratense&tbm=isch',
+    regions           : null,
+    scientificName    : 'Viburnum suratense',
+    taxon             : {
       family : 'Adoxaceae',
       genus  : 'Viburnum',
       species: 'suratense',
@@ -1269,11 +1231,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Vulnerable (VU)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Ceroxylon+vogelianum&tbm=isch',
-    regions       : null,
-    scientificName: 'Ceroxylon vogelianum',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Ceroxylon+vogelianum&tbm=isch',
+    regions           : null,
+    scientificName    : 'Ceroxylon vogelianum',
+    taxon             : {
       family : 'Arecaceae',
       genus  : 'Ceroxylon',
       species: 'vogelianum',
@@ -1286,11 +1247,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Centropogon+granulosus&tbm=isch',
-    regions       : null,
-    scientificName: 'Centropogon granulosus',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Centropogon+granulosus&tbm=isch',
+    regions           : null,
+    scientificName    : 'Centropogon granulosus',
+    taxon             : {
       family : 'Campanulaceae',
       genus  : 'Centropogon',
       species: 'granulosus',
@@ -1303,11 +1263,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Hypericum+goyanesii&tbm=isch',
-    regions       : null,
-    scientificName: 'Hypericum goyanesii',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Hypericum+goyanesii&tbm=isch',
+    regions           : null,
+    scientificName    : 'Hypericum goyanesii',
+    taxon             : {
       family : 'Hypericaceae',
       genus  : 'Hypericum',
       species: 'goyanesii',
@@ -1320,11 +1279,10 @@ const plantListDB: PlantData[] = [
   {
     conservationStatus: 'Least Concern (LC)',
     ecosystems        : null,
-    imageUrl:
-      'https://www.google.com/search?q=Buddleja+bullata&tbm=isch',
-    regions       : null,
-    scientificName: 'Buddleja bullata',
-    taxon         : {
+    imageUrl          : 'https://www.google.com/search?q=Buddleja+bullata&tbm=isch',
+    regions           : null,
+    scientificName    : 'Buddleja bullata',
+    taxon             : {
       family : 'Scrophulariaceae',
       genus  : 'Buddleja',
       species: 'bullata',
@@ -1395,8 +1353,7 @@ const plantListDB: PlantData[] = [
     ecosystems        : null,
     imageUrl          : null,
     regions           : [
-      'Santander',
-
+      'Santander'
     ],
     scientificName: 'Erythrina poeppigiana',
     taxon         : {

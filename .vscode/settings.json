@@ -26,5 +26,6 @@
     "tab.activeBorder": "#c2f4af",
     "titleBar.border": "#a0ee82"
   },
-  "peacock.remoteColor": "#a0ee82"
+  "peacock.remoteColor": "#a0ee82",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

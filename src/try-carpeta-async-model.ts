@@ -8,15 +8,15 @@
  *
  * BATCH PROCESSING WORKFLOW:
  * Raw Data → Sort by number (descending)
- *   ↓
+ * ↓
  * Divide into batches (configurable batchSize)
- *   ↓
+ * ↓
  * For each batch:
- *   - Instantiate ClassCarpeta only when needed
- *   - Check for existing record in database
- *   - Evaluate changes (llaveProceso, category, dates)
- *   - Upsert to database
- *   ↓
+ * - Instantiate ClassCarpeta only when needed
+ * - Check for existing record in database
+ * - Evaluate changes (llaveProceso, category, dates)
+ * - Upsert to database
+ * ↓
  * Log progress and continue next batch
  *
  * MEMORY EFFICIENCY:
@@ -38,9 +38,12 @@
  */
 
 /* eslint-disable no-unused-vars */
+import { NotificationService } from './services/notification-service.js';
 import { rawCarpetas } from './assets/carpetas.js';
 import { ClassCarpeta } from './models/carpeta.js';
 import { client } from './services/connection/prisma.js';
+import { TelegramService } from './services/telegramService.js';
+import { sleep } from './utils/awaiter.js';
 
 // Add this helper function at the bottom or in utils
 /**
@@ -71,18 +74,18 @@ import { client } from './services/connection/prisma.js';
  * @param {T[]} items - Array of items to process
  * @param {number} batchSize - Number of items per batch (e.g., 1, 5, 10)
  * @param {(item: T) => Promise<void>} handler - Async function to execute for each item.
- *                                               Side effects only (returns void).
+ * Side effects only (returns void).
  * @returns {Promise<void>} Resolves when all items processed successfully.
  * @throws {Error} If handler throws - error propagates and stops processing.
  *
  * @example
  * // Process 100 carpetas in batches of 5
  * await processBatch<ClassCarpeta>(
- *   carpetaArray,
- *   5,
- *   async (carpeta) => {
- *     await carpeta.syncToDatabase();
- *   }
+ * carpetaArray,
+ * 5,
+ * async (carpeta) => {
+ * await carpeta.syncToDatabase();
+ * }
  * );
  *
  * @note For rate limits of 1 req/12.5s, use batchSize=1
@@ -91,7 +94,7 @@ import { client } from './services/connection/prisma.js';
 async function processBatch<T>(
   items: T[],
   batchSize: number,
-  handler: ( item: T ) => Promise<void>,
+  handler: ( item: T ) => Promise<void>
 ) {
   for ( let i = 0; i < items.length; i += batchSize ) {
     const batch = items.slice(
@@ -110,7 +113,7 @@ async function processBatch<T>(
             item
           );
         }
-      ),
+      )
     );
   }
 }
@@ -140,14 +143,13 @@ export async function tryAsyncClassCarpetas() {
         ),
       };
     }
-  )
-    .sort(
-      (
-        a, b
-      ) => {
-        return b.numero - a.numero;
-      }
-    );
+  ).sort(
+    (
+      a, b
+    ) => {
+      return b.numero - a.numero;
+    }
+  );
 
   // 2. Process in Batches
   // We use a batch size of 1 because your RATE_LIMIT is strict (12.5s).
@@ -168,48 +170,111 @@ export async function tryAsyncClassCarpetas() {
         );
 
         try {
-          const existingCarpeta = await client.carpeta.findUnique(
-            {
-              where: {
-                numero: carpeta.numero,
-              },
-            }
-          );
+          const existingCarpeta
+            = await client.carpeta.findUnique(
+              {
+                where: {
+                  numero: carpeta.numero,
+                },
+              }
+            );
 
           // 1. Check if the record already exists
           if ( existingCarpeta ) {
-          // 2. Evaluate changes
+          // 1a. Guard: nombre mismatch — skip and alert
+          // Check if existing name has a value before comparing to prevent skipping when it's empty
+            const hasExistingName = existingCarpeta.nombre !== undefined
+                                  && existingCarpeta.nombre !== null
+                                  && existingCarpeta.nombre !== ''
+                                  && existingCarpeta.nombre !== 'undefined';
+
+            if (
+              hasExistingName
+            && existingCarpeta.nombre !== carpeta.nombre
+            ) {
+              const warningMsg
+                = `⚠️ NOMBRE MISMATCH en carpeta #${ carpeta.numero }:\n`
+              + `  DB:    "${ existingCarpeta.nombre }"\n`
+              + `  Local: "${ carpeta.nombre }"\n`
+              + 'Se omite la actualización para evitar sobreescribir con un nombre diferente.';
+
+              console.warn(
+                warningMsg
+              );
+
+              await TelegramService.sendSimpleMessage(
+                warningMsg
+              );
+
+              await NotificationService.processNotifications(
+                {
+                  title         : `${ carpeta.numero } ${ carpeta.nombre }`,
+                  body          : `La carpeta que está procesando no tiene el mismo nombre que la carpeta que existe en la base de datos, por favor revisar la discrepancia entre los valores: ${ existingCarpeta.nombre } y ${ carpeta.nombre }`,
+                  additionalData: {
+                    carpetaId      : existingCarpeta.id,
+                    carpetaNumero  : carpeta.numero,
+                    carpetaNombre  : carpeta.nombre,
+                    llaveProceso   : carpeta.llaveProceso,
+                    category       : carpeta.category,
+                    existingCarpeta: existingCarpeta,
+                    carpeta        : carpeta,
+                  }
+                }
+              );
+
+              return; // Skip this carpeta entirely
+            }
+
+            // 2. Evaluate changes
             const isSameLlave
-              = existingCarpeta.llaveProceso === carpeta.llaveProceso;
+              = existingCarpeta.llaveProceso
+            === carpeta.llaveProceso;
             console.log(
               `isSameLlave: ${ isSameLlave }`
             );
-            const isSameCategory = existingCarpeta.category === carpeta.category;
+            const isSameCategory
+              = existingCarpeta.category === carpeta.category;
             console.log(
               `isSameCategory: ${ isSameCategory }`
             );
             console.log(
-              `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision }`,
+              `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision }`
             );
             const isSamefechaUltimaRevision
               = existingCarpeta.fechaUltimaRevision?.getTime()
             === carpeta.fechaUltimaRevision?.getTime();
 
             // 3. Skip ONLY if neither has changed
-            if ( isSameLlave && isSameCategory && isSamefechaUltimaRevision ) {
+            // Also enforce that we don't skip if the DB was missing the name but we have it now
+            if (
+              hasExistingName
+            && isSameLlave
+            && isSameCategory
+            && isSamefechaUltimaRevision
+            ) {
               console.log(
-                `⏭️ Skipping ${ carpeta.numero }: llaveProceso and category are unchanged.`,
+                `⏭️ Skipping ${ carpeta.numero }: llaveProceso and category are unchanged.`
               );
 
               return;
+            }
+
+            if ( !hasExistingName ) {
+              console.log(
+                existingCarpeta.nombre + typeof existingCarpeta.nombre
+              );
+              await sleep(
+                12000
+              );
             }
           }
         } catch ( error ) {
           console.error(
             `❌ Error processing prisma find unique ${ item.numero }:`,
-            error,
+            error
           );
         }
+
 
         // Fetch Data
         await carpeta.getProcesos();
@@ -222,7 +287,8 @@ export async function tryAsyncClassCarpetas() {
       // The 'carpeta' variable goes out of scope here and is freed from memory.
       } catch ( error ) {
         console.error(
-          `❌ Error processing ${ item.numero }:`, error
+          `❌ Error processing ${ item.numero }:`,
+          error
         );
       }
     }
@@ -232,5 +298,3 @@ export async function tryAsyncClassCarpetas() {
     '✅ Sync Complete'
   );
 }
-
-// ... End of tryAsyncClassCarpetas function }

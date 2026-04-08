@@ -47,7 +47,6 @@ import { Category } from '../types/carpetas.js';
 import * as fs from 'fs/promises';
 import { RawDb } from '../types/raw-db.js';
 
-
 export function rawCarpetas() {
   const workbook = xlsx.readFile(
     '/home/cachorro_cami/OneDrive/bases_de_datos/general.xlsx',
@@ -57,51 +56,51 @@ export function rawCarpetas() {
   );
 
   const {
-    SheetNames, Sheets
+    SheetNames, Sheets 
   } = workbook;
 
   const outputSheets: unknown[] = [];
 
   const mapperSheets = SheetNames.flatMap(
     (
-      sheetname
+      sheetname 
     ) => {
       const sheet = Sheets[ sheetname ];
 
       const tableSheet = xlsx.utils.sheet_to_json<RawDb>(
-        sheet
+        sheet 
       );
 
       outputSheets.push(
-        tableSheet
+        tableSheet 
       );
 
       return tableSheet.map(
         (
-          table
+          table 
         ) => {
           return {
             ...table,
             category: sheetname.replaceAll(
-              ' ', ''
+              ' ', '' 
             ) as Category,
           };
-        }
+        } 
       );
-    }
+    } 
   );
 
   fs.writeFile(
     'outputSheets.json', JSON.stringify(
-      outputSheets
-    )
+      outputSheets 
+    ) 
   );
 
   const RawCarpetas: RawDb[] = [
     ...mapperSheets
   ].sort(
     (
-      a, b
+      a, b 
     ) => {
       const x = a.NUMERO;
 
@@ -114,39 +113,39 @@ export function rawCarpetas() {
       }
 
       return 0;
-    }
+    } 
   );
 
   fs.writeFile(
     'carpetas.json', JSON.stringify(
-      RawCarpetas, null, 2
-    )
+      RawCarpetas, null, 2 
+    ) 
   );
 
   const outputData: string[] = [];
 
   RawCarpetas.forEach(
     (
-      carpeta, index
+      carpeta, index 
     ) => {
       const newString = `${
         Number(
-          carpeta.NUMERO
+          carpeta.NUMERO 
         ) === index + 1
       } numero: ${ carpeta.NUMERO }, index:${ index + 1 } `;
 
       console.log(
-        newString
+        newString 
       );
       outputData.push(
-        newString
+        newString 
       );
-    }
+    } 
   );
   fs.writeFile(
     'numbers.json', JSON.stringify(
-      outputData, null, 2
-    )
+      outputData, null, 2 
+    ) 
   );
 
   return RawCarpetas;

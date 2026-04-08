@@ -6,46 +6,46 @@ import plantListDB from './assets/plantListDB';
 
 async function upsertSpecimenToDB(
   {
-    data
-  }: { data: PlantData; }
+    data 
+  }: { data: PlantData } 
 ) {
   try {
     const client = await clientPromise;
     const database = client.db(
-      'botany_db'
+      'botany_db' 
     );
     const specimens = database.collection<PlantData>(
-      'specimens'
+      'specimens' 
     );
 
     const {
-      _id, ...updateData
+      _id, ...updateData 
     } = data as any;
 
     const query = _id
       ? {
           _id: new ObjectId(
-            _id
-          )
+            _id 
+          ),
         }
       : {
-          scientificName: data.scientificName
+          scientificName: data.scientificName,
         };
 
     const result = await specimens.findOneAndUpdate(
       query,
       {
-        $set: updateData
+        $set: updateData,
       },
       {
         returnDocument: 'after',
-        upsert        : true
-      }
+        upsert        : true,
+      },
     );
 
     if ( !result ) {
       throw new Error(
-        'Failed to update or create document in MongoDB.'
+        'Failed to update or create document in MongoDB.' 
       );
     }
 
@@ -58,7 +58,7 @@ async function upsertSpecimenToDB(
     };
   } catch ( error ) {
     console.error(
-      'Database Error:', error
+      'Database Error:', error 
     );
 
     return {
@@ -70,19 +70,19 @@ async function upsertSpecimenToDB(
   }
 }
 
-async function processBatchPlants () {
+async function processBatchPlants() {
   for ( const element of plantListDB ) {
     const upsert = await upsertSpecimenToDB(
       {
-        data: element
-      }
+        data: element,
+      } 
     );
 
     if ( upsert.success ) {
       console.log(
         `successfull upsert: ${ JSON.stringify(
-          upsert.data, null, 2
-        ) }`
+          upsert.data, null, 2 
+        ) }`,
       );
     }
   }

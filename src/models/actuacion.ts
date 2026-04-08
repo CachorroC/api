@@ -66,14 +66,13 @@ async function pMap<T, R>(
   const executing: Promise<void>[] = [];
 
   for ( const item of array ) {
-    const p = Promise.resolve()
-      .then(
-        () => {
-          return mapper(
-            item
-          );
-        }
-      );
+    const p = Promise.resolve().then(
+      () => {
+        return mapper(
+          item
+        );
+      }
+    );
     results.push(
       p as unknown as R
     );
@@ -286,12 +285,10 @@ export class ActuacionService {
       ) => {
         const prevDate = ensureDate(
           prev.fechaActuacion
-        )
-          ?.getTime() || 0;
+        )?.getTime() || 0;
         const currDate = ensureDate(
           current.fechaActuacion
-        )
-          ?.getTime() || 0;
+        )?.getTime() || 0;
 
         if ( currDate > prevDate ) {
           return current;
@@ -300,12 +297,10 @@ export class ActuacionService {
         if ( currDate === prevDate ) {
           const prevReg = ensureDate(
             prev.fechaRegistro
-          )
-            ?.getTime() || 0;
+          )?.getTime() || 0;
           const currReg = ensureDate(
             current.fechaRegistro
-          )
-            ?.getTime() || 0;
+          )?.getTime() || 0;
 
           if ( currReg > prevReg ) {
             return current;
@@ -359,9 +354,10 @@ export class ActuacionService {
     const isUltima = actualLatestItem
       ? String(
         apiData.idRegActuacion
-      ) === String(
-        actualLatestItem.idRegActuacion
       )
+        === String(
+          actualLatestItem.idRegActuacion
+        )
       : false;
 
     return {
@@ -486,9 +482,10 @@ export class ActuacionService {
             WEBHOOK_URL, {
               method : 'POST',
               headers: {
-                'Content-Type'           : 'application/json',
-                'CF-Access-Client-Id'    : process.env.CF_ACCESS_CLIENT_ID ?? '',
-                'CF-Access-Client-Secret': process.env.CF_ACCESS_CLIENT_SECRET ?? '',
+                'Content-Type'       : 'application/json',
+                'CF-Access-Client-Id': process.env.CF_ACCESS_CLIENT_ID ?? '',
+                'CF-Access-Client-Secret':
+                process.env.CF_ACCESS_CLIENT_SECRET ?? '',
               },
               body: JSON.stringify(
                 {
@@ -516,7 +513,7 @@ export class ActuacionService {
             }
           );
           console.log(
-            `webhook fetch post request sent, response: ${ response.status } - ${ response.statusText }`
+            `webhook fetch post request sent, response: ${ response.status } - ${ response.statusText }`,
           );
 
           if ( !response.ok ) {
@@ -533,7 +530,7 @@ export class ActuacionService {
             parentProc.idProceso,
             {
               data: act,
-              ...parentProc
+              ...parentProc,
             },
             postError.message,
             'WEBHOOK',
@@ -553,7 +550,7 @@ export class ActuacionService {
           parentProc.idProceso,
           {
             data: act,
-            ...parentProc
+            ...parentProc,
           },
           teleError.message,
           'TELEGRAM',
@@ -592,7 +589,7 @@ export class ActuacionService {
             parentProc.idProceso,
             {
               data: act,
-              ...parentProc
+              ...parentProc,
             },
             postError.message,
             'WEBHOOK',
@@ -651,7 +648,7 @@ export class ActuacionService {
     apiActuaciones: FetchResponseActuacionType[],
     parentProc: ProcessRequest,
     logger: FileLogger,
-    arrayBufferData: ArrayBuffer
+    arrayBufferData: ArrayBuffer,
   ) {
     const latestItemByDate = this.getLatestByDate(
       apiActuaciones
@@ -740,12 +737,11 @@ export class ActuacionService {
           await logger.logFailure(
             parentProc.idProceso,
             {
-              data: actuacionNueva
+              data: actuacionNueva,
             },
             error.message,
             'DB_ITEM',
           );
-
         }
       }
 
@@ -791,7 +787,7 @@ export class ActuacionService {
               parentProc.idProceso,
               {
                 data: existingItems,
-                ...parentProc
+                ...parentProc,
               },
               err.message,
               'DB_ITEM',
@@ -803,7 +799,9 @@ export class ActuacionService {
     }
 
     await this.updateCarpetaIfNewer(
-      apiActuaciones, parentProc, arrayBufferData
+      apiActuaciones,
+      parentProc,
+      arrayBufferData,
     );
   }
 
@@ -842,7 +840,7 @@ export class ActuacionService {
   static async updateCarpetaIfNewer(
     actuaciones: FetchResponseActuacionType[],
     parentProc: ProcessRequest,
-    arrayBufferData: ArrayBuffer
+    arrayBufferData: ArrayBuffer,
   ) {
     const incomingLast = this.getLatestByDate(
       actuaciones
@@ -952,13 +950,15 @@ export class ActuacionService {
           savedActuacion = await client.actuacion.upsert(
             {
               where: {
-                idRegActuacion: `${ incomingLast.idRegActuacion }`
+                idRegActuacion: `${ incomingLast.idRegActuacion }`,
               },
               create: {
                 ...incomingLast,
-                actuacion: sanitizeText(
+                actuacion:
+                sanitizeText(
                   incomingLast.actuacion as string
-                ) || 'Sin descripción',
+                )
+                || 'Sin descripción',
                 anotacion: incomingLast.anotacion
                   ? sanitizeText(
                       incomingLast.anotacion as string
@@ -973,10 +973,12 @@ export class ActuacionService {
                 idProceso     : parentProc.idProceso,
                 isUltimaAct   : true,
                 idRegActuacion: `${ incomingLast.idRegActuacion }`,
-                fechaActuacion: ensureDate(
+                fechaActuacion:
+                ensureDate(
                   incomingLast.fechaActuacion
                 ) ?? new Date(),
-                fechaRegistro: ensureDate(
+                fechaRegistro:
+                ensureDate(
                   incomingLast.fechaRegistro
                 ) ?? new Date(),
                 fechaInicial: ensureDate(
@@ -987,16 +989,18 @@ export class ActuacionService {
                 ) ?? undefined,
                 proceso: {
                   connect: {
-                    idProceso: parentProc.idProceso
-                  }
+                    idProceso: parentProc.idProceso,
+                  },
                 },
               },
               update: {
-                cant          : incomingLast.cant,
-                fechaActuacion: ensureDate(
+                cant: incomingLast.cant,
+                fechaActuacion:
+                ensureDate(
                   incomingLast.fechaActuacion
                 ) ?? new Date(),
-                fechaRegistro: ensureDate(
+                fechaRegistro:
+                ensureDate(
                   incomingLast.fechaRegistro
                 ) ?? new Date(),
                 fechaInicial: ensureDate(
@@ -1010,13 +1014,15 @@ export class ActuacionService {
           );
         } catch ( error: any ) {
           console.log(
-            `⚠️ First upsert failed for ${ incomingLast.idRegActuacion }: ${ error.message }. Attempting UTF-8 ArrayBuffer fallback...`
+            `⚠️ First upsert failed for ${ incomingLast.idRegActuacion }: ${ error.message }. Attempting UTF-8 ArrayBuffer fallback...`,
           );
 
           try {
             if ( !arrayBufferData ) {
               throw new Error(
-                'No ArrayBuffer provided for fallback.'
+                'No ArrayBuffer provided for fallback.', {
+                  cause: error 
+                }
               );
             }
 
@@ -1048,11 +1054,14 @@ export class ActuacionService {
                   }
                 }
               } else if ( obj && typeof obj === 'object' ) {
-                if ( String(
-                  obj.idRegActuacion
-                ) === String(
-                  incomingLast.idRegActuacion
-                ) ) {
+                if (
+                  String(
+                    obj.idRegActuacion
+                  )
+                  === String(
+                    incomingLast.idRegActuacion
+                  )
+                ) {
                   return obj;
                 }
 
@@ -1079,7 +1088,7 @@ export class ActuacionService {
             if ( foundRecord ) {
               fallbackData = {
                 ...incomingLast,
-                ...foundRecord
+                ...foundRecord,
               };
             }
 
@@ -1087,13 +1096,15 @@ export class ActuacionService {
             savedActuacion = await client.actuacion.upsert(
               {
                 where: {
-                  idRegActuacion: `${ incomingLast.idRegActuacion }`
+                  idRegActuacion: `${ incomingLast.idRegActuacion }`,
                 },
                 create: {
                   ...incomingLast,
-                  actuacion: sanitizeText(
+                  actuacion:
+                  sanitizeText(
                     fallbackData.actuacion as string
-                  ) || 'Sin descripción',
+                  )
+                  || 'Sin descripción',
                   anotacion: fallbackData.anotacion
                     ? sanitizeText(
                         fallbackData.anotacion as string
@@ -1108,13 +1119,16 @@ export class ActuacionService {
                   idProceso     : parentProc.idProceso,
                   isUltimaAct   : true,
                   idRegActuacion: `${ incomingLast.idRegActuacion }`,
-                  fechaActuacion: ensureDate(
+                  fechaActuacion:
+                  ensureDate(
                     incomingLast.fechaActuacion
                   ) ?? new Date(),
-                  fechaRegistro: ensureDate(
+                  fechaRegistro:
+                  ensureDate(
                     incomingLast.fechaRegistro
                   ) ?? new Date(),
-                  fechaInicial: ensureDate(
+                  fechaInicial:
+                  ensureDate(
                     incomingLast.fechaInicial
                   ) ?? undefined,
                   fechaFinal: ensureDate(
@@ -1122,19 +1136,22 @@ export class ActuacionService {
                   ) ?? undefined,
                   proceso: {
                     connect: {
-                      idProceso: parentProc.idProceso
-                    }
+                      idProceso: parentProc.idProceso,
+                    },
                   },
                 },
                 update: {
-                  cant          : incomingLast.cant,
-                  fechaActuacion: ensureDate(
+                  cant: incomingLast.cant,
+                  fechaActuacion:
+                  ensureDate(
                     incomingLast.fechaActuacion
                   ) ?? new Date(),
-                  fechaRegistro: ensureDate(
+                  fechaRegistro:
+                  ensureDate(
                     incomingLast.fechaRegistro
                   ) ?? new Date(),
-                  fechaInicial: ensureDate(
+                  fechaInicial:
+                  ensureDate(
                     incomingLast.fechaInicial
                   ) ?? undefined,
                   fechaFinal: ensureDate(
@@ -1144,12 +1161,11 @@ export class ActuacionService {
               }
             );
             console.log(
-              `✅ Fallback upsert successful for ${ incomingLast.idRegActuacion }`
+              `✅ Fallback upsert successful for ${ incomingLast.idRegActuacion }`,
             );
-
           } catch ( fallbackError: any ) {
             console.log(
-              `❌ Fallback upsert also failed: ${ fallbackError.message }`
+              `❌ Fallback upsert also failed: ${ fallbackError.message }`,
             );
 
             return;

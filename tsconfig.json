@@ -2,6 +2,7 @@
   "compilerOptions": {
     "sourceMap": false,
     "outDir": "./dist",
+    "rootDir": "./",
     "module": "esnext",
     "moduleResolution": "bundler",
     "target": "ESNext",
@@ -13,11 +14,14 @@
       "ESNext.Array",
       "ESNext.AsyncIterable",
       "ES2022.Object",
-      "esnext"
+      "esnext",
+      "ES2024.String"
     ],
     "esModuleInterop": true,
     "skipLibCheck": true
 
   },
-  "exclude": [ "node_modules" ]
+  "exclude": [
+    "node_modules",
+  ]
 }

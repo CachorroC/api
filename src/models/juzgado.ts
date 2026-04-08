@@ -10,15 +10,15 @@ import { fetchResponseProceso, intProceso } from '../types/procesos.js';
  * @returns The standardized, clean string safe for strict equivalence checks.
  */
 const normalizeText = (
-  text: string
+  text: string 
 ): string => {
   return text
     .toLowerCase()
     .normalize(
-      'NFD'
+      'NFD' 
     )
     .replace(
-      /\p{Diacritic}/gu, ''
+      /\p{Diacritic}/gu, '' 
     )
     .trim();
 };
@@ -32,40 +32,39 @@ const normalizeText = (
  * @returns The fully extrapolated and formatted court type string.
  */
 export function extrapolateTipoToCorrectType(
-  tipo: string
+  tipo: string 
 ): string {
-  let output = tipo.toUpperCase()
-    .trim();
+  let output = tipo.toUpperCase().trim();
 
   // Flag indicators based on common legal abbreviations in the Colombian system
   const hasEjecucion = /EJE|E\b|EJ\b|EJEC/im.test(
-    tipo
+    tipo 
   );
   const isPromiscuoCircuito = /PCTO/im.test(
-    tipo
+    tipo 
   );
   const isPequenasCausas = /PCCM|PCYCM|PEQUE|CAUSAS/im.test(
-    tipo
+    tipo 
   );
   const isPromiscuoMunicipal = /PM\b|PROM|P M/im.test(
-    tipo
+    tipo 
   );
   const isCivilMunicipal = /(CM\b|MUNICIPAL|C M)/im.test(
-    tipo
+    tipo 
   );
   const isCivilCircuito = /(CCTO|CIRCUITO|CTO\b|C CTO|CC\b)/im.test(
-    tipo
+    tipo 
   );
   const isAdministrativo = /ADMIN|ADMON|SECCI(Ó|O)N/im.test(
-    tipo
+    tipo 
   );
 
   // Added basic support for Familia/Laboral
   const isFamilia = /FAMILIA/im.test(
-    tipo
+    tipo 
   );
   const isLaboral = /LABORAL/im.test(
-    tipo
+    tipo 
   );
 
   // Evaluate execution courts first, as they represent a specific subclass
@@ -137,52 +136,50 @@ class JuzgadoClass implements Juzgado {
       id    : string;
       tipo  : string;
       ciudad: string;
-    }
+    } 
   ) {
     // Retain the exact ID string (2 or 3 digits) passed in
     this.id = id;
-    this.tipo = tipo.toUpperCase()
-      .trim();
-    this.ciudad = ciudad.toUpperCase()
-      .trim();
+    this.tipo = tipo.toUpperCase().trim();
+    this.ciudad = ciudad.toUpperCase().trim();
 
     // Create normalized variations so we match the Despachos DB
     // regardless of padding inconsistencies (e.g., '1', '01', or '001')
     const unpaddedId = id.replace(
-      /^0+/, ''
+      /^0+/, '' 
     ) || '0';
     const paddedId3 = unpaddedId.padStart(
-      3, '0'
+      3, '0' 
     );
     const paddedId2 = unpaddedId.padStart(
-      2, '0'
+      2, '0' 
     );
 
     const possibleNames = [
       normalizeText(
-        `JUZGADO ${ this.id } ${ this.tipo } DE ${ this.ciudad }`
+        `JUZGADO ${ this.id } ${ this.tipo } DE ${ this.ciudad }` 
       ),
       normalizeText(
-        `JUZGADO ${ paddedId3 } ${ this.tipo } DE ${ this.ciudad }`
+        `JUZGADO ${ paddedId3 } ${ this.tipo } DE ${ this.ciudad }` 
       ),
       normalizeText(
-        `JUZGADO ${ paddedId2 } ${ this.tipo } DE ${ this.ciudad }`
+        `JUZGADO ${ paddedId2 } ${ this.tipo } DE ${ this.ciudad }` 
       ),
     ];
 
     // Attempt to locate a matching canonical entry in the database
     const matchedDespacho = Despachos.find(
       (
-        despacho
+        despacho 
       ) => {
         const normalizedIteratedName = normalizeText(
-          despacho.nombre
+          despacho.nombre 
         );
 
         return possibleNames.includes(
-          normalizedIteratedName
+          normalizedIteratedName 
         );
-      }
+      } 
     );
 
     if ( matchedDespacho ) {
@@ -214,7 +211,7 @@ class JuzgadoClass implements Juzgado {
    * @returns An object containing the safely extracted `id`, `tipo`, and `ciudad`.
    */
   private static extractPartsFromLongName(
-    rawName: string
+    rawName: string 
   ) {
     let id = '';
     let tipo = '';
@@ -222,7 +219,7 @@ class JuzgadoClass implements Juzgado {
 
     // 1. Isolate the ID digits from the string
     const idMatch = rawName.match(
-      /(\d+)/
+      /(\d+)/ 
     );
 
     if ( idMatch ) {
@@ -234,13 +231,13 @@ class JuzgadoClass implements Juzgado {
     // 2. Strip noise terms (JUZGADO, DESPACHO, asterisks, and the ID) to isolate Tipo and Ciudad
     const cleanedName = rawName
       .replace(
-        /JUZGADO|DESPACHO/gi, ''
+        /JUZGADO|DESPACHO/gi, '' 
       )
       .replace(
-        id, ''
+        id, '' 
       )
       .replace(
-        /\*/g, ''
+        /\*/g, '' 
       )
       .trim();
 
@@ -295,36 +292,34 @@ class JuzgadoClass implements Juzgado {
     ];
 
     const normalizedName = normalizeText(
-      cleanedName
-    )
-      .toUpperCase();
+      cleanedName 
+    ).toUpperCase();
 
     // Check if the string ends with any of our known compound cities
     const foundCity = compoundCities.find(
       (
-        c
+        c 
       ) => {
         return normalizedName.endsWith(
-          c
+          c 
         );
-      }
+      } 
     );
 
     if ( foundCity ) {
       // If a known compound city is at the end, slice it off securely
       const matchIndex = normalizedName.lastIndexOf(
-        foundCity
+        foundCity 
       );
       ciudad = cleanedName.slice(
-        matchIndex
-      )
-        .trim();
+        matchIndex 
+      ).trim();
       tipo = cleanedName
         .slice(
-          0, matchIndex
+          0, matchIndex 
         )
         .replace(
-          /\s+(DE|-)\s*$/i, ''
+          /\s+(DE|-)\s*$/i, '' 
         )
         .trim();
     } else {
@@ -336,9 +331,8 @@ class JuzgadoClass implements Juzgado {
       if ( lastSeparatorMatch ) {
         ciudad = lastSeparatorMatch[ 3 ].trim();
         tipo = cleanedName.substring(
-          0, lastSeparatorMatch.index
-        )
-          .trim();
+          0, lastSeparatorMatch.index 
+        ).trim();
       } else {
         // Fallback for completely unbroken strings without "DE" or "-"
         tipo = cleanedName;
@@ -347,9 +341,8 @@ class JuzgadoClass implements Juzgado {
 
     // Final scrub of any trailing/leading hyphens left over on the tipo
     tipo = tipo.replace(
-      /^-\s*/, ''
-    )
-      .trim();
+      /^-\s*/, '' 
+    ).trim();
 
     return {
       id,
@@ -375,14 +368,14 @@ class JuzgadoClass implements Juzgado {
     }: {
       ciudad    : string;
       juzgadoRaw: string;
-    }
+    } 
   ) {
     let rawId = '';
     let rawTipo = juzgadoRaw;
 
     // Grab the first block of digits natively, skipping prefixes like slashes
     const match = juzgadoRaw.match(
-      /(\d+)/
+      /(\d+)/ 
     );
 
     if ( match ) {
@@ -392,16 +385,16 @@ class JuzgadoClass implements Juzgado {
       // Eliminate the digits from the string to evaluate the raw code properly
       rawTipo = juzgadoRaw
         .replace(
-          /.*?(\d+)\s*/, ''
+          /.*?(\d+)\s*/, '' 
         )
         .replace(
-          /^[/\\-\s]+/, ''
+          /^[/\\-\s]+/, '' 
         )
         .trim();
     }
 
     const newTipo = extrapolateTipoToCorrectType(
-      rawTipo
+      rawTipo 
     );
 
     return new JuzgadoClass(
@@ -409,7 +402,7 @@ class JuzgadoClass implements Juzgado {
         id  : rawId,
         tipo: newTipo,
         ciudad,
-      }
+      } 
     );
   }
 
@@ -421,10 +414,10 @@ class JuzgadoClass implements Juzgado {
    * @returns A new instance of `JuzgadoClass`.
    */
   static fromLongName(
-    despacho: string
+    despacho: string 
   ) {
     const parts = this.extractPartsFromLongName(
-      despacho
+      despacho 
     );
 
     if ( !parts.id && !parts.ciudad ) {
@@ -434,7 +427,7 @@ class JuzgadoClass implements Juzgado {
           id    : '',
           tipo  : despacho,
           ciudad: '',
-        }
+        } 
       );
     }
 
@@ -443,7 +436,7 @@ class JuzgadoClass implements Juzgado {
         id    : parts.id,
         tipo  : parts.tipo,
         ciudad: parts.ciudad,
-      }
+      } 
     );
   }
 
@@ -455,10 +448,10 @@ class JuzgadoClass implements Juzgado {
    * @returns A new instance of `JuzgadoClass`.
    */
   static fromProceso(
-    proceso: fetchResponseProceso | intProceso
+    proceso: fetchResponseProceso | intProceso 
   ) {
     const parts = this.extractPartsFromLongName(
-      proceso.despacho
+      proceso.despacho 
     );
 
     // If no ID can be found, default to putting the raw string into 'tipo'
@@ -468,7 +461,7 @@ class JuzgadoClass implements Juzgado {
           id    : '',
           tipo  : proceso.despacho,
           ciudad: proceso.departamento,
-        }
+        } 
       );
     }
 
@@ -477,7 +470,7 @@ class JuzgadoClass implements Juzgado {
         id    : parts.id,
         tipo  : parts.tipo,
         ciudad: parts.ciudad || proceso.departamento,
-      }
+      } 
     );
   }
 }

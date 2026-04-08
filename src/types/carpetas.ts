@@ -1,10 +1,10 @@
 /**
  * @module types/carpetas
  * @description Case Folder (Carpeta) Type Definitions and Interfaces
- * 
+ *
  * Defines the complete type hierarchy for a judicial case folder (expediente).
  * Represents the fully structured, validated case object after model transformation.
- * 
+ *
  * DATA STRUCTURE HIERARCHY:
  * IntCarpeta (interface)
  *   ├─ demanda: IntDemanda (claim information, amounts, obligations)
@@ -15,12 +15,12 @@
  *   ├─ notas: NotasBuilder[] (case notes and annotations)
  *   ├─ ultimaActuacion: DatabaseActuacionType (latest legal action)
  *   └─ Various metadata (numero, llaveProceso, category, dates, status)
- * 
+ *
  * PRIMARY TYPE: IntCarpeta
  * Represents a fully-loaded case folder with all relationships populated.
  * Maps to Prisma carpeta table in database.
  * Used throughout the application after ClassCarpeta instantiation.
- * 
+ *
  * CATEGORY ENUM:
  * Classifies case type based on workflow/status:
  * - 'Terminados': Closed/completed cases
@@ -29,7 +29,7 @@
  * - 'LiosJuridicos': Complex legal situations
  * - 'SinTercero': Cases without third-party involvement
  * - 'Bancolombia': Cases from Bancolombia portfolio
- * 
+ *
  * HELPER TYPES:
  * - Codeudor: Secondary defendant structure (ID, name, contact, address)
  * - Obligacion: Financial obligations (A, B amounts)
@@ -39,9 +39,9 @@
  * - Juzgado: Court information structure
  * - IntDemanda: Claim/demand information
  * - IntDeudor: Defendant information
- * - intNotificacion: Notification delivery proof  
+ * - intNotificacion: Notification delivery proof
  * - intNotifier: Diligencia records (291, 292, etc.)
- * 
+ *
  * RELATIONSHIPS:
  * carpeta → demanda (1-to-1): Contains claim amounts and obligations
  * carpeta → deudor (1-to-1): Main defendant information
@@ -50,7 +50,7 @@
  * carpeta → procesos (1-to-many): Multiple legal processes
  * carpeta → notas (1-to-many): Multiple case notes
  * carpeta → ultimaActuacion (1-to-0/1): Latest action record
- * 
+ *
  * TO PARSE THIS DATA:
  * ```
  * const carpeta: IntCarpeta = {

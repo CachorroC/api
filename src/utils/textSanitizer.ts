@@ -15,7 +15,7 @@
  * @returns {string} The sanitized, normalized, and trimmed string. Returns an empty string if input is falsy.
  */
 export function sanitizeText(
-  str: string | null | undefined
+  str: string | null | undefined 
 ): string {
   // 1. Handle null/undefined
   if ( str === null || str === undefined ) {
@@ -35,7 +35,7 @@ export function sanitizeText(
     // Fallback regex for Node versions < 20
     text = text.replace(
       /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g,
-      '\uFFFD'
+      '\uFFFD',
     );
   }
 
