@@ -1,7 +1,8 @@
 import { rawCarpetas } from '../assets/carpetas';
+import * as fs from 'node:fs';
 
 
-function getRawNotes() {
+export function getRawNotes() {
   const RawCarpetas = rawCarpetas();
   const notes = [];
 
@@ -12,13 +13,10 @@ function getRawNotes() {
 
     const note = {
       numero: NUMERO,
-      note  : OBSERVACIONES,
-      extra : EXTRA,
-      extra2: EXTRA2,
-      total : [
-        ...EXTRA || [],
-        ...EXTRA2 || [],
-        ...OBSERVACIONES || []
+      notes : [
+        EXTRA || '',
+        EXTRA2 || '',
+        OBSERVACIONES || ''
       ]
     };
 
@@ -27,5 +25,13 @@ function getRawNotes() {
     );
   }
 
+  fs.writeFileSync(
+    'notes.json', JSON.stringify(
+      notes, null, 2
+    )
+  );
+
   return notes;
 }
+
+getRawNotes();
