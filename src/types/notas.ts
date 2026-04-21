@@ -44,3 +44,18 @@ export interface IntNota {
   text     : string;
   content  : string[];
 }
+
+export type CreateNotaInput = Omit<IntNota, 'createdAt'> & {
+  createdAt?: Date
+};
+
+export interface DateContext {
+  date: Date;
+  text: string;
+}
+
+export interface NoteRecord {
+  note         : string;
+  date?        : Date;
+  relevantDates: DateContext[];
+}
