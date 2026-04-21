@@ -33,5 +33,3 @@ export function getRawNotes() {
 
   return notes;
 }
-
-getRawNotes();
