@@ -44,6 +44,7 @@ import { ClassCarpeta } from './models/carpeta.js';
 import { client } from './services/connection/prisma.js';
 import { TelegramService } from './services/telegramService.js';
 import { sleep } from './utils/awaiter.js';
+import { areNamesCompletelyDifferent } from './utils/string-similarity.js';
 
 // Add this helper function at the bottom or in utils
 /**
@@ -191,7 +192,9 @@ export async function tryAsyncClassCarpetas() {
 
               if (
                 hasExistingName
-              && existingCarpeta.nombre !== carpeta.nombre
+              && areNamesCompletelyDifferent(
+                existingCarpeta.nombre, carpeta.nombre 
+              )
               ) {
                 const warningMsg
                   = `⚠️ NOMBRE MISMATCH en carpeta #${ carpeta.numero }:\n`
