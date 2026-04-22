@@ -248,16 +248,19 @@ export async function tryAsyncClassCarpetas() {
                 = existingCarpeta.fechaUltimaRevision?.getTime()
               === carpeta.fechaUltimaRevision?.getTime();
 
+              const isSameName = existingCarpeta.nombre === carpeta.nombre;
+
               // 3. Skip ONLY if neither has changed
               // Also enforce that we don't skip if the DB was missing the name but we have it now
               if (
                 hasExistingName
+              && isSameName
               && isSameLlave
               && isSameCategory
               && isSamefechaUltimaRevision
               ) {
                 console.log(
-                  `⏭️ Skipping ${ carpeta.numero }: llaveProceso and category are unchanged.`
+                  `⏭️ Skipping ${ carpeta.numero }: name, llaveProceso, and category are unchanged.`
                 );
 
                 return;
