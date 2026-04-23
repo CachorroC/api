@@ -2,18 +2,20 @@ import { sanitizeText } from './textSanitizer.js';
 
 /**
  * Calculates the Levenshtein distance between two strings.
- * 
+ *
  * @param {string} a - First string.
  * @param {string} b - Second string.
  * @returns {number} The distance between the strings.
  */
 function levenshteinDistance(
-  a: string, b: string 
+  a: string, b: string
 ): number {
   const matrix: number[][] = [];
 
   for ( let i = 0; i <= b.length; i++ ) {
-    matrix[ i ] = [ i ];
+    matrix[ i ] = [
+      i 
+    ];
   }
 
   for ( let j = 0; j <= a.length; j++ ) {
@@ -23,16 +25,16 @@ function levenshteinDistance(
   for ( let i = 1; i <= b.length; i++ ) {
     for ( let j = 1; j <= a.length; j++ ) {
       if ( b.charAt(
-        i - 1 
+        i - 1
       ) === a.charAt(
-        j - 1 
+        j - 1
       ) ) {
         matrix[ i ][ j ] = matrix[ i - 1 ][ j - 1 ];
       } else {
         matrix[ i ][ j ] = Math.min(
           matrix[ i - 1 ][ j - 1 ] + 1,
           Math.min(
-            matrix[ i ][ j - 1 ] + 1, matrix[ i - 1 ][ j ] + 1 
+            matrix[ i ][ j - 1 ] + 1, matrix[ i - 1 ][ j ] + 1
           )
         );
       }
@@ -45,19 +47,19 @@ function levenshteinDistance(
 /**
  * Calculates the similarity between two strings using a token-based approach and Levenshtein distance.
  * Returns a value between 0 and 1, where 1 is identical.
- * 
+ *
  * @param {string} str1 - First string.
  * @param {string} str2 - Second string.
  * @returns {number} Similarity score (0 to 1).
  */
 export function getStringSimilarity(
-  str1: string, str2: string 
+  str1: string, str2: string
 ): number {
   const s1 = sanitizeText(
-    str1 
+    str1
   ).toUpperCase();
   const s2 = sanitizeText(
-    str2 
+    str2
   ).toUpperCase();
 
   if ( s1 === s2 ) {
@@ -71,56 +73,62 @@ export function getStringSimilarity(
   // 1. Jaccard similarity (token based) - Good for word reordering/missing words
   const tokens1 = new Set(
     s1.split(
-      /\s+/ 
-    ) 
+      /\s+/
+    )
   );
   const tokens2 = new Set(
     s2.split(
-      /\s+/ 
-    ) 
+      /\s+/
+    )
   );
 
   const intersection = new Set(
-    [ ...tokens1 ].filter(
+    [
+      ...tokens1 
+    ].filter(
       (
-        x 
+        x
       ) => {
         return tokens2.has(
-          x 
+          x
         );
-      } 
+      }
     )
   );
   const union = new Set(
-    [ ...tokens1, ...tokens2 ] 
+    [
+      ...tokens1,
+      ...tokens2 
+    ]
   );
 
   const jaccard = intersection.size / union.size;
 
   // 2. Levenshtein similarity (character based) - Good for typos
   const distance = levenshteinDistance(
-    s1, s2 
+    s1, s2
   );
   const maxLength = Math.max(
-    s1.length, s2.length 
+    s1.length, s2.length
   );
   const levSimilarity = ( maxLength - distance ) / maxLength;
 
   // Return the maximum of both to be lenient with differences
   const similarity = Math.max(
-    jaccard, levSimilarity 
+    jaccard, levSimilarity
   );
   console.log(
     `"${ str1 }" is ${ ( similarity * 100 ).toFixed(
-      2 
-    ) }% similar to "${ str2 }"` 
+      2
+    ) }% similar to "${ str2 }"`
   );
+
   return similarity;
 }
 
 /**
  * Determines if two names are completely different based on a similarity threshold.
- * 
+ *
  * @param {string | null | undefined} name1 - First name.
  * @param {string | null | undefined} name2 - Second name.
  * @returns {boolean} True if names are completely different, false if they are similar enough.
@@ -140,7 +148,7 @@ export function areNamesCompletelyDifferent(
   }
 
   const similarity = getStringSimilarity(
-    name1, name2 
+    name1, name2
   );
 
   // Threshold of 0.7 allows for missing words in long names or minor typos.

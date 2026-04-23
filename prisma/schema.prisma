@@ -163,14 +163,24 @@ model Notifier {
 
 model Nota {
   carpetaNumero Int?
-  createdAt     DateTime  @default(now())
-  id            String    @id
+  createdAt     DateTime        @default(now())
+  id            String          @id
   pathname      String?
-  updatedAt     DateTime  @updatedAt
+  updatedAt     DateTime        @updatedAt
   dueDate       DateTime?
   text          String
   content       String[]
-  carpeta       Carpeta?  @relation(fields: [carpetaNumero], references: [numero])
+  completed     Boolean         @default(false)
+  carpeta       Carpeta?        @relation(fields: [carpetaNumero], references: [numero])
+  relevantDates RelevantDates[]
+}
+
+model RelevantDates {
+  date   DateTime
+  text   String
+  id     Int      @id @default(autoincrement())
+  nota   Nota?    @relation(fields: [notaId], references: [id])
+  notaId String?
 }
 
 model Task {

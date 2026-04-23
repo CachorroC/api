@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.7.0
- * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.7.0",
-  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
 }
 
 /**
@@ -394,6 +394,7 @@ export const ModelName = {
   MedidasCautelares: 'MedidasCautelares',
   Notifier: 'Notifier',
   Nota: 'Nota',
+  RelevantDates: 'RelevantDates',
   Task: 'Task',
   Actuacion: 'Actuacion',
   Juzgado: 'Juzgado',
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "carpeta" | "factura" | "emisorDeFactura" | "deudor" | "codeudor" | "demanda" | "notificacion" | "medidasCautelares" | "notifier" | "nota" | "task" | "actuacion" | "juzgado" | "proceso" | "user"
+    modelProps: "carpeta" | "factura" | "emisorDeFactura" | "deudor" | "codeudor" | "demanda" | "notificacion" | "medidasCautelares" | "notifier" | "nota" | "relevantDates" | "task" | "actuacion" | "juzgado" | "proceso" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1158,6 +1159,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RelevantDates: {
+      payload: Prisma.$RelevantDatesPayload<ExtArgs>
+      fields: Prisma.RelevantDatesFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RelevantDatesFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RelevantDatesFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload>
+        }
+        findFirst: {
+          args: Prisma.RelevantDatesFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RelevantDatesFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload>
+        }
+        findMany: {
+          args: Prisma.RelevantDatesFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload>[]
+        }
+        create: {
+          args: Prisma.RelevantDatesCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload>
+        }
+        createMany: {
+          args: Prisma.RelevantDatesCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RelevantDatesCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload>[]
+        }
+        delete: {
+          args: Prisma.RelevantDatesDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload>
+        }
+        update: {
+          args: Prisma.RelevantDatesUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload>
+        }
+        deleteMany: {
+          args: Prisma.RelevantDatesDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RelevantDatesUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RelevantDatesUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload>[]
+        }
+        upsert: {
+          args: Prisma.RelevantDatesUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelevantDatesPayload>
+        }
+        aggregate: {
+          args: Prisma.RelevantDatesAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRelevantDates>
+        }
+        groupBy: {
+          args: Prisma.RelevantDatesGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RelevantDatesGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RelevantDatesCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RelevantDatesCountAggregateOutputType> | number
+        }
+      }
+    }
     Task: {
       payload: Prisma.$TaskPayload<ExtArgs>
       fields: Prisma.TaskFieldRefs
@@ -1730,10 +1805,21 @@ export const NotaScalarFieldEnum = {
   updatedAt: 'updatedAt',
   dueDate: 'dueDate',
   text: 'text',
-  content: 'content'
+  content: 'content',
+  completed: 'completed'
 } as const
 
 export type NotaScalarFieldEnum = (typeof NotaScalarFieldEnum)[keyof typeof NotaScalarFieldEnum]
+
+
+export const RelevantDatesScalarFieldEnum = {
+  date: 'date',
+  text: 'text',
+  id: 'id',
+  notaId: 'notaId'
+} as const
+
+export type RelevantDatesScalarFieldEnum = (typeof RelevantDatesScalarFieldEnum)[keyof typeof RelevantDatesScalarFieldEnum]
 
 
 export const TaskScalarFieldEnum = {
@@ -2058,6 +2144,21 @@ export type PrismaClientOptions = ({
    * ```
    */
   comments?: runtime.SqlCommenterPlugin[]
+  /**
+   * Optional maximum size for the query plan cache. If not provided, a default size will be used.
+   * A value of `0` can be used to disable the cache entirely. A higher cache size can improve
+   * performance for applications that execute a large number of unique queries, while a smaller
+   * cache size can reduce memory usage.
+   * 
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   adapter,
+   *   queryPlanCacheMaxSize: 100,
+   * })
+   * ```
+   */
+  queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
   carpeta?: Prisma.CarpetaOmit
@@ -2070,6 +2171,7 @@ export type GlobalOmitConfig = {
   medidasCautelares?: Prisma.MedidasCautelaresOmit
   notifier?: Prisma.NotifierOmit
   nota?: Prisma.NotaOmit
+  relevantDates?: Prisma.RelevantDatesOmit
   task?: Prisma.TaskOmit
   actuacion?: Prisma.ActuacionOmit
   juzgado?: Prisma.JuzgadoOmit

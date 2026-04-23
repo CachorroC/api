@@ -42,6 +42,7 @@ export type NotaMinAggregateOutputType = {
   updatedAt: Date | null
   dueDate: Date | null
   text: string | null
+  completed: boolean | null
 }
 
 export type NotaMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type NotaMaxAggregateOutputType = {
   updatedAt: Date | null
   dueDate: Date | null
   text: string | null
+  completed: boolean | null
 }
 
 export type NotaCountAggregateOutputType = {
@@ -63,6 +65,7 @@ export type NotaCountAggregateOutputType = {
   dueDate: number
   text: number
   content: number
+  completed: number
   _all: number
 }
 
@@ -83,6 +86,7 @@ export type NotaMinAggregateInputType = {
   updatedAt?: true
   dueDate?: true
   text?: true
+  completed?: true
 }
 
 export type NotaMaxAggregateInputType = {
@@ -93,6 +97,7 @@ export type NotaMaxAggregateInputType = {
   updatedAt?: true
   dueDate?: true
   text?: true
+  completed?: true
 }
 
 export type NotaCountAggregateInputType = {
@@ -104,6 +109,7 @@ export type NotaCountAggregateInputType = {
   dueDate?: true
   text?: true
   content?: true
+  completed?: true
   _all?: true
 }
 
@@ -202,6 +208,7 @@ export type NotaGroupByOutputType = {
   dueDate: Date | null
   text: string
   content: string[]
+  completed: boolean
   _count: NotaCountAggregateOutputType | null
   _avg: NotaAvgAggregateOutputType | null
   _sum: NotaSumAggregateOutputType | null
@@ -236,7 +243,9 @@ export type NotaWhereInput = {
   dueDate?: Prisma.DateTimeNullableFilter<"Nota"> | Date | string | null
   text?: Prisma.StringFilter<"Nota"> | string
   content?: Prisma.StringNullableListFilter<"Nota">
+  completed?: Prisma.BoolFilter<"Nota"> | boolean
   carpeta?: Prisma.XOR<Prisma.CarpetaNullableScalarRelationFilter, Prisma.CarpetaWhereInput> | null
+  relevantDates?: Prisma.RelevantDatesListRelationFilter
 }
 
 export type NotaOrderByWithRelationInput = {
@@ -248,7 +257,9 @@ export type NotaOrderByWithRelationInput = {
   dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   text?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
   carpeta?: Prisma.CarpetaOrderByWithRelationInput
+  relevantDates?: Prisma.RelevantDatesOrderByRelationAggregateInput
 }
 
 export type NotaWhereUniqueInput = Prisma.AtLeast<{
@@ -263,7 +274,9 @@ export type NotaWhereUniqueInput = Prisma.AtLeast<{
   dueDate?: Prisma.DateTimeNullableFilter<"Nota"> | Date | string | null
   text?: Prisma.StringFilter<"Nota"> | string
   content?: Prisma.StringNullableListFilter<"Nota">
+  completed?: Prisma.BoolFilter<"Nota"> | boolean
   carpeta?: Prisma.XOR<Prisma.CarpetaNullableScalarRelationFilter, Prisma.CarpetaWhereInput> | null
+  relevantDates?: Prisma.RelevantDatesListRelationFilter
 }, "id">
 
 export type NotaOrderByWithAggregationInput = {
@@ -275,6 +288,7 @@ export type NotaOrderByWithAggregationInput = {
   dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   text?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
   _count?: Prisma.NotaCountOrderByAggregateInput
   _avg?: Prisma.NotaAvgOrderByAggregateInput
   _max?: Prisma.NotaMaxOrderByAggregateInput
@@ -294,6 +308,7 @@ export type NotaScalarWhereWithAggregatesInput = {
   dueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Nota"> | Date | string | null
   text?: Prisma.StringWithAggregatesFilter<"Nota"> | string
   content?: Prisma.StringNullableListFilter<"Nota">
+  completed?: Prisma.BoolWithAggregatesFilter<"Nota"> | boolean
 }
 
 export type NotaCreateInput = {
@@ -304,7 +319,9 @@ export type NotaCreateInput = {
   dueDate?: Date | string | null
   text: string
   content?: Prisma.NotaCreatecontentInput | string[]
+  completed?: boolean
   carpeta?: Prisma.CarpetaCreateNestedOneWithoutNotasInput
+  relevantDates?: Prisma.RelevantDatesCreateNestedManyWithoutNotaInput
 }
 
 export type NotaUncheckedCreateInput = {
@@ -316,6 +333,8 @@ export type NotaUncheckedCreateInput = {
   dueDate?: Date | string | null
   text: string
   content?: Prisma.NotaCreatecontentInput | string[]
+  completed?: boolean
+  relevantDates?: Prisma.RelevantDatesUncheckedCreateNestedManyWithoutNotaInput
 }
 
 export type NotaUpdateInput = {
@@ -326,7 +345,9 @@ export type NotaUpdateInput = {
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   text?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.NotaUpdatecontentInput | string[]
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   carpeta?: Prisma.CarpetaUpdateOneWithoutNotasNestedInput
+  relevantDates?: Prisma.RelevantDatesUpdateManyWithoutNotaNestedInput
 }
 
 export type NotaUncheckedUpdateInput = {
@@ -338,6 +359,8 @@ export type NotaUncheckedUpdateInput = {
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   text?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.NotaUpdatecontentInput | string[]
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relevantDates?: Prisma.RelevantDatesUncheckedUpdateManyWithoutNotaNestedInput
 }
 
 export type NotaCreateManyInput = {
@@ -349,6 +372,7 @@ export type NotaCreateManyInput = {
   dueDate?: Date | string | null
   text: string
   content?: Prisma.NotaCreatecontentInput | string[]
+  completed?: boolean
 }
 
 export type NotaUpdateManyMutationInput = {
@@ -359,6 +383,7 @@ export type NotaUpdateManyMutationInput = {
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   text?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.NotaUpdatecontentInput | string[]
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type NotaUncheckedUpdateManyInput = {
@@ -370,6 +395,7 @@ export type NotaUncheckedUpdateManyInput = {
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   text?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.NotaUpdatecontentInput | string[]
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type NotaListRelationFilter = {
@@ -391,6 +417,7 @@ export type NotaCountOrderByAggregateInput = {
   dueDate?: Prisma.SortOrder
   text?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
 }
 
 export type NotaAvgOrderByAggregateInput = {
@@ -405,6 +432,7 @@ export type NotaMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
   text?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
 }
 
 export type NotaMinOrderByAggregateInput = {
@@ -415,10 +443,16 @@ export type NotaMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
   text?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
 }
 
 export type NotaSumOrderByAggregateInput = {
   carpetaNumero?: Prisma.SortOrder
+}
+
+export type NotaNullableScalarRelationFilter = {
+  is?: Prisma.NotaWhereInput | null
+  isNot?: Prisma.NotaWhereInput | null
 }
 
 export type NotaCreateNestedManyWithoutCarpetaInput = {
@@ -472,6 +506,22 @@ export type NotaUpdatecontentInput = {
   push?: string | string[]
 }
 
+export type NotaCreateNestedOneWithoutRelevantDatesInput = {
+  create?: Prisma.XOR<Prisma.NotaCreateWithoutRelevantDatesInput, Prisma.NotaUncheckedCreateWithoutRelevantDatesInput>
+  connectOrCreate?: Prisma.NotaCreateOrConnectWithoutRelevantDatesInput
+  connect?: Prisma.NotaWhereUniqueInput
+}
+
+export type NotaUpdateOneWithoutRelevantDatesNestedInput = {
+  create?: Prisma.XOR<Prisma.NotaCreateWithoutRelevantDatesInput, Prisma.NotaUncheckedCreateWithoutRelevantDatesInput>
+  connectOrCreate?: Prisma.NotaCreateOrConnectWithoutRelevantDatesInput
+  upsert?: Prisma.NotaUpsertWithoutRelevantDatesInput
+  disconnect?: Prisma.NotaWhereInput | boolean
+  delete?: Prisma.NotaWhereInput | boolean
+  connect?: Prisma.NotaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.NotaUpdateToOneWithWhereWithoutRelevantDatesInput, Prisma.NotaUpdateWithoutRelevantDatesInput>, Prisma.NotaUncheckedUpdateWithoutRelevantDatesInput>
+}
+
 export type NotaCreateWithoutCarpetaInput = {
   createdAt?: Date | string
   id: string
@@ -480,6 +530,8 @@ export type NotaCreateWithoutCarpetaInput = {
   dueDate?: Date | string | null
   text: string
   content?: Prisma.NotaCreatecontentInput | string[]
+  completed?: boolean
+  relevantDates?: Prisma.RelevantDatesCreateNestedManyWithoutNotaInput
 }
 
 export type NotaUncheckedCreateWithoutCarpetaInput = {
@@ -490,6 +542,8 @@ export type NotaUncheckedCreateWithoutCarpetaInput = {
   dueDate?: Date | string | null
   text: string
   content?: Prisma.NotaCreatecontentInput | string[]
+  completed?: boolean
+  relevantDates?: Prisma.RelevantDatesUncheckedCreateNestedManyWithoutNotaInput
 }
 
 export type NotaCreateOrConnectWithoutCarpetaInput = {
@@ -530,6 +584,71 @@ export type NotaScalarWhereInput = {
   dueDate?: Prisma.DateTimeNullableFilter<"Nota"> | Date | string | null
   text?: Prisma.StringFilter<"Nota"> | string
   content?: Prisma.StringNullableListFilter<"Nota">
+  completed?: Prisma.BoolFilter<"Nota"> | boolean
+}
+
+export type NotaCreateWithoutRelevantDatesInput = {
+  createdAt?: Date | string
+  id: string
+  pathname?: string | null
+  updatedAt?: Date | string
+  dueDate?: Date | string | null
+  text: string
+  content?: Prisma.NotaCreatecontentInput | string[]
+  completed?: boolean
+  carpeta?: Prisma.CarpetaCreateNestedOneWithoutNotasInput
+}
+
+export type NotaUncheckedCreateWithoutRelevantDatesInput = {
+  carpetaNumero?: number | null
+  createdAt?: Date | string
+  id: string
+  pathname?: string | null
+  updatedAt?: Date | string
+  dueDate?: Date | string | null
+  text: string
+  content?: Prisma.NotaCreatecontentInput | string[]
+  completed?: boolean
+}
+
+export type NotaCreateOrConnectWithoutRelevantDatesInput = {
+  where: Prisma.NotaWhereUniqueInput
+  create: Prisma.XOR<Prisma.NotaCreateWithoutRelevantDatesInput, Prisma.NotaUncheckedCreateWithoutRelevantDatesInput>
+}
+
+export type NotaUpsertWithoutRelevantDatesInput = {
+  update: Prisma.XOR<Prisma.NotaUpdateWithoutRelevantDatesInput, Prisma.NotaUncheckedUpdateWithoutRelevantDatesInput>
+  create: Prisma.XOR<Prisma.NotaCreateWithoutRelevantDatesInput, Prisma.NotaUncheckedCreateWithoutRelevantDatesInput>
+  where?: Prisma.NotaWhereInput
+}
+
+export type NotaUpdateToOneWithWhereWithoutRelevantDatesInput = {
+  where?: Prisma.NotaWhereInput
+  data: Prisma.XOR<Prisma.NotaUpdateWithoutRelevantDatesInput, Prisma.NotaUncheckedUpdateWithoutRelevantDatesInput>
+}
+
+export type NotaUpdateWithoutRelevantDatesInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pathname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NotaUpdatecontentInput | string[]
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  carpeta?: Prisma.CarpetaUpdateOneWithoutNotasNestedInput
+}
+
+export type NotaUncheckedUpdateWithoutRelevantDatesInput = {
+  carpetaNumero?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pathname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NotaUpdatecontentInput | string[]
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type NotaCreateManyCarpetaInput = {
@@ -540,6 +659,7 @@ export type NotaCreateManyCarpetaInput = {
   dueDate?: Date | string | null
   text: string
   content?: Prisma.NotaCreatecontentInput | string[]
+  completed?: boolean
 }
 
 export type NotaUpdateWithoutCarpetaInput = {
@@ -550,6 +670,8 @@ export type NotaUpdateWithoutCarpetaInput = {
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   text?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.NotaUpdatecontentInput | string[]
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relevantDates?: Prisma.RelevantDatesUpdateManyWithoutNotaNestedInput
 }
 
 export type NotaUncheckedUpdateWithoutCarpetaInput = {
@@ -560,6 +682,8 @@ export type NotaUncheckedUpdateWithoutCarpetaInput = {
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   text?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.NotaUpdatecontentInput | string[]
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relevantDates?: Prisma.RelevantDatesUncheckedUpdateManyWithoutNotaNestedInput
 }
 
 export type NotaUncheckedUpdateManyWithoutCarpetaInput = {
@@ -570,8 +694,38 @@ export type NotaUncheckedUpdateManyWithoutCarpetaInput = {
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   text?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.NotaUpdatecontentInput | string[]
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
+
+/**
+ * Count Type NotaCountOutputType
+ */
+
+export type NotaCountOutputType = {
+  relevantDates: number
+}
+
+export type NotaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  relevantDates?: boolean | NotaCountOutputTypeCountRelevantDatesArgs
+}
+
+/**
+ * NotaCountOutputType without action
+ */
+export type NotaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotaCountOutputType
+   */
+  select?: Prisma.NotaCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * NotaCountOutputType without action
+ */
+export type NotaCountOutputTypeCountRelevantDatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RelevantDatesWhereInput
+}
 
 
 export type NotaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -583,7 +737,10 @@ export type NotaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   dueDate?: boolean
   text?: boolean
   content?: boolean
+  completed?: boolean
   carpeta?: boolean | Prisma.Nota$carpetaArgs<ExtArgs>
+  relevantDates?: boolean | Prisma.Nota$relevantDatesArgs<ExtArgs>
+  _count?: boolean | Prisma.NotaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["nota"]>
 
 export type NotaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -595,6 +752,7 @@ export type NotaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   dueDate?: boolean
   text?: boolean
   content?: boolean
+  completed?: boolean
   carpeta?: boolean | Prisma.Nota$carpetaArgs<ExtArgs>
 }, ExtArgs["result"]["nota"]>
 
@@ -607,6 +765,7 @@ export type NotaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   dueDate?: boolean
   text?: boolean
   content?: boolean
+  completed?: boolean
   carpeta?: boolean | Prisma.Nota$carpetaArgs<ExtArgs>
 }, ExtArgs["result"]["nota"]>
 
@@ -619,11 +778,14 @@ export type NotaSelectScalar = {
   dueDate?: boolean
   text?: boolean
   content?: boolean
+  completed?: boolean
 }
 
-export type NotaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"carpetaNumero" | "createdAt" | "id" | "pathname" | "updatedAt" | "dueDate" | "text" | "content", ExtArgs["result"]["nota"]>
+export type NotaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"carpetaNumero" | "createdAt" | "id" | "pathname" | "updatedAt" | "dueDate" | "text" | "content" | "completed", ExtArgs["result"]["nota"]>
 export type NotaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carpeta?: boolean | Prisma.Nota$carpetaArgs<ExtArgs>
+  relevantDates?: boolean | Prisma.Nota$relevantDatesArgs<ExtArgs>
+  _count?: boolean | Prisma.NotaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type NotaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carpeta?: boolean | Prisma.Nota$carpetaArgs<ExtArgs>
@@ -636,6 +798,7 @@ export type $NotaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "Nota"
   objects: {
     carpeta: Prisma.$CarpetaPayload<ExtArgs> | null
+    relevantDates: Prisma.$RelevantDatesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     carpetaNumero: number | null
@@ -646,6 +809,7 @@ export type $NotaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     dueDate: Date | null
     text: string
     content: string[]
+    completed: boolean
   }, ExtArgs["result"]["nota"]>
   composites: {}
 }
@@ -1041,6 +1205,7 @@ readonly fields: NotaFieldRefs;
 export interface Prisma__NotaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   carpeta<T extends Prisma.Nota$carpetaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Nota$carpetaArgs<ExtArgs>>): Prisma.Prisma__CarpetaClient<runtime.Types.Result.GetResult<Prisma.$CarpetaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  relevantDates<T extends Prisma.Nota$relevantDatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Nota$relevantDatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RelevantDatesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1078,6 +1243,7 @@ export interface NotaFieldRefs {
   readonly dueDate: Prisma.FieldRef<"Nota", 'DateTime'>
   readonly text: Prisma.FieldRef<"Nota", 'String'>
   readonly content: Prisma.FieldRef<"Nota", 'String[]'>
+  readonly completed: Prisma.FieldRef<"Nota", 'Boolean'>
 }
     
 
@@ -1495,6 +1661,30 @@ export type Nota$carpetaArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.CarpetaInclude<ExtArgs> | null
   where?: Prisma.CarpetaWhereInput
+}
+
+/**
+ * Nota.relevantDates
+ */
+export type Nota$relevantDatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RelevantDates
+   */
+  select?: Prisma.RelevantDatesSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RelevantDates
+   */
+  omit?: Prisma.RelevantDatesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RelevantDatesInclude<ExtArgs> | null
+  where?: Prisma.RelevantDatesWhereInput
+  orderBy?: Prisma.RelevantDatesOrderByWithRelationInput | Prisma.RelevantDatesOrderByWithRelationInput[]
+  cursor?: Prisma.RelevantDatesWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RelevantDatesScalarFieldEnum | Prisma.RelevantDatesScalarFieldEnum[]
 }
 
 /**

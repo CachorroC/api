@@ -68,6 +68,11 @@ export type Notifier = Prisma.NotifierModel
  */
 export type Nota = Prisma.NotaModel
 /**
+ * Model RelevantDates
+ * 
+ */
+export type RelevantDates = Prisma.RelevantDatesModel
+/**
  * Model Task
  * 
  */

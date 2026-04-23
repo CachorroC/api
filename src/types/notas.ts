@@ -27,6 +27,8 @@
  * and track procedural history without separate date entry.
  */
 
+import { RelevantDate } from '../models/nota';
+
 /**
  * @interface IntNota
  * @description Structure of a judicial case observation/annotation.
@@ -38,11 +40,12 @@
  * @property {string[]} content - Note text split by '//' delimiter for section handling
  */
 export interface IntNota {
-  createdAt: Date;
-  pathname : string | null;
-  dueDate  : Date | null;
-  text     : string;
-  content  : string[];
+  createdAt    : Date;
+  pathname     : string | null;
+  dueDate      : Date | null;
+  text         : string;
+  content      : string[];
+  relevantDates: DateContext[];
 }
 
 export type CreateNotaInput = Omit<IntNota, 'createdAt'> & {
@@ -54,8 +57,24 @@ export interface DateContext {
   text: string;
 }
 
-export interface NoteRecord {
-  note         : string;
-  date?        : Date;
-  relevantDates: DateContext[];
+// 1. Define the input interfaces (Props)
+// Fields with Prisma @default() or @id are marked as optional (?)
+export interface RelevantDateProps {
+  id?    : number; // DB auto-increments, so it's optional on creation
+  date   : Date;
+  text   : string;
+  notaId?: string | null;
+}
+
+export interface NotaProps {
+  id?           : string;
+  createdAt?    : Date;
+  updatedAt?    : Date;
+  carpetaNumero?: number | null;
+  pathname?     : string | null;
+  dueDate?      : Date | null;
+  text          : string;
+  content       : string[];
+  completed?    : boolean;
+  relevantDates?: RelevantDateProps[] | RelevantDate[];
 }

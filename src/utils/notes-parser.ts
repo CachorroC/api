@@ -3,7 +3,7 @@
  * @description Utility to split concatenated notes and structure them with extracted dates.
  */
 
-import { NoteRecord } from '../types/notas';
+import { IntNota } from '../types/notas';
 import { extractDatesFromText } from './extract-dates';
 
 /**
@@ -13,7 +13,7 @@ import { extractDatesFromText } from './extract-dates';
  */
 export function parseNotes(
   total: string
-): NoteRecord[] {
+): IntNota[] {
   if ( !total || typeof total !== 'string' ) {
     return [];
   }

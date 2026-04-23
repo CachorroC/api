@@ -193,7 +193,7 @@ export async function tryAsyncClassCarpetas() {
               if (
                 hasExistingName
               && areNamesCompletelyDifferent(
-                existingCarpeta.nombre, carpeta.nombre 
+                existingCarpeta.nombre, carpeta.nombre
               )
               ) {
                 const warningMsg

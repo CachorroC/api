@@ -61,6 +61,7 @@ export const ModelName = {
   MedidasCautelares: 'MedidasCautelares',
   Notifier: 'Notifier',
   Nota: 'Nota',
+  RelevantDates: 'RelevantDates',
   Task: 'Task',
   Actuacion: 'Actuacion',
   Juzgado: 'Juzgado',
@@ -247,10 +248,21 @@ export const NotaScalarFieldEnum = {
   updatedAt: 'updatedAt',
   dueDate: 'dueDate',
   text: 'text',
-  content: 'content'
+  content: 'content',
+  completed: 'completed'
 } as const
 
 export type NotaScalarFieldEnum = (typeof NotaScalarFieldEnum)[keyof typeof NotaScalarFieldEnum]
+
+
+export const RelevantDatesScalarFieldEnum = {
+  date: 'date',
+  text: 'text',
+  id: 'id',
+  notaId: 'notaId'
+} as const
+
+export type RelevantDatesScalarFieldEnum = (typeof RelevantDatesScalarFieldEnum)[keyof typeof RelevantDatesScalarFieldEnum]
 
 
 export const TaskScalarFieldEnum = {

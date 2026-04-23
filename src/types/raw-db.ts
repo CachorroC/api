@@ -152,7 +152,7 @@ export type Departamento = 'CUNDINAMARCA' | 'CUNDINNAMARCA' | 'CUNDINAMARCA ' | 
 
 export type FechaNotificacionEnum = '9/04/2018' | 'POSITIVO' | 'NEGATIVO' | '10/09/2018' | '21/05/2018' | '08/10/2018' | '|';
 
-export type Category = 'Terminados' | 'Insolvencia' | 'Reintegra' | 'LiosJuridicos' | 'Bancolombia';
+export type Category = 'Terminados' | 'Insolvencia' | 'Reintegra' | 'LiosJuridicos' | 'SinTercero' | 'Bancolombia';
 
 // Converts JSON strings to/from your types
 export class RawDBConvert {
