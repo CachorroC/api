@@ -35,13 +35,16 @@ export function parseNotes(
         );
 
         return {
-          note: trimmedNote,
-          date: allDates.length > 0
+          createdAt: new Date(),
+          pathname : null,
+          dueDate  : allDates.length > 0
             ? allDates[ 0 ].date
-            : undefined,
-          relevantDates: allDates.length >= 2
-            ? allDates
-            : []
+            : null,
+          text   : trimmedNote,
+          content: [
+            trimmedNote 
+          ],
+          relevantDates: allDates
         };
       }
     );
