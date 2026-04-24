@@ -15,7 +15,7 @@
       "ESNext.AsyncIterable",
       "ES2022.Object",
       "esnext",
-      "ES2024.String"
+      "esnext.String"
     ],
     "esModuleInterop": true,
     "skipLibCheck": true

@@ -91,6 +91,15 @@ import { areNamesCompletelyDifferent } from './utils/string-similarity.js';
  *
  * @note For rate limits of 1 req/12.5s, use batchSize=1
  * @note For better throughput with looser rate limits, increase batchSize to 5-10
+ *
+ * @caveat If the handler throws an error, the current batch will fail, and the entire process
+ * will stop (the error propagates). Ensure individual error handling within the handler if
+ * you want to continue processing subsequent items.
+ *
+ * ## ADDITIONAL LOGIC FLOW
+ * This utility provides a "Chunk-Parallel" execution strategy:
+ * - **Horizontal Parallelism**: Executes all items within a single batch concurrently using `Promise.all()`.
+ * - **Vertical Sequentiality**: Waits for the current batch to fully resolve before moving to the next one.
  */
 async function processBatch<T>(
   items: T[],
@@ -122,10 +131,42 @@ async function processBatch<T>(
 // ---------------------------------------------------------
 
 /**
- * Description placeholder
- *
  * @async
- * @returns {*}
+ * @function tryAsyncClassCarpetas
+ * @description Main orchestration function for synchronizing the case folder (Carpeta) database.
+ * It transforms raw spreadsheet-like data into structured models and syncs them with the
+ * Colombian Judiciary's official API.
+ *
+ * ## LOGIC FLOW & ARCHITECTURE
+ * 1. **Data Normalization**: Reads raw case data and sorts by internal folder number (descending).
+ * 2. **Batch Orchestration**: Uses `processBatch` with a hardcoded size (default 1) to respect
+ *    strict government API rate limits (~12.5s per request).
+ * 3. **Existence Check**: Queries Prisma for an existing record using the unique `numero`.
+ * 4. **Safety Guards**:
+ *    - **Name Mismatch Guard**: Uses string similarity algorithms (`areNamesCompletelyDifferent`)
+ *      to detect if the local case name significantly differs from the DB record. If they differ,
+ *      it aborts the update and sends notifications (Telegram/Service) to prevent data corruption.
+ * 5. **Change Detection (Skip Logic)**:
+ *    - Compares `nombre`, `llaveProceso`, `category`, `fechaUltimaRevision`, and `idProcesos`.
+ *    - If all match and `idProcesos` is already populated, it skips the expensive API fetch phase.
+ * 6. **Synchronization**:
+ *    - Instantiates `ClassCarpeta` (lazy loading).
+ *    - Calls `getProcesos()` and `getActuaciones()` (Internal API calls).
+ *    - Persists the final state via `agregateToDBMethod()`.
+ *
+ * ## CAVEATS & SIDE EFFECTS
+ * - **Rate Limiting**: The process is intentionally slow (1 batch = 1 item) to avoid being blocked
+ *   by the Rama Judicial firewall.
+ * - **External API Dependency**: Failure of the Judiciary API will cause the sync for that item
+ *   to throw an error, which is caught and logged per-item.
+ * - **Database Mutability**: This function performs heavy write operations (Upserts) and deletes/re-creates
+ *   related records (processes, actions) depending on the model implementation.
+ * - **Notifications**: May trigger Telegram alerts if new legal actions are detected or if
+ *   integrity guards are tripped.
+ * - **Garbage Collection**: By processing items one by one and letting `ClassCarpeta` instances
+ *   go out of scope, memory usage remains stable even with thousands of records.
+ *
+ * @returns {Promise<void>} Resolves when the entire synchronization cycle finishes.
  */
 export async function tryAsyncClassCarpetas() {
   try {
@@ -170,6 +211,8 @@ export async function tryAsyncClassCarpetas() {
           console.log(
             `\n📂 Processing: ${ carpeta.numero } - ${ carpeta.nombre }`
           );
+          // Fetch Data
+          await carpeta.getProcesos();
 
           try {
             const existingCarpeta
@@ -250,8 +293,12 @@ export async function tryAsyncClassCarpetas() {
               );
               const isSameName = existingCarpeta.nombre === carpeta.nombre;
 
-              const hasIdProcesos
-                = existingCarpeta.idProcesos && existingCarpeta.idProcesos.length > 0;
+              const existingCarpetaIdProcesos = new Set(
+                existingCarpeta.idProcesos
+              );
+              const carpetaIdProcesos = new Set(
+                carpeta.idProcesos
+              );
 
 
               // 3. Skip ONLY if neither has changed
@@ -262,7 +309,6 @@ export async function tryAsyncClassCarpetas() {
               && isSameLlave
               && isSameCategory
                 && isSamefechaUltimaRevision
-              && hasIdProcesos
               ) {
                 console.log(
                   `⏭️ Skipping ${ carpeta.numero }: name, llaveProceso, category, and idProcesos are unchanged.`
@@ -288,8 +334,7 @@ export async function tryAsyncClassCarpetas() {
           }
 
 
-          // Fetch Data
-          await carpeta.getProcesos();
+
 
           // commenting out the method of getActuaciones so that it is handled directly by it's own instance
           await carpeta.getActuaciones();
@@ -309,7 +354,11 @@ export async function tryAsyncClassCarpetas() {
     console.log(
       '✅ Sync Complete'
     );
+
+    return;
   } finally {
     await client.$disconnect();
+
+
   }
 }
