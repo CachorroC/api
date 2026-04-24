@@ -241,14 +241,18 @@ export async function tryAsyncClassCarpetas() {
               console.log(
                 `isSameCategory: ${ isSameCategory }`
               );
-              console.log(
-                `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision }`
-              );
+
               const isSamefechaUltimaRevision
                 = existingCarpeta.fechaUltimaRevision?.getTime()
               === carpeta.fechaUltimaRevision?.getTime();
-
+              console.log(
+                `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision } isSamefechaUltimaRevision? ${ isSamefechaUltimaRevision }`
+              );
               const isSameName = existingCarpeta.nombre === carpeta.nombre;
+
+              const hasIdProcesos
+                = existingCarpeta.idProcesos && existingCarpeta.idProcesos.length > 0;
+
 
               // 3. Skip ONLY if neither has changed
               // Also enforce that we don't skip if the DB was missing the name but we have it now
@@ -257,10 +261,11 @@ export async function tryAsyncClassCarpetas() {
               && isSameName
               && isSameLlave
               && isSameCategory
-              && isSamefechaUltimaRevision
+                && isSamefechaUltimaRevision
+              && hasIdProcesos
               ) {
                 console.log(
-                  `⏭️ Skipping ${ carpeta.numero }: name, llaveProceso, and category are unchanged.`
+                  `⏭️ Skipping ${ carpeta.numero }: name, llaveProceso, category, and idProcesos are unchanged.`
                 );
 
                 return;
