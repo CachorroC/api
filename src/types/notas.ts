@@ -60,7 +60,7 @@ export interface DateContext {
 // 1. Define the input interfaces (Props)
 // Fields with Prisma @default() or @id are marked as optional (?)
 export interface RelevantDateProps {
-  id?    : number; // DB auto-increments, so it's optional on creation
+  id?    : string; // DB auto-increments, so it's optional on creation
   date   : Date;
   text   : string;
   notaId?: string | null;

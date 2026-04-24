@@ -20,31 +20,21 @@ export type RelevantDatesModel = runtime.Types.Result.DefaultSelection<Prisma.$R
 
 export type AggregateRelevantDates = {
   _count: RelevantDatesCountAggregateOutputType | null
-  _avg: RelevantDatesAvgAggregateOutputType | null
-  _sum: RelevantDatesSumAggregateOutputType | null
   _min: RelevantDatesMinAggregateOutputType | null
   _max: RelevantDatesMaxAggregateOutputType | null
-}
-
-export type RelevantDatesAvgAggregateOutputType = {
-  id: number | null
-}
-
-export type RelevantDatesSumAggregateOutputType = {
-  id: number | null
 }
 
 export type RelevantDatesMinAggregateOutputType = {
   date: Date | null
   text: string | null
-  id: number | null
+  id: string | null
   notaId: string | null
 }
 
 export type RelevantDatesMaxAggregateOutputType = {
   date: Date | null
   text: string | null
-  id: number | null
+  id: string | null
   notaId: string | null
 }
 
@@ -56,14 +46,6 @@ export type RelevantDatesCountAggregateOutputType = {
   _all: number
 }
 
-
-export type RelevantDatesAvgAggregateInputType = {
-  id?: true
-}
-
-export type RelevantDatesSumAggregateInputType = {
-  id?: true
-}
 
 export type RelevantDatesMinAggregateInputType = {
   date?: true
@@ -125,18 +107,6 @@ export type RelevantDatesAggregateArgs<ExtArgs extends runtime.Types.Extensions.
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: RelevantDatesAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: RelevantDatesSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: RelevantDatesMinAggregateInputType
@@ -167,8 +137,6 @@ export type RelevantDatesGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   _count?: RelevantDatesCountAggregateInputType | true
-  _avg?: RelevantDatesAvgAggregateInputType
-  _sum?: RelevantDatesSumAggregateInputType
   _min?: RelevantDatesMinAggregateInputType
   _max?: RelevantDatesMaxAggregateInputType
 }
@@ -176,11 +144,9 @@ export type RelevantDatesGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type RelevantDatesGroupByOutputType = {
   date: Date
   text: string
-  id: number
+  id: string
   notaId: string | null
   _count: RelevantDatesCountAggregateOutputType | null
-  _avg: RelevantDatesAvgAggregateOutputType | null
-  _sum: RelevantDatesSumAggregateOutputType | null
   _min: RelevantDatesMinAggregateOutputType | null
   _max: RelevantDatesMaxAggregateOutputType | null
 }
@@ -206,7 +172,7 @@ export type RelevantDatesWhereInput = {
   NOT?: Prisma.RelevantDatesWhereInput | Prisma.RelevantDatesWhereInput[]
   date?: Prisma.DateTimeFilter<"RelevantDates"> | Date | string
   text?: Prisma.StringFilter<"RelevantDates"> | string
-  id?: Prisma.IntFilter<"RelevantDates"> | number
+  id?: Prisma.StringFilter<"RelevantDates"> | string
   notaId?: Prisma.StringNullableFilter<"RelevantDates"> | string | null
   nota?: Prisma.XOR<Prisma.NotaNullableScalarRelationFilter, Prisma.NotaWhereInput> | null
 }
@@ -220,7 +186,7 @@ export type RelevantDatesOrderByWithRelationInput = {
 }
 
 export type RelevantDatesWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.RelevantDatesWhereInput | Prisma.RelevantDatesWhereInput[]
   OR?: Prisma.RelevantDatesWhereInput[]
   NOT?: Prisma.RelevantDatesWhereInput | Prisma.RelevantDatesWhereInput[]
@@ -236,10 +202,8 @@ export type RelevantDatesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   notaId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.RelevantDatesCountOrderByAggregateInput
-  _avg?: Prisma.RelevantDatesAvgOrderByAggregateInput
   _max?: Prisma.RelevantDatesMaxOrderByAggregateInput
   _min?: Prisma.RelevantDatesMinOrderByAggregateInput
-  _sum?: Prisma.RelevantDatesSumOrderByAggregateInput
 }
 
 export type RelevantDatesScalarWhereWithAggregatesInput = {
@@ -248,52 +212,55 @@ export type RelevantDatesScalarWhereWithAggregatesInput = {
   NOT?: Prisma.RelevantDatesScalarWhereWithAggregatesInput | Prisma.RelevantDatesScalarWhereWithAggregatesInput[]
   date?: Prisma.DateTimeWithAggregatesFilter<"RelevantDates"> | Date | string
   text?: Prisma.StringWithAggregatesFilter<"RelevantDates"> | string
-  id?: Prisma.IntWithAggregatesFilter<"RelevantDates"> | number
+  id?: Prisma.StringWithAggregatesFilter<"RelevantDates"> | string
   notaId?: Prisma.StringNullableWithAggregatesFilter<"RelevantDates"> | string | null
 }
 
 export type RelevantDatesCreateInput = {
   date: Date | string
   text: string
+  id: string
   nota?: Prisma.NotaCreateNestedOneWithoutRelevantDatesInput
 }
 
 export type RelevantDatesUncheckedCreateInput = {
   date: Date | string
   text: string
-  id?: number
+  id: string
   notaId?: string | null
 }
 
 export type RelevantDatesUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   nota?: Prisma.NotaUpdateOneWithoutRelevantDatesNestedInput
 }
 
 export type RelevantDatesUncheckedUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   notaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RelevantDatesCreateManyInput = {
   date: Date | string
   text: string
-  id?: number
+  id: string
   notaId?: string | null
 }
 
 export type RelevantDatesUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type RelevantDatesUncheckedUpdateManyInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   notaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -314,10 +281,6 @@ export type RelevantDatesCountOrderByAggregateInput = {
   notaId?: Prisma.SortOrder
 }
 
-export type RelevantDatesAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-}
-
 export type RelevantDatesMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   text?: Prisma.SortOrder
@@ -330,10 +293,6 @@ export type RelevantDatesMinOrderByAggregateInput = {
   text?: Prisma.SortOrder
   id?: Prisma.SortOrder
   notaId?: Prisma.SortOrder
-}
-
-export type RelevantDatesSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
 }
 
 export type RelevantDatesCreateNestedManyWithoutNotaInput = {
@@ -381,12 +340,13 @@ export type RelevantDatesUncheckedUpdateManyWithoutNotaNestedInput = {
 export type RelevantDatesCreateWithoutNotaInput = {
   date: Date | string
   text: string
+  id: string
 }
 
 export type RelevantDatesUncheckedCreateWithoutNotaInput = {
   date: Date | string
   text: string
-  id?: number
+  id: string
 }
 
 export type RelevantDatesCreateOrConnectWithoutNotaInput = {
@@ -421,31 +381,32 @@ export type RelevantDatesScalarWhereInput = {
   NOT?: Prisma.RelevantDatesScalarWhereInput | Prisma.RelevantDatesScalarWhereInput[]
   date?: Prisma.DateTimeFilter<"RelevantDates"> | Date | string
   text?: Prisma.StringFilter<"RelevantDates"> | string
-  id?: Prisma.IntFilter<"RelevantDates"> | number
+  id?: Prisma.StringFilter<"RelevantDates"> | string
   notaId?: Prisma.StringNullableFilter<"RelevantDates"> | string | null
 }
 
 export type RelevantDatesCreateManyNotaInput = {
   date: Date | string
   text: string
-  id?: number
+  id: string
 }
 
 export type RelevantDatesUpdateWithoutNotaInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type RelevantDatesUncheckedUpdateWithoutNotaInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type RelevantDatesUncheckedUpdateManyWithoutNotaInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -500,7 +461,7 @@ export type $RelevantDatesPayload<ExtArgs extends runtime.Types.Extensions.Inter
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     date: Date
     text: string
-    id: number
+    id: string
     notaId: string | null
   }, ExtArgs["result"]["relevantDates"]>
   composites: {}
@@ -928,7 +889,7 @@ export interface Prisma__RelevantDatesClient<T, Null = never, ExtArgs extends ru
 export interface RelevantDatesFieldRefs {
   readonly date: Prisma.FieldRef<"RelevantDates", 'DateTime'>
   readonly text: Prisma.FieldRef<"RelevantDates", 'String'>
-  readonly id: Prisma.FieldRef<"RelevantDates", 'Int'>
+  readonly id: Prisma.FieldRef<"RelevantDates", 'String'>
   readonly notaId: Prisma.FieldRef<"RelevantDates", 'String'>
 }
     

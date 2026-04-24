@@ -52,6 +52,7 @@ export function rawCarpetas() {
     '/home/cachorro_cami/OneDrive/bases_de_datos/general.xlsx',
     {
       cellDates: true,
+      codepage : 65001
     },
   );
 

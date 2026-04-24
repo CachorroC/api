@@ -178,7 +178,7 @@ model Nota {
 model RelevantDates {
   date   DateTime
   text   String
-  id     Int      @id @default(autoincrement())
+  id     String   @id
   nota   Nota?    @relation(fields: [notaId], references: [id])
   notaId String?
 }

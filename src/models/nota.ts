@@ -3,18 +3,18 @@ import { extractDatesFromText } from '../utils/extract-dates.js';
 
 // 2. Define the Classes
 export class RelevantDate {
-  public readonly id?: number;
-  public date        : Date;
-  public text        : string;
-  public notaId      : string | null;
+  public readonly id: string;
+  public date       : Date;
+  public text       : string;
+  public notaId     : string | null;
 
   constructor(
-    props: RelevantDateProps
+    props: RelevantDateProps, notaId: string, index: number
   ) {
-    this.id = props.id; // Will remain undefined until saved to DB
+    this.notaId = props.notaId ?? notaId;
+    this.id = props.id ?? `${ this.notaId }-${ index }`;
     this.date = props.date;
     this.text = props.text;
-    this.notaId = props.notaId ?? null;
   }
 }
 
@@ -62,15 +62,12 @@ export class NotasBuilder implements NotaProps {
     // Map raw prop objects into instances of the RelevantDate class
     this.relevantDates = ( props.relevantDates ?? [] ).map(
       (
-        rd
+        rd, idx
       ) => {
         return rd instanceof RelevantDate
           ? rd
           : new RelevantDate(
-              {
-                ...rd,
-                notaId: this.id
-              }
+              rd, this.id, idx
             );
       }
     );

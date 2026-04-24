@@ -1039,21 +1039,87 @@ export class ClassCarpeta implements IntCarpeta {
       );
     }
 
-    // 7. Crear notas
+    // 7. Crear/Actualizar notas
     if ( this.notas && this.notas.length > 0 ) {
       try {
         console.log(
-          '📓create notes'
+          '📓 syncing notes'
         );
-        await client.nota.createMany(
-          {
-            data          : this.notas,
-            skipDuplicates: true,
-          }
+        await Promise.allSettled(
+          this.notas.map(
+            async (
+              nota
+            ) => {
+              try {
+                console.log(
+                  '📓 upserting note for carpeta ' + nota.id
+                );
+                await client.nota.upsert(
+                  {
+                    where: {
+                      id: nota.id,
+                    },
+                    update: {
+                      text         : nota.text,
+                      content      : nota.content,
+                      dueDate      : nota.dueDate,
+                      completed    : nota.completed,
+                      pathname     : nota.pathname,
+                      relevantDates: {
+                        deleteMany: {},
+                        create    : nota.relevantDates.map(
+                          (
+                            rd
+                          ) => {
+                            return {
+                              id  : rd.id,
+                              date: rd.date,
+                              text: rd.text,
+                            };
+                          }
+                        ),
+                      },
+                    },
+                    create: {
+                      id       : nota.id,
+                      text     : nota.text,
+                      content  : nota.content,
+                      dueDate  : nota.dueDate,
+                      createdAt: nota.createdAt,
+                      completed: nota.completed,
+                      pathname : nota.pathname,
+                      carpeta  : {
+                        connect: {
+                          numero: this.numero,
+                        },
+                      },
+                      relevantDates: {
+                        create: nota.relevantDates.map(
+                          (
+                            rd
+                          ) => {
+                            return {
+                              id  : rd.id,
+                              date: rd.date,
+                              text: rd.text,
+                            };
+                          }
+                        ),
+                      },
+                    },
+                  }
+                );
+              } catch ( error ) {
+                console.log(
+                  `❌ Error al sincronizar nota ${ nota.id }: ${ error }`
+                );
+              }
+            }
+          ),
         );
       } catch ( error ) {
         console.log(
-          `❌ Error al crear notas: ${ error }`
+          `❌ Error general al sincronizar notas: ${ error }`
         );
       }
     }
@@ -1280,19 +1346,100 @@ export class ClassCarpeta implements IntCarpeta {
     incomingCarpeta: ClassCarpeta
   ): Promise<number> {
     const {
-      notas
+      notas, numero
     } = incomingCarpeta;
-    const updater = await client.nota.createMany(
-      {
-        data          : notas,
-        skipDuplicates: true,
-      }
-    );
+
+    if ( !notas || notas.length === 0 ) {
+      return 0;
+    }
+
     console.log(
-      updater
+      `📓 syncing ${ notas.length } notes for carpeta ${ numero }`
     );
 
-    return updater.count;
+    const results = await Promise.allSettled(
+      notas.map(
+        async (
+          nota
+        ) => {
+          try {
+            await client.nota.upsert(
+              {
+                where: {
+                  id: nota.id,
+                },
+                update: {
+                  text         : nota.text,
+                  content      : nota.content,
+                  dueDate      : nota.dueDate,
+                  completed    : nota.completed,
+                  pathname     : nota.pathname,
+                  relevantDates: {
+                    deleteMany: {},
+                    create    : nota.relevantDates.map(
+                      (
+                        rd
+                      ) => {
+                        return {
+                          id  : rd.id,
+                          date: rd.date,
+                          text: rd.text,
+                        };
+                      }
+                    ),
+                  },
+                },
+                create: {
+                  id       : nota.id,
+                  text     : nota.text,
+                  content  : nota.content,
+                  dueDate  : nota.dueDate,
+                  createdAt: nota.createdAt,
+                  completed: nota.completed,
+                  pathname : nota.pathname,
+                  carpeta  : {
+                    connect: {
+                      numero: numero,
+                    },
+                  },
+                  relevantDates: {
+                    create: nota.relevantDates.map(
+                      (
+                        rd
+                      ) => {
+                        return {
+                          id  : rd.id,
+                          date: rd.date,
+                          text: rd.text,
+                        };
+                      }
+                    ),
+                  },
+                },
+              }
+            );
+
+            return true;
+          } catch ( error ) {
+            console.log(
+              `❌ Error al sincronizar nota ${ nota.id }: ${ error }`
+            );
+
+            throw error;
+          }
+        }
+      ),
+    );
+
+    const successCount = results.filter(
+      (
+        r
+      ) => {
+        return r.status === 'fulfilled';
+      }
+    ).length;
+
+    return successCount;
   }
 
   /**
