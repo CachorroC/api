@@ -4739,181 +4739,181 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BELLO',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BELLO',
     url         : '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-bello',
   },
   {
     agrupacion  : 'CIVIL',
     especialidad: 'CIVIL',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BUCARAMANGA',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BUCARAMANGA',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-bucaramanga',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BUENAVENTURA',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BUENAVENTURA',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-buenaventura',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'CIVIL',
     especialidad: 'CIVIL',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-cartagena',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CÚCUTA',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CÚCUTA',
     url         : '/web/juzgado-1-civil-municipal-de-pequenas-causas-y-competencia-multiple',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE ENVIGADO',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE ENVIGADO',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-envigado',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE FLORIDABLANCA',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE FLORIDABLANCA',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-floridablanca',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE IBAGUÉ',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE IBAGUÉ',
     url         : '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-ibague',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE ITAGÜÍ',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE ITAGÜÍ',
     url         : '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-itagui',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-medellin',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MONTERÍA',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MONTERÍA',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-monteria',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE NEIVA',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE NEIVA',
     url         : '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-neiva',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE PALMIRA',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE PALMIRA',
     url         : '/web/juzgado-01-pequenas-causas-y-competencia-multiple-de-palmira',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE PASTO',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE PASTO',
     url         : '/web/juzgado-01-de-pequenas-causas-y-competencia-multiple-de-pasto',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE PEREIRA',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE PEREIRA',
     url         : '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-pereira',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE POPAYÁN',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE POPAYÁN',
     url         : '/web/juzgado-01-de-pequenas-causas-y-competencias-multiples-de-popayan',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE RIOHACHA',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE RIOHACHA',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-riohacha',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-santa-marta',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SINCELEJO',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SINCELEJO',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-sincelejo',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SOACHA',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SOACHA',
     url         : '/web/juzgado-01-municipal-de-pequenas-causas-y-competencia-multiple-de-soacha',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SOLEDAD',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SOLEDAD',
     url         : '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-soledad',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE TULUÁ',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE TULUÁ',
     url         : '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-tulua',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE TUNJA',
+    nombre      : 'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE TUNJA',
     url         : '/web/juzgado-civil-municipal-de-pequenas-causas-y-competencia-multiple-de-tunja',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
     url: '/web/juzgado-01-civil-municipal-de-pequenas-causas-y-competencia-multiple-de-valledupar',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 001 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE VILLAVICENCIO',
+      'JUZGADO 001 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE VILLAVICENCIO',
     url: '/web/juzgado-001-de-pequenas-causas-y-competencia-multiple-de-villavicencio',
   },
   {
@@ -15575,149 +15575,149 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BELLO',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BELLO',
     url         : '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-bello',
   },
   {
     agrupacion  : 'CIVIL',
     especialidad: 'CIVIL',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BUCARAMANGA',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BUCARAMANGA',
     url: '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-bucaramanga',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BUENAVENTURA',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BUENAVENTURA',
     url: '/web/juzgado-02-de-pequenas-causas-y-competencia-multiple-de-buenaventura',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
     url: '/web/juzgado-02-de-pequenas-causas-y-competencia-multiple-de-cartagena',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CÚCUTA',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CÚCUTA',
     url         : '/web/juzgado-2-de-pequenas-causas-y-competencia-multiple-de-cucuta',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE IBAGUÉ',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE IBAGUÉ',
     url         : '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-ibague',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-medellin',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MONTERÍA',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MONTERÍA',
     url: '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-monteria',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE NEIVA',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE NEIVA',
     url         : '/web/juzgado-02-de-pequenas-causas-y-competencia-multiple-de-neiva',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE PALMIRA',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE PALMIRA',
     url         : '/web/juzgado-02-de-pequenas-causas-y-competencia-multiple-de-palmira',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE PASTO',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE PASTO',
     url         : '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-pasto',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE PEREIRA',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE PEREIRA',
     url         : '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-pereira',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
     url: '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-santa-marta',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SOACHA',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SOACHA',
     url         : '/web/juzgado-02-municipal-de-pequenas-causas-y-competencia-multiple-de-soacha',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SOLEDAD',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SOLEDAD',
     url         : '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-soledad',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE TUNJA',
+    nombre      : 'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE TUNJA',
     url         : '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-tunja',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
     url: '/web/juzgado-civil-municipal-de-pequenas-causas-y-competencia-multiple-de-valledupar',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE VILLAVICENCIO',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE VILLAVICENCIO',
     url: '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-villavicencio',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE TRANSITORIO DE SINCELEJO',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE TRANSITORIO DE SINCELEJO',
     url: '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-transitorio-de-sincelejo',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIAS MULTIPLE DE POPAYAN',
+      'JUZGADO 002 DE PEQUEÑAS CAUSAS Y COMPETENCIAS MULTIPLE DE POPAYAN',
     url: '/web/juzgado-002-de-pequenas-causas-y-competencia-multiple-de-popayan',
   },
   {
@@ -18619,7 +18619,7 @@ export const Despachos = [
     agrupacion  : 'CIVIL',
     especialidad: 'CIVIL',
     nombre:
-      'JUZGADO 003 CIVIL MUNICIPAL DE FLORIDABLANCA, ANTES 002 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE',
+      'JUZGADO 003 CIVIL MUNICIPAL DE FLORIDABLANCA, ANTES 002 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE',
     url: '/web/juzgado-03-civil-municipal-de-floridablanca',
   },
   {
@@ -19023,124 +19023,124 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BUCARAMANGA',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BUCARAMANGA',
     url: '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-bucaramanga',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
     url: '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-cartagena',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CÚCUTA',
+    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CÚCUTA',
     url         : '/web/juzgado-3-de-pequenas-causas-y-competencia-multiple-de-cucuta',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE FLORIDABLANCA',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE FLORIDABLANCA',
     url: '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-floridablanca',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE IBAGUÉ',
+    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE IBAGUÉ',
     url         : '/web/juzgado-03-de-pequenas-causas-y-competencia-multiple-de-ibague',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE LA LOCALIDAD DE SUBA - BOGOTÁ',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE LA LOCALIDAD DE SUBA - BOGOTÁ',
     url: '/web/juzgado-03-de-pequenas-causas-y-competencia-multiple-localidad-suba-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-medellin',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MONTERÍA',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MONTERÍA',
     url: '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-monteria',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE NEIVA',
+    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE NEIVA',
     url         : '/web/juzgado-03-de-pequenas-causas-y-competencia-multiple-de-neiva',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE PASTO',
+    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE PASTO',
     url         : '/web/juzgado-3-de-pequenas-causas-y-competencia-multiple-de-pasto',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE POPAYÁN',
+    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE POPAYÁN',
     url         : '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-popayan',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
     url: '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-santa-marta',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SOACHA',
+    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SOACHA',
     url         : '/web/juzgado-03-municipal-de-pequenas-causas-y-competencia-multiple-de-soacha',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SOLEDAD',
+    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SOLEDAD',
     url         : '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-soledad',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE TUNJA',
+    nombre      : 'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE TUNJA',
     url         : '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-de-tunja',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
     url: '/web/juzgado-03-civil-municipal-de-pequenas-causas-y-competencia-multiple-de-valledupar',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE TRANSITORIO DE SINCELEJO',
+      'JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE TRANSITORIO DE SINCELEJO',
     url: '/web/juzgado-003-de-pequenas-causas-y-competencia-multiple-transitorio-de-sincelejo',
   },
   {
@@ -20532,7 +20532,7 @@ export const Despachos = [
     agrupacion  : 'CIVIL',
     especialidad: 'CIVIL',
     nombre:
-      'JUZGADO 004 CIVIL MUNICIPAL DE MONTERÍA ANTES JUZGADO 003 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MULTIPLE DE MONTERÍA',
+      'JUZGADO 004 CIVIL MUNICIPAL DE MONTERÍA ANTES JUZGADO 003 DE PEQUEÑAS CAUSAS Y COMPETENCIA MULTIPLE DE MONTERÍA',
     url: '/web/juzgado-004-civil-municipal-de-monteria',
   },
   {
@@ -20774,85 +20774,85 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
+      'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
     url: '/web/juzgado-04-municipal-de-pequenas-causas-y-competencia-multiple-de-cartagena',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE FLORIDABLANCA',
+      'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE FLORIDABLANCA',
     url: '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-de-floridablanca',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-de-medellin',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE NEIVA',
+    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE NEIVA',
     url         : '/web/juzgado-04-civil-municipal-de-pequenas-causas-de-neiva',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
+      'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
     url: '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-de-santa-marta',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SOACHA',
+    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SOACHA',
     url         : '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-de-soacha',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SOLEDAD',
+    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SOLEDAD',
     url         : '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-de-soledad',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE TUNJA',
+    nombre      : 'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE TUNJA',
     url         : '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-de-tunja',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
+      'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
     url: '/web/juzgado-04-civil-municipal-de-pequenas-causas-y-competencia-multiple-de-valledupar',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 004 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE TRANSITORIO DE SINCELEJO',
+      'JUZGADO 004 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE TRANSITORIO DE SINCELEJO',
     url: '/web/juzgado-004-de-pequenas-causas-y-competencia-multiple-transitorio-de-sincelejo',
   },
   {
@@ -21291,14 +21291,14 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 004 TRANSITORIO DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE PASTO',
+      'JUZGADO 004 TRANSITORIO DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE PASTO',
     url: '/web/juzgado-004-transitorio-de-pequenas-causas-y-competencia-multiple-de-pasto',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 004 TRANSITORIO DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE POPAYÁN',
+      'JUZGADO 004 TRANSITORIO DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE POPAYÁN',
     url: '/web/juzgado-004-transitorio-de-pequenas-causas-y-competencia-multiple-de-popayan',
   },
   {
@@ -21848,79 +21848,79 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-005-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-005-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-005-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
+      'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
     url: '/web/juzgado-05-de-pequenas-causas-y-competencia-multiple-de-cartagena',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-005-de-pequenas-causas-y-competencia-multiple-de-medellin',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MONTERÍA',
+      'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MONTERÍA',
     url: '/web/juzgado-005-de-pequenas-causas-y-competencia-multiple-de-monteria',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE NEIVA',
+    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE NEIVA',
     url         : '/web/juzgado-005-de-pequenas-causas-y-competencia-multiple-de-neiva',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE PASTO',
+    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE PASTO',
     url         : '/web/juzgado-005-de-pequenas-causas-y-competencia-multiple-de-pasto',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
+      'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
     url: '/web/juzgado-005-de-pequenas-causas-y-competencia-multiple-de-santa-marta',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SOACHA',
+    nombre      : 'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SOACHA',
     url         : '/web/juzgado-005-de-pequenas-causas-y-competencia-multiple-de-soacha',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
+      'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
     url: '/web/juzgado-05-civil-municipal-de-pequenas-causas-y-competencia-multiple-de-valledupar-transitorio',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 005 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE, ANTES 006 CIVIL MUNICIPAL DE FLORIDABLANCA',
+      'JUZGADO 005 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE, ANTES 006 CIVIL MUNICIPAL DE FLORIDABLANCA',
     url: '/web/juzgado-06-civil-municipal-de-floridablanca',
   },
   {
@@ -22683,53 +22683,53 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 006 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 006 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-006-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 006 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 006 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-06-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 006 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 006 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-006-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 006 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
+      'JUZGADO 006 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CARTAGENA',
     url: '/web/juzgado-006-de-pequenas-causas-y-competencia-multiple-de-cartagena',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 006 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 006 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-006-de-pequenas-causas-y-competencia-multiple-de-medellin',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 006 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE NEIVA',
+    nombre      : 'JUZGADO 006 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE NEIVA',
     url         : '/web/juzgado-06-civil-municipal-de-pequenas-causas-de-neiva',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 006 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
+      'JUZGADO 006 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
     url: '/web/juzgado-006-de-pequenas-causas-y-competencia-multiple-de-valledupar',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 006 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE, ANTES 007 CIVIL MUNICIPAL DE FLORIDABLANCA',
+      'JUZGADO 006 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE, ANTES 007 CIVIL MUNICIPAL DE FLORIDABLANCA',
     url: '/web/juzgado-006-de-pequenas-causas-y-competencia-multiple-antes-007-civil-municipal-de-floridablanca',
   },
   {
@@ -23296,46 +23296,46 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 007 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 007 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-007-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 007 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 007 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-07-de-pequenas-causas-y-competencias-multiples-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 007 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 007 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-07-municipal-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 007 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 007 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-07-de-pequenas-causas-y-competencia-multiple-del-corregimiento-de-san-cristobal-de-medellin',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 007 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE NEIVA',
+    nombre      : 'JUZGADO 007 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE NEIVA',
     url         : '/web/juzgado-07-civil-municipal-de-pequenas-causas-de-neiva',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 007 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
+      'JUZGADO 007 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE SANTA MARTA',
     url: '/web/juzgado-007-civil-municipal-de-santa-marta',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 007 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
+      'JUZGADO 007 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE VALLEDUPAR',
     url: '/web/juzgado-007-de-pequenas-causas-y-competencia-multiple-de-valledupar',
   },
   {
@@ -23814,33 +23814,33 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 008 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 008 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-008-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 008 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 008 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-08-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 008 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 008 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-008-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 008 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 008 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-008-de-pequenas-causas-y-competencia-multiple-de-medellin',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 008 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE NEIVA - ANTES 005 CIVIL MUNICIPAL',
+      'JUZGADO 008 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE NEIVA - ANTES 005 CIVIL MUNICIPAL',
     url: '/web/juzgado-005-civil-municipal-de-neiva',
   },
   {
@@ -24292,26 +24292,26 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 009 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 009 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-009-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 009 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 009 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-09-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 009 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 009 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-09-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 009 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 009 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-009-de-pequenas-causas-y-competencia-multiple-de-medellin',
   },
   {
@@ -24672,26 +24672,26 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 010 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 010 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-010-de-pequenas-causas-y-competencias-multiples-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 010 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 010 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-010-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 010 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 010 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-010-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 010 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
+      'JUZGADO 010 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE MEDELLÍN',
     url: '/web/juzgado-010-de-pequenas-causas-y-competencia-multiple-de-medellin',
   },
   {
@@ -25002,19 +25002,19 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 011 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 011 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-011-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 011 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 011 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-11-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 011 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE CALI',
+    nombre      : 'JUZGADO 011 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE CALI',
     url         : '/web/juzgado-011-de-pequenas-causas-y-competencia-multiple-de-cali',
   },
   {
@@ -25274,13 +25274,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 012 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 012 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-012-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 012 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 012 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-012-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -25529,13 +25529,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 013 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 013 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-013-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 013 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 013 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-13-de-pequenas-causas-y-competencias-multiples-de-bogota',
   },
   {
@@ -25747,13 +25747,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 014 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 014 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-014-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 014 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 014 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-014-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -25959,13 +25959,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 015 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 015 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-15-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 015 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 015 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-015-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -26128,13 +26128,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 016 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 016 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-016-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 016 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 016 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-016-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -26290,13 +26290,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 017 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 017 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-017-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 017 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 017 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-017-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -26421,13 +26421,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 018 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 018 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-018-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 018 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 018 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-018-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -26559,13 +26559,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 019 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 019 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-019-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 019 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 019 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-019-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -26689,13 +26689,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 020 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 020 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-020-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 020 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 020 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-020-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -26808,13 +26808,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 021 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 021 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-21-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 021 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 021 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-21-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -26907,13 +26907,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 022 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 022 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-022-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 022 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 022 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-022-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -27014,13 +27014,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 023 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 023 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-023-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 023 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 023 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-023-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -27114,13 +27114,13 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 024 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
+      'JUZGADO 024 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BARRANQUILLA',
     url: '/web/juzgado-024-de-pequenas-causas-y-competencia-multiple-de-barranquilla',
   },
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 024 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 024 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-24-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -27193,7 +27193,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 025 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE KENNEDY',
+    nombre      : 'JUZGADO 025 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE KENNEDY',
     url         : '/web/juzgado-25-de-pequenas-causas-y-competencias-multiple-de-kennedy',
   },
   {
@@ -27280,7 +27280,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 026 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 026 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-026-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -27373,7 +27373,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 027 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 027 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-27-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -27480,7 +27480,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 028 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 028 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-28-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -27553,7 +27553,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 029 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 029 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-29-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -27622,7 +27622,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 030 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 030 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-30-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -27690,7 +27690,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 031 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 031 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-31-de-pequenas-causas-y-competencia-multiples-de-bogota',
   },
   {
@@ -27758,7 +27758,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 032 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 032 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-32-de-pequenas-causas-y-competencia-multiple-localidad-barrios-unidos-de-bogota',
   },
   {
@@ -27825,7 +27825,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 033 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 033 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-33-de-pequenas-causas-y-competencia-multiple-localidad-chapinero-de-bogota',
   },
   {
@@ -27887,7 +27887,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 034 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 034 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-034-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -27948,7 +27948,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 035 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 035 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-035-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28003,7 +28003,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 036 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 036 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-36-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28065,7 +28065,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 037 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 037 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-37-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28102,7 +28102,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 038 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 038 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-038-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28152,7 +28152,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 039 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 039 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-039-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28203,7 +28203,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 040 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 040 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-040-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28240,7 +28240,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 041 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 041 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-041-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28276,7 +28276,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 042 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 042 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-042-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28320,7 +28320,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 043 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ ',
+    nombre      : 'JUZGADO 043 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ ',
     url         : '/web/juzgado-043-de-pequenas-causas-y-competencia-multiple-de-bogota-',
   },
   {
@@ -28371,7 +28371,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 044 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 044 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-044-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28659,7 +28659,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 053 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 053 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-053-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28716,7 +28716,7 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 055 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE-ANTES 073 CIVIL MUNICIPAL DE BOGOTÁ',
+      'JUZGADO 055 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE-ANTES 073 CIVIL MUNICIPAL DE BOGOTÁ',
     url: '/web/juzgado-055-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28741,7 +28741,7 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 056 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE ANTES JUZGADO 074 CIVIL MUNICIPAL',
+      'JUZGADO 056 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE ANTES JUZGADO 074 CIVIL MUNICIPAL',
     url: '/web/juzgado-056-de-pequenas-causas-y-competencia-multiple',
   },
   {
@@ -28829,7 +28829,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 060 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 060 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-60-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28948,7 +28948,7 @@ export const Despachos = [
     agrupacion  : 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     nombre:
-      'JUZGADO 067 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE ANTES JUZGADO 085 CIVIL MUNICIPAL DE BOGOTÁ',
+      'JUZGADO 067 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE ANTES JUZGADO 085 CIVIL MUNICIPAL DE BOGOTÁ',
     url: '/web/juzgado-85-civil-municipal-de-bogota',
   },
   {
@@ -28973,7 +28973,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 068 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 068 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-68-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -28985,7 +28985,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 069 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 069 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-069-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -29004,7 +29004,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 070 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 070 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-070-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -29023,7 +29023,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 071 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 071 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-071-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -29042,7 +29042,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 072 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 072 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-072-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -29061,7 +29061,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 073 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 073 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-073-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -29074,7 +29074,7 @@ export const Despachos = [
   {
     agrupacion  : '',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 074 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 074 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-074-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {
@@ -29093,7 +29093,7 @@ export const Despachos = [
   {
     agrupacion  : 'PROMISCUO / COMPETENCIA MÚLTIPLE',
     especialidad: 'PROMISCUO / COMPETENCIA MÚLTIPLE',
-    nombre      : 'JUZGADO 075 DE PEQUEÑAS CAUSAS  Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
+    nombre      : 'JUZGADO 075 DE PEQUEÑAS CAUSAS Y COMPETENCIA MÚLTIPLE DE BOGOTÁ',
     url         : '/web/juzgado-075-de-pequenas-causas-y-competencia-multiple-de-bogota',
   },
   {

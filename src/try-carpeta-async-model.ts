@@ -197,7 +197,7 @@ export async function tryAsyncClassCarpetas() {
     // 2. Process in Batches
     // We use a batch size of 1 because your RATE_LIMIT is strict (12.5s).
     // If you lower the rate limit, increase this to 5 or 10.
-    const BATCH_SIZE = 2;
+    const BATCH_SIZE = 1;
 
     await processBatch(
       rawData, BATCH_SIZE, async (
@@ -213,7 +213,7 @@ export async function tryAsyncClassCarpetas() {
           );
           // Fetch Data
           await carpeta.getProcesos();
-
+          /*
           try {
             const existingCarpeta
               = await client.carpeta.findUnique(
@@ -224,10 +224,9 @@ export async function tryAsyncClassCarpetas() {
                 }
               );
 
-            // 1. Check if the record already exists
+
             if ( existingCarpeta ) {
-            // 1a. Guard: nombre mismatch — skip and alert
-            // Check if existing name has a value before comparing to prevent skipping when it's empty
+
               const hasExistingName = existingCarpeta.nombre !== undefined
                                     && existingCarpeta.nombre !== null
                                     && existingCarpeta.nombre !== ''
@@ -269,10 +268,10 @@ export async function tryAsyncClassCarpetas() {
                   }
                 );
 
-                return; // Skip this carpeta entirely
+                return;
               }
 
-              // 2. Evaluate changes
+
               const isSameLlave
                 = existingCarpeta.llaveProceso
               === carpeta.llaveProceso;
@@ -299,16 +298,16 @@ export async function tryAsyncClassCarpetas() {
               const carpetaIdProcesos = new Set(
                 carpeta.idProcesos
               );
-              /** true only when every ID in carpetaIdProcesos already exists in existingCarpetaIdProcesos */
+
               const isSameIdProcesos
                 = Array.from(
-                  carpetaIdProcesos 
+                  carpetaIdProcesos
                 ).every(
                   (
-                    id 
+                    id
                   ) => {
                     return existingCarpetaIdProcesos.has(
-                      id 
+                      id
                     );
                   }
                 );
@@ -317,8 +316,7 @@ export async function tryAsyncClassCarpetas() {
               );
 
 
-              // 3. Skip ONLY if neither has changed
-              // Also enforce that we don't skip if the DB was missing the name but we have it now
+
               if (
                 hasExistingName
               && isSameName
@@ -350,7 +348,7 @@ export async function tryAsyncClassCarpetas() {
             );
           }
 
-
+ */
 
 
           // commenting out the method of getActuaciones so that it is handled directly by it's own instance

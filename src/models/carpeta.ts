@@ -1,5 +1,6 @@
 import { ConsultaActuacion,
-  DatabaseActuacionType, } from '../types/actuaciones.js';
+  DatabaseActuacionType,
+  FetchResponseActuacionType, } from '../types/actuaciones.js';
 import { Category,
   Codeudor,
   IntCarpeta,
@@ -432,9 +433,16 @@ export class ClassCarpeta implements IntCarpeta {
       );
 
       if ( !request.ok ) {
+        console.log(
+          'error in getProcesos', request
+        );
         const json = await request.json();
 
         if ( request.status === 404 ) {
+          console.log(
+            '404 in getProcesos', json
+          );
+
           // Lógica de logueo 404...
           try {
             const fs = await import(
@@ -574,7 +582,7 @@ export class ClassCarpeta implements IntCarpeta {
       }
 
       for ( const rawProceso of procesos ) {
-        if ( rawProceso.esPrivado || rawProceso.idProceso === 3175205751 ) {
+        if ( rawProceso.esPrivado ) {
           continue;
         }
 
@@ -595,7 +603,9 @@ export class ClassCarpeta implements IntCarpeta {
             rawProceso
           ),
         };
-
+        console.log(
+          'proceso:', proceso
+        );
         this.procesos.push(
           proceso
         );
@@ -761,17 +771,29 @@ export class ClassCarpeta implements IntCarpeta {
               nombre       : this.nombre,
             };
 
-            for ( const newAct of newActuaciones ) {
-              try {
-                await TelegramService.sendNotification(
-                  newAct, processInfo
+
+            try {
+              const ultimaNewAct = getLatestByDate(
+                newActuaciones
+              ) as FetchResponseActuacionType;
+
+              if ( !ultimaNewAct ) {
+                throw new Error(
+                  `No se pudo encontrar la última actuación para el proceso ${ idProceso }`
                 );
-              } catch ( teleError ) {
-                console.log(
-                  `⚠️ Telegram notification failed for actuacion ${ newAct.idRegActuacion }: ${ teleError }`,
+              } else {
+                await TelegramService.sendNotification(
+                  ultimaNewAct, processInfo
                 );
               }
+
+            } catch ( teleError ) {
+              console.log(
+                `⚠️ Telegram notification failed for actuacion  ${ teleError }`,
+              );
             }
+
+
           }
         } catch ( notifyError ) {
           console.log(
@@ -1126,6 +1148,10 @@ export class ClassCarpeta implements IntCarpeta {
 
     // 8. Relacionar procesos y actuaciones
     if ( this.procesos && this.procesos.length > 0 ) {
+      console.log(
+        '📂 syncing procesos'
+      );
+
       for ( const proceso of this.procesos ) {
         try {
           const {
@@ -1140,6 +1166,9 @@ export class ClassCarpeta implements IntCarpeta {
             );
           }
 
+          console.log(
+            'syncing proceso', proceso
+          );
           // ✅ 2. Provide the relation directly without the ternary operator
           await client.proceso.upsert(
             {
@@ -1211,6 +1240,10 @@ export class ClassCarpeta implements IntCarpeta {
         );
 
         for ( const actuacion of processActuaciones ) {
+          console.log(
+            'syncing actuacion', actuacion
+          );
+
           try {
             const isUltima
               = ultimaActuacion
