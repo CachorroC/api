@@ -197,7 +197,7 @@ export async function tryAsyncClassCarpetas() {
     // 2. Process in Batches
     // We use a batch size of 1 because your RATE_LIMIT is strict (12.5s).
     // If you lower the rate limit, increase this to 5 or 10.
-    const BATCH_SIZE = 1;
+    const BATCH_SIZE = 2;
 
     await processBatch(
       rawData, BATCH_SIZE, async (
@@ -299,6 +299,22 @@ export async function tryAsyncClassCarpetas() {
               const carpetaIdProcesos = new Set(
                 carpeta.idProcesos
               );
+              /** true only when every ID in carpetaIdProcesos already exists in existingCarpetaIdProcesos */
+              const isSameIdProcesos
+                = Array.from(
+                  carpetaIdProcesos 
+                ).every(
+                  (
+                    id 
+                  ) => {
+                    return existingCarpetaIdProcesos.has(
+                      id 
+                    );
+                  }
+                );
+              console.log(
+                `isSameIdProcesos: ${ isSameIdProcesos }`
+              );
 
 
               // 3. Skip ONLY if neither has changed
@@ -308,7 +324,8 @@ export async function tryAsyncClassCarpetas() {
               && isSameName
               && isSameLlave
               && isSameCategory
-                && isSamefechaUltimaRevision
+              && isSamefechaUltimaRevision
+              && isSameIdProcesos
               ) {
                 console.log(
                   `⏭️ Skipping ${ carpeta.numero }: name, llaveProceso, category, and idProcesos are unchanged.`
