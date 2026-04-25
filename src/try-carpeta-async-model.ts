@@ -213,7 +213,7 @@ export async function tryAsyncClassCarpetas() {
           );
           // Fetch Data
           await carpeta.getProcesos();
-          /*
+
           try {
             const existingCarpeta
               = await client.carpeta.findUnique(
@@ -347,9 +347,6 @@ export async function tryAsyncClassCarpetas() {
               error
             );
           }
-
- */
-
 
           // commenting out the method of getActuaciones so that it is handled directly by it's own instance
           await carpeta.getActuaciones();
