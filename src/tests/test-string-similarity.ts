@@ -55,10 +55,16 @@ testCases.forEach(
       ) }` 
     );
     console.log(
-      `  Result: ${ result ? 'DIFFERENT' : 'SIMILAR' } (Expected: ${ expected ? 'DIFFERENT' : 'SIMILAR' })` 
+      `  Result: ${ result
+        ? 'DIFFERENT'
+        : 'SIMILAR' } (Expected: ${ expected
+        ? 'DIFFERENT'
+        : 'SIMILAR' })` 
     );
     console.log(
-      `  Status: ${ passed ? '✅ PASSED' : '❌ FAILED' }\n` 
+      `  Status: ${ passed
+        ? '✅ PASSED'
+        : '❌ FAILED' }\n` 
     );
   } 
 );

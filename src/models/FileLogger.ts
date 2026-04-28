@@ -73,10 +73,10 @@ export class FileLogger {
    * const newItemsLogger = new FileLogger('new_items.json');
    */
   constructor(
-    filename: string 
+    filename: string
   ) {
     this.filePath = path.join(
-      process.cwd(), 'logs', filename 
+      process.cwd(), 'logs', filename
     );
     this.ensureDir();
   }
@@ -97,10 +97,10 @@ export class FileLogger {
     try {
       await fs.mkdir(
         path.dirname(
-          this.filePath 
+          this.filePath
         ), {
           recursive: true,
-        } 
+        }
       );
     } catch {
       /* ignore */
@@ -165,7 +165,7 @@ export class FileLogger {
     contextId: string | number,
     subItem: any,
     error: string,
-    phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM' | 'DECODE_ITEM',
+    phase: 'FETCH' | 'DB_ITEM' | 'WEBHOOK' | 'TELEGRAM' | 'DECODE_ITEM' | 'DB_RELATION_MISSING',
   ) {
     let carpetaNumero = 0;
 
@@ -177,7 +177,7 @@ export class FileLogger {
 
     const logTime = new Date();
     const formatedLogTime = formatDateToString(
-      logTime 
+      logTime
     );
 
     const logEntry = {
@@ -195,14 +195,14 @@ export class FileLogger {
 
       try {
         const fileContent = await fs.readFile(
-          this.filePath, 'utf-8' 
+          this.filePath, 'utf-8'
         );
         currentData = JSON.parse(
-          fileContent 
+          fileContent
         );
 
         if ( !Array.isArray(
-          currentData 
+          currentData
         ) ) {
           currentData = [];
         }
@@ -212,13 +212,13 @@ export class FileLogger {
 
       const existingIndex = currentData.findIndex(
         (
-          item 
+          item
         ) => {
           const incomingId = String(
-            contextId 
+            contextId
           );
           const itemId = String(
-            item.parentId 
+            item.parentId
           );
 
           if ( incomingId !== '0' && itemId === incomingId ) {
@@ -231,36 +231,36 @@ export class FileLogger {
             carpetaNumero
           && itemCarpeta
           && String(
-            itemCarpeta 
+            itemCarpeta
           ) === String(
-            carpetaNumero 
+            carpetaNumero
           )
           ) {
             return true;
           }
 
           return false;
-        } 
+        }
       );
 
       if ( existingIndex !== -1 ) {
         currentData[ existingIndex ] = logEntry;
       } else {
         currentData.push(
-          logEntry 
+          logEntry
         );
       }
 
       await fs.writeFile(
         this.filePath,
         JSON.stringify(
-          currentData, null, 2 
+          currentData, null, 2
         ),
         'utf-8',
       );
     } catch ( e ) {
       console.log(
-        'Failed to write to log file', e 
+        'Failed to write to log file', e
       );
     }
   }
@@ -276,12 +276,12 @@ export class FileLogger {
     parentProc: ProcessRequest,
   ) {
     const filePath = path.join(
-      process.cwd(), 'logs', NEW_ITEMS_LOG_FILE 
+      process.cwd(), 'logs', NEW_ITEMS_LOG_FILE
     );
 
     const itemsToSave = newItems.map(
       (
-        item 
+        item
       ) => {
         return {
           ...item,
@@ -291,7 +291,7 @@ export class FileLogger {
             processId    : parentProc.idProceso,
           },
         };
-      } 
+      }
     );
 
     try {
@@ -299,14 +299,14 @@ export class FileLogger {
 
       try {
         const fileContent = await fs.readFile(
-          filePath, 'utf-8' 
+          filePath, 'utf-8'
         );
         currentData = JSON.parse(
-          fileContent 
+          fileContent
         );
 
         if ( !Array.isArray(
-          currentData 
+          currentData
         ) ) {
           currentData = [];
         }
@@ -317,20 +317,20 @@ export class FileLogger {
       for ( const newItem of itemsToSave ) {
         const existingIndex = currentData.findIndex(
           (
-            existing 
+            existing
           ) => {
             return (
               existing._meta
             && existing._meta.carpetaNumero === newItem._meta.carpetaNumero
             );
-          } 
+          }
         );
 
         if ( existingIndex !== -1 ) {
           currentData[ existingIndex ] = newItem;
         } else {
           currentData.push(
-            newItem 
+            newItem
           );
         }
       }
@@ -338,13 +338,13 @@ export class FileLogger {
       await fs.writeFile(
         filePath,
         JSON.stringify(
-          currentData, null, 2 
+          currentData, null, 2
         ),
         'utf-8',
       );
     } catch ( error ) {
       console.log(
-        '❌ Failed to save new items to JSON file:', error 
+        '❌ Failed to save new items to JSON file:', error
       );
     }
   }

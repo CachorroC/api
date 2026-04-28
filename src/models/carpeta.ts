@@ -1279,6 +1279,11 @@ export class ClassCarpeta implements IntCarpeta {
                   ...( isUltima && {
                     cant: actuacion.cant,
                   } ),
+                  proceso: {
+                    connect: {
+                      idProceso: proceso.idProceso,
+                    },
+                  },
                 },
               }
             );
@@ -1516,5 +1521,259 @@ export class ClassCarpeta implements IntCarpeta {
         },
       }
     );
+  }
+
+  /**
+   * Fetches all legal processes associated with this case from the Colombian Judiciary API.
+   *
+   * This method queries the official Rama Judicial API using the case filing number (llaveProceso).
+   * It performs the following operations:
+   *
+   * **API Query:**
+   * - Endpoint: /api/v2/Procesos/Consulta/NumeroRadicacion
+   * - Parameter: numero={llaveProceso}
+   * - Flags: SoloActivos=false (includes inactive processes)
+   * - Uses smart retry mechanism for reliability
+   *
+   * **Data Processing:**
+   * - Filters out private processes (esPrivado === true)
+   * - Excludes known confidential process IDs (e.g., 3175205751)
+   * - Transforms API format to internal outProceso type
+   * - Converts date strings to Date objects
+   * - Preserves court (Juzgado) information
+   *
+   * **Error Handling & Logging:**
+   * - HTTP 404: Logs to carpeta-404-log.json (filing number not found in system)
+   * - Empty results: Logs if llaveProceso starts with '1' (potential missing data)
+   * - Other errors: Throws with detailed error message including status code
+   *
+   * **Side Effects:**
+   * - Creates/appends to carpeta-404-log.json when applicable
+   * - Logs detailed output to console for debugging
+   * @static
+   * @async
+   * @returns {Promise<outProceso[]>} Array of legal processes associated with this case,
+   *                                  or empty array if none found or API error occurs.
+   *                                  Each process contains:
+   *                                  - idProceso: Unique process identifier
+   *                                  - fechaProceso: Process creation date
+   *                                  - fechaUltimaActuacion: Latest action date
+   *                                  - juzgado: Associated court information
+   *                                  - esPrivado: Confidentiality flag
+   *
+   * @throws {Error} Throws if HTTP status is not 200/404 (500, 503, etc).
+   *                 Error includes status code and response body.
+   *
+   * @example
+   * const carpeta = new ClassCarpeta(rawData);
+   * try {
+   *   const processes = await carpeta.getProcesos();
+   *   console.log(`Found ${processes.length} processes`);
+   *   processes.forEach(p => {
+   *     console.log(`Process ${p.idProceso}: ${p.fechaProceso}`);
+   *   });
+   * } catch (err) {
+   *   console.error('Error fetching processes:', err.message);
+   * }
+   */
+  static async getProcesosByLlaveProceso(
+    llaveProceso: string,
+    numero: number
+  ): Promise<outProceso[]> {
+    const outputProcesos: outProceso[] = [];
+
+    try {
+      console.log(
+        '🧡 initiating getProcesosByLLaveProceso'
+      );
+      const request = await fetchWithSmartRetry(
+        `https://consultaprocesos.ramajudicial.gov.co:448/api/v2/Procesos/Consulta/NumeroRadicacion?numero=${ llaveProceso }&SoloActivos=false&pagina=1`,
+      );
+
+      if ( !request.ok ) {
+        console.log(
+          'error in getProcesos', request
+        );
+        const json = await request.json();
+
+        if ( request.status === 404 ) {
+          console.log(
+            '404 in getProcesos', json
+          );
+
+          // Lógica de logueo 404...
+          try {
+            const fs = await import(
+              'fs'
+            );
+            const path = await import(
+              'path'
+            );
+            const logPath = path.resolve(
+              __dirname, 'carpeta-404-log.json'
+            );
+            let logArr = [];
+
+            try {
+              const prev = fs.existsSync(
+                logPath
+              )
+                ? fs.readFileSync(
+                    logPath, 'utf8'
+                  )
+                : '[]';
+              logArr = JSON.parse(
+                prev
+              );
+            } catch ( e ) {
+              console.log(
+                e
+              );
+              logArr = [];
+            }
+
+            logArr.push(
+              {
+                fecha       : new Date().toISOString(),
+                llaveProceso: llaveProceso,
+                numero      : numero,
+                status      : request.status,
+                json,
+              }
+            );
+
+            try {
+              fs.writeFileSync(
+                logPath, JSON.stringify(
+                  logArr, null, 2
+                )
+              );
+            } catch ( e ) {
+              console.error(
+                'No se pudo escribir el log 404:', e
+              );
+            }
+          } catch ( e ) {
+            console.error(
+              'Error al intentar loguear el 404:', e
+            );
+          }
+        }
+
+        throw new Error(
+          `📉${ request.status } : ${ request.statusText } === ${ JSON.stringify(
+            json,
+          ) }`,
+        );
+      }
+
+      const consultaProcesos = ( await request.json() ) as ConsultaProcesos;
+      const {
+        procesos
+      } = consultaProcesos;
+      console.log(
+        consultaProcesos
+      );
+      console.log(
+        `📰 hay ${ procesos.length } procesos en ${ numero }`
+      );
+
+      if ( procesos.length === 0 && llaveProceso.startsWith(
+        '1'
+      ) ) {
+        // Lógica de logueo vacío...
+        try {
+          const fs = await import(
+            'fs'
+          );
+          const path = await import(
+            'path'
+          );
+          const logPath = path.resolve(
+            __dirname, 'carpeta-404-log.json'
+          );
+          let logArr = [];
+
+          try {
+            const prev = fs.existsSync(
+              logPath
+            )
+              ? fs.readFileSync(
+                  logPath, 'utf8'
+                )
+              : '[]';
+            logArr = JSON.parse(
+              prev
+            );
+          } catch ( e ) {
+            console.log(
+              e
+            );
+            logArr = [];
+          }
+
+          logArr.push(
+            {
+              fecha       : new Date().toISOString(),
+              llaveProceso: llaveProceso,
+              numero      : numero,
+              procesos    : 'no hay procesos para esta carpeta, revisar el radicado',
+            }
+          );
+
+          try {
+            fs.writeFileSync(
+              logPath, JSON.stringify(
+                logArr, null, 2
+              )
+            );
+          } catch ( e ) {
+            console.error(
+              'No se pudo escribir el log 404:', e
+            );
+          }
+        } catch ( e ) {
+          console.error(
+            'Error al intentar loguear el 404:', e
+          );
+        }
+      }
+
+      for ( const rawProceso of procesos ) {
+        if ( rawProceso.esPrivado ) {
+          continue;
+        }
+
+        const proceso: outProceso = {
+          ...rawProceso,
+          idProceso   : rawProceso.idProceso.toString(),
+          fechaProceso: rawProceso.fechaProceso
+            ? new Date(
+                rawProceso.fechaProceso
+              )
+            : null,
+          fechaUltimaActuacion: rawProceso.fechaUltimaActuacion
+            ? new Date(
+                rawProceso.fechaUltimaActuacion
+              )
+            : null,
+          juzgado: JuzgadoClass.fromProceso(
+            rawProceso
+          ),
+        };
+        console.log(
+          'proceso:', proceso
+        );
+        outputProcesos.push(
+          proceso
+        );
+      }
+    } catch ( error ) {
+      console.log(
+        `💩${ numero } => error en CarpetaBuilder.getProcesos(${ llaveProceso }) => ${ error }`,
+      );
+    }
+
+    return outputProcesos;
   }
 }

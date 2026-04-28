@@ -27,6 +27,7 @@ import { sleep } from '../utils/awaiter.js';
 import { ensureDate, formatDateToString } from '../utils/ensureDate.js';
 import { sanitizeText } from '../utils/textSanitizer.js';
 import { ApiError } from './ApiError.js';
+import { ClassCarpeta } from './carpeta.js';
 import { FileLogger } from './FileLogger.js';
 const WEBHOOK_URL = process.env.WEBHOOK_URL || '';
 const NEW_ACTUACION_WEBHOOK_URL = process.env.NEW_ACTUACION_WEBHOOK_URL || '';
@@ -650,6 +651,93 @@ export class ActuacionService {
     logger: FileLogger,
     arrayBufferData: ArrayBuffer,
   ) {
+
+    // 🛡️ SAFEGUARD: Ensure the parent Proceso exists before proceeding
+    const parentProceso = await client.proceso.findUnique(
+      {
+        where: {
+          idProceso: parentProc.idProceso
+        },
+        select: {
+          idProceso: true
+        }
+      }
+    );
+
+    if ( !parentProceso ) {
+      console.log(
+        `⚠️ Process Sync Aborted: No 'Proceso' record found for ID ${ parentProc.idProceso }. Skipping actuaciones payload to prevent relation errors.`
+      );
+      await logger.logFailure(
+        parentProc.idProceso,
+        parentProc,
+        `Missing parent Proceso record for ID ${ parentProc.idProceso }`,
+        'DB_RELATION_MISSING'
+      );
+
+      try {
+        const procesosResponse = await ClassCarpeta.getProcesosByLlaveProceso(
+          parentProc.llaveProceso, parentProc.carpetaNumero
+        );
+
+        for ( const proceso of procesosResponse ) {
+          if ( proceso.idProceso === parentProc.idProceso ) {
+            const procesoInput: Prisma.ProcesoUncheckedCreateInput = {
+              cantFilas           : proceso.cantFilas,
+              carpetaNumero       : parentProc.carpetaNumero,
+              departamento        : proceso.departamento,
+              despacho            : proceso.despacho,
+              esPrivado           : proceso.esPrivado,
+              fechaProceso        : proceso.fechaProceso,
+              fechaUltimaActuacion: proceso.fechaUltimaActuacion,
+              idConexion          : proceso.idConexion,
+              idProceso           : proceso.idProceso,
+              juzgadoCiudad       : proceso.juzgado.ciudad,
+              juzgadoId           : proceso.juzgado.id,
+              juzgadoTipo         : proceso.juzgado.tipo,
+              llaveProceso        : proceso.llaveProceso,
+              sujetosProcesales   : proceso.sujetosProcesales
+            };
+
+            try {
+              await client.proceso.upsert(
+                {
+                  where: {
+                    idProceso: proceso.idProceso
+                  },
+                  update: procesoInput,
+                  create: procesoInput
+                }
+              );
+              // Continued logic...
+            } catch ( upsertError: any ) {
+              console.log(
+                `⚠️ Failed upserting proceso to database: ${ upsertError.message }`
+              );
+              await logger.logFailure(
+                parentProc.idProceso,
+                parentProc,
+                `Failed upserting proceso: ${ upsertError.message }`,
+                'DB_ITEM'
+              );
+
+              return;
+            }
+          }
+        }
+      } catch ( error : any ) {
+        console.log(
+          `⚠️ Process Sync Aborted: No 'Proceso' record found for ID ${ parentProc.idProceso }`
+        );
+        await logger.logFailure(
+          parentProc.idProceso,
+          parentProc,
+          `⚠️ Process Sync Aborted: No 'Proceso' record found for ID ${ parentProc.idProceso }`,
+          'DB_RELATION_MISSING'
+        );
+      }
+    }
+
     const latestItemByDate = this.getLatestByDate(
       apiActuaciones
     );
@@ -1021,7 +1109,7 @@ export class ActuacionService {
             if ( !arrayBufferData ) {
               throw new Error(
                 'No ArrayBuffer provided for fallback.', {
-                  cause: error 
+                  cause: error
                 }
               );
             }
