@@ -1,6 +1,6 @@
-import { Prisma } from '@prisma/client';
-import { IntDeudor } from '../types/carpetas';
-import { RawDb } from '../types/raw-db';
+import { Prisma } from '../prisma/generated/prisma/client.js';
+import { IntDeudor } from '../types/carpetas.js';
+import { RawDb } from '../types/raw-db.js';
 
 export class Tel {
   fijo   : string | null;
@@ -57,6 +57,7 @@ export class ClassDeudor implements IntDeudor {
       DEMANDADO_NOMBRE: nombre,
       NUMERO: id,
     } = rawCarpeta;
+
     this.id = Number(
       id 
     );
@@ -77,17 +78,17 @@ export class ClassDeudor implements IntDeudor {
         telefono 
       ) 
     );
+
     this.telCelular = celular;
     this.telFijo = fijo;
 
     const nameStringArray = nombre
-      ? nombre.trim()
-        .split(
+      ? nombre.trim().split(
           ' ' 
         )
-      : 'Nelson Nuñez'.split(
-        ' ' 
-      );
+      : 'Nelson Nu�ez'.split(
+          ' ' 
+        );
 
     const nameArrayLength = nameStringArray.length;
 
@@ -129,7 +130,7 @@ export class ClassDeudor implements IntDeudor {
             this.segundoNombre,
             this.primerApellido
           ]
-          = nameStringArray;
+            = nameStringArray;
           this.segundoApellido = null;
 
           break;
@@ -171,6 +172,7 @@ export class ClassDeudor implements IntDeudor {
       telCelular     : deudor.telCelular,
       telFijo        : deudor.telFijo,
     };
+
     return newDeudor;
   }
 }

@@ -1,0 +1,30 @@
+-- AlterTable
+ALTER TABLE "Actuacion" ALTER COLUMN "fechaActuacion" SET DATA TYPE TIMESTAMP(3),
+ALTER COLUMN "fechaFinal" SET DATA TYPE TIMESTAMP(3),
+ALTER COLUMN "fechaInicial" SET DATA TYPE TIMESTAMP(3),
+ALTER COLUMN "fechaRegistro" SET DATA TYPE TIMESTAMP(3);
+
+-- AlterTable
+ALTER TABLE "Carpeta" ALTER COLUMN "fechaUltimaRevision" SET DATA TYPE TIMESTAMP(3);
+
+-- AlterTable
+ALTER TABLE "Demanda" ALTER COLUMN "entregaGarantiasAbogado" SET DATA TYPE TIMESTAMP(3),
+ALTER COLUMN "fechaPresentacion" SET DATA TYPE TIMESTAMP(3)[],
+ALTER COLUMN "vencimientoPagare" SET DATA TYPE TIMESTAMP(3)[],
+ALTER COLUMN "mandamientoPago" SET DATA TYPE TIMESTAMP(3)[];
+
+-- AlterTable
+ALTER TABLE "Factura" ALTER COLUMN "fecha" SET DATA TYPE TIMESTAMP(3);
+
+-- AlterTable
+ALTER TABLE "Nota" ALTER COLUMN "dueDate" SET DATA TYPE TIMESTAMP(3);
+
+-- AlterTable
+ALTER TABLE "Notificacion" ALTER COLUMN "autoNotificado" SET DATA TYPE TIMESTAMP(3);
+
+-- AlterTable
+ALTER TABLE "Proceso" ALTER COLUMN "fechaProceso" SET DATA TYPE TIMESTAMP(3),
+ALTER COLUMN "fechaUltimaActuacion" SET DATA TYPE TIMESTAMP(3);
+
+-- AlterTable
+ALTER TABLE "Task" ALTER COLUMN "dueDate" SET DATA TYPE TIMESTAMP(3);

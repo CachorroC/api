@@ -1,0 +1,17 @@
+{
+  "idRegActuacion": 1742206170,
+  "llaveProceso": "11001400305020170133600",
+  "consActuacion": 78,
+  "fechaActuacion": "2025-04-25T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 4274-2025, No. Reloj Radicador: 123080, Entidad o Señor(a): REINTEGRA SAS - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Otras, Observaciones: CESIÓN DE DERECHO",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2025-04-25T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 78,
+  "isUltimaAct": true,
+  "idProceso": 106185210,
+  "createdAt": "2025-04-25T05:00:00.000Z"
+}

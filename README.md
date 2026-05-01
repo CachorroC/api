@@ -1,311 +1,120 @@
-# REST API Example
+# API de Actuaciones y Carpetas – Rama Judicial
 
-This example shows how to implement a **REST API with TypeScript** using [Express](https://expressjs.com/) and [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client). The example uses an SQLite database file with some initial dummy data which you can find at [`./prisma/dev.db`](./prisma/dev.db).
+Este proyecto es una API y conjunto de scripts para
+sincronizar, consultar y actualizar información de
+actuaciones judiciales y carpetas, utilizando datos de la
+Rama Judicial de Colombia. Utiliza Node.js, TypeScript y
+Prisma ORM para la gestión de datos y automatización de
+procesos.
 
-## Getting started
+## Características principales
 
-### 1. Download example and install dependencies
+- **Sincronización automática de actuaciones**: Obtiene y
+  actualiza actuaciones judiciales de procesos almacenados
+  en la base de datos.
+- **Integración con Prisma**: Utiliza Prisma ORM para
+  operaciones eficientes de lectura y escritura en la base
+  de datos.
+- **Automatización y robustez**: Incluye mecanismos de
+  espera, manejo de errores y actualización masiva de datos.
+- **Cliente API robusto**: Permite la consulta y
+  procesamiento de actuaciones de múltiples procesos
+  judiciales de manera concurrente y segura.
 
-Download this example:
+## Estructura de archivos relevante
 
-```
-npx try-prisma@latest --template typescript/rest-express
-```
+- `src/actuaciones.ts`: Script principal para sincronización
+  y actualización de actuaciones.
+- `src/services/prisma.ts`: Configuración y cliente Prisma
+  para acceso a la base de datos.
+- `src/models/actuacion.ts`: Modelo de datos para
+  actuaciones.
+- `src/types/actuaciones.ts`: Tipos TypeScript para las
+  entidades y respuestas de la API.
+- `src/utils/awaiter.js`: Utilidad para funciones asíncronas
+  y retardos.
+- `src/utils/fetcher.js`: Cliente robusto para llamadas HTTP
+  y procesamiento de lotes.
 
-Install npm dependencies:
+## Operaciones y flujo principal
 
-```
-cd rest-express
-npm install
-```
+1. **Obtención de procesos**: Se consultan todas las
+   carpetas y sus procesos asociados desde la base de datos
+   (`getIdProcesos`).
+2. **Consulta de actuaciones**: Por cada proceso, se realiza
+   una petición HTTP a la API pública de la Rama Judicial
+   para obtener las actuaciones.
+3. **Procesamiento y transformación**: Las fechas y campos
+   relevantes se transforman a objetos Date y se normalizan
+   los datos.
+4. **Actualización en base de datos**: Se realiza un upsert
+   (insertar o actualizar) de cada actuación en la base de
+   datos, asegurando que no haya duplicados y que la
+   información esté actualizada.
+5. **Automatización**: El script puede ejecutarse de forma
+   continua o programada para mantener la base de datos
+   sincronizada.
 
-<details><summary><strong>Alternative:</strong> Clone the entire repo</summary>
+## Ejemplo de ejecución
 
-Clone this repository:
+El script principal ejecuta la función `runSync`, que
+realiza todo el flujo de sincronización:
 
-```
-git clone git@github.com:prisma/prisma-examples.git --depth=1
-```
-
-Install npm dependencies:
-
-```
-cd prisma-examples/typescript/rest-express
-npm install
-```
-
-</details>
-
-### 2. Create and seed the database
-
-Run the following command to create your SQLite database file. This also creates the `User` and `Post` tables that are defined in [`prisma/schema.prisma`](./prisma/schema.prisma):
-
-```
-npx prisma migrate dev --name init
-```
-
-When `npx prisma migrate dev` is executed against a newly created database, seeding is also triggered. The seed file in [`prisma/seed.ts`](./prisma/seed.ts) will be executed and your database will be populated with the sample data.
-
-### 3. Start the REST API server
-
-```
-npm run dev
-```
-
-The server is now running on `http://localhost:3000`. You can now run the API requests, e.g. [`http://localhost:3000/feed`](http://localhost:3000/feed).
-
-## Using the REST API
-
-You can access the REST API of the server using the following endpoints:
-
-### `GET`
-
-- `/post/:id`: Fetch a single post by its `id`
-- `/feed?searchString={searchString}&take={take}&skip={skip}&orderBy={orderBy}`: Fetch all _published_ posts
-  - Query Parameters
-    - `searchString` (optional): This filters posts by `title` or `content`
-    - `take` (optional): This specifies how many objects should be returned in the list
-    - `skip` (optional): This specifies how many of the returned objects in the list should be skipped
-    - `orderBy` (optional): The sort order for posts in either ascending or descending order. The value can either `asc` or `desc`
-- `/user/:id/drafts`: Fetch user's drafts by their `id`
-- `/users`: Fetch all users
-
-### `POST`
-
-- `/post`: Create a new post
-  - Body:
-    - `title: String` (required): The title of the post
-    - `content: String` (optional): The content of the post
-    - `authorEmail: String` (required): The email of the user that creates the post
-- `/signup`: Create a new user
-  - Body:
-    - `email: String` (required): The email address of the user
-    - `name: String` (optional): The name of the user
-    - `postData: PostCreateInput[]` (optional): The posts of the user
-
-### `PUT`
-
-- `/publish/:id`: Toggle the publish value of a post by its `id`
-- `/post/:id/views`: Increases the `viewCount` of a `Post` by one `id`
-
-### `DELETE`
-
-- `/post/:id`: Delete a post by its `id`
-
-## Evolving the app
-
-Evolving the application typically requires two steps:
-
-1. Migrate your database using Prisma Migrate
-1. Update your application code
-
-For the following example scenario, assume you want to add a "profile" feature to the app where users can create a profile and write a short bio about themselves.
-
-### 1. Migrate your database using Prisma Migrate
-
-The first step is to add a new table, e.g. called `Profile`, to the database. You can do this by adding a new model to your [Prisma schema file](./prisma/schema.prisma) file and then running a migration afterwards:
-
-```diff
-// ./prisma/schema.prisma
-
-model User {
-  id      Int      @default(autoincrement()) @id
-  name    String?
-  email   String   @unique
-  posts   Post[]
-+ profile Profile?
-}
-
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  viewCount Int      @default(0)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
-}
-
-+model Profile {
-+  id     Int     @default(autoincrement()) @id
-+  bio    String?
-+  user   User    @relation(fields: [userId], references: [id])
-+  userId Int     @unique
-+}
+```bash
+node src/actuaciones.ts
 ```
 
-Once you've updated your data model, you can execute the changes against your database with the following command:
+Esto:
 
-```
-npx prisma migrate dev --name add-profile
-```
+- Obtiene todos los procesos de la base de datos.
+- Consulta las actuaciones de cada proceso.
+- Actualiza la base de datos con la información más
+  reciente.
+- Muestra en consola el progreso y el estado final.
 
-This adds another migration to the `prisma/migrations` directory and creates the new `Profile` table in the database.
+## Salidas y archivos generados
 
-### 2. Update your application code
+- `actuacionesOutput.json`: Archivo de ejemplo con el
+  resultado de la sincronización de actuaciones.
+- Mensajes de log en consola sobre el progreso y errores.
 
-You can now use your `PrismaClient` instance to perform operations against the new `Profile` table. Those operations can be used to implement API endpoints in the REST API.
+## Requisitos
 
-#### 2.1 Add the API endpoint to your app
+- Node.js >= 18
+- Prisma ORM
+- Acceso a la API pública de la Rama Judicial
 
-Update your `index.ts` file by adding a new endpoint to your API:
+## Instalación y configuración
 
-```ts
-app.post("/user/:id/profile", async (req, res) => {
-  const { id } = req.params;
-  const { bio } = req.body;
+1. Instala las dependencias:
+   ```bash
+   pnpm install
+   # o npm install
+   ```
+2. Configura la base de datos en `prisma/schema.prisma` y
+   ejecuta las migraciones:
+   ```bash
+   npx prisma migrate dev
+   ```
+3. Ajusta las variables de entorno si es necesario.
 
-  const profile = await prisma.profile.create({
-    data: {
-      bio,
-      user: {
-        connect: {
-          id: Number(id),
-        },
-      },
-    },
-  });
+## Uso
 
-  res.json(profile);
-});
-```
+Ejecuta el script principal para sincronizar actuaciones:
 
-#### 2.2 Testing out your new endpoint
-
-Restart your application server and test out your new endpoint.
-
-##### `POST`
-
-- `/user/:id/profile`: Create a new profile based on the user id
-  - Body:
-    - `bio: String` : The bio of the user
-
-<details><summary>Expand to view more sample Prisma Client queries on <code>Profile</code></summary>
-
-Here are some more sample Prisma Client queries on the new <code>Profile</code> model:
-
-##### Create a new profile for an existing user
-
-```ts
-const profile = await prisma.profile.create({
-  data: {
-    bio: "Hello World",
-    user: {
-      connect: { email: "alice@prisma.io" },
-    },
-  },
-});
+```bash
+node src/actuaciones.ts
 ```
 
-##### Create a new user with a new profile
+## Notas adicionales
 
-```ts
-const user = await prisma.user.create({
-  data: {
-    email: "john@prisma.io",
-    name: "John",
-    profile: {
-      create: {
-        bio: "Hello World",
-      },
-    },
-  },
-});
-```
+- El script implementa retardos automáticos entre peticiones
+  para evitar bloqueos por parte de la API externa.
+- El manejo de errores es robusto: los fallos en la consulta
+  de un proceso no detienen la sincronización global.
+- El código es fácilmente extensible para agregar nuevas
+  fuentes de datos o modificar la lógica de actualización.
 
-##### Update the profile of an existing user
+## Licencia
 
-```ts
-const userWithUpdatedProfile = await prisma.user.update({
-  where: { email: "alice@prisma.io" },
-  data: {
-    profile: {
-      update: {
-        bio: "Hello Friends",
-      },
-    },
-  },
-});
-```
-
-</details>
-
-## Switch to another database (e.g. PostgreSQL, MySQL, SQL Server, MongoDB)
-
-If you want to try this example with another database than SQLite, you can adjust the the database connection in [`prisma/schema.prisma`](./prisma/schema.prisma) by reconfiguring the `datasource` block.
-
-Learn more about the different connection configurations in the [docs](https://www.prisma.io/docs/reference/database-reference/connection-urls).
-
-<details><summary>Expand for an overview of example configurations with different databases</summary>
-
-### PostgreSQL
-
-For PostgreSQL, the connection URL has the following structure:
-
-```prisma
-datasource db {
-  provider = "postgresql"
-  url      = "postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA"
-}
-```
-
-Here is an example connection string with a local PostgreSQL database:
-
-```prisma
-datasource db {
-  provider = "postgresql"
-  url      = "postgresql://janedoe:mypassword@localhost:5432/notesapi?schema=public"
-}
-```
-
-### MySQL
-
-For MySQL, the connection URL has the following structure:
-
-```prisma
-datasource db {
-  provider = "mysql"
-  url      = "mysql://USER:PASSWORD@HOST:PORT/DATABASE"
-}
-```
-
-Here is an example connection string with a local MySQL database:
-
-```prisma
-datasource db {
-  provider = "mysql"
-  url      = "mysql://janedoe:mypassword@localhost:3306/notesapi"
-}
-```
-
-### Microsoft SQL Server
-
-Here is an example connection string with a local Microsoft SQL Server database:
-
-```prisma
-datasource db {
-  provider = "sqlserver"
-  url      = "sqlserver://localhost:1433;initial catalog=sample;user=sa;password=mypassword;"
-}
-```
-
-### MongoDB
-
-Here is an example connection string with a local MongoDB database:
-
-```prisma
-datasource db {
-  provider = "mongodb"
-  url      = "mongodb://USERNAME:PASSWORD@HOST/DATABASE?authSource=admin&retryWrites=true&w=majority"
-}
-```
-
-</details>
-
-## Next steps
-
-- Check out the [Prisma docs](https://www.prisma.io/docs)
-- Share your feedback on the [Prisma Discord](https://pris.ly/discord/)
-- Create issues and ask questions on [GitHub](https://github.com/prisma/prisma/)
+MIT

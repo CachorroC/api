@@ -1,13 +1,79 @@
+/**
+ * @module types/carpetas
+ * @description Case Folder (Carpeta) Type Definitions and Interfaces
+ *
+ * Defines the complete type hierarchy for a judicial case folder (expediente).
+ * Represents the fully structured, validated case object after model transformation.
+ *
+ * DATA STRUCTURE HIERARCHY:
+ * IntCarpeta (interface)
+ *   ├─ demanda: IntDemanda (claim information, amounts, obligations)
+ *   ├─ deudor: IntDeudor (defendant/debtor personal information)
+ *   ├─ codeudor: Codeudor (co-debtor if applicable)
+ *   ├─ juzgado: Juzgado (court information with normalized metadata)
+ *   ├─ procesos: outProceso[] (associated legal processes)
+ *   ├─ notas: NotasBuilder[] (case notes and annotations)
+ *   ├─ ultimaActuacion: DatabaseActuacionType (latest legal action)
+ *   └─ Various metadata (numero, llaveProceso, category, dates, status)
+ *
+ * PRIMARY TYPE: IntCarpeta
+ * Represents a fully-loaded case folder with all relationships populated.
+ * Maps to Prisma carpeta table in database.
+ * Used throughout the application after ClassCarpeta instantiation.
+ *
+ * CATEGORY ENUM:
+ * Classifies case type based on workflow/status:
+ * - 'Terminados': Closed/completed cases
+ * - 'Insolvencia': Insolvency proceedings
+ * - 'Reintegra': Reintegration cases
+ * - 'LiosJuridicos': Complex legal situations
+ * - 'SinTercero': Cases without third-party involvement
+ * - 'Bancolombia': Cases from Bancolombia portfolio
+ *
+ * HELPER TYPES:
+ * - Codeudor: Secondary defendant structure (ID, name, contact, address)
+ * - Obligacion: Financial obligations (A, B amounts)
+ * - ResultadoEnum: Notification results (POSITIVO, NEGATIVO, CERTIMAIL, dates)
+ * - FisicoEnum: Physical service methods (EMBARGO, INMUEBLE, VEHICULO, etc.)
+ * - TipoProceso: Process type classification
+ * - Juzgado: Court information structure
+ * - IntDemanda: Claim/demand information
+ * - IntDeudor: Defendant information
+ * - intNotificacion: Notification delivery proof
+ * - intNotifier: Diligencia records (291, 292, etc.)
+ *
+ * RELATIONSHIPS:
+ * carpeta → demanda (1-to-1): Contains claim amounts and obligations
+ * carpeta → deudor (1-to-1): Main defendant information
+ * carpeta → codeudor (1-to-0/1): Secondary defendant if present
+ * carpeta → juzgado (1-to-1): Court/despacho information
+ * carpeta → procesos (1-to-many): Multiple legal processes
+ * carpeta → notas (1-to-many): Multiple case notes
+ * carpeta → ultimaActuacion (1-to-0/1): Latest action record
+ *
+ * TO PARSE THIS DATA:
+ * ```
+ * const carpeta: IntCarpeta = {
+ *   numero: 123456,
+ *   nombre: \"Juan Perez\",
+ *   category: \"Bancolombia\",
+ *   demanda: { ... },
+ *   deudor: { ... },
+ *   // ... other properties
+ * };
+ * ```
+ */
+
 // To parse this data:
 //
 //   import { Convert } from "./file
 //
 //   const CarpetaRaw = Convert.toCarpetaRaw(json);
 
-import { Prisma } from '@prisma/client';
-import { outActuacion } from './actuaciones';
-import { outProceso } from './procesos';
-import { NotasBuilder } from '../models/nota';
+import { DatabaseActuacionType } from './actuaciones.js';
+import { outProceso } from './procesos.js';
+import { NotasBuilder } from '../models/nota.js';
+import { Prisma } from '../prisma/generated/prisma/client.js';
 
 export type IntCarpeta = {
   category           : Category;
@@ -20,8 +86,8 @@ export type IntCarpeta = {
   notasCount         : number | null;
   fecha              : Date | null;
   id                 : number;
-  idProcesos         : number[];
-  idRegUltimaAct     : number | null;
+  idProcesos         : string[];
+  idRegUltimaAct     : string | null;
   llaveProceso       : string;
   nombre             : string;
   numero             : number;
@@ -30,7 +96,7 @@ export type IntCarpeta = {
   fechaUltimaRevision: Date | null;
   terminado          : boolean;
   tipoProceso        : TipoProceso;
-  ultimaActuacion    : outActuacion | null;
+  ultimaActuacion    : DatabaseActuacionType | null;
   notas              : NotasBuilder[];
 };
 
@@ -41,12 +107,11 @@ export type Obligacion = {
 
 export type Category =
   | 'Terminados'
-  | 'LiosJuridicos'
-  | 'Bancolombia'
-  | 'Reintegra'
   | 'Insolvencia'
-  | 'SinEspecificar'
-  | 'todos';
+  | 'Reintegra'
+  | 'LiosJuridicos'
+  | 'SinTercero'
+  | 'Bancolombia';
 
 export interface Codeudor {
   cedula   : string | null;
@@ -128,7 +193,7 @@ export type DepartamentoRaw =
   | 'TOLIMA'
   | 'CUN DINAMARCA'
   | 'CUNDINNAMARCA '
-  | 'BOYACÁ'
+  | 'BOYAC�'
   | 'CUNDINAMRCA'
   | 'CNDINAMARCA'
   | '';
@@ -231,4 +296,5 @@ export type TipoProceso =
   | 'HIPOTECARIO'
   | 'PRENDARIO'
   | 'SINGULAR'
-  | 'ACUMULADO';
+  | 'ACUMULADO'
+  | 'VERBAL';

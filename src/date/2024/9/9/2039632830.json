@@ -1,1 +1,17 @@
-{"idRegActuacion":2039632830,"llaveProceso":"11001418907120240087400","consActuacion":14,"fechaActuacion":"2024-10-09T05:00:00.000Z","actuacion":"Liquidación Costas Art. 366 C.G.P.","anotacion":null,"fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-09T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":14,"isUltimaAct":true,"idProceso":168317340,"createdAt":"2024-10-09T05:00:00.000Z"}
+{
+  "idRegActuacion": 2039632830,
+  "llaveProceso": "11001418907120240087400",
+  "consActuacion": 14,
+  "fechaActuacion": "2024-10-09T05:00:00.000Z",
+  "actuacion": "Liquidación Costas Art. 366 C.G.P.",
+  "anotacion": null,
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-09T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 14,
+  "isUltimaAct": true,
+  "idProceso": 168317340,
+  "createdAt": "2024-10-09T05:00:00.000Z"
+}

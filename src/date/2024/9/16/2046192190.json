@@ -1,1 +1,17 @@
-{"idRegActuacion":2046192190,"llaveProceso":"11001400302820170084900","consActuacion":102,"fechaActuacion":"2024-10-16T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"Radicado No. 12767-2024, No. Reloj Radicador: 016, Entidad o Señor(a): JENNY TERESA SUTA ROJAS - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: // TATIANA HIGUERA","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-16T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":102,"isUltimaAct":true,"idProceso":50685700,"createdAt":"2024-10-16T05:00:00.000Z"}
+{
+  "idRegActuacion": 2046192190,
+  "llaveProceso": "11001400302820170084900",
+  "consActuacion": 102,
+  "fechaActuacion": "2024-10-16T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "Radicado No. 12767-2024, No. Reloj Radicador: 016, Entidad o Señor(a): JENNY TERESA SUTA ROJAS - Tercer Interesado, Aportó Documento: Memorial, Con La Solucitud: Memorial, Observaciones: // TATIANA HIGUERA",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-16T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 102,
+  "isUltimaAct": true,
+  "idProceso": 50685700,
+  "createdAt": "2024-10-16T05:00:00.000Z"
+}

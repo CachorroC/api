@@ -1,1 +1,17 @@
-{"idRegActuacion":1200293154,"llaveProceso":"11001310301120170033500","consActuacion":117,"fechaActuacion":"2024-10-17T05:00:00.000Z","actuacion":"Oficio firmado","anotacion":"FIRMADO DIGITALMENTE GB3180, PARA TRAMITE DE PARTE, PASA A CORRESPONDENCIA PARA SU REMISIÓN AL INTERESADO- PROCESO CON 1  CUADERNO Y MEMORIAL 10069-2024// AZ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-17T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":117,"isUltimaAct":true,"idProceso":1805257424,"createdAt":"2024-10-17T05:00:00.000Z"}
+{
+  "idRegActuacion": 1200293154,
+  "llaveProceso": "11001310301120170033500",
+  "consActuacion": 117,
+  "fechaActuacion": "2024-10-17T05:00:00.000Z",
+  "actuacion": "Oficio firmado",
+  "anotacion": "FIRMADO DIGITALMENTE GB3180, PARA TRAMITE DE PARTE, PASA A CORRESPONDENCIA PARA SU REMISIÓN AL INTERESADO- PROCESO CON 1  CUADERNO Y MEMORIAL 10069-2024// AZ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-17T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 117,
+  "isUltimaAct": true,
+  "idProceso": 1805257424,
+  "createdAt": "2024-10-17T05:00:00.000Z"
+}

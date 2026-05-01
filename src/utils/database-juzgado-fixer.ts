@@ -1,8 +1,27 @@
+/**
+ * @module utils/database-juzgado-fixer
+ * @description Court (Juzgado) Data Extraction and Transformation Utility
+ *
+ * Processes raw case data to extract, normalize, and transform court information
+ * from multiple source fields. Handles inconsistent formatting and creates structured
+ * court model instances with metadata.
+ *
+ * EXECUTION FLOW:
+ * RawCarpetas (Excel rows) → For each carpeta → Extract fields → Parse with regex →
+ * Create JuzgadoClass → Export to JSON
+ *
+ * KEY FUNCTIONS:
+ * - extrapolateIdCiudadyTipo(): Parse court name, extract ID, type, city
+ * - JuzgadoClass.fromShortName(): Create structured court model
+ */
+
 import * as fs from 'fs/promises';
-import { extrapolateTipoToCorrectType, JuzgadoClass } from '../models/juzgado';
-import { RawCarpetas } from '../data/carpetas';
+import { extrapolateTipoToCorrectType } from '../models/juzgado.js';
+import JuzgadoClass from '../models/juzgado.js';
+import { rawCarpetas } from '../assets/carpetas.js';
 
 const outgoingJuzgados = [];
+const RawCarpetas = rawCarpetas();
 
 for ( const carpeta of RawCarpetas ) {
   const juzgadoByCarpeta = extrapolateIdCiudadyTipo(
@@ -66,12 +85,11 @@ export function extrapolateIdCiudadyTipo(
 
   if ( ejecucion ) {
     matchedRegexNumberAndLetters = ejecucion.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im,
+      /(\d+)(\s?)([A-Z������\s-]+)/im,
     );
-  }
-  else if ( origen ) {
+  } else if ( origen ) {
     matchedRegexNumberAndLetters = origen.match(
-      /(\d+)(\s?)([A-Zñúáéóí\s-]+)/im,
+      /(\d+)(\s?)([A-Z������\s-]+)/im,
     );
   }
 
@@ -97,11 +115,11 @@ export function extrapolateIdCiudadyTipo(
           matchedRegexNumberAndLetters 
         ),
       };
-    }
-    else if ( asAnArray.length >= 2 ) {
+    } else if ( asAnArray.length >= 2 ) {
       const temporaryTipo = extrapolateTipoToCorrectType(
         asAnArray[ 3 ] 
       );
+
       return {
         id       : asAnArray[ 1 ],
         tipo     : temporaryTipo,
@@ -118,6 +136,7 @@ export function extrapolateIdCiudadyTipo(
     const temporaryTipo = extrapolateTipoToCorrectType(
       asAnArray[ 3 ] 
     );
+
     return {
       id       : asAnArray[ 1 ],
       tipo     : temporaryTipo,

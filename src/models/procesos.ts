@@ -1,9 +1,53 @@
-import { client } from '../services/prisma';
-import { ConsultaNumeroRadicacion, outProceso } from '../types/procesos';
-import { JuzgadoClass } from './juzgado';
+/**
+ * @module models/procesos
+ * @description Judicial Processes Collection Model
+ *
+ * Manages aggregated legal processes associated with a single case folder (carpeta).
+ * Deduplicates process IDs and synchronizes process records with Prisma database,
+ * including related court information (juzgado).
+ *
+ * PROCESS SYNCHRONIZATION WORKFLOW:
+ * Constructor: Filter private processes → add to Set (deduplication)
+ *   ↓
+ * prismaUpdateProcesos():
+ *   1. Find existing carpeta in database
+ *   2. Merge existing process IDs with new ones
+ *   3. Apply upsert logic: connectOrCreate for each process
+ *   4. Create court record if needed (connectOrCreate on juzgado)
+ *   ↓
+ * Database update with atomic transaction
+ *
+ * DEDUPLICATION STRATEGY:
+ * Uses Set<string> (idProcesosSet) to prevent duplicate process IDs.
+ * Only adds publicly visible processes (esPrivado = false).
+ * Merges with existing database processes to maintain history.
+ */
 
+import { client } from '../services/connection/prisma';
+import { ConsultaProcesos, outProceso } from '../types/procesos.js';
+import JuzgadoClass from './juzgado.js';
+
+/**
+ * @class ClassProcesos
+ * @description Manages collection of legal processes for a single case folder.
+ * Handles deduplication, database synchronization, and court record creation.
+ *
+ * @property {Set<string>} idProcesosSet - Deduplication set of process identifiers
+ * @property {outProceso[]} procesos - Array of public (visible) process records
+ * @property {number} numero - Case folder number (carpetaNumero)
+ * @property {number} carpetaId - Database ID reference for the parent case folder
+ *
+ * @constructor
+ * @param {outProceso[]} procesos - Array of process objects from API response
+ * @param {number} numero - Folder number from parent carpeta
+ * @param {number} carpetaId - Database primary key of parent carpeta
+ *
+ * @example
+ * const procesos = new ClassProcesos(apiProcesos, 123456, dbId);
+ * const result = await procesos.prismaUpdateProcesos();
+ */
 export class ClassProcesos {
-  idProcesosSet: Set<number> = new Set();
+  idProcesosSet: Set<string> = new Set();
   procesos     : outProceso[] = [];
   numero       : number;
   carpetaId    : number;
@@ -37,6 +81,7 @@ export class ClassProcesos {
           },
         } 
       );
+
       carpeta.idProcesos.forEach(
         (
           idProceso 
@@ -50,10 +95,7 @@ export class ClassProcesos {
       const updater = await client.carpeta.update(
         {
           where: {
-            mainId: {
-              numero: this.numero,
-              id    : this.carpetaId,
-            },
+            numero: this.numero,
           },
           data: {
             idProcesos: {
@@ -92,15 +134,17 @@ export class ClassProcesos {
           },
         } 
       );
+
       console.log(
         updater 
       );
+
       return updater;
-    }
-    catch ( error ) {
+    } catch ( error ) {
       console.log(
         error 
       );
+
       return null;
     }
   }
@@ -122,7 +166,7 @@ export class ClassProcesos {
         );
       }
 
-      const json = ( await request.json() ) as ConsultaNumeroRadicacion;
+      const json = ( await request.json() ) as ConsultaProcesos;
 
       const {
         procesos 
@@ -136,13 +180,13 @@ export class ClassProcesos {
             ...proceso,
             fechaProceso: proceso.fechaProceso
               ? new Date(
-                proceso.fechaProceso 
-              )
+                  proceso.fechaProceso 
+                )
               : null,
             fechaUltimaActuacion: proceso.fechaUltimaActuacion
               ? new Date(
-                proceso.fechaUltimaActuacion 
-              )
+                  proceso.fechaUltimaActuacion 
+                )
               : null,
             juzgado: JuzgadoClass.fromProceso(
               proceso 
@@ -150,14 +194,30 @@ export class ClassProcesos {
           };
         } 
       );
+
       return new ClassProcesos(
-        mappedprocesos, numero, carpetaId 
+        [
+          ...mappedprocesos
+        ].map(
+          (
+            proceso 
+          ) => {
+            return {
+              ...proceso,
+              idProceso: String(
+                proceso.idProceso 
+              ),
+            };
+          } 
+        ),
+        numero,
+        carpetaId,
       );
-    }
-    catch ( error ) {
+    } catch ( error ) {
       console.log(
         error 
       );
+
       return new ClassProcesos(
         [], numero, carpetaId 
       );

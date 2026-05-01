@@ -1,11 +1,10 @@
-import { IntDemanda, TipoProceso, intNotificacion } from '../types/carpetas';
-import { RawDb } from '../types/raw-db';
-import { Decimal } from '@prisma/client/runtime/library';
-import { capitalBuilder } from '../utils/capital-builder';
-import { datesExtractor } from '../utils/date-validator';
-import { Prisma } from '@prisma/client';
-import { ClassNotificacion } from './notificacion';
-import { tipoProcesoBuilder } from './tipoProceso';
+import { Prisma } from '../prisma/generated/prisma/client.js';
+import { IntDemanda, TipoProceso, intNotificacion } from '../types/carpetas.js';
+import { RawDb } from '../types/raw-db.js';
+import { capitalBuilder } from '../utils/capital-builder.js';
+import { datesExtractor } from '../utils/date-validator.js';
+import { ClassNotificacion } from './notificacion.js';
+import { tipoProcesoBuilder } from './tipoProceso.js';
 
 export class ClassDemanda implements IntDemanda {
   constructor(
@@ -41,17 +40,18 @@ export class ClassDemanda implements IntDemanda {
     ] = datesExtractor(
       fechaOrdenaMedidas 
     );
+
     this.id = Number(
       NUMERO 
     );
     this.bienes = BIENES
       ? String(
-        BIENES 
-      )
+          BIENES 
+        )
       : BIENES_SECUESTRADOS
         ? String(
-          BIENES_SECUESTRADOS 
-        )
+            BIENES_SECUESTRADOS 
+          )
         : null;
     this.medidasCautelares = {
       id: Number(
@@ -60,8 +60,8 @@ export class ClassDemanda implements IntDemanda {
       fechaOrdenaMedida: newFechaOrdenaMedida ?? null,
       medidaSolicitada : medidaSolicitada
         ? String(
-          medidaSolicitada 
-        )
+            medidaSolicitada 
+          )
         : null,
     };
 
@@ -99,15 +99,15 @@ export class ClassDemanda implements IntDemanda {
 
     if ( NewEntregaDeGarantias.length === 0 ) {
       this.entregaGarantiasAbogado = null;
-    }
-    else {
+    } else {
       const [
         firstEntrega
       ] = NewEntregaDeGarantias;
+
       this.entregaGarantiasAbogado = firstEntrega;
     }
 
-    this.capitalAdeudado = new Decimal(
+    this.capitalAdeudado = new Prisma.Decimal(
       capitalBuilder(
         capitalAdeudado 
       ) 
@@ -120,8 +120,8 @@ export class ClassDemanda implements IntDemanda {
       : null;
     this.municipio = municipio
       ? String(
-        municipio 
-      )
+          municipio 
+        )
       : null;
     this.obligacion = Array.from(
       obligacionesSet 
@@ -142,23 +142,23 @@ export class ClassDemanda implements IntDemanda {
         : null;
     this.llaveProceso = llaveProceso
       ? String(
-        llaveProceso 
-      )
+          llaveProceso 
+        )
       : null;
-    this.avaluo = new Decimal(
+    this.avaluo = new Prisma.Decimal(
       capitalBuilder(
         VALOR_AVALUO 
       ) 
     );
-    this.liquidacion = new Decimal(
+    this.liquidacion = new Prisma.Decimal(
       capitalBuilder(
         VALOR_LIQUIDACION_DEL_CREDITO 
       ),
     );
   }
-  liquidacion            : Decimal;
-  avaluo                 : Decimal;
-  capitalAdeudado        : Decimal;
+  liquidacion            : Prisma.Decimal;
+  avaluo                 : Prisma.Decimal;
+  capitalAdeudado        : Prisma.Decimal;
   carpetaNumero!         : number;
   departamento           : string | null;
   despacho               : string | null;
@@ -228,6 +228,7 @@ export class ClassDemanda implements IntDemanda {
         },
       },
     };
+
     return newDemanda;
   }
 }

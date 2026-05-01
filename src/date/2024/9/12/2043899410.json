@@ -1,1 +1,17 @@
-{"idRegActuacion":2043899410,"llaveProceso":"11001400308120180011100","consActuacion":31,"fechaActuacion":"2024-10-11T05:00:00.000Z","actuacion":"Archivo Definitivo","anotacion":"PROCESO ARCHIVADO//FISICO//CAJA #370//KRISTIAN OCHOA//","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-11T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":31,"isUltimaAct":true,"idProceso":51918100,"createdAt":"2024-10-11T05:00:00.000Z"}
+{
+  "idRegActuacion": 2043899410,
+  "llaveProceso": "11001400308120180011100",
+  "consActuacion": 31,
+  "fechaActuacion": "2024-10-11T05:00:00.000Z",
+  "actuacion": "Archivo Definitivo",
+  "anotacion": "PROCESO ARCHIVADO//FISICO//CAJA #370//KRISTIAN OCHOA//",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-11T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 31,
+  "isUltimaAct": true,
+  "idProceso": 51918100,
+  "createdAt": "2024-10-11T05:00:00.000Z"
+}

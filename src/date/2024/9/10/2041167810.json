@@ -1,1 +1,17 @@
-{"idRegActuacion":2041167810,"llaveProceso":"11001418907220240052900","consActuacion":9,"fechaActuacion":"2024-10-10T05:00:00.000Z","actuacion":"Recepción memorial","anotacion":"RTA EMBARGO ","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-10T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":9,"isUltimaAct":true,"idProceso":160274900,"createdAt":"2024-10-10T05:00:00.000Z"}
+{
+  "idRegActuacion": 2041167810,
+  "llaveProceso": "11001418907220240052900",
+  "consActuacion": 9,
+  "fechaActuacion": "2024-10-10T05:00:00.000Z",
+  "actuacion": "Recepción memorial",
+  "anotacion": "RTA EMBARGO ",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-10T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 9,
+  "isUltimaAct": true,
+  "idProceso": 160274900,
+  "createdAt": "2024-10-10T05:00:00.000Z"
+}

@@ -1,8 +1,54 @@
-import { Prisma } from '@prisma/client';
-import { intNotificacion, intNotifier } from '../types/carpetas';
-import { RawDb } from '../types/raw-db';
-import { datesExtractor } from '../utils/date-validator';
+/**
+ * @module models/notificacion
+ * @description Judicial Notification Model
+ *
+ * Encapsulates notification/delivery (notificación) data for legal documents within a judicial process.
+ * Handles multiple notification methods (physical, certimail) and validates notification results
+ * through formal notification procedures (DILIGENCIAS 291 and 292).
+ *
+ * NOTIFICATION WORKFLOW:
+ * Raw Data → Parse notification methods
+ *   ↓
+ * Extract notification dates (datesExtractor)
+ *   ↓
+ * Transform notification results (POSITIVO/ABIERTO → boolean)
+ *   ↓
+ * Build notifiers array with diligencia 291 and 292
+ *   ↓
+ * Store notification proof metadata
+ *
+ * DILIGENCIAS TYPES:
+ * - 291: First formal notification attempt (electronic/physical service)
+ * - 292: Second notification attempt (if first fails or requires confirmation)
+ *
+ * Each diligencia tracks:
+ * - Receipt date (cuando el demandado recibe la notificación)
+ * - Contribution date (cuando se aporta al proceso)
+ * - Result status (POSITIVO/ABIERTO or null)
+ */
 
+import { Prisma } from '../prisma/generated/prisma/client.js';
+import { intNotificacion, intNotifier } from '../types/carpetas.js';
+import { RawDb } from '../types/raw-db.js';
+import { datesExtractor } from '../utils/date-validator.js';
+
+/**
+ * @class ClassNotificacion
+ * @implements {intNotificacion}
+ * @description Transforms raw database notification records into typed notification objects.
+ * Manages notification delivery proof via formal diligencias (legal notices).
+ *
+ * @property {number} id - Unique identifier for notification (case number)
+ * @property {boolean | null} certimail - Whether certimail (registered mail) was used
+ * @property {boolean | null} fisico - Whether physical service was used
+ * @property {Date | null} autoNotificado - Auto-notification date if applicable
+ * @property {intNotifier[]} notifiers - Array of diligencia records (291, 292, etc.)
+ *
+ * @constructor
+ * @param {RawDb} rawDb - Raw database record containing FISICO, CERTIMAIL, NUMERO,
+ *                        FECHA_RECIBO_291, FECHA_APORTA_NOTIFICACION_291, RESULTADO_291,
+ *                        FECHA_RECIBO_292, FECHA_APORTA_NOTIFICACION_292, RESULTADO_292
+ */
 export class ClassNotificacion implements intNotificacion {
   constructor(
     rawDb: RawDb 
@@ -19,6 +65,7 @@ export class ClassNotificacion implements intNotificacion {
       FECHA_APORTA_NOTIFICACION_292: fechaAporta292,
       RESULTADO_292: resultado292,
     } = rawDb;
+
     this.id = Number(
       NUMERO 
     );
@@ -34,8 +81,8 @@ export class ClassNotificacion implements intNotificacion {
       : null;
     this.autoNotificado = autoNotificado
       ? new Date(
-        autoNotificado 
-      )
+          autoNotificado 
+        )
       : null;
 
     if ( autoNotificado ) {
@@ -44,9 +91,9 @@ export class ClassNotificacion implements intNotificacion {
       ] = datesExtractor(
         autoNotificado 
       );
+
       this.autoNotificado = newAutoNotificado ?? null;
-    }
-    else {
+    } else {
       this.autoNotificado = null;
     }
 
@@ -67,6 +114,7 @@ export class ClassNotificacion implements intNotificacion {
         ? true
         : false
       : null;
+
     this.notifiers.push(
       {
         tipo         : '291',
@@ -96,6 +144,7 @@ export class ClassNotificacion implements intNotificacion {
         ? true
         : false
       : null;
+
     this.notifiers.push(
       {
         tipo         : '292',
@@ -128,30 +177,31 @@ export class ClassNotificacion implements intNotificacion {
             notif 
           ) => {
             const notifCarpetaInput: Prisma.NotifierTipoCarpetaNumeroCompoundUniqueInput
-            = {
-              tipo         : notif.tipo,
-              carpetaNumero: notif.carpetaNumero,
-            };
-
-            const notifierConnectOrCreate: Prisma.NotifierCreateOrConnectWithoutNotificacionInput
-            = {
-              where: {
-                tipo_carpetaNumero: notifCarpetaInput,
-              },
-              create: {
+              = {
                 tipo         : notif.tipo,
                 carpetaNumero: notif.carpetaNumero,
-                fechaAporta  : notif.fechaAporta,
-                fechaRecibido: notif.fechaRecibido,
-                resultado    : notif.resultado,
-              },
-            };
+              };
+
+            const notifierConnectOrCreate: Prisma.NotifierCreateOrConnectWithoutNotificacionInput
+              = {
+                where: {
+                  tipo_carpetaNumero: notifCarpetaInput,
+                },
+                create: {
+                  tipo         : notif.tipo,
+                  carpetaNumero: notif.carpetaNumero,
+                  fechaAporta  : notif.fechaAporta,
+                  fechaRecibido: notif.fechaRecibido,
+                  resultado    : notif.resultado,
+                },
+              };
 
             return notifierConnectOrCreate;
           } 
         ),
       },
     };
+
     return newNotificacion;
   }
 }

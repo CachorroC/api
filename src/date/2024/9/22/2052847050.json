@@ -1,1 +1,17 @@
-{"idRegActuacion":2052847050,"llaveProceso":"11001400306320170092400","consActuacion":70,"fechaActuacion":"2024-10-22T05:00:00.000Z","actuacion":"Constancia secretarial","anotacion":"EXPEDIENTE DIGITAL PASA A LIQUIDACIONES // LAURA ROMERO LINARES","fechaInicial":null,"fechaFinal":null,"fechaRegistro":"2024-10-22T05:00:00.000Z","codRegla":"00                              ","conDocumentos":false,"cant":70,"isUltimaAct":true,"idProceso":65700110,"createdAt":"2024-10-22T05:00:00.000Z"}
+{
+  "idRegActuacion": 2052847050,
+  "llaveProceso": "11001400306320170092400",
+  "consActuacion": 70,
+  "fechaActuacion": "2024-10-22T05:00:00.000Z",
+  "actuacion": "Constancia secretarial",
+  "anotacion": "EXPEDIENTE DIGITAL PASA A LIQUIDACIONES // LAURA ROMERO LINARES",
+  "fechaInicial": null,
+  "fechaFinal": null,
+  "fechaRegistro": "2024-10-22T05:00:00.000Z",
+  "codRegla": "00                              ",
+  "conDocumentos": false,
+  "cant": 70,
+  "isUltimaAct": true,
+  "idProceso": 65700110,
+  "createdAt": "2024-10-22T05:00:00.000Z"
+}

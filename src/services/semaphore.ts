@@ -33,6 +33,7 @@ async function f() {
   const elapsed = ( hrt[ 0 ] * 1000 + hrt[ 1 ] / 1e6 ) / 1000;
 
   const rps = n / elapsed;
+
   console.log(
     rps.toFixed(
       3 
@@ -73,6 +74,7 @@ async function g() {
   const elapsed = ( hrt[ 0 ] * 1000 + hrt[ 1 ] / 1e6 ) / 1000;
 
   const rps = n / ( elapsed / 60 );
+
   console.log(
     rps.toFixed(
       3 
@@ -113,6 +115,7 @@ async function h() {
   const elapsed = ( hrt[ 0 ] * 1000 + hrt[ 1 ] / 1e6 ) / 1000;
 
   const rps = n / elapsed;
+
   console.log(
     rps.toFixed(
       3 
