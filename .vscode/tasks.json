@@ -1,0 +1,10 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Clean JSDoc",
+			"type": "shell",
+			"command": "node scripts/clean-jsdoc2.js"
+		}
+	]
+}
