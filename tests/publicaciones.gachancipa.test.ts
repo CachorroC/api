@@ -33,7 +33,7 @@ test(
       'link', {
         name: 'Resultados por página'
       }
-    ).dblclick();
+    ).click();
     await page.getByRole(
       'menuitem', {
         name: '75'
