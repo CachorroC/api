@@ -727,12 +727,18 @@ export class ActuacionService {
         }
       } catch ( error : any ) {
         console.log(
-          `⚠️ Process Sync Aborted: No 'Proceso' record found for ID ${ parentProc.idProceso }`
+          `⚠️ Process Sync Aborted: No 'Proceso' record found for ID ${ parentProc.idProceso }: ${  JSON.stringify(
+            error, null, 2
+          ) }`
         );
         await logger.logFailure(
           parentProc.idProceso,
           parentProc,
-          `⚠️ Process Sync Aborted: No 'Proceso' record found for ID ${ parentProc.idProceso }`,
+          `⚠️ Process Sync Aborted: No 'Proceso' record found for ID ${ parentProc.idProceso }: ${  JSON.stringify(
+            error,
+            null,
+            2
+          ) }`,
           'DB_RELATION_MISSING'
         );
       }
