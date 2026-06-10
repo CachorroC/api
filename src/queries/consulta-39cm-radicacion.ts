@@ -90,13 +90,10 @@ async function fetchProceso(
   };
 }
 
-export async function run(
-  first = FIRST_LLAVE_PROCESO,
-  last = LAST_LLAVE_PROCESO
-): Promise<ProcesoResult[]> {
+export async function run(): Promise<ProcesoResult[]> {
   const results: ProcesoResult[] = [];
 
-  for ( let i = first; i <= last; i++ ) {
+  for ( let i = FIRST_LLAVE_PROCESO; i <= LAST_LLAVE_PROCESO; i++ ) {
     const llaveProceso = String(
       i
     ).padStart(
@@ -113,115 +110,45 @@ export async function run(
 
     if ( result.error ) {
       console.log(
-        `❌ ${ llaveProceso } failed after ${ result.error.attempts } attempts (${ i }/${ last })`
+        `❌ ${ llaveProceso } failed after ${ result.error.attempts } attempts (${ i }/${ LAST_LLAVE_PROCESO })`
       );
     } else {
       console.log(
-        `✅ ${ llaveProceso } done (${ i }/${ last })`
+        `✅ ${ llaveProceso } done (${ i }/${ LAST_LLAVE_PROCESO })`
       );
     }
   }
 
-  return results;
-}
-
-/**
- * Merges freshly fetched results into the existing output file, replacing any
- * previous entry that shares the same numeric `llaveProceso` (so re-running a
- * sub-range, e.g. to fix a padding bug, overwrites only those entries) and
- * keeping every other entry untouched. Returns the merged, sorted array.
- */
-async function mergeAndWrite(
-  newResults: ProcesoResult[], outPath: string
-): Promise<ProcesoResult[]> {
-  let existing: ProcesoResult[] = [];
-
-  try {
-    const raw = await fs.readFile(
-      outPath, 'utf-8'
-    );
-
-    existing = JSON.parse(
-      raw
-    );
-  } catch {
-    existing = [];
-  }
-
-  const merged = new Map<number, ProcesoResult>();
-
-  for ( const item of [
-    ...existing,
-    ...newResults
-  ] ) {
-    merged.set(
-      parseInt(
-        item.llaveProceso, 10
-      ), item
-    );
-  }
-
-  const sorted = [ ...merged.entries() ]
-    .sort(
-      (
-        [ a ], [ b ]
-      ) => a - b
-    )
-    .map(
-      (
-        [ , value ]
-      ) => value
-    );
+  const outPath = path.join(
+    process.cwd(), '001-700-39cm-request.json'
+  );
 
   await fs.writeFile(
     outPath, JSON.stringify(
-      sorted, null, 2
+      results, null, 2
     )
   );
 
-  return sorted;
+  console.log(
+    `Saved ${ results.length } results to ${ outPath }`
+  );
+
+  return results;
 }
 
 if ( process.argv[ 1 ].includes(
   'consulta-39cm-radicacion'
 ) ) {
-  const first = process.argv[ 2 ] ? Number(
-    process.argv[ 2 ]
-  ) : FIRST_LLAVE_PROCESO;
-  const last = process.argv[ 3 ] ? Number(
-    process.argv[ 3 ]
-  ) : LAST_LLAVE_PROCESO;
-
-  run(
-    first, last
-  )
-    .then(
-      async (
-        results
-      ) => {
-        const outPath = path.join(
-          process.cwd(), '001-700-39cm-request.json'
-        );
-
-        const merged = await mergeAndWrite(
-          results, outPath
-        );
-
-        console.log(
-          `Saved ${ merged.length } results to ${ outPath }`
-        );
-      }
-    )
-    .catch(
-      (
-        err
-      ) => {
-        console.error(
-          'Execution failed:', err
-        );
-        process.exit(
-          1
-        );
-      }
-    );
+  run().catch(
+    (
+      err
+    ) => {
+      console.error(
+        'Execution failed:', err
+      );
+      process.exit(
+        1
+      );
+    }
+  );
 }
