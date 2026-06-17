@@ -696,7 +696,7 @@ export class ActuacionService {
               juzgadoId           : proceso.juzgado.id,
               juzgadoTipo         : proceso.juzgado.tipo,
               llaveProceso        : proceso.llaveProceso,
-              sujetosProcesales   : proceso.sujetosProcesales
+              sujetosProcesales   : proceso.sujetosProcesales ?? ''
             };
 
             try {
