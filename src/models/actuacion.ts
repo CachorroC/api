@@ -377,8 +377,7 @@ export class ActuacionService {
         : null,
       cant         : apiData.cant,
       carpetaNumero: parentProc.carpetaNumero,
-      // Sanitize the remaining string fields
-      codRegla     : String(
+      codRegla     : sanitizeText(
         apiData.codRegla as string
       ),
       conDocumentos: apiData.conDocumentos,
@@ -828,14 +827,124 @@ export class ActuacionService {
           console.log(
             `   ❌ Insert Failed for ${ actuacionNueva.idRegActuacion }: ${ error.message }`,
           );
-          await logger.logFailure(
-            parentProc.idProceso,
-            {
-              data: actuacionNueva,
-            },
-            error.message,
-            'DB_ITEM',
-          );
+
+          try {
+            if ( !arrayBufferData ) {
+              throw new Error(
+                'No ArrayBuffer provided for fallback.', {
+                  cause: error
+                }
+              );
+            }
+
+            const decoder = new TextDecoder(
+              'iso-8859-1'
+            );
+            const parsedJson = JSON.parse(
+              decoder.decode(
+                arrayBufferData
+              )
+            );
+
+            const findInJson = (
+              obj: any
+            ): any => {
+              if ( Array.isArray(
+                obj
+              ) ) {
+                for ( const item of obj ) {
+                  const found = findInJson(
+                    item
+                  );
+
+                  if ( found ) {
+                    return found;
+                  }
+                }
+              } else if ( obj && typeof obj === 'object' ) {
+                if (
+                  String(
+                    obj.idRegActuacion
+                  )
+                  === String(
+                    actuacionNueva.idRegActuacion
+                  )
+                ) {
+                  return obj;
+                }
+
+                for ( const key of Object.keys(
+                  obj
+                ) ) {
+                  const found = findInJson(
+                    obj[ key ]
+                  );
+
+                  if ( found ) {
+                    return found;
+                  }
+                }
+              }
+
+              return null;
+            };
+
+            const foundRecord = findInJson(
+              parsedJson
+            );
+            const fallback = foundRecord
+              ? {
+                  ...actuacionNueva,
+                  ...foundRecord,
+                }
+              : actuacionNueva;
+
+            await client.actuacion.upsert(
+              {
+                where: {
+                  idRegActuacion: actuacionNueva.idRegActuacion,
+                },
+                create: {
+                  ...actuacionNueva,
+                  actuacion:
+                  sanitizeText(
+                    fallback.actuacion as string
+                  )
+                  || 'Sin descripción',
+                  anotacion: fallback.anotacion
+                    ? sanitizeText(
+                        fallback.anotacion as string
+                      )
+                    : null,
+                  codRegla: sanitizeText(
+                    fallback.codRegla as string
+                  ),
+                  llaveProceso: sanitizeText(
+                    fallback.llaveProceso as string
+                  ),
+                },
+                update: {
+                  cant         : actuacionNueva.cant,
+                  consActuacion: actuacionNueva.consActuacion,
+                },
+              }
+            );
+            console.log(
+              `   ✅ Fallback insert successful for ${ actuacionNueva.idRegActuacion }`,
+            );
+          } catch ( fallbackError: any ) {
+            console.log(
+              `   ❌ Fallback insert also failed: ${ fallbackError.message }`,
+            );
+            await logger.logFailure(
+              parentProc.idProceso,
+              {
+                data: actuacionNueva,
+              },
+              fallbackError.message,
+              'DB_ITEM',
+            );
+          }
         }
       }
 

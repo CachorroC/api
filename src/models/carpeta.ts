@@ -513,9 +513,7 @@ export class ClassCarpeta implements IntCarpeta {
       const {
         procesos
       } = consultaProcesos;
-      console.log(
-        consultaProcesos
-      );
+
       console.log(
         `📰 hay ${ procesos.length } procesos en ${ this.numero }`
       );
