@@ -11,7 +11,7 @@ const MAX_ATTEMPTS = 10;
 
 const FIRST_LLAVE_PROCESO = 1;
 
-const LAST_LLAVE_PROCESO = 700;
+const LAST_LLAVE_PROCESO = 900;
 
 function buildUrl(
   llaveProceso: string
@@ -120,7 +120,7 @@ export async function run(): Promise<ProcesoResult[]> {
   }
 
   const outPath = path.join(
-    process.cwd(), '001-700-39cm-request.json'
+    process.cwd(), '001-900-39cm-request.json'
   );
 
   await fs.writeFile(
