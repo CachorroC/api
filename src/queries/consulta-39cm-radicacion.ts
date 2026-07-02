@@ -13,6 +13,10 @@ const FIRST_LLAVE_PROCESO = 1;
 
 const LAST_LLAVE_PROCESO = 900;
 
+const OUTPUT_PATH = path.join(
+  process.cwd(), '001-900-39cm-request.json'
+);
+
 function buildUrl(
   llaveProceso: string
 ): string {
@@ -90,8 +94,39 @@ async function fetchProceso(
   };
 }
 
+async function loadExistingResults(): Promise<ProcesoResult[]> {
+  try {
+    const content = await fs.readFile(
+      OUTPUT_PATH, 'utf-8'
+    );
+
+    return JSON.parse(
+      content
+    ) as ProcesoResult[];
+  } catch {
+    return [];
+  }
+}
+
+async function saveResults(
+  results: ProcesoResult[]
+): Promise<void> {
+  await fs.writeFile(
+    OUTPUT_PATH, JSON.stringify(
+      results, null, 2
+    )
+  );
+}
+
 export async function run(): Promise<ProcesoResult[]> {
-  const results: ProcesoResult[] = [];
+  const results = await loadExistingResults();
+  const processed = new Set(
+    results.map(
+      (
+        r
+      ) => r.llaveProceso
+    )
+  );
 
   for ( let i = FIRST_LLAVE_PROCESO; i <= LAST_LLAVE_PROCESO; i++ ) {
     const llaveProceso = String(
@@ -100,12 +135,25 @@ export async function run(): Promise<ProcesoResult[]> {
       3, '0'
     );
 
+    if ( processed.has(
+      llaveProceso
+    ) ) {
+      console.log(
+        `⏭ ${ llaveProceso } already fetched, skipping (${ i }/${ LAST_LLAVE_PROCESO })`
+      );
+      continue;
+    }
+
     const result = await fetchProceso(
       llaveProceso
     );
 
     results.push(
       result
+    );
+
+    await saveResults(
+      results
     );
 
     if ( result.error ) {
@@ -119,18 +167,8 @@ export async function run(): Promise<ProcesoResult[]> {
     }
   }
 
-  const outPath = path.join(
-    process.cwd(), '001-900-39cm-request.json'
-  );
-
-  await fs.writeFile(
-    outPath, JSON.stringify(
-      results, null, 2
-    )
-  );
-
   console.log(
-    `Saved ${ results.length } results to ${ outPath }`
+    `Saved ${ results.length } results to ${ OUTPUT_PATH }`
   );
 
   return results;

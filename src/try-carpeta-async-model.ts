@@ -291,6 +291,9 @@ export async function tryAsyncClassCarpetas() {
                 `existing carpeta fechaUltimaRevision: ${ existingCarpeta.fechaUltimaRevision } && carpeta fechaUltimaRevision: ${ carpeta.fechaUltimaRevision } isSamefechaUltimaRevision? ${ isSamefechaUltimaRevision }`
               );
               const isSameName = existingCarpeta.nombre === carpeta.nombre;
+              console.log(
+                `Existing carpeta idProcesos: ${ existingCarpeta.idProcesos } && carpeta idProcesos: ${ carpeta.idProcesos }` 
+              );
 
               const existingCarpetaIdProcesos = new Set(
                 existingCarpeta.idProcesos

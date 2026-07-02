@@ -514,8 +514,18 @@ export class ClassCarpeta implements IntCarpeta {
         procesos
       } = consultaProcesos;
 
+      const idProcesosNumber = procesos.map(
+        (
+          prc
+        ) => {
+          return prc.idProceso;
+        }
+      );
+
       console.log(
-        `📰 hay ${ procesos.length } procesos en ${ this.numero }`
+        `📰 hay ${ procesos.length } procesos en ${ this.numero } ${ idProcesosNumber.join(
+          ', '
+        ) }`
       );
 
       if ( procesos.length === 0 && this.llaveProceso.startsWith(
@@ -580,9 +590,6 @@ export class ClassCarpeta implements IntCarpeta {
       }
 
       for ( const rawProceso of procesos ) {
-        if ( rawProceso.esPrivado ) {
-          continue;
-        }
 
         const proceso: outProceso = {
           ...rawProceso,
@@ -607,8 +614,17 @@ export class ClassCarpeta implements IntCarpeta {
         this.procesos.push(
           proceso
         );
+        const idProcesoAsString = String(
+          proceso.idProceso
+        );
+        console.log(
+          idProcesoAsString
+        );
         this.idProcesos.push(
-          proceso.idProceso.toString()
+          idProcesoAsString
+        );
+        console.log(
+          this.idProcesos
         );
         this.juzgado = JuzgadoClass.fromProceso(
           rawProceso
@@ -802,11 +818,7 @@ export class ClassCarpeta implements IntCarpeta {
         continue;
       } catch ( error ) {
         console.log(
-          `💩${ this.numero } ERROR ==> getActuaciones ${ idProceso } => ${ JSON.stringify(
-            error,
-            null,
-            2,
-          ) }`,
+          `💩${ this.numero } ERROR ==> getActuaciones ${ idProceso } => ${ error }`,
         );
 
         continue;
